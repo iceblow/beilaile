@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.TaisanAccesOutflowMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.TaisanAccesOutflow" >
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="ROW_OF_SINGLE_AGAIN" property="rowOfSingleAgain" jdbcType="VARCHAR" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="CRAFTS_ORDER" property="craftsOrder" jdbcType="VARCHAR" />
+    <result column="ORINGINAL_WAVE" property="oringinalWave" jdbcType="VARCHAR" />
+    <result column="VERSION_REFERENCE_WAVE" property="versionReferenceWave" jdbcType="VARCHAR" />
+    <result column="PRINTING_REFERENCE_WAVE" property="printingReferenceWave" jdbcType="VARCHAR" />
+    <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+    <result column="CUTTING_DATE" property="cuttingDate" jdbcType="VARCHAR" />
+    <result column="CUTTING_NUM" property="cuttingNum" jdbcType="INTEGER" />
+    <result column="CUTTING_MAN" property="cuttingMan" jdbcType="VARCHAR" />
+    <result column="FLOWER_TYPE" property="flowerType" jdbcType="VARCHAR" />
+    <result column="CUT_LARGE_RECEIVE_DATE" property="cutLargeReceiveDate" jdbcType="VARCHAR" />
+    <result column="CUT_LARGE_RETURN_DATE" property="cutLargeReturnDate" jdbcType="VARCHAR" />
+    <result column="FLOWER_FACTORY" property="flowerFactory" jdbcType="VARCHAR" />
+    <result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+    <result column="ARRANGE_FABRIC_AND_ASSIST_MATERIAL" property="arrangeFabricAndAssistMaterial" jdbcType="VARCHAR" />
+    <result column="ARRANGE_FABRIC_AND_ASSIST_MATERIAL_TIME" property="arrangeFabricAndAssistMaterialTime" jdbcType="VARCHAR" />
+    <result column="ASSIST_MATERIAL_READY" property="assistMaterialReady" jdbcType="VARCHAR" />
+    <result column="ASSIST_MATERIAL_READY_TIME" property="assistMaterialReadyTime" jdbcType="VARCHAR" />
+    <result column="ASSIST_OUT" property="assistOut" jdbcType="VARCHAR" />
+    <result column="ASSIST_OUT_TIME" property="assistOutTime" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 得到数据量 -->
+  <select id="getCount" parameterType="com.warehouse.entity.TaisanAccesOutflow" resultType="java.lang.Integer">
+  	select count(*) from taisan_acces_outflow where 1=1
+  	<if test='wave!="" and wave!=null'>
+  		and WAVE LIKE CONCAT("%",#{wave},"%")
+  	</if>
+  	<if test='factory!="" and factory!=null'>
+  		and FACTORY LIKE CONCAT("%",#{factory},"%")
+  	</if>
+  	<if test='assistMaterialReady=="Y" or assistMaterialReady=="y"'>
+  		and ASSIST_MATERIAL_READY='辅料已就绪'
+  	</if>
+  	<if test='assistMaterialReady=="N" or assistMaterialReady=="n"'>
+  		and (ASSIST_MATERIAL_READY!='辅料已就绪' or ASSIST_MATERIAL_READY IS NULL) 
+  	</if>
+  	<if test='arrangeFabricAndAssistMaterialTime!=null and arrangeFabricAndAssistMaterialTime!=""'>
+  		and ARRANGE_FABRIC_AND_ASSIST_MATERIAL_TIME LIKE CONCAT("%",#{arrangeFabricAndAssistMaterialTime},"%")
+  	</if>
+  	<if test='assistOut=="Y" or assistOut=="y"'>
+  		and ASSIST_OUT='工厂已领(辅)'
+  	</if>
+  	<if test='assistOut=="N" or assistOut=="n"'>
+  		and (ASSIST_OUT!='工厂已领(辅)' or ASSIST_OUT IS NULL) 
+  	</if>
+  </select>
+  <!-- 分页查询数据 -->
+  <select id="getDataByPage" parameterType="com.warehouse.entity.TaisanAccesOutflow" resultMap="BaseResultMap">
+  	select * from taisan_acces_outflow where 1=1
+  	<if test='wave!="" and wave!=null'>
+  		and WAVE LIKE CONCAT("%",#{wave},"%")
+  	</if>
+  	<if test='factory!="" and factory!=null'>
+  		and FACTORY LIKE CONCAT("%",#{factory},"%")
+  	</if>
+  	<if test='assistMaterialReady=="Y" or assistMaterialReady=="y"'>
+  		and ASSIST_MATERIAL_READY='辅料已就绪'
+  	</if>
+  	<if test='assistMaterialReady=="N" or assistMaterialReady=="n"'>
+  		and (ASSIST_MATERIAL_READY!='辅料已就绪' or ASSIST_MATERIAL_READY IS NULL) 
+  	</if>
+  	<if test='arrangeFabricAndAssistMaterialTime!=null and arrangeFabricAndAssistMaterialTime!=""'>
+  		and ARRANGE_FABRIC_AND_ASSIST_MATERIAL_TIME LIKE CONCAT("%",#{arrangeFabricAndAssistMaterialTime},"%")
+  	</if>
+  	<if test='assistOut=="Y" or assistOut=="y"'>
+  		and ASSIST_OUT='工厂已领(辅)'
+  	</if>
+  	<if test='assistOut=="N" or assistOut=="n"'>
+  		and (ASSIST_OUT!='工厂已领(辅)' or ASSIST_OUT IS NULL) 
+  	</if>
+  	ORDER BY WAVE DESC
+  	LIMIT #{begin},#{end} 
+  </select>
+  
+  <!-- 辅料就绪 -->
+  <update id="assistMaterialReady" parameterType="java.lang.String">
+  	UPDATE taisan_acces_outflow SET
+  	ASSIST_MATERIAL_READY = '辅料已就绪',
+  	ASSIST_MATERIAL_READY_TIME = CURDATE()
+  	WHERE WAVE=#{wave}
+  </update>
+  
+  <!-- 辅料发放 -->  
+  <update id="assistOut" parameterType="java.lang.String">
+  	UPDATE taisan_acces_outflow SET
+  	ASSIST_OUT = '工厂已领(辅)',
+  	ASSIST_OUT_TIME=CURDATE()
+  	WHERE WAVE=#{wave}
+  </update>
+  
+  
+  <!-- 重新安排订单 -->
+  
+   <update id="rowOfSingleAgain" parameterType="java.lang.String">
+  	UPDATE taisan_acces_outflow SET
+  	ROW_OF_SINGLE_AGAIN = '等待重新排单'
+  	WHERE WAVE=#{wave}
+  </update>
+  
+  
+  
+</mapper>

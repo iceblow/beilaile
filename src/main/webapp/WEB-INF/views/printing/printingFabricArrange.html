@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/printing/printingFabricArrange.js"></script> 
+<title>匹印安排</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">匹印安排</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2" style="float: left;">
+								<label for="wave">波次号</label><input type="text"
+									class="form-control date" name="wave">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="wave">匹印安排</label><input type="text"
+									class="form-control date" name="fabricIsReadyStatus">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="wave">面料发放</label><input type="text"
+									class="form-control date" name="fabrciIssueState">
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="mySelectProduct">查询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="3" style="text-align: center;">
+									<div>
+										<button id="toExcle">导出excle</button>
+									</div>
+								</th>
+								<th colspan="60" style="text-align: center; font-size: 16px;">匹印安排表</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;"><input
+									type="checkbox" id="checkbox" /></th>
+								<th style="text-align: center;">序号</th>
+								<th style="text-align: center;">添加日期</th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">产品图</th>
+								<th style="text-align: center;">工艺单</th>
+								<th style="text-align: center;">面料材质</th>
+								<th style="text-align: center;">面料颜色</th>
+								<th style="text-align: center;">面料1</th>
+								<th style="text-align: center;">面料2</th>
+								<th style="text-align: center;">面料3</th>
+								<th style="text-align: center;">面料4</th>
+								<th style="text-align: center;">面料5</th>
+								<th style="text-align: center;">面料6</th>
+								<th style="text-align: center;">面料7</th>
+								<th style="text-align: center;">面料8</th>
+								<th style="text-align: center;">面料9</th>
+								<th style="text-align: center;">面料10</th>
+								<th style="text-align: center;">面料11</th>
+								<th style="text-align: center;">面料12</th>
+								<th style="text-align: center;">面料13</th>
+								<th style="text-align: center;">面料14</th>
+								<th style="text-align: center;">面料15</th>
+								<th style="text-align: center;">面料16</th>
+								<th style="text-align: center;">面料17</th>
+								<th style="text-align: center;">面料18</th>
+								<th style="text-align: center;">单位</th>
+								<th style="text-align: center;">面料总条数</th>
+								<th style="text-align: center;">备注</th>
+								<th style="text-align: center;">单件用料</th>
+								<th style="text-align: center;">订单采购件数</th>
+								<!-- <th style="text-align: center;">面料供应商</th> -->
+								<th style="text-align: center;">预定条数</th>
+								<!-- <th style="text-align: center;">收件人</th>
+								<th style="text-align: center;">收货地址</th> -->
+								<th style="text-align: center;">用料位置</th>
+								<!-- <th style="text-align: center;">实际用料</th>
+								<th style="text-align: center;">面料单价</th> -->
+								<th style="text-align: center;">总重量</th>
+								<th style="text-align: center;">合用波次</th>
+								<th style="text-align: center;">面料空差</th>
+								<th style="text-align: center;">求和</th>
+								<!-- <th style="text-align: center;">总金额</th> -->
+								<!-- <th style="text-align: center;">下单时间</th>
+								<th style="text-align: center;">付款时间</th>
+								<th style="text-align: center;">收货时间</th>
+								<th style="text-align: center;">发出时间</th> -->
+								<th style="text-align: center;">裁片类型</th>
+								<!-- <th style="text-align: center;">面料运费</th> -->
+								<th style="text-align: center;">面料种类数</th>
+								<th style="text-align: center;">订单类型</th>
+								<th style="text-align: center;">车缝工厂</th>
+								<th style="text-align: center;">匹印工厂</th>
+								<th style="text-align: center;">反馈信息</th>
+								<!-- <th style="text-align: center;">准备时间</th> -->
+								<th style="text-align: center;">匹印安排</th>
+								<th style="text-align: center;">面料发放</th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+</html>

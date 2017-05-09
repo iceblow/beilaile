@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ProductOperationSituationMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.ProductOperationSituation" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SID" property="sid" jdbcType="VARCHAR" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+    <result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+    <result column="DATA_STATUS" property="dataStatus" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="OPERATION_TIME" property="operationTime" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
+    <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+    <result column="DELETE_PEOPLE" property="deletePeople" jdbcType="VARCHAR" />
+    <result column="DEL_STATUS" property="delStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SID, WAVE, PRODUCT_NAME, PRODUCT_CODE, DESIGN_IMG, ORDER_GRADE,DATA_STATUS, REMARKS, OPERATION_TIME, 
+    CREATE_TIME, MODIFY_TIME, MODIFIED_BY, DELETE_TIME, DELETE_PEOPLE, DEL_STATUS
+  </sql>
+ 
+  <insert id="addProductOperationSituationInfo" parameterType="com.warehouse.entity.ProductOperationSituation" >
+    insert into product_operation_situation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="sid != null" >
+        SID,
+      </if>
+      <if test="wave != null" >
+        WAVE,
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME,
+      </if>
+      <if test="productCode != null" >
+        PRODUCT_CODE,
+      </if>
+      <if test="designImg != null" >
+        DESIGN_IMG,
+      </if>
+      <if test="orderGrade != null" >
+        ORDER_GRADE,
+      </if>
+      <if test="dataStatus != null" >
+        DATA_STATUS,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="operationTime != null" >
+        OPERATION_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY,
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME,
+      </if>
+      <if test="deletePeople != null" >
+        DELETE_PEOPLE,
+      </if>
+      <if test="delStatus != null" >
+        DEL_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="wave != null" >
+        #{wave,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="designImg != null" >
+        #{designImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderGrade != null" >
+        #{orderGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="dataStatus != null" >
+        #{dataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        #{operationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null" >
+        #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deletePeople != null" >
+        #{deletePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="delStatus != null" >
+        #{delStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.ProductOperationSituation" >
+    update product_operation_situation
+    <set >
+      <if test="sid != null" >
+        SID = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="wave != null" >
+        WAVE = #{wave,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="designImg != null" >
+        DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderGrade != null" >
+        ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="dataStatus != null" >
+        DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        OPERATION_TIME = #{operationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deletePeople != null" >
+        DELETE_PEOPLE = #{deletePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="delStatus != null" >
+        DEL_STATUS = #{delStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.entity.ProductOperationSituation" >
+    update product_operation_situation
+    set SID = #{sid,jdbcType=VARCHAR},
+      WAVE = #{wave,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+      ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+      DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      OPERATION_TIME = #{operationTime,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+      DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      DELETE_PEOPLE = #{deletePeople,jdbcType=VARCHAR},
+      DEL_STATUS = #{delStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="modifyOperationInfo" parameterType="map" >
+    update product_operation_situation
+    set REMARKS = #{remarks,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getOperationInfoBpcnt" resultType="java.lang.Integer">
+  	 SELECT COUNT(0) FROM product_operation_situation   where 1=1
+  	 <if test="productCode != null and productCode != &quot;&quot; and productCode != &quot;N&quot; and productCode != &quot;Y&quot;">
+      AND PRODUCT_CODE LIKE CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+    </if>
+     <if test="productName != null and productName != &quot;&quot; and productName != &quot;N&quot; and productName != &quot;Y&quot;">
+      AND PRODUCT_NAME LIKE CONCAT('%',#{productName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+      AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+    </if>
+    </select>
+  <select id="findOperationInfoCndbp" parameterType="Map" resultMap="BaseResultMap">
+  	  SELECT
+    *
+    FROM
+    product_operation_situation
+    where 1=1
+    <if test="productCode != null and productCode != &quot;&quot; and productCode != &quot;N&quot; and productCode != &quot;Y&quot;">
+      AND PRODUCT_CODE LIKE CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="productName != null and productName != &quot;&quot; and productName != &quot;N&quot; and productName != &quot;Y&quot;">
+      AND PRODUCT_NAME LIKE CONCAT('%',#{productName,jdbcType=VARCHAR},'%')
+    </if>
+     <if test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+      AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+    </if>
+   	ORDER BY DATA_STATUS ASC , OPERATION_TIME DESC
+    LIMIT #{pageNow},#{pageSize}
+  </select>
+  <update id="confirmShipmentOperation" parameterType="java.lang.Integer">
+  update product_operation_situation
+  	
+     set DATA_STATUS='已上架' , OPERATION_TIME= DATE_FORMAT(now(),'%Y-%m-%d %T') , MODIFY_TIME=  DATE_FORMAT(now(),'%Y-%m-%d %T')
+  	 where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="queryById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select *
+  from
+  product_operation_situation
+ where ID = #{id,jdbcType=INTEGER}
+  
+  </select>
+</mapper>

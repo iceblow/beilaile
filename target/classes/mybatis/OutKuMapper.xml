@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.OutKuMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.OutKu" >
+    <id column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="gongying" property="gongying" jdbcType="VARCHAR" />
+    <result column="Odate" property="odate" jdbcType="VARCHAR" />
+    <result column="oboci" property="oboci" jdbcType="VARCHAR" />
+    <result column="mianliao" property="mianliao" jdbcType="VARCHAR" />
+    <result column="Ocolor" property="ocolor" jdbcType="VARCHAR" />
+    <result column="chu1" property="chu1" jdbcType="VARCHAR" />
+    <result column="chu2" property="chu2" jdbcType="VARCHAR" />
+    <result column="chu3" property="chu3" jdbcType="VARCHAR" />
+    <result column="chu4" property="chu4" jdbcType="VARCHAR" />
+    <result column="chu5" property="chu5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    oid, gongying, Odate, oboci, mianliao, Ocolor, chu1, chu2, chu3, chu4, chu5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from outku
+    where oid = #{oid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from outku
+    where oid = #{oid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.warehouse.entity.OutKu" >
+    insert into outku (oid, gongying, Odate, 
+      oboci, mianliao, Ocolor, 
+      chu1, chu2, chu3, chu4, 
+      chu5)
+    values (#{oid,jdbcType=INTEGER}, #{gongying,jdbcType=VARCHAR}, #{odate,jdbcType=VARCHAR}, 
+      #{oboci,jdbcType=VARCHAR}, #{mianliao,jdbcType=VARCHAR}, #{ocolor,jdbcType=VARCHAR}, 
+      #{chu1,jdbcType=VARCHAR}, #{chu2,jdbcType=VARCHAR}, #{chu3,jdbcType=VARCHAR}, #{chu4,jdbcType=VARCHAR}, 
+      #{chu5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.warehouse.entity.OutKu" >
+    insert into outku
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="gongying != null" >
+        gongying,
+      </if>
+      <if test="odate != null" >
+        Odate,
+      </if>
+      <if test="oboci != null" >
+        oboci,
+      </if>
+      <if test="mianliao != null" >
+        mianliao,
+      </if>
+      <if test="ocolor != null" >
+        Ocolor,
+      </if>
+      <if test="chu1 != null" >
+        chu1,
+      </if>
+      <if test="chu2 != null" >
+        chu2,
+      </if>
+      <if test="chu3 != null" >
+        chu3,
+      </if>
+      <if test="chu4 != null" >
+        chu4,
+      </if>
+      <if test="chu5 != null" >
+        chu5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="gongying != null" >
+        #{gongying,jdbcType=VARCHAR},
+      </if>
+      <if test="odate != null" >
+        #{odate,jdbcType=VARCHAR},
+      </if>
+      <if test="oboci != null" >
+        #{oboci,jdbcType=VARCHAR},
+      </if>
+      <if test="mianliao != null" >
+        #{mianliao,jdbcType=VARCHAR},
+      </if>
+      <if test="ocolor != null" >
+        #{ocolor,jdbcType=VARCHAR},
+      </if>
+      <if test="chu1 != null" >
+        #{chu1,jdbcType=VARCHAR},
+      </if>
+      <if test="chu2 != null" >
+        #{chu2,jdbcType=VARCHAR},
+      </if>
+      <if test="chu3 != null" >
+        #{chu3,jdbcType=VARCHAR},
+      </if>
+      <if test="chu4 != null" >
+        #{chu4,jdbcType=VARCHAR},
+      </if>
+      <if test="chu5 != null" >
+        #{chu5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.OutKu" >
+    update outku
+    <set >
+      <if test="gongying != null" >
+        gongying = #{gongying,jdbcType=VARCHAR},
+      </if>
+      <if test="odate != null" >
+        Odate = #{odate,jdbcType=VARCHAR},
+      </if>
+      <if test="oboci != null" >
+        oboci = #{oboci,jdbcType=VARCHAR},
+      </if>
+      <if test="mianliao != null" >
+        mianliao = #{mianliao,jdbcType=VARCHAR},
+      </if>
+      <if test="ocolor != null" >
+        Ocolor = #{ocolor,jdbcType=VARCHAR},
+      </if>
+      <if test="chu1 != null" >
+        chu1 = #{chu1,jdbcType=VARCHAR},
+      </if>
+      <if test="chu2 != null" >
+        chu2 = #{chu2,jdbcType=VARCHAR},
+      </if>
+      <if test="chu3 != null" >
+        chu3 = #{chu3,jdbcType=VARCHAR},
+      </if>
+      <if test="chu4 != null" >
+        chu4 = #{chu4,jdbcType=VARCHAR},
+      </if>
+      <if test="chu5 != null" >
+        chu5 = #{chu5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.entity.OutKu" >
+    update outku
+    set gongying = #{gongying,jdbcType=VARCHAR},
+      Odate = #{odate,jdbcType=VARCHAR},
+      oboci = #{oboci,jdbcType=VARCHAR},
+      mianliao = #{mianliao,jdbcType=VARCHAR},
+      Ocolor = #{ocolor,jdbcType=VARCHAR},
+      chu1 = #{chu1,jdbcType=VARCHAR},
+      chu2 = #{chu2,jdbcType=VARCHAR},
+      chu3 = #{chu3,jdbcType=VARCHAR},
+      chu4 = #{chu4,jdbcType=VARCHAR},
+      chu5 = #{chu5,jdbcType=VARCHAR}
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+</mapper>

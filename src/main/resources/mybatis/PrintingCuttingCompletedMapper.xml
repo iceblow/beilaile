@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.PrintingCuttingCompletedMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.PrintingCuttingCompleted">
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="CROP_COMPLETION_DATE" property="cropCompletionDate"
+			jdbcType="DATE" />
+		<result column="CROP_NUMBER" property="cropNumber" jdbcType="INTEGER" />
+		<result column="PIECES_APPROVED" property="piecesApproved"
+			jdbcType="VARCHAR" />
+		<result column="IMAGE" property="image" jdbcType="VARCHAR" />
+		<result column="CUT_LARGE_RECEIVE_DATE" property="cutLargeReceiveDate"
+			jdbcType="DATE" />
+		<result column="CUT_LARGE_RETURN_DATE" property="cutLargeReturnDate"
+			jdbcType="DATE" />
+		<result column="PRINTING_FACTORY" property="printingFactory"
+			jdbcType="VARCHAR" />
+		<result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+		<result column="FACTORY_PICKING_DATE" property="factoryPickingDate"
+			jdbcType="DATE" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getCountByPage" parameterType="com.warehouse.entity.PrintingCuttingCompleted"
+		resultType="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM
+		printing_cutting_completed
+		WHERE 1=1
+		<!-- 查询波次号 -->
+		<if
+			test='wave!="" and wave!=null and wave!="Y" and wave!="y" and wave!="N" and wave!="n"'>
+			AND WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if test='wave=="y" or wave=="Y"'>
+			AND (WAVE IS NOT NULL AND WAVE!='')
+		</if>
+		<if test='wave=="n" or wave=="N"'>
+			AND (WAVE IS NULL OR WAVE ='')
+		</if>
+		<!-- 查询片印领料日期 -->
+		<if
+			test='cutLargeReceiveDate!="" and cutLargeReceiveDate!=null and cutLargeReceiveDate!="Y" and cutLargeReceiveDate!="y" and cutLargeReceiveDate!="N" and cutLargeReceiveDate!="n"'>
+			AND CUT_LARGE_RECEIVE_DATE LIKE
+			CONCAT("%",#{cutLargeReceiveDate},"%")
+		</if>
+		<if test='cutLargeReceiveDate=="y" or cutLargeReceiveDate=="Y"'>
+			AND (CUT_LARGE_RECEIVE_DATE IS NOT NULL AND
+			CUT_LARGE_RECEIVE_DATE!='')
+		</if>
+		<if test='cutLargeReceiveDate=="n" or cutLargeReceiveDate=="N"'>
+			AND (CUT_LARGE_RECEIVE_DATE IS NULL OR
+			CUT_LARGE_RECEIVE_DATE ='')
+		</if>
+		<!-- 查询片印回料日期 -->
+		<if
+			test='cutLargeReturnDate!="" and cutLargeReturnDate!=null and cutLargeReturnDate!="Y" and cutLargeReturnDate!="y" and cutLargeReturnDate!="N" and cutLargeReturnDate!="n"'>
+			AND CUT_LARGE_RETURN_DATE LIKE
+			CONCAT("%",#{cutLargeReturnDate},"%")
+		</if>
+		<if test='cutLargeReturnDate=="y" or cutLargeReturnDate=="Y"'>
+			AND (CUT_LARGE_RETURN_DATE IS NOT NULL AND
+			CUT_LARGE_RETURN_DATE!='')
+		</if>
+		<if test='cutLargeReturnDate=="n" or cutLargeReturnDate=="N"'>
+			AND (CUT_LARGE_RETURN_DATE IS NULL OR
+			CUT_LARGE_RETURN_DATE ='')
+		</if>
+		<!-- 查询印花工厂 -->
+		<if
+			test='printingFactory!="" and printingFactory!=null and printingFactory!="Y" and printingFactory!="y" and printingFactory!="N" and printingFactory!="n"'>
+			AND PRINTING_FACTORY LIKE CONCAT("%",#{printingFactory},"%")
+		</if>
+		<if test='printingFactory=="y" or printingFactory=="Y"'>
+			AND (PRINTING_FACTORY IS NOT NULL AND
+			PRINTING_FACTORY!='')
+		</if>
+		<if test='printingFactory=="n" or printingFactory=="N"'>
+			AND (PRINTING_FACTORY IS NULL OR PRINTING_FACTORY ='')
+		</if>
+		<!-- 查询车缝工厂 -->
+		<if
+			test='factory!="" and factory!=null and factory!="Y" and factory!="y" and factory!="N" and factory!="n"'>
+			AND FACTORY LIKE CONCAT("%",#{factory},"%")
+		</if>
+		<if test='factory=="y" or factory=="Y"'>
+			AND (FACTORY IS NOT NULL AND FACTORY!='')
+		</if>
+		<if test='factory=="n" or factory=="N"'>
+			AND (FACTORY IS NULL OR FACTORY ='')
+		</if>
+		<!-- 查询车缝领料日期 -->
+		<if
+			test='factoryPickingDate!="" and factoryPickingDate!=null and factoryPickingDate!="Y" and factoryPickingDate!="y" and factoryPickingDate!="N" and factoryPickingDate!="n"'>
+			AND FACTORY_PICKING_DATE LIKE
+			CONCAT("%",#{factoryPickingDate},"%")
+		</if>
+		<if test='factoryPickingDate=="y" or factoryPickingDate=="Y"'>
+			AND (FACTORY_PICKING_DATE IS NOT NULL AND
+			FACTORY_PICKING_DATE!='')
+		</if>
+		<if test='factoryPickingDate=="n" or factoryPickingDate=="N"'>
+			AND (FACTORY_PICKING_DATE IS NULL OR FACTORY_PICKING_DATE
+			='')
+		</if>
+		<!-- 查询备注 -->
+		<if
+			test='remark!="" and remark!=null and remark!="Y" and remark!="y" and remark!="N" and remark!="n"'>
+			AND REMARK LIKE CONCAT("%",#{remark},"%")
+		</if>
+		<if test='remark=="y" or remark=="Y"'>
+			AND (REMARK IS NOT NULL AND REMARK!='')
+		</if>
+		<if test='remark=="n" or remark=="N"'>
+			AND (REMARK IS NULL OR REMARK ='')
+		</if>
+	</select>
+	<select id="getDataByPage" parameterType="com.warehouse.entity.PrintingCuttingCompleted"
+		resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		printing_cutting_completed
+		WHERE 1=1
+		<!-- 查询波次号 -->
+		<if
+			test='wave!="" and wave!=null and wave!="Y" and wave!="y" and wave!="N" and wave!="n"'>
+			AND WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if test='wave=="y" or wave=="Y"'>
+			AND (WAVE IS NOT NULL AND WAVE!='')
+		</if>
+		<if test='wave=="n" or wave=="N"'>
+			AND (WAVE IS NULL OR WAVE ='')
+		</if>
+		<!-- 查询片印领料日期 -->
+		<if
+			test='cutLargeReceiveDate!="" and cutLargeReceiveDate!=null and cutLargeReceiveDate!="Y" and cutLargeReceiveDate!="y" and cutLargeReceiveDate!="N" and cutLargeReceiveDate!="n"'>
+			AND CUT_LARGE_RECEIVE_DATE LIKE
+			CONCAT("%",#{cutLargeReceiveDate},"%")
+		</if>
+		<if test='cutLargeReceiveDate=="y" or cutLargeReceiveDate=="Y"'>
+			AND (CUT_LARGE_RECEIVE_DATE IS NOT NULL AND
+			CUT_LARGE_RECEIVE_DATE!='')
+		</if>
+		<if test='cutLargeReceiveDate=="n" or cutLargeReceiveDate=="N"'>
+			AND (CUT_LARGE_RECEIVE_DATE IS NULL OR
+			CUT_LARGE_RECEIVE_DATE ='')
+		</if>
+		<!-- 查询片印回料日期 -->
+		<if
+			test='cutLargeReturnDate!="" and cutLargeReturnDate!=null and cutLargeReturnDate!="Y" and cutLargeReturnDate!="y" and cutLargeReturnDate!="N" and cutLargeReturnDate!="n"'>
+			AND CUT_LARGE_RETURN_DATE LIKE
+			CONCAT("%",#{cutLargeReturnDate},"%")
+		</if>
+		<if test='cutLargeReturnDate=="y" or cutLargeReturnDate=="Y"'>
+			AND (CUT_LARGE_RETURN_DATE IS NOT NULL AND
+			CUT_LARGE_RETURN_DATE!='')
+		</if>
+		<if test='cutLargeReturnDate=="n" or cutLargeReturnDate=="N"'>
+			AND (CUT_LARGE_RETURN_DATE IS NULL OR
+			CUT_LARGE_RETURN_DATE ='')
+		</if>
+		<!-- 查询印花工厂 -->
+		<if
+			test='printingFactory!="" and printingFactory!=null and printingFactory!="Y" and printingFactory!="y" and printingFactory!="N" and printingFactory!="n"'>
+			AND PRINTING_FACTORY LIKE CONCAT("%",#{printingFactory},"%")
+		</if>
+		<if test='printingFactory=="y" or printingFactory=="Y"'>
+			AND (PRINTING_FACTORY IS NOT NULL AND
+			PRINTING_FACTORY!='')
+		</if>
+		<if test='printingFactory=="n" or printingFactory=="N"'>
+			AND (PRINTING_FACTORY IS NULL OR PRINTING_FACTORY ='')
+		</if>
+		<!-- 查询车缝工厂 -->
+		<if
+			test='factory!="" and factory!=null and factory!="Y" and factory!="y" and factory!="N" and factory!="n"'>
+			AND FACTORY LIKE CONCAT("%",#{factory},"%")
+		</if>
+		<if test='factory=="y" or factory=="Y"'>
+			AND (FACTORY IS NOT NULL AND FACTORY!='')
+		</if>
+		<if test='factory=="n" or factory=="N"'>
+			AND (FACTORY IS NULL OR FACTORY ='')
+		</if>
+		<!-- 查询车缝领料日期 -->
+		<if
+			test='factoryPickingDate!="" and factoryPickingDate!=null and factoryPickingDate!="Y" and factoryPickingDate!="y" and factoryPickingDate!="N" and factoryPickingDate!="n"'>
+			AND FACTORY_PICKING_DATE LIKE
+			CONCAT("%",#{factoryPickingDate},"%")
+		</if>
+		<if test='factoryPickingDate=="y" or factoryPickingDate=="Y"'>
+			AND (FACTORY_PICKING_DATE IS NOT NULL AND
+			FACTORY_PICKING_DATE!='')
+		</if>
+		<if test='factoryPickingDate=="n" or factoryPickingDate=="N"'>
+			AND (FACTORY_PICKING_DATE IS NULL OR FACTORY_PICKING_DATE
+			='')
+		</if>
+		<!-- 查询备注 -->
+		<if
+			test='remark!="" and remark!=null and remark!="Y" and remark!="y" and remark!="N" and remark!="n"'>
+			AND REMARK LIKE CONCAT("%",#{remark},"%")
+		</if>
+		<if test='remark=="y" or remark=="Y"'>
+			AND (REMARK IS NOT NULL AND REMARK!='')
+		</if>
+		<if test='remark=="n" or remark=="N"'>
+			AND (REMARK IS NULL OR REMARK ='')
+		</if>
+		ORDER BY
+		CUT_LARGE_RECEIVE_DATE,
+		CROP_COMPLETION_DATE DESC,
+		WAVE
+		LIMIT
+		#{begin},#{end}
+	</select>
+	<update id="updateDataByWave" parameterType="com.warehouse.entity.PrintingCuttingCompleted">
+		UPDATE printing_cutting_completed SET
+		<!-- 修改车缝工厂 -->
+		<if test='factory!=null'>
+			FACTORY=#{factory}
+		</if>
+		<!-- 修改印花工厂 -->
+		<if test='printingFactory!=null'>
+			PRINTING_FACTORY=#{printingFactory}
+		</if>
+		<!-- 修改备注 -->
+		<if test='remark!=null'>
+			REMARK=#{remark}
+		</if>
+		WHERE WAVE=#{wave}
+	</update>
+</mapper>

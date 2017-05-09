@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.SampleArrangeMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.SampleArrange" >
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="IF_GIVE_OUT" property="ifGiveOut" jdbcType="VARCHAR" />
+    <result column="CONSIGNEE" property="consignee" jdbcType="VARCHAR" />
+    <result column="SHIPPING_ADDRESS" property="shippingAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getCount" parameterType="com.warehouse.entity.SampleArrange" resultType="java.lang.Integer">
+  	SELECT COUNT(*) FROM sample_arrange where 1=1
+  	<if test='wave!="" and wave!=null'>
+  		and WAVE LIKE CONCAT("%",#{wave},"%")
+  	</if>
+  	<if test='productCode!="" and productCode!=null'>
+  		and PRODUCT_CODE LIKE CONCAT("%",#{productCode},"%")
+  	</if>
+  </select>
+  <select id="getDataByPage" parameterType="com.warehouse.entity.SampleArrange" resultMap="BaseResultMap">
+  	SELECT * FROM sample_arrange where 1=1
+  	<if test='wave!="" and wave!=null'>
+  		and WAVE LIKE CONCAT("%",#{wave},"%")
+  	</if>
+  	<if test='productCode!="" and productCode!=null'>
+  		and PRODUCT_CODE LIKE CONCAT("%",#{productCode},"%")
+  	</if>
+  	ORDER BY FIELD(IF_GIVE_OUT,NULL,'','已发出')
+  	LIMIT #{begin},#{end}
+  </select>
+  <update id="dbUpdate" parameterType="com.warehouse.entity.SampleArrange">
+  	UPDATE sample_arrange SET
+  	<if test="consignee!=null">
+  		CONSIGNEE=#{consignee}
+  	</if>
+  	<if test="shippingAddress!=null">
+  		SHIPPING_ADDRESS=#{shippingAddress}
+  	</if>
+  	WHERE WAVE=#{wave}
+  </update>
+  
+  <update id="out" parameterType="java.lang.String">
+  	UPDATE sample_arrange SET
+  	IF_GIVE_OUT='已发出',
+  	GIVE_OUT_TIME=CURDATE()
+  	WHERE WAVE=#{wave}
+  </update>
+  <insert id="addForModel" parameterType="com.warehouse.entity.SampleArrange">
+  	INSERT INTO sample_arrange VALUES(#{wave},#{designImg},#{productCode},NULL,NULL,'模特',#{shippingAddress})
+  </insert>
+</mapper>

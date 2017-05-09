@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ApparelDevelopmentMissSampleimgMapper">
+	<resultMap id="BaseResultMap"
+		type="com.warehouse.entity.ApparelDevelopmentMissSampleimg">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="girard" property="girard" jdbcType="VARCHAR" />
+		<result column="original_wave" property="originalWave"
+			jdbcType="VARCHAR" />
+		<result column="merchant_id" property="merchantId" jdbcType="VARCHAR" />
+		<result column="designer" property="designer" jdbcType="VARCHAR" />
+		<result column="cloth_name" property="clothName" jdbcType="VARCHAR" />
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="plate" property="plate" jdbcType="VARCHAR" />
+		<result column="platewave" property="platewave" jdbcType="VARCHAR" />
+		<result column="refer_print" property="referPrint" jdbcType="VARCHAR" />
+		<result column="design_img" property="designImg" jdbcType="VARCHAR" />
+		<result column="sample_img" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="child_img" property="childImg" jdbcType="VARCHAR" />
+		<result column="process_img" property="processImg" jdbcType="VARCHAR" />
+		<result column="code52" property="code52" jdbcType="INTEGER" />
+		<result column="code59" property="code59" jdbcType="INTEGER" />
+		<result column="code66" property="code66" jdbcType="INTEGER" />
+		<result column="code73" property="code73" jdbcType="INTEGER" />
+		<result column="code80" property="code80" jdbcType="INTEGER" />
+		<result column="code90" property="code90" jdbcType="INTEGER" />
+		<result column="code100" property="code100" jdbcType="INTEGER" />
+		<result column="code110" property="code110" jdbcType="INTEGER" />
+		<result column="code120" property="code120" jdbcType="INTEGER" />
+		<result column="code130" property="code130" jdbcType="INTEGER" />
+		<result column="code160" property="code160" jdbcType="INTEGER" />
+		<result column="code170" property="code170" jdbcType="INTEGER" />
+		<result column="total" property="total" jdbcType="INTEGER" />
+		<result column="releaseDate" property="releaseDate" jdbcType="VARCHAR" />
+		<result column="smallSampleA" property="smallsamplea" jdbcType="VARCHAR" />
+		<result column="smallSampleB" property="smallsampleb" jdbcType="VARCHAR" />
+		<result column="smallSampleC" property="smallsamplec" jdbcType="VARCHAR" />
+		<result column="smallSampleD" property="smallsampled" jdbcType="VARCHAR" />
+		<result column="smallSampleE" property="smallsamplee" jdbcType="VARCHAR" />
+		<result column="SMALL_SAMPLE_NUM_A" property="smallSampleNumA"
+			jdbcType="VARCHAR" />
+		<result column="SMALL_SAMPLE_NUM_B" property="smallSampleNumB"
+			jdbcType="VARCHAR" />
+		<result column="SMALL_SAMPLE_NUM_C" property="smallSampleNumC"
+			jdbcType="VARCHAR" />
+		<result column="SMALL_SAMPLE_NUM_D" property="smallSampleNumD"
+			jdbcType="VARCHAR" />
+		<result column="SMALL_SAMPLE_NUM_E" property="smallSampleNumE"
+			jdbcType="VARCHAR" />
+		<result column="addressA" property="addressa" jdbcType="VARCHAR" />
+		<result column="addressB" property="addressb" jdbcType="VARCHAR" />
+		<result column="addressC" property="addressc" jdbcType="VARCHAR" />
+		<result column="addressD" property="addressd" jdbcType="VARCHAR" />
+		<result column="addressE" property="addresse" jdbcType="VARCHAR" />
+		<result column="widthA" property="widtha" jdbcType="VARCHAR" />
+		<result column="widthB" property="widthb" jdbcType="VARCHAR" />
+		<result column="widthC" property="widthc" jdbcType="VARCHAR" />
+		<result column="widthD" property="widthd" jdbcType="VARCHAR" />
+		<result column="widthE" property="widthe" jdbcType="VARCHAR" />
+		<result column="ingredientA" property="ingredienta" jdbcType="VARCHAR" />
+		<result column="ingredientB" property="ingredientb" jdbcType="VARCHAR" />
+		<result column="ingredientC" property="ingredientc" jdbcType="VARCHAR" />
+		<result column="ingredientD" property="ingredientd" jdbcType="VARCHAR" />
+		<result column="ingredientE" property="ingrediente" jdbcType="VARCHAR" />
+		<result column="smallSampleAF" property="smallsampleaf"
+			jdbcType="VARCHAR" />
+		<result column="smallSampleBF" property="smallsamplebf"
+			jdbcType="VARCHAR" />
+		<result column="smallSampleCF" property="smallsamplecf"
+			jdbcType="VARCHAR" />
+		<result column="addressAF" property="addressaf" jdbcType="VARCHAR" />
+		<result column="addressBF" property="addressbf" jdbcType="VARCHAR" />
+		<result column="addressCF" property="addresscf" jdbcType="VARCHAR" />
+		<result column="widthAF" property="widthaf" jdbcType="VARCHAR" />
+		<result column="widthBF" property="widthbf" jdbcType="VARCHAR" />
+		<result column="widthCF" property="widthcf" jdbcType="VARCHAR" />
+		<result column="ingredientAF" property="ingredientaf" jdbcType="VARCHAR" />
+		<result column="ingredientBF" property="ingredientbf" jdbcType="VARCHAR" />
+		<result column="ingredientCF" property="ingredientcf" jdbcType="VARCHAR" />
+		<result column="print_position" property="printPosition"
+			jdbcType="VARCHAR" />
+		<result column="embroidered_position" property="embroideredPosition"
+			jdbcType="VARCHAR" />
+		<result column="delb" property="delb" jdbcType="INTEGER" />
+		<result column="PC_IP" property="pcIp" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="OPERATION" property="operation" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="COMPLETE_TIME" property="completeTime"
+			jdbcType="VARCHAR" />
+		<result column="print" property="print" jdbcType="VARCHAR" />
+		<result column="film_print" property="filmPrint" jdbcType="VARCHAR" />
+		<result column="embroidery" property="embroidery" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 添加 -->
+	<insert id="insertSelective"
+		parameterType="com.warehouse.entity.ApparelDevelopmentMissSampleimg">
+		insert into apparel_development_miss_sampleImg
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="girard != null">
+				girard,
+			</if>
+			<if test="merchantId != null">
+				merchant_id,
+			</if>
+			<if test="designer != null">
+				designer,
+			</if>
+			<if test="clothName != null">
+				cloth_name,
+			</if>
+			<if test="model != null">
+				model,
+			</if>
+			<if test="plate != null">
+				plate,
+			</if>
+			<if test="platewave != null">
+				platewave,
+			</if>
+			<if test="referPrint != null">
+				refer_print,
+			</if>
+			<if test="designImg != null">
+				design_img,
+			</if>
+			<if test="sampleImg != null">
+				sample_img,
+			</if>
+			<if test="childImg != null">
+				child_img,
+			</if>
+			<if test="processImg!=null">
+				process_img,
+			</if>
+			<if test="code52 != null">
+				code52,
+			</if>
+			<if test="code59 != null">
+				code59,
+			</if>
+			<if test="code66 != null">
+				code66,
+			</if>
+			<if test="code73 != null">
+				code73,
+			</if>
+			<if test="code80 != null">
+				code80,
+			</if>
+			<if test="code90 != null">
+				code90,
+			</if>
+			<if test="code100 != null">
+				code100,
+			</if>
+			<if test="code110 != null">
+				code110,
+			</if>
+			<if test="code120 != null">
+				code120,
+			</if>
+			<if test="code130 != null">
+				code130,
+			</if>
+			<if test="code160 != null">
+				code160,
+			</if>
+			<if test="code170 != null">
+				code170,
+			</if>
+			<if test="total != null">
+				total,
+			</if>
+			<if test="releaseDate != null">
+				releaseDate,
+			</if>
+			<if test="smallsamplea != null">
+				smallSampleA,
+			</if>
+			<if test="smallsampleb != null">
+				smallSampleB,
+			</if>
+			<if test="smallsamplec != null">
+				smallSampleC,
+			</if>
+			<if test="smallsampled != null">
+				smallSampleD,
+			</if>
+			<if test="smallsamplee != null">
+				smallSampleE,
+			</if>
+			<if test="addressa != null">
+				addressA,
+			</if>
+			<if test="addressb != null">
+				addressB,
+			</if>
+			<if test="addressc != null">
+				addressC,
+			</if>
+			<if test="addressd != null">
+				addressD,
+			</if>
+			<if test="addresse != null">
+				addressE,
+			</if>
+			<if test="widtha != null">
+				widthA,
+			</if>
+			<if test="widthb != null">
+				widthB,
+			</if>
+			<if test="widthc != null">
+				widthC,
+			</if>
+			<if test="widthd != null">
+				widthD,
+			</if>
+			<if test="widthe != null">
+				widthE,
+			</if>
+			<if test="ingredienta != null">
+				ingredientA,
+			</if>
+			<if test="ingredientb != null">
+				ingredientB,
+			</if>
+			<if test="ingredientc != null">
+				ingredientC,
+			</if>
+			<if test="ingredientd != null">
+				ingredientD,
+			</if>
+			<if test="ingrediente != null">
+				ingredientE,
+			</if>
+			<if test="smallsampleaf != null">
+				smallSampleAF,
+			</if>
+			<if test="smallsamplebf != null">
+				smallSampleBF,
+			</if>
+			<if test="smallsamplecf != null">
+				smallSampleCF,
+			</if>
+			<if test="addressaf != null">
+				addressAF,
+			</if>
+			<if test="addressbf != null">
+				addressBF,
+			</if>
+			<if test="addresscf != null">
+				addressCF,
+			</if>
+			<if test="widthaf != null">
+				widthAF,
+			</if>
+			<if test="widthbf != null">
+				widthBF,
+			</if>
+			<if test="widthcf != null">
+				widthCF,
+			</if>
+			<if test="ingredientaf != null">
+				ingredientAF,
+			</if>
+			<if test="ingredientbf != null">
+				ingredientBF,</if>
+			<if test="ingredientcf != null">
+				ingredientCF,
+			</if>
+			<if test="printPosition != null">
+				print_position,
+			</if>
+			<if test="embroideredPosition != null">
+				embroidered_position,
+			</if>
+			<if test="delb != null">
+				delb,
+			</if>
+			<if test="pcIp != null">
+				PC_IP,</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="operation != null">
+				OPERATION,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="completeTime!=null">
+				COMPLETE_TIME,
+			</if>
+			<if test="print!=null">
+				print,
+			</if>
+			<if test="filmPrint!=null">
+				film_print,
+			</if>
+			<if test="embroidery!=null">
+				embroidery
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="girard != null">
+				#{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantId != null">
+				#{merchantId,jdbcType=VARCHAR},
+			</if>
+			<if test="designer != null">
+				#{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				#{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="plate != null">
+				#{plate,jdbcType=VARCHAR},
+			</if>
+			<if test="platewave != null">
+				#{platewave,jdbcType=VARCHAR},
+			</if>
+			<if test="referPrint != null">
+				#{referPrint,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg  != null">
+				#{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="childImg != null">
+				#{childImg,jdbcType=VARCHAR},
+			</if>
+			<if test="processImg!=null">
+				#{processImg,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				#{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code59 != null">
+				#{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				#{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				#{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				#{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				#{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				#{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				#{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				#{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				#{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				#{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				#{code170,jdbcType=INTEGER},
+			</if>
+			<if test="total != null">
+				#{total,jdbcType=INTEGER},
+			</if>
+			<if test="smallsamplea != null">
+				#{smallsamplea,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsampleb != null">
+				#{smallsampleb,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsamplec != null">
+				#{smallsamplec,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsampled != null">
+				#{smallsampled,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsamplee != null">
+				#{smallsamplee,jdbcType=VARCHAR},
+			</if>
+			<if test="addressa != null">
+				#{addressa,jdbcType=VARCHAR},
+			</if>
+			<if test="addressb != null">
+				#{addressb,jdbcType=VARCHAR},
+			</if>
+			<if test="addressc != null">
+				#{addressc,jdbcType=VARCHAR},
+			</if>
+			<if test="addressd != null">
+				#{addressd,jdbcType=VARCHAR},
+			</if>
+			<if test="addresse != null">
+				#{addresse,jdbcType=VARCHAR},
+			</if>
+			<if test="widtha != null">
+				#{widtha,jdbcType=VARCHAR},
+			</if>
+			<if test="widthb != null">
+				#{widthb,jdbcType=VARCHAR},
+			</if>
+			<if test="widthc != null">
+				#{widthc,jdbcType=VARCHAR},
+			</if>
+			<if test="widthd != null">
+				#{widthd,jdbcType=VARCHAR},
+			</if>
+			<if test="widthe != null">
+				#{widthe,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredienta != null">
+				#{ingredienta,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientb != null">
+				#{ingredientb,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientc != null">
+				#{ingredientc,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientd != null">
+				#{ingredientd,jdbcType=VARCHAR},
+			</if>
+			<if test="ingrediente != null">
+				#{ingrediente,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsampleaf != null">
+				#{smallsampleaf,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsamplebf != null">
+				#{smallsamplebf,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsamplecf != null">
+				#{smallsamplecf,jdbcType=VARCHAR},
+			</if>
+			<if test="addressaf != null">
+				#{addressaf,jdbcType=VARCHAR},
+			</if>
+			<if test="addressbf != null">
+				#{addressbf,jdbcType=VARCHAR},
+			</if>
+			<if test="addresscf != null">
+				#{addresscf,jdbcType=VARCHAR},
+			</if>
+			<if test="widthaf != null">
+				#{widthaf,jdbcType=VARCHAR},
+			</if>
+			<if test="widthbf != null">
+				#{widthbf,jdbcType=VARCHAR},
+			</if>
+			<if test="widthcf != null">
+				#{widthcf,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientaf != null">
+				#{ingredientaf,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientbf != null">
+				#{ingredientbf,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientcf != null">
+				#{ingredientcf,jdbcType=VARCHAR},
+			</if>
+			<if test="printPosition != null">
+				#{printPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="embroideredPosition != null">
+				#{embroideredPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="delb != null">
+				#{delb,jdbcType=INTEGER},
+			</if>
+			<if test="pcIp  != null">
+				#{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				#{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="completeTime!=null">
+				#{completeTime,jdbcType=VARCHAR},
+			</if>
+			<if test="print!=null">
+				#{print,jdbcType=VARCHAR},
+			</if>
+			<if test="filmPrint!=null">
+				#{filmPrint,jdbcType=VARCHAR},
+			</if>
+			<if test="embroidery!=null">
+				#{embroidery,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+	<!-- 修改 -->
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.warehouse.entity.ApparelDevelopmentMissSampleimg">
+		update apparel_development_miss_sampleImg
+		<set>
+			<if test="girard != null">
+				girard = #{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="originalWave != null">
+				original_wave = #{originalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantId != null">
+				merchant_id = #{merchantId,jdbcType=VARCHAR},
+			</if>
+			<if test="designer != null">
+				designer = #{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				cloth_name = #{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				model = #{model,jdbcType=VARCHAR},
+			</if>
+			<if test="plate != null">
+				plate = #{plate,jdbcType=VARCHAR},
+			</if>
+			<if test="platewave != null">
+				platewave = #{platewave,jdbcType=VARCHAR},
+			</if>
+			<if test="referPrint != null">
+				refer_print = #{referPrint,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				design_img = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				sample_img = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="childImg != null">
+				child_img = #{childImg,jdbcType=VARCHAR},
+			</if>
+			<if test="processImg!=null">
+				process_img=#{processImg,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				code52 = #{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code59 != null">
+				code59 = #{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				code66 = #{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				code73 = #{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				code80 = #{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				code90 = #{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				code100 = #{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				code110 = #{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				code120 = #{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				code130 = #{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				code160 = #{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				code170 = #{code170,jdbcType=INTEGER},
+			</if>
+			<if test="total != null">
+				total = #{total,jdbcType=INTEGER},
+			</if>
+			<if test="releaseDate != null">
+				releaseDate = #{releaseDate,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsamplea != null">
+				smallSampleA = #{smallsamplea,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsampleb != null">
+				smallSampleB = #{smallsampleb,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsamplec != null">
+				smallSampleC = #{smallsamplec,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsampled != null">
+				smallSampleD = #{smallsampled,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsamplee != null">
+				smallSampleE = #{smallsamplee,jdbcType=VARCHAR},
+			</if>
+			<if test="smallSampleNumA !=null">
+				SMALL_SAMPLE_NUM_A=#{smallSampleNumA,jdbcType=VARCHAR},
+			</if>
+			<if test="smallSampleNumB !=null">
+				SMALL_SAMPLE_NUM_B=#{smallSampleNumB,jdbcType=VARCHAR},
+			</if>
+			<if test="smallSampleNumC !=null">
+				SMALL_SAMPLE_NUM_C=#{smallSampleNumC,jdbcType=VARCHAR},
+			</if>
+			<if test="smallSampleNumD !=null">
+				SMALL_SAMPLE_NUM_D=#{smallSampleNumD,jdbcType=VARCHAR},
+			</if>
+			<if test="smallSampleNumE !=null">
+				SMALL_SAMPLE_NUM_E=#{smallSampleNumE,jdbcType=VARCHAR},
+			</if>
+			<if test="addressa != null">
+				addressA = #{addressa,jdbcType=VARCHAR},
+			</if>
+			<if test="addressb != null">
+				addressB = #{addressb,jdbcType=VARCHAR},
+			</if>
+			<if test="addressc != null">
+				addressC = #{addressc,jdbcType=VARCHAR},
+			</if>
+			<if test="addressd != null">
+				addressD = #{addressd,jdbcType=VARCHAR},
+			</if>
+			<if test="addresse != null">
+				addressE = #{addresse,jdbcType=VARCHAR},
+			</if>
+			<if test="widtha != null">
+				widthA = #{widtha,jdbcType=VARCHAR},
+			</if>
+			<if test="widthb != null">
+				widthB = #{widthb,jdbcType=VARCHAR},
+			</if>
+			<if test="widthc != null">
+				widthC = #{widthc,jdbcType=VARCHAR},
+			</if>
+			<if test="widthd != null">
+				widthD = #{widthd,jdbcType=VARCHAR},
+			</if>
+			<if test="widthe != null">
+				widthE = #{widthe,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredienta != null">
+				ingredientA = #{ingredienta,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientb != null">
+				ingredientB = #{ingredientb,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientc != null">
+				ingredientC = #{ingredientc,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientd != null">
+				ingredientD = #{ingredientd,jdbcType=VARCHAR},
+			</if>
+			<if test="ingrediente != null">
+				ingredientE = #{ingrediente,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsampleaf != null">
+				smallSampleAF = #{smallsampleaf,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsamplebf != null">
+				smallSampleBF = #{smallsamplebf,jdbcType=VARCHAR},
+			</if>
+			<if test="smallsamplecf != null">
+				smallSampleCF = #{smallsamplecf,jdbcType=VARCHAR},
+			</if>
+			<if test="addressaf != null">
+				addressAF = #{addressaf,jdbcType=VARCHAR},
+			</if>
+			<if test="addressbf != null">
+				addressBF = #{addressbf,jdbcType=VARCHAR},
+			</if>
+			<if test="addresscf != null">
+				addressCF = #{addresscf,jdbcType=VARCHAR},
+			</if>
+			<if test="widthaf != null">
+				widthAF = #{widthaf,jdbcType=VARCHAR},
+			</if>
+			<if test="widthbf != null">
+				widthBF = #{widthbf,jdbcType=VARCHAR},
+			</if>
+			<if test="widthcf != null">
+				widthCF = #{widthcf,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientaf != null">
+				ingredientAF = #{ingredientaf,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientbf != null">
+				ingredientBF = #{ingredientbf,jdbcType=VARCHAR},
+			</if>
+			<if test="ingredientcf != null">
+				ingredientCF = #{ingredientcf,jdbcType=VARCHAR},
+			</if>
+			<if test="printPosition != null">
+				print_position = #{printPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="embroideredPosition != null">
+				embroidered_position =
+				#{embroideredPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="delb != null">
+				delb = #{delb,jdbcType=INTEGER},
+			</if>
+			<if test="pcIp != null">
+				PC_IP = #{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="completeTime!=null">
+				COMPLETE_TIME=#{completeTime,jdbcType=VARCHAR},
+			</if>
+			<if test="releaseDate!=null">
+				releaseDate=#{releaseDate,jdbcType=VARCHAR},
+			</if>
+			<if test="print!=null">
+				print=#{print,jdbcType=VARCHAR},
+			</if>
+			<if test="filmPrint!=null">
+				film_print=#{filmPrint,jdbcType=VARCHAR},
+			</if>
+			<if test="embroidery!=null">
+				embroidery=#{embroidery,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据id查询数据 -->
+	<select id="getApparelDevelopmentMissSampleimgById"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from
+		apparel_development_miss_sampleImg where id=#{id}
+	</select>
+	<!-- 模糊查询 -->
+	<select id="getCountByLike"
+		parameterType="com.warehouse.entity.ApparelDevelopmentMissSampleimg"
+		resultType="java.lang.Integer">
+		select count(1) from
+		apparel_development_miss_sampleImg where delb !=1
+		<if test="girard!=null and girard!=''">
+			and girard like concat("%",#{girard},"%")<!-- 波次 -->
+		</if>
+		<if
+			test='merchantId!="" and merchantId!=null and merchantId!="Y" and merchantId!="N" and merchantId!="y" and merchantId!="n"'>
+			and merchant_id like concat("%",#{merchantId},"%")<!--商家编码 -->
+		</if>
+		<if test='merchantId=="Y" or merchantId=="y"'>
+			and merchant_id !=''
+		</if>
+		<if test='merchantId=="N" or merchantId=="n"'>
+			and (merchant_id is NULL or merchant_id='')
+		</if>
+		<if test="designer!=null and designer!=''">
+			and designer like concat("%",#{designer},"%")<!-- 设计师 -->
+		</if>
+		<if test="model!='' and model!=null">
+			and model like concat("%",#{model},"%")<!-- 款号 -->
+		</if>
+		<if test="platewave!='' and platewave!=null">
+			and platewave like concat("%",#{platewave},"%")<!-- 参考波次 -->
+		</if>
+		<if test="referPrint!='' and referPrint!=null">
+			and refer_print like concat("%",#{referPrint},"%")<!-- 参考印花 -->
+		</if>
+		<if test='processImg=="Y" or processImg=="y"'>
+			and process_img !=''
+		</if>
+		<if test='processImg=="N" or processImg=="n"'>
+			and (process_img is NULL or process_img='')
+		</if>
+		<if test='sampleImg=="Y" or sampleImg=="y"'>
+			and sample_img !=''
+		</if>
+		<if test='sampleImg=="N" or sampleImg=="n"'>
+			and (sample_img is NULL or sample_img='')
+		</if>
+	</select>
+	<select id="getApparelDevelopmentMissSampleimgByLike"
+		parameterType="com.warehouse.entity.ApparelDevelopmentMissSampleimg"
+		resultMap="BaseResultMap">
+		select * from
+		apparel_development_miss_sampleImg where delb !=1
+		<if test="girard!=null and girard!=''">
+			and girard like concat("%",#{girard},"%")<!-- 波次 -->
+		</if>
+		<if
+			test='merchantId!="" and merchantId!=null and merchantId!="Y" and merchantId!="N" and merchantId!="y" and merchantId!="n"'>
+			and merchant_id like concat("%",#{merchantId},"%")<!--商家编码 -->
+		</if>
+		<if test='merchantId=="Y" or merchantId=="y"'>
+			and merchant_id !=''
+		</if>
+		<if test='merchantId=="N" or merchantId=="n"'>
+			and (merchant_id is NULL or merchant_id='')
+		</if>
+		<if test="designer!=null and designer!=''">
+			and designer like concat("%",#{designer},"%")<!-- 设计师 -->
+		</if>
+		<if test="model!='' and model!=null">
+			and model like concat("%",#{model},"%")<!-- 款号 -->
+		</if>
+		<if test="platewave!='' and platewave!=null">
+			and platewave like concat("%",#{platewave},"%")<!-- 参考波次 -->
+		</if>
+		<if test="referPrint!='' and referPrint!=null">
+			and refer_print like concat("%",#{referPrint},"%")<!-- 参考印花 -->
+		</if>
+		<if test='processImg=="Y" or processImg=="y"'>
+			and process_img !=''
+		</if>
+		<if test='processImg=="N" or processImg=="n"'>
+			and (process_img is NULL or process_img='')
+		</if>
+		<if test='sampleImg=="Y" or sampleImg=="y"'>
+			and sample_img !=''
+		</if>
+		<if test='sampleImg=="N" or sampleImg=="n"'>
+			and (sample_img is NULL or sample_img='')
+		</if>
+		order by delb asc,ADD_TIME desc limit #{begin},#{end}
+	</select>
+
+	<select id="queryEtrack" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from apparel_development_miss_sampleImg where
+		id=#{id}
+	</select>
+</mapper>

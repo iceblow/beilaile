@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>面料供应商</title><@p.cache/><@p.css/> <@p.js/>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">面料供应商</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<button id="add_button" class="btn btn-primary btn-lg"
+						data-toggle="modal" data-target="#myModal">添加新供应商</button>
+				</div>
+				<div class="col-md-12">
+					<form action="" id="form-anyVal" enctype="multipart/form-data"
+						role="form" method="post">
+						<div id="val-input-empty" class="col-md-8">
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 供应商名称</span> <input
+										name="supplierName" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 供应商地址</span> <input
+										name="supplierAddress" value="" type="text"
+										class="form-control">
+								</div>
+							</div>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+						<div class="col-md-2">
+							<span class="input-group-btn">
+								<button id="anyVal-btn" class="btn btn-default" type="button">
+									查询</button>
+							</span>
+						</div>
+					</form>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12" style="height: 50px;"></div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<!-- <th>序号</th> -->
+										<th>供应商编码</th>
+										<th>供应商名称</th>
+										<th>供应商简称</th>
+										<th>联系人</th>
+										<th>联系方式</th>
+										<th>供应商地址</th>
+										<th>创建时间</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--修改 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改 /添加供应商</h4>
+					</div>
+					<form enctype="multipart/form-data" role="form"
+						id="addOrUpdateFabricSupplier" action="" method="post">
+						<div class="modal-body" id="modify-prompt">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="supplierName">供应商名称</label> <input type="text"
+										class="form-control" name="supplierName" id="supplierName"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="supplierAbbreviation">供应商简称</label> <input
+										type="text" class="form-control" name="supplierAbbreviation"
+										id="supplierAbbreviation" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="foreman">联系人</label> <input type="text"
+										class="form-control" name="foreman" id="foreman"
+										style="color: red;">
+								</div>
+								<div class="col-md-4">
+									<label for="mobile">手机号</label> <input type="text"
+										class="form-control" name="mobile" id="mobile"
+										style="color: red;">
+								</div>
+								<div class="col-md-4">
+									<label for="supplierAddress">供应商地址 </label> <input type="text"
+										class="form-control" name="supplierAddress"
+										id="supplierAddress" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<input hidden="hidden" type="text" class="form-control"
+										name="id" id="findFabricSupplierById">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="submit-btn">提交</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 刪除 -->
+
+		<div class="modal fade" id="addModalCode" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">你确定该供应商的色卡吗？？？</div>
+					<input hidden="hidden" id="add-input-supplierCode"
+						name="supplierCode" type="text">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							取消</button>
+						<button type="button" id="add-code-btn" class="btn btn-primary">
+							确认添加色卡</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<div class="modal fade" id="delModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">
+						你确定刪除该: <span style="color: red" id="myModal-wave-text"> </span>
+						吗？？？
+					</div>
+					<input hidden="hidden" id="del-input-id" name="del-id" type="text">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							取消</button>
+						<button type="button" id="del-btn" class="btn btn-primary">
+							确认刪除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+<script type="text/javascript">
+	//页面加载执行
+	$(function() {
+		$.post('getFabricSupplierByPageCount.do', {}, function(data) {
+			$("#pageSize").val(10);
+			$("#pageNow").val(data.pageNow);
+			var anyVal = $("#form-anyVal").serialize();
+			findConditionFabricSupplierByPage(anyVal);
+			$(".tcdPageCode").createPage({
+				pageCount : data.totalPageCount,
+				current : data.pageNow,
+				backFn : function(p) {
+					$("#pageSize").val(10);
+					$("#pageNow").val(p);
+					var anyVal = $("#form-anyVal").serialize();
+					findConditionFabricSupplierByPage(anyVal);
+				}
+			});
+		});
+	});
+	//点击提交
+	$("#submit-btn").on("click", function() {
+		//var formData = new FormData($("#form-input")[0]);
+		var anyVal = $("#addOrUpdateFabricSupplier").serialize();
+		var if_input_Id = $("#findFabricSupplierById").val();
+		if (if_input_Id != "" && if_input_Id != null) {
+			updateFabricSupplier(anyVal);
+		} else {
+			addFabricSupplier(anyVal);
+		}
+	});
+	$("#add-code-btn").on('click',
+					function() {
+		var code = $("#add-input-supplierCode").val();
+		window.location.href = "/colorCard.html?supplierCode="
+								+ code;
+						//alert(code);
+					})
+	function addSupplieCode(code) {
+		$("#add-input-supplierCode").val(code);
+	};
+
+	//删除
+	$("#del-btn").on('click', function() {
+		var id = $("#del-input-id").val();
+		alert("因为是档案 所以没有删除功能.请联系管理员 谢谢");
+		/* 	$.post('delFabricFiles.do', {
+		 'id' : id
+		 }, function(data) {
+		 alert(data);
+		 if (data = 1) {
+		 $("#myModal-prompt").html("恭喜你刪除成功");
+		 $("#del-btn").remove();
+		 var anyVal = $("#form-anyVal").serialize();
+		 //調用方法
+		 findDistributionFabricPageByVal(anyVal);
+		 } else {
+		 $("#myModal-prompt").html("删除失败！原因可能是网络问题");
+		 $("#del-btn").remove();
+		 var anyVal = $("#form-anyVal").serialize();
+		 //調用方法
+		 findDistributionFabricPageByVal(anyVal);
+		 }
+		 }); */
+	});
+	//点击查询获取查询的条件 数据
+	$("#anyVal-btn").on('click', function() {
+		$("#pageSize").attr('name', "");
+		$("#pageNow").attr('name', "");
+		var anyVal = $("#form-anyVal").serialize();
+		$.post('getFabricSupplierByPageCount.do', anyVal, function(data) {
+			$("#pageSize").attr('name', "pageSize");
+			$("#pageNow").attr('name', "pageNow");
+			$("#pageNow").val(1);
+			var anyVal1 = $("#form-anyVal").serialize();
+			findConditionFabricSupplierByPage(anyVal1);
+			$(".tcdPageCode").createPage({
+				pageCount : data.totalPageCount,
+				current : data.pageNow,
+				backFn : function(p) {
+					$("#pageSize").val(10);
+					$("#pageNow").val(p);
+					var anyVal2 = $("#form-anyVal").serialize();
+					findConditionFabricSupplierByPage(anyVal2);
+				}
+			});
+		});
+	});
+	//添加
+	function addFabricSupplier(anyVal) {
+		$.post('addFabricSupplier.do', anyVal, function(data) {
+			if (data == 18) {
+				alert("你要添加的供应商已经存在了!!请对其修改!!");
+			} else {
+				window.location.reload();//刷新当前页面.
+			}
+
+		});
+	};
+	//修改
+	function updateFabricSupplier(anyVal) {
+		$.post('updateFabricSupplier.do', anyVal, function(data) {
+			var pageNow = $("#pageNow").val();
+			$("#pageSize").val(10);
+			$("#pageNow").val(pageNow); //給當前頁賦值
+			var anyVal = $("#form-anyVal").serialize(); //获取form表单
+			//調用方法
+			findConditionFabricSupplierByPage(anyVal);
+		});
+	};
+	//查询
+	function findConditionFabricSupplierByPage(anyVal) {
+		$
+				.post(
+						"findConditionFabricSupplierByPage.do",
+						anyVal,
+						function(data) {
+
+							$(".table_app").empty();
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr><td >"
+										+ (data[i].supplierCode == null ? ''
+												: data[i].supplierCode)
+										+ "</td><td >"
+										+ (data[i].supplierName == null ? ''
+												: data[i].supplierName)
+										+ "</td><td >"
+										+ (data[i].supplierAbbreviation == null ? ''
+												: data[i].supplierAbbreviation)
+										+ "</td><td >"
+										+ (data[i].foreman == null ? ''
+												: data[i].foreman)
+										+ "</td><td >"
+										+ (data[i].mobile == null ? ''
+												: data[i].mobile)
+										+ "</td><td >"
+										+ (data[i].supplierAddress == null ? ''
+												: data[i].supplierAddress)
+										+ "</td><td >"
+										+ (data[i].createTime == null ? ''
+												: data[i].createTime)
+										+ "</td><td ><button type='button'  data-toggle='modal' data-target='#myModal'  onclick='findFabricSupplierById(\""
+										+ data[i].id
+										+ "\")'  class='btn btn-primary icon-pencil'>修改</button><button type='button'  data-toggle='modal' data-target='#delModal' onclick='delFabricFilesById(\""
+										+ data[i].id
+										+ "\",\""
+										+ data[i].factoryName
+										+ "\")' class='icon-trash btn btn-danger'>删除</button><button type='button'  data-toggle='modal' data-target='#addModalCode' onclick='addSupplieCode(\""
+										+ data[i].supplierCode
+										+ "\")' class='btn btn-primary icon-pencil'>查看</button></td></tr>";
+								$(".table_app").append(_HTML_TEBLE_);
+							}
+						});
+	};
+	//根据id获取当前数据
+	function findFabricSupplierById(id) {
+		$.post("findFabricSupplierById.do", {
+			'id' : id
+		}, function(result) {
+			$("#findFabricSupplierById").val(result.id);
+			$("#supplierName").val(result.supplierName);
+			$("#supplierAbbreviation").val(result.supplierAbbreviation);
+			$("#foreman").val(result.foreman);
+			$("#mobile").val(result.mobile);
+			$("#supplierAddress").val(result.supplierAddress);
+		});
+	};//点击添加添加清空id
+	$("#add_button").on("click", function() {
+		$("#obj_hidden_id").val("");
+	});
+</script>
+
+</html>

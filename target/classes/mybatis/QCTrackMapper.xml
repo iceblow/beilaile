@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.QCDAO">
+	<!-- 普通分页查询 -->
+	<select id="getAllCount" resultType="java.lang.Integer">
+		select count(0) from QCTrack
+	</select>
+
+	<select id="getAllByPage" parameterType="com.warehouse.util.Pagess"
+		resultType="com.warehouse.entity.QCTrack">
+		select * from QCTrack order by id desc limit
+		#{begin},#{end}
+	</select>
+
+	<!-- 模糊查询 -->
+	<select id="getCondationCount" parameterType="com.warehouse.util.CaoUtil"
+		resultType="java.lang.Integer">
+		select count(1) from QCTrack where 1=1
+		<if
+			test='factory!="" and factory!=null and factory!="Y" and factory!="y" and factory!="N" and factory!="n"'>
+			and factory like concat("%",#{factory},"%")
+		</if>
+		<if test='factory=="Y" or factory=="y"'>
+			and factory!=""
+		</if>
+		<if test='factory=="N" or factory=="n"'>
+			and (factory="" or factory is NULL)
+		</if>
+		
+		<if test='qc!="" and qc!=null and qc!="Y" and qc!="y" and qc!="N" and qc!="n"'>
+			and qc like concat("%",#{qc},"%")
+		</if>
+		<if test='qc=="Y" or qc=="y"'>
+			and qc!=""
+		</if>
+		<if test='qc=="N" or qc=="n"'>
+			and (qc="" or qc is NULL)
+		</if>
+		<if
+			test='b_id!="" and b_id!=null and b_id!="Y" and b_id!="y" and b_id!="N" and qc!="n"'>
+			and b_id like concat("%",#{b_id},"%")
+		</if>
+		<if test='b_id=="Y" or b_id=="y"'>
+			and b_id!=""
+		</if>
+		<if test='b_id=="N" or b_id=="n"'>
+			and (b_id="" or b_id is NULL)
+		</if>
+		<if
+			test='outTime!="" and outTime!=null and outTime!="Y" and outTime!="y" and outTime!="N" and outTime!="n"'>
+			and outTime like concat("%",#{outTime},"%")
+		</if>
+		<if test='outTime=="Y" or outTime=="y"'>
+			and outTime!=""
+		</if>
+		<if test='outTime=="N" or outTime=="n"'>
+			and (outTime="" or outTime is NULL)
+		</if>
+		<if
+			test='orderType!="" and orderType!=null and orderType!="Y" and orderType!="y" and orderType!="N" and orderType!="n"'>
+			and orderType like concat("%",#{orderType},"%")
+		</if>
+		<if test='orderType=="Y" or orderType=="y"'>
+			and orderType!=""
+		</if>
+		<if test='orderType=="N" or orderType=="n"'>
+			and (orderType="" or orderType is NULL)
+		</if>
+		<if
+			test='fabricToPlantTime!="" and fabricToPlantTime!=null and fabricToPlantTime!="Y" and fabricToPlantTime!="y" and fabricToPlantTime!="N" and fabricToPlantTime!="n"'>
+			and fabricToPlantTime like concat("%",#{fabricToPlantTime},"%")
+		</if>
+		<if test='fabricToPlantTime=="Y" or fabricToPlantTime=="y"'>
+			and fabricToPlantTime!=""
+		</if>
+		<if test='fabricToPlantTime=="N" or fabricToPlantTime=="n"'>
+			and (fabricToPlantTime="" or fabricToPlantTime is NULL)
+		</if>
+		<if
+			test='accessoriesToPlantTime!="" and accessoriesToPlantTime!=null and accessoriesToPlantTime!="Y" and accessoriesToPlantTime!="y" and accessoriesToPlantTime!="N" and accessoriesToPlantTime!="n"'>
+			and accessoriesToPlantTime like
+			concat("%",#{accessoriesToPlantTime},"%")
+		</if>
+		<if test='accessoriesToPlantTime=="Y" or accessoriesToPlantTime=="y"'>
+			and accessoriesToPlantTime!=""
+		</if>
+		<if test='accessoriesToPlantTime=="N" or accessoriesToPlantTime=="n"'>
+			and (accessoriesToPlantTime="" or accessoriesToPlantTime
+			is NULL)
+		</if>
+		<if
+			test='printtingTime!="" and printtingTime!=null and printtingTime!="Y" and printtingTime!="y" and printtingTime!="N" and printtingTime!="n"'>
+			and printtingTime like concat("%",#{printtingTime},"%")
+		</if>
+		<if test='printtingTime=="Y" or printtingTime=="y"'>
+			and printtingTime!=""
+		</if>
+		<if test='printtingTime=="N" or printtingTime=="n"'>
+			and (printtingTime="" or printtingTime is NULL)
+		</if>
+		<if
+			test='backToTheFactoryTime!="" and backToTheFactoryTime!=null and backToTheFactoryTime!="Y" and backToTheFactoryTime!="y" and backToTheFactoryTime!="N" and backToTheFactoryTime!="n"'>
+			and backToTheFactoryTime like
+			concat("%",#{backToTheFactoryTime},"%")
+		</if>
+		<if test='backToTheFactoryTime=="Y" or backToTheFactoryTime=="y"'>
+			and backToTheFactoryTime!=""
+		</if>
+		<if test='backToTheFactoryTime=="N" or backToTheFactoryTime=="n"'>
+			and (backToTheFactoryTime="" or backToTheFactoryTime is
+			NULL)
+		</if>
+
+		<if
+			test='cdPrintingTime!="" and cdPrintingTime!=null and cdPrintingTime!="Y" and cdPrintingTime!="y" and cdPrintingTime!="N" and cdPrintingTime!="n"'>
+			and cdPrintingTime like concat("%",#{cdPrintingTime},"%")
+		</if>
+		<if test='cdPrintingTime=="Y" or cdPrintingTime=="y"'>
+			and cdPrintingTime!=""
+		</if>
+		<if test='cdPrintingTime=="N" or cdPrintingTime=="n"'>
+			and (cdPrintingTime="" or cdPrintingTime is NULL)
+		</if>
+
+		<if
+			test='embroideryAndPrintingBackToTheFactoryTime!="" and embroideryAndPrintingBackToTheFactoryTime!=null and embroideryAndPrintingBackToTheFactoryTime!="Y" and embroideryAndPrintingBackToTheFactoryTime!="y" and embroideryAndPrintingBackToTheFactoryTime!="N" and embroideryAndPrintingBackToTheFactoryTime!="n"'>
+			and embroideryAndPrintingBackToTheFactoryTime like
+			concat("%",#{embroideryAndPrintingBackToTheFactoryTime},"%")
+		</if>
+		<if
+			test='embroideryAndPrintingBackToTheFactoryTime=="Y" or embroideryAndPrintingBackToTheFactoryTime=="y"'>
+			and embroideryAndPrintingBackToTheFactoryTime!=""
+		</if>
+		<if
+			test='embroideryAndPrintingBackToTheFactoryTime=="N" or embroideryAndPrintingBackToTheFactoryTime=="n"'>
+			and (embroideryAndPrintingBackToTheFactoryTime="" or
+			embroideryAndPrintingBackToTheFactoryTime is NULL)
+		</if>
+		<if
+			test='piecePickingTime!="" and piecePickingTime!=null and piecePickingTime!="Y" and piecePickingTime!="y" and piecePickingTime!="N" and piecePickingTime!="n"'>
+			and piecePickingTime like concat("%",#{piecePickingTime},"%")
+		</if>
+		<if test='piecePickingTime=="Y" or piecePickingTime=="y"'>
+			and piecePickingTime!=""
+		</if>
+		<if test='piecePickingTime=="N" or piecePickingTime=="n"'>
+			and (piecePickingTime="" or piecePickingTime is NULL)
+		</if>
+		<if
+			test='cuttingTime!="" and cuttingTime!=null and cuttingTime!="Y" and cuttingTime!="y" and cuttingTime!="N" and cuttingTime!="n"'>
+			and cuttingTime like concat("%",#{cuttingTime},"%")
+		</if>
+		<if test='cuttingTime=="Y" or cuttingTime=="y"'>
+			and cuttingTime!=""
+		</if>
+		<if test='cuttingTime=="N" or cuttingTime=="n"'>
+			and (cuttingTime="" or cuttingTime is NULL)
+		</if>
+		<if
+			test='cuttingDetail!="" and cuttingDetail!=null and cuttingDetail!="Y" and cuttingDetail!="y" and cuttingDetail!="N" and cuttingDetail!="n"'>
+			and cuttingDetail like concat("%",#{cuttingDetail},"%")
+		</if>
+		<if test='cuttingDetail=="Y" or cuttingDetail=="y"'>
+			and cuttingDetail!=""
+		</if>
+		<if test='cuttingDetail=="N" or cuttingDetail=="n"'>
+			and (cuttingDetail="" or cuttingDetail is NULL)
+		</if>
+		<if
+			test='workshopProductionTime!="" and workshopProductionTime!=null and workshopProductionTime!="Y" and workshopProductionTime!="y" and workshopProductionTime!="N" and workshopProductionTime!="n"'>
+			and workshopProductionTime like
+			concat("%",#{workshopProductionTime},"%")
+		</if>
+		<if test='workshopProductionTime=="Y" or workshopProductionTime=="y"'>
+			and workshopProductionTime!=""
+		</if>
+		<if test='workshopProductionTime=="N" or workshopProductionTime=="n"'>
+			and (workshopProductionTime="" or workshopProductionTime
+			is NULL)
+		</if>
+		<if
+			test='afterTheWholeTime!="" and afterTheWholeTime!=null and afterTheWholeTime!="Y" and afterTheWholeTime!="y" and afterTheWholeTime!="N" and afterTheWholeTime!="n"'>
+			and afterTheWholeTime like concat("%",#{afterTheWholeTime},"%")
+		</if>
+		<if test='afterTheWholeTime=="Y" or afterTheWholeTime=="y"'>
+			and afterTheWholeTime!=""
+		</if>
+		<if test='afterTheWholeTime=="N" or afterTheWholeTime=="n"'>
+			and (afterTheWholeTime="" or afterTheWholeTime is NULL)
+		</if>
+		<if
+			test='deliveryTime!="" and deliveryTime!=null and deliveryTime!="Y" and deliveryTime!="y" and deliveryTime!="N" and deliveryTime!="n"'>
+			and deliveryTime like concat("%",#{deliveryTime},"%")
+		</if>
+		<if test='deliveryTime=="Y" or deliveryTime=="y"'>
+			and deliveryTime!=""
+		</if>
+		<if test='deliveryTime=="N" or deliveryTime=="n"'>
+			and (deliveryTime="" or deliveryTime is NULL)
+		</if>
+		<if
+			test='outNum!="" and outNum!=null and outNum!="Y" and outNum!="y" and outNum!="N" and outNum!="n"'>
+			and outNum like concat("%",#{outNum},"%")
+		</if>
+		<if test='outNum=="Y" or outNum=="y"'>
+			and outNum!=""
+		</if>
+		<if test='outNum=="N" or outNum=="n"'>
+			and (outNum="" or outNum is NULL)
+		</if>
+		<if
+			test='quality!="" and quality!=null and quality!="Y" and quality!="y" and quality!="N" and quality!="n"'>
+			and quality like concat("%",#{quality},"%")
+		</if>
+		<if test='quality=="Y" or quality=="y"'>
+			and quality!=""
+		</if>
+		<if test='quality=="N" or quality=="n"'>
+			and (quality="" or quality is NULL)
+		</if>
+	</select>
+	
+	
+	
+	
+	<select id="getCondationByPage" parameterType="com.warehouse.util.CaoUtil"
+		resultType="com.warehouse.entity.QCTrack">
+		select * from QCTrack where 1=1
+		<if
+			test='factory!="" and factory!=null and factory!="Y" and factory!="y" and factory!="N" and factory!="n"'>
+			and factory like concat("%",#{factory},"%")
+		</if>
+		<if test='factory=="Y" or factory=="y"'>
+			and factory!=""
+		</if>
+		<if test='factory=="N" or factory=="n"'>
+			and (factory="" or factory is NULL)
+		</if>
+		<if
+			test='qc!="" and qc!=null and qc!="Y" and qc!="y" and qc!="N" and qc!="n"'>
+			and qc like concat("%",#{qc},"%")
+		</if>
+		<if test='qc=="Y" or qc=="y"'>
+			and qc!=""
+		</if>
+		<if test='qc=="N" or qc=="n"'>
+			and (qc="" or qc is NULL)
+		</if>
+
+		<if
+			test='b_id!="" and b_id!=null and b_id!="Y" and b_id!="y" and b_id!="N" and qc!="n"'>
+			and b_id like concat("%",#{b_id},"%")
+		</if>
+		<if test='b_id=="Y" or b_id=="y"'>
+			and b_id!=""
+		</if>
+		<if test='b_id=="N" or b_id=="n"'>
+			and (b_id="" or b_id is NULL)
+		</if>
+		<if
+			test='outTime!="" and outTime!=null and outTime!="Y" and outTime!="y" and outTime!="N" and outTime!="n"'>
+			and outTime like concat("%",#{outTime},"%")
+		</if>
+		<if test='outTime=="Y" or outTime=="y"'>
+			and outTime!=""
+		</if>
+		<if test='outTime=="N" or outTime=="n"'>
+			and (outTime="" or outTime is NULL)
+		</if>
+		<if
+			test='orderType!="" and orderType!=null and orderType!="Y" and orderType!="y" and orderType!="N" and orderType!="n"'>
+			and orderType like concat("%",#{orderType},"%")
+		</if>
+		<if test='orderType=="Y" or orderType=="y"'>
+			and orderType!=""
+		</if>
+		<if test='orderType=="N" or orderType=="n"'>
+			and (orderType="" or orderType is NULL)
+		</if>
+		<if
+			test='fabricToPlantTime!="" and fabricToPlantTime!=null and fabricToPlantTime!="Y" and fabricToPlantTime!="y" and fabricToPlantTime!="N" and fabricToPlantTime!="n"'>
+			and fabricToPlantTime like concat("%",#{fabricToPlantTime},"%")
+		</if>
+		<if test='fabricToPlantTime=="Y" or fabricToPlantTime=="y"'>
+			and fabricToPlantTime!=""
+		</if>
+		<if test='fabricToPlantTime=="N" or fabricToPlantTime=="n"'>
+			and (fabricToPlantTime="" or fabricToPlantTime is NULL)
+		</if>
+		<if
+			test='accessoriesToPlantTime!="" and accessoriesToPlantTime!=null and accessoriesToPlantTime!="Y" and accessoriesToPlantTime!="y" and accessoriesToPlantTime!="N" and accessoriesToPlantTime!="n"'>
+			and accessoriesToPlantTime like
+			concat("%",#{accessoriesToPlantTime},"%")
+		</if>
+		<if test='accessoriesToPlantTime=="Y" or accessoriesToPlantTime=="y"'>
+			and accessoriesToPlantTime!=""
+		</if>
+		<if test='accessoriesToPlantTime=="N" or accessoriesToPlantTime=="n"'>
+			and (accessoriesToPlantTime="" or accessoriesToPlantTime
+			is NULL)
+		</if>
+		<if
+			test='printtingTime!="" and printtingTime!=null and printtingTime!="Y" and printtingTime!="y" and printtingTime!="N" and printtingTime!="n"'>
+			and printtingTime like concat("%",#{printtingTime},"%")
+		</if>
+		<if test='printtingTime=="Y" or printtingTime=="y"'>
+			and printtingTime!=""
+		</if>
+		<if test='printtingTime=="N" or printtingTime=="n"'>
+			and (printtingTime="" or printtingTime is NULL)
+		</if>
+		<if
+			test='backToTheFactoryTime!="" and backToTheFactoryTime!=null and backToTheFactoryTime!="Y" and backToTheFactoryTime!="y" and backToTheFactoryTime!="N" and backToTheFactoryTime!="n"'>
+			and backToTheFactoryTime like
+			concat("%",#{backToTheFactoryTime},"%")
+		</if>
+		<if test='backToTheFactoryTime=="Y" or backToTheFactoryTime=="y"'>
+			and backToTheFactoryTime!=""
+		</if>
+		<if test='backToTheFactoryTime=="N" or backToTheFactoryTime=="n"'>
+			and (backToTheFactoryTime="" or backToTheFactoryTime is
+			NULL)
+		</if>
+		<if
+			test='cdPrintingTime!="" and cdPrintingTime!=null and cdPrintingTime!="Y" and cdPrintingTime!="y" and cdPrintingTime!="N" and cdPrintingTime!="n"'>
+			and cdPrintingTime like concat("%",#{cdPrintingTime},"%")
+		</if>
+		<if test='cdPrintingTime=="Y" or cdPrintingTime=="y"'>
+			and cdPrintingTime!=""
+		</if>
+		<if test='cdPrintingTime=="N" or cdPrintingTime=="n"'>
+			and (cdPrintingTime="" or cdPrintingTime is NULL)
+		</if>
+		<if
+			test='embroideryAndPrintingBackToTheFactoryTime!="" and embroideryAndPrintingBackToTheFactoryTime!=null and embroideryAndPrintingBackToTheFactoryTime!="Y" and embroideryAndPrintingBackToTheFactoryTime!="y" and embroideryAndPrintingBackToTheFactoryTime!="N" and embroideryAndPrintingBackToTheFactoryTime!="n"'>
+			and embroideryAndPrintingBackToTheFactoryTime like
+			concat("%",#{embroideryAndPrintingBackToTheFactoryTime},"%")
+		</if>
+		<if
+			test='embroideryAndPrintingBackToTheFactoryTime=="Y" or embroideryAndPrintingBackToTheFactoryTime=="y"'>
+			and embroideryAndPrintingBackToTheFactoryTime!=""
+		</if>
+		<if
+			test='embroideryAndPrintingBackToTheFactoryTime=="N" or embroideryAndPrintingBackToTheFactoryTime=="n"'>
+			and (embroideryAndPrintingBackToTheFactoryTime="" or
+			embroideryAndPrintingBackToTheFactoryTime is NULL)
+		</if>
+		<if
+			test='piecePickingTime!="" and piecePickingTime!=null and piecePickingTime!="Y" and piecePickingTime!="y" and piecePickingTime!="N" and piecePickingTime!="n"'>
+			and piecePickingTime like concat("%",#{piecePickingTime},"%")
+		</if>
+		<if test='piecePickingTime=="Y" or piecePickingTime=="y"'>
+			and piecePickingTime!=""
+		</if>
+		<if test='piecePickingTime=="N" or piecePickingTime=="n"'>
+			and (piecePickingTime="" or piecePickingTime is NULL)
+		</if>
+		<if
+			test='cuttingTime!="" and cuttingTime!=null and cuttingTime!="Y" and cuttingTime!="y" and cuttingTime!="N" and cuttingTime!="n"'>
+			and cuttingTime like concat("%",#{cuttingTime},"%")
+		</if>
+		<if test='cuttingTime=="Y" or cuttingTime=="y"'>
+			and cuttingTime!=""
+		</if>
+		<if test='cuttingTime=="N" or cuttingTime=="n"'>
+			and (cuttingTime="" or cuttingTime is NULL)
+		</if>
+		<if
+			test='cuttingDetail!="" and cuttingDetail!=null and cuttingDetail!="Y" and cuttingDetail!="y" and cuttingDetail!="N" and cuttingDetail!="n"'>
+			and cuttingDetail like concat("%",#{cuttingDetail},"%")
+		</if>
+		<if test='cuttingDetail=="Y" or cuttingDetail=="y"'>
+			and cuttingDetail!=""
+		</if>
+		<if test='cuttingDetail=="N" or cuttingDetail=="n"'>
+			and (cuttingDetail="" or cuttingDetail is NULL)
+		</if>
+		<if
+			test='workshopProductionTime!="" and workshopProductionTime!=null and workshopProductionTime!="Y" and workshopProductionTime!="y" and workshopProductionTime!="N" and workshopProductionTime!="n"'>
+			and workshopProductionTime like
+			concat("%",#{workshopProductionTime},"%")
+		</if>
+		<if test='workshopProductionTime=="Y" or workshopProductionTime=="y"'>
+			and workshopProductionTime!=""
+		</if>
+		<if test='workshopProductionTime=="N" or workshopProductionTime=="n"'>
+			and (workshopProductionTime="" or workshopProductionTime
+			is NULL)
+		</if>
+		<if
+			test='afterTheWholeTime!="" and afterTheWholeTime!=null and afterTheWholeTime!="Y" and afterTheWholeTime!="y" and afterTheWholeTime!="N" and afterTheWholeTime!="n"'>
+			and afterTheWholeTime like concat("%",#{afterTheWholeTime},"%")
+		</if>
+		<if test='afterTheWholeTime=="Y" or afterTheWholeTime=="y"'>
+			and afterTheWholeTime!=""
+		</if>
+		<if test='afterTheWholeTime=="N" or afterTheWholeTime=="n"'>
+			and (afterTheWholeTime="" or afterTheWholeTime is NULL)
+		</if>
+		<if
+			test='deliveryTime!="" and deliveryTime!=null and deliveryTime!="Y" and deliveryTime!="y" and deliveryTime!="N" and deliveryTime!="n"'>
+			and deliveryTime like concat("%",#{deliveryTime},"%")
+		</if>
+		<if test='deliveryTime=="Y" or deliveryTime=="y"'>
+			and deliveryTime!=""
+		</if>
+		<if test='deliveryTime=="N" or deliveryTime=="n"'>
+			and (deliveryTime="" or deliveryTime is NULL)
+		</if>
+		<if
+			test='outNum!="" and outNum!=null and outNum!="Y" and outNum!="y" and outNum!="N" and outNum!="n"'>
+			and outNum like concat("%",#{outNum},"%")
+		</if>
+		<if test='outNum=="Y" or outNum=="y"'>
+			and outNum!=""
+		</if>
+		<if test='outNum=="N" or outNum=="n"'>
+			and (outNum="" or outNum is NULL)
+		</if>
+		<if
+			test='quality!="" and quality!=null and quality!="Y" and quality!="y" and quality!="N" and quality!="n"'>
+			and quality like concat("%",#{quality},"%")
+		</if>
+		<if test='quality=="Y" or quality=="y"'>
+			and quality!=""
+		</if>
+		<if test='quality=="N" or quality=="n"'>
+			and (quality="" or quality is NULL)
+		</if>
+		order by id desc
+		LIMIT #{begin},#{end}
+	</select>
+
+	<insert id="addQCTrack" parameterType="com.warehouse.entity.QCTrack">
+		insert into QCTrack
+		values(NULL,#{factory},#{qc},#{b_id},#{img},#{order_date},#{outTime},#{orderType},#{fabricToPlantTime},#{accessoriesToPlantTime},#{printtingTime},#{backToTheFactoryTime},#{cdPrintingTime},#{embroideryAndPrintingBackToTheFactoryTime},#{piecePickingTime},#{cuttingTime},#{cuttingDetail},#{workshopProductionTime},#{afterTheWholeTime},#{deliveryTime},#{outNum},#{quality});
+	</insert>
+
+	<update id="updateQCTrack" parameterType="com.warehouse.entity.QCTrack">
+		update QCTrack set
+		factory=#{factory},
+		qc=#{qc},
+		b_id=#{b_id},
+		img=#{img},
+		order_date=#{order_date},
+		outTime=#{outTime},
+		orderType=#{orderType},
+		fabricToPlantTime=#{fabricToPlantTime},
+		accessoriesToPlantTime=#{accessoriesToPlantTime},
+		printtingTime=#{printtingTime},
+		backToTheFactoryTime=#{backToTheFactoryTime},
+		cdPrintingTime=#{cdPrintingTime},
+		embroideryAndPrintingBackToTheFactoryTime=#{embroideryAndPrintingBackToTheFactoryTime},
+		piecePickingTime=#{piecePickingTime},
+		cuttingTime=#{cuttingTime},
+		cuttingDetail=#{cuttingDetail},
+		workshopProductionTime=#{workshopProductionTime},
+		afterTheWholeTime=#{afterTheWholeTime},
+		deliveryTime=#{deliveryTime},
+		outNum=#{outNum},
+		quality=#{quality}
+		where id=#{id}
+	</update>
+	
+	<select id="getOne" resultType="com.warehouse.entity.QCTrack">
+		select * from qctrack where id=#{id}
+	</select>
+</mapper>

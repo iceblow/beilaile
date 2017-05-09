@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.AccesRationIssueMapper">
+    <resultMap id="BaseResultMap" type="com.warehouse.entity.AccesRationIssue">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="SCHE_TIME" property="scheTime" jdbcType="VARCHAR"/>
+        <result column="WAVE" property="wave" jdbcType="VARCHAR"/>
+        <result column="IMG" property="img" jdbcType="VARCHAR"/>
+        <result column="ISSUE_NUM" property="issueNum" jdbcType="INTEGER"/>
+        <result column="ORDER_DETAILS" property="orderDetails" jdbcType="VARCHAR"/>
+        <result column="ORI_NAME" property="oriName" jdbcType="VARCHAR"/>
+        <result column="ACCES_NAME" property="accesName" jdbcType="VARCHAR"/>
+        <result column="SUM_ISSUE" property="sumIssue" jdbcType="VARCHAR"/>
+        <result column="READY_SUM_ISSUE" property="readySumIssue" jdbcType="VARCHAR"/>
+        <result column="ACCES_SERIAL_NUM" property="accesSerialNum" jdbcType="VARCHAR"/>
+        <result column="ACCES_QUANTITY" property="accesQuantity" jdbcType="DOUBLE"/>
+        <result column="ACCES_SINGLE_USE" property="accesSingleUse" jdbcType="DOUBLE"/>
+        <result column="ACCES_ACTUAL_CSPT" property="accesActualCspt" jdbcType="INTEGER"/>
+        <result column="ACCES_SCRAP_RATE" property="accesScrapRate" jdbcType="DOUBLE"/>
+        <result column="ACCES_ETALON_DESCRIPTION" property="accesEtalonDescription" jdbcType="VARCHAR"/>
+        <result column="SYNCH_TIME" property="synchTime" jdbcType="VARCHAR"/>
+        <result column="READY_TIME" property="readyTime" jdbcType="VARCHAR"/>
+        <result column="DISPOSE_TIME_CSPT" property="disposeTimeCspt" jdbcType="VARCHAR"/>
+        <result column="ISSUE_METHOD" property="issueMethod" jdbcType="VARCHAR"/>
+        <result column="ISSUE_STATUS" property="issueStatus" jdbcType="VARCHAR"/>
+        <result column="ISSUE_REMARKS" property="issueRemarks" jdbcType="VARCHAR"/>
+        <result column="ISSUE_MARK_STATUS" property="issueMarkStatus" jdbcType="VARCHAR"/>
+        <result column="FOUNDER" property="founder" jdbcType="VARCHAR"/>
+        <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR"/>
+        <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR"/>
+        <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, SCHE_TIME, WAVE, IMG, ISSUE_NUM, ORDER_DETAILS, ORI_NAME, ACCES_NAME, SUM_ISSUE,
+        READY_SUM_ISSUE, ACCES_SERIAL_NUM, ACCES_QUANTITY, ACCES_SINGLE_USE, ACCES_ACTUAL_CSPT,
+        ACCES_SCRAP_RATE, ACCES_ETALON_DESCRIPTION, SYNCH_TIME, READY_TIME, DISPOSE_TIME_CSPT, ISSUE_METHOD,
+        ISSUE_STATUS, ISSUE_REMARKS, ISSUE_MARK_STATUS, FOUNDER, CREATED_TIME, MODIFY_TIME,
+        DELETE_TIME, OPERATOR, OPERATOR_IP
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from acces_ration_issue
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.warehouse.entity.AccesRationIssue">
+        insert into acces_ration_issue
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="scheTime != null">
+                SCHE_TIME,
+            </if>
+            <if test="wave != null">
+                WAVE,
+            </if>
+            <if test="img != null">
+                IMG,
+            </if>
+            <if test="issueNum != null">
+                ISSUE_NUM,
+            </if>
+            <if test="orderDetails != null">
+                ORDER_DETAILS,
+            </if>
+            <if test="oriName != null">
+                ORI_NAME,
+            </if>
+            <if test="accesName != null">
+                ACCES_NAME,
+            </if>
+            <if test="sumIssue != null">
+                SUM_ISSUE,
+            </if>
+            <if test="readySumIssue != null">
+                READY_SUM_ISSUE,
+            </if>
+            <if test="accesSerialNum != null">
+                ACCES_SERIAL_NUM,
+            </if>
+            <if test="accesQuantity != null">
+                ACCES_QUANTITY,
+            </if>
+            <if test="accesSingleUse != null">
+                ACCES_SINGLE_USE,
+            </if>
+            <if test="accesActualCspt != null">
+                ACCES_ACTUAL_CSPT,
+            </if>
+            <if test="accesScrapRate != null">
+                ACCES_SCRAP_RATE,
+            </if>
+            <if test="accesEtalonDescription != null">
+                ACCES_ETALON_DESCRIPTION,
+            </if>
+            <if test="synchTime != null">
+                SYNCH_TIME,
+            </if>
+            <if test="readyTime != null">
+                READY_TIME,
+            </if>
+            <if test="disposeTimeCspt != null">
+                DISPOSE_TIME_CSPT,
+            </if>
+            <if test="issueStatus != null">
+                ISSUE_STATUS,
+            </if>
+            <if test="issueRemarks != null">
+                ISSUE_REMARKS,
+            </if>
+            <if test="issueMarkStatus != null">
+                ISSUE_MARK_STATUS,
+            </if>
+            <if test="founder != null">
+                FOUNDER,
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME,
+            </if>
+            <if test="modifyTime != null">
+                MODIFY_TIME,
+            </if>
+            <if test="deleteTime != null">
+                DELETE_TIME,
+            </if>
+            <if test="operator != null">
+                OPERATOR,
+            </if>
+            <if test="operatorIp != null">
+                OPERATOR_IP,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="scheTime != null">
+                #{scheTime,jdbcType=VARCHAR},
+            </if>
+            <if test="wave != null">
+                #{wave,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="issueNum != null">
+                #{issueNum,jdbcType=INTEGER},
+            </if>
+            <if test="orderDetails != null">
+                #{orderDetails,jdbcType=VARCHAR},
+            </if>
+            <if test="oriName != null">
+                #{oriName,jdbcType=VARCHAR},
+            </if>
+            <if test="accesName != null">
+                #{accesName,jdbcType=VARCHAR},
+            </if>
+            <if test="sumIssue != null">
+                #{sumIssue,jdbcType=VARCHAR},
+            </if>
+            <if test="readySumIssue != null">
+                #{readySumIssue,jdbcType=VARCHAR},
+            </if>
+            <if test="accesSerialNum != null">
+                #{accesSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesQuantity != null">
+                #{accesQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesSingleUse != null">
+                #{accesSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesActualCspt != null">
+                #{accesActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesScrapRate != null">
+                #{accesScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesEtalonDescription != null">
+                #{accesEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="synchTime != null">
+                #{synchTime,jdbcType=VARCHAR},
+            </if>
+            <if test="readyTime != null">
+                #{readyTime,jdbcType=VARCHAR},
+            </if>
+            <if test="disposeTimeCspt != null">
+                #{disposeTimeCspt,jdbcType=VARCHAR},
+            </if>
+            <if test="issueStatus != null">
+                #{issueStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="issueRemarks != null">
+                #{issueRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="issueMarkStatus != null">
+                #{issueMarkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="founder != null">
+                #{founder,jdbcType=VARCHAR},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteTime != null">
+                #{deleteTime,jdbcType=VARCHAR},
+            </if>
+            <if test="operator != null">
+                #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorIp != null">
+                #{operatorIp,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.AccesRationIssue">
+        update acces_ration_issue
+        <set>
+            <if test="scheTime != null">
+                SCHE_TIME = #{scheTime,jdbcType=VARCHAR},
+            </if>
+            <if test="wave != null">
+                WAVE = #{wave,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                IMG = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="issueNum != null">
+                ISSUE_NUM = #{issueNum,jdbcType=INTEGER},
+            </if>
+            <if test="orderDetails != null">
+                ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+            </if>
+            <if test="oriName != null">
+                ORI_NAME = #{oriName,jdbcType=VARCHAR},
+            </if>
+            <if test="accesName != null">
+                ACCES_NAME = #{accesName,jdbcType=VARCHAR},
+            </if>
+            <if test="sumIssue != null">
+                SUM_ISSUE = #{sumIssue,jdbcType=VARCHAR},
+            </if>
+            <if test="readySumIssue != null">
+                READY_SUM_ISSUE = #{readySumIssue,jdbcType=VARCHAR},
+            </if>
+            <if test="accesSerialNum != null">
+                ACCES_SERIAL_NUM = #{accesSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesQuantity != null">
+                ACCES_QUANTITY = #{accesQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesSingleUse != null">
+                ACCES_SINGLE_USE = #{accesSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesActualCspt != null">
+                ACCES_ACTUAL_CSPT = #{accesActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesScrapRate != null">
+                ACCES_SCRAP_RATE = #{accesScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesEtalonDescription != null">
+                ACCES_ETALON_DESCRIPTION = #{accesEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="synchTime != null">
+                SYNCH_TIME = #{synchTime,jdbcType=VARCHAR},
+            </if>
+            <if test="readyTime != null">
+                READY_TIME = #{readyTime,jdbcType=VARCHAR},
+            </if>
+            <if test="disposeTimeCspt != null">
+                DISPOSE_TIME_CSPT = #{disposeTimeCspt,jdbcType=VARCHAR},
+            </if>
+            <if test="issueStatus != null">
+                ISSUE_STATUS = #{issueStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="issueRemarks != null">
+                ISSUE_REMARKS = #{issueRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="issueMarkStatus != null">
+                ISSUE_MARK_STATUS = #{issueMarkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="founder != null">
+                FOUNDER = #{founder,jdbcType=VARCHAR},
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteTime != null">
+                DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+            </if>
+            <if test="operator != null">
+                OPERATOR = #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorIp != null">
+                OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="getAccesOrderIssueBpcnt" resultType="java.lang.Integer">
+        SELECT COUNT(0) FROM acces_ration_issue where ISSUE_MARK_STATUS ='1' AND 1=1
+        <if test="addTime != null and addTime != &quot;&quot; and addTime != &quot;N&quot; and addTime != &quot;Y&quot;">
+            AND ADD_TIME LIKE CONCAT('%',#{addTime,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="addTime == &quot;N&quot;">
+            AND (ADD_TIME ='' OR ADD_TIME
+            IS
+            NULL)
+        </if>
+        <if test="addTime ==&quot;Y&quot;">
+            AND ADD_TIME !=''
+        </if>
+
+        <if test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+            AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="wave == &quot;N&quot;">
+            AND (WAVE ='' OR WAVE
+            IS
+            NULL)
+        </if>
+        <if test="wave ==&quot;Y&quot;">
+            AND WAVE !=''
+        </if>
+        <if test="orderNum != null and orderNum != &quot;&quot; and orderNum != &quot;N&quot; and orderNum != &quot;Y&quot;">
+            AND ORDER_NUM LIKE
+            CONCAT('%',#{orderNum,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="orderNum == &quot;N&quot;">
+            AND (ORDER_NUM ='' OR ORDER_NUM
+            IS
+            NULL)
+        </if>
+        <if test="orderNum ==&quot;Y&quot;">
+            AND ORDER_NUM !=''
+        </if>
+        <if test="oriName != null and oriName != &quot;&quot; and oriName != &quot;N&quot; and oriName != &quot;Y&quot;">
+            AND ORI_NAME LIKE
+            CONCAT('%',#{oriName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="oriName == &quot;N&quot;">
+            AND (ORI_NAME ='' OR ORDER_NUM
+            IS
+            NULL)
+        </if>
+        <if test="oriName ==&quot;Y&quot;">
+            AND ORI_NAME !=''
+        </if>
+
+    </select>
+
+    <select id="findAccesOrderIssueCndbp" parameterType="Map" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM
+        acces_ration_issue
+        WHERE
+        ISSUE_MARK_STATUS = '1'
+        AND 1 = 1
+        <if test="scheTime != null and scheTime != &quot;&quot; and scheTime != &quot;N&quot; and scheTime != &quot;Y&quot;">
+            AND SCHE_TIME LIKE CONCAT('%',#{scheTime,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="scheTime == &quot;N&quot;">
+            AND (SCHE_TIME ='' OR SCHE_TIME
+            IS
+            NULL)
+        </if>
+        <if test="scheTime ==&quot;Y&quot;">
+            AND SCHE_TIME !=''
+        </if>
+        <if test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+            AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="wave == &quot;N&quot;">
+            AND (WAVE ='' OR WAVE
+            IS
+            NULL)
+        </if>
+        <if test="wave ==&quot;Y&quot;">
+            AND WAVE !=''
+        </if>
+        <if test="orderNum != null and orderNum != &quot;&quot; and orderNum != &quot;N&quot; and orderNum != &quot;Y&quot;">
+            AND ORDER_NUM LIKE
+            CONCAT('%',#{orderNum,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="orderNum == &quot;N&quot;">
+            AND (ORDER_NUM ='' OR ORDER_NUM
+            IS
+            NULL)
+        </if>
+        <if test="orderNum ==&quot;Y&quot;">
+            AND ORDER_NUM !=''
+        </if>
+        <if test="oriName != null and oriName != &quot;&quot; and oriName != &quot;N&quot; and oriName != &quot;Y&quot;">
+            AND ORI_NAME LIKE
+            CONCAT('%',#{oriName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="oriName == &quot;N&quot;">
+            AND (ORI_NAME ='' OR ORDER_NUM
+            IS
+            NULL)
+        </if>
+        <if test="oriName ==&quot;Y&quot;">
+            AND ORI_NAME !=''
+        </if>
+        ORDER BY FIELD(ISSUE_STATUS,'未处理','追加补料单','完成配发') ASC,SYNCH_TIME DESC,WAVE ASC
+        LIMIT #{pageNow},#{pageSize}
+    </select>
+    <!--<if test="orderByWave != null and orderByWave != &quot;&quot; and orderByWave != &quot;N&quot; and orderByWave != &quot;Y&quot;">-->
+    <!--,#{orderByWave} ASC-->
+    <!--</if>-->
+</mapper>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>仓库面料详情</title><@p.cache/><@p.css/> <@p.js/>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">仓库面料详情</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<form action="" id="form-anyVal" enctype="multipart/form-data"
+						role="form" method="post">
+						<div id="val-input-empty" class="col-md-8">
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">面料编号</span> <input
+										name="fabricCode" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">面料名称</span> <input
+										name="fabricName" value="" type="text" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+						<div class="col-md-2">
+							<span class="input-group-btn">
+								<button id="anyVal-btn" class="btn btn-default" type="button">
+									查询</button>
+							</span>
+						</div>
+					</form>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12" style="height: 50px;"></div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th colspan="12" style="text-align: center;">仓库面料记录详情</th>
+									</tr>
+									<tr>
+										<th>序列号</th>
+										<th>条形码</th>
+										<th>面料编号</th>
+										<th>面料名称</th>
+										<th>供应商名称</th>
+										<th>面料重量</th>
+										<th>面料单位</th>
+										<th>面料颜色</th>
+										<th>面料数量</th>
+										<th>入库时间</th>
+										<th>出库时间</th>
+										<th>创建时间</th>
+										<!-- <th>操作</th> -->
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+<script type="text/javascript">
+	//页面加载执行
+	$(function() {
+		$.post('getInventoryFabricSingleDetailsByPageCount.do', {}, function(
+				data) {
+			$("#pageSize").val(10);
+			$("#pageNow").val(data.pageNow);
+			var anyVal = $("#form-anyVal").serialize();
+			findConditionInventoryFabricDetailsByPage(anyVal);
+			$(".tcdPageCode").createPage({
+				pageCount : data.totalPageCount,
+				current : data.pageNow,
+				backFn : function(p) {
+					$("#pageSize").val(10);
+					$("#pageNow").val(p);
+					var anyVal = $("#form-anyVal").serialize();
+					findConditionInventoryFabricDetailsByPage(anyVal);
+				}
+			});
+		});
+	});
+
+	//点击查询获取查询的条件 数据
+	$("#anyVal-btn")
+			.on(
+					'click',
+					function() {
+						$("#pageSize").attr('name', "");
+						$("#pageNow").attr('name', "");
+						var anyVal = $("#form-anyVal").serialize();
+						$
+								.post(
+										'getInventoryFabricSingleDetailsByPageCount.do',
+										anyVal,
+										function(data) {
+											$("#pageSize").attr('name',
+													"pageSize");
+											$("#pageNow").attr('name',
+													"pageNow");
+											$("#pageNow").val(1);
+											var anyVal1 = $("#form-anyVal")
+													.serialize();
+											findConditionInventoryFabricDetailsByPage(anyVal1);
+											$(".tcdPageCode")
+													.createPage(
+															{
+																pageCount : data.totalPageCount,
+																current : data.pageNow,
+																backFn : function(
+																		p) {
+																	$(
+																			"#pageSize")
+																			.val(
+																					10);
+																	$(
+																			"#pageNow")
+																			.val(
+																					p);
+																	var anyVal2 = $(
+																			"#form-anyVal")
+																			.serialize();
+																	findConditionInventoryFabricDetailsByPage(anyVal2);
+																}
+															});
+										});
+					});
+	function findConditionInventoryFabricDetailsByPage(anyVal) {
+		$.post("findConditionInventoryFabricSingleDetailsByPage.do", anyVal,
+				function(data) {
+
+					$(".table_app").empty();
+					for (var i = 0; i < data.length; i++) {
+						var _HTML_TEBLE_ = "";
+						_HTML_TEBLE_ = "<tr><td >"
+								+ (data[i].sid == null ? '' : data[i].sid)
+								+ "</td><td >"
+								+ (data[i].fabricBarcode == null ? ''
+										: data[i].fabricBarcode)
+								+ "</td><td >"
+								+ (data[i].fabricCode == null
+										|| data[i].fabricCode == '' ? ''
+										: data[i].fabricCode)
+								+ "</td><td >"
+								+ (data[i].fabricName == null ? ''
+										: data[i].fabricName)
+								+ "</td><td >"
+								+ (data[i].supplierName == null ? ''
+										: data[i].supplierName)
+								+ "</td><td >"
+								+ (data[i].fabricWeight == null ? ''
+										: data[i].fabricWeight)
+								+ "</td><td >"
+								+ (data[i].fabricUnit == null ? ''
+										: data[i].fabricUnit)
+								+ "</td><td >"
+								+ (data[i].fabricColor == null ? ''
+										: data[i].fabricColor)
+								+ "</td><td >"
+								+ (data[i].fabricAmount == null ? ''
+										: data[i].fabricAmount)
+								+ "</td><td >"
+								+ (data[i].fabricStorageTime == null ? ''
+										: data[i].fabricStorageTime)
+								+ "</td><td >"
+								+ (data[i].fabricOutTime == null ? ''
+										: data[i].fabricOutTime)
+								+ "</td><td >"
+								+ (data[i].createTime == null ? ''
+										: data[i].createTime) + "</td></tr>";
+						$(".table_app").append(_HTML_TEBLE_);
+					}
+				});
+	};
+</script>
+</html>

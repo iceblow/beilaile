@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/cutting/layer/layer.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/cutting/returnToSinglePattern.js"></script>
+<title>返单纸样</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">返单纸样</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2" style="float: left;">
+								<label for="wave">波次号</label> <input type="text"
+									class="form-control date" name="wave">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="productCode">商品编码</label> <input type="text"
+									class="form-control date" name="productCode">
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="mySelect">查询按钮</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="10" style="text-align: center; font-size: 16px;">返单纸样表</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">返单时间</th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">原波次</th>
+								<th style="text-align: center;">商品编码</th>
+								<th style="text-align: center;">服装名</th>
+								<th style="text-align: center;">设计图</th>
+								<th style="text-align: center;">工艺单</th>
+								<th style="text-align: center;">尺码表</th>
+								<th style="text-align: center;">需要样衣</th>
+								<th style="text-align: center;">纸样完成</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+</html>

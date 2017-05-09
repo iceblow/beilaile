@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>辅料理单</title> <@p.cache/> <@p.css/> <@p.js/>
+</head>
+<body>
+<@p.top/>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <@p.left/>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+
+                <ul class="breadcrumb">
+                    <li><i class="icon-home home-icon"> </i> <a href="#">
+                        Home </a></li>
+                    <li><a href="#"> Tables </a></li>
+                    <li class="active">辅料理单</li>
+                </ul>
+                <!-- .breadcrumb -->
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+            <div class="col-md-12">
+                <button id="add_button" class="btn btn-primary btn-lg"
+                        data-toggle="modal" data-target="#myModal">添加
+                </button>
+            </div>
+            <!-- /.col-lg-6 -->
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-anyVal" method="post">
+                    <div id="val-input-empty" class="col-md-12">
+                        <div class="col-md-2">
+                            <label for="addDate">日期</label> <input type="text"
+                                                                   name="addDate" id="queryAddDate"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="wave">波次号</label> <input type="text" name="wave" id="queryWave"/>
+                        </div>
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="numberOrder">订单数</label>-->
+                            <!--<input type="text" name="numberOrder">-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="orderDetails">订单详情</label>-->
+                            <!--<input type="text" name="orderDetails">-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="editionType"> 版型</label>-->
+                            <!--<input name="editionType"type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="code59"> 尺码59 </label>-->
+                            <!--<input name="code59" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="code66">尺码66</label>-->
+                            <!--<input name="code66" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="code73"> 尺码73 </label>-->
+                            <!--<input name="code73" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="code80"> 尺码80</label>-->
+                            <!--<input name="code80" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="code90"> 尺码 90</label>-->
+                            <!--<input name="code90" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="packingBagQuantity"> 包装袋数量</label>-->
+                            <!--<input name="packingBagQuantity" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="packingBagSpecification"> 包装袋规格 </label> <input-->
+                                <!--name="packingBagSpecification" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="ingredient"> 成分</label> <input name="ingredient"-->
+                                                                       <!--type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="popperColor"> 五爪扣色号 </label> <input-->
+                                <!--name="popperColor" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="popperQuantity"> 数量</label> <input-->
+                                <!--name="popperQuantity" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="accessoriesA"> 辅料A </label> <input-->
+                                <!--name="accessoriesA" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="accessoriesAQuantity"> A数量</label> <input-->
+                                <!--name="accessoriesAQuantity" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="accessoriesB"> 辅料B </label> <input-->
+                                <!--name="accessoriesB" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="accessoriesBQuantity"> B数量</label> <input-->
+                                <!--name="accessoriesBQuantity" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="accessoriesC"> 辅料C</label> <input-->
+                                <!--name="accessoriesC" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="accessoriesCQuantity"> C数量</label> <input-->
+                                <!--name="accessoriesCQuantity" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="remarksRichard"> 理单备注 </label> <input-->
+                                <!--name="remarksRichard" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="remarks"> 备注</label> <input name="remarks"-->
+                                                                    <!--type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="issuedStatus"> 发放状态</label> <input-->
+                                <!--name="issuedStatus" type="text"/>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                            <!--<label for="founder"> 创建人</label> <input name="founder"-->
+                                                                     <!--type="text"/>-->
+                        <!--</div>-->
+                        <div class="col-md-2">
+								<span class="input-group-btn">
+									<button id="anyVal-btn" class="btn btn-default" type="button">
+                                        查询
+                                    </button>
+								</span>
+                        </div>
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow"
+                               value=""> <input hidden="hidden" type="text"
+                                                id="pageSize" name="pageSize" value="">
+                    </div>
+                </form>
+            </div>
+
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>日期</th>
+                                <th>波段</th>
+                                <th>订单数</th>
+                                <th>订单详情</th>
+                                <th>裁剪数</th>
+                                <th>裁剪详情</th>
+                                <th>设计图</th>
+                                <th>工艺单</th>
+                                <th>尺码表</th>
+                                <th>版型</th>
+                                <th>面料入仓日期</th>
+                                <th>裁剪日期</th>
+                                <th>指定工厂</th>
+                                <th>指定工厂日期</th>
+                                <th>52#</th>
+                                <th>59#</th>
+                                <th>66#</th>
+                                <th>73#</th>
+                                <th>80#</th>
+                                <th>90#</th>
+                                <th>吊牌总数</th>
+                                <th>吊牌损耗率</th>
+                                <th>包装袋数量</th>
+                                <th>包装袋损耗率</th>
+                                <th>包装袋规格</th>
+                                <th>成分</th>
+                                <th>五爪扣色号</th>
+                                <th>五爪扣损耗率</th>
+                                <th>单耗</th>
+                                <th>数量</th>
+                                <th>辅料A</th>
+                                <th>辅料A损耗率</th>
+                                <th>单耗</th>
+                                <th>数量</th>
+                                <th>辅料B</th>
+                                <th>辅料B损耗率</th>
+                                <th>单耗</th>
+                                <th>数量</th>
+                                <th>辅料C</th>
+                                <th>辅料C损耗率</th>
+                                <th>单耗</th>
+                                <th>数量</th>
+                                <th>理单备注</th>
+                                <th>备注</th>
+                                <th>状态</th>
+                                <th>创建人</th>
+                                <th colspan="1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加/修改》》模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">添加</h4>
+                </div>
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-input" method="post">
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <label for="addDate">日期</label> <input type="text"
+                                                                       class="form-control" name="addDate"
+                                                                       id="addDate"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="wave">波次号</label> <input type="text"
+                                                                     class="form-control" name="wave" readonly
+                                                                     id="wave"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="packingBagQuantity"> 包装袋数量</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="packingBagQuantity" type="text" id="packingBagQuantity"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="loss"> 损耗</label> <input class="form-control"
+                                                                     name="loss" type="text" id="loss"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="packingBagSpecification"> 包装袋规格 </label> <input
+                                    name="packingBagSpecification" type="text"
+                                    class="form-control" id="packingBagSpecification"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ingredient"> 成分</label> <input name="ingredient"
+                                                                           class="form-control" type="text"
+                                                                           id="ingredient"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="popperColor"> 五爪扣色号 </label> <input
+                                    class="form-control" name="popperColor" type="text"
+                                    id="popperColor"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="popperScrapRate"> 五爪扣损耗率</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="popperScrapRate" type="text"
+                                    id="popperScrapRate"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="popperSingleUse"> 五爪扣单耗</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="popperSingleUse" type="text" id="popperSingleUse"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="popperQuantity"> 五爪扣数量</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="popperQuantity" type="text" id="popperQuantity"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesA"> 辅料A </label> <input
+                                    class="form-control" name="accessoriesA" type="text"
+                                    id="accessoriesA"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesAQuantity"> A数量</label> <input
+                                    onkeyup="chkNum(this)" name="accessoriesAQuantity" type="text"
+                                    class="form-control" id="accessoriesAQuantity"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesASingleUse"> A单耗</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="accessoriesASingleUse" type="text"
+                                    id="accessoriesASingleUse"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesAActualConsumption"> A实发</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="accessoriesAActualConsumption" type="text"
+                                    id="accessoriesAActualConsumption"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesB"> 辅料B </label> <input
+                                    class="form-control" name="accessoriesB" type="text"
+                                    id="accessoriesB"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesBQuantity"> B数量</label> <input
+                                    onkeyup="chkNum(this)" name="accessoriesBQuantity" type="text"
+                                    class="form-control" id="accessoriesBQuantity"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesBSingleUse"> B单耗</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="accessoriesBSingleUse" type="text"
+                                    id="accessoriesBSingleUse"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesBActualConsumption"> B实发</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="accessoriesBActualConsumption" type="text"
+                                    id="accessoriesBActualConsumption"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesC"> 辅料C</label> <input
+                                    class="form-control" name="accessoriesC" type="text"
+                                    id="accessoriesC"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesCQuantity"> C数量</label> <input
+                                    onkeyup="chkNum(this)" name="accessoriesCQuantity" type="text"
+                                    class="form-control" id="accessoriesCQuantity"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesCSingleUse"> C单耗</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="accessoriesCSingleUse" type="text"
+                                    id="accessoriesCSingleUse"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="accessoriesCActualConsumption"> C实发</label> <input
+                                    onkeyup="chkNum(this)" class="form-control"
+                                    name="accessoriesCActualConsumption" type="text"
+                                    id="accessoriesCActualConsumption"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="remarks"> 备注</label> <input name="remarks"
+                                                                        class="form-control" type="text" id="remarks"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label bolder blue"> 发放状态</label>
+                                <div class="radio">
+                                    <label> <input name="issuedStatus" type="radio"
+                                                   class="ace ready" value="准备就绪"> <span class="lbl">
+												准备就绪</span>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label> <input name="issuedStatus" type="radio"
+                                                   class="ace refuse" value="拒绝"> <span class="lbl">
+												拒绝</span>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label> <input name="issuedStatus" type="radio"
+                                                   class="ace issued" value="已发放"> <span class="lbl">
+												已发放</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" class="form-control" name="id"
+                               placeholder="" id="obj_hidden_id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" id="submit-btn" class="btn btn-primary"
+                                data-dismiss="modal">提交
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <!-- 刪除 -->
+    <div class="modal fade" id="myModal_del" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                </div>
+                <div id="myModal-prompt" class="modal-body">
+                    你确定刪除编号为:<span style="color: red" id="myModal2-wave-text"></span>的数据吗？？？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                    </button>
+                    <button type="button" id="delAccessoryMaterial"
+                            class="btn btn-primary">确认刪除
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    //页面加载就执行
+    $(function () {
+        $(".col-md-2").find(":input").each(
+                function () {
+                    $(this).val("");
+                });
+        var anyVal = $("#form-anyVal").serialize();
+        getAccessoryMaterialByPageCount(anyVal);
+    });
+    //查询
+    $("#anyVal-btn").on("click", function () {
+        var anyVal = $("#form-anyVal").serialize();
+        getAccessoryMaterialByPageCount(anyVal);
+    });
+    //提交
+    $("#submit-btn").on("click", function () {
+        var formData = new FormData($("#form-input")[0]);
+        var if_input_Id = $("#obj_hidden_id").val();
+        if (if_input_Id != "" && if_input_Id != null) {
+            //修改
+            modifyAccessoryMaterial(formData);
+        } else {
+            //添加
+            addAccessoryMaterial(formData);
+        }
+    });
+    //查询总条数
+    function getAccessoryMaterialByPageCount(anyVal) {
+        $.post('getAccessoryMaterialByPageCount.do', anyVal, function (data) {
+            $("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+            $("#pageNow").val(data.pageNow);
+            var anyVal2 = $("#form-anyVal").serialize();
+            //获取form参数进行查询
+            //調用方法传参
+            findAccessoryMaterial(anyVal2);
+            // 进入后台进行分页查询
+            $(".tcdPageCode").createPage({ //哦哦
+                pageCount: data.totalPageCount, //总页数
+                current: data.pageNow, //当前页
+                backFn: function (p) {
+                    $("#pageSize").val(10);
+                    $("#pageNow").val(p); //給當前頁賦值
+                    var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+                    //調用方法
+                    findAccessoryMaterial(anyVal1);
+                }
+            });
+        });
+    }
+    //查询
+    function findAccessoryMaterial(anyVal) {
+        $.post("findConditionAccessoryMaterialByPage.do", anyVal, //from表单内容
+                function (data) {
+                    $(".table_app").empty(); //清空原有的数据
+                    for (var i = 0; i < data.length; i++) {
+                        var _HTML_TEBLE_ = "";
+                        _HTML_TEBLE_ = "<tr>" +
+                                + "<input type='hidden' class='id' value='"
+                                + data[i].id
+                                + "'/>"
+                                +"<td>"
+                                + data[i].id
+                                + "</td><td >"
+                                + (data[i].addDate == null ? '': data[i].addDate)
+                                + "</td><td >"
+                                + (data[i].wave == null ? '': data[i].wave)
+                                + "</td><td >"
+                                + (data[i].numberOrder == null ? '': data[i].numberOrder)
+                                + "</td><td >"
+                                + (data[i].orderDetails == null ? '': data[i].orderDetails)
+                                + "</td><td >"
+                                + (data[i].cropNumber == null ? '' : data[i].cropNumber)
+                                + "</td><td >"
+                                + (data[i].cropDetails == null ? '': data[i].cropDetails)
+                                + "</td><td><img style='width: 120px; height: 120px' src=" + data[i].designChart + "></td><td>"
+                                + (data[i].craftsOrder == null || data[i].craftsOrder == "" ? '': "<a href='" + data[i].craftsOrder + "' target='_blank'>工艺单</a>")
+                                + "</td><td>"
+                                + (data[i].sizeChart == null || data[i].sizeChart == "" ? '' : "<a href='" + data[i].sizeChart + "' target='_blank'>尺码表</a>")
+                                + "</td><td >"
+                                + (data[i].editionType == null || data[i].editionType == "" ? '' : data[i].editionType)
+                                + "</td><td >"
+                                + (data[i].fabricWarehousDate == null || data[i].fabricWarehousDate == "" ? '' : data[i].fabricWarehousDate)
+                                + "</td><td >"
+                                + (data[i].cropDate == null || data[i].cropDate == "" ? '' : data[i].cropDate)
+                                + "</td><td >"
+                                + (data[i].specifiesFactory == null || data[i].specifiesFactory == "" ? '' : data[i].specifiesFactory)
+                                + "</td><td >"
+                                + (data[i].specifiesFactoryDate == null || data[i].specifiesFactoryDate == "" ? '' : data[i].specifiesFactoryDate)
+                                + "</td><td  class='modify-table-numeric' name='code52' >"
+                                + (data[i].code52 == null || data[i].code52 == "" ? '' : data[i].code52)
+                                + "</td><td class='modify-table-numeric' name='code59'>"
+                                + (data[i].code59 == null || data[i].code59 == "" ? '' : data[i].code59)
+                                + "</td><td class='modify-table-numeric' name='code66'>"
+                                + (data[i].code66 == null || data[i].code66 == "" ? ''  : data[i].code66)
+                                + "</td><td class='modify-table-numeric' name='code73'>"
+                                + (data[i].code73 == null || data[i].code73 == "" ? '' : data[i].code73)
+                                + "</td><td class='modify-table-numeric' name='code80'>"
+                                + (data[i].code80 == null || data[i].code80 == "" ? '' : data[i].code80)
+                                + "</td><td class='modify-table-numeric' name='code90'>"
+                                + (data[i].code90 == null || data[i].code90 == "" ? '' : data[i].code90)
+                                + "</td><td class='' name='totalCode'>"
+                                + (data[i].totalCode == null || data[i].totalCode == "" ? '' : data[i].totalCode)
+                                + "</td><td class='' name='tagLoss'>"
+                                + (data[i].tagLoss == null || data[i].tagLoss == "" ? '' : data[i].tagLoss)
+                                + "</td><td class='' name='packingBagQuantity'>"
+                                + (data[i].packingBagQuantity == null || data[i].packingBagQuantity == "" ? '' : data[i].packingBagQuantity)
+                                + "</td><td class='' name='loss'>"
+                                + (data[i].loss == null || data[i].loss == "" ? '' : data[i].loss)
+                                + "</td><td class='modify-table-char' value='packingBagSpecification'>"
+                                + (data[i].packingBagSpecification == null  || data[i].packingBagSpecification == "" ? '' : data[i].packingBagSpecification)
+                                + "</td><td class='modify-table-char' value='ingredient'>"
+                                + (data[i].ingredient == null  || data[i].ingredient == "" ? '' : data[i].ingredient)
+                                + "</td><td class='modify-table-char' value='popperColor'>"
+                                + (data[i].popperColor == null || data[i].popperColor == "" ? '' : data[i].popperColor)
+                                + "</td><td class='' name='popperScrapRate'>"
+                                + (data[i].popperScrapRate == null || data[i].popperScrapRate == "" ? '' : data[i].popperScrapRate)
+                                + "</td><td class='calQuality' name='popperSingleUse'>"
+                                + (data[i].popperSingleUse == null || data[i].popperSingleUse == "" ? '' : data[i].popperSingleUse)
+                                + "</td><td class='modify-table-numeric' name='popperQuantity'>"
+                                + (data[i].popperQuantity == null || data[i].popperQuantity == "" ? '' : data[i].popperQuantity)
+                                + "</td><td class='modify-table-char' value='accessoriesA'>"
+                                + (data[i].accessoriesA == null || data[i].accessoriesA == "" ? '' : data[i].accessoriesA)
+                                + "</td><td class='calQuality' name='accessoriesScrapRateA'>"
+                                + (data[i].accessoriesScrapRateA == null || data[i].accessoriesScrapRateA == "" ? '' : data[i].accessoriesScrapRateA)
+                                + "</td><td class='calQuality' name='accessoriesASingleUse'>"
+                                + (data[i].accessoriesASingleUse == null  || data[i].accessoriesASingleUse == "" ? '' : data[i].accessoriesASingleUse)
+                                + "</td><td class='modify-table-numeric' name='accessoriesAQuantity'>"
+                                + (data[i].accessoriesAQuantity == null || data[i].accessoriesAQuantity == "" ? '' : data[i].accessoriesAQuantity)
+                                + "</td><td class='modify-table-char' value='accessoriesB'>"
+                                + (data[i].accessoriesB == null || data[i].accessoriesB == "" ? '' : data[i].accessoriesB)
+                                + "</td><td class='calQuality' name='accessoriesScrapRateB'>"
+                                + (data[i].accessoriesScrapRateB == null || data[i].accessoriesScrapRateB == "" ? '' : data[i].accessoriesScrapRateB)
+                                + "</td><td class='calQuality' name='accessoriesBSingleUse'>"
+                                + (data[i].accessoriesBSingleUse == null || data[i].accessoriesBSingleUse == "" ? '' : data[i].accessoriesBSingleUse)
+                                + "</td><td class='modify-table-numeric' name='accessoriesBQuantity'>"
+                                + (data[i].accessoriesBQuantity == null || data[i].accessoriesBQuantity == "" ? '' : data[i].accessoriesBQuantity)
+                                + "</td><td class='modify-table-char' value='accessoriesC'>"
+                                + (data[i].accessoriesC == null || data[i].accessoriesC == "" ? '' : data[i].accessoriesC)
+                                + "</td><td class='calQuality' name='accessoriesScrapRateC'>"
+                                + (data[i].accessoriesScrapRateC == null || data[i].accessoriesScrapRateC == "" ? '' : data[i].accessoriesScrapRateC)
+                                + "</td><td class='calQuality' name='accessoriesCSingleUse'>"
+                                + (data[i].accessoriesCSingleUse == null || data[i].accessoriesCSingleUse == "" ? '' : data[i].accessoriesCSingleUse)
+                                + "</td><td class='modify-table-numeric' name='accessoriesCQuantity'>"
+                                + (data[i].accessoriesCQuantity == null || data[i].accessoriesCQuantity == "" ? '' : data[i].accessoriesCQuantity)
+                                + "</td><td>"
+                                + (data[i].remarksRichard == null || data[i].remarksRichard == "" ? '' : data[i].remarksRichard)
+                                + "</td><td class='modify-table-char' value='remarks'>"
+                                + (data[i].remarks == null || data[i].remarks == "" ? '' : data[i].remarks)
+                                + "</td><td class='issuedStatus"+data[i].id+"'>"
+                                + (data[i].issuedStatus == null || data[i].issuedStatus == "" ? '' : data[i].issuedStatus)
+                                + "</td><td >"
+                                + (data[i].founder == null || data[i].founder == "" ? '' : data[i].founder)
+                                + "</td><td>"
+                                +"<button type='button' onclick='manageAmComplete(\""
+                                + data[i].id
+                                + "\")' class='btn btn-primary btn-sm icon-confirm'>理单完成</button>"
+                                        //删除 修改功能不开放使用
+//                                + "</td><td >"
+//                                +"<button type='button'  data-toggle='modal' data-target='#myModal' onclick='modifyObjectById(\""
+//                                + data[i].id
+//                                + "\")' class='btn btn-primary icon-pencil'>修改</button>"
+//                                +"<button type='button'  data-toggle='modal' data-target='#myModal_del' onclick='delObjectById(\""
+//                                + data[i].id
+//                                + "\")' class='icon-trash btn btn-danger'>删除</button>"
+                                +"</td></tr>";
+                        $(".table_app").append(_HTML_TEBLE_);
+                        var issuedStatus = data[i].issuedStatus;
+                        var issId = data[i].id;
+                        changeAccessoryMaterialBgc(issuedStatus,issId);
+                    }
+
+                    modifyCellByNumeric("savaAccessoryMaterialArgsUpdate.do");
+                    modifyCellByChar("modifyAccessoryMaterial.do");
+
+                    calQuality();//绑定计算数量函数
+                });
+    }
+    ;
+    function addAccessoryMaterial(formData) {
+        $.ajax({
+            url: 'addAccessoryMaterial.do',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                window.location.reload();
+            },
+            error: function (data) {
+                window.location.reload();//刷新当前页面.
+            }
+        });
+    }
+    ;
+    //修改
+    function modifyAccessoryMaterial(formData) {
+        $.ajax({
+            url: 'modifyAccessoryMaterial.do',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                var pageNow = $("#pageNow").val();
+                $("#pageSize").val(10);
+                $("#pageNow").val(pageNow); //給當前頁賦值
+                var anyVal = $("#form-anyVal").serialize(); //获取form表单
+                //調用方法
+                findAccessoryMaterial(anyVal);
+            },
+            error: function (data) {
+                var pageNow = $("#pageNow").val();
+                $("#pageSize").val(10);
+                $("#pageNow").val(pageNow); //給當前頁賦值
+                var anyVal = $("#form-anyVal").serialize(); //获取form表单
+                //調用方法
+                findAccessoryMaterial(anyVal);
+            }
+        });
+    }
+    ;
+    //删除
+    $("#delAccessoryMaterial").on('click', function () {
+        var id = $("#myModal2-wave-text").text();
+        $.post('delAccessoryMaterialById.do', {
+            'id': id
+        }, function (data) {
+            if (data = 1) {
+                $("#myModal-prompt").html("恭喜你刪除成功");
+                $("#del-btn").remove();
+                window.location.reload();
+            } else {
+                $(" #myModal-prompt").html("删除失败！原因可能是网络问题");
+                $("#del-btn").remove();
+                window.location.reload();
+            }
+        });
+    });
+    //修改获取最新数据
+    function modifyObjectById(id) {
+        $.post("getAccessoryMaterialById.do", {
+            'id': id
+        }, function (result) {
+            $("#obj_hidden_id").val(result.id);//id
+            $("#addDate").val(result.addDate);
+            $("#wave").val(result.wave);
+            $("#packingBagQuantity").val(result.packingBagQuantity);
+            $("#packingBagSpecification").val(result.packingBagSpecification);
+            $("#loss").val(result.loss);
+            $("#ingredient").val(result.ingredient);
+            $("#popperColor").val(result.popperColor);
+            $("#popperQuantity").val(result.popperQuantity);
+            $("#popperSingleUse").val(result.accessoriesCSingleUse);
+            $("#popperScrapRate").val(result.popperScrapRate);
+            $("#accessoriesA").val(result.accessoriesA);
+            $("#accessoriesAQuantity").val(result.accessoriesAQuantity);
+            $("#accessoriesASingleUse").val(result.accessoriesASingleUse);
+            $("#accessoriesAActualConsumption").val(result.accessoriesAActualConsumption);
+            $("#accessoriesB").val(result.accessoriesB);
+            $("#accessoriesBQuantity").val(result.accessoriesBQuantity);
+            $("#accessoriesBSingleUse").val(result.accessoriesBSingleUse);
+            $("#accessoriesBActualConsumption").val(result.accessoriesBActualConsumption);
+            $("#accessoriesC").val(result.accessoriesC);
+            $("#accessoriesCQuantity").val(result.accessoriesCQuantity);
+            $("#accessoriesCSingleUse").val(result.accessoriesCSingleUse);
+            $("#accessoriesCActualConsumption").val(result.accessoriesCActualConsumption);
+            $("#remarks").val(result.remarks);
+            var issuedStatus = result.issuedStatus;
+            if (issuedStatus == '准备就绪') {
+                $(".ready").prop('checked', "checked");
+                $(".refuse").removeAttr('checked');
+                $(".issued").removeAttr('checked');
+
+            } else if (issuedStatus == '拒绝') {
+                $(".ready").removeAttr('checked');
+                $(".refuse").prop('checked', "checked");
+                $(".issued").removeAttr('checked');
+            } else if (issuedStatus == '已发放') {
+                $(".ready").removeAttr('checked');
+                $(".refuse").removeAttr('checked');
+                $(".issued").prop('checked', "checked");
+
+            }
+            $("#createdTime").val(result.createdTime);
+            $("#founder").val(result.founder);
+        });
+    }
+    ;
+    //删除
+    function delObjectById(id) {
+        $("#myModal2-wave-text").text(id);
+    }
+    ;
+    //点击添加添加清空id
+    $("#add_button").on("click", function () {
+        $("#obj_hidden_id").val("");
+    });
+
+    //============= the following by chiayich ===================================
+
+    //修改更新计算 辅料 包装袋 吊牌 五爪扣 辅料A 辅料B 辅料C 的数量
+    function calQuality(){
+        $(".calQuality").on(
+                "dblclick",
+                function() {
+                    var id = $(this).parent().children("td:first").html();
+                    id = parseInt(id);
+                    var code = $(this).text().trim();
+                    var name = $(this).attr("name");
+                    $(this).html(
+                            "<input id='" + id + "' type='text' value='" + code
+                            + "' name='" + name + "'> ");
+
+                    $("#" + id).focus();// 文本框获取光标事件
+                    savaArgsUpate(id, name);
+                });
+    }
+    //calQuality调用 保存更新数据 及回填计算所得数量
+    function savaArgsUpate(id,name){
+        $("#" + id).blur(
+                        function() {
+                            var updatedArgs = $(this).val();
+                            var trlabele = $(this).closest("td");
+                            trlabele.text(updatedArgs);
+                            var data = {
+                                id : id
+                            };
+                            data[name] = updatedArgs;
+                            $.ajax({
+                                url : 'savaAccessoryMaterialArgsUpdate.do',
+                                dataType : 'json',
+                                type : 'post',
+                                data : data,
+                                success : function(data) {
+                                    var trlabel = trlabele.parents();
+                                    if(data.popperQuantity!=null){
+                                        trlabel.children("td[name='popperQuantity']").html(data.popperQuantity);
+                                    }
+                                    if(data.popperQuantity!=null){
+                                        trlabel.children("td[name='tagLoss']").html(data.tagLoss);
+                                    }
+                                    if(data.popperQuantity!=null){
+                                        trlabel.children("td[name='loss']").html(data.loss);
+                                    }
+                                    if(data.popperQuantity!=null){
+                                        trlabel.children("td[name='popperScrapRate']").html(data.popperScrapRate);
+                                    }
+                                    if(data.accessoriesAQuantity!=null){
+                                        trlabel.children("td[name='accessoriesAQuantity']").html(data.accessoriesAQuantity);
+                                    }
+                                    if(data.accessoriesBQuantity!=null){
+                                        trlabel.children("td[name='accessoriesBQuantity']").html(data.accessoriesBQuantity);
+                                    }
+                                    if(data.accessoriesCQuantity!=null){
+                                        trlabel.children("td[name='accessoriesCQuantity']").html(data.accessoriesCQuantity);
+                                    }
+                                    if(data.totalCode!=null){
+                                        trlabel.children("td[name='totalCode']").html(data.totalCode);
+                                    }
+                                    if(data.packingBagQuantity!=null){
+                                        trlabel.children("td[name='packingBagQuantity']").html(data.packingBagQuantity);
+                                    }
+                                },
+                                error : function() {
+                                    alert("修改失败,输入的类型错误!");
+                                }
+                            });
+                        });
+    }
+
+    //理单完成
+    function manageAmComplete(id) {
+        var flag = confirm("确认准备就绪？");
+        var data = {
+            amId : id
+        };
+        if (flag) {
+            var tdArgs =  $(".issuedStatus" + id);
+            $.ajax({
+                url: "manageAmComplete.do",
+                dataType : 'json',
+                type : 'post',
+                data : data,
+                success: function (result) {
+                    var issuedStatus = "理单完成";
+                    tdArgs.text(issuedStatus);
+                    var issId = id;
+                    changeAccessoryMaterialBgc(issuedStatus,issId);
+                }
+            });
+        }
+    }
+
+
+    //改变辅料理单背景色
+    function changeAccessoryMaterialBgc (issuedStatus,issId ) {
+        if (issuedStatus == "理单完成") {
+            $(".issuedStatus" + issId).parent().css("background", "#bbffbb");
+        }else if (issuedStatus == "未理单") {
+            $(".issuedStatus" + issId).parent().css("background", "none");
+        } else if (issuedStatus == "被退回") {
+            $(".issuedStatus" + issId).parent().css("background", "#ffbb77");
+        } else if (issuedStatus == "已发放") {
+            $(".issuedStatus" + issId).parent().css("background", "#84c1ff");
+        } else if (issuedStatus == "配包完成") {
+            $(".issuedStatus" + issId).parent().css("background", "#ffaad5");
+        }else{
+            $(".issuedStatus" + issId).parent().css("background","none");
+        }
+    }
+
+    $("#queryAddDate").keyup(function(){
+        if(event.keyCode == 13){
+            $("#anyVal-btn").click();
+        }
+    });
+    $("#queryWave").keyup(function(){
+        if(event.keyCode == 13){
+            $("#anyVal-btn").click();
+        }
+    });
+    //=============== 以下弃用 整理时可删除============================
+//    function confirmReady(id) {
+//        var flag = confirm("确认准备就绪？");
+//        var data = {
+//            amId : id
+//        };
+//        if (flag) {
+//            $.ajax({
+//                url: "confirmReady.do",
+//                dataType : 'json',
+//                type : 'post',
+//                data : data,
+//                success: function (result) {
+//                    var issuedStatus = "准备就绪";
+//                    var issId = id;
+//                    changeAccessoryMaterialBgc(issuedStatus,issId);
+//                }
+//            });
+//        }
+//    }
+//    function alreadyIssue(id) {
+//        var flag = confirm("确认采购？");
+//        var data = {
+//            amId : id
+//        };
+//        if (flag) {
+//            $.ajax({
+//                url: "alreadyIssue.do",
+//                dataType : 'json',
+//                type : 'post',
+//                data : data,
+//                success: function () {
+//                    var issuedStatus = "确认采购";
+//                    var issId = id;
+//                    changeAccessoryMaterialBgc(issuedStatus,issId);
+//                }
+//            });
+//        }
+//    }
+//    function resetState(id) {
+//        var flag = confirm("确认重置状态？可能导致同步的其他数据出现问题 慎重或及时使用！！");
+//        var data = {
+//            amId : id
+//        };
+//        if (flag) {
+//            $.ajax({
+//                url: "resetState.do",
+//                dataType : 'json',
+//                type : 'post',
+//                data : data,
+//                success: function () {
+//                    var issuedStatus = "";
+//                    var issId = id;
+//                    changeAccessoryMaterialBgc(issuedStatus,issId);
+//                }
+//            });
+//        }
+//    }
+
+    //============= the foregoing by chiayich ===================================
+</script>
+</html>

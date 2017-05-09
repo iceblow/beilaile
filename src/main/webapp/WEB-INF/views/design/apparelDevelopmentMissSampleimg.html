@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>补工艺单</title> <@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/design/apparelDevelopmentMissSampleimg.js"></script>
+<style type="text/css">
+table tr:hover {
+	background-color: #dafdf3;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">补工艺单</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div>
+					<div class="col-md-12">
+						<button style="float: right;" class="btn btn-primary btn-lg"
+							data-toggle="modal" data-target="#myModal" id="add">添 加</button>
+						<div style="float: left;">
+							<form id="myselect-from">
+								<font>波次查询</font><input type="text" name="girard"
+									id="checkByGirard" /> <font>商家编号</font><input type="text"
+									name="merchantId" id="checkByMerchantId" /> <font>款号查询</font><input
+									type="text" name="model" id="checkByModel" /> <font>设计师查询</font><input
+									type="text" name="designer" id="checkByDesigner" /> <br /> <br />
+								<!-- <font>版号查询</font><input type="text" name="plate" id="checkByPlate" />  -->
+								<!-- <font>服装名查询</font><input type="text" name="clothName" id="checkByClothName" /> -->
+								<font>参考波次</font> <input type="text" name="platewave"
+									id="checkByPlatewave" /> <font>参考印花</font><input type="text"
+									name="referPrint" id="checkByReferprint" /> <font>头样图查询</font><input
+									type="text" name="processImg" id="checkByProcessImg" /> <font>工艺单查询</font><input
+									type="text" name="sampleImg" id="checkBySampleImg" />
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal" style="background-color: #428bca;"
+									id="checkbtn">查询</button>
+							</form>
+							<!-- <button style="float: right;" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="printImg">打印工艺单</button> -->
+						</div>
+
+					</div>
+					<div class="col-md-12"></div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="2" style="text-align: center;">
+									<div>
+										<button id="sampleImg" class="btn btn-default btn-sm"
+											data-dismiss="modal">生成工艺单</button>
+									</div>
+								</th>
+								<th colspan="38" style="text-align: center; font-size: 16px;">补工艺单表</th>
+								<!-- <th colspan="2" style="text-align: center;"></th> -->
+							</tr>
+							<tr>
+								<th style="text-align: center; width: 30px;"><input
+									type="checkbox" id="checkbox" /></th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">原波次</th>
+								<th style="text-align: center;">商家编号</th>
+								<th style="text-align: center;">设计师</th>
+								<th style="text-align: center;">款号</th>
+								<th style="text-align: center;">参考波次</th>
+								<th style="text-align: center;">参考印花</th>
+								<!-- <th style="text-align: center;">服装名</th> -->
+								<th style="text-align: center;">设计图</th>
+								<th style="text-align: center;">头样图</th>
+								<th style="text-align: center;">工艺单</th>
+								<!--<th style="text-align: center;">图样工艺单</th> -->
+								<th style="text-align: center;">尺码表</th>
+								<th style="text-align: center;">尺码</th>
+								<th style="text-align: center;">总件数</th>
+								<th style="text-align: center;">匹印</th>
+								<th style="text-align: center;">片印</th>
+								<th style="text-align: center;">绣花</th>
+
+								<!--<th style="text-align: center;">设计时间</th>
+								<th style="text-align: center;">头版码数</th>
+								<th style="text-align: center;">审核</th>
+								<th style="text-align: center;">纸样</th>
+								<th style="text-align: center;">车版</th>
+								<th style="text-align: center;">发版日期</th>
+								<th style="text-align: center;">完成日期</th>
+								<th style="text-align: center;">尺码确认</th>
+								<th style="text-align: center;">作废</th>
+								<th style="text-align: center;">跟单员</th>
+								<th style="text-align: center;">供应商</th> -->
+
+								<th style="text-align: center;">面料A小样</th>
+								<!--<th style="text-align: center;">面料A地址</th> -->
+								<th style="text-align: center;">面料A幅宽</th>
+								<th style="text-align: center;">面料A成分</th>
+
+								<th style="text-align: center;">面料B小样</th>
+								<!--<th style="text-align: center;">面料B地址</th> -->
+								<th style="text-align: center;">面料B幅宽</th>
+								<th style="text-align: center;">面料B成分</th>
+
+								<th style="text-align: center;">面料C小样</th>
+								<!--<th style="text-align: center;">面料C地址</th> -->
+								<th style="text-align: center;">面料C幅宽</th>
+								<th style="text-align: center;">面料C成分</th>
+
+								<th style="text-align: center;">面料D小样</th>
+								<!--<th style="text-align: center;">面料D地址</th> -->
+								<th style="text-align: center;">面料D幅宽</th>
+								<th style="text-align: center;">面料D成分</th>
+
+								<th style="text-align: center;">面料E小样</th>
+								<!--<th style="text-align: center;">面料E地址</th> -->
+								<th style="text-align: center;">面料E幅宽</th>
+								<th style="text-align: center;">面料E成分</th>
+
+								<th style="text-align: center;">辅料A小样</th>
+								<!-- <th style="text-align: center;">辅料A地址</th> -->
+								<!-- <th style="text-align: center;">辅料A幅宽</th>
+								<th style="text-align: center;">辅料A成分</th> -->
+
+								<th style="text-align: center;">辅料B小样</th>
+								<!--<th style="text-align: center;">辅料B地址</th> -->
+								<!-- <th style="text-align: center;">辅料B幅宽</th>
+								<th style="text-align: center;">辅料B成分</th> -->
+
+								<th style="text-align: center;">辅料C小样</th>
+								<!--<th style="text-align: center;">辅料C地址</th> -->
+								<!--<th style="text-align: center;">辅料C幅宽</th>
+								<th style="text-align: center;">辅料C成分</th> -->
+
+								<th style="text-align: center;">印花位置</th>
+								<th style="text-align: center;">绣花位置</th>
+								<th style="text-align: center;">备注</th>
+								<th style="text-align: center;">操 作</th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+
+			<!--原 添加模态框 -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<form action="" method="post" id="add_form"
+						enctype="multipart/form-data">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">添加补工艺单数据</h4>
+							</div>
+							<div id="add_form_input" class="modal-body">
+								<div class="col-md-12">
+									<div class="col-md-6">
+										<label for="girard">波次号</label> <input type="text"
+											class="form-control" name="girard" placeholder="" id="girard">
+									</div>
+									<div class="col-md-6">
+										<label for="merchantId">商家编号</label> <input type="text"
+											class="form-control" name="merchantId" placeholder=""
+											id="merchantId">
+									</div>
+									<div class="col-md-6">
+										<label for="designer">设计师</label> <input type="text"
+											class="form-control" name="designer" placeholder=""
+											id="designer">
+									</div>
+									<div class="col-md-6">
+										<label for="clothName">服装名</label> <input type="text"
+											class="form-control" name="clothName" placeholder=""
+											id="clothName">
+									</div>
+									<div class="col-md-6">
+										<label for="model">款号</label> <input type="text"
+											class="form-control" name="model" placeholder="" id="model">
+									</div>
+									<div class="col-md-6">
+										<label for="plate">版号</label> <input type="text"
+											class="form-control" name="plate" placeholder="" id="plate">
+									</div>
+									<div class="col-md-6">
+										<label for="platewave">参考波次</label> <input type="text"
+											class="form-control" name="platewave" placeholder=""
+											id="platewave">
+									</div>
+									<div class="col-md-6">
+										<label for="referPrint">参考印花</label> <input type="text"
+											class="form-control" name="referPrint" placeholder=""
+											id="referPrint">
+									</div>
+									<div class="col-md-6">
+										<label for="designImg">设计图</label> <input type="file"
+											name="file" id="designImg">
+									</div>
+									<div class="col-md-6">
+										<label for="processImg">头样图</label> <input type="file"
+											name="file1" id="processImg">
+									</div>
+									<!-- 	<div class="col-md-6">
+										<label for="processPatternImg">图样工艺单</label><input type="file"
+											name="file3" id="processPatternImg" />
+									</div> -->
+									<div class="col-md-6">
+										<label for="childImg">子码表</label> <input type="file"
+											name="file2" id="childImg">
+									</div>
+									<!-- 	<div class="col-md-6">
+										<label for="designTime" style="color: red">*设计时间*</label> <input
+											type="text" class="form-control input-date" name="designTime"
+											placeholder="" id="designTime">
+									</div> -->
+									<div class="col-md-6">
+										<label for="remark" style="color: red">*备注</label> <input
+											type="text" class="form-control" name="remark" placeholder=""
+											id="remark">
+									</div>
+									<div class="col-md-4">
+										<label for="code52">52码</label> <input type="text"
+											class="form-control" name="code52" placeholder="" id="code52"
+											onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code59">59码</label> <input type="text"
+											class="form-control" name="code59" placeholder="" id="code59"
+											onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code66">66码</label> <input type="text"
+											class="form-control" name="code66" placeholder="" id="code66"
+											onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code73">73码</label> <input type="text"
+											class="form-control" name="code73" placeholder="" id="code73"
+											onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code80">80码</label> <input type="text"
+											class="form-control" name="code80" placeholder="" id="code80"
+											onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code90">90码</label> <input type="text"
+											class="form-control" name="code90" placeholder="" id="code90"
+											onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code100">100码</label> <input type="text"
+											class="form-control" name="code100" placeholder=""
+											id="code100" onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code110">110码</label> <input type="text"
+											class="form-control" name="code110" placeholder=""
+											id="code110" onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code120">120码</label> <input type="text"
+											class="form-control" name="code120" placeholder=""
+											id="code120" onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code130">130码</label> <input type="text"
+											class="form-control" name="code130" placeholder=""
+											id="code130" onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code160">160码</label> <input type="text"
+											class="form-control" name="code160" placeholder=""
+											id="code160" onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-4">
+										<label for="code170">170码</label> <input type="text"
+											class="form-control" name="code170" placeholder=""
+											id="code170" onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal" id="addApparelDevelopmentMissSampleimg">
+									添加</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!--修改 模态框（Modal） -->
+			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<form action="" method="post" enctype="multipart/form-data"
+					id="myupp-form">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">修改服装开发信息</h4>
+							</div>
+							<div class="modal-body">
+								<input type="hidden" name="id" id="id" />
+								<div class="col-md-12">
+									<div class="col-md-6">
+										<label for="girard">波次号</label> <input type="text"
+											class="form-control" name="girard" placeholder=""
+											id="ugirard">
+									</div>
+									<div class="col-md-6">
+										<label for="merchantId">商家编号</label> <input type="text"
+											class="form-control" name="merchantId" placeholder=""
+											id="umerchantId">
+									</div>
+									<div class="col-md-6">
+										<label for="designer">设计师</label> <input type="text"
+											class="form-control" name="designer" placeholder=""
+											id="udesigner">
+									</div>
+									<!-- <div class="col-md-6">
+										<label for="clothName">服装名</label> <input type="text"
+											class="form-control" name="clothName" placeholder=""
+											id="uclothName">
+									</div> -->
+									<div class="col-md-6">
+										<label for="model">款号</label> <input type="text"
+											class="form-control" name="model" placeholder="" id="umodel">
+									</div>
+									<!-- 	<div class="col-md-6">
+										<label for="plate">版号</label> <input type="text"
+											class="form-control" name="plate" placeholder="" id="uplate">
+									</div> -->
+									<div class="col-md-6">
+										<label for="platewave">参考波次</label> <input type="text"
+											class="form-control" name="platewave" placeholder=""
+											id="uplatewave">
+									</div>
+									<div class="col-md-6">
+										<label for="referPrint">参考印花</label> <input type="text"
+											class="form-control" name="referPrint" placeholder=""
+											id="ureferPrint">
+									</div>
+									<div class="col-md-6">
+										<label for="designImg">设计图</label> <input type="file"
+											name="file" id="udesignImg">
+									</div>
+									<div class="col-md-6">
+										<label for="processImg">头样图</label> <input type="file"
+											name="file1" id="uprocessImg">
+									</div>
+									<!-- 	<div class="col-md-6">
+										<label for="processPatternImg">图样工艺单</label><input type="file"
+											name="file3" id="uprocessPatternImg" />
+									</div> -->
+									<div class="col-md-6">
+										<label for="childImg">子码表</label> <input type="file"
+											name="file2" id="uchildImg">
+									</div>
+									<!-- 	<div class="col-md-6">
+										<label for="designTime" style="color: red">*设计时间*</label> <input
+											type="text" class="form-control input-date" name="designTime"
+											placeholder="" id="udesignTime">
+									</div> -->
+									<div class="col-md-6">
+										<label for="remark" style="color: red">备注</label> <input
+											type="text" class="form-control" name="remark" placeholder=""
+											id="uremark">
+									</div>
+
+									<div class="col-md-4">
+										<label for="code52">52码</label> <input type="text"
+											class="form-control" name="code52" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode52">
+									</div>
+									<div class="col-md-4">
+										<label for="code59">59码</label> <input type="text"
+											class="form-control" name="code59" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode59">
+									</div>
+									<div class="col-md-4">
+										<label for="code66">66码</label> <input type="text"
+											class="form-control" name="code66" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode66">
+									</div>
+									<div class="col-md-4">
+										<label for="code73">73码</label> <input type="text"
+											class="form-control" name="code73" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode73">
+									</div>
+									<div class="col-md-4">
+										<label for="code80">80码</label> <input type="text"
+											class="form-control" name="code80" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode80">
+									</div>
+									<div class="col-md-4">
+										<label for="code90">90码</label> <input type="text"
+											class="form-control" name="code90" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode90">
+									</div>
+									<div class="col-md-4">
+										<label for="code100">100码</label> <input type="text"
+											class="form-control" name="code100" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode100">
+									</div>
+									<div class="col-md-4">
+										<label for="code110">110码</label> <input type="text"
+											class="form-control" name="code110" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode110">
+									</div>
+									<div class="col-md-4">
+										<label for="code120">120码</label> <input type="text"
+											class="form-control" name="code120" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode120">
+									</div>
+									<div class="col-md-4">
+										<label for="code130">130码</label> <input type="text"
+											class="form-control" name="code130" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode130">
+									</div>
+									<div class="col-md-4">
+										<label for="code160">160码</label> <input type="text"
+											class="form-control" name="code160" placeholder=""
+											onkeyup="value=value.replace(/\D/g,'')" id="ucode160">
+									</div>
+									<div class="col-md-4">
+										<label for="code170">170码</label> <input type="text"
+											class="form-control" name="code170" placeholder=""
+											id="ucode170" onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+
+								</div>
+							</div>
+							<input type="hidden" id="myIndex" name="myIndex" value="">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal" id="myupdate">修改</button>
+								<!-- <input type="submit" class="btn btn-primary"
+									style="background-color: #428bca;" value="修改"
+									id="uppApparelDevelopmentManagement" /> -->
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

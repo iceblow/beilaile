@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 面料跟踪 </title><@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/taisan/problemNotReceiveMaterial.js"></script>
+ 
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active"> 面料跟踪 </li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2">
+								<label for="wave">波次号</label><input type="text"
+									class="form-control" name="wave">
+							</div>
+							<div class="col-md-2">
+								<label for="productCode">商品编号</label><input type="text"
+									class="form-control" name="productCode">
+							</div>
+							<div class="col-md-2">
+								<label for="clouthName">商品名</label><input type="text"
+									class="form-control" name="clouthName">
+							</div>
+							<div class="col-md-2">
+								<label for="factory">工厂</label><input type="text"
+									class="form-control" name="factory">
+							</div>
+							<div class="col-md-2">
+								<label for="orderType">订单类型</label><input type="text"
+									class="form-control" name="orderType">
+							</div>							
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="myselect">查询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered"
+						style="width: 100%; height: 100%;">
+						<thead>
+							<tr>								
+								<th colspan="21" style="text-align: center; font-size: 25px;"> 面料跟踪 </th>
+							</tr>
+							<tr>
+								<th style="text-align: center; font-size: 16px;">波次号</th>
+								<th style="text-align: center; font-size: 16px;">商品编号</th>
+								<th style="text-align: center; font-size: 16px;">图片</th>
+								<th style="text-align: center; font-size: 16px;">工厂</th>
+								<th style="text-align: center; font-size: 16px;">订单类型</th>
+								<th style="text-align: center; font-size: 16px;">面料入库时间</th>
+								<th style="text-align: center; font-size: 16px;">发版日期</th>
+								<th style="text-align: center; font-size: 16px;">时间间隔</th>
+								<th style="text-align: center; font-size: 16px;">问题反馈</th>
+								<th style="text-align: center; font-size: 16px;">延期原因</th>
+								<th style="text-align: center; font-size: 16px;">负责人</th>
+								<th style="text-align: center; font-size: 16px;">备注</th>
+								<th style="text-align: center; font-size: 16px;">问题解决</th>
+								<th style="text-align: center; font-size: 16px;">问题解决时间</th>
+								<th style="text-align: center; font-size: 16px;">问题是否解决</th>
+								<th style="text-align: center; font-size: 16px;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+					<div style="display: none;">
+						<img id="printImg" src="" width="100%" height="100%">
+					</div>
+				</div>
+			</div>
+
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

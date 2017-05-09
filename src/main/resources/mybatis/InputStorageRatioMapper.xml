@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.InputStorageRatioDAO">
+	<!-- 查询最近30天的日期 -->
+	<select id="getDate" resultType="java.lang.String">
+		select release_time from input_storage_ratio group by release_time 
+		ORDER BY release_time DESC LIMIT 0,60
+	</select>
+	<!-- 查询名称 -->
+	<select id="getNameType" resultType="java.lang.String">
+		select type_name from input_storage_ratio
+		WHERE
+		type_name!='' group by
+		type_name ORDER BY
+		release_time DESC
+	</select>
+
+	<!-- 查询入库比例 -->
+	<select id="getRatioIn" parameterType="java.lang.String" resultType="java.lang.Double">
+		select b.ratio_in from 
+		(select release_time from input_storage_ratio group by release_time ORDER BY release_time DESC LIMIT 0,60)a
+		left join 
+		(select * from input_storage_ratio WHERE type_name=#{typeName})b on a.release_time=b.release_time;
+	</select>
+	<!-- 查询未入库比例 -->
+	<select id="getRatioNot" parameterType="java.lang.String" resultType="java.lang.Double">
+		select b.ratio_not from 
+		(select release_time from input_storage_ratio group by release_time ORDER BY release_time DESC LIMIT 0,60)a
+		left join 
+		(select * from input_storage_ratio WHERE type_name=#{typeName})b on a.release_time=b.release_time;
+	</select>
+</mapper>

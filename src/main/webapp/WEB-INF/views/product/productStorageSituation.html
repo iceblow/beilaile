@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<@p.cache/><@p.css/> <@p.js/>
+<title>入库情况</title>
+<script src="/res/js/laypage/laypage.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="notStorage">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">入库情况</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+
+			</div>
+			<form id="selectFromData" enctype='mutipart/form-data'>
+					<div class="col-md-2">
+						<label for=wave></label>波次<input id="wave"  type="text"class="form-control" name="wave">
+					</div>
+					<div class="col-md-2">
+						<label for=productName></label>商品名称<input id="productName"  type="text"class="form-control" name="productName">
+					</div>
+					<div class="col-md-2">
+						<label for=productCode></label>商品编码<input id="productCode"  type="text"class="form-control" name="productCode">
+					</div>
+					<div class="col-md-2">
+						<label for=orderGrade></label>订单等级<input id="orderGrade"  type="text"class="form-control" name="orderGrade">
+					</div>
+					<div class="col-md-2">
+						<label for=createTime></label>创建时间<input id="createTime"  type="text"class="form-control" name="createTime">
+					</div>
+					
+			</form>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #428bca;"
+					id="myselect">查询</button>
+			</div> 
+			<div class="main-content">
+				<table class="table table-bordered" style="width: 100%; height: 100%;">
+					<thead>
+						<tr>
+							<th colspan="30" style="text-align: center; font-size: 25px;">入库情况</th>
+						</tr>
+						<tr>
+							<th>ID</th>
+							<th>序列</th>
+							<th>波次</th>
+							<th>商品编码</th>
+							<th>设计图</th>
+							<th>订单等级</th>
+							<th>数据状态</th>
+							<th>备注</th>
+							<th>入仓时间</th>
+							<th>创建时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+					</tbody>
+				</table>
+				<!-- 分页 -->
+				<div id="pageSystem" style="width: 100%; position: relative; top: 10px;"></div>				
+			</div>
+		</div>
+	</div>
+</body>
+ <script type="text/javascript">
+$(function() {
+	loadPageDatas(1);
+	selectButton();
+	
+});
+
+//模糊查询
+var mySelectForm;
+function selectButton() {
+	$("#myselect").click(function() {
+		mySelectForm= $("#selectFromData").serialize();
+		firstLoadData("productStorageSituation/getProductStorageSituationPage.do?"+mySelectForm,1);
+	});
+}
+
+//进入后台进行分页查询
+function loadPageDatas(index) {
+	firstLoadData("productStorageSituation/getProductStorageSituationPage.do", index);
+}
+
+//查询完成,打印数据
+function loadData(mydata) {
+	$("#tbody").empty();
+	$.each (mydata, function(index, x) {
+		var id = "<td>" + x.id + "</td>";
+		var sid = "<td>" + x.sid + "</a></td>";  //原波次号
+		var wave = "<td>" + x.wave + "</a></td>";  //波次号
+		var productCode =x.productCode == null ? "<td></td>" : "<td>" + x.productCode + "</td>";	//商品编码
+		var designImg= "<td><img style='width: 50px; height: 50px' src='" + x.designImg + "'></td>";  //设计图
+		if(x.dataStatus=='已入库'){
+			var orderGrade= x.orderGrade == null ? "<td></td>" : "<td>" + x.orderGrade + "</td>";//订单等级
+			var dataStatus= x.dataStatus == null ? "<td></td>" : "<td>已入仓</td>";   //数据状态
+			var remarks =x.remarks == null ? "<td></td>" : "<td>" + x.remarks + "</td>";	//备注
+		}else{
+			var orderGrade= x.orderGrade == null ? "<td class='mydblClick' name='orderGrade'></td>" : "<td class='mydblClick' name='orderGrade'>" + x.orderGrade + "</td>";//订单等级
+			var remarks =x.remarks == null ? "<td class='mydblClick' name='remarks'></td>" : "<td class='mydblClick' name='remarks'>" + x.remarks + "</td>";	//备注
+			var dataStatus= x.dataStatus == null ? "<td></td>" : "<td>" + x.dataStatus + "</td>";   //数据状态
+		}
+				
+		var storageTime =x.storageTime == null ? "<td></td>" : "<td>" + x.storageTime + "</td>"; //入仓时间
+		var createTime = x.createTime == null ? "<td ></td>" :"<td >" + x.createTime + "</td>"; //创建时间
+		$("tbody").append(
+				"<tr>"
+					+ id
+					+ sid
+					+ wave
+					+ productCode
+					+ designImg
+					+ orderGrade
+					+ dataStatus
+					+ remarks
+					+ storageTime
+					+ createTime
+					+ "<td class='dataState"+x.id+"'><button type='button' class='btn btn-primary updateDataStatus"+x.id+"'>确认入仓</button>"
+					+ "<button type='button' class='btn btn-danger deleteById"+x.id+"'>删除</button></td>"
+					+ "</tr>");
+						var dataStatus =x.dataStatus;
+					 if (dataStatus != "" && dataStatus != null && dataStatus =='已入库' ) {
+							$(".dataState" + x.id).parent().attr("bgcolor", "#00ffff");
+							$(".dataState" +x.id).find('button').remove();
+							$(".dataState" + x.id).append("<button class='btn icon-ok btn-inverse' disabled='disabled'>已确认入仓</button>");
+						} 
+		
+					deleteDate(x.id);
+					mydblclick();
+					updateDataStatus(x.id);
+	}); 
+}
+
+
+//设置文本框
+function mydblclick(){
+	 $(".mydblClick").on("dblclick",function() {
+		var myid= $(this).parent().find("td:eq(0)").text().trim();//获取到id值	
+		var thisText = $(this).text().trim();    //文本框中原有的值
+		var thisName = $(this).attr("name");    //获取文本框的属性名
+		var thisVal = $(this).attr("value");   //获取文本框属性值
+		if(thisName == "remarks"  || thisName== "orderGrade"){
+			$(this).html(
+					"<form id='dbUpdateForm'><input type='hidden' name='id' value="+
+							myid+" /><input type='text' id='my"+thisName +"' name='" + thisName+ "' value='" + thisText+ "'></form>");
+			$(this).attr("class", "sn");
+			myblur("my" + thisName);
+		} 
+		$("#my"+ thisName).focus();
+	}); 
+} 
+
+	//提交对文本框中数据
+ function myblur(id){
+	 $("#" + id).blur(function() {
+				 var myform = $("#dbUpdateForm").serialize();
+				 $.ajax({
+					 url : 'productStorageSituation/updateProductStorageSituationById.do',
+					 type : 'POST',
+					 dataType : 'json',
+					 data : myform ,
+					 success : function(data){
+						 if(data==1){
+							 firstLoadData("productStorageSituation/getProductStorageSituationPage.do?"+mySelectForm,$(".laypage_curr").text());
+						 }else{
+							 alert("修改失败");
+						 }
+					 }
+				 });
+			 });
+ 	}
+	
+	//确认入仓
+ function updateDataStatus(ById){
+		$(".updateDataStatus"+ById).on("click",function() {
+			var  id= $(this).parent().parent().find("td:eq(0)").text().trim();//获取到id
+			if(confirm('确定要入仓吗?')){
+				$.ajax({
+					url : 'productStorageSituation/updateDataStateById.do',
+					type : 'POST',
+					data : { id:id} ,
+					dataType : 'json',
+					success : function(data){
+						if(data>=1){
+							//data=1:表示数据入仓成功,添加数据不一定成功
+							firstLoadData("productStorageSituation/getProductStorageSituationPage.do?"+mySelectForm,$(".laypage_curr").text());
+						}else{
+							alert("入仓失败");
+						}
+					}
+				});
+			}else{
+				return false;
+			}
+		});
+	}
+
+//假刪除數據
+function deleteDate(ids){
+	$(".deleteById"+ids).on("click",function() {
+		var  id= $(this).parent().parent().find("td:eq(0)").text().trim();//获取到id
+		if(confirm('确定要删除此条数据吗?')){
+			$.ajax({
+				url : 'productStorageSituation/deleteProductStorageSituationById.do',
+				type : 'POST',
+				data : { id:id} ,
+				dataType : 'json',
+				success : function(data){
+					if(data>=1){
+						firstLoadData("productStorageSituation/getProductStorageSituationPage.do?"+mySelectForm,$(".laypage_curr").text());
+					}else{
+						alert("删除失败");
+					}
+				}
+			});
+		}else{
+			return false;
+		}
+	});
+}
+
+
+</script>
+</html>

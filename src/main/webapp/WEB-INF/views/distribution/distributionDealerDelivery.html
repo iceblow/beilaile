@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>经销单出货信息</title> <@p.cache/> <@p.css/> <@p.js/>
+     <script src="/res/js/ajaxfileupload.js"></script>
+    <script src="/res/js/distribution/distributionDealerDelivery.js"></script>
+    <style>
+        .chia-file-up{padding: 0px 0px;}
+        .chia-file-up, select{border: 0px solid #d5d5d5;}
+    </style>
+</head>
+<body  onload="show()">
+<@p.top/>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <@p.left/>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li><i class="icon-home home-icon"> </i> <a href="#">
+                        Home </a></li>
+                    <li><a href="#"> Tables </a></li>
+                    <li class="active">经销单出货信息</li>
+                </ul>
+                <!-- .breadcrumb -->
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+          
+            <!-- /.col-lg-6 -->
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-anyVal" method="post">
+                    <div id="val-input-empty" class="col-md-12">
+                       
+                        <div class="col-md-2">
+                            <label for="clothingNamed">服装名</label>
+                            <input type="text" name="clothingName" id="clothingNamed"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="productCoded">商品编号</label>
+                            <input type="text" name="productCode" id="productCoded"/>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <label for="waved">波次号</label>
+                            <input type="text" name="wave" id="waved"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="ordersTyped">订单类型</label>
+                            <input type="text" name="ordersType" id="ordersTyped"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="trackingPeopled">跟踪人</label>
+                            <input type="text" name="trackingPeople" id="trackingPeopled"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="distributorFactoryd">经销工厂</label>
+                            <input type="text" name="distributorFactory" id="distributorFactoryd"/>
+                        </div>
+                      
+                        <div class="col-md-2">
+								<span class="input-group-btn">
+									<button id="queryDistributionInfo" class="btn btn-default" type="button"> 查询</button>
+								</span>
+                        </div>
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="">
+                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+                    </div>
+                </form>
+            </div>
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>								
+								<th colspan="50" style="text-align: center; font-size: 25px;">经销单出货 </th>
+							</tr>
+									
+                            <tr>
+                                <th>编号</th>
+                                <th>序列号</th>
+                                <th>商品编号</th>
+                                <th>原波次</th>
+                                <th>波次号</th>
+                                <th>设计图</th>
+                                <th>工艺单</th>
+                                <th>尺码表</th>
+                                <th>订单明细</th>
+                                <th>订单数</th>
+                                <th>订单类型</th>
+                                <th>订单等级</th>
+                                <th>经销工厂</th>
+                                <th>经销价格(元/件)</th>
+                                <th>工厂59码</th>
+                                <th>工厂66码</th>
+                                <th>工厂73码</th>
+                                <th>工厂80码</th>
+                                <th>工厂90码</th>
+                                <th>工厂110码</th>
+                                <th>工厂120码</th>
+                                <th>工厂130码</th>
+                                <th>工厂160码</th>
+                                <th>工厂170码</th>
+                                <th>总出货数</th>
+                                <th>设计图</th>
+                                <th>实际59码</th>
+                                <th>实际66码</th>
+                                <th>实际73码</th>
+                                <th>实际80码</th>
+                                <th>实际90码</th>
+                                <th>实际110码</th>
+                                <th>实际120码</th>
+                                <th>实际130码</th>
+                                <th>实际160码</th>
+                                <th>实际170码</th>
+                                <th>实际入库数</th>
+                                <th>跟踪人</th>
+                                <th>下单日期</th>
+                              
+                                <th>要求到货日期</th>
+                                <th>订单剩余天数</th>
+                                <th>环节开始时间</th>
+                                <th>本环节耗费天数</th>
+                                <th>备注</th>
+                               
+                                <th>出库订单号</th>
+                                <th>确认出货时间</th>
+                              
+                               
+                                <th colspan="1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="nowDiv"></div>
+
+
+
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

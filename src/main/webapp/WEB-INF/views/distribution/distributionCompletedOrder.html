@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>已经完成订单</title> <@p.cache/> <@p.css/> <@p.js/>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">已经完成订单</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12">
+					<form enctype="multipart/form-data" role="form" action=""
+						id="form-anyVal" method="post">
+						<div id="val-input-empty" class="col-md-12">
+							<div class="col-md-3">
+								<label for="wave">波次号</label> <input type="text" name="wave" />
+							</div>
+							<div class="col-md-3">
+								<label for="clothingName">服装名</label> <input type="text" name="clothingName" />
+							</div>
+							<div class="col-md-3">
+								<label for="trackingPeople">跟踪人</label> <input type="text" name="trackingPeople" />
+							</div>
+							<div class="col-md-3">
+								<label for="productCode">商品编码</label> <input type="text" name="productCode" />
+							</div>
+						
+							<div class="col-md-3">
+								<label for="distributorFactory">经销工厂</label> <input type="text" name="distributorFactory" />
+							</div>
+							<div class="col-md-3">
+								<span class="input-group-btn">
+									<button id="anyVal-btn" class="btn btn-default" type="button">
+										查询</button>
+								</span>
+							</div>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-bordered">
+								<thead>
+								<tr>								
+								<th colspan="50" style="text-align: center; font-size: 25px;"> 已完成订单 </th>
+							</tr>
+									<tr>
+										<th>编号</th>
+										<th>原波次</th>
+										<th>波次号</th>
+										<th>商品编号</th>
+										<th>设计图</th>
+										<th>工艺单</th>
+										<th>尺码表</th>
+										<th>订单明细</th>
+										<th>订单数</th>
+										<th>服装名</th>
+										<th>订单类型</th>
+										<th>订单等级</th>
+										<th>经销工厂</th>
+										<th>经销价格(元/件)</th>
+										<th>出货数</th>
+										<th>入仓数</th>
+										<th>备注</th>
+										<th>跟踪人</th>
+										<th>下单日期</th>
+										<th>完成订单号</th>
+										<th>要求到货日期</th>
+										<th>订单剩余天数</th>
+										<th>环节开始时间</th>
+										<th>本环节耗费天数</th>
+										<th>入仓时间</th>
+										<th>入仓操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 采购提醒 -->
+		<div class="modal fade" id="myModal_confirm" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="modal_prompt" class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							onclick="confirmation_Operation()">确认入仓</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+//页面加载就执行
+$(function(){
+	var anyVal = $("#form-anyVal").serialize();
+	　　getDistributionCompletedOrderByPageCount(anyVal);
+	　　});
+	//查询
+$("#anyVal-btn").on("click", function() {
+	var anyVal = $("#form-anyVal").serialize();
+	　getDistributionCompletedOrderByPageCount(anyVal);
+});
+//查询总条数  
+function getDistributionCompletedOrderByPageCount(anyVal){
+	$.post('getDistributionCompletedOrderByPageCount.do', anyVal, function(data) {
+		$("#pageSize").val(10); 
+		$("#pageNow").val(data.pageNow);
+		var anyVal2 = $("#form-anyVal").serialize();
+		findDistributionCompletedOrder(anyVal2);
+		$(".tcdPageCode").createPage({ 
+			pageCount : data.totalPageCount, 
+			current : data.pageNow, 
+			backFn : function(p) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(p);
+				var anyVal = $("#form-anyVal").serialize();
+				findDistributionCompletedOrder(anyVal);
+			}
+		});
+	});
+}
+	//查询
+	function findDistributionCompletedOrder(anyVal) {
+		$.post("findConditionDistributionCompletedOrderByPage.do",
+						anyVal, 
+						function(data) {
+							$(".table_app").empty(); 
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr><td >"
+									+ (data[i].id == null || data[i].id == "" ? '' :data[i].id)
+									+ "</td><td >"
+									+ (data[i].oringinalWave == null || data[i].oringinalWave == "" ? '' :data[i].oringinalWave)
+									+ "</td><td >"
+										+ (data[i].wave == null || data[i].wave == "" ? '' :data[i].wave)
+										+ "</td><td >"
+										+ (data[i].productCode == null || data[i].productCode == "" ? '' :data[i].productCode)
+										+ "</td><td><img style='width: 120px; height: 120px' src=" + data[i].designImg + "></td><td>"
+										+ (data[i].sampleImg == null
+												|| data[i].sampleImg == "" ? ''
+														: "<a href='" + data[i].sampleImg+ "' target='_blank'>工艺单</a>")
+										+ "</td>"
+										+ "<td>"
+										+ (data[i].sizeChart == null
+												|| data[i].sizeChart == "" ? ''
+														: "<a href='" + data[i].sizeChart+ "' target='_blank'>尺码表</a>")
+										+ "</td><td>"
+										+ (data[i].orderDetails == null || data[i].orderDetails == "" ? '' :data[i].orderDetails)
+										+ "</td><td >"
+										+ (data[i].orders == null || data[i].orders == "" ? '' :data[i].orders)
+										+ "</td><td class='mydblclick' name='clothingName'>"
+										+ (data[i].clothingName == null || data[i].clothingName == "" ? '' :data[i].clothingName)
+										+ "</td><td class='mydblclick' name='ordersType'>"
+										+ (data[i].ordersType == null || data[i].ordersType == "" ? '' :data[i].ordersType)
+										+ "</td><td class='mydblclick' name='orderGrade'>"
+										+ (data[i].orderGrade == null || data[i].orderGrade == "" ? '' :data[i].orderGrade)
+										+ "</td><td  class='mydblclick' name='distributorFactory'>"
+										+ (data[i].distributorFactory == null || data[i].distributorFactory == "" ? '' :data[i].distributorFactory)
+										+ "</td><td class='modify-table-numeric' value='distributorPrice'>"
+										+ (data[i].distributorPrice == null || data[i].distributorPrice == "" ? '' :data[i].distributorPrice)
+										+ "</td><td class='modify-table-numeric' value='shipmentNumber'>"
+										+ (data[i].shipmentNumber == null || data[i].shipmentNumber == "" ? '' :data[i].shipmentNumber)
+										+ "</td><td class='modify-table-numeric' value='storageNumber'>"
+										+ (data[i].storageNumber == null || data[i].storageNumber == "" ? '' :data[i].storageNumber)
+										+ "</td><td class='mydblclick' name='remarks'>"
+										+ (data[i].remarks == null || data[i].remarks == "" ? '' :data[i].remarks)
+										+ "</td><td class='mydblclick' name='trackingPeople'>"
+										+ (data[i].trackingPeople == null || data[i].trackingPeople == "" ? '' :data[i].trackingPeople)
+										+ "</td><td>"
+										+ (data[i].orderDate == null || data[i].orderDate == "" ? '' :data[i].orderDate)
+										+ "</td><td>"
+										+ (data[i].completedOrderNumber == null || data[i].completedOrderNumber == "" ? '' :data[i].completedOrderNumber)
+										+ "</td><td>"
+										+ (data[i].planStorageDate == null || data[i].planStorageDate == "" ? '' :data[i].planStorageDate)
+										+ "</td><td>"
+										+ (data[i].planStorageDate == null || data[i].planStorageDate == "" ? '' :showtimeplan(data[i].planStorageDate))
+										+ "</td><td>"
+										+ (data[i].linkStartTime == null || data[i].linkStartTime == "" ? '' :data[i].linkStartTime)
+										+ "</td><td>"
+										+ (data[i].linkStartTime == null || data[i].linkStartTime == "" ? '' :showtimelink(data[i].linkStartTime))
+										+ "</td><td>"
+										+ (data[i].confirmStorageTime == null || data[i].confirmStorageTime == "" ? '' :data[i].confirmStorageTime)
+										+ "</td><td class='dataStatus"+data[i].id+"'><button type='button' data-toggle='modal' id='confirm' data-target='#myModal_confirm'  onclick='confirmation_storage(\""
+										+ data[i].id
+										+ "\",\""
+										+ data[i].wave
+										+ "\")' class='btn btn-primary icon-lock'>确认入仓</button></td></tr>";
+								$(".table_app").append(_HTML_TEBLE_);
+								var dataStatus = data[i].dataStatus;
+								if (dataStatus = "已入库" && dataStatus !=null && dataStatus!="") {
+									$(".dataStatus" + data[i].id).parent().attr("bgcolor", "#00ffff");
+									$(".dataStatus" + data[i].id).find('button').remove();
+									$(".dataStatus" + data[i].id).find('button').remove();
+									$(".dataStatus" + data[i].id).append("<button class='btn icon-ok btn-inverse' disabled='disabled'>已确认入库</button>");
+								}
+							};
+							modifyCellByNumeric("modifyDistributionCompletedOrder.do",findDistributionCompletedOrder);
+							modifyCellByChar("modifyDistributionCompletedOrder.do",findDistributionCompletedOrder);
+							updbclick();
+							
+						});
+	};
+
+	function confirmation_storage(id, wave) {
+		$("#modal_prompt").html("<span style='font-size: 18px;'>你确定波次号为:<span style='color: red' id='wave-text'></span>的产品进行<sapn style='color: #97FFFF;'>入仓</sapn>吗??? </span><br> <span style='color: red; font-size: 18px;'>确认之前,你要确保数据都是对的哦!!!</span><input hidden='hidden' type='text' id='data-id' />");
+		$("#confirmation_operation").show();
+		$("#wave-text").text(wave);
+		$("#data-id").text(id);
+	};
+	function confirmation_Operation() {
+		var id = $("#data-id").text();
+		$.post('updateDistributionCompletedOrderByStorage.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#modal_prompt").html("恭喜你！已经确认成功");
+				$("#confirmation_operation").hide();
+				var pageNow = $("#pageNow").val();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); 
+				var anyVal = $("#form-anyVal").serialize();
+				findDistributionCompletedOrder(anyVal);
+			} else {
+				$("#modal_prompt").html("发送失败！原因可能是网络问题" + data);
+				$("#confirmation_operation").hide();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); 
+				var anyVal = $("#form-anyVal").serialize();
+				findDistributionCompletedOrder(anyVal);
+			}
+			$("#data-id").text("");
+			$("#wave-text").text("");
+		});
+	}
+	
+	function showtimeplan(time){
+		
+		var datenow=new Date();
+		var dateplan=new Date(time);
+		var dif = datenow.getTime() - dateplan.getTime();
+		var day = Math.floor(dif / (1000 * 60 * 60 * 24));
+		day+=1;
+		return day;
+	}
+	function showtimelink(time){
+		
+		var datenow=new Date();
+		var datelink=new Date(time);
+		var dif = datenow.getTime() - datelink.getTime();
+		var day = Math.floor(dif / (1000 * 60 * 60 * 24));
+		day+=1;
+		return day;
+	}
+	
+	function updbclick() {
+
+		$(".mydblclick").on("dblclick",function() {
+			
+			var id = $(this).parent().find("td:eq(0)").text();
+			var code = $(this).text().trim();
+			var name = $(this).attr("name");
+	
+			//alert("code========"+code);
+			$(this).html("<input id='" + id + "' type='text' value='"+code+"' name='" + name + "' style='width:100px;'> ");
+			$("#" + id).focus();// 文本框获取光标事件
+
+			uppblur(id, name);
+		});
+	}
+	// 光标离开事件
+	function uppblur(id, name) {
+		
+		$("#" + id).blur(function() {
+			var newtxt = $(this).val();
+			
+			
+			$(this).closest("td").text(newtxt);
+			var data = {id : id};
+			data[name] = newtxt;
+			
+		    
+			$.ajax({
+				url : '/modifyDistributionCompletedOrder.do',
+				dataType : 'json',
+				type : 'post',
+				data : data,
+				success : function(data) {
+					if (data == 1) {
+						
+						var anyVal = $("#form-anyVal").serialize();
+						　getDistributionCompletedOrderByPageCount(anyVal);
+					}
+				},error : function() {
+					alert("修改失败,输入的类型错误!");
+				}
+			});
+		});
+	}
+
+</script>
+</html>

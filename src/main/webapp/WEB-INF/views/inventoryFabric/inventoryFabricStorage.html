@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<title>仓库面料入库</title> <@p.cache/> <@p.css/> <@p.js/>
+</head>
+
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"></i> <a href="#">Home</a></li>
+						<li><a href="#">Tables</a></li>
+						<li class="active">仓库面料入库</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<button id="add_button" class="btn btn-primary btn-lg"
+						data-toggle="modal" data-target="#myModal">添加仓库面料入库</button>
+				</div>
+				<div class="col-md-12">
+					<form action="" id="form-anyVal" enctype="multipart/form-data"
+						role="form" method="post">
+						<div id="val-input-empty" class="col-md-8">
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">面料编号</span> <input
+										name="fabricCode" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">面料名称</span> <input
+										name="fabricName" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">供应商名称</span> <input
+										name="supplierName" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">面料颜色</span> <input
+										name="fabricColor" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">面料入库时间</span> <input
+										name="fabricStorageTime" value="" type="text"
+										class="form-control">
+								</div>
+							</div>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+						<div class="col-md-2">
+							<span class="input-group-btn">
+								<button id="anyVal-btn" class="btn btn-default" type="button">查询</button>
+							</span>
+						</div>
+					</form>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12" style="height: 50px;"></div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th colspan="12" style="text-align: center;">仓库面料入库</th>
+									</tr>
+									<tr>
+										<th>序列号</th>
+										<th>条形码</th>
+										<th>面料编号</th>
+										<th>面料名称</th>
+										<th>供应商名称</th>
+										<th>面料重量</th>
+										<th>面料单位</th>
+										<th>面料颜色</th>
+										<th>面料数量</th>
+										<th>面料入库时间</th>
+										<th>创建时间</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app"></tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--修改 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加仓库面料</h4>
+						<h6 class="modal-title" style="color: red">添加了之后不能修改</h6>
+					</div>
+					<form enctype="multipart/form-data" role="form"
+						id="addOrUpdateInventoryFabricStorage" action="" method="post">
+						<div class="modal-body" id="modify-prompt">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="fabricCode">面料编号</label> <input type="text"
+										class="form-control fabricCode" name="fabricCode"
+										id="fabricCode" placeholder="">
+								</div>
+								<div class="col-md-4">
+									<label for="fabricWeight">面料重量(必填)</label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control weightLength"
+										name="fabricWeight" id="fabricWeight" value="0"
+										placeholder=" ">
+								</div>
+								<!-- <div class="col-md-4">
+                                    <label for="fabricStorageTime">面料入库时间 </label> <input
+                                    type="text" class="form-control input-date"
+                                    name="fabricStorageTime" id="fabricStorageTime"
+                                    placeholder=" ">
+                                    </div> -->
+								<div class="col-md-4">
+									<label class="control-label bolder blue">面料单位</label>
+									<div class="radio">
+										<label> <input name="fabricUnit" type="radio"
+											class="ace" value="米" id="m_radio"> <span class="lbl">米</span></label>
+									</div>
+									<div class="radio">
+										<label> <input name="fabricUnit" type="radio"
+											class="ace" value="码" id="s_radio"> <span class="lbl">码</span></label>
+									</div>
+									<div class="radio">
+										<label> <input name="fabricUnit" type="radio"
+											class="ace" value="千克" checked="checked" id="kg_radio"> <span
+											class="lbl">千克</span></label>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<label for="fabricAmount">面料数量</label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control"
+										name="fabricAmount" id="fabricAmount" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<input hidden="hidden" type="text" class="form-control"
+										name="id" id="findInventoryFabricStorageById">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="submit-btn">提交</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 刪除 -->
+		<div class="modal fade" id="delModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">
+						你确定刪除该: <span style="color: red" id="modal-name-text"></span>吗？？？
+					</div>
+					<input hidden="hidden" id="modal-id-text" type="text">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" id="del-btn" class="btn btn-primary">确认刪除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<div class="modal fade" id="statusModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="statusModal-prompt" class="modal-body">
+						你确定入库该名称: <span style="color: red" id="modal-fabricName-text"></span>吗？？？
+					</div>
+					<input hidden="hidden" id="modal-fabricId-text" type="text">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button"
+							id="updateInventoryFabricStorageDataStatusById"
+							class="btn btn-primary">确认入库</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+<script type="text/javascript">
+	//页面加载执行
+	$(function() {
+		$.post('getInventoryFabricStorageByPageCount.do', {}, function(data) {
+			$("#pageSize").val(10);
+			$("#pageNow").val(data.pageNow);
+			var anyVal = $("#form-anyVal").serialize();
+			findConditionInventoryFabricStorageByPage(anyVal);
+			$(".tcdPageCode").createPage({
+				pageCount : data.totalPageCount,
+				current : data.pageNow,
+				backFn : function(p) {
+					$("#pageSize").val(10);
+					$("#pageNow").val(p);
+					var anyVal = $("#form-anyVal").serialize();
+					findConditionInventoryFabricStorageByPage(anyVal);
+				}
+			});
+		});
+	});
+	//点击提交
+	$(".fabricCode").on("blur", function() {
+		var fabricCode = $(this).val().trim();
+		$.post('findFabricLibraryByFabricLibraryCode.do', {
+			fabricCode : fabricCode
+		}, function(data) {
+			if (data == null || data == "") {
+				//addForm();
+				alert("该ml编号不存在!请先输入面料档案");
+				$("#submit-btn").hide();
+			} else {
+				$("#submit-btn").show();
+			}
+		});
+	});
+
+	$("#submit-btn").on("click", function() {
+		var anyVal = $("#addOrUpdateInventoryFabricStorage").serialize();
+		var if_input_Id = $("#findInventoryFabricStorageById").val();
+		if (if_input_Id != "" && if_input_Id != null) {
+			updateInventoryFabricStorage(anyVal);
+		} else {
+			addInventoryFabricStorage(anyVal);
+		}
+	});
+
+	function delInventoryFabricStorageById(id, wave) {
+		$("#modal-name-text").text(wave);
+		$("#modal-id-text").val(id);
+	}
+	//删除
+	$("#del-btn").on('click', function() {
+		var id = $("#modal-id-text").val();
+		$.post('delInventoryFabricStorage.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-prompt").html("恭喜你刪除成功");
+				$("#del-btn").remove();
+				var anyVal = $("#form-anyVal").serialize();
+				//調用方法
+				findConditionInventoryFabricStorageByPage(anyVal);
+			} else {
+				$("#myModal-prompt").html("删除失败！原因可能是网络问题");
+				$("#del-btn").remove();
+				var anyVal = $("#form-anyVal").serialize();
+				//調用方法
+				findConditionInventoryFabricStorageByPage(anyVal);
+			}
+		});
+	});
+	//点击查询获取查询的条件 数据
+	$("#anyVal-btn")
+			.on(
+					'click',
+					function() {
+						$("#pageSize").attr('name', "");
+						$("#pageNow").attr('name', "");
+						var anyVal = $("#form-anyVal").serialize();
+						$
+								.post(
+										'getInventoryFabricStorageByPageCount.do',
+										anyVal,
+										function(data) {
+											$("#pageSize").attr('name',
+													"pageSize");
+											$("#pageNow").attr('name',
+													"pageNow");
+											$("#pageNow").val(1);
+											var anyVal1 = $("#form-anyVal")
+													.serialize();
+											findConditionInventoryFabricStorageByPage(anyVal1);
+											$(".tcdPageCode")
+													.createPage(
+															{
+																pageCount : data.totalPageCount,
+																current : data.pageNow,
+																backFn : function(
+																		p) {
+																	$(
+																			"#pageSize")
+																			.val(
+																					10);
+																	$(
+																			"#pageNow")
+																			.val(
+																					p);
+																	var anyVal2 = $(
+																			"#form-anyVal")
+																			.serialize();
+																	findConditionInventoryFabricStorageByPage(anyVal2);
+																}
+															});
+										});
+					});
+	//添加
+	function addInventoryFabricStorage(anyVal) {
+		$.post('addInventoryFabricStorage.do', anyVal, function(data) {
+			if (data == 18) {
+				alert("你要添加的供应商已经存在了!!请对其修改!!");
+			} else {
+				window.location.reload(); //刷新当前页面.
+			}
+
+		});
+	};
+	//修改
+	function updateInventoryFabricStorage(anyVal) {
+		$.post('modifyInventoryFabricStorage.do', anyVal, function(data) {
+			var pageNow = $("#pageNow").val();
+			$("#pageSize").val(10);
+			$("#pageNow").val(pageNow); //給當前頁賦值
+			var anyVal = $("#form-anyVal").serialize(); //获取form表单
+			//調用方法
+			findConditionInventoryFabricStorageByPage(anyVal);
+		});
+	};
+	//查询
+	function findConditionInventoryFabricStorageByPage(anyVal) {
+		$
+				.post(
+						"findConditionInventoryFabricStorageByPage.do",
+						anyVal,
+						function(data) {
+
+							$(".table_app").empty();
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr><td >"
+										+ (data[i].sid == null ? ''
+												: data[i].sid)
+										+ "</td><td >"
+										+ (data[i].fabricBarcode == null ? ''
+												: data[i].fabricBarcode)
+										+ "</td><td >"
+										+ (data[i].fabricCode == null ? ''
+												: data[i].fabricCode)
+										+ "</td><td >"
+										+ (data[i].fabricName == null ? ''
+												: data[i].fabricName)
+										+ "</td><td >"
+										+ (data[i].supplierName == null ? ''
+												: data[i].supplierName)
+										+ "</td><td >"
+										+ (data[i].fabricWeight == null ? ''
+												: data[i].fabricWeight)
+										+ "</td><td >"
+										+ (data[i].fabricUnit == null ? ''
+												: data[i].fabricUnit)
+										+ "</td><td >"
+										+ (data[i].fabricColor == null ? ''
+												: data[i].fabricColor)
+										+ "</td><td >"
+										+ (data[i].fabricAmount == null ? ''
+												: data[i].fabricAmount)
+										+ "</td><td >"
+										+ (data[i].fabricStorageTime == null ? ''
+												: data[i].fabricStorageTime)
+										+ "</td><td >"
+										+ (data[i].createTime == null ? ''
+												: data[i].createTime)
+										+ "</td><td class='storageStatus"+data[i].id+"'><button type='button'  data-toggle='modal' data-target='#myModal'  onclick='findInventoryFabricStorageById(\""
+										+ data[i].id
+										+ "\")'  class='btn btn-primary icon-pencil'>修改</button><button type='button'  data-toggle='modal' data-target='#delModal' onclick='delInventoryFabricStorageById(\""
+										+ data[i].id
+										+ "\",\""
+										+ data[i].fabricName
+										+ "\")' class='icon-trash btn btn-danger'>删除</button><button type='button'  data-toggle='modal' data-target='#statusModal'   onclick='ConfirmStorageBtn(\""
+										+ data[i].id
+										+ "\",\""
+										+ data[i].fabricName
+										+ "\")' class='icon-trash btn btn-warning icon-lock'>确认入库</button></td></tr>";
+								$(".table_app").append(_HTML_TEBLE_);
+								var storageStatus = data[i].dataStatus;
+								if (storageStatus != ""
+										&& storageStatus != null
+										&& storageStatus == "已入库") {
+									$(".storageStatus" + data[i].id).parent()
+											.attr("bgcolor", "#00ffff");
+									$(".storageStatus" + data[i].id).find(
+											'button').remove();
+									$(".storageStatus" + data[i].id)
+											.append(
+													"<button class='btn icon-ok btn-inverse' disabled='disabled'>已入库</button>");
+
+								}
+							}
+						});
+	};
+	//确认入库
+	function ConfirmStorageBtn(id, fabricName) {
+		$("#modal-fabricName-text").text(fabricName);
+		$("#modal-fabricId-text").val(id);
+	}
+	//删除
+	$("#updateInventoryFabricStorageDataStatusById").on('click', function() {
+		var id = $("#modal-fabricId-text").val();
+		$.post('updateInventoryFabricStorageDataStatusById.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#statusModal-prompt").html("恭喜你入库成功");
+				$("#updateInventoryFabricStorageDataStatusById").remove();
+				var anyVal = $("#form-anyVal").serialize();
+				//調用方法
+				findConditionInventoryFabricStorageByPage(anyVal);
+			} else {
+				$("#statusModal-prompt").html("入库失败！原因可能是网络问题");
+				$("#updateInventoryFabricStorageDataStatusById").remove();
+				var anyVal = $("#form-anyVal").serialize();
+				//調用方法
+				findConditionInventoryFabricStorageByPage(anyVal);
+			}
+		});
+	});
+	//根据id获取当前数据
+	function findInventoryFabricStorageById(id) {
+		$.post("findInventoryFabricStorageById.do", {
+			'id' : id
+		}, function(result) {
+			var fabricUnit = result.fabricUnit;
+			if (fabricUnit == '码') {
+				$("#kg_radio").removeAttr('checked');
+				$("#m_radio").removeAttr('checked');
+				$("#s_radio").prop('checked', "checked");
+			} else if (fabricUnit == '米') {
+				$("#kg_radio").removeAttr('checked');
+				$("#s_radio").removeAttr('checked');
+				$("#m_radio").prop('checked', "checked");
+			} else if (fabricUnit == '千克' || piecesApproved == null
+					|| piecesApproved == "") {
+				$("#m_radio").removeAttr('checked');
+				$("#s_radio").removeAttr('checked');
+				$("#kg_radio").prop('checked', "checked");
+			}
+			$("#findInventoryFabricStorageById").val(result.id);
+			$("#fabricCode").val(result.fabricCode);
+			$("#fabricUnit").val(result.fabricUnit);
+			$("#fabricAmount").val(result.fabricAmount);
+			$("#fabricWeight").val(result.fabricWeight);
+		});
+	}; //点击添加添加清空id
+	$("#add_button").on("click", function() {
+		$("#obj_hidden_id").val("");
+	});
+	$(".weightLength").blur(function() {
+		var length = $(this).val().length;
+		if (length > 5) {
+			$("#submit-btn").hide();
+			alert("你输入的格式不正确:面料重量不能大于100公斤");
+		} else {
+			$("#submit-btn").show();
+		}
+	})
+</script>
+
+</html>

@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributionSummaryMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.DistributionSummary">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="CLOTH_NAME" property="clothName" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_IMG" property="productImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="SIZE_IMG" property="sizeImg" jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER" />
+		<result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+		<result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+		<result column="DISTRIBUTTION_FACTORY" property="distributtionFactory"
+			jdbcType="VARCHAR" />
+		<result column="PLAN_IN_WAREHOUSE_TIME" property="planInWarehouseTime"
+			jdbcType="VARCHAR" />
+		<result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR" />
+		<result column="TO_MAKE_THE_SAMPLE" property="toMakeTheSample"
+			jdbcType="VARCHAR" />
+		<result column="TO_MAKE_THE_SAMPLE_COMPLETE" property="toMakeTheSampleComplete"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_ORDER" property="confirmOrder"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_ORDER_TIME" property="confirmOrderTime"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_ARRIVE_FACTORY" property="fabricArriveFactory"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_ARRIVE_FACTORY_TIME" property="fabricArriveFactoryTime"
+			jdbcType="VARCHAR" />
+		<result column="ACCES_ARRIVE_FACTORY" property="accesArriveFactory"
+			jdbcType="VARCHAR" />
+		<result column="ACCES_ARRIVE_FACTORY_TIME" property="accesArriveFactoryTime"
+			jdbcType="VARCHAR" />
+		<result column="START_MAKE" property="startMake" jdbcType="VARCHAR" />
+		<result column="START_MAKE_TIME" property="startMakeTime"
+			jdbcType="VARCHAR" />
+		<result column="START_DELIVER" property="startDeliver"
+			jdbcType="VARCHAR" />
+		<result column="START_DELIVER_TIME" property="startDeliverTime"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_COMPLETE_DELIVERY" property="confirmCompleteDelivery"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_COMPLETE_DELIVERY_TIME" property="confirmCompleteDeliveryTime"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_IN_WAREHOUSE" property="confirmInWarehouse"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_IN_WAREHOUSE_TIME" property="confirmInWarehouseTime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PRODUCT_CODE, CLOTH_NAME, ORINGINAL_WAVE, WAVE, PRODUCT_IMG,
+		SAMPLE_IMG, SIZE_IMG,
+		ORDER_DETAILS, ORDER_NUM, ORDER_GRADE, ORDER_TYPE, DISTRIBUTTION_FACTORY,
+		PLAN_IN_WAREHOUSE_TIME,
+		RELEASE_TIME, TO_MAKE_THE_SAMPLE, TO_MAKE_THE_SAMPLE_COMPLETE, CONFIRM_ORDER,
+		CONFIRM_ORDER_TIME,
+		FABRIC_ARRIVE_FACTORY, FABRIC_ARRIVE_FACTORY_TIME, ACCES_ARRIVE_FACTORY,
+		ACCES_ARRIVE_FACTORY_TIME,
+		START_MAKE, START_MAKE_TIME, START_DELIVER, START_DELIVER_TIME,
+		CONFIRM_COMPLETE_DELIVERY,
+		CONFIRM_COMPLETE_DELIVERY_TIME, CONFIRM_IN_WAREHOUSE, CONFIRM_IN_WAREHOUSE_TIME
+	</sql>
+	<select id="getDistributionSummaryInfoBpcnt" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(0) from distribution_summary
+		where 1=1
+		AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if
+			test="productCode != null and productCode != &quot;&quot; and productCode != &quot;N&quot; and productCode != &quot;Y&quot;">
+			AND PRODUCT_CODE LIKE CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+
+		<if test='confirmOrder != null and confirmOrder != ""'>
+			<if test="confirmOrder == 'Y'.toString()">
+				AND CONFIRM_ORDER IS NOT NULL
+			</if>
+			<if test="confirmOrder == 'N'.toString()">
+				AND CONFIRM_ORDER IS NULL
+			</if>
+
+		</if>
+
+
+		<if test='fabricArriveFactory != null and fabricArriveFactory != ""'>
+			<if test="fabricArriveFactory == 'Y'.toString()">
+				AND FABRIC_ARRIVE_FACTORY IS NOT NULL
+			</if>
+			<if test="fabricArriveFactory == 'N'.toString()">
+				AND FABRIC_ARRIVE_FACTORY IS NULL
+			</if>
+
+		</if>
+		<if test='accesArriveFactory != null and accesArriveFactory != ""'>
+			<if test="accesArriveFactory == 'Y'.toString()">
+				AND ACCES_ARRIVE_FACTORY IS NOT NULL
+			</if>
+			<if test="accesArriveFactory == 'N'.toString()">
+				AND ACCES_ARRIVE_FACTORY IS NULL
+			</if>
+
+		</if>
+		<if test='startMake != null and startMake != ""'>
+			<if test="startMake == 'Y'.toString()">
+				AND START_MAKE IS NOT NULL
+			</if>
+			<if test="startMake == 'N'.toString()">
+				AND START_MAKE IS NULL
+			</if>
+
+		</if>
+		<if test='startDeliver != null and startDeliver != ""'>
+			<if test="startDeliver == 'Y'.toString()">
+				AND START_DELIVER IS NOT NULL
+			</if>
+			<if test="startDeliver == 'N'.toString()">
+				AND START_DELIVER IS NULL
+			</if>
+
+		</if>
+		<if
+			test='confirmCompleteDelivery != null and confirmCompleteDelivery != ""'>
+			<if test="confirmCompleteDelivery == 'Y'.toString()">
+				AND CONFIRM_COMPLETE_DELIVERY IS NOT NULL
+			</if>
+			<if test="confirmCompleteDelivery == 'N'.toString()">
+				AND CONFIRM_COMPLETE_DELIVERY IS NULL
+			</if>
+
+		</if>
+
+		<if test='confirmInWarehouse != null and confirmInWarehouse != ""'>
+			<if test="confirmInWarehouse == 'Y'.toString()">
+				AND CONFIRM_IN_WAREHOUSE IS NOT NULL
+			</if>
+			<if test="confirmInWarehouse == 'N'.toString()">
+				AND CONFIRM_IN_WAREHOUSE IS NULL
+			</if>
+
+		</if>
+
+
+
+
+	</select>
+
+	<select id="findDistributionSummaryInfoCndbp" parameterType="map"
+		resultMap="BaseResultMap">
+		select * from distribution_summary
+		where 1 = 1
+		AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if
+			test="productCode != null and productCode != &quot;&quot; and productCode != &quot;N&quot; and productCode != &quot;Y&quot;">
+			AND PRODUCT_CODE LIKE CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+
+		<if test='confirmOrder != null and confirmOrder != ""'>
+			<if test="confirmOrder == 'Y'.toString()">
+				AND CONFIRM_ORDER IS NOT NULL
+			</if>
+			<if test="confirmOrder == 'N'.toString()">
+				AND CONFIRM_ORDER IS NULL
+			</if>
+
+		</if>
+		<if test='fabricArriveFactory != null and fabricArriveFactory != ""'>
+			<if test="fabricArriveFactory == 'Y'.toString()">
+				AND FABRIC_ARRIVE_FACTORY IS NOT NULL
+			</if>
+			<if test="fabricArriveFactory == 'N'.toString()">
+				AND FABRIC_ARRIVE_FACTORY IS NULL
+			</if>
+
+		</if>
+		<if test='accesArriveFactory != null and accesArriveFactory != ""'>
+			<if test="accesArriveFactory == 'Y'.toString()">
+				AND ACCES_ARRIVE_FACTORY IS NOT NULL
+			</if>
+			<if test="accesArriveFactory == 'N'.toString()">
+				AND ACCES_ARRIVE_FACTORY IS NULL
+			</if>
+
+		</if>
+		<if test='startMake != null and startMake != ""'>
+			<if test="startMake == 'Y'.toString()">
+				AND START_MAKE IS NOT NULL
+			</if>
+			<if test="startMake == 'N'.toString()">
+				AND START_MAKE IS NULL
+			</if>
+
+		</if>
+		<if test='startDeliver != null and startDeliver != ""'>
+			<if test="startDeliver == 'Y'.toString()">
+				AND START_DELIVER IS NOT NULL
+			</if>
+			<if test="startDeliver == 'N'.toString()">
+				AND START_DELIVER IS NULL
+			</if>
+
+		</if>
+		<if
+			test='confirmCompleteDelivery != null and confirmCompleteDelivery != ""'>
+			<if test="confirmCompleteDelivery == 'Y'.toString()">
+				AND CONFIRM_COMPLETE_DELIVERY IS NOT NULL
+			</if>
+			<if test="confirmCompleteDelivery == 'N'.toString()">
+				AND CONFIRM_COMPLETE_DELIVERY IS NULL
+			</if>
+
+		</if>
+		<if test='confirmInWarehouse != null and confirmInWarehouse != ""'>
+			<if test="confirmInWarehouse == 'Y'.toString()">
+				AND CONFIRM_IN_WAREHOUSE IS NOT NULL
+			</if>
+			<if test="confirmInWarehouse == 'N'.toString()">
+				AND CONFIRM_IN_WAREHOUSE IS NULL
+			</if>
+
+		</if>
+		ORDER BY CONFIRM_IN_WAREHOUSE ASC , CONFIRM_IN_WAREHOUSE_TIME DESC ,
+		CONFIRM_COMPLETE_DELIVERY ASC , CONFIRM_COMPLETE_DELIVERY_TIME DESC ,
+		START_DELIVER ASC , START_DELIVER_TIME DESC ,
+		START_MAKE ASC , START_MAKE_TIME DESC ,
+		ACCES_ARRIVE_FACTORY ASC , ACCES_ARRIVE_FACTORY_TIME DESC ,
+		FABRIC_ARRIVE_FACTORY ASC , FABRIC_ARRIVE_FACTORY_TIME DESC ,
+		CONFIRM_ORDER ASC , CONFIRM_ORDER_TIME
+
+
+
+		LIMIT #{pageNow},#{pageSize}
+
+
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from distribution_summary
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from distribution_summary
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.warehouse.entity.DistributionSummary">
+		insert into distribution_summary (ID, PRODUCT_CODE, CLOTH_NAME,
+		ORINGINAL_WAVE, WAVE, PRODUCT_IMG,
+		SAMPLE_IMG, SIZE_IMG, ORDER_DETAILS,
+		ORDER_NUM, ORDER_GRADE, ORDER_TYPE,
+		DISTRIBUTTION_FACTORY, PLAN_IN_WAREHOUSE_TIME,
+		RELEASE_TIME, TO_MAKE_THE_SAMPLE, TO_MAKE_THE_SAMPLE_COMPLETE,
+		CONFIRM_ORDER, CONFIRM_ORDER_TIME, FABRIC_ARRIVE_FACTORY,
+		FABRIC_ARRIVE_FACTORY_TIME, ACCES_ARRIVE_FACTORY,
+		ACCES_ARRIVE_FACTORY_TIME, START_MAKE, START_MAKE_TIME,
+		START_DELIVER, START_DELIVER_TIME, CONFIRM_COMPLETE_DELIVERY,
+		CONFIRM_COMPLETE_DELIVERY_TIME, CONFIRM_IN_WAREHOUSE,
+		CONFIRM_IN_WAREHOUSE_TIME)
+		values (#{id,jdbcType=INTEGER}, #{productCode,jdbcType=VARCHAR},
+		#{clothName,jdbcType=VARCHAR},
+		#{oringinalWave,jdbcType=VARCHAR}, #{wave,jdbcType=VARCHAR}, #{productImg,jdbcType=VARCHAR},
+		#{sampleImg,jdbcType=VARCHAR}, #{sizeImg,jdbcType=VARCHAR},
+		#{orderDetails,jdbcType=VARCHAR},
+		#{orderNum,jdbcType=INTEGER}, #{orderGrade,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR},
+		#{distributtionFactory,jdbcType=VARCHAR},
+		#{planInWarehouseTime,jdbcType=VARCHAR},
+		#{releaseTime,jdbcType=VARCHAR}, #{toMakeTheSample,jdbcType=VARCHAR},
+		#{toMakeTheSampleComplete,jdbcType=VARCHAR},
+		#{confirmOrder,jdbcType=VARCHAR},
+		#{confirmOrderTime,jdbcType=VARCHAR},
+		#{fabricArriveFactory,jdbcType=VARCHAR},
+		#{fabricArriveFactoryTime,jdbcType=VARCHAR},
+		#{accesArriveFactory,jdbcType=VARCHAR},
+		#{accesArriveFactoryTime,jdbcType=VARCHAR},
+		#{startMake,jdbcType=VARCHAR}, #{startMakeTime,jdbcType=VARCHAR},
+		#{startDeliver,jdbcType=VARCHAR},
+		#{startDeliverTime,jdbcType=VARCHAR},
+		#{confirmCompleteDelivery,jdbcType=VARCHAR},
+		#{confirmCompleteDeliveryTime,jdbcType=VARCHAR},
+		#{confirmInWarehouse,jdbcType=VARCHAR},
+		#{confirmInWarehouseTime,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.warehouse.entity.DistributionSummary">
+		insert into distribution_summary
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE,
+			</if>
+			<if test="clothName != null">
+				CLOTH_NAME,
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="productImg != null">
+				PRODUCT_IMG,
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG,
+			</if>
+			<if test="sizeImg != null">
+				SIZE_IMG,
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS,
+			</if>
+			<if test="orderNum != null">
+				ORDER_NUM,
+			</if>
+			<if test="orderGrade != null">
+				ORDER_GRADE,
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE,
+			</if>
+			<if test="distributtionFactory != null">
+				DISTRIBUTTION_FACTORY,
+			</if>
+			<if test="planInWarehouseTime != null">
+				PLAN_IN_WAREHOUSE_TIME,
+			</if>
+			<if test="releaseTime != null">
+				RELEASE_TIME,
+			</if>
+			<if test="toMakeTheSample != null">
+				TO_MAKE_THE_SAMPLE,
+			</if>
+			<if test="toMakeTheSampleComplete != null">
+				TO_MAKE_THE_SAMPLE_COMPLETE,
+			</if>
+			<if test="confirmOrder != null">
+				CONFIRM_ORDER,
+			</if>
+			<if test="confirmOrderTime != null">
+				CONFIRM_ORDER_TIME,
+			</if>
+			<if test="fabricArriveFactory != null">
+				FABRIC_ARRIVE_FACTORY,
+			</if>
+			<if test="fabricArriveFactoryTime != null">
+				FABRIC_ARRIVE_FACTORY_TIME,
+			</if>
+			<if test="accesArriveFactory != null">
+				ACCES_ARRIVE_FACTORY,
+			</if>
+			<if test="accesArriveFactoryTime != null">
+				ACCES_ARRIVE_FACTORY_TIME,
+			</if>
+			<if test="startMake != null">
+				START_MAKE,
+			</if>
+			<if test="startMakeTime != null">
+				START_MAKE_TIME,
+			</if>
+			<if test="startDeliver != null">
+				START_DELIVER,
+			</if>
+			<if test="startDeliverTime != null">
+				START_DELIVER_TIME,
+			</if>
+			<if test="confirmCompleteDelivery != null">
+				CONFIRM_COMPLETE_DELIVERY,
+			</if>
+			<if test="confirmCompleteDeliveryTime != null">
+				CONFIRM_COMPLETE_DELIVERY_TIME,
+			</if>
+			<if test="confirmInWarehouse != null">
+				CONFIRM_IN_WAREHOUSE,
+			</if>
+			<if test="confirmInWarehouseTime != null">
+				CONFIRM_IN_WAREHOUSE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="productCode != null">
+				#{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				#{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				#{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productImg != null">
+				#{productImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				#{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeImg != null">
+				#{sizeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				#{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNum != null">
+				#{orderNum,jdbcType=INTEGER},
+			</if>
+			<if test="orderGrade != null">
+				#{orderGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				#{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="distributtionFactory != null">
+				#{distributtionFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="planInWarehouseTime != null">
+				#{planInWarehouseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="releaseTime != null">
+				#{releaseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="toMakeTheSample != null">
+				#{toMakeTheSample,jdbcType=VARCHAR},
+			</if>
+			<if test="toMakeTheSampleComplete != null">
+				#{toMakeTheSampleComplete,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmOrder != null">
+				#{confirmOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmOrderTime != null">
+				#{confirmOrderTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricArriveFactory != null">
+				#{fabricArriveFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricArriveFactoryTime != null">
+				#{fabricArriveFactoryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="accesArriveFactory != null">
+				#{accesArriveFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="accesArriveFactoryTime != null">
+				#{accesArriveFactoryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="startMake != null">
+				#{startMake,jdbcType=VARCHAR},
+			</if>
+			<if test="startMakeTime != null">
+				#{startMakeTime,jdbcType=VARCHAR},
+			</if>
+			<if test="startDeliver != null">
+				#{startDeliver,jdbcType=VARCHAR},
+			</if>
+			<if test="startDeliverTime != null">
+				#{startDeliverTime,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmCompleteDelivery != null">
+				#{confirmCompleteDelivery,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmCompleteDeliveryTime != null">
+				#{confirmCompleteDeliveryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmInWarehouse != null">
+				#{confirmInWarehouse,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmInWarehouseTime != null">
+				#{confirmInWarehouseTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.DistributionSummary">
+		update distribution_summary
+		<set>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				CLOTH_NAME = #{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productImg != null">
+				PRODUCT_IMG = #{productImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeImg != null">
+				SIZE_IMG = #{sizeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNum != null">
+				ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+			</if>
+			<if test="orderGrade != null">
+				ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="distributtionFactory != null">
+				DISTRIBUTTION_FACTORY = #{distributtionFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="planInWarehouseTime != null">
+				PLAN_IN_WAREHOUSE_TIME = #{planInWarehouseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="releaseTime != null">
+				RELEASE_TIME = #{releaseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="toMakeTheSample != null">
+				TO_MAKE_THE_SAMPLE = #{toMakeTheSample,jdbcType=VARCHAR},
+			</if>
+			<if test="toMakeTheSampleComplete != null">
+				TO_MAKE_THE_SAMPLE_COMPLETE =
+				#{toMakeTheSampleComplete,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmOrder != null">
+				CONFIRM_ORDER = #{confirmOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmOrderTime != null">
+				CONFIRM_ORDER_TIME = #{confirmOrderTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricArriveFactory != null">
+				FABRIC_ARRIVE_FACTORY = #{fabricArriveFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricArriveFactoryTime != null">
+				FABRIC_ARRIVE_FACTORY_TIME =
+				#{fabricArriveFactoryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="accesArriveFactory != null">
+				ACCES_ARRIVE_FACTORY = #{accesArriveFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="accesArriveFactoryTime != null">
+				ACCES_ARRIVE_FACTORY_TIME =
+				#{accesArriveFactoryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="startMake != null">
+				START_MAKE = #{startMake,jdbcType=VARCHAR},
+			</if>
+			<if test="startMakeTime != null">
+				START_MAKE_TIME = #{startMakeTime,jdbcType=VARCHAR},
+			</if>
+			<if test="startDeliver != null">
+				START_DELIVER = #{startDeliver,jdbcType=VARCHAR},
+			</if>
+			<if test="startDeliverTime != null">
+				START_DELIVER_TIME = #{startDeliverTime,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmCompleteDelivery != null">
+				CONFIRM_COMPLETE_DELIVERY =
+				#{confirmCompleteDelivery,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmCompleteDeliveryTime != null">
+				CONFIRM_COMPLETE_DELIVERY_TIME =
+				#{confirmCompleteDeliveryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmInWarehouse != null">
+				CONFIRM_IN_WAREHOUSE = #{confirmInWarehouse,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmInWarehouseTime != null">
+				CONFIRM_IN_WAREHOUSE_TIME =
+				#{confirmInWarehouseTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.warehouse.entity.DistributionSummary">
+		update distribution_summary
+		set PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+		CLOTH_NAME = #{clothName,jdbcType=VARCHAR},
+		ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+		WAVE = #{wave,jdbcType=VARCHAR},
+		PRODUCT_IMG = #{productImg,jdbcType=VARCHAR},
+		SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+		SIZE_IMG = #{sizeImg,jdbcType=VARCHAR},
+		ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+		ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+		ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+		ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+		DISTRIBUTTION_FACTORY = #{distributtionFactory,jdbcType=VARCHAR},
+		PLAN_IN_WAREHOUSE_TIME = #{planInWarehouseTime,jdbcType=VARCHAR},
+		RELEASE_TIME = #{releaseTime,jdbcType=VARCHAR},
+		TO_MAKE_THE_SAMPLE = #{toMakeTheSample,jdbcType=VARCHAR},
+		TO_MAKE_THE_SAMPLE_COMPLETE = #{toMakeTheSampleComplete,jdbcType=VARCHAR},
+		CONFIRM_ORDER = #{confirmOrder,jdbcType=VARCHAR},
+		CONFIRM_ORDER_TIME = #{confirmOrderTime,jdbcType=VARCHAR},
+		FABRIC_ARRIVE_FACTORY = #{fabricArriveFactory,jdbcType=VARCHAR},
+		FABRIC_ARRIVE_FACTORY_TIME = #{fabricArriveFactoryTime,jdbcType=VARCHAR},
+		ACCES_ARRIVE_FACTORY = #{accesArriveFactory,jdbcType=VARCHAR},
+		ACCES_ARRIVE_FACTORY_TIME = #{accesArriveFactoryTime,jdbcType=VARCHAR},
+		START_MAKE = #{startMake,jdbcType=VARCHAR},
+		START_MAKE_TIME = #{startMakeTime,jdbcType=VARCHAR},
+		START_DELIVER = #{startDeliver,jdbcType=VARCHAR},
+		START_DELIVER_TIME = #{startDeliverTime,jdbcType=VARCHAR},
+		CONFIRM_COMPLETE_DELIVERY = #{confirmCompleteDelivery,jdbcType=VARCHAR},
+		CONFIRM_COMPLETE_DELIVERY_TIME =
+		#{confirmCompleteDeliveryTime,jdbcType=VARCHAR},
+		CONFIRM_IN_WAREHOUSE = #{confirmInWarehouse,jdbcType=VARCHAR},
+		CONFIRM_IN_WAREHOUSE_TIME = #{confirmInWarehouseTime,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

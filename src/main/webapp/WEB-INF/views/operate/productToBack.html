@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/operate/productToBack.js"></script>
+<title>商品返单信息</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">商品返单信息</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2" style="float: left;">
+								<label for="productCodes">商品编号</label> <input type="text"
+									class="form-control date" name="productCodes">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="wave">商品波次</label> <input type="text"
+									class="form-control date" name="wave">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="productName">商品名称</label> <input type="text"
+									class="form-control date" name="productName">
+							</div>
+							<br /> <br /> <br />
+							<div class="col-md-2" style="float: left;">
+								<label for="productOldName">商品名称(旧)</label> <input type="text"
+									class="form-control date" name="productOldName">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="productShortName">商品简称</label> <input type="text"
+									class="form-control date" name="productShortName">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="excleFile">excle文件</label> <input type="text"
+									class="form-control date" name="excleFile">
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal" style="background-color: #428bca;"
+									id="mySelectProduct">查 询</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="10" style="text-align: center; font-size: 16px;">商品返单信息</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">序号</th>
+								<th style="text-align: center;">商品编号</th>
+								<th style="text-align: center;">商品波次</th>
+								<th style="text-align: center;">商品名称</th>
+								<th style="text-align: center;">商品名称(旧)</th>
+								<th style="text-align: center;">商品简称</th>
+								<th style="text-align: center;">excle文件</th>
+								<th style="text-align: center;">商品图片</th>
+								<th style="text-align: center;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 添加模态框 -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">添加数量信息</h4>
+						</div>
+						<div class="modal-body">
+							<input type="hidden" name="girardOld" id="girardOld" /> <input
+								type="hidden" name="productCodes" id="productCodes" /> <input
+								type="hidden" name="productName" id="productName" /> <input
+								type="hidden" name="productShortName" id="productShortName" />
+							<input type="hidden" name="productOldName" id="productOldName" />
+							<input type="hidden" name="excleFile" id="excleFile" /> <input
+								type="hidden" name="productImg" id="productImg" />
+							<div class="col-md-12">
+								<div class="col-md-4" style="float: left;">
+									<label for="girard">波次</label> <input type="text"
+										class="form-control date" name="girard" id="girard">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code52">52码</label> <input type="text"
+										class="form-control date" name="code52" id="code52">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code59">59码</label> <input type="text"
+										class="form-control date" name="code59" id="code59">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code66">66码</label> <input type="text"
+										class="form-control date" name="code66" id="code66">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code73">73码</label> <input type="text"
+										class="form-control date" name="code73" id="code73">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code80">80码</label> <input type="text"
+										class="form-control date" name="code80" id="code80">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code90">90码</label> <input type="text"
+										class="form-control date" name="code90" id="code90">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code100">100码</label> <input type="text"
+										class="form-control date" name="code100" id="code100">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code110">110码</label> <input type="text"
+										class="form-control date" name="code110" id="code110">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code120">120码</label> <input type="text"
+										class="form-control date" name="code120" id="code120">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code130">130码</label> <input type="text"
+										class="form-control date" name="code130" id="code130">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code160">160码</label> <input type="text"
+										class="form-control date" name="code160" id="code160">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code170">170码</label> <input type="text"
+										class="form-control date" name="code170" id="code170">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="expectTime">预计出货时间</label> <input type="text"
+										class="form-control date  input-date" name="expectTime"
+										id="expectTime">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="addSub"
+								style="background-color: #428bca;">添加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 添加模特样衣 -->
+			<div class="modal fade" id="sampleForModel" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">填写model地址</h4>
+						</div>
+						<form action="" method="post" id="sample_for_model_form">
+							<div class="modal-body">
+								<div class="col-md-12">
+									<input type="hidden" name="wave" id="wave">
+									<input type="hidden" name="designImg" id="designImg">
+									<input type="hidden" name="productCode" id="productCode">
+									<label for="shippingAddress">model地址</label> <input type="text"
+										class="form-control date" name="shippingAddress" id="shippingAddress">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal" id="commitSampleForMode"
+									style="background-color: #428bca;">确认model地址</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

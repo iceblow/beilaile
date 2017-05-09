@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributionConfirmOrderMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.DistributionConfirmOrder">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="CLOTH_NAME" property="clothName" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_IMG" property="productImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="SIZE_IMG" property="sizeImg" jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER" />
+		<result column="PLAN_IN_WAREHOUSE_TIME" property="planInWarehouseTime"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+		<result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+		<result column="DISTRIBUTTION_FACTORY" property="distributtionFactory"
+			jdbcType="VARCHAR" />
+		<result column="CLOTH_PRICE" property="clothPrice" jdbcType="VARCHAR" />
+		<result column="CONFIRM_ORDER" property="confirmOrder"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_ORDER_TIME" property="confirmOrderTime"
+			jdbcType="VARCHAR" />
+		<result column="DATA_STATE" property="dataState" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="TRACKING_OFFICER" property="trackingOfficer"
+			jdbcType="VARCHAR" />
+		<result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="TACHE_START_TIME" property="tacheStartTime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 查询总条数 -->
+	<select id="selectAllcount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM distribution_confirm_order where 1=1
+		AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave}, "%")
+		</if>
+		<if test='oringinalWave!=null and oringinalWave!=""'>
+			AND ORINGINAL_WAVE LIKE CONCAT("%" ,#{oringinalWave}, "%")
+		</if>
+		<if test='clothName!=null and clothName!=""'>
+			AND CLOTH_NAME LIKE CONCAT("%" ,#{clothName}, "%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%" ,#{productCode}, "%")
+		</if>
+		<if test='orderType!=null and orderType!=""'>
+			AND ORDER_TYPE LIKE CONCAT("%" ,#{orderType}, "%")
+		</if>
+		<if test='distributtionFactory!=null and distributtionFactory!=""'>
+			AND DISTRIBUTTION_FACTORY LIKE CONCAT("%",#{distributtionFactory}, "%")
+		</if>
+
+		<if test='trackingOfficer!=null and trackingOfficer!=""'>
+			AND TRACKING_OFFICER LIKE CONCAT("%" ,#{trackingOfficer},
+			"%")
+		</if>
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="getDistributionConfirmOrderPage" parameterType="com.warehouse.dao.DistributionConfirmOrderMapper"
+		resultMap="BaseResultMap">
+		select * from distribution_confirm_order where 1=1
+		AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='oringinalWave!=null and oringinalWave!=""'>
+			AND ORINGINAL_WAVE LIKE CONCAT("%"
+			,#{oringinalWave,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='clothName!=null and clothName!=""'>
+			AND CLOTH_NAME LIKE CONCAT("%"
+			,#{clothName,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%"
+			,#{productCode,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='orderType!=null and orderType!=""'>
+			AND ORDER_TYPE LIKE CONCAT("%"
+			,#{orderType,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='distributtionFactory!=null and distributtionFactory!=""'>
+			AND DISTRIBUTTION_FACTORY LIKE CONCAT("%"
+			,#{distributtionFactory,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='trackingOfficer!=null and trackingOfficer!=""'>
+			AND TRACKING_OFFICER LIKE CONCAT("%"
+			,#{trackingOfficer,jdbcType=VARCHAR}, "%")
+		</if>
+		ORDER BY confirm_order_time ASC,RELEASE_TIME ASC , order_grade DESC
+		limit #{begin},#{end}
+	</select>
+
+	<update id="sureDistributionConfirmOrderById" parameterType="com.warehouse.dao.DistributionConfirmOrderMapper">
+		update distribution_confirm_order
+		<set>
+			DATA_STATE ='确认下单' ,
+			CONFIRM_ORDER_TIME=now()
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="giveUpDistributionConfirmOrderById" parameterType="com.warehouse.dao.DistributionConfirmOrderMapper">
+		update distribution_confirm_order
+		<set>
+			DATA_STATE ='放弃下单' ,
+			CONFIRM_ORDER_TIME=now()
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateDistributionConfirmOrderById" parameterType="com.warehouse.dao.DistributionConfirmOrderMapper">
+		update distribution_confirm_order
+		<set>
+			<if test='remark!=null'>
+				REMARK =#{remark,jdbcType=VARCHAR}
+			</if>
+			<if test='clothPrice!=null'>
+				CLOTH_PRICE =#{clothPrice,jdbcType=VARCHAR}
+			</if>
+			<if test='trackingOfficer!=null '>
+				TRACKING_OFFICER=#{trackingOfficer,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>

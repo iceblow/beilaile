@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.InputStorageMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.InputStorage">
+		<id column="sid" property="sid" jdbcType="INTEGER" />
+		<result column="sdate" property="sdate" jdbcType="VARCHAR" />
+		<result column="girard" property="girard" jdbcType="VARCHAR" />
+		<result column="commodityc_code" property="commoditycCode"
+			jdbcType="VARCHAR" />
+		<result column="productShortName" property="productShortName"
+			jdbcType="VARCHAR" />
+		<result column="temp_bar" property="tempBar" jdbcType="VARCHAR" />
+		<result column="vendor_code" property="vendorCode" jdbcType="VARCHAR" />
+		<result column="factory" property="factory" jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="code59" property="code59" jdbcType="INTEGER" />
+		<result column="code66" property="code66" jdbcType="INTEGER" />
+		<result column="code73" property="code73" jdbcType="INTEGER" />
+		<result column="code80" property="code80" jdbcType="INTEGER" />
+		<result column="code90" property="code90" jdbcType="INTEGER" />
+		<result column="code100" property="code100" jdbcType="INTEGER" />
+		<result column="code110" property="code110" jdbcType="INTEGER" />
+		<result column="code120" property="code120" jdbcType="INTEGER" />
+		<result column="code130" property="code130" jdbcType="INTEGER" />
+		<result column="code160" property="code160" jdbcType="INTEGER" />
+		<result column="code170" property="code170" jdbcType="INTEGER" />
+		<result column="total" property="total" jdbcType="INTEGER" />
+		<result column="delb" property="delb" jdbcType="INTEGER" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="PC_IP" property="pcIp" jdbcType="VARCHAR" />
+		<result column="OPERATION" property="operation" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select * from inputstorage
+		where sid =
+		#{sid,jdbcType=INTEGER}
+	</select>
+
+	<insert id="insertSelective" parameterType="com.warehouse.entity.InputStorage">
+		insert into inputstorage
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="sdate != null">
+				sdate,
+			</if>
+			<if test="commoditycCode!=null">
+				commodityc_code,
+			</if>
+			<if test="commoditycCode!=null">
+				productShortName,
+			</if>
+			<if test="girard != null">
+				girard,
+			</if>
+			<if test="factory != null">
+				factory,
+			</if>
+			<if test="tempBar!=null">
+				temp_bar,
+			</if>
+			<if test="vendorCode!=null">
+				vendor_code,
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG,
+			</if>
+			<if test="code59 != null">
+				code59,
+			</if>
+			<if test="code66 != null">
+				code66,
+			</if>
+			<if test="code73 != null">
+				code73,
+			</if>
+			<if test="code80 != null">
+				code80,
+			</if>
+			<if test="code90 != null">
+				code90,
+			</if>
+			<if test="code100 != null">
+				code100,
+			</if>
+			<if test="code110 != null">
+				code110,
+			</if>
+			<if test="code120 != null">
+				code120,
+			</if>
+			<if test="code130 != null">
+				code130,
+			</if>
+			<if test="code160 != null">
+				code160,
+			</if>
+			<if test="code170 != null">
+				code170,
+			</if>
+			<if test="total != null">
+				total,
+			</if>
+			<if test="delb != null">
+				delb,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="pcIp != null">
+				PC_IP,
+			</if>
+			<if test="operation != null">
+				OPERATION,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				#{sid,jdbcType=INTEGER},
+			</if>
+			<if test="sdate != null">
+				#{sdate,jdbcType=VARCHAR},
+			</if>
+			<if test="commoditycCode!=null">
+				#{commoditycCode,jdbcType=VARCHAR},
+			</if>
+			<if test="productShortName!=null">
+				#{productShortName,jdbcType=VARCHAR},
+			</if>
+			<if test="girard != null">
+				#{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				#{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="tempBar!=null">
+				#{tempBar,jdbcType=VARCHAR},
+			</if>
+			<if test="vendorCode!=null">
+				#{vendorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="code59 != null">
+				#{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				#{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				#{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				#{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				#{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				#{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				#{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				#{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				#{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				#{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				#{code170,jdbcType=INTEGER},
+			</if>
+			<if test="total != null">
+				#{total,jdbcType=INTEGER},
+			</if>
+			<if test="delb != null">
+				#{delb,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="pcIp != null">
+				#{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				#{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.InputStorage">
+		update inputstorage
+		<set>
+			<if test="sdate != null">
+				sdate = #{sdate,jdbcType=VARCHAR},
+			</if>
+			<if test="commoditycCode!=null">
+				commodityc_code=#{commoditycCode,jdbcType=VARCHAR},
+			</if>
+			<if test="productShortName!=null">
+				productShortName=#{productShortName,jdbcType=VARCHAR},
+			</if>
+			<if test="girard != null">
+				girard = #{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				factory = #{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="tempBar!=null">
+				temp_bar=#{tempBar,jdbcType=VARCHAR},
+			</if>
+			<if test="vendorCode!=null">
+				vendor_code=#{vendorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="code59 != null">
+				code59 = #{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				code66 = #{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				code73 = #{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				code80 = #{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				code90 = #{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				code100 = #{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				code110 = #{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				code120 = #{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				code130 = #{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				code160 = #{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				code170 = #{code170,jdbcType=INTEGER},
+			</if>
+			<if test="total != null">
+				total = #{total,jdbcType=INTEGER},
+			</if>
+			<if test="delb != null">
+				delb = #{delb,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="pcIp != null">
+				PC_IP = #{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where sid = #{sid,jdbcType=INTEGER}
+	</update>
+	<!-- 假删除 -->
+	<update id="delByPrimaryKey" parameterType="com.warehouse.entity.InputStorage">
+		update inputstorage
+		set
+		delb=1,DEL_TIME=#{delTime}
+		where sid=#{sid}
+	</update>
+
+	<!-- 模糊查询 -->
+	<select id="getCountByOutsideLike" parameterType="com.warehouse.entity.InputStorage"
+		resultType="java.lang.Integer">
+		select count(1) from inputstorage where delb=0 and 1=1
+		<if test="girard !='' and girard !=null">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="factory!=null and factory!=''">
+			and factory like concat("%",#{factory},"%")
+		</if>
+		<if test="commoditycCode!=null and commoditycCode!=''">
+			and commodityc_code like concat("%",#{commoditycCode},"%")
+		</if>
+	</select>
+	<select id="InputstorageByLike" parameterType="com.warehouse.entity.InputStorage"
+		resultMap="BaseResultMap">
+		select * from inputstorage where delb=0 and 1=1
+		<if test="girard !='' and girard !=null">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="factory!=null and factory!=''">
+			and factory like concat("%",#{factory},"%")
+		</if>
+		<if test="commoditycCode!=null and commoditycCode!=''">
+			and commodityc_code like concat("%",#{commoditycCode},"%")
+		</if>
+		order by ADD_TIME desc limit #{begin},#{end}
+	</select>
+	<!-- 查询打印个数 -->
+	<select id="selectTotalByPrimaryKey" resultType="java.lang.Integer"
+		statementType="STATEMENT">
+		select ${code} from inputstorage where sid=${sid}
+	</select>
+</mapper>

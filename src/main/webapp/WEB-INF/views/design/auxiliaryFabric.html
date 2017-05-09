@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>服装开发管理</title> <@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/design/auxiliaryFabric.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">辅料采购</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2">
+								<label for="cloth_name">设计师</label> <input type="text"
+									class="form-control" name="cloth_name" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="design_time">设计时间</label> <input type="text"
+									class="form-control" name="design_time" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="girard">波次号</label> <input type="text"
+									class="form-control" name="girard" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="model">款号</label> <input type="text"
+									class="form-control" name="model" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="design_img">设计图</label> <input type="text"
+									class="form-control" name="design_img" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="sample_img">头样图</label> <input type="text"
+									class="form-control" name="sample_img" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="child_img">尺码图</label> <input type="text"
+									class="form-control" name="child_img" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="paperpattern_emf_file">纸样emf图</label> <input type="text"
+									class="form-control" name="paperpattern_emf_file" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="paperpattern_prj_file">纸样prj图</label> <input type="text"
+									class="form-control" name="paperpattern_prj_file" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="popper_color">五爪扣颜色</label> <input type="text"
+									class="form-control" name="popper_color" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="mark_washORdrop">洗唛/吊牌</label> <input type="text"
+									class="form-control" name="mark_washORdrop" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="mark_wash_element">洗唛成份</label> <input type="text"
+									class="form-control" name="mark_wash_element" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="accessoryAName">辅料A名称</label> <input type="text"
+									class="form-control" name="accessoryAName" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="accessoryBName">辅料B名称</label> <input type="text"
+									class="form-control" name="accessoryBName" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="accessoryCName">辅料C名称</label> <input type="text"
+									class="form-control" name="accessoryCName" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="remark">备注</label> <input type="text"
+									class="form-control" name="remark" placeholder="">
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="myselect">查询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="28" style="text-align: center; font-size: 16px;">辅料采购申请</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">设计师</th>
+								<th style="text-align: center;">设计时间</th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">款号</th>
+								<th style="text-align: center; width: 30px;">订单明细</th>
+								<th style="text-align: center;">订单数量</th>
+								<th style="text-align: center;">设计图</th>
+								<th style="text-align: center;">头样图</th>
+								<th style="text-align: center;">尺码图</th>
+								<th style="text-align: center;">emf图</th>
+								<th style="text-align: center;">prj图</th>
+								<th style="text-align: center;">五爪扣颜色</th>
+								<th style="text-align: center;">五爪扣数量</th>
+								<th style="text-align: center;">洗唛/吊牌</th>
+								
+								<!-- <th style="text-align: center;">52码</th>
+								<th style="text-align: center;">59码</th>
+								<th style="text-align: center;">66码</th>
+								<th style="text-align: center;">73码</th>
+								<th style="text-align: center;">80码</th>
+								<th style="text-align: center;">90码</th> -->
+								<th style="text-align: center;">洗唛成份</th>
+								<th style="text-align: center;">辅料A名称</th>
+								<th style="text-align: center;">辅料A数量</th>
+								<th style="text-align: center;">辅料B名称</th>
+								<th style="text-align: center;">辅料B数量</th>
+								<th style="text-align: center;">辅料C名称</th>
+								<th style="text-align: center;">辅料C数量</th>
+								<th style="text-align: center;">备注</th>
+								<th style="text-align: center;">操 作</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+			<!--修改 模态框（Modal） -->
+			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<form id="myform" method="post">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">修改辅料采购信息</h4>
+							</div>
+							<div class="modal-body">
+								<input type="hidden" name="id" id="id" />
+								<div class="col-md-12">
+									<div class="col-md-4">
+										<label for="popper_color">五爪扣颜色</label> <input type="text"
+											class="form-control" name="popper_color" placeholder=""
+											id="popper_color">
+									</div>
+									<div class="col-md-4">
+										<label for="popper_num">五爪扣数量</label> <input type="text"
+											class="form-control" name="popper_num" id="popper_num">
+									</div>
+									<div class="col-md-4">
+										<label for="mark_washORdrop">洗唛/吊牌</label> <input type="text"
+											class="form-control" name="mark_washORdrop"
+											id="mark_washORdrop">
+									</div>
+									<div class="col-md-4">
+										<label for="code52">52码</label> <input type="text"
+											class="form-control" name="code52" id="code52">
+									</div>
+									<div class="col-md-4">
+										<label for="code59">59码</label> <input type="text"
+											class="form-control" name="code59" id="code59">
+									</div>
+									<div class="col-md-4">
+										<label for="code66">66码</label> <input type="text"
+											class="form-control" name="code66" id="code66">
+									</div>
+									<div class="col-md-4">
+										<label for="code73">73码</label> <input type="text"
+											class="form-control" name="code73" id="code73">
+									</div>
+									<div class="col-md-4">
+										<label for="code80">80码</label> <input type="text"
+											class="form-control" name="code80" id="code80">
+									</div>
+									<div class="col-md-4">
+										<label for="code90">90码</label> <input type="text"
+											class="form-control" name="code90" id="code90">
+									</div>
+									<div class="col-md-4">
+										<label for="total">订单数量</label> <input type="text"
+											class="form-control" name="total" id="total">
+									</div>
+									<div class="col-md-4">
+										<label for="mark_wash_element">洗唛成份</label> <input type="text"
+											class="form-control" name="mark_wash_element"
+											id="mark_wash_element">
+									</div>
+									<div class="col-md-4">
+										<label for="accessoryAName">辅料A名称</label> <input type="text"
+											class="form-control" name="accessoryAName"
+											id="accessoryAName">
+									</div>
+									<div class="col-md-4">
+										<label for="accessoryANum">辅料A数量</label> <input type="text"
+											class="form-control" name="accessoryANum" id="accessoryANum">
+									</div>
+									<div class="col-md-4">
+										<label for="accessoryBName">辅料B名称</label> <input type="text"
+											class="form-control" name="accessoryBName"
+											id="accessoryBName">
+									</div>
+									<div class="col-md-4">
+										<label for="accessoryBNum">辅料B数量</label> <input type="text"
+											class="form-control" name="accessoryBNum" id="accessoryBNum">
+									</div>
+									<div class="col-md-4">
+										<label for="accessoryCName">辅料C名称</label> <input type="text"
+											class="form-control" name="accessoryCName"
+											id="accessoryCName">
+									</div>
+									<div class="col-md-4">
+										<label for="accessoryCNum">辅料C数量</label> <input type="text"
+											class="form-control" name="accessoryCNum" id="accessoryCNum">
+									</div>
+									<div class="col-md-4">
+										<label for="remark">备注</label> <input type="text"
+											class="form-control" name="remark" id="remark">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal" style="background-color: #428bca;"
+									id="uppAuxiliaryFabric">修改</button>
+								<!-- <input type="submit" class="btn btn-primary"
+									style="background-color: #428bca;" value="修改"
+									id="uppAuxiliaryFabric" /> -->
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+
+			<script type="text/javascript">
+				$(".input-date").datetimepicker({
+					format : "yyyy-mm-dd",
+					autoclose : true,
+					todayBtn : true,
+					todayHighlight : true,
+					showMeridian : true,
+					pickerPosition : "bottom-left",
+					language : 'zh-CN', //中文，需要引用zh-CN.js包
+					startView : 2, //月视图
+					minView : 2
+				//日期时间选择器所能够提供的最精确的时间选择视图
+				});
+			</script>
+</body>
+</html>

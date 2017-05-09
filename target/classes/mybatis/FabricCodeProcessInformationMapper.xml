@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FabricCodeProcessInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.FabricCodeProcessInformation" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="GENERATE_BARCODE" property="generateBarcode" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_GOODS_CODE" property="supplierGoodsCode" jdbcType="VARCHAR" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+    <result column="CRAFTS_ORDER" property="craftsOrder" jdbcType="VARCHAR" />
+    <result column="FABRIC_CODE" property="fabricCode" jdbcType="VARCHAR" />
+    <result column="FABRIC_MATERIAL" property="fabricMaterial" jdbcType="VARCHAR" />
+    <result column="COLOR_CARD_CODE" property="colorCardCode" jdbcType="VARCHAR" />
+    <result column="COLOR_CARD_NAME" property="colorCardName" jdbcType="VARCHAR" />
+    <result column="COLOR_CODE" property="colorCode" jdbcType="VARCHAR" />
+    <result column="FABRIC_COLOUR" property="fabricColour" jdbcType="VARCHAR" />
+    <result column="NUMBER_ORDER" property="numberOrder" jdbcType="VARCHAR" />
+    <result column="FABRIC_TYPE" property="fabricType" jdbcType="VARCHAR" />
+    <result column="PARAMETER" property="parameter" jdbcType="DOUBLE" />
+    <result column="FABRIC_PRICES" property="fabricPrices" jdbcType="DECIMAL" />
+    <result column="PURCHASE_DISCOUNT" property="purchaseDiscount" jdbcType="DECIMAL" />
+    <result column="TAX_RATE" property="taxRate" jdbcType="DECIMAL" />
+    <result column="AFTER_TAX_PRICE" property="afterTaxPrice" jdbcType="DECIMAL" />
+    <result column="MINIMUM_PURCHASE_AMOUNT" property="minimumPurchaseAmount" jdbcType="VARCHAR" />
+    <result column="SCHEDULED_NUMBER" property="scheduledNumber" jdbcType="VARCHAR" />
+    <result column="KG_M" property="kgM" jdbcType="VARCHAR" />
+    <result column="ACTUAL_DOSAGE" property="actualDosage" jdbcType="DOUBLE" />
+    <result column="MATERIALS" property="materials" jdbcType="VARCHAR" />
+    <result column="COMBINED_WAVE" property="combinedWave" jdbcType="VARCHAR" />
+    <result column="DIFFERENCE" property="difference" jdbcType="DOUBLE" />
+    <result column="TOTAL_MONEY" property="totalMoney" jdbcType="DECIMAL" />
+    <result column="PIECES_APPROVED" property="piecesApproved" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_CODE" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="SUPPLIER" property="supplier" jdbcType="VARCHAR" />
+    <result column="RECIPIENT" property="recipient" jdbcType="VARCHAR" />
+    <result column="RECIPIENT_ADDRESS" property="recipientAddress" jdbcType="VARCHAR" />
+    <result column="FABRIC_FREIGHT" property="fabricFreight" jdbcType="DECIMAL" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="ADDITION_TIME" property="additionTime" jdbcType="VARCHAR" />
+    <result column="PURCHASING_ORDER_TIME" property="purchasingOrderTime" jdbcType="VARCHAR" />
+    <result column="PURCHASING_PAYMENT_TIME" property="purchasingPaymentTime" jdbcType="VARCHAR" />
+    <result column="PURCHASING_RECEIPT_TIME" property="purchasingReceiptTime" jdbcType="VARCHAR" />
+    <result column="PURCHASING_GIVEOUT_TIME" property="purchasingGiveoutTime" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+    <result column="DEL_STATE" property="delState" jdbcType="VARCHAR" />
+    <result column="PURCHASING_STATUS" property="purchasingStatus" jdbcType="VARCHAR" />
+    <result column="TOTAL_COUNT" property="totalCount" jdbcType="INTEGER" />
+    <result column="METER" property="meter" jdbcType="DOUBLE" />
+    <result column="TOTAL_WEIGHT" property="totalWeight" jdbcType="DOUBLE" />
+    <result column="WEIGHT" property="weight" jdbcType="DOUBLE" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PRODUCT_CODE, GENERATE_BARCODE, SUPPLIER_GOODS_CODE, WAVE, DESIGN_IMG, CRAFTS_ORDER, 
+    FABRIC_CODE, FABRIC_MATERIAL, COLOR_CARD_CODE, COLOR_CARD_NAME, COLOR_CODE, FABRIC_COLOUR, 
+    NUMBER_ORDER, FABRIC_TYPE, PARAMETER, FABRIC_PRICES, PURCHASE_DISCOUNT, TAX_RATE, 
+    AFTER_TAX_PRICE, MINIMUM_PURCHASE_AMOUNT, SCHEDULED_NUMBER, KG_M, ACTUAL_DOSAGE, 
+    MATERIALS, COMBINED_WAVE, DIFFERENCE, TOTAL_MONEY, PIECES_APPROVED, SUPPLIER_CODE, 
+    SUPPLIER, RECIPIENT, RECIPIENT_ADDRESS, FABRIC_FREIGHT, REMARKS, ADDITION_TIME, PURCHASING_ORDER_TIME, 
+    PURCHASING_PAYMENT_TIME, PURCHASING_RECEIPT_TIME, PURCHASING_GIVEOUT_TIME, ADD_TIME, 
+    UPDATE_TIME, DEL_TIME, DEL_STATE, PURCHASING_STATUS,TOTAL_COUNT，METER,TOTAL_WEIGHT,WEIGHT
+  </sql>
+ 
+
+  
+  <select id="getFabricCodeProcessInfoBpcnt" resultType="java.lang.Integer" parameterType="map">
+  	select count(0) from fabric_code_process_information where 1=1
+  	    <if test='additionTime != null and additionTime != "" '>
+			AND ADDITION_TIME &gt;= #{additionTime,jdbcType=VARCHAR}
+		</if>
+		<if test='kgM != null and kgM != "" '>
+			AND KG_M &gt;= #{kgM,jdbcType=VARCHAR}
+		</if>
+		<if test='supplier != null and supplier != "" '>
+			AND SUPPLIER &gt;= #{supplier,jdbcType=VARCHAR}
+		</if>
+		
+		
+		<if
+			test='fabricColour != null and fabricColour != "" and fabricColour != "N" and fabricColour != "Y"'>
+			AND FABRIC_COLOUR LIKE CONCAT(CONCAT('%',
+			#{fabricColour,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricColour =="N" '>
+			AND FABRIC_COLOUR=''
+		</if>
+		<if test='fabricColour =="Y"'>
+			AND FABRIC_COLOUR !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT(CONCAT('%',
+			#{wave,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='wave =="N" '>
+			AND WAVE=''
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='fabricMaterial != null and fabricMaterial != "" and fabricMaterial != "N" and fabricMaterial != "Y"'>
+			AND FABRIC_MATERIAL LIKE CONCAT(CONCAT('%',
+			#{fabricMaterial,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricMaterial =="N" '>
+			AND FABRIC_MATERIAL=''
+		</if>
+		<if test='fabricMaterial =="Y"'>
+			AND FABRIC_MATERIAL !=''
+		</if>
+  </select>
+  
+  <select id="findFabricCodeProcessInfoCndbp" parameterType="Map" resultMap="BaseResultMap">
+   select * from fabric_code_process_information where 1=1
+    <if test='additionTime != null and additionTime != "" '>
+			AND ADDITION_TIME &gt;= #{additionTime,jdbcType=VARCHAR}
+		</if>
+		<if test='kgM != null and kgM != "" '>
+			AND KG_M &gt;= #{kgM,jdbcType=VARCHAR}
+		</if>
+		<if test='supplier != null and supplier != "" '>
+			AND SUPPLIER &gt;= #{supplier,jdbcType=VARCHAR}
+		</if>
+		
+		
+		<if
+			test='fabricColour != null and fabricColour != "" and fabricColour != "N" and fabricColour != "Y"'>
+			AND FABRIC_COLOUR LIKE CONCAT(CONCAT('%',
+			#{fabricColour,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricColour =="N" '>
+			AND FABRIC_COLOUR=''
+		</if>
+		<if test='fabricColour =="Y"'>
+			AND FABRIC_COLOUR !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT(CONCAT('%',
+			#{wave,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='wave =="N" '>
+			AND WAVE=''
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='fabricMaterial != null and fabricMaterial != "" and fabricMaterial != "N" and fabricMaterial != "Y"'>
+			AND FABRIC_MATERIAL LIKE CONCAT(CONCAT('%',
+			#{fabricMaterial,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricMaterial =="N" '>
+			AND FABRIC_MATERIAL=''
+		</if>
+		<if test='fabricMaterial =="Y"'>
+			AND FABRIC_MATERIAL !=''
+		</if>
+		LIMIT
+		#{pageNow},#{pageSize}
+   
+  </select>
+  <select id="exportCurrentFabricCodeProcessData" parameterType="Map" resultMap="BaseResultMap">
+   select * from fabric_code_process_information where 1=1
+    <if test='additionTime != null and additionTime != "" '>
+			AND ADDITION_TIME &gt;= #{additionTime,jdbcType=VARCHAR}
+		</if>
+		<if test='kgM != null and kgM != "" '>
+			AND KG_M &gt;= #{kgM,jdbcType=VARCHAR}
+		</if>
+		<if test='supplier != null and supplier != "" '>
+			AND SUPPLIER &gt;= #{supplier,jdbcType=VARCHAR}
+		</if>
+		
+		
+		<if
+			test='fabricColour != null and fabricColour != "" and fabricColour != "N" and fabricColour != "Y"'>
+			AND FABRIC_COLOUR LIKE CONCAT(CONCAT('%',
+			#{fabricColour,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricColour =="N" '>
+			AND FABRIC_COLOUR=''
+		</if>
+		<if test='fabricColour =="Y"'>
+			AND FABRIC_COLOUR !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT(CONCAT('%',
+			#{wave,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='wave =="N" '>
+			AND WAVE=''
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='fabricMaterial != null and fabricMaterial != "" and fabricMaterial != "N" and fabricMaterial != "Y"'>
+			AND FABRIC_MATERIAL LIKE CONCAT(CONCAT('%',
+			#{fabricMaterial,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricMaterial =="N" '>
+			AND FABRIC_MATERIAL=''
+		</if>
+		<if test='fabricMaterial =="Y"'>
+			AND FABRIC_MATERIAL !=''
+		</if>
+	
+   
+  </select>
+ 
+ 
+</mapper>

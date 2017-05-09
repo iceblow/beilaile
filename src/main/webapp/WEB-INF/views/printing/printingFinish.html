@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/cutting/layer/layer.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/printing/printingFinish.js"></script>
+<title>印花理单表</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">印花理单表</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-1">
+								<label for="wave">波次号</label> <input type="text"
+									class="form-control" name="wave" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="productCoed">商品编号</label> <input type="text"
+									class="form-control" name="productCoed" placeholder="">
+							</div>
+						</form>
+						<div class="col-md-1">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="mySelectBtn">查询按钮</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="25" style="text-align: center; font-size: 16px;">印花理单表</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">商品编号</th>
+								<th style="text-align: center;">设计师</th>
+								<th style="text-align: center;">参考印花</th>
+								<th style="text-align: center;">设计图</th>
+								<th style="text-align: center;">工艺单</th>
+								<th style="text-align: center;">图样工艺单</th>
+								<th style="text-align: center;">尺码详情</th>
+								<th style="text-align: center;">总件数</th>
+								<th style="text-align: center;">有无印绣花</th>
+								<th style="text-align: center;">匹印</th>
+								<th style="text-align: center;">面料A匹印</th>
+								<th style="text-align: center;">面料B匹印</th>
+								<th style="text-align: center;">面料C匹印</th>
+								<th style="text-align: center;">面料D匹印</th>
+								<th style="text-align: center;">面料E匹印</th>
+								<th style="text-align: center;">匹印要求</th>
+								<th style="text-align: center;">片印</th>
+								<th style="text-align: center;">片印位置</th>
+								<th style="text-align: center;">片印要求</th>
+								<th style="text-align: center;">绣花</th>
+								<th style="text-align: center;">绣花位置</th>
+								<th style="text-align: center;">绣花要求</th>
+								<th style="text-align: center;">印花理单</th>
+								<th style="text-align: center;">重新理单</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 修改模态框 -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">印花理单数据</h4>
+						</div>
+						<div class="modal-body">
+							<form id="myCompleteOrderForm">
+								<div class="col-md-12">
+									<input type="hidden" name="id" id="id" value=""/>
+									<div class="col-md-3" style="float: left;">
+										<label for="wave">波次号</label> <input type="text"
+											class="form-control date" name="wave" id="wave" readonly="true">
+									</div>
+									<div class="col-md-3" style="float: left;">
+										<label for="">有无印绣花</label><br /> <input
+											name="printingOrEmbroidered" class="ifFlase" id="ifFlase" type="radio"
+											value="无" />无 <input
+											name="printingOrEmbroidered" class="ifTrue" type="radio"
+											value="有" />有
+									</div>
+									<div class="col-md-12" style="float: left; display:none ;"
+										id="allPrintDiv">
+										<div class="col-md-3" style="float: left;" id="ifPrintingDiv">
+											是否匹印
+											<div style="width: 20px; height: 20px; float: right;">
+												<input type="checkbox" name="ifPrinting" id="ifPrinting"
+													value="需要匹印">
+											</div>
+										</div>
+
+										<div class="col-md-3 fabric"
+											style="float: left; display: none;">
+											面料A匹印
+											<div style="width: 20px; height: 20px; float: right;">
+												<input type="checkbox" name="fabricA" id="fabricA" value="匹印">
+											</div>
+										</div>
+
+										<div class="col-md-3 fabric"
+											style="float: left; display: none;">
+											面料B匹印
+											<div style="width: 20px; height: 20px; float: right;">
+												<input type="checkbox" name="fabricB" id="fabricB" value="匹印">
+											</div>
+										</div>
+
+										<div class="col-md-3 fabric"
+											style="float: left; display: none;">
+											面料C匹印
+											<div style="width: 20px; height: 20px; float: right;">
+												<input type="checkbox" name="fabricC" id="fabricC" value="匹印">
+											</div>
+										</div>
+
+										<div class="col-md-3 fabric"
+											style="float: left; display: none;"></div>
+
+										<div class="col-md-3 fabric"
+											style="float: left; display: none;">
+											面料D匹印
+											<div style="width: 20px; height: 20px; float: right;">
+												<input type="checkbox" name="fabricD" id="fabricD" value="匹印">
+											</div>
+										</div>
+
+										<div class="col-md-3 fabric"
+											style="float: left; display: none;">
+											面料E匹印
+											<div style="width: 20px; height: 20px; float: right;">
+												<input type="checkbox" name="fabricE" id="fabricE" value="匹印">
+											</div>
+										</div>
+										<div class="col-md-3 fabric"
+											style="float: left; display: none;">
+											<label for="requirePrinting">匹印要求</label> <input type="text"
+												class="form-control date text" id='requirePrinting' name="requirePrinting">
+										</div>
+									</div>
+
+									<div class="col-md-12" style="float: left; display: none;"
+										id="allSliceDiv">
+										<div class="col-md-2" style="float: left;" id="ifSliceDiv">
+											是否片印
+											<div style="width: 20px; height: 20px; float: right;">
+												<input type="checkbox" name="ifSlice" id="ifSlice" value="需要片印">
+											</div>
+										</div>
+										<div class="col-md-3 silce"
+											style="float: left; display: none;">
+											<label for="sliceAddress">片印位置</label> <input type="text"
+												class="form-control date text" id="sliceAddress" name="sliceAddress">
+										</div>
+										<div class="col-md-3 silce"
+											style="float: left; display: none;">
+											<label for="requireSlice">片印要求</label> <input type="text"
+												class="form-control date text" id="requireSlice" name="requireSlice">
+										</div>
+									</div>
+									<div class="col-md-12" style="float: left; display: none;"
+										id="allEmbroiderDiv">
+										<div class="col-md-2" style="float: left;" id="ifEmbroiderDiv">
+											是否绣花
+											<div style="width: 20px; height: 20px; float: right;">
+												<input type="checkbox" name="ifEmbroider" id="ifEmbroider" value="需要绣花">
+											</div>
+										</div>
+										<div class="col-md-3 embroider"
+											style="float: left; display: none;">
+											<label for="embroiderAddress">绣花位置</label> <input type="text"
+												class="form-control date text" id="embroiderAddress" name="embroiderAddress">
+										</div>
+										<div class="col-md-3 embroider"
+											style="float: left; display: none;">
+											<label for="requireEmbroider">绣花要求</label> <input type="text"
+												class="form-control date text" id="requireEmbroider" name="requireEmbroider">
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="completeOrder"
+								style="background-color: #428bca;">理单完成</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

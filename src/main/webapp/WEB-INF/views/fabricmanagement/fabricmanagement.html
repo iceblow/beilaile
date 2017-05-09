@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<@p.cache/> <@p.css/> <@p.js/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/fabricmanagement/fabricmanagement.js"></script>
+<title>面料出入库进度表</title>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">面料进度</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div>
+					<div class="col-md-12">
+						<div style="float: left;">
+							<font>波次查询</font> <input type="text" name="wave"
+								id="checkByFlag1" /> <font>面料查询</font> <input type="text"
+								name="fabricMaterial" id="checkByFlag2" /> <font>入库查询</font> <input
+								type="text" name="inputAmount" id="checkByFlag3" /> <font>出库查询</font>
+							<input type="text" name="outputAmount" id="checkByFlag4" />
+
+							<button id="checkbtn" class="btn btn-default">查 询</button>
+						</div>
+					</div>
+					<div class="col-md-12"></div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="30" style="text-align: center; font-size: 16px;">面料出入库进度表</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">入库时间</th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">面料品名</th>
+								<th style="text-align: center;">采购总条数</th>
+								<th style="text-align: center;">入库总条数</th>
+								<th style="text-align: center;">未入库条数</th>
+								<th style="text-align: center;">出库总条数</th>
+								<th style="text-align: center;">相差条数</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+</body>
+</html>

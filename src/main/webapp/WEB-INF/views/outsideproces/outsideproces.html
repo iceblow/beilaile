@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<@p.cache/> <@p.css/> <@p.js/>
+<title>外加工各款价格明细表</title>
+<script src="/res/js/laypage/laypage.js"></script>
+<script
+	src="/res/js/outsideproces/outsideproces.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">加工核价</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div>
+					<div class="col-md-12">
+						<button style="float: right;" class="btn btn-primary btn-lg"
+							data-toggle="modal" data-target="#myModal" id="add">添加</button>
+						<div style="float: left;">
+							<font>波次查询</font> <input type="text" name="girard"
+								id="checkByGirard" />
+							<button id="checkbtn" class="btn btn-default">查 询</button>
+						</div>
+					</div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="30" style="text-align: center; font-size: 16px;">外加工各款价格明细表</th>
+							</tr>
+							<tr>
+								<!-- <th style="text-align: center;">编号</th> -->
+								<th style="text-align: center;">款号（波次）</th>
+								<th style="text-align: center;">件数</th>
+								<th style="text-align: center;">类别</th>
+								<th style="text-align: center;">加工外发总价</th>
+								<th style="text-align: center;">裁片外发总价</th>
+								<th style="text-align: center;">备 注</th>
+								<th style="text-align: center;">核价人</th>
+								<th style="text-align: center;">时 间</th>
+								<th style="text-align: center;" colspan="2">操 作</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+
+			<!-- 添加模态框 -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">添 加 数 据</h4>
+						</div>
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<label for="girard">款号（波号）</label> <input type="text"
+										class="form-control" name="girard" placeholder="" id="girard">
+								</div>
+								<div class="col-md-6">
+									<label for="bnumber">件数</label><input type="text"
+										class="form-control" name="bnumber" placeholder=""
+										id="bnumber" onkeyup="value=value.replace(/\D/g,'')">
+								</div>
+								<div class="col-md-6">
+									<label for="category">类别</label> <input type="text"
+										class="form-control" name="category" placeholder=""
+										id="category">
+								</div>
+								<div class="col-md-6">
+									<label for="workprice">加工总价</label> <input type="text"
+										class="form-control" name="workprice" placeholder=""
+										id="workprice" onkeyup="value=value.replace(/[^\d\.]/g,'')">
+								</div>
+								<div class="col-md-6">
+									<label for="cpprice">裁片总价</label> <input type="text"
+										class="form-control" name="cpprice" placeholder=""
+										id="cpprice" onkeyup="value=value.replace(/[^\d\.]/g,'')">
+								</div>
+								<div class="col-md-6">
+									<label for="remark">备注</label> <input type="text"
+										class="form-control" name="remark" placeholder="" id="remark">
+								</div>
+								<div class="col-md-6">
+									<label for="hejia">核价人</label> <input type="text"
+										class="form-control" name="hejia" placeholder="" id="hejia">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="addProce">添加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--修改 模态框（Modal） -->
+			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">修改入库数据</h4>
+						</div>
+
+						<form enctype="" role="" id="vender" action="" method="">
+							<div class="modal-body">
+								<input type="hidden" class="form-control" name="bid" id="bid"
+									readonly="readonly">
+								<div class="col-md-12">
+									<div class="col-md-6">
+										<label for="girard">款号（波号）</label> <input type="text"
+											class="form-control" name="girard" placeholder=""
+											id="ugirard">
+									</div>
+									<div class="col-md-6">
+										<label for="bnumber">件数</label><input type="text"
+											class="form-control" name="bnumber" placeholder=""
+											id="ubnumber" onkeyup="value=value.replace(/\D/g,'')">
+									</div>
+									<div class="col-md-6">
+										<label for="category">类别</label> <input type="text"
+											class="form-control" name="category" placeholder=""
+											id="ucategory">
+									</div>
+									<div class="col-md-6">
+										<label for="workprice">加工总价</label> <input type="text"
+											class="form-control" name="workprice" placeholder=""
+											id="uworkprice" onkeyup="value=value.replace(/[^\d\.]/g,'')">
+									</div>
+									<div class="col-md-6">
+										<label for="cpprice">裁片总价</label> <input type="text"
+											class="form-control" name="cpprice" placeholder=""
+											id="ucpprice" onkeyup="value=value.replace(/[^\d\.]/g,'')">
+									</div>
+									<div class="col-md-6">
+										<label for="remark">备注</label> <input type="text"
+											class="form-control" name="remark" placeholder=""
+											id="uremark">
+									</div>
+									<div class="col-md-6">
+										<label for="hejia">核价人</label> <input type="text"
+											class="form-control" name="hejia" placeholder="" id="uhejia">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal" id="uppOutsideproce"
+									style="background-color: #428bca;">修改</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+</body>
+</html>

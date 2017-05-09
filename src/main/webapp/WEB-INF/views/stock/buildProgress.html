@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>裁片外发生产进度表</title> <@p.cache/> <@p.css/> <@p.js/>
+<script type="text/javascript"
+	src="res/js/getDiscrepantDays/getDiscrepantDays.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">裁片外发生产进度表</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<button class="btn btn-primary btn-lg" data-toggle="modal"
+						data-target="#myModal">添加</button>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12">
+					<form action="" id="anyVal-from">
+						<div id="val-input-empty" class="col-md-10">
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">设计师</span> <input
+										name="designers" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">波次</span> <input name="wave"
+										value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">发版时间</span> <input
+										name="releaseTime" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">印花或裁片</span> <input
+										name="piecesApproved" value="" type="text"
+										class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">订单类型</span> <input
+										name="orderType" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">印绣花厂</span> <input
+										name="folwerFactory" type="text" class="form-control">
+								</div>
+							</div>
+
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">面料入库时间</span> <input
+										name="fabricStorageTime" value="" type="text"
+										class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">面料发放时间</span> <input
+										name="fabricReleaseTime" type="text" class="form-control">
+								</div>
+							</div>
+
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">印绣花给样时间</span> <input
+										name="proofingTime" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">印绣花回样时间</span> <input
+										name="proofingCompletionTime" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">匹印领料</span> <input
+										name="largeCargoTime" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">匹印出货</span> <input
+										name="largeCargoCompletionTime" type="text"
+										class="form-control">
+								</div>
+							</div>
+
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">辅料申请采购时间</span> <input
+										name="accessoriesPurchasingTime" type="text"
+										class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">制单->裁床时间</span> <input
+										name="cuttingTime" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">裁剪完成时间</span> <input
+										name="cropCompletionTime" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">裁剪数</span> <input
+										name="cropNumber" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">车缝领料时间</span> <input
+										name="factoryPickingTime" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">车缝工厂</span> <input
+										name="factory" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">计划出货时间</span><input
+										name="plannedShippingTime" type="text" class="form-control">
+								</div>
+							</div>
+
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">大货入库时间</span> <input
+										name="storageTime" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">片印领料日期</span> <input
+										name="cutLargeReceiveTime" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">片印回料日期</span> <input
+										name="cutLargeReturnTime" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">制版日期</span> <input
+										name="plateMakingTime" type="text" class="form-control">
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<span class="input-group-btn">
+								<button id="anyVal-btn" class="btn btn-default" type="button">
+									查询</button>
+							</span>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				<div class="col-md-12" style="height: 50px;"></div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table  table-bordered">
+								<thead>
+									<tr>
+										<th colspan="6"><font color="red">订单总数:<span
+												id="sumOrderNumber"></span></font>
+										<th colspan="36" style="text-align: center; font-size: 16px;">裁片外发跟踪表</th>
+									</tr>
+									<tr>
+										<th>序号</th>
+										<th>商品编号</th>
+										<th>设计师</th>
+										<th>参照版波</th>
+										<th>参考印花</th>
+										<th>原波次</th>
+										<th>波次</th>
+										<th>图片</th>
+										<th>工艺单</th>
+										<th>图样工艺单</th>
+										<th>尺码表</th>
+										<th>订单数量</th>
+										<th>订单明细</th>
+										<th>颜色</th>
+										<th>印绣花厂</th>
+										<th>印花或裁片</th>
+										<th>绣花单价</th>
+										<th>匹印单价</th>
+										<th>裁片印单价</th>
+										<th>订单类型</th>
+										<th>发版时间</th>
+										<th>纸样完成时间</th>
+										<th>辅料准备继续时间</th>
+										<th>印绣花给样时间</th>
+										<th>印绣花回样时间</th>
+										<th>制单->裁床日期</th>
+										<th>面料入库时间</th>
+										<th>面料发放时间</th>
+										<th>制版时间</th>
+										<th>匹印领料</th>
+										<th>匹印出货</th>
+										<th>裁剪完成日期</th>
+										<th>裁剪数</th>
+										<th>片印领料日期</th>
+										<th>片印回料日期</th>
+										<th>安排车缝领料日期</th>
+										<th>车缝领料日期</th>
+										<th>车缝工厂</th>
+										<th>计划入仓日期</th>
+										<th>大货入仓时间</th>
+										<th>大货入仓数</th>
+										<th>参考价</th>
+										<th>订单单价</th>
+										<th>备注</th>
+										<th>加急等级</th>
+										<th>数据操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 添加 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加 裁片外发生产进度数据</h4>
+					</div>
+					<form enctype="multipart/form-data" role="form" id="vender"
+						action="addBuildProgress.do" method="post">
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">设计师</label> <input type="text"
+										class="form-control" name="designers" placeholder=" ">
+								</div>
+
+								<div class="col-md-4">
+									<label for="oringinalWave">原返单波次</label> <input type="text"
+										class="form-control" name="oringinalWave" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">波次</label> <input type="text"
+										class="form-control" name="wave" placeholder="一定要輸入波次哦親"
+										style="color: red;">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="inputfile"> 添加图片 </label> <input name="imageFile"
+										id="imageFile" type="file" id="up" />
+								</div>
+								<div class="col-md-4">
+									<label for="image"> 图片预览 </label>
+									<div style="width: 120px; height: 120px;">
+										<img class="ImgSrc" id="ImgPr" width="120" height="120" />
+									</div>
+								</div>
+								<!-- <div class="col-md-4">
+									<label class="control-label bolder blue">印花或裁片</label>
+									<div class="radio">
+										<label> <input name="piecesApproved" type="radio"
+											class="ace" value="印花"> <span class="lbl"> 印花</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input name="piecesApproved" type="radio"
+											class="ace" value="裁片"> <span class="lbl"> 裁片</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input name="piecesApproved" type="radio"
+											class="ace" value="无" checked="checked"> <span
+											class="lbl"> 无</span>
+										</label>
+									</div>
+								</div> -->
+							</div>
+							<div class="col-md-12">
+
+								<div class="col-md-4">
+									<label for="orders">订单数量 </label> <input type="text"
+										class="form-control" name="orders" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="orderDetails">订单明细 </label> <input type="text"
+										class="form-control" name="orderDetails" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="colour">颜色 </label> <input type="text"
+										class="form-control" name="colour" placeholder=" ">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="releaseTime">发版时间 </label> <input type="text"
+										class="form-control input-date" name="releaseTime"
+										placeholder=" ">
+								</div>
+								 <div class="col-md-4">
+									<label for="folwerFactory">印绣花厂 </label> <input type="text"
+										class="form-control" name="folwerFactory" placeholder=" ">
+								</div> 
+								<div class="col-md-4">
+									<label for="proofingTime">印绣花给样时间 </label> <input type="text"
+										class="form-control input-date" name="proofingTime"
+										placeholder=" ">
+								</div>
+							</div>
+							<div class="col-md-12">
+
+								<div class="col-md-4">
+									<label for="proofingCompletionTime">印绣花回样时间 </label> <input
+										type="text" class="form-control input-date"
+										name="proofingCompletionTime" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="flowerPrice">绣花单价 </label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control" name="flowerPrice"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="printingPrice">匹印单价 </label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control"
+										name="printingPrice" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="piecesPrice">裁片印单价 </label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control" name="piecesPrice"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="accessoriesPurchasingTime">辅料申请采购时间 </label> <input
+										type="text" class="form-control input-date"
+										name="accessoriesPurchasingTime" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="cuttingTime"> 制单 -> 裁床时间 </label> <input
+										type="text" class="form-control input-date" name="cuttingTime"
+										placeholder=" ">
+								</div>
+
+								<div class="col-md-4">
+									<label for="factory"> 车缝工厂 </label> <input type="text"
+										class="form-control" name="factory" placeholder=" ">
+								</div>
+
+								<div class="col-md-4">
+									<label for="orderType"> 订单类别 </label> <input type="text"
+										class="form-control" name="orderType" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="orderPrice"> 订单单价 </label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control" name="orderPrice"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="plannedShippingTime"> 计划出货时间 </label> <input
+										type="text" class="form-control input-date"
+										name="plannedShippingTime" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="remarks"> 备注 </label> <input type="text"
+										class="form-control" name="remarks" placeholder=" ">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="submit" class="btn btn-primary">提交</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- .main-container-inner -->
+		<!--修改 模态框（Modal） -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改 裁片外发生产进度数据</h4>
+					</div>
+					<form enctype="multipart/form-data" role="form"
+						id="modifyByBuildProgress" action="" method="post">
+						<div class="modal-body" id="modify-prompt">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">设计师</label> <input type="text"
+										class="form-control" name="designers" id="designers"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="oringinalWave">原返单波次</label> <input type="text"
+										class="form-control" name="oringinalWave" id="oringinalWave"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">波次</label> <input type="text"
+										class="form-control" name="wave" id="wave"
+										placeholder="一定要輸入波次哦親" style="color: red;">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="inputfile"> 添加图片 </label> <input name="imageFile"
+										id="imageFile" type="file" id="up" />
+								</div>
+								<div class="col-md-4">
+									<label for="image"> 图片预览 </label>
+									<div style="width: 120px; height: 120px;">
+										<img class="ImgSrc" id="ImgPr" width="120" height="120" />
+									</div>
+								</div>
+							<!-- 	<div class="col-md-4">
+									<label class="control-label bolder blue">印花或裁片</label>
+									<div class="">
+										<label> <input name="piecesApproved" type="radio"
+											class="yinhuan_radio" value="印花" id="yinhuan_radio">
+											<span class="lbl"> 印花</span>
+										</label>
+									</div>
+									<div class="">
+										<label> <input name="piecesApproved" type="radio"
+											class="caipen_radio" value="裁片" id="caipen_radio"> <span
+											class="lbl"> 裁片</span>
+										</label>
+									</div>
+									<div class="">
+										<label> <input name="piecesApproved" type="radio"
+											class="wu_radio" value="无" id="wu_radio"> <span
+											class="lbl"> 无</span>
+										</label>
+									</div>
+								</div> -->
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="orders">订单数量 </label> <input type="text"
+										class="form-control" name="orders" id="orders" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="orderDetails">订单明细 </label> <input type="text"
+										class="form-control" name="orderDetails" id="orderDetails"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="colour">颜色 </label> <input type="text"
+										class="form-control" name="colour" id="colour" placeholder=" ">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="releaseTime">发版时间 </label> <input type="text"
+										class="form-control input-date" name="releaseTime"
+										id="releaseTime" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="folwerFactory">印绣花厂 </label> <input type="text"
+										class="form-control " name="folwerFactory" id="folwerFactory"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="proofingTime">印绣花给样时间 </label> <input type="text"
+										class="form-control input-date" name="proofingTime"
+										id="proofingTime" placeholder=" ">
+								</div>
+							</div>
+							<div class="col-md-12">
+
+								<div class="col-md-4">
+									<label for="proofingCompletionTime">印绣花回样时间 </label> <input
+										type="text" class="form-control input-date"
+										name="proofingCompletionTime" id="proofingCompletionTime"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="flowerPrice">绣花单价 </label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control" name="flowerPrice"
+										id="flowerPrice" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="printingPrice">匹印单价 </label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control"
+										name="printingPrice" id="printingPrice" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="piecesPrice">裁片印单价 </label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control" name="piecesPrice"
+										id="piecesPrice" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="accessoriesPurchasingTime">辅料申请采购时间 </label> <input
+										type="text" class="form-control input-date"
+										name="accessoriesPurchasingTime"
+										id="accessoriesPurchasingTime" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="cuttingTime "> 制单 -> 裁床时间 </label> <input
+										type="text" class="form-control input-date" name="cuttingTime"
+										id="cuttingTime" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="factory"> 车缝工厂 </label> <input type="text"
+										class="form-control" name="factory" id="factory"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="orderType"> 订单类别 </label> <input type="text"
+										class="form-control" name="orderType" id="orderType"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="orderPrice"> 订单单价 </label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control" name="orderPrice"
+										id="orderPrice" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="plannedShippingTime"> 计划出货时间 </label> <input
+										type="text" class="form-control input-date"
+										name="plannedShippingTime" id="plannedShippingTime"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="remarks"> 备注 </label> <input type="text"
+										class="form-control" name="remarks" id="remarks"
+										placeholder=" ">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" onclick="modify_btn()">提交</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 刪除 -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">
+						你确定刪除波次号为:<span style="color: red" id="myModal2-wave-text"></span>的数据吗？？？
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" id="del-btn" class="btn btn-primary">确认刪除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- /.main-container-inner -->
+		<a href="#" id="btn-scroll-up"
+			class="btn-scroll-up btn btn-sm btn-inverse"> <i
+			class="icon-double-angle-up icon-only bigger-110"> </i>
+		</a> <input type="hidden" value="${pageContext.request.contextPath}"
+			id="path">
+	</div>
+
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+<script type="text/javascript">
+	function delByBuildProgress(wave) {
+		$("#myModal2-wave-text").text(wave);
+	}
+
+	function modifyByorderDetails(orderDetails) {
+		$.post('modifyByorderDetails.do', {
+			'orderDetails' : orderDetails
+		}, function(data) {
+			//alert("+==================结果=================+" + data);
+		});
+	}
+	$("#del-btn").on('click', function() {
+		var wave = $("#myModal2-wave-text").html();
+		$.post('delByPrimaryKey.do', {
+			'wave' : wave
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-prompt").html("恭喜你刪除成功");
+				$("#del-btn").remove();
+				window.location.reload();
+
+			} else {
+				$("#myModal-prompt").html("删除失败！原因可能是网络问题");
+				$("#del-btn").remove();
+				window.location.reload();
+			}
+		});
+	})
+	//点击查询获取查询的条件 数据
+	$(function() {
+
+		$("#anyVal-btn").on('click', function() { //点击事查詢事件
+			$("#pageSize").attr('name', ""); //去掉分页查询pageSize
+			$("#pageNow").attr('name', ""); //去掉分页查询pageNow
+			var anyVal = $("#anyVal-from").serialize();
+			getAnyValSumOrderNumber(anyVal);
+			$.post('getAnyVaTotalPageCount.do', anyVal, function(data) {
+				$("#pageSize").attr('name', "pageSize"); //给pageSize赋值name
+				$("#pageNow").attr('name', "pageNow"); //给pageNow赋name值
+				$("#pageNow").val(1);
+				var anyVal = $("#anyVal-from").serialize(); //獲取條件字段
+				findByProgress(anyVal);
+				$(".tcdPageCode").createPage({
+					pageCount : data.totalPageCount,
+					current : data.pageNow,
+					backFn : function(p) {
+						$("#pageSize").val(10);
+						$("#pageNow").val(p); //給當前頁賦值
+						var anyVal = $("#anyVal-from").serialize(); //获取form表单
+						//調用方法
+						findByProgress(anyVal); //調用分頁查詢 在這裏才調用
+						getAnyValSumOrderNumber(anyVal);
+					}
+				});
+			});
+		});
+		//修改赋值方法 
+		$("#up").uploadPreview({
+			Img : "ImgPr",
+			Width : 120,
+			Height : 120
+		});
+	});
+	function getAnyValSumOrderNumber(anyVal) {
+		$.post('getAnyValSumOrderNumber.do', anyVal, function(data) {
+			$("#sumOrderNumber").text(data);
+		});
+	};
+	function modify_btn() {
+		var formData = new FormData($("#modifyByBuildProgress")[0]);
+		$.ajax({
+			url : 'modifyByBuildProgress.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				var pageNow = $("#pageNow").val();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findByProgress(anyVal);
+			},
+			error : function(data) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(1); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findByProgress(anyVal);
+			}
+		});
+	}
+	/*页面加载执行的方法*/
+	var anyVal = $("#anyVal-from").serialize(); //获取form表单
+	getAnyValSumOrderNumber(anyVal);
+	$.post('getAnyVaTotalPageCount.do', anyVal, function(data) {
+		$("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+		$("#pageNow").val(data.pageNow);
+		//获取form参数进行查询
+		var anyVal = $("#anyVal-from").serialize();
+		//調用方法传参
+		findByProgress(anyVal);
+		// 进入后台进行分页查询
+		$(".tcdPageCode").createPage({ //哦哦
+			pageCount : data.totalPageCount, //总页数
+			current : data.pageNow, //当前页
+			backFn : function(p) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(p); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findByProgress(anyVal);
+			}
+		});
+	});
+	//查詢方法 
+	function findByProgress(anyVal) {
+		$
+				.post(
+						"findByAnyValPage.do",
+						anyVal,
+						function(data) {
+							var id = 1;
+							$(".table_app").empty(); //清空原有的数据
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr id='myModallclick'><td>"
+										+ id
+										+ "</td><td >"
+										+ (data[i].productCode == null
+												|| data[i].productCode == '' ? ''
+												: data[i].productCode)
+										+ "</td><td >"
+										+ (data[i].designers == null
+												|| data[i].designers == '' ? ''
+												: data[i].designers)
+										+ "</td><td>"
+										+ (data[i].referenceWave == null
+												|| data[i].referenceWave == '' ? ''
+												: data[i].referenceWave)
+										+ "</td><td>"
+										+ (data[i].referencePrinting == null
+												|| data[i].referencePrinting == '' ? ''
+												: data[i].referencePrinting)
+										+ "</td><td>"
+										+ (data[i].oringinalWave == null
+												|| data[i].oringinalWave == '' ? ''
+												: data[i].oringinalWave)
+										+ "</td><td>"
+										+ (data[i].wave == null
+												|| data[i].wave == '' ? ''
+												: data[i].wave)
+										+ "</td><td><img style='width: 120px; height: 120px' src=" + data[i].image + "></td><td>"
+										+ (data[i].craftsOrder == null
+												|| data[i].craftsOrder == "" ? ''
+												: "<a href='" + data[i].craftsOrder+ "' target='_blank'>工艺单</a>")
+										+ "</td><td>"
+										+ (data[i].patternCraftsOrder == null
+												|| data[i].patternCraftsOrder == "" ? ''
+												: "<a href='" + data[i].patternCraftsOrder+ "' target='_blank'>图样工艺单</a>")
+										+ "</td><td>"
+										+ (data[i].sizeChart == null
+												|| data[i].sizeChart == "" ? ''
+												: "<a href='" + data[i].sizeChart+ "' target='_blank'>尺码表</a>")
+										+ "</td><td>"
+										+ (data[i].orders == null
+												|| data[i].orders == '' ? ''
+												: data[i].orders)
+										+ "</td><td>"
+										+ (data[i].orderDetails == null
+												|| data[i].orderDetails == '' ? ''
+												: data[i].orderDetails)
+										+ "</td><td >"
+										+ (data[i].colour == null
+												|| data[i].colour == '' ? ''
+												: data[i].colour)
+										+ "</td><td >"
+										+ (data[i].folwerFactory == null
+												|| data[i].folwerFactory == '' ? ''
+												: data[i].folwerFactory)
+										+ "</td><td >"
+										+ (data[i].piecesApproved == null
+												|| data[i].piecesApproved == '' ? ''
+												: data[i].piecesApproved)
+										+ "</td><td >"
+										+ (data[i].flowerPrice == null
+												|| data[i].flowerPrice == '' ? ''
+												: data[i].flowerPrice)
+										+ "</td><td >"
+										+ (data[i].printingPrice == null
+												|| data[i].printingPrice == '' ? ''
+												: data[i].printingPrice)
+										+ "</td><td >"
+										+ (data[i].piecesPrice == null
+												|| data[i].piecesPrice == '' ? ''
+												: data[i].piecesPrice)
+										+ "</td><td >"
+										+ (data[i].orderType == null
+												|| data[i].orderType == '' ? ''
+												: data[i].orderType)
+										+ "</td><td value='" + data[i].releaseTime + "' ><a target='_blank' href='distributionFabric.html?releaseTime="
+										+ data[i].releaseTime
+										+ "'>"
+										+ (data[i].releaseTime == null
+												|| data[i].releaseTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].releaseTime,
+														data[i].storageTime))
+										+ "</a></td><td value='" + data[i].patternCompletionTime + "'>"
+										+ (data[i].patternCompletionTime == null
+												|| data[i].patternCompletionTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].patternCompletionTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].accessoriesPurchasingTime + "'>"
+										+ (data[i].accessoriesPurchasingTime == null
+												|| data[i].accessoriesPurchasingTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].accessoriesPurchasingTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].proofingTime + "'>"
+										+ (data[i].proofingTime == null
+												|| data[i].proofingTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].proofingTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].proofingCompletionTime + "'>"
+										+ (data[i].proofingCompletionTime == null
+												|| data[i].proofingCompletionTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].proofingCompletionTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].cuttingTime + "'>"
+										+ (data[i].cuttingTime == null
+												|| data[i].cuttingTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].cuttingTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].fabricStorageTime + "'><a target='_blank'  href='fabricmanagement.html?wave="
+										+ data[i].wave
+										+ "'>"
+										+ (data[i].fabricStorageTime == null
+												|| data[i].fabricStorageTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].fabricStorageTime,
+														data[i].storageTime))
+										+ "</a></td><td value='" + data[i].fabricReleaseTime + "'>"+ (data[i].fabricReleaseTime == null|| data[i].fabricReleaseTime == '' ? '': getDiscrepantDays(data[i].fabricReleaseTime,data[i].storageTime))
+										+ "</td><td value='"+data[i].plateMakingTime+"'>"+(data[i].plateMakingTime == null|| data[i].plateMakingTime == '' ? '': getDiscrepantDays(data[i].plateMakingTime,data[i].storageTime))+"</td><td value='" + data[i].largeCargoTime + "'>"
+										+ (data[i].largeCargoTime == null
+												|| data[i].largeCargoTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].largeCargoTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].largeCargoCompletionTime + "'>"
+										+ (data[i].largeCargoCompletionTime == null
+												|| data[i].largeCargoCompletionTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].largeCargoCompletionTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].cropCompletionTime + "'>"
+										+ (data[i].cropCompletionTime == null
+												|| data[i].cropCompletionTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].cropCompletionTime,
+														data[i].storageTime))
+										+ "</td><td >"
+										+ (data[i].cropNumber == null
+												|| data[i].cropNumber == '' ? ''
+												: data[i].cropNumber)
+										+ "</td><td value='" + data[i].cutLargeReceiveTime + "'>"
+										+ (data[i].cutLargeReceiveTime == null
+												|| data[i].cutLargeReceiveTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].cutLargeReceiveTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].cutLargeReturnTime + "'>"
+										+ (data[i].cutLargeReturnTime == null
+												|| data[i].cutLargeReturnTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].cutLargeReturnTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].planFactoryPickingTime + "'>"
+										+ (data[i].planFactoryPickingTime == null
+												|| data[i].planFactoryPickingTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].planFactoryPickingTime,
+														data[i].storageTime))
+										+ "</td><td value='" + data[i].factoryPickingTime + "'>"
+										+ (data[i].factoryPickingTime == null
+												|| data[i].factoryPickingTime == '' ? ''
+												: getDiscrepantDays(
+														data[i].factoryPickingTime,
+														data[i].storageTime))
+										+ "</td><td >"
+										+ (data[i].factory == null
+												|| data[i].factory == '' ? ''
+												: data[i].factory)
+										+ "</td><td>"
+										+ (data[i].plannedShippingTime == null
+												|| data[i].plannedShippingTime == '' ? ''
+												: data[i].plannedShippingTime)
+										+ "</td><td>"
+										+ (data[i].storageTime == null
+												|| data[i].storageTime == '' ? ''
+												: data[i].storageTime)
+										+ "</td><td>"
+										+ (data[i].storageNumber == null
+												|| data[i].storageNumber == '' ? ''
+												: data[i].storageNumber)
+										+ "</td><td>"
+										+ (data[i].quot == null
+												|| data[i].quot == '' ? ''
+												: data[i].quot)
+										+ "</td><td>"
+										+ (data[i].orderPrice == null
+												|| data[i].orderPrice == '' ? ''
+												: data[i].orderPrice)
+										+ "</td><td>"
+										+ (data[i].remarks == null
+												|| data[i].remarks == '' ? ''
+												: data[i].remarks)
+										+ "</td><td class='urgentState"+data[i].id+"'>"
+										+ (data[i].urgentState == null
+												|| data[i].urgentState == '' ? ''
+												: data[i].urgentState)
+										+ "</td><td><button type='button'  data-toggle='modal' data-target='#myModal1' onclick='modifyByBuildProgress(\""
+										+ data[i].wave
+										+ "\",this)' class='btn btn-primary icon-pencil'>修改</button><button type='button'  data-toggle='modal' data-target='#myModal2' onclick='delByBuildProgress(\""
+										+ data[i].wave
+										+ "\")' class='icon-trash btn btn-danger'>删除</button></td></tr>";
+								var tr = $(_HTML_TEBLE_);
+								$(".table_app").append(tr);
+								id++;
+								var urgentState = data[i].urgentState;
+								if (urgentState > 0) {
+									$(".urgentState" + data[i].id).parent()
+											.attr("bgcolor", "#6FB7B7");
+								}
+							}
+						});
+
+	}
+	function modifyByBuildProgress(wave, tr) {
+		$.post("getModifyBuildProgressByWave.do", {
+			'wave' : wave
+		},
+				function(result) {
+					var piecesApproved = result.piecesApproved;
+					if (piecesApproved == '印花') {
+						$(".caipen_radio").removeAttr('checked');
+						$(".wu_radio").removeAttr('checked');
+						$(".yinhuan_radio").prop('checked', "checked");
+					} else if (piecesApproved == '裁片') {
+						$(".yinhuan_radio").removeAttr('checked');
+						$(".wu_radio").removeAttr('checked');
+						$(".caipen_radio").prop('checked', "checked");
+					} else if (piecesApproved == '无' || piecesApproved == null
+							|| piecesApproved == "") {
+						$(".yinhuan_radio").removeAttr('checked');
+						$(".caipen_radio").removeAttr('checked');
+						$(".wu_radio").prop('checked', "checked");
+					}
+					$("#imageFile").html(wave);
+					$(".ImgSrc").attr('src', result.image);
+					$("#designers").val(result.designers);
+					$("#oringinalWave").val(result.oringinalWave);
+					$("#wave").val(result.wave);
+					$("#orders").val(result.orders);
+					$("#orderDetails").val(result.orderDetails);
+					$("#colour").val(result.colour);
+					$("#releaseTime").val(result.releaseTime);
+					$("#folwerFactory").val(result.folwerFactory);
+					$("#proofingTime").val(result.proofingTime);
+					$("#proofingCompletionTime").val(
+							result.proofingCompletionTime);
+					$("#largeCargoTime").val(result.largeCargoTime);
+					$("#largeCargoCompletionTime").val(
+							result.largeCargoCompletionTime);
+					$("#flowerPrice").val(result.flowerPrice);
+					$("#printingPrice").val(result.printingPrice);
+					$("#piecesPrice").val(result.piecesPrice);
+					$("#accessoriesPurchasingTime").val(
+							result.accessoriesPurchasingTime);
+					$("#cuttingTime").val(result.cuttingTime);
+					$("#cropCompletionTime").val(result.cropCompletionTime);
+					$("#cropNumber").val(result.cropNumber);
+					$("#factoryPickingTime").val(result.factoryPickingTime);
+					$("#factory").val(result.factory);
+					$("#orderType").val(result.orderType);
+					$("#orderPrice").val(result.orderPrice);
+					$("#plannedShippingTime").val(result.plannedShippingTime);
+					//$("#storageNumber").val($(tr).parent().parent().find("td").eq(30).text());
+					$("#remarks").val(result.remarks);
+				});
+		$("#modifyModalBtn").trigger("myClick");
+		$("#up").uploadPreview({
+			Img : "ImgPr",
+			Width : 120,
+			Height : 120
+		});
+	};
+	$("#myselect").click(function() {
+		$("#mydiv").show();
+	});
+	$("#val-input-empty").find('div').find('div').find(":input").each(
+			function() {
+				$(this).val("");
+			});
+	//修改赋值方法 
+	$("#up").uploadPreview({
+		Img : "ImgPr",
+		Width : 120,
+		Height : 120
+	});
+</script>
+</html>

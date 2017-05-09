@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributionFinishProductPerfectMapper">
+	<resultMap id="BaseResultMap"
+		type="com.warehouse.entity.DistributionFinishProductPerfect">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="CLOTH_NAME" property="clothName" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_IMG" property="productImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="SIZE_IMG" property="sizeImg" jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER" />
+		<result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+		<result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+		<result column="DISTRIBUTTION_FACTORY" property="distributtionFactory"
+			jdbcType="VARCHAR" />
+		<result column="PLAN_IN_WAREHOUSE_TIME" property="planInWarehouseTime"
+			jdbcType="VARCHAR" />
+		<result column="FACTORY_REPORT_DELIVER" property="factoryReportDeliver"
+			jdbcType="VARCHAR" />
+		<result column="START_DELIVER" property="startDeliver"
+			jdbcType="VARCHAR" />
+		<result column="START_DELIVER_TIME" property="startDeliverTime"
+			jdbcType="VARCHAR" />
+
+		<result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="TRACKING_OFFICER" property="trackingOfficer"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+		<result column="TACHE_START_TIME" property="tacheStartTime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PRODUCT_CODE, CLOTH_NAME, ORINGINAL_WAVE, WAVE,
+		PRODUCT_IMG,
+		SAMPLE_IMG, SIZE_IMG,
+		ORDER_DETAILS, ORDER_NUM,
+		ORDER_GRADE, ORDER_TYPE, DISTRIBUTTION_FACTORY,
+		PLAN_IN_WAREHOUSE_TIME,
+		FACTORY_REPORT_DELIVER, START_DELIVER,
+		START_DELIVER_TIME,RELEASE_TIME,REMARK,TRACKING_OFFICER,ORDER_ID,TACHE_START_TIME
+	</sql>
+	<!-- 查询单条数据 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from distribution_finish_product_perfect
+		where ID =
+		#{id,jdbcType=INTEGER}
+	</select>
+	<!-- 根据传入条件修改条件 -->
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.warehouse.entity.DistributionFinishProductPerfect">
+		update distribution_finish_product_perfect
+		<set>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				CLOTH_NAME = #{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productImg != null">
+				PRODUCT_IMG = #{productImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeImg != null">
+				SIZE_IMG = #{sizeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNum != null">
+				ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+			</if>
+			<if test="orderGrade != null">
+				ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="distributtionFactory != null">
+				DISTRIBUTTION_FACTORY =
+				#{distributtionFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="planInWarehouseTime != null">
+				PLAN_IN_WAREHOUSE_TIME =
+				#{planInWarehouseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="factoryReportDeliver != null">
+				FACTORY_REPORT_DELIVER =
+				#{factoryReportDeliver,jdbcType=VARCHAR},
+			</if>
+			<if test="trackingOfficer != null">
+				TRACKING_OFFICER = #{trackingOfficer,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="startDeliver != null">
+				START_DELIVER = #{startDeliver,jdbcType=VARCHAR},
+				START_DELIVER_TIME = CURDATE(),
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 查询数据量 -->
+	<select id="getCount"
+		parameterType="com.warehouse.entity.DistributionFinishProductPerfect"
+		resultType="Integer">
+		SELECT COUNT(*) FROM distribution_finish_product_perfect WHERE 1=1
+		AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%",#{productCode},"%")
+		</if>
+		<if
+			test='clothName!=null and clothName!="" and clothName!="Y" and clothName!="y" and clothName!="N" and clothName!="n"'>
+			AND CLOTH_NAME LIKE CONCAT("%",#{clothName},"%")
+		</if>
+		<if test='clothName=="Y" or clothName=="y"'>
+			AND (CLOTH_NAME IS NOT NULL AND CLOTH_NAME!="")
+		</if>
+		<if test='clothName=="N" or clothName=="n"'>
+			AND (CLOTH_NAME IS NULL OR CLOTH_NAME="")
+		</if>
+
+		<!-- 新增条件 -->
+		<if test='releaseTime!=null and releaseTime!=""'>
+			AND RELEASE_TIME LIKE CONCAT("%",#{releaseTime},"%")
+		</if>
+		<if test='startDeliverTime!=null and startDeliverTime!=""'>
+			AND START_DELIVER_TIME LIKE
+			CONCAT("%",#{startDeliverTime},"%")
+		</if>
+		<if test='distributtionFactory!=null and distributtionFactory!=""'>
+			AND DISTRIBUTTION_FACTORY LIKE
+			CONCAT("%",#{distributtionFactory},"%")
+		</if>
+		<if test='trackingOfficer!=null and trackingOfficer!=""'>
+			AND TRACKING_OFFICER LIKE
+			CONCAT("%",#{trackingOfficer},"%")
+		</if>
+		<if test='orderType!=null and orderType!=""'>
+			AND ORDER_TYPE =#{orderType}
+		</if>
+	</select>
+	<!-- 分页查询数据 -->
+	<select id="getDataByPage"
+		parameterType="com.warehouse.entity.DistributionFinishProductPerfect"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM distribution_finish_product_perfect WHERE 1=1
+		AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test='trackingOfficer!=null and trackingOfficer!=""'>
+			AND TRACKING_OFFICER LIKE
+			CONCAT("%",#{trackingOfficer},"%")
+		</if>
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%",#{productCode},"%")
+		</if>
+		<if
+			test='clothName!=null and clothName!="" and clothName!="Y" and clothName!="y" and clothName!="N" and clothName!="n"'>
+			AND CLOTH_NAME LIKE CONCAT("%",#{clothName},"%")
+		</if>
+		<if test='clothName=="Y" or clothName=="y"'>
+			AND (CLOTH_NAME IS NOT NULL AND CLOTH_NAME!="")
+		</if>
+		<if test='clothName=="N" or clothName=="n"'>
+			AND (CLOTH_NAME IS NULL OR CLOTH_NAME="")
+		</if>
+
+		<!-- 新增条件 -->
+		<if test='releaseTime!=null and releaseTime!=""'>
+			AND RELEASE_TIME LIKE CONCAT("%",#{releaseTime},"%")
+		</if>
+		<if test='startDeliverTime!=null and startDeliverTime!=""'>
+			AND START_DELIVER_TIME LIKE
+			CONCAT("%",#{startDeliverTime},"%")
+		</if>
+		<if test='distributtionFactory!=null and distributtionFactory!=""'>
+			AND DISTRIBUTTION_FACTORY LIKE
+			CONCAT("%",#{distributtionFactory},"%")
+		</if>
+	
+		<if test='orderType!=null and orderType!=""'>
+			AND ORDER_TYPE =#{orderType}
+		</if>
+		ORDER BY ORDER_GRADE DESC,START_DELIVER ASC,START_DELIVER_TIME
+		ASC,WAVE ASC
+		LIMIT #{begin},#{end}
+	</select>
+	
+	<select id="exportCurrentDistributionFinishData" parameterType="map" resultMap="BaseResultMap">
+	    SELECT
+		<include refid="Base_Column_List" />
+		FROM distribution_finish_product_perfect WHERE 1=1
+		AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%",#{productCode},"%")
+		</if>
+		<if
+			test='clothName!=null and clothName!="" and clothName!="Y" and clothName!="y" and clothName!="N" and clothName!="n"'>
+			AND CLOTH_NAME LIKE CONCAT("%",#{clothName},"%")
+		</if>
+		<if test='clothName=="Y" or clothName=="y"'>
+			AND (CLOTH_NAME IS NOT NULL AND CLOTH_NAME!="")
+		</if>
+		<if test='clothName=="N" or clothName=="n"'>
+			AND (CLOTH_NAME IS NULL OR CLOTH_NAME="")
+		</if>
+
+		<!-- 新增条件 -->
+		<if test='releaseTime!=null and releaseTime!=""'>
+			AND RELEASE_TIME LIKE CONCAT("%",#{releaseTime},"%")
+		</if>
+		<if test='startDeliverTime!=null and startDeliverTime!=""'>
+			AND START_DELIVER_TIME LIKE
+			CONCAT("%",#{startDeliverTime},"%")
+		</if>
+		<if test='distributtionFactory!=null and distributtionFactory!=""'>
+			AND DISTRIBUTTION_FACTORY LIKE
+			CONCAT("%",#{distributtionFactory},"%")
+		</if>
+		<if test='trackingOfficer!=null and trackingOfficer!=""'>
+			AND TRACKING_OFFICER LIKE
+			CONCAT("%",#{trackingOfficer},"%")
+		</if>
+		<if test='orderType!=null and orderType!=""'>
+			AND ORDER_TYPE =#{orderType}
+		</if>
+		ORDER BY ORDER_GRADE DESC,START_DELIVER ASC,START_DELIVER_TIME
+		ASC,WAVE ASC
+	
+	
+	</select>
+</mapper>

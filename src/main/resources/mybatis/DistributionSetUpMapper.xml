@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributionSetUpMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.DistributionSetUp" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="CLOTH_NAME" property="clothName" jdbcType="VARCHAR" />
+    <result column="ORINGINAL_WAVE" property="oringinalWave" jdbcType="VARCHAR" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="PRODUCT_IMG" property="productImg" jdbcType="VARCHAR" />
+    <result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+    <result column="SIZE_IMG" property="sizeImg" jdbcType="VARCHAR" />
+    <result column="ORDER_DETAILS" property="orderDetails" jdbcType="VARCHAR" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER" />
+    <result column="PLAN_IN_WAREHOUSE_TIME" property="planInWarehouseTime" jdbcType="VARCHAR" />
+    <result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+    <result column="SET_UP_DISTRIBUTION" property="setUpDistribution" jdbcType="VARCHAR" />
+    <result column="SET_UP_DISTRIBUTION_TIME" property="setUpDistributionTime" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="DEL_STATE" property="delState" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+    <result column="ADD_PERSION" property="addPersion" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_PERSION" property="modifyPersion" jdbcType="VARCHAR" />
+    <result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+    <result column="DEL_PERSION" property="delPersion" jdbcType="VARCHAR" />
+    
+    <result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PRODUCT_CODE, CLOTH_NAME, ORINGINAL_WAVE, WAVE, PRODUCT_IMG, SAMPLE_IMG, SIZE_IMG, 
+    ORDER_DETAILS, ORDER_NUM, PLAN_IN_WAREHOUSE_TIME, ORDER_GRADE, SET_UP_DISTRIBUTION, 
+    SET_UP_DISTRIBUTION_TIME, STATE, DEL_STATE, ADD_TIME, ADD_PERSION, MODIFY_TIME, MODIFY_PERSION, 
+    DEL_TIME, DEL_PERSION,RELEASE_TIME,REMARK
+  </sql>
+  <!-- 修改 --> 
+  <update id="updateDistributionSetUp" parameterType="com.warehouse.entity.DistributionSetUp" >
+    update distribution_set_up
+    <set >
+      <if test="productCode != null" >
+        PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="clothName != null" >
+        CLOTH_NAME = #{clothName,jdbcType=VARCHAR},
+      </if>
+      <if test="oringinalWave != null" >
+        ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+      </if>
+      <if test="wave != null" >
+        WAVE = #{wave,jdbcType=VARCHAR},
+      </if>
+      <if test="productImg != null" >
+        PRODUCT_IMG = #{productImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleImg != null" >
+        SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeImg != null" >
+        SIZE_IMG = #{sizeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDetails != null" >
+        ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="planInWarehouseTime != null" >
+        PLAN_IN_WAREHOUSE_TIME = #{planInWarehouseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderGrade != null" >
+        ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="setUpDistribution != null" >
+        SET_UP_DISTRIBUTION = #{setUpDistribution,jdbcType=VARCHAR},
+      </if>
+      <if test="setUpDistributionTime != null" >
+        SET_UP_DISTRIBUTION_TIME = #{setUpDistributionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="delState != null" >
+        DEL_STATE = #{delState,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addPersion != null" >
+        ADD_PERSION = #{addPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyPersion != null" >
+        MODIFY_PERSION = #{modifyPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="delTime != null" >
+        DEL_TIME = #{delTime,jdbcType=VARCHAR},
+      </if>
+      <if test="delPersion != null" >
+        DEL_PERSION = #{delPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="remark!= null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+<!-- 模糊查询 -->
+  <select id="getCountDistributionSetUp" parameterType="com.warehouse.entity.DistributionSetUp"
+		resultType="java.lang.Integer">
+		select count(1) from distribution_set_up where  1=1 and DEL_STATE IS NULL
+		AND (DEL_PERSION IS NULL OR DEL_PERSION='')
+		AND (DEL_TIME IS NULL OR DEL_TIME='')
+		<if test="oringinalWave !='' and oringinalWave !=null">
+			and ORINGINAL_WAVE like concat("%",#{oringinalWave},"%")
+		</if>
+		<if test="wave !='' and wave !=null">
+			and WAVE like concat("%",#{wave},"%")
+		</if>
+		<if test="clothName !=null and clothName !=''">
+			and CLOTH_NAME like concat("%",#{clothName},"%")
+		</if>
+	</select>
+	<select id="distributionSetUpByLike" parameterType="com.warehouse.entity.DistributionSetUp"
+		resultMap="BaseResultMap">
+		select * from distribution_set_up where  1=1 and DEL_STATE IS NULL
+		AND (DEL_PERSION IS NULL OR DEL_PERSION='')
+		AND (DEL_TIME IS NULL OR DEL_TIME='')
+		<if test="oringinalWave !='' and oringinalWave !=null">
+			and ORINGINAL_WAVE like concat("%",#{oringinalWave},"%")
+		</if>
+		<if test="wave !='' and wave !=null">
+			and WAVE like concat("%",#{wave},"%")
+		</if>
+		<if test="clothName !=null and clothName !=''">
+			and CLOTH_NAME like concat("%",#{clothName},"%")
+		</if>
+		order by STATE asc,PLAN_IN_WAREHOUSE_TIME asc limit #{begin},#{end}
+	</select>
+</mapper>

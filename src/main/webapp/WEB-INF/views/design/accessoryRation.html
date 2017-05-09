@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>新料单</title> <@p.cache/> <@p.css/> <@p.js/>
+</head>
+<body>
+<@p.top/>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <@p.left/>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+
+                <ul class="breadcrumb">
+                    <li><i class="icon-home home-icon"> </i> <a href="#">
+                        Home </a></li>
+                    <li><a href="#"> Tables </a></li>
+                    <li class="active">新料单</li>
+                </ul>
+                <!-- .breadcrumb -->
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+            <div class="col-md-12">
+                <button id="add_button" class="btn btn-primary btn-lg"
+                        data-toggle="modal" data-target="#myModal">添加
+                </button>
+            </div>
+            <!-- /.col-lg-6 -->
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-anyVal" method="post">
+                    <div id="val-input-empty" class="col-md-12">
+                        <div class="col-md-2">
+                            <label for="addDate">日期</label> <input type="text"
+                                                                   name="addDate" id="queryAddDate"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="wave">波次号</label> <input type="text" name="wave" id="queryWave"/>
+                        </div>
+                        <div class="col-md-2">
+								<span class="input-group-btn">
+									<button id="anyVal-btn" class="btn btn-default" type="button">
+                                        查询
+                                    </button>
+								</span>
+                        </div>
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="">
+                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+                    </div>
+                </form>
+            </div>
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>日期</th>
+                                <th>波段</th>
+                                <th>订单数</th>
+                                <th>订单详情</th>
+                                <th>裁剪数</th>
+                                <th>裁剪详情</th>
+                                <th>设计图</th>
+                                <th>工艺单</th>
+                                <th>尺码表</th>
+                                <th>版型</th>
+                                <th>面料入仓日期</th>
+                                <th>裁剪日期</th>
+                                <th>指定工厂</th>
+                                <th>指定工厂日期</th>
+                                <th>52#</th>
+                                <th>59#</th>
+                                <th>66#</th>
+                                <th>73#</th>
+                                <th>80#</th>
+                                <th>90#</th>
+                                <th>辅料名称</th>
+                                <th>辅料规格</th>
+                                <th>辅料损耗率</th>
+                                <th>辅料单耗</th>
+                                <th>辅料数量</th>
+                                <th>理单备注</th>
+                                <th>备注</th>
+                                <th>状态</th>
+                                <th>创建人</th>
+                                <th colspan="2">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    //页面加载就执行
+    $(function () {
+        $(".col-md-2").find(":input").each(
+                function () {
+                    $(this).val("");
+                });
+        var anyVal = $("#form-anyVal").serialize();
+        getAccessoryRationByPageCount(anyVal);
+    });
+    //查询
+    $("#anyVal-btn").on("click", function () {
+        var anyVal = $("#form-anyVal").serialize();
+        getAccessoryRationByPageCount(anyVal);
+    });
+    //提交
+    $("#submit-btn").on("click", function () {
+        var formData = new FormData($("#form-input")[0]);
+        var if_input_Id = $("#obj_hidden_id").val();
+        if (if_input_Id != "" && if_input_Id != null) {
+            //修改
+            modifyAccessoryRation(formData);
+        } else {
+            //添加
+            addAccessoryRation(formData);
+        }
+    });
+    //查询总条数
+    function getAccessoryRationByPageCount(anyVal) {
+        $.post('getAccessoryRationByPageCount.do', anyVal, function (data) {
+            $("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+            $("#pageNow").val(data.pageNow);
+            var anyVal2 = $("#form-anyVal").serialize();
+            //获取form参数进行查询
+            //調用方法传参
+            findAccessoryRation(anyVal2);
+            // 进入后台进行分页查询
+            $(".tcdPageCode").createPage({ //哦哦
+                pageCount: data.totalPageCount, //总页数
+                current: data.pageNow, //当前页
+                backFn: function (p) {
+                    $("#pageSize").val(10);
+                    $("#pageNow").val(p); //給當前頁賦值
+                    var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+                    //調用方法
+                    findAccessoryRation(anyVal1);
+                }
+            });
+        });
+    }
+    //查询
+    function findAccessoryRation(anyVal) {
+        $.post("findConditionAccessoryRationByPage.do", anyVal, //from表单内容
+                function (data) {
+                    $(".table_app").empty(); //清空原有的数据
+                    for (var i = 0; i < data.length; i++) {
+                        var _HTML_TEBLE_ = "";
+                        _HTML_TEBLE_ = "<tr>" + +"<input type='hidden' class='id' value='"
+                                + data[i].id
+                                + "'/>"
+                                + "<td>"
+                                + data[i].id
+                                + "</td><td >"
+                                + (data[i].addDate == null ? '' : data[i].addDate)
+                                + "</td><td >"
+                                + (data[i].wave == null ? '' : data[i].wave)
+                                + "</td><td >"
+                                + (data[i].numberOrder == null ? '' : data[i].numberOrder)
+                                + "</td><td >"
+                                + (data[i].orderDetails == null ? '' : data[i].orderDetails)
+                                + "</td><td >"
+                                + (data[i].cropNumber == null ? '' : data[i].cropNumber)
+                                + "</td><td >"
+                                + (data[i].cropDetails == null ? '' : data[i].cropDetails)
+                                + "</td><td><img style='width: 120px; height: 120px' src=" + data[i].designChart + "></td><td>"
+                                + (data[i].craftsOrder == null || data[i].craftsOrder == "" ? '' : "<a href='" + data[i].craftsOrder + "' target='_blank'>工艺单</a>")
+                                + "</td><td>"
+                                + (data[i].sizeChart == null || data[i].sizeChart == "" ? '' : "<a href='" + data[i].sizeChart + "' target='_blank'>尺码表</a>")
+                                + "</td><td >"
+                                + (data[i].editionType == null || data[i].editionType == "" ? '' : data[i].editionType)
+                                + "</td><td >"
+                                + (data[i].fabricWarehousDate == null || data[i].fabricWarehousDate == "" ? '' : data[i].fabricWarehousDate)
+                                + "</td><td >"
+                                + (data[i].cropDate == null || data[i].cropDate == "" ? '' : data[i].cropDate)
+                                + "</td><td >"
+                                + (data[i].specifiesFactory == null || data[i].specifiesFactory == "" ? '' : data[i].specifiesFactory)
+                                + "</td><td >"
+                                + (data[i].specifiesFactoryDate == null || data[i].specifiesFactoryDate == "" ? '' : data[i].specifiesFactoryDate)
+                                + "</td><td  class='modify-table-numeric' name='code52' >"
+                                + (data[i].code52 == null || data[i].code52 == "" ? '' : data[i].code52)
+                                + "</td><td class='modify-table-numeric' name='code59'>"
+                                + (data[i].code59 == null || data[i].code59 == "" ? '' : data[i].code59)
+                                + "</td><td class='modify-table-numeric' name='code66'>"
+                                + (data[i].code66 == null || data[i].code66 == "" ? '' : data[i].code66)
+                                + "</td><td class='modify-table-numeric' name='code73'>"
+                                + (data[i].code73 == null || data[i].code73 == "" ? '' : data[i].code73)
+                                + "</td><td class='modify-table-numeric' name='code80'>"
+                                + (data[i].code80 == null || data[i].code80 == "" ? '' : data[i].code80)
+                                + "</td><td class='modify-table-numeric' name='code90'>"
+                                + (data[i].code90 == null || data[i].code90 == "" ? '' : data[i].code90)
+                                + "</td><td class='modify-table-char' value='accessoriesName'>"
+                                + (data[i].accessoriesName == null || data[i].accessoriesName == "" ? '' : data[i].accessoriesName)
+                                + "</td><td class='modify-table-char' value='accessories'>"
+                                + (data[i].accessories == null || data[i].accessories == "" ? '' : data[i].accessories)
+
+                                + "</td><td class='calQuality' name='accessoriesScrapRate'>"
+                                + (data[i].accessoriesScrapRate == null || data[i].accessoriesScrapRate == "" ? '' : data[i].accessoriesScrapRate)
+                                + "</td><td class='calQuality' name='accessoriesSingleUse'>"
+                                + (data[i].accessoriesSingleUse == null || data[i].accessoriesSingleUse == "" ? '' : data[i].accessoriesSingleUse)
+                                + "</td><td class='modify-table-numeric' name='accessoriesQuantity'>"
+                                + (data[i].accessoriesQuantity == null || data[i].accessoriesQuantity == "" ? '' : data[i].accessoriesQuantity)
+                                + "</td><td>"
+                                + (data[i].remarksRichard == null || data[i].remarksRichard == "" ? '' : data[i].remarksRichard)
+                                + "</td><td class='modify-table-char' value='remarks'>"
+                                + (data[i].remarks == null || data[i].remarks == "" ? '' : data[i].remarks)
+                                + "</td><td class='issuedStatus" + data[i].id + "'>"
+                                + (data[i].issuedStatus == null || data[i].issuedStatus == "" ? '' : data[i].issuedStatus)
+                                + "</td><td >"
+                                + (data[i].founder == null || data[i].founder == "" ? '' : data[i].founder)
+                                + "</td><td >"
+                                + "<button type='button'  onclick='rationPurchasing(\""
+                                + data[i].id
+                                + "\")' class='btn btn-primary '>去采购</button>"
+                                + "<button type='button'  onclick='rationAlreadyIssue(\""
+                                + data[i].id
+                                + "\")' class='btn btn-info '>已发放</button>"
+                                + "</td><td>"
+                                + "<button type='button'  onclick='rationPrepareComplete(\""
+                                + data[i].id
+                                + "\")' class='btn btn-success '>准备发放</button>"
+                                +"<button type='button'   onclick='rejectRation(\""
+                                + data[i].id
+                                + "\")' class=' btn btn-danger'>需要驳回</button>"
+
+                                + "</td></tr>";
+                        $(".table_app").append(_HTML_TEBLE_);
+                        var issuedStatus = data[i].issuedStatus;
+                        var issId = data[i].id;
+                        addRationBackGroundColor(issuedStatus, issId);
+                    }
+                });
+    }
+    //============= the following by chiayich ===================================
+
+
+
+
+    //新料单状态改为配置完成
+    function rationPrepareComplete(id) {
+        var flag = confirm("确认准备发放？");
+        var data = {
+            amId: id
+        };
+        var tdArgs =  $(".issuedStatus" + id);
+        if (flag) {
+            $.ajax({
+                url: "rationPrepareComplete.do",
+                dataType: 'json',
+                type: 'post',
+                data: data,
+                success: function (result) {
+                    var issuedStatus = "准备发放";
+                    var issId = id;
+                    tdArgs.text(issuedStatus);
+                    addRationBackGroundColor(issuedStatus, issId);
+                }
+            });
+        }
+    }
+
+
+    //状态该为 已发放
+    function rationAlreadyIssue(id) {
+        var flag = confirm("确认已发放？");
+        var data = {
+            amId: id
+        };
+        var tdArgs =  $(".issuedStatus" + id);
+        if (flag) {
+            $.ajax({
+                url: "rationAlreadyIssue.do",
+                dataType: 'json',
+                type: 'post',
+                data: data,
+                success: function (result) {
+                    var issuedStatus = "已发放";
+                    var issId = id;
+                    tdArgs.text(issuedStatus);
+                    addRationBackGroundColor(issuedStatus, issId);
+                }
+            });
+        }
+    }
+    //状态改为 去采购
+    function rationPurchasing(id) {
+        var flag = confirm("确认去采购？");
+        var data = {
+            amId: id
+        };
+        var tdArgs =  $(".issuedStatus" + id);
+        if (flag) {
+            $.ajax({
+                url: "rationPurchasing.do",
+                dataType: 'json',
+                type: 'post',
+                data: data,
+                success: function (result) {
+                    var issuedStatus = "采购中";
+                    var issId = id;
+                    tdArgs.text(issuedStatus);
+                    addRationBackGroundColor(issuedStatus, issId);
+                }
+            });
+        }
+    }
+    //状态改为驳回
+    function rejectRation(id) {
+        var flag = confirm("确认 驳回？");
+        var data = {
+            amId: id
+        };
+        var tdArgs =  $(".issuedStatus" + id);
+        if (flag) {
+            $.ajax({
+                url: "rejectRation.do",
+                dataType: 'json',
+                type: 'post',
+                data: data,
+                success: function () {
+                    var issuedStatus = "驳回";
+                    tdArgs.text(issuedStatus);
+                    var issId = id;
+                    addRationBackGroundColor(issuedStatus, issId);
+                }
+            });
+        }
+    }
+
+    function addRationBackGroundColor(issuedStatus, issId) {
+        if (issuedStatus == "准备发放") {
+            $(".issuedStatus" + issId).parent().css("background", "#ffdcb9");
+        } else if (issuedStatus == "采购中") {
+            $(".issuedStatus" + issId).parent().css("background", "#d9ffff");
+        } else if (issuedStatus == "已发放") {
+            $(".issuedStatus" + issId).parent().css("background", "#ffd9ec");
+        } else if (issuedStatus == "驳回") {
+            $(".issuedStatus" + issId).parent().css("background", "#ffbb77");
+        } else {
+            $(".issuedStatus" + issId).parent().css("background", "none");
+        }
+    }
+
+    $("#queryAddDate").keyup(function () {
+        if (event.keyCode == 13) {
+            $("#anyVal-btn").click();
+        }
+    });
+    $("#queryWave").keyup(function () {
+        if (event.keyCode == 13) {
+            $("#anyVal-btn").click();
+        }
+    });
+
+
+    //============= the foregoing by chiayich ===================================
+</script>
+</html>

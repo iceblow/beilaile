@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<title>面料编码出库流程信息表</title><@p.cache/><@p.css/> <@p.js/>
+
+</head>
+
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">面料编码出库流程信息表</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+			
+            <div class="col-md-12">
+               <form action="exportCurrentFabricCodeData.do" id="form-anyVal">
+						<div id="val-input-empty" class="col-md-8">
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 开始/结束日期 </span> <input
+										name="additionTime" type="text"
+										class="form-control input-date">
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 波次号 </span> <input name="wave"
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 面料材质 </span> <input
+										name="fabricMaterial" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 颜色 </span> <input
+										name="fabricColour" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 面料单位 </span> <input name="kgM"
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 供应商 </span> <input
+										name="supplier" type="text" class="form-control">
+								</div>
+							</div>
+							
+					
+
+                       
+                        
+                        
+                        <div class="col-md-2">
+								<span class="input-group-btn">
+									<button id="queryFabricCodeProcessInfo" class="btn btn-default" type="button"> 查询</button>
+								</span>
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="">
+                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+                    </div>
+                    
+                </form>
+                
+                
+            </div>
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                            <th colspan="6"><font color="red">导出当前查询数据:
+												<button id="exportCurrentFabricCodeData">导出</button>
+										</font></th>
+								<th colspan="30" style="text-align: center; font-size: 16px;">面料编码出库流程信息表</th>
+							</tr>
+                            <tr>
+                            	<th>ID</th>
+                                <th>设计图</th>
+                                <th>日期</th>
+                                <th>波次号</th>
+                                <th>订单数量</th>
+                                <th>合用波次</th>
+                                <th>供应商编号</th>
+                                <th>供应商</th>
+                                <th>色卡编号</th>
+                                <th>色卡类型</th>
+                                <th>面料编号</th>
+                                <th>面料材质</th>
+                                <th>颜色编号</th>
+                                <th>颜色</th>
+                                <th>生成条码</th>
+                                <th>条码</th>
+                                <th>供应商货品编码</th>
+                                <th>最小采购量</th>
+                                <th>预购条数</th>
+                                <th>收件人</th>
+                                <th>收件地址</th>
+                                <th>用料</th>
+                                <th>米</th>
+                                <th>重量</th>
+                                <th>价格</th>
+                                <th>折扣</th>
+                                <th>面料1</th>
+                                <th>单位</th>
+                                <th>总条数</th>
+                                <th>差值</th>
+                                <th>求和</th>
+                                <th>总金额</th>
+                                <th>税率</th>
+                                <th>税后价</th>
+                                <th>备注</th>
+                                <th>添加时间</th>
+                                <th>采购状态</th>
+                                <th>邮费</th>
+                             
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+/**
+ * Created by admin on 2017/4/28.
+ */
+//页面加载就执行
+
+$(function () {
+
+    $(".col-md-2").find(":input").each(
+        function () {
+            $(this).val("");
+        });
+    var anyVal = $("#form-anyVal").serialize();
+    getFabricCodeProcessInfoBpcnt(anyVal);
+
+   
+    //查询
+    $("#queryFabricCodeProcessInfo").on("click", function () {
+        var anyVal = $("#form-anyVal").serialize();
+        getFabricCodeProcessInfoBpcnt(anyVal);
+    });
+    
+
+});
+//提交
+
+
+
+//查询总条数
+function getFabricCodeProcessInfoBpcnt(anyVal) {
+
+    $.post('getFabricCodeProcessInfoBpcnt.do', anyVal,
+        function (data) {
+    		
+            $("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+            $("#pageNow").val(data.pageNow);
+         	
+            var anyVal2 = $("#form-anyVal").serialize();
+            //获取form参数进行查询
+            //調用方法传参
+            findFabricCodeProcessInfoCndbp(anyVal2);
+         
+            // 进入后台进行分页查询
+            $(".tcdPageCode").createPage({ //哦哦
+                pageCount: data.totalPageCount, //总页数
+                current: data.pageNow, //当前页
+                backFn: function (p) {
+                    $("#pageSize").val(10);
+                    $("#pageNow").val(p); //給當前頁賦值
+                    var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+                    //調用方法
+                    findFabricCodeProcessInfoCndbp(anyVal1);
+                }
+            });
+        });
+}
+//查询
+function findFabricCodeProcessInfoCndbp(anyVal) {
+    $.post("findFabricCodeProcessInfoCndbp.do", anyVal, //from表单内容
+        function (data) {
+            $(".table_app").empty(); //清空原有的数据
+            for (var i = 0; i < data.length; i++) {
+                var _HTML_TEBLE_ = "";
+                _HTML_TEBLE_ = "<tr>" +"<input type='hidden' class='id' value='"
+                    + data[i].id
+                    + "'/>"
+                    + "<td>"
+                    + data[i].id
+                    + "</td><td>"
+                       //设计图
+                    + "<img  width='120px' height='120px'src='"
+               		+ (data[i].designImg == null ? '' : data[i].designImg)
+               	 	+ "'/>"
+             	    + "</td><td >"
+                        //日期
+                    + (data[i].additionTime == null ? '' : data[i].additionTime)
+                    + "</td><td >"
+                        //波次号
+                    + (data[i].wave == null ? '' : data[i].wave)
+                    + "</td><td >"
+                        //订单数量
+                    + (data[i].numberOrder == null ? '' : data[i].numberOrder)
+                    + "</td><td >"
+                        //合用波次
+                    + (data[i].combinedWave == null ? '' : data[i].combinedWave)
+                    + "</td><td >"
+                        //供应商编号                   
+                    + (data[i].supplierCode == null ? '' : data[i].supplierCode)
+                   
+                    + "</td><td>"
+                        //供应商
+                    + (data[i].supplier == null ? '' : data[i].supplier)
+                    + "</td><td>"
+                        //色卡编号
+                    + (data[i].colorCardCode == null ? '' : data[i].colorCardCode)
+                    +"</td><td>"
+                        //色卡类型
+                    + (data[i].colorCardName == null ? '' : data[i].colorCardName)
+                    + "</td><td >"
+                        //面料编号
+                    + (data[i].fabricCode == null ? '' : data[i].fabricCode)
+                    + "</td><td >"
+                        //面料材质
+                    + (data[i].fabricMaterial == null ? '' : data[i].fabricMaterial)
+                    + "</td><td >"
+                        //颜色编号
+                    + (data[i].colorCode == null ? '' : data[i].colorCode)
+                    + "</td><td >"
+                        //颜色
+                    + (data[i].fabricColour == null ? '' : data[i].fabricColour)
+                    + "</td><td >"
+                        //商品编码                 
+                    + (data[i].productCode == null ? '' : data[i].productCode)
+                   
+                    + "</td><td>"
+                        //条码
+                    + (data[i].generateBarcode == null ? '' : data[i].generateBarcode)
+                    + "</td><td>"
+                        //供应商货品编号
+                    + (data[i].supplierGoodsCode == null ? '' : data[i].supplierGoodsCode)
+                    +"</td><td>"
+                        //最小采购量
+                    + (data[i].minimumPurchaseAmount == null ? '' : data[i].minimumPurchaseAmount)
+                    + "</td><td >"
+                        //预购条数
+                    + (data[i].scheduledNumber == null ? '' : data[i].scheduledNumber)
+                    + "</td><td >"
+                        //收件人
+                    + (data[i].recipient == null ? '' : data[i].recipient)
+                    + "</td><td >"
+                        //收件地址           
+                    + (data[i].recipientAddress == null ? '' : data[i].recipientAddress)
+                   
+                    + "</td><td>"
+                        //用料
+                    + (data[i].materials == null ? '' : data[i].materials)
+                    + "</td><td>"
+                        //米
+                    + (data[i].meter == null ? '' : data[i].meter)
+                    +"</td><td>"
+                        //重量
+                    + (data[i].parameter == null ? '' : data[i].parameter)
+                    + "</td><td>"
+                        //价格
+                    + (data[i].fabricPrices == null ? '' : data[i].fabricPrices)
+                    + "</td><td >"
+                        //折扣
+                    + (data[i].purchaseDiscount == null ? '' : data[i].purchaseDiscount)
+                    + "</td><td >"
+                        //面料1
+                    + (data[i].parameter == null ? '' : data[i].parameter)
+                    + "</td><td >"
+                        //单位
+                    + (data[i].kgM == null ? '' : data[i].kgM)
+                   
+                    + "</td><td>"
+                        //总条数
+                    + (data[i].totalCount == null ? '' : data[i].totalCount)
+                    + "</td><td>"
+                        //差值
+                    + (data[i].difference == null ? '' : data[i].difference)
+                    +"</td><td>"
+                        //求和
+                    + (data[i].totalWeight == null ? '' : data[i].totalWeight)
+                    + "</td><td >"
+                        //总金额
+                    + (data[i].totalMoney == null ? '' : data[i].totalMoney)
+                    + "</td><td >"
+                        //税率
+                    + (data[i].taxRate == null ? '' : data[i].taxRate)
+                    + "</td><td >"
+                        //税后价
+                    + (data[i].afterTaxPrice == null ? '' : data[i].afterTaxPrice)
+                   
+                    + "</td><td>"
+                        //备注
+                    + (data[i].remarks == null ? '' : data[i].remarks)
+                    + "</td><td>"
+                        //添加时间
+                    + (data[i].addTime == null ? '' : data[i].addTime)
+                    +"</td><td>"
+                        //采购状态
+                    + (data[i].purchasingStatus == null ? '' : data[i].purchasingStatus)
+                    + "</td><td>"
+                        //邮费
+                    + (data[i].fabricFreight == null ? '' : data[i].fabricFreight)
+                    + "</td></tr>";
+                $(".table_app").append(_HTML_TEBLE_);
+              
+				
+            }
+            updbclick();
+        });
+}
+
+
+
+
+function updbclick() {
+
+	$(".myDblClick").on("dblclick",function() {
+		if($(this).parent().find(".myDataStatus").text().trim()=='已拍摄')
+			{
+			return;
+			}
+	
+		var id = $(this).parent().find(".id").val();
+		var code = $(this).text().trim();
+		var name = $(this).attr("name");
+		//alert("code========"+code);
+		$(this).html("<input id='" + id + "' type='text' value='"+code+"' name='" + name + "' style='width:100px;'> ");
+		$("#" + id).focus();// 文本框获取光标事件
+
+		uppblur(id, name);
+	});
+}
+// 光标离开事件
+function uppblur(id, name) {
+	
+	$("#" + id).blur(function() {
+		var newtxt = $(this).val();
+	
+		
+		$(this).closest("td").text(newtxt);
+		var data = {id : id};
+		data[name] = newtxt;
+	    
+		$.ajax({
+			url : '/modifyPhotographyInfo.do',
+			dataType : 'json',
+			type : 'post',
+			data : data,
+			success : function(data) {
+				if (data == 1) {
+					
+					 var anyVal = $("#form-anyVal").serialize();
+			            getPhotographyInfoBpcnt(anyVal);
+					
+				}
+			},error : function() {
+				alert("修改失败,输入的类型错误!");
+			}
+		});
+	});
+}
+
+$("#exportCurrentFabricCodeData").on('click', function() {
+	var anyVal = $("#form-anyVal").serialize();
+
+	$("#form-anyVal").submit();
+	
+})
+
+
+
+</script>
+</html>

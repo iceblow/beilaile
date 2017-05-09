@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.TaskDistributionDAO">
+	<select id="getAllCount" parameterType="com.warehouse.entity.TaskDistribution"
+		resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM taskdistribution where 1=1
+		<if
+			test='designer!=null and designer!="" and designer!="y" and designer!="Y" and designer!="n" and designer!="N"'>
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test='designer=="Y" or designer=="y"'>
+			and designer!="" and designer IS NOT NULL
+		</if>
+		<if test='designer=="N" or designer=="n"'>
+			and( designer ="" or designer IS NULL)
+		</if>
+		<if
+			test='wave!=null and wave!="" and wave!="y" and wave!="Y" and wave!="n" and wave!="N"'>
+			and wave like concat("%",#{wave},"%")
+		</if>
+		<if test='wave=="Y" or wave=="y"'>
+			and wave!="" and wave IS NOT NULL
+		</if>
+		<if test='wave=="N" or wave=="n"'>
+			and( wave="" or wave IS NULL)
+		</if>
+		<if
+			test='folwerFactory!=null and folwerFactory!="" and folwerFactory!="y" and folwerFactory!="Y" and folwerFactory!="n" and folwerFactory!="N"'>
+			and folwerFactory like concat("%",#{folwerFactory},"%")
+		</if>
+		<if test='folwerFactory=="Y" or folwerFactory=="y"'>
+			and folwerFactory !="" and folwerFactory IS NOT NULL
+		</if>
+		<if test='folwerFactory=="N" or folwerFactory=="n"'>
+			and( folwerFactory ="" or folwerFactory IS NULL)
+		</if>
+		<if
+			test='pieceApproved!=null and pieceApproved!="" and pieceApproved!="y" and pieceApproved!="Y" and pieceApproved!="n" and pieceApproved!="N"'>
+			and pieceApproved like concat("%",#{pieceApproved},"%")
+		</if>
+		<if test='pieceApproved=="Y" or pieceApproved=="y"'>
+			and pieceApproved!="" and pieceApproved IS NOT NULL
+		</if>
+		<if test='pieceApproved=="N" or pieceApproved=="n"'>
+			and( pieceApproved="" or pieceApproved IS NULL)
+		</if>
+		<if
+			test='flowerPrice!=null and flowerPrice!="" and flowerPrice!="y" and flowerPrice!="Y" and flowerPrice!="n" and flowerPrice!="N"'>
+			and flowerPrice like concat("%",#{flowerPrice},"%")
+		</if>
+		<if test='flowerPrice=="Y" or flowerPrice=="y"'>
+			and flowerPrice!="" and flowerPrice IS NOT NULL
+		</if>
+		<if test='flowerPrice=="N" or flowerPrice=="n"'>
+			and( flowerPrice="" or flowerPrice IS NULL)
+		</if>
+		<if test='orderType!=null and orderType!="" and orderType!="Y" and orderType!="y" and orderType!="N" and orderType!="n"'>
+			and orderType like concat("%",#{orderType},"%")
+		</if>
+		<if test='orderType=="Y" or orderType=="y"'>
+			and orderType!="" and orderType IS NOT NULL
+		</if>
+		<if test='orderType=="N" or orderType=="n"'>
+			and (orderType="" and orderType IS NULL)
+		</if>
+		<if
+			test='fabricStorageTime!=null and fabricStorageTime!="" and fabricStorageTime!="y" and fabricStorageTime!="Y" and fabricStorageTime!="n" and fabricStorageTime!="N"'>
+			and fabricStorageTime like concat("%",#{fabricStorageTime},"%")
+		</if>
+		<if test='fabricStorageTime=="Y" or fabricStorageTime=="y"'>
+			and fabricStorageTime!="" and fabricStorageTime IS NOT
+			NULL
+		</if>
+		<if test='fabricStorageTime=="N" or fabricStorageTime=="n"'>
+			and( fabricStorageTime="" or fabricStorageTime IS NULL)
+		</if>
+		<if
+			test='fabricReleaseTime!=null and fabricReleaseTime!="" and fabricReleaseTime!="y" and fabricReleaseTime!="Y" and fabricReleaseTime!="n" and fabricReleaseTime!="N"'>
+			and fabricReleaseTime like concat("%",#{fabricReleaseTime},"%")
+		</if>
+		<if test='fabricReleaseTime=="Y" or fabricReleaseTime=="y"'>
+			and fabricReleaseTime!="" and fabricReleaseTime IS NOT
+			NULL
+		</if>
+		<if test='fabricReleaseTime=="N" or fabricReleaseTime=="n"'>
+			and( fabricReleaseTime="" or fabricReleaseTime IS NULL)
+		</if>
+		<if
+			test='largeCargoTime!=null and largeCargoTime!="" and largeCargoTime!="y" and largeCargoTime!="Y" and largeCargoTime!="n" and largeCargoTime!="N"'>
+			and largeCargoTime like concat("%",#{largeCargoTime},"%")
+		</if>
+		<if test='largeCargoTime=="Y" or largeCargoTime=="y"'>
+			and largeCargoTime!="" and largeCargoTime IS NOT NULL
+		</if>
+		<if test='largeCargoTime=="N" or largeCargoTime=="n"'>
+			and( largeCargoTime="" or largeCargoTime IS NULL)
+		</if>
+		<if
+			test='largeCargoCompletionTime!=null and largeCargoCompletionTime!="" and largeCargoCompletionTime!="y" and largeCargoCompletionTime!="Y" and largeCargoCompletionTime!="n" and largeCargoCompletionTime!="N"'>
+			and largeCargoCompletionTime like
+			concat("%",#{largeCargoCompletionTime},"%")
+		</if>
+		<if test='largeCargoCompletionTime=="Y" or largeCargoCompletionTime=="y"'>
+			and largeCargoCompletionTime!="" and
+			largeCargoCompletionTime IS NOT NULL
+		</if>
+		<if test='largeCargoCompletionTime=="N" or largeCargoCompletionTime=="n"'>
+			and( largeCargoCompletionTime="" or
+			largeCargoCompletionTime IS NULL)
+		</if>
+		<if
+			test='cropCompletionTime!=null and cropCompletionTime!="" and cropCompletionTime!="y" and cropCompletionTime!="Y" and cropCompletionTime!="n" and cropCompletionTime!="N"'>
+			and cropCompletionTime like
+			concat("%",#{cropCompletionTime},"%")
+		</if>
+		<if test='cropCompletionTime=="Y" or cropCompletionTime=="y"'>
+			and cropCompletionTime!="" and cropCompletionTime IS NOT
+			NULL
+		</if>
+		<if test='cropCompletionTime=="N" or cropCompletionTime=="n"'>
+			and( cropCompletionTime="" or cropCompletionTime IS NULL)
+		</if>
+		<if
+			test='cropNumber!=null and cropNumber!="" and cropNumber!="y" and cropNumber!="Y" and cropNumber!="n" and cropNumber!="N"'>
+			and like concat("%",#{cropNumber},"%")
+		</if>
+		<if test='cropNumber=="Y" or cropNumber=="y"'>
+			and cropNumber!="" and cropNumber IS NOT NULL
+		</if>
+		<if test='cropNumber=="N" or cropNumber=="n"'>
+			and(cropNumber ="" or cropNumber IS NULL)
+		</if>
+		<if
+			test='cutLargeReceiveTime!=null and cutLargeReceiveTime!="" and cutLargeReceiveTime!="y" and cutLargeReceiveTime!="Y" and cutLargeReceiveTime!="n" and cutLargeReceiveTime!="N"'>
+			and cutLargeReceiveTime like
+			concat("%",#{cutLargeReceiveTime},"%")
+		</if>
+		<if test='cutLargeReceiveTime=="Y" or cutLargeReceiveTime=="y"'>
+			and cutLargeReceiveTime!="" and cutLargeReceiveTime IS NOT
+			NULL
+		</if>
+		<if test='cutLargeReceiveTime=="N" or cutLargeReceiveTime=="n"'>
+			and( cutLargeReceiveTime="" or cutLargeReceiveTime IS
+			NULL)
+		</if>
+		<if
+			test='cutLargeReturnTime!=null and cutLargeReturnTime!="" and cutLargeReturnTime!="y" and cutLargeReturnTime!="Y" and cutLargeReturnTime!="n" and cutLargeReturnTime!="N"'>
+			and like concat("%",#{cutLargeReturnTime},"%")
+		</if>
+		<if test='cutLargeReturnTime=="Y" or cutLargeReturnTime=="y"'>
+			and cutLargeReturnTime!="" and cutLargeReturnTime IS NOT
+			NULL
+		</if>
+		<if test='cutLargeReturnTime=="N" or cutLargeReturnTime=="n"'>
+			and( cutLargeReturnTime="" or cutLargeReturnTime IS NULL)
+		</if>
+	</select>
+
+	<select id="getDataByPage" parameterType="com.warehouse.entity.TaskDistribution"
+		resultType="com.warehouse.entity.TaskDistribution">
+		SELECT * FROM taskdistribution
+		where 1=1
+		<if
+			test='designer!=null and designer!="" and designer!="y" and designer!="Y" and designer!="n" and designer!="N"'>
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test='designer=="Y" or designer=="y"'>
+			and designer!="" and designer IS NOT NULL
+		</if>
+		<if test='designer=="N" or designer=="n"'>
+			and( designer ="" or designer IS NULL)
+		</if>
+		<if
+			test='wave!=null and wave!="" and wave!="y" and wave!="Y" and wave!="n" and wave!="N"'>
+			and wave like concat("%",#{wave},"%")
+		</if>
+		<if test='wave=="Y" or wave=="y"'>
+			and wave!="" and wave IS NOT NULL
+		</if>
+		<if test='wave=="N" or wave=="n"'>
+			and( wave="" or wave IS NULL)
+		</if>
+		<if
+			test='folwerFactory!=null and folwerFactory!="" and folwerFactory!="y" and folwerFactory!="Y" and folwerFactory!="n" and folwerFactory!="N"'>
+			and folwerFactory like concat("%",#{folwerFactory},"%")
+		</if>
+		<if test='folwerFactory=="Y" or folwerFactory=="y"'>
+			and folwerFactory !="" and folwerFactory IS NOT NULL
+		</if>
+		<if test='folwerFactory=="N" or folwerFactory=="n"'>
+			and( folwerFactory ="" or folwerFactory IS NULL)
+		</if>
+		<if
+			test='pieceApproved!=null and pieceApproved!="" and pieceApproved!="y" and pieceApproved!="Y" and pieceApproved!="n" and pieceApproved!="N"'>
+			and pieceApproved like concat("%",#{pieceApproved},"%")
+		</if>
+		<if test='pieceApproved=="Y" or pieceApproved=="y"'>
+			and pieceApproved!="" and pieceApproved IS NOT NULL
+		</if>
+		<if test='pieceApproved=="N" or pieceApproved=="n"'>
+			and( pieceApproved="" or pieceApproved IS NULL)
+		</if>
+		<if
+			test='flowerPrice!=null and flowerPrice!="" and flowerPrice!="y" and flowerPrice!="Y" and flowerPrice!="n" and flowerPrice!="N"'>
+			and flowerPrice like concat("%",#{flowerPrice},"%")
+		</if>
+		<if test='flowerPrice=="Y" or flowerPrice=="y"'>
+			and flowerPrice!="" and flowerPrice IS NOT NULL
+		</if>
+		<if test='flowerPrice=="N" or flowerPrice=="n"'>
+			and( flowerPrice="" or flowerPrice IS NULL)
+		</if>
+		<if test='orderType!=null and orderType!="" and orderType!="Y" and orderType!="y" and orderType!="N" and orderType!="n"'>
+			and orderType like concat("%",#{orderType},"%")
+		</if>
+		<if test='orderType=="Y" or orderType=="y"'>
+			and orderType!="" and orderType IS NOT NULL
+		</if>
+		<if test='orderType=="N" or orderType=="n"'>
+			and (orderType="" and orderType IS NULL)
+		</if>
+		<if
+			test='fabricStorageTime!=null and fabricStorageTime!="" and fabricStorageTime!="y" and fabricStorageTime!="Y" and fabricStorageTime!="n" and fabricStorageTime!="N"'>
+			and fabricStorageTime like concat("%",#{fabricStorageTime},"%")
+		</if>
+		<if test='fabricStorageTime=="Y" or fabricStorageTime=="y"'>
+			and fabricStorageTime!="" and fabricStorageTime IS NOT
+			NULL
+		</if>
+		<if test='fabricStorageTime=="N" or fabricStorageTime=="n"'>
+			and( fabricStorageTime="" or fabricStorageTime IS NULL)
+		</if>
+		<if
+			test='fabricReleaseTime!=null and fabricReleaseTime!="" and fabricReleaseTime!="y" and fabricReleaseTime!="Y" and fabricReleaseTime!="n" and fabricReleaseTime!="N"'>
+			and fabricReleaseTime like concat("%",#{fabricReleaseTime},"%")
+		</if>
+		<if test='fabricReleaseTime=="Y" or fabricReleaseTime=="y"'>
+			and fabricReleaseTime!="" and fabricReleaseTime IS NOT
+			NULL
+		</if>
+		<if test='fabricReleaseTime=="N" or fabricReleaseTime=="n"'>
+			and( fabricReleaseTime="" or fabricReleaseTime IS NULL)
+		</if>
+		<if
+			test='largeCargoTime!=null and largeCargoTime!="" and largeCargoTime!="y" and largeCargoTime!="Y" and largeCargoTime!="n" and largeCargoTime!="N"'>
+			and largeCargoTime like concat("%",#{largeCargoTime},"%")
+		</if>
+		<if test='largeCargoTime=="Y" or largeCargoTime=="y"'>
+			and largeCargoTime!="" and largeCargoTime IS NOT NULL
+		</if>
+		<if test='largeCargoTime=="N" or largeCargoTime=="n"'>
+			and( largeCargoTime="" or largeCargoTime IS NULL)
+		</if>
+		<if
+			test='largeCargoCompletionTime!=null and largeCargoCompletionTime!="" and largeCargoCompletionTime!="y" and largeCargoCompletionTime!="Y" and largeCargoCompletionTime!="n" and largeCargoCompletionTime!="N"'>
+			and largeCargoCompletionTime like
+			concat("%",#{largeCargoCompletionTime},"%")
+		</if>
+		<if test='largeCargoCompletionTime=="Y" or largeCargoCompletionTime=="y"'>
+			and largeCargoCompletionTime!="" and
+			largeCargoCompletionTime IS NOT NULL
+		</if>
+		<if test='largeCargoCompletionTime=="N" or largeCargoCompletionTime=="n"'>
+			and( largeCargoCompletionTime="" or
+			largeCargoCompletionTime IS NULL)
+		</if>
+		<if
+			test='cropCompletionTime!=null and cropCompletionTime!="" and cropCompletionTime!="y" and cropCompletionTime!="Y" and cropCompletionTime!="n" and cropCompletionTime!="N"'>
+			and cropCompletionTime like
+			concat("%",#{cropCompletionTime},"%")
+		</if>
+		<if test='cropCompletionTime=="Y" or cropCompletionTime=="y"'>
+			and cropCompletionTime!="" and cropCompletionTime IS NOT
+			NULL
+		</if>
+		<if test='cropCompletionTime=="N" or cropCompletionTime=="n"'>
+			and( cropCompletionTime="" or cropCompletionTime IS NULL)
+		</if>
+		<if
+			test='cropNumber!=null and cropNumber!="" and cropNumber!="y" and cropNumber!="Y" and cropNumber!="n" and cropNumber!="N"'>
+			and like concat("%",#{cropNumber},"%")
+		</if>
+		<if test='cropNumber=="Y" or cropNumber=="y"'>
+			and cropNumber!="" and cropNumber IS NOT NULL
+		</if>
+		<if test='cropNumber=="N" or cropNumber=="n"'>
+			and(cropNumber ="" or cropNumber IS NULL)
+		</if>
+		<if
+			test='cutLargeReceiveTime!=null and cutLargeReceiveTime!="" and cutLargeReceiveTime!="y" and cutLargeReceiveTime!="Y" and cutLargeReceiveTime!="n" and cutLargeReceiveTime!="N"'>
+			and cutLargeReceiveTime like
+			concat("%",#{cutLargeReceiveTime},"%")
+		</if>
+		<if test='cutLargeReceiveTime=="Y" or cutLargeReceiveTime=="y"'>
+			and cutLargeReceiveTime!="" and cutLargeReceiveTime IS NOT
+			NULL
+		</if>
+		<if test='cutLargeReceiveTime=="N" or cutLargeReceiveTime=="n"'>
+			and( cutLargeReceiveTime="" or cutLargeReceiveTime IS
+			NULL)
+		</if>
+		<if
+			test='cutLargeReturnTime!=null and cutLargeReturnTime!="" and cutLargeReturnTime!="y" and cutLargeReturnTime!="Y" and cutLargeReturnTime!="n" and cutLargeReturnTime!="N"'>
+			and like concat("%",#{cutLargeReturnTime},"%")
+		</if>
+		<if test='cutLargeReturnTime=="Y" or cutLargeReturnTime=="y"'>
+			and cutLargeReturnTime!="" and cutLargeReturnTime IS NOT
+			NULL
+		</if>
+		<if test='cutLargeReturnTime=="N" or cutLargeReturnTime=="n"'>
+			and( cutLargeReturnTime="" or cutLargeReturnTime IS NULL)
+		</if>
+		order by orderSum desc,releaseTime desc
+		LIMIT #{begin},#{end}
+	</select>
+
+	<select id="getOneById" parameterType="java.lang.Integer"
+		resultType="com.warehouse.entity.TaskDistribution">
+		SELECT * FROM taskdistribution WHERE ID=#{id}
+	</select>
+
+	<update id="updateTaskDistribution" parameterType="com.warehouse.entity.TaskDistribution">
+		UPDATE
+		taskdistribution SET
+		folwerFactory=#{folwerFactory},
+		pieceApproved=#{pieceApproved},
+		flowerPrice=#{flowerPrice},
+		printingPrice=#{printingPrice},
+		piecesPrice=#{piecesPrice},
+		orderType=#{orderType},
+		releaseTime=#{releaseTime},
+		proofingTime=#{proofingTime},
+		proofingCompletionTime=#{proofingCompletionTime},
+		cuttingTime=#{cuttingTime},
+		fabricStorageTime=#{fabricStorageTime},
+		fabricReleaseTime=#{fabricReleaseTime},
+		largeCargoTime=#{largeCargoTime},
+		largeCargoCompletionTime=#{largeCargoCompletionTime},
+		cropCompletionTime=#{cropCompletionTime},
+		cropNumber=#{cropNumber},
+		cutLargeReceiveTime=#{cutLargeReceiveTime},
+		cutLargeReturnTime=#{cutLargeReturnTime},remark=#{remark},
+		updateTime=NOW()
+		WHERE id=#{id}
+	</update>
+
+	<update id="dbUpdateTask" parameterType="com.warehouse.entity.TaskDistribution">
+		UPDATE
+		taskdistribution SET
+		<if test='folwerFactory!=null'>
+			folwerFactory=#{folwerFactory},
+		</if>
+		<if test='pieceApproved!=null'>
+			pieceApproved=#{pieceApproved},
+		</if>
+		<if test='flowerPrice!=null'>
+			flowerPrice=#{flowerPrice},
+		</if>
+		<if test='printingPrice!=null'>
+			printingPrice=#{printingPrice},
+		</if>
+		<if test='piecesPrice!=null'>
+			piecesPrice=#{piecesPrice},
+		</if>
+		<if test='orderType!=null'>
+			orderType=#{orderType},
+		</if>
+		<if test='proofingTime!=null'>
+			proofingTime=#{proofingTime},
+		</if>
+		<if test='proofingCompletionTime!=null'>
+			proofingCompletionTime=#{proofingCompletionTime},
+		</if>
+		<if test='cuttingTime!=null'>
+			cuttingTime=#{cuttingTime},
+		</if>
+		<if test='remark!=null'>
+			remark=#{remark},
+		</if>
+		updateTime=NOW()
+		WHERE id=#{id}
+	</update>
+</mapper>

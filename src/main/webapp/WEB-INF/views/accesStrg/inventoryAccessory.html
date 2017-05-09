@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>辅料库存</title> <@p.cache/> <@p.css/> <@p.js/>
+    <script src="/res/js/acces/inventoryA.js"></script>
+    <style>
+        <!--图片选择按钮样式控制-->
+        .chia-file-up {
+            padding: 0px 0px;
+        }
+
+        .chia-file-up, select {
+            border: 0px solid #d5d5d5;
+        }
+    </style>
+</head>
+<body>
+<@p.top/>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <@p.left/>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li><i class="icon-home home-icon"> </i> <a href="#">
+                        Home </a></li>
+                    <li><a href="#"> Tables </a></li>
+                    <li class="active">辅料库存</li>
+                </ul>
+                <!-- .breadcrumb -->
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+            <div class="col-md-12">
+                <button id="add_button" class="btn btn-primary btn-lg"
+                        data-toggle="modal" data-target="#addAccessoryInfo">添加
+                </button>
+            </div>
+            <!-- /.col-lg-6 -->
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-anyVal" method="post">
+                    <div id="val-input-empty" class="col-md-12">
+                        <div class="col-md-2">
+                            <label for="queryAccesNameWh">辅料名称</label>
+                            <input type="text" name="queryAccesNameWh" id="queryAccesNameWh"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="queryAccesSerialNumWh">序列号</label>
+                            <input type="text" name="queryAccesSerialNumWh" id="queryAccesSerialNumWh"/>
+                        </div>
+                        <div class="col-md-2">
+								<span class="input-group-btn">
+									<button id="queryAccesInventory" class="btn btn-default" type="button"> 查询</button>
+								</span>
+                        </div>
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="">
+                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+                    </div>
+                </form>
+            </div>
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>名称</th>
+                                <th>序列号</th>
+                                <th>条码</th>
+                                <th>原记录方式</th>
+                                <th>计量单位</th>
+                                <th>规格</th>
+                                <th>存储方式</th>
+                                <th>存储单位</th>
+                                <th>历史使用波次</th>
+                                <th>库存总数量</th>
+                                <th>可自由支配数量</th>
+                                <th>库存锁定数量</th>
+                                <th>记录更新时间</th>
+                                <th>修改时间</th>
+                                <th>操作员</th>
+                                <th colspan="1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改模态框 modifyAccessoryInfo -->
+<div class="modal fade" id="modifyAccessoryInfo" tabindex="-1" role="dialog"
+     aria-labelledby="myModifyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModifyModalLabel">修改辅料信息</h4>
+            </div>
+            <form action="" method="post" id="modify_acces_info_form"
+                  enctype="multipart/form-data">
+                <div id="modify_form_input" class="modal-body">
+
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label for="accesNameAim">名称</label>
+                            <input type="text" class="form-control"
+                                   name="accesNameAi" placeholder=""
+                                   id="accesNameAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSerialNumAim">序列号</label>
+                            <input type="text" class="form-control"
+                                   name="accesSerialNumAi"
+                                   placeholder=""
+                                   id="accesSerialNumAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesBarcodeAim">条码</label>
+                            <input type="text" class="form-control"
+                                   name="accesBarcodeAi"
+                                   placeholder=""
+                                   id="accesBarcodeAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesImgAim">图片</label>
+                            <input type="file"
+                                   class="form-control chia-file-up"
+                                   name="file" id="accesImgAim">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="accesStoreMethodAim">存储方式</label>
+                            <input type="text" class="form-control"
+                                   name="accesStoreMethodAi"
+                                   placeholder=""
+                                   id="accesStoreMethodAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesStoreUnitAim">最小计量单位</label>
+                            <input type="text" class="form-control"
+                                   name="accesStoreUnitAi"
+                                   placeholder=""
+                                   id="accesStoreUnitAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesEtalonAim">规格</label>
+                            <input type="text" class="form-control"
+                                   name="accesEtalonAi"
+                                   placeholder=""
+                                   id="accesEtalonAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesHitoryWaveAim">历史使用波次</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="accesHitoryWaveAi"
+                                   id="accesHitoryWaveAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSupplierNameAim">供应商名称</label>
+                            <input type="text" class="form-control"
+                                   name="accesSupplierNameAi"
+                                   placeholder=""
+                                   id="accesSupplierNameAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSupplierContactAim">供应商联系方式</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="accesSupplierContactAi"
+                                   id="accesSupplierContactAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSupplierAddressAim">供应商地址</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="accesSupplierAddressAi"
+                                   id="accesSupplierAddressAim">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSupplyModeAim">供应商配货方式</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="accesSupplyModeAi"
+                                   id="accesSupplyModeAim"/>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="accesSupplyDegreeAim">供应能力</label>
+                            <input type="text" class="form-control"
+                                   name="accesSupplyDegreeAi"
+                                   placeholder="" id="accesSupplyDegreeAim">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="standbyFirAim">备注</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="standbyFirAi" placeholder=""
+                                   id="standbyFirAim">
+                        </div>
+                        <input hidden="hidden" id="accesInfoId" type="text" value=""
+                               name="id">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal"
+                            onclick="ajaxUpdateAccesInfo()"
+                            id="ajaxModifyAccesInfo">
+                        修改
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- 添加模态框 add_acces_info_form -->
+<div class="modal fade" id="addAccessoryInfo" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" method="post" id="add_acces_info_form"
+              enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">添加辅料信息</h4>
+                </div>
+                <div id="add_form_input" class="modal-body">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label for="accesNameAi">名称</label>
+                            <input type="text" class="form-control"
+                                   name="accesNameAi" placeholder=""
+                                   id="accesNameAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSerialNumAi">序列号</label>
+                            <input type="text" class="form-control"
+                                   name="accesSerialNumAi"
+                                   placeholder=""
+                                   id="accesSerialNumAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesBarcodeAi">条码</label>
+                            <input type="text" class="form-control"
+                                   name="accesBarcodeAi"
+                                   placeholder=""
+                                   id="accesBarcodeAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesImgAi">图片</label>
+                            <input type="file"
+                                   class="form-control chia-file-up"
+                                   name="file" id="accesImgAi">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="accesStoreMethodAi">存储方式</label>
+                            <input type="text" class="form-control"
+                                   name="accesStoreMethodAi"
+                                   placeholder=""
+                                   id="accesStoreMethodAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesStoreUnitAi">最小计量单位</label>
+                            <input type="text" class="form-control"
+                                   name="accesStoreUnitAi"
+                                   placeholder=""
+                                   id="accesStoreUnitAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesEtalonAi">规格</label>
+                            <input type="text" class="form-control"
+                                   name="accesEtalonAi"
+                                   placeholder=""
+                                   id="accesEtalonAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesHitoryWaveAi">历史使用波次</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="accesHitoryWaveAi"
+                                   id="accesHitoryWaveAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSupplierNameAi">供应商名称</label>
+                            <input type="text" class="form-control"
+                                   name="accesSupplierNameAi"
+                                   placeholder=""
+                                   id="accesSupplierNameAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSupplierContactAi">供应商联系方式</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="accesSupplierContactAi"
+                                   id="accesSupplierContactAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSupplierAddressAi">供应商地址</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="accesSupplierAddressAi"
+                                   id="accesSupplierAddressAi">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="accesSupplyModeAi">供应商配货方式</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="accesSupplyModeAi"
+                                   id="accesSupplyModeAi"/>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="accesSupplyDegreeAi">供应能力</label>
+                            <input type="text" class="form-control"
+                                   name="accesSupplyDegreeAi"
+                                   placeholder="" id="accesSupplyDegreeAi">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="standbyFir">备注</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="standbyFir" placeholder=""
+                                   id="standbyFir">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal" id="ajaxAddAccesInfo">
+                        添加
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+</script>
+</html>

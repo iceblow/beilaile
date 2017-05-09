@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FabricLibraryMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.FabricLibrary">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="addNumber" property="addNumber" jdbcType="VARCHAR" />
+		<result column="fabricCode" property="fabricCode" jdbcType="VARCHAR" />
+		<result column="fabricName" property="fabricName" jdbcType="VARCHAR" />
+		<result column="supplierCode" property="supplierCode" jdbcType="VARCHAR" />
+		<result column="supplierName" property="supplierName" jdbcType="VARCHAR" />
+		<result column="colorCardCode" property="colorCardCode"
+			jdbcType="VARCHAR" />
+		<result column="colorCardNmae" property="colorCardNmae"
+			jdbcType="VARCHAR" />
+		<result column="colorCode" property="colorCode" jdbcType="VARCHAR" />
+		<result column="colorName" property="colorName" jdbcType="VARCHAR" />
+		<result column="fabricPrice" property="fabricPrice" jdbcType="DECIMAL" />
+		<result column="fabricMeter" property="fabricMeter" jdbcType="DOUBLE" />
+		<result column="fabricOrigin" property="fabricOrigin" jdbcType="VARCHAR" />
+		<result column="fabricIngredient" property="fabricIngredient"
+			jdbcType="VARCHAR" />
+		<result column="fabricGrammage" property="fabricGrammage"
+			jdbcType="DOUBLE" />
+		<result column="fabricType" property="fabricType" jdbcType="VARCHAR" />
+		<result column="fabricSample" property="fabricSample" jdbcType="VARCHAR" />
+		<result column="colorCardUpdatedDate" property="colorCardUpdatedDate"
+			jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="VARCHAR" />
+		<result column="founder" property="founder" jdbcType="VARCHAR" />
+		<result column="modifyTime" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="modifyOperator" property="modifyOperator"
+			jdbcType="VARCHAR" />
+		<result column="deleteTime" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="deleteOperator" property="deleteOperator"
+			jdbcType="VARCHAR" />
+		<result column="fabricStatus" property="fabricStatus" jdbcType="INTEGER" />
+		<result column="fabricLength" property="fabricLength" jdbcType="DOUBLE" />
+		<result column="gramWeight" property="gramWeight" jdbcType="DOUBLE" />
+		<result column="kilogramMeter" property="kilogramMeter"
+			jdbcType="DOUBLE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, addNumber, fabricCode, fabricName,supplierCode,
+		supplierName,
+		colorCardCode,
+		colorCardNmae,
+		colorCode, colorName,
+		fabricPrice,
+		fabricMeter, fabricOrigin, fabricIngredient,
+		fabricGrammage,
+		fabricType, fabricSample, colorCardUpdatedDate,
+		createTime, founder,
+		modifyTime,
+		modifyOperator, deleteTime,
+		deleteOperator, fabricStatus,fabricLength,gramWeight,kilogramMeter
+	</sql>
+	<select id="findFabricLibraryByAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from fabric_library
+	</select>
+	<!-- 根据名称 ,颜色,产地查询 -->
+	<select id="findFabricLibraryBySupplierCode" resultType="Integer"
+		parameterType="java.lang.String">
+		SELECT
+		COUNT(0)
+		FROM
+		fabric_library
+		WHERE
+		fabricStatus = 1
+		AND
+		fabricCode
+		= #{fabricCode,jdbcType=VARCHAR}
+	</select>
+	<select id="findFabricLibraryByFabricLibraryCode" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		*
+		FROM
+		fabric_library
+		WHERE
+		fabricStatus = 1
+		AND
+		fabricCode
+		= #{fabricCode,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据id查询 -->
+	<select id="findFabricLibraryById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		fabric_library
+		WHERE
+		fabricStatus = 1
+		AND id =
+		#{id,jdbcType=INTEGER}
+	</select>
+	<select id="getFabricLibraryByPageCount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM fabric_library
+		WHERE fabricStatus = 1 AND 1=1
+		<if test='fabriCode != null and fabriCode != ""'>
+			AND fabriCode LIKE
+			CONCAT(CONCAT('%',#{fabriCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricName != null and fabricName != ""'>
+			AND fabricName LIKE
+			CONCAT(CONCAT('%',#{fabricName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierName != null and supplierName != ""'>
+			AND supplierName LIKE
+			CONCAT(CONCAT('%',#{supplierName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='colorCardCode != null and colorCardCode != ""'>
+			AND colorCardCode LIKE
+			CONCAT(CONCAT('%',#{colorCardCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierCode != null and supplierCode != ""'>
+			AND supplierCode LIKE
+			CONCAT(CONCAT('%',#{supplierCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='colorCardNmae != null and colorCardNmae != ""'>
+			AND colorCardNmae LIKE
+			CONCAT(CONCAT('%',#{colorCardNmae,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='colorName != null and colorName != ""'>
+			AND colorName LIKE
+			CONCAT(CONCAT('%',#{colorName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricOrigin != null and fabricOrigin != ""'>
+			AND fabricOrigin LIKE
+			CONCAT(CONCAT('%',#{fabricOrigin,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricType != null and fabricType != ""'>
+			AND fabricType LIKE
+			CONCAT(CONCAT('%',#{fabricType,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='colorCode != null and colorCode != ""'>
+			AND colorCode LIKE
+			CONCAT(CONCAT('%',#{colorCode,jdbcType=VARCHAR}),'%')
+		</if>
+
+	</select>
+	<select id="findConditionFabricLibraryByPage" resultMap="BaseResultMap"
+		parameterType="Map">
+		select
+		*
+		from fabric_library
+		WHERE fabricStatus = 1 AND 1=1
+		<if test='fabriCode != null and fabriCode != ""'>
+			AND fabriCode LIKE
+			CONCAT(CONCAT('%',#{fabriCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricName != null and fabricName != ""'>
+			AND fabricName LIKE
+			CONCAT(CONCAT('%',#{fabricName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='colorCardCode != null and colorCardCode != ""'>
+			AND colorCardCode LIKE
+			CONCAT(CONCAT('%',#{colorCardCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierCode != null and supplierCode != ""'>
+			AND supplierCode LIKE
+			CONCAT(CONCAT('%',#{supplierCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierName != null and supplierName != ""'>
+			AND supplierName LIKE
+			CONCAT(CONCAT('%',#{supplierName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='colorCardNmae != null and colorCardNmae != ""'>
+			AND colorCardNmae LIKE
+			CONCAT(CONCAT('%',#{colorCardNmae,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='colorName != null and colorName != ""'>
+			AND colorName LIKE
+			CONCAT(CONCAT('%',#{colorName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricOrigin != null and fabricOrigin != ""'>
+			AND fabricOrigin LIKE
+			CONCAT(CONCAT('%',#{fabricOrigin,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricType != null and fabricType != ""'>
+			AND fabricType LIKE
+			CONCAT(CONCAT('%',#{fabricType,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='colorCode != null and colorCode != ""'>
+			AND colorCode LIKE
+			CONCAT(CONCAT('%',#{colorCode,jdbcType=VARCHAR}),'%')
+		</if>
+		ORDER BY createTime DESC LIMIT #{pageNow},#{pageSize}
+	</select>
+	<insert id="addFabricLibrary" parameterType="com.warehouse.entity.FabricLibrary">
+		insert into fabric_library
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="addNumber != null">
+				addNumber,
+			</if>
+			<if test="fabricCode != null">
+				fabricCode,
+			</if>
+			<if test="fabricName != null">
+				fabricName,
+			</if>
+			<if test="supplierCode != null">
+				supplierCode,
+			</if>
+			<if test="supplierName != null">
+				supplierName,
+			</if>
+			<if test="colorCardCode != null">
+				colorCardCode,
+			</if>
+			<if test="colorCardNmae != null">
+				colorCardNmae,
+			</if>
+			<if test="colorCode != null">
+				colorCode,
+			</if>
+			<if test="colorName != null">
+				colorName,
+			</if>
+			<if test="fabricPrice != null">
+				fabricPrice,
+			</if>
+			<if test="fabricMeter != null">
+				fabricMeter,
+			</if>
+			<if test="fabricOrigin != null">
+				fabricOrigin,
+			</if>
+			<if test="fabricIngredient != null">
+				fabricIngredient,
+			</if>
+			<if test="fabricGrammage != null">
+				fabricGrammage,
+			</if>
+			<if test="fabricType != null">
+				fabricType,
+			</if>
+			<if test="fabricSample != null">
+				fabricSample,
+			</if>
+			<if test="colorCardUpdatedDate != null">
+				colorCardUpdatedDate,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="founder != null">
+				founder,
+			</if>
+			<if test="modifyTime != null">
+				modifyTime,
+			</if>
+			<if test="modifyOperator != null">
+				modifyOperator,
+			</if>
+			<if test="deleteTime != null">
+				deleteTime,
+			</if>
+			<if test="deleteOperator != null">
+				deleteOperator,
+			</if>
+			<if test="fabricStatus != null">
+				fabricStatus,
+			</if>
+			<if test='fabricLength != null and fabricLength!=""'>
+				fabricLength,
+			</if>
+			<if test='gramWeight != null and gramWeight!=""'>
+				gramWeight,
+			</if>
+			<if test='kilogramMeter != null and kilogramMeter!=""'>
+				kilogramMeter,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="addNumber != null">
+				#{addNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCode != null">
+				#{fabricCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricName != null">
+				#{fabricName,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierCode != null">
+				#{supplierCode,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierName != null">
+				#{supplierName,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardCode != null">
+				#{colorCardCode,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardNmae != null">
+				#{colorCardNmae,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCode != null">
+				#{colorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="colorName != null">
+				#{colorName,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricPrice != null">
+				#{fabricPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="fabricMeter != null">
+				#{fabricMeter,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricOrigin != null">
+				#{fabricOrigin,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricIngredient != null">
+				#{fabricIngredient,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricGrammage != null">
+				#{fabricGrammage,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricType != null">
+				#{fabricType,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricSample != null">
+				#{fabricSample,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardUpdatedDate != null">
+				#{colorCardUpdatedDate,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				#{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyOperator != null">
+				#{modifyOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				#{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteOperator != null">
+				#{deleteOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricStatus != null">
+				#{fabricStatus,jdbcType=INTEGER},
+			</if>
+			<if test='fabricLength != null and fabricLength != ""'>
+				#{fabricLength,jdbcType=DOUBLE},
+			</if>
+			<if test='gramWeight != null and gramWeight != ""'>
+				#{gramWeight,jdbcType=DOUBLE},
+			</if>
+			<if test='kilogramMeter != null and kilogramMeter != ""'>
+				#{kilogramMeter,jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+	<update id="modifyFabricLibrary" parameterType="com.warehouse.entity.FabricLibrary">
+		update fabric_library
+		<set>
+			<if test="addNumber != null">
+				addNumber = #{addNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCode != null">
+				fabricCode = #{fabricCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricName != null">
+				fabricName = #{fabricName,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierCode != null">
+				supplierCode = #{supplierCode,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierName != null">
+				supplierName = #{supplierName,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardCode != null">
+				colorCardCode = #{colorCardCode,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardNmae != null">
+				colorCardNmae = #{colorCardNmae,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCode != null">
+				colorCode = #{colorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="colorName != null">
+				colorName = #{colorName,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricPrice != null">
+				fabricPrice = #{fabricPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="fabricMeter != null">
+				fabricMeter = #{fabricMeter,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricOrigin != null">
+				fabricOrigin = #{fabricOrigin,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricIngredient != null">
+				fabricIngredient = #{fabricIngredient,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricGrammage != null">
+				fabricGrammage = #{fabricGrammage,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricType != null">
+				fabricType = #{fabricType,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricSample != null">
+				fabricSample = #{fabricSample,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardUpdatedDate != null">
+				colorCardUpdatedDate =
+				#{colorCardUpdatedDate,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				founder = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				modifyTime = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyOperator != null">
+				modifyOperator = #{modifyOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				deleteTime = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteOperator != null">
+				deleteOperator = #{deleteOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricStatus != null">
+				fabricStatus = #{fabricStatus,jdbcType=INTEGER},
+			</if>
+			<if test='fabricLength != null and fabricLength != ""'>
+				fabricLength = #{fabricLength,jdbcType=DOUBLE},
+			</if>
+			<if test='gramWeight != null and gramWeight != ""'>
+				gramWeight = #{gramWeight,jdbcType=DOUBLE},
+			</if>
+			<if test='kilogramMeter != null and kilogramMeter != ""'>
+				kilogramMeter = #{kilogramMeter,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="delFabricLibraryById" parameterType="com.warehouse.entity.FabricLibrary">
+		update fabric_library
+		<set>
+			<if test="addNumber != null">
+				addNumber = #{addNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCode != null">
+				fabricCode = #{fabricCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricName != null">
+				fabricName = #{fabricName,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierCode != null">
+				supplierCode = #{supplierCode,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierName != null">
+				supplierName = #{supplierName,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardCode != null">
+				colorCardCode = #{colorCardCode,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardNmae != null">
+				colorCardNmae = #{colorCardNmae,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCode != null">
+				colorCode = #{colorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="colorName != null">
+				colorName = #{colorName,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricPrice != null">
+				fabricPrice = #{fabricPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="fabricMeter != null">
+				fabricMeter = #{fabricMeter,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricOrigin != null">
+				fabricOrigin = #{fabricOrigin,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricIngredient != null">
+				fabricIngredient = #{fabricIngredient,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricGrammage != null">
+				fabricGrammage = #{fabricGrammage,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricType != null">
+				fabricType = #{fabricType,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricSample != null">
+				fabricSample = #{fabricSample,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardUpdatedDate != null">
+				colorCardUpdatedDate =
+				#{colorCardUpdatedDate,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				founder = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				modifyTime = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyOperator != null">
+				modifyOperator = #{modifyOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				deleteTime = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteOperator != null">
+				deleteOperator = #{deleteOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricStatus != null">
+				fabricStatus = #{fabricStatus,jdbcType=INTEGER},
+			</if>
+			<if test='fabricLength != null and fabricLength != ""'>
+				fabricLength = #{fabricLength,jdbcType=DOUBLE},
+			</if>
+			<if test='gramWeight != null and gramWeight != ""'>
+				gramWeight = #{gramWeight,jdbcType=DOUBLE},
+			</if>
+			<if test='kilogramMeter != null and kilogramMeter != ""'>
+				kilogramMeter = #{kilogramMeter,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

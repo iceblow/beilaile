@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.ApparelDevelopmentReturnMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.ApparelDevelopmentReturn">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="return_time" jdbcType="VARCHAR" property="returnTime" />
+		<result column="designer" jdbcType="VARCHAR" property="designer" />
+		<result column="girard" jdbcType="VARCHAR" property="girard" />
+		<result column="original_wave" jdbcType="VARCHAR" property="originalWave" />
+		<result column="refer_wave" jdbcType="VARCHAR" property="referWave" />
+		<result column="print_wave" jdbcType="VARCHAR" property="printWave" />
+		<result column="model" jdbcType="VARCHAR" property="model" />
+		<result column="product_id" jdbcType="VARCHAR" property="productId" />
+		<result column="vendor_code" jdbcType="VARCHAR" property="vendorCode" />
+		<result column="cloth_name" jdbcType="VARCHAR" property="clothName" />
+		<result column="design_img" jdbcType="VARCHAR" property="designImg" />
+		<result column="sample_img" jdbcType="VARCHAR" property="sampleImg" />
+		<result column="size_chart" jdbcType="VARCHAR" property="sizeChart" />
+		<result column="paperpattern_emf_file" jdbcType="VARCHAR"
+			property="paperpatternEmfFile" />
+		<result column="paperpattern_prj_file" jdbcType="VARCHAR"
+			property="paperpatternPrjFile" />
+		<result column="code52" jdbcType="INTEGER" property="code52" />
+		<result column="code59" jdbcType="INTEGER" property="code59" />
+		<result column="code66" jdbcType="INTEGER" property="code66" />
+		<result column="code73" jdbcType="INTEGER" property="code73" />
+		<result column="code80" jdbcType="INTEGER" property="code80" />
+		<result column="code90" jdbcType="INTEGER" property="code90" />
+		<result column="code100" jdbcType="INTEGER" property="code100" />
+		<result column="code110" jdbcType="INTEGER" property="code110" />
+		<result column="code120" jdbcType="INTEGER" property="code120" />
+		<result column="code130" jdbcType="INTEGER" property="code130" />
+		<result column="code160" jdbcType="INTEGER" property="code160" />
+		<result column="code170" jdbcType="INTEGER" property="code170" />
+		<result column="count" jdbcType="INTEGER" property="count" />
+		<result column="expect_time" jdbcType="VARCHAR" property="expectTime" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="delb" jdbcType="INTEGER" property="delb" />
+		<result column="PC_IP" jdbcType="VARCHAR" property="pcIp" />
+		<result column="OPERATION" jdbcType="VARCHAR" property="operation" />
+		<result column="OPERATOR" jdbcType="VARCHAR" property="operator" />
+		<result column="ADD_TIME" jdbcType="VARCHAR" property="addTime" />
+		<result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+		<result column="DEL_TIME" jdbcType="VARCHAR" property="delTime" />
+		<result column="urgent_state" jdbcType="INTEGER" property="urgentState" />
+		<result column="STORAGE_TIME" jdbcType="VARCHAR" property="storageTime" />
+		<result column="STORAGE_NUMBER" jdbcType="VARCHAR" property="storageNumber" />
+		<result column="goodsId" jdbcType="VARCHAR" property="goodsId" />
+
+	</resultMap>
+	<!-- 根据id查询 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from apparel_development_return where id =
+		#{id,jdbcType=INTEGER}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertSelective" parameterType="com.warehouse.entity.ApparelDevelopmentReturn">
+		insert into apparel_development_return
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="returnTime != null">
+				return_time,
+			</if>
+			<if test="designer != null">
+				designer,
+			</if>
+			<if test="girard != null">
+				girard,
+			</if>
+			<if test="originalWave != null">
+				original_wave,
+			</if>
+			<if test="referWave != null">
+				refer_wave,
+			</if>
+			<if test="printWave != null">
+				print_wave,
+			</if>
+			<if test="model != null">
+				model,
+			</if>
+			<if test="productId != null">
+				product_id,
+			</if>
+			<if test="vendorCode != null">
+				vendor_code,
+			</if>
+			<if test="clothName != null">
+				cloth_name,
+			</if>
+			<if test="designImg != null">
+				design_img,
+			</if>
+			<if test="sampleImg != null">
+				sample_img,
+			</if>
+			<if test="sizeChart != null">
+				size_chart,
+			</if>
+			<if test="paperpatternEmfFile != null">
+				paperpattern_emf_file,
+			</if>
+			<if test="paperpatternPrjFile != null">
+				paperpattern_prj_file,
+			</if>
+			<if test="code52 != null">
+				code52,
+			</if>
+			<if test="code59 != null">
+				code59,
+			</if>
+			<if test="code66 != null">
+				code66,
+			</if>
+			<if test="code73 != null">
+				code73,
+			</if>
+			<if test="code80 != null">
+				code80,
+			</if>
+			<if test="code90 != null">
+				code90,
+			</if>
+			<if test="code100 != null">
+				code100,
+			</if>
+			<if test="code110 != null">
+				code110,
+			</if>
+			<if test="code120 != null">
+				code120,
+			</if>
+			<if test="code130 != null">
+				code130,
+			</if>
+			<if test="code160 != null">
+				code160,
+			</if>
+			<if test="code170 != null">
+				code170,
+			</if>
+			<if test="count != null">
+				count,
+			</if>
+			<if test="expectTime!=null">
+				expect_time,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="delb != null">
+				delb,
+			</if>
+			<if test="pcIp != null">
+				PC_IP,
+			</if>
+			<if test="operation != null">
+				OPERATION,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+			<if test="urgentState != null">
+				urgent_state,
+			</if>
+			<if test="storageTime!=null">
+				STORAGE_TIME,
+			</if>
+			<if test="storageNumber!=null">
+				STORAGE_NUMBER,
+			</if>
+			<if test="goodsId!=null">
+				goodsId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="returnTime != null">
+				#{returnTime,jdbcType=VARCHAR},
+			</if>
+			<if test="designer != null">
+				#{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="girard != null">
+				#{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="originalWave != null">
+				#{originalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="referWave != null">
+				#{referWave,jdbcType=VARCHAR},
+			</if>
+			<if test="printWave != null">
+				#{printWave,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="vendorCode != null">
+				#{vendorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				#{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				#{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				#{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="paperpatternEmfFile != null">
+				#{paperpatternEmfFile,jdbcType=VARCHAR},
+			</if>
+			<if test="paperpatternPrjFile != null">
+				#{paperpatternPrjFile,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				#{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code59 != null">
+				#{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				#{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				#{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				#{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				#{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				#{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				#{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				#{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				#{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				#{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				#{code170,jdbcType=INTEGER},
+			</if>
+			<if test="count != null">
+				#{count,jdbcType=INTEGER},
+			</if>
+			<if test="expectTime!=null">
+				#{expectTime,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="delb != null">
+				#{delb,jdbcType=INTEGER},
+			</if>
+			<if test="pcIp != null">
+				#{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				#{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="urgentState != null">
+				#{urgentState,jdbcType=INTEGER},
+			</if>
+			<if test="storageTime!=null">
+				#{storageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="storageNumber!=null">
+				#{storageNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsId!=null">
+				#{goodsId,,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+	<!-- 修改 -->
+	<update id="updateByPrimaryKey" parameterType="com.warehouse.entity.ApparelDevelopmentReturn">
+		update apparel_development_return
+		<set>
+			<if test="returnTime != null">
+				return_time = #{returnTime,jdbcType=VARCHAR},
+			</if>
+			<if test="designer != null">
+				designer = #{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="girard != null">
+				girard = #{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="originalWave != null">
+				original_wave = #{originalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="referWave != null">
+				refer_wave = #{referWave,jdbcType=VARCHAR},
+			</if>
+			<if test="printWave != null">
+				print_wave = #{printWave,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				model = #{model,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				product_id = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="vendorCode != null">
+				vendor_code = #{vendorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				cloth_name = #{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				design_img = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				sample_img = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				size_chart = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="paperpatternEmfFile != null">
+				paperpattern_emf_file =
+				#{paperpatternEmfFile,jdbcType=VARCHAR},
+			</if>
+			<if test="paperpatternPrjFile != null">
+				paperpattern_prj_file =
+				#{paperpatternPrjFile,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null and code52!=''">
+				code52 = #{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code59 != null and code59!=''">
+				code59 = #{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null and code66!=''">
+				code66 = #{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null and code73!=''">
+				code73 = #{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null and code80!=''">
+				code80 = #{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null and code90!=''">
+				code90 = #{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null and code100!=''">
+				code100 = #{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null and code110!=''">
+				code110 = #{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null and code120!=''">
+				code120 = #{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null and code130!=''">
+				code130 = #{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null and code160!=''">
+				code160 = #{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null and code170!=''">
+				code170 = #{code170,jdbcType=INTEGER},
+			</if>
+			<if test="count != null and count!=''">
+				count = #{count,jdbcType=INTEGER},
+			</if>
+			<if test="expectTime!=null">
+				expect_time=#{expectTime,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="delb != null and delb!=''">
+				delb = #{delb,jdbcType=INTEGER},
+			</if>
+			<if test="pcIp != null">
+				PC_IP = #{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="urgentState != null">
+				urgent_state=#{urgentState,jdbcType=INTEGER},
+			</if>
+			<if test="storageTime!=null">
+				STORAGE_TIME=#{storageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="storageNumber!=null">
+				STORAGE_NUMBER=#{storageNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="goodsId!=null">
+				goodsId=#{goodsId,,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 删除 -->
+	<update id="deleteByPrimaryKey" parameterType="com.warehouse.entity.ApparelDevelopmentReturn">
+		update
+		apparel_development_return set
+		delb=1,DEL_TIME=#{delTime} where
+		id=#{id}
+	</update>
+	<!-- 分页 -->
+	<select id="selApparelDevelopmentReturnCount" parameterType="com.warehouse.entity.ApparelDevelopmentReturn"
+		resultType="java.lang.Integer">
+		select count(1) from apparel_development_return
+		where delb=0 and 1=1
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="designer != null and designer != ''">
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test="originalWave != null and originalWave !=''">
+			and original_wave like concat("%",#{originalWave},"%")
+		</if>
+		<if test="referWave != null and referWave !=''">
+			and refer_wave like concat("%",#{referWave},"%")
+		</if>
+		<if test="printWave != null and printWave !=''">
+			and print_wave like concat("%",#{printWave},"%")
+		</if>
+		<if test="model != null and model!='' ">
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test="productId != null and productId !=''">
+			and product_id like concat("%",#{productId},"%")
+		</if>
+		<if test="vendorCode != null and vendorCode !=''">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="clothName != null and clothName!=''">
+			and cloth_name like concat("%",#{clothName},"%")
+		</if>
+		<if test='sizeChart=="Y" or sizeChart=="y"'>
+			and size_chart !=''
+		</if>
+		<if test='sizeChart=="N" or sizeChart=="n"'>
+			and (size_chart is NULL or size_chart='')
+		</if>
+
+	</select>
+	<select id="developmentReturns" parameterType="com.warehouse.entity.ApparelDevelopmentReturn"
+		resultMap="BaseResultMap">
+		select * from apparel_development_return
+		where delb=0 and 1=1
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="designer != null and designer != ''">
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test="originalWave != null and originalWave !=''">
+			and original_wave like concat("%",#{originalWave},"%")
+		</if>
+		<if test="referWave != null and referWave !=''">
+			and refer_wave like concat("%",#{referWave},"%")
+		</if>
+		<if test="printWave != null and printWave !=''">
+			and print_wave like concat("%",#{printWave},"%")
+		</if>
+		<if test="model != null and model!='' ">
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test="productId != null and productId !=''">
+			and product_id like concat("%",#{productId},"%")
+		</if>
+		<if test="vendorCode != null and vendorCode !=''">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="clothName != null and clothName!=''">
+			and cloth_name like concat("%",#{clothName},"%")
+		</if>
+		<if test='sizeChart=="Y" or sizeChart=="y"'>
+			and size_chart !=''
+		</if>
+		<if test='sizeChart=="N" or sizeChart=="n"'>
+			and (size_chart is NULL or size_chart='')
+		</if>
+		order by ADD_TIME desc limit #{begin},#{end}
+	</select>
+	<!-- 旺店通 -->
+	<select id="queryEtrack" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from apparel_development_return where id=#{id}
+	</select>
+
+	<!-- 分页 -->
+	<select id="selApparelDevelopmentReturnCountover" parameterType="com.warehouse.entity.ApparelDevelopmentReturn"
+		resultType="java.lang.Integer">
+		select count(1) from apparel_development_return
+		where delb=0 and 1=1
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="designer != null and designer != ''">
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test="originalWave != null and originalWave !=''">
+			and original_wave like concat("%",#{originalWave},"%")
+		</if>
+		<if test="referWave != null and referWave !=''">
+			and refer_wave like concat("%",#{referWave},"%")
+		</if>
+		<if test="printWave != null and printWave !=''">
+			and print_wave like concat("%",#{printWave},"%")
+		</if>
+		<if test="model != null and model!='' ">
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test="productId != null and productId !=''">
+			and product_id like concat("%",#{productId},"%")
+		</if>
+		<if test="vendorCode != null and vendorCode !=''">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="clothName != null and clothName!=''">
+			and cloth_name like concat("%",#{clothName},"%")
+		</if>
+		<if test='sizeChart=="Y" or sizeChart=="y"'>
+			and size_chart !=''
+		</if>
+		<if test='sizeChart=="N" or sizeChart=="n"'>
+			and (size_chart is NULL or size_chart='')
+		</if>
+		and (STORAGE_TIME is NULL or STORAGE_TIME='')
+	</select>
+	<select id="developmentReturnsover" parameterType="com.warehouse.entity.ApparelDevelopmentReturn"
+		resultMap="BaseResultMap">
+		select * from apparel_development_return
+		where delb=0 and 1=1
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="designer != null and designer != ''">
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test="originalWave != null and originalWave !=''">
+			and original_wave like concat("%",#{originalWave},"%")
+		</if>
+		<if test="referWave != null and referWave !=''">
+			and refer_wave like concat("%",#{referWave},"%")
+		</if>
+		<if test="printWave != null and printWave !=''">
+			and print_wave like concat("%",#{printWave},"%")
+		</if>
+		<if test="model != null and model!='' ">
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test="productId != null and productId !=''">
+			and product_id like concat("%",#{productId},"%")
+		</if>
+		<if test="vendorCode != null and vendorCode !=''">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="clothName != null and clothName!=''">
+			and cloth_name like concat("%",#{clothName},"%")
+		</if>
+		<if test='sizeChart=="Y" or sizeChart=="y"'>
+			and size_chart !=''
+		</if>
+		<if test='sizeChart=="N" or sizeChart=="n"'>
+			and (size_chart is NULL or size_chart='')
+		</if>
+		and (STORAGE_TIME is NULL or STORAGE_TIME='')
+		order by ADD_TIME desc
+		limit #{begin},#{end}
+	</select>
+
+	<!-- 分页 -->
+	<select id="selApparelDevelopmentReturnCounting" parameterType="com.warehouse.entity.ApparelDevelopmentReturn"
+		resultType="java.lang.Integer">
+		select count(1) from apparel_development_return
+		where delb=0 and 1=1
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="designer != null and designer != ''">
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test="originalWave != null and originalWave !=''">
+			and original_wave like concat("%",#{originalWave},"%")
+		</if>
+		<if test="referWave != null and referWave !=''">
+			and refer_wave like concat("%",#{referWave},"%")
+		</if>
+		<if test="printWave != null and printWave !=''">
+			and print_wave like concat("%",#{printWave},"%")
+		</if>
+		<if test="model != null and model!='' ">
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test="productId != null and productId !=''">
+			and product_id like concat("%",#{productId},"%")
+		</if>
+		<if test="vendorCode != null and vendorCode !=''">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="clothName != null and clothName!=''">
+			and cloth_name like concat("%",#{clothName},"%")
+		</if>
+		<if test='sizeChart=="Y" or sizeChart=="y"'>
+			and size_chart !=''
+		</if>
+		<if test='sizeChart=="N" or sizeChart=="n"'>
+			and (size_chart is NULL or size_chart='')
+		</if>
+		and STORAGE_TIME !=''
+	</select>
+	<select id="developmentReturnsing" parameterType="com.warehouse.entity.ApparelDevelopmentReturn"
+		resultMap="BaseResultMap">
+		select * from apparel_development_return
+		where delb=0 and 1=1
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="designer != null and designer != ''">
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test="originalWave != null and originalWave !=''">
+			and original_wave like concat("%",#{originalWave},"%")
+		</if>
+		<if test="referWave != null and referWave !=''">
+			and refer_wave like concat("%",#{referWave},"%")
+		</if>
+		<if test="printWave != null and printWave !=''">
+			and print_wave like concat("%",#{printWave},"%")
+		</if>
+		<if test="model != null and model!='' ">
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test="productId != null and productId !=''">
+			and product_id like concat("%",#{productId},"%")
+		</if>
+		<if test="vendorCode != null and vendorCode !=''">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="clothName != null and clothName!=''">
+			and cloth_name like concat("%",#{clothName},"%")
+		</if>
+		<if test='sizeChart=="Y" or sizeChart=="y"'>
+			and size_chart !=''
+		</if>
+		<if test='sizeChart=="N" or sizeChart=="n"'>
+			and (size_chart is NULL or size_chart='')
+		</if>
+		and STORAGE_TIME !='' order by ADD_TIME desc limit #{begin},#{end}
+	</select>
+	<!-- excel -->
+	<select id="toExcelNum" parameterType="com.warehouse.entity.ApparelDevelopmentReturn"
+		resultType="java.lang.Integer">
+		select count(*) from apparel_development_return where
+		delb=0 and return_time=#{returnTime}
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+	</select>
+	<select id="toExcel" parameterType="com.warehouse.entity.ApparelDevelopmentReturn"
+		resultMap="BaseResultMap">
+		select * from apparel_development_return where
+		delb=0 and return_time=#{returnTime}
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+	</select>
+</mapper>

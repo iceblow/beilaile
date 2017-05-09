@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ProductOnlineProgressMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.ProductOnlineProgress">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="SID" property="sid" jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+		<result column="STORAGE_STATUS" property="storageStatus"
+			jdbcType="VARCHAR" />
+		<result column="STORAGE_TIME" property="storageTime" jdbcType="VARCHAR" />
+		<result column="SAMPLE_STATUS" property="sampleStatus"
+			jdbcType="VARCHAR" />
+		<result column="SAMPLE_TIME" property="sampleTime" jdbcType="VARCHAR" />
+		<result column="PHOTOGRAPHY_STATUS" property="photographyStatus"
+			jdbcType="VARCHAR" />
+		<result column="PHOTOGRAPHY_TIME" property="photographyTime"
+			jdbcType="VARCHAR" />
+		<result column="ARTWORK_STATUS" property="artworkStatus"
+			jdbcType="VARCHAR" />
+		<result column="ARTWORK_TIME" property="artworkTime" jdbcType="VARCHAR" />
+		<result column="OPERATION_STATUS" property="operationStatus"
+			jdbcType="VARCHAR" />
+		<result column="OPERATION_TIME" property="operationTime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SID, WAVE, PRODUCT_CODE,PRODUCT_NAME, DESIGN_IMG,
+		ORDER_GRADE,
+		STORAGE_STATUS,
+		STORAGE_TIME,
+		SAMPLE_STATUS, SAMPLE_TIME,
+		PHOTOGRAPHY_STATUS, PHOTOGRAPHY_TIME, ARTWORK_STATUS,
+		ARTWORK_TIME,
+		OPERATION_STATUS, OPERATION_TIME
+	</sql>
+	<insert id="insertSelective" parameterType="com.warehouse.entity.ProductOnlineProgress">
+		insert into product_online_progress
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="sid != null">
+				SID,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE,
+			</if>
+			<if test="productName !=null">
+				PRODUCT_NAME,
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG,
+			</if>
+			<if test="orderGrade != null">
+				ORDER_GRADE,
+			</if>
+			<if test="storageStatus != null">
+				STORAGE_STATUS,
+			</if>
+			<if test="storageTime != null">
+				STORAGE_TIME,
+			</if>
+			<if test="sampleStatus != null">
+				SAMPLE_STATUS,
+			</if>
+			<if test="sampleTime != null">
+				SAMPLE_TIME,
+			</if>
+			<if test="photographyStatus != null">
+				PHOTOGRAPHY_STATUS,
+			</if>
+			<if test="photographyTime != null">
+				PHOTOGRAPHY_TIME,
+			</if>
+			<if test="artworkStatus != null">
+				ARTWORK_STATUS,
+			</if>
+			<if test="artworkTime != null">
+				ARTWORK_TIME,
+			</if>
+			<if test="operationStatus != null">
+				OPERATION_STATUS,
+			</if>
+			<if test="operationTime != null">
+				OPERATION_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productCode != null">
+				#{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="productName !=null">
+				#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="orderGrade != null">
+				#{orderGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="storageStatus != null">
+				#{storageStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="storageTime != null">
+				#{storageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleStatus != null">
+				#{sampleStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleTime != null">
+				#{sampleTime,jdbcType=VARCHAR},
+			</if>
+			<if test="photographyStatus != null">
+				#{photographyStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="photographyTime != null">
+				#{photographyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="artworkStatus != null">
+				#{artworkStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="artworkTime != null">
+				#{artworkTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operationStatus != null">
+				#{operationStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="operationTime != null">
+				#{operationTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.ProductOnlineProgress">
+		update product_online_progress
+		<set>
+			<if test="sid != null">
+				SID = #{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="productName !=null">
+				PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="orderGrade != null">
+				ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="storageStatus != null">
+				STORAGE_STATUS = #{storageStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="storageTime != null">
+				STORAGE_TIME = #{storageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleStatus != null">
+				SAMPLE_STATUS = #{sampleStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleTime != null">
+				SAMPLE_TIME = #{sampleTime,jdbcType=VARCHAR},
+			</if>
+			<if test="photographyStatus != null">
+				PHOTOGRAPHY_STATUS =
+				#{photographyStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="photographyTime != null">
+				PHOTOGRAPHY_TIME = #{photographyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="artworkStatus != null">
+				ARTWORK_STATUS = #{artworkStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="artworkTime != null">
+				ARTWORK_TIME = #{artworkTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operationStatus != null">
+				OPERATION_STATUS = #{operationStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="operationTime != null">
+				OPERATION_TIME = #{operationTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where WAVE = #{wave,jdbcType=VARCHAR}
+	</update>
+	<!-- 分页查询 -->
+	<select id="selectCountByPrimaryKey" resultType="java.lang.Integer"
+		parameterType="com.warehouse.entity.ProductOnlineProgress">
+		select count(*) from product_online_progress
+		where 1=1
+		<if test="wave != null and wave!=''">
+			and WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="productName !=null and productName!=''">
+			and PRODUCT_NAME LIKE
+			CONCAT('%',#{productName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="productCode != null and productCode!=''">
+			and PRODUCT_CODE LIKE
+			CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="com.warehouse.entity.ProductOnlineProgress">
+		select
+		<include refid="Base_Column_List" />
+		from product_online_progress
+		where 1=1
+		<if test="wave != null and wave!=''">
+			and WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="productName !=null and productName!=''">
+			and PRODUCT_NAME LIKE
+			CONCAT('%',#{productName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="productCode != null and productCode!=''">
+			and PRODUCT_CODE LIKE
+			CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+		</if>
+		order by
+		SAMPLE_TIME,PHOTOGRAPHY_TIME,ARTWORK_TIME,OPERATION_TIME,STORAGE_TIME
+		asc
+	</select>
+</mapper>

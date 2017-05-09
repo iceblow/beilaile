@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.SewingPickingOrderMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.SewingPickingOrder">
+		<id column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+		<result column="SEWING_FACTORY" property="sewingFactory"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_TIME" property="orderTime" jdbcType="VARCHAR" />
+		<result column="DELIVERY_TIME" property="deliveryTime"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_REMARK" property="orderRemark" jdbcType="VARCHAR" />
+		<result column="ORDER_STATUS" property="orderStatus" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="REVOKED_TIME" property="revokedTime" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ORDER_ID, SEWING_FACTORY, ORDER_TIME, DELIVERY_TIME,
+		ORDER_REMARK,
+		ORDER_STATUS,
+		ADD_TIME,REVOKED_TIME
+	</sql>
+	<!-- 分页 -->
+	<select id="getCountBySewing" resultType="java.lang.Integer"
+		parameterType="com.warehouse.entity.SewingPickingOrder">
+		select count(*) from sewing_picking_order where 1=1
+		<if test="sewingFactory!='' and sewingFactory!=null">
+			AND SEWING_FACTORY LIKE CONCAT('%',#{sewingFactory},'%')
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="com.warehouse.entity.SewingPickingOrder">
+		select
+		<include refid="Base_Column_List" />
+		from sewing_picking_order where 1=1
+		<if test="sewingFactory!='' and sewingFactory!=null">
+			AND SEWING_FACTORY LIKE CONCAT('%',#{sewingFactory},'%')
+		</if>
+		order by ORDER_STATUS asc,ADD_TIME desc limit
+		#{begin},#{end}
+	</select>
+	<select id="listSewingPickingOrderAll" resultMap="BaseResultMap">
+		select * from
+		sewing_picking_order
+	</select>
+	<insert id="insertSelective" parameterType="com.warehouse.entity.SewingPickingOrder">
+		insert into sewing_picking_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderId != null">
+				ORDER_ID,
+			</if>
+			<if test="sewingFactory != null">
+				SEWING_FACTORY,
+			</if>
+			<if test="orderTime != null">
+				ORDER_TIME,
+			</if>
+			<if test="deliveryTime != null">
+				DELIVERY_TIME,
+			</if>
+			<if test="orderRemark != null">
+				ORDER_REMARK,
+			</if>
+			<if test="orderStatus != null">
+				ORDER_STATUS,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="revokedTime != null">
+				REVOKED_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderId != null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="sewingFactory != null">
+				#{sewingFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTime != null">
+				#{orderTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deliveryTime != null">
+				#{deliveryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orderRemark != null">
+				#{orderRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStatus != null">
+				#{orderStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="revokedTime != null">
+				#{revokedTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.SewingPickingOrder">
+		update sewing_picking_order
+		<set>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTime != null">
+				ORDER_TIME = #{orderTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deliveryTime != null">
+				DELIVERY_TIME = #{deliveryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="revokedTime != null">
+				REVOKED_TIME = #{revokedTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orderRemark != null">
+				ORDER_REMARK = #{orderRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStatus != null">
+				ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ORDER_ID = #{orderId,jdbcType=INTEGER}
+	</update>
+	<!-- 根据订单号查询数据 -->
+	<select id="selSewingByOrderId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from sewing_picking_order where
+		ORDER_ID=#{orderId,jdbcType=INTEGER}
+	</select>
+
+</mapper>

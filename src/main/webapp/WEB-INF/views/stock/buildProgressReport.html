@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<title>跟单裁片外发进度报表</title>
+<script type="text/javascript">
+	$(function() {
+		getAll();
+	});
+	function getAll() {
+		$.ajax({
+			url : $("#path").val() + '/buildProgressReport/getCount.do',
+			type : 'post',
+			dataType : 'json',
+			async : false,
+			success : function(data) {
+				select1(data.date, data.storage, "跟单裁片外发进度报表(款式)");
+			},
+			error : function() {
+				alert("查询失败");
+			}
+		});
+		$.ajax({
+			url : $("#path").val() + '/buildProgressReport/getSum.do',
+			type : 'post',
+			dataType : 'json',
+			async : false,
+			success : function(data) {
+				select2(data.date, data.storage, "跟单裁片外发进度报表(数量)");
+			},
+			error : function() {
+				alert("查询失败");
+			}
+		});
+	}
+	function select1(date, storage, title) {
+		$('#container1').highcharts({
+			title : {
+				text : title
+			},
+			subtitle : {
+				text : ''
+			},
+			xAxis : {
+				categories : date
+			},
+			yAxis : {
+				title : {
+					text : ''
+				}
+			},
+			plotOptions : {
+				line : {
+					dataLabels : {
+						enabled : true
+					},
+					enableMouseTracking : true
+				}
+			},
+			series : storage,
+		});
+	}
+	function select2(date, storage, title) {
+		$('#container2').highcharts({
+			title : {
+				text : title
+			},
+			subtitle : {
+				text : ''
+			},
+			xAxis : {
+				categories : date
+			},
+			yAxis : {
+				title : {
+					text : ''
+				}
+			},
+			plotOptions : {
+				line : {
+					dataLabels : {
+						enabled : true
+					},
+					enableMouseTracking : true
+				}
+			},
+			series : storage,
+		});
+	}
+</script>
+</head>
+<body>
+	<@p.top/>
+
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+
+				<div class="breadcrumbs" id="breadcrumbs">
+
+					<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">跟单裁片外发进度报表</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				</div>
+				<div>
+					<div id="container1"
+						style="border: 1px black; width: 1024px; height: 450px; margin: 0 auto;"></div>
+					<div id="container2"
+						style="border: 1px black; width: 1024px; height: 450px; margin: 0 auto;"></div>
+				</div>
+
+				<input type="hidden" value="${pageContext.request.contextPath}"
+					id="path">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

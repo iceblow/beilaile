@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ProblemFeedbackMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.ProblemFeedback">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="LINK" property="link" jdbcType="VARCHAR" />
+		<result column="REASON" property="reason" jdbcType="VARCHAR" />
+		<result column="CREATEDATE" property="createdate" jdbcType="VARCHAR" />
+		<result column="SOLUTION" property="solution" jdbcType="VARCHAR" />
+		<result column="RESOLVE_TIME" property="resolveTime" jdbcType="VARCHAR" />
+		<result column="SOLVE_DEPT" property="solveDept" jdbcType="VARCHAR" />
+		<result column="IS_RESOLVED" property="isResolved" jdbcType="VARCHAR" />
+		<result column="DELAYED_SHIP_DATE" property="delayedShipDate"
+			jdbcType="VARCHAR" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+		<result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR" />
+		<result column="countNumber" property="countNumber" jdbcType="INTEGER" />
+
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, WAVE, LINK, REASON, CREATEDATE, SOLUTION, RESOLVE_TIME,
+		SOLVE_DEPT,
+		IS_RESOLVED,
+		DELAYED_SHIP_DATE, REMARKS, STATUS,
+		CREATED_TIME, FOUNDER, MODIFY_TIME,DEL_TIME, OPERATOR,
+		OPERATOR_IP
+	</sql>
+	<select id="getProblemFeedbackById" resultMap="BaseResultMap"
+		parameterType="com.warehouse.entity.ProblemFeedback">
+		SELECT * FROM problem_feedback WHERE
+		ID=#{id,jdbcType=INTEGER}
+	</select>
+	<select id="getProblemFeedbackByLink" resultMap="BaseResultMap">
+		SELECT LINK
+		FROM
+		problem_feedback WHERE `STATUS` ='1' GROUP BY LINK;
+	</select>
+	<select id="getProblemFeedbackByCreatedate" resultMap="BaseResultMap">
+		SELECT
+		CREATEDATE FROM problem_feedback WHERE CREATEDATE !='' AND `STATUS`
+		='1' GROUP BY CREATEDATE;
+	</select>
+
+	<select id="getProblemFeedbackByReports" resultMap="BaseResultMap">
+		SELECT
+		CREATEDATE ,COUNT(LINK) AS countNumber,LINK FROM
+		problem_feedback WHERE
+		CREATEDATE
+		!=
+		'' AND `STATUS` ='1' GROUP BY
+		CREATEDATE,LINK;
+	</select>
+	<select id="getProblemFeedbackByPageCount" parameterType="com.warehouse.entity.ProblemFeedback"
+		resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM problem_feedback where STATUS = '1' AND 1=1
+		<if test='wave != null and wave != ""'>
+			AND WAVE LIKE
+			CONCAT(CONCAT('%',#{wave,jdbcType=VARCHAR}),'%')
+		</if>
+	</select>
+	<select id="findConditionProblemFeedbackByPage" resultMap="BaseResultMap"
+		parameterType="Map">
+		select
+		<include refid="Base_Column_List" />
+		from problem_feedback where STATUS = '1' AND 1=1
+		<if test='wave != null and wave != ""'>
+			AND WAVE LIKE
+			CONCAT(CONCAT('%',#{wave,jdbcType=VARCHAR}),'%')
+		</if>
+		ORDER BY CREATED_TIME DESC LIMIT #{pageNow},#{pageSize}
+	</select>
+	<insert id="addProblemFeedback" parameterType="com.warehouse.entity.ProblemFeedback">
+		insert into problem_feedback
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="link != null">
+				LINK,
+			</if>
+			<if test="reason != null">
+				REASON,
+			</if>
+			<if test="createdate != null">
+				CREATEDATE,
+			</if>
+			<if test="solution != null">
+				SOLUTION,
+			</if>
+			<if test="resolveTime != null">
+				RESOLVE_TIME,
+			</if>
+			<if test="solveDept != null">
+				SOLVE_DEPT,
+			</if>
+			<if test="isResolved != null">
+				IS_RESOLVED,
+			</if>
+			<if test="delayedShipDate != null">
+				DELAYED_SHIP_DATE,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME,
+			</if>
+			<if test="founder != null">
+				FOUNDER,
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="link != null">
+				#{link,jdbcType=VARCHAR},
+			</if>
+			<if test="reason != null">
+				#{reason,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=VARCHAR},
+			</if>
+			<if test="solution != null">
+				#{solution,jdbcType=VARCHAR},
+			</if>
+			<if test="resolveTime != null">
+				#{resolveTime,jdbcType=VARCHAR},
+			</if>
+			<if test="solveDept != null">
+				#{solveDept,jdbcType=VARCHAR},
+			</if>
+			<if test="isResolved != null">
+				#{isResolved,jdbcType=VARCHAR},
+			</if>
+			<if test="delayedShipDate != null">
+				#{delayedShipDate,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				#{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				#{operatorIp,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="ModifyProblemFeedback" parameterType="com.warehouse.entity.ProblemFeedback">
+		update problem_feedback
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="link != null">
+				LINK = #{link,jdbcType=VARCHAR},
+			</if>
+			<if test="reason != null">
+				REASON = #{reason,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				CREATEDATE = #{createdate,jdbcType=VARCHAR},
+			</if>
+			<if test="solution != null">
+				SOLUTION = #{solution,jdbcType=VARCHAR},
+			</if>
+			<if test="resolveTime != null">
+				RESOLVE_TIME = #{resolveTime,jdbcType=VARCHAR},
+			</if>
+			<if test="solveDept != null">
+				SOLVE_DEPT = #{solveDept,jdbcType=VARCHAR},
+			</if>
+			<if test="isResolved != null">
+				IS_RESOLVED = #{isResolved,jdbcType=VARCHAR},
+			</if>
+			<if test="delayedShipDate != null">
+				DELAYED_SHIP_DATE = #{delayedShipDate,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="delProblemFeedbackById" parameterType="com.warehouse.entity.ProblemFeedback">
+		update problem_feedback
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="link != null">
+				LINK = #{link,jdbcType=VARCHAR},
+			</if>
+			<if test="reason != null">
+				REASON = #{reason,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				CREATEDATE = #{createdate,jdbcType=VARCHAR},
+			</if>
+			<if test="solution != null">
+				SOLUTION = #{solution,jdbcType=VARCHAR},
+			</if>
+			<if test="resolveTime != null">
+				RESOLVE_TIME = #{resolveTime,jdbcType=VARCHAR},
+			</if>
+			<if test="solveDept != null">
+				SOLVE_DEPT = #{solveDept,jdbcType=VARCHAR},
+			</if>
+			<if test="isResolved != null">
+				IS_RESOLVED = #{isResolved,jdbcType=VARCHAR},
+			</if>
+			<if test="delayedShipDate != null">
+				DELAYED_SHIP_DATE = #{delayedShipDate,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

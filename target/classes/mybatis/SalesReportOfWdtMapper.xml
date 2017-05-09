@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.SalesReportOfWdtDAO">
+	<insert id="insertSelective" parameterType="com.warehouse.entity.SalesReportOfWdt">
+		insert into sales_report_of_wdt
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ALIAE_CODE != null">
+				ALIAE_CODE,
+			</if>
+			<if test="PRODUCT_CODE != null">
+				PRODUCT_CODE,
+			</if>
+			<if test="PRODUCT_NAME != null">
+				PRODUCT_NAME,
+			</if>
+			<if test="STOCK_NUM != null">
+				STOCK_NUM,
+			</if>
+			<if test="SALES_7DAYS != null">
+				SALES_7DAYS,
+			</if>
+			<if test="SALES_14DAYS != null">
+				SALES_14DAYS,
+			</if>
+			<if test="SALES_30DAYS != null">
+				SALES_30DAYS,
+			</if>
+			<if test="SALES_TATOAL != null">
+				SALES_TATOAL,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ALIAE_CODE != null">
+				#{ALIAE_CODE,jdbcType=VARCHAR},
+			</if>
+			<if test="PRODUCT_CODE != null">
+				#{PRODUCT_CODE,jdbcType=VARCHAR},
+			</if>
+			<if test="PRODUCT_NAME != null">
+				#{PRODUCT_NAME,jdbcType=VARCHAR},
+			</if>
+			<if test="STOCK_NUM != null">
+				#{STOCK_NUM,jdbcType=INTEGER},
+			</if>
+			<if test="SALES_7DAYS != null">
+				#{SALES_7DAYS,jdbcType=INTEGER},
+			</if>
+			<if test="SALES_14DAYS != null">
+				#{SALES_14DAYS,jdbcType=INTEGER},
+			</if>
+			<if test="SALES_30DAYS != null">
+				#{SALES_30DAYS,jdbcType=INTEGER},
+			</if>
+			<if test="SALES_TATOAL != null">
+				#{SALES_TATOAL,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<insert id="insertSelectives" parameterType="String"> ${form} </insert>
+	<!-- 删除信息 -->
+	<delete id="delSelective">
+		truncate table sales_report_of_wdt;
+	</delete>
+	<!-- 查询总页数 -->
+	<select id="getCountByPage" parameterType="com.warehouse.entity.SalesReportOfWdt"
+		resultType="java.lang.Integer">
+		select count(*) from sales_report_of_wdt
+	</select>
+	<!-- 查询 -->
+	<select id="getDataByPage" parameterType="com.warehouse.entity.SalesReportOfWdt"
+		resultType="com.warehouse.entity.SalesReportOfWdt">
+		select * from sales_report_of_wdt order by SALES_TATOAL
+		desc
+		limit #{begin},#{end}
+	</select>
+</mapper>

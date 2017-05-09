@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.NotStorageRecordMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.NotStorageRecord">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+		<result column="PROCESSING_TYPE" property="processingType" jdbcType="VARCHAR" />
+		<result column="MATERIAL_TIME" property="materialTime" jdbcType="VARCHAR" />
+		<result column="MATERIAL_DAYS" property="materialDays" jdbcType="INTEGER" />
+		<result column="ESTIMATED_DELIVERY_TIME" property="estimatedDeliveryTime" jdbcType="VARCHAR" />
+		<result column="PROBLEM_FEEDBACK" property="problemFeedback" jdbcType="VARCHAR" />
+		<result column="REASON_FOR_DELAY" property="reasonForDelay" jdbcType="VARCHAR" />
+		<result column="PERSON_IN_CHARGE" property="personInCharge" jdbcType="VARCHAR" />
+		<result column="STORAGE_TIME" property="storageTime" jdbcType="VARCHAR" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+		<result column="PROBLEM_SOLVING" property="problemSolving" jdbcType="VARCHAR" />
+		<result column="PROBLEM_SOLVING_TIME" property="problemSolvingTime" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="MODIFIER" property="modifier" jdbcType="VARCHAR" />
+		<result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="DELETE_PEOPLE" property="deletePeople" jdbcType="VARCHAR" />
+		<result column="COMPLETION_TIME" property="completionTime" jdbcType="VARCHAR" />
+		<result column="COMPLETION_PEOPLE" property="completionPeople" jdbcType="VARCHAR" />
+		<result column="DATA_STATE" property="dataState" jdbcType="VARCHAR" />
+		<result column="PROBLEM_STATE" property="problemState" jdbcType="VARCHAR" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, WAVE, FACTORY, PROCESSING_TYPE, MATERIAL_TIME,
+		MATERIAL_DAYS,
+		ESTIMATED_DELIVERY_TIME,
+		PROBLEM_FEEDBACK,
+		REASON_FOR_DELAY, PERSON_IN_CHARGE, STORAGE_TIME, MEMO,
+		PROBLEM_SOLVING,
+		PROBLEM_SOLVING_TIME, ADD_TIME, UPDATE_TIME, MODIFIER,
+		DELETE_TIME, DELETE_PEOPLE,
+		COMPLETION_TIME, COMPLETION_PEOPLE,
+		DATA_STATE,PROBLEM_STATE
+	</sql>
+	<!-- 查询的总条数 -->
+	<select id="selectPage" parameterType="com.warehouse.entity.NotStorageRecord" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM not_storage_record where 1=1
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave}, "%")
+		</if>
+		<if test='productName!=null and productName!=""'>
+			AND PRODUCT_NAME LIKE CONCAT("%" ,#{productName}, "%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%" ,#{productCode}, "%")
+		</if>
+		<if test='materialTime!=null and materialTime!="" '> AND MATERIAL_TIME
+			like
+			CONCAT(CONCAT("%",#{materialTime,jdbcType=VARCHAR}),"%") </if>
+		<if test='factory!=null  and factory!="" '> AND FACTORY like
+			CONCAT(CONCAT("%",#{factory,jdbcType=VARCHAR}),"%")
+		</if>
+		<if test='problemFeedback!=null and problemFeedback!="" '>
+			AND PROBLEM_FEEDBACK like
+			CONCAT("%",#{problemFeedback,jdbcType=VARCHAR},"%")
+		</if>
+		<if test='reasonForDelay!=null and reasonForDelay!="" '>
+			AND REASON_FOR_DELAY like
+			CONCAT("%",#{reasonForDelay,jdbcType=VARCHAR},"%")
+		</if>
+		<if test='personInCharge!=null and personInCharge!="" '>
+			AND PERSON_IN_CHARGE like
+			CONCAT("%",#{personInCharge,jdbcType=VARCHAR},"%")
+		</if>
+		and PROBLEM_SOLVING_TIME is null
+		and DATA_STATE IS NULL
+	</select>
+	<!-- 分页查询的返回数据 -->
+	<select id="getAllByPage" parameterType="com.warehouse.entity.NotStorageRecord" resultMap="BaseResultMap">
+		select * from not_storage_record where 1=1
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%" ,#{productCode,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='productName!=null and productName!=""'>
+			AND PRODUCT_NAME LIKE CONCAT("%" ,#{productName,jdbcType=VARCHAR}, "%")
+		</if>
+		
+		<if test='materialTime!=null and materialTime!="" '>
+			AND MATERIAL_TIME like CONCAT("%",#{materialTime,jdbcType=VARCHAR},"%")
+		</if>
+		<if test='factory!=null and factory!="" '>
+			AND FACTORY like CONCAT("%",#{factory,jdbcType=VARCHAR},"%")
+		</if>
+		<if test='problemFeedback!=null and problemFeedback!="" '>
+			AND PROBLEM_FEEDBACK like CONCAT("%",
+			#{problemFeedback,jdbcType=VARCHAR},"%")
+		</if>
+		<if test='reasonForDelay!=null and reasonForDelay!="" '>
+			AND REASON_FOR_DELAY like
+			CONCAT("%",#{reasonForDelay,jdbcType=VARCHAR},"%")
+		</if>
+		<if test='personInCharge!=null and personInCharge!="" '>
+			AND PERSON_IN_CHARGE like
+			CONCAT("%",#{personInCharge,jdbcType=VARCHAR},"%")
+		</if>
+		<!-- and PROBLEM_SOLVING_TIME is null -->
+		and DATA_STATE IS NULL
+		ORDER BY
+		MATERIAL_TIME asc
+		limit #{begin},#{end}
+	</select>
+	
+	<!-- 通过双击文本框修改表中数据 -->
+	<update id="updateByText" parameterType="com.warehouse.entity.NotStorageRecord">
+		update not_storage_record
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				FACTORY = #{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="processingType != null">
+				PROCESSING_TYPE = #{processingType,jdbcType=VARCHAR},
+			</if>
+			<if test="materialTime != null">
+				MATERIAL_TIME = #{materialTime,jdbcType=DATE},
+			</if>
+			<if test="materialDays != null">
+				MATERIAL_DAYS = #{materialDays,jdbcType=INTEGER},
+			</if>
+			<if test="estimatedDeliveryTime != null">
+				ESTIMATED_DELIVERY_TIME =
+				#{estimatedDeliveryTime,jdbcType=DATE},
+			</if>
+			<if test="problemFeedback != null">
+				PROBLEM_FEEDBACK = #{problemFeedback,jdbcType=VARCHAR},
+			</if>
+			<if test="reasonForDelay != null">
+				REASON_FOR_DELAY = #{reasonForDelay,jdbcType=VARCHAR},
+			</if>
+			<if test="personInCharge != null">
+				PERSON_IN_CHARGE = #{personInCharge,jdbcType=VARCHAR},
+			</if>
+			<if test="storageTime != null">
+				STORAGE_TIME = #{storageTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="memo != null">
+				MEMO = #{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="problemSolving != null">
+				PROBLEM_SOLVING = #{problemSolving,jdbcType=VARCHAR},
+			</if>
+			<if test="problemSolvingTime != null">
+				PROBLEM_SOLVING_TIME =
+				#{problemSolvingTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifier != null">
+				MODIFIER = #{modifier,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deletePeople != null">
+				DELETE_PEOPLE = #{deletePeople,jdbcType=VARCHAR},
+			</if>
+			<if test="completionTime != null">
+				COMPLETION_TIME = #{completionTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="completionPeople != null">
+				COMPLETION_PEOPLE = #{completionPeople,jdbcType=VARCHAR},
+			</if>
+			<if test="dataState != null">
+				DATA_STATE = #{dataState,jdbcType=VARCHAR},
+			</if>
+			<if test="problemState != null">
+				PROBLEM_STATE = #{problemState,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 数据假删除 -->
+	<update id="falseDelete" parameterType="com.warehouse.entity.NotStorageRecord">
+		update not_storage_record
+		<set>
+			<if test="dataState != null">
+				DATA_STATE = #{dataState,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id= #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/product/productSampleSituation.js"></script>
+<title>样衣情况</title>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">样衣情况</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div>
+					<div class="col-md-12">				
+						<div style="float: left;">
+							<form id="mySelect_From">
+								<font>波次查询</font> <input type="text" name="wave"id="wave" /> 
+								<font>序列号查询</font> <input type="text" name="sid" id="sid" />
+							    <font>商品编码查询</font> <input type="text" name="productCode" id="productCode" />
+							    <font>商品名称查询</font> <input type="text" name="productName" id="productName" />
+								<a id="checkbtn" class="btn btn-default">查 询</a>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-12"></div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="30" style="text-align: center; font-size: 16px;">样衣情况</th>
+							</tr>
+							<tr id="head">
+								<th style="text-align: center;">序列号</th>
+								<th style="text-align: center;">波次号</th>
+								<!-- <th style="text-align: center;">商品名称</th> -->
+								<th style="text-align: center;">商品编码</th>
+								<th style="text-align: center;">图片</th>
+								<th style="text-align: center;">订单等级</th>
+								<th style="text-align: center;">样衣发放状态</th>
+								<th style="text-align: center;">备注</th>
+								<th style="text-align: center;">样衣发放日期</th>
+								<th style="text-align: center;">创建时间</th>
+								<th style="text-align: center;">确认发放</th>
+								<!-- <th style="text-align: center;" >删除</th> -->
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+		</div>
+
+		<input type="hidden" value="${pageContext.request.contextPath}"
+			id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

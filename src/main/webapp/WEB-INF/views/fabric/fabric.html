@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="utf-8" />
+<@p.cache/> <@p.css/> <@p.js/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script
+	src="${pageContext.request.contextPath }/res/js/fabric/fabricMain.js"></script>
+<title>用料日报表</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">用料日报表</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="19" style="text-align: center; font-size: 16px;">
+									<button style="float: left;" class="btn btn-primary btn-lg"
+										data-toggle="modal" data-target="#myModal" id="add">添加</button>
+									用料日报表
+								</th>
+								<th colspan="6">波次号：<input type="text"
+									style="margin-top: 10px;" id="selBid">
+									<button style="float: right;" class="btn btn-primary btn-lg"
+										id="selSub">查询</button>
+								</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">日期</th>
+								<th style="text-align: center;">波号</th>
+								<th style="text-align: center;">面料</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">用量/单位</th>
+								<th style="text-align: center;">操作时间</th>
+								<th style="text-align: center;">设计图</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 添加模态框 -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加用料日报表数据</h4>
+					</div>
+
+					<form enctype="multipart/form-data" role="form" id="vender"
+						action="" method="post">
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<label for="b_id">波号</label> <input type="text"
+										class="form-control" name="b_id" id="b_ids"> <label
+										for="date">日期</label> <input type="text" class="form-control input-date"
+										name="date" id="dates">
+								</div>
+								<div id="div">
+									<div id="1" class="mydiv" style="float: left;">
+										<div class="col-md-6" style="float: left;">
+											<label for="fabric">面料名称</label> <input type="text"
+												class="form-control fabrics" name="fabric">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="consumption">用量</label> <input type="text"
+												class="form-control consumptions" name="consumption"
+												onkeyup="value=value.replace(/[^\d.-]/g,'')">
+										</div>
+										<div class="col-md-6" style="float: right;">
+											<input type="radio" checked="checked" name="company1"
+												class='company1' value="kg">kg <input type="radio"
+												name="company1" class='company1' value="M">M
+										</div>
+									</div>
+								</div>
+								<div>
+									<a href="javascript:void(0);" onclick="zjadd()">添加面料</a>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="submit" class="btn btn-primary" id="addSub">提交</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!--修改 模态框（Modal） -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">操作用料日报表数据</h4>
+					</div>
+
+					<form enctype="" role="" id="vender" action="" method="">
+						<div class="modal-body">
+							<div class="col-md-12">
+								<input type="hidden" class="form-control" name="id" id="id"
+									readonly="readonly">
+								<div class="col-md-6">
+									<label for="b_id">波号：</label> <input type="text"
+										class="form-control" name="b_id" id="b_id">
+								</div>
+								<div class="col-md-6">
+									<label for="date">日期：</label> <input type="text"
+										class="form-control input-date" name="date" id="date">
+								</div>
+								<div class="col-md-6">
+									<label for="fabric">面料名称：</label> <input type="text"
+										class="form-control" name="fabric" id="fabric">
+								</div>
+								<div class="col-md-6">
+									<label for="consumption">用量：</label> <input type="text"
+										class="form-control" name="consumption" id="consumption"
+										onkeyup="value=value.replace(/[^\d.-]/g,'')">
+								</div>
+
+								<div class="col-md-6" style="margin-top: 35px;">
+									<input type="radio" name="company" class='company' value="kg"
+										checked="checked">kg <input type="radio"
+										name="company" class='company' value="M">M
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" onclick="del()">删除</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="updateSub"
+								style="background-color: #428bca;" disabled="disabled">修改</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- 隐藏的绝对路径，供jquery使用 -->
+		<input type="hidden" value="${pageContext.request.contextPath}"
+			id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

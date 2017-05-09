@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/cutting/layer/layer.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/printing/pieceProcessCase.js"></script>
+<title>片印加工情况</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">片印加工情况</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-1">
+								<label for="wave">波次号</label> <input type="text"
+									class="form-control" name="wave" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="printingFactory">印花工厂</label> <input type="text"
+									class="form-control" name="printingFactory"
+									id="printingFactory" placeholder="">
+							</div>
+						</form>
+						<div class="col-md-1">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="mySelectBtn">查询按钮</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="24" style="text-align: center; font-size: 16px;">片印加工情况</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">商品编号</th>
+								<th style="text-align: center;">设计师</th>
+								<th style="text-align: center;">参考印花</th>
+								<th style="text-align: center;">设计图</th>
+								<th style="text-align: center;">工艺单</th>
+								<th style="text-align: center;">图样工艺单</th>
+								<th style="text-align: center;">尺码详情</th>
+								<th style="text-align: center;">总件数</th>
+								<th style="text-align: center;">印花工厂</th>
+								<th style="text-align: center;">片印领料日期</th>
+								<th style="text-align: center;">片印回样日期</th>
+								<th style="text-align: center;">片印要求</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

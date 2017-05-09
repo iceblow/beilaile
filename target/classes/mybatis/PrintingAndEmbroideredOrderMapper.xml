@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.PrintingAndEmbroideredOrderMapper">
+	<resultMap id="BaseResultMap"
+		type="com.warehouse.entity.PrintingAndEmbroideredOrder">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_COED" property="productCoed" jdbcType="VARCHAR" />
+		<result column="DESIGNER" property="designer" jdbcType="VARCHAR" />
+		<result column="REFERENCE_PRINTING" property="referencePrinting"
+			jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="PATTERN_CRAFTS_ORDER" property="patternCraftsOrder"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDERS" property="orders" jdbcType="INTEGER" />
+		<result column="PRINTING_OR_EMBROIDERED" property="printingOrEmbroidered"
+			jdbcType="VARCHAR" />
+		<result column="IF_PRINTING" property="ifPrinting" jdbcType="VARCHAR" />
+		<result column="FABRIC_A" property="fabricA" jdbcType="VARCHAR" />
+		<result column="FABRIC_B" property="fabricB" jdbcType="VARCHAR" />
+		<result column="FABRIC_C" property="fabricC" jdbcType="VARCHAR" />
+		<result column="FABRIC_D" property="fabricD" jdbcType="VARCHAR" />
+		<result column="FABRIC_E" property="fabricE" jdbcType="VARCHAR" />
+		<result column="REQUIRE_PRINTING" property="requirePrinting"
+			jdbcType="VARCHAR" />
+		<result column="IF_SLICE" property="ifSlice" jdbcType="VARCHAR" />
+		<result column="SLICE_ADDRESS" property="sliceAddress"
+			jdbcType="VARCHAR" />
+		<result column="REQUIRE_SLICE" property="requireSlice"
+			jdbcType="VARCHAR" />
+		<result column="IF_EMBROIDER" property="ifEmbroider" jdbcType="VARCHAR" />
+		<result column="EMBROIDER_ADDRESS" property="embroiderAddress"
+			jdbcType="VARCHAR" />
+		<result column="REQUIRE_EMBROIDER" property="requireEmbroider"
+			jdbcType="VARCHAR" />
+		<result column="COMPLETE_ORDER" property="completeOrder"
+			jdbcType="VARCHAR" />
+		<result column="COMPLETE_ORDER_TIME" property="completeOrderTime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, WAVE, PRODUCT_COED, DESIGNER, REFERENCE_PRINTING,
+		DESIGN_IMG,
+		SAMPLE_IMG, PATTERN_CRAFTS_ORDER,
+		ORDER_DETAILS, ORDERS,
+		PRINTING_OR_EMBROIDERED, IF_PRINTING, FABRIC_A, FABRIC_B,
+		FABRIC_C,
+		FABRIC_D, FABRIC_E, REQUIRE_PRINTING, IF_SLICE,
+		SLICE_ADDRESS,
+		REQUIRE_SLICE,
+		IF_EMBROIDER, EMBROIDER_ADDRESS, REQUIRE_EMBROIDER,
+		COMPLETE_ORDER,
+		COMPLETE_ORDER_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from printing_and_embroidered_order
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="getCount" parameterType="com.warehouse.entity.PrintingAndEmbroideredOrder"
+		resultType="java.lang.Integer">
+		select count(*) from
+		printing_and_embroidered_order where 1=1
+		<if test='wave!="" and wave!=null'>
+			AND WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if test='productCoed!="" and productCoed!=null'>
+			AND PRODUCT_COED LIKE CONCAT("%",#{productCoed},"%")
+		</if>
+	</select>
+	<select id="getDataByPage" parameterType="com.warehouse.entity.PrintingAndEmbroideredOrder"
+		resultMap="BaseResultMap">
+		select * from printing_and_embroidered_order where 1=1
+		<if test='wave!="" and wave!=null'>
+			AND WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if test='productCoed!="" and productCoed!=null'>
+			AND PRODUCT_COED LIKE CONCAT("%",#{productCoed},"%")
+		</if>
+		ORDER BY
+		COMPLETE_ORDER
+		ASC,WAVE ASC LIMIT #{begin},#{end}
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.PrintingAndEmbroideredOrder">
+		update printing_and_embroidered_order
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productCoed != null">
+				PRODUCT_COED = #{productCoed,jdbcType=VARCHAR},
+			</if>
+			<if test="designer != null">
+				DESIGNER = #{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="referencePrinting != null">
+				REFERENCE_PRINTING =
+				#{referencePrinting,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="patternCraftsOrder != null">
+				PATTERN_CRAFTS_ORDER =
+				#{patternCraftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				ORDERS = #{orders,jdbcType=INTEGER},
+			</if>
+			<if test="printingOrEmbroidered != null">
+				PRINTING_OR_EMBROIDERED =
+				#{printingOrEmbroidered,jdbcType=VARCHAR},
+			</if>
+			<if test="ifPrinting != null">
+				IF_PRINTING = #{ifPrinting,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricA != null">
+				FABRIC_A = #{fabricA,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricB != null">
+				FABRIC_B = #{fabricB,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricC != null">
+				FABRIC_C = #{fabricC,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricD != null">
+				FABRIC_D = #{fabricD,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricE != null">
+				FABRIC_E = #{fabricE,jdbcType=VARCHAR},
+			</if>
+			<if test="requirePrinting != null">
+				REQUIRE_PRINTING = #{requirePrinting,jdbcType=VARCHAR},
+			</if>
+			<if test="ifSlice != null">
+				IF_SLICE = #{ifSlice,jdbcType=VARCHAR},
+			</if>
+			<if test="sliceAddress != null">
+				SLICE_ADDRESS = #{sliceAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="requireSlice != null">
+				REQUIRE_SLICE = #{requireSlice,jdbcType=VARCHAR},
+			</if>
+			<if test="ifEmbroider != null">
+				IF_EMBROIDER = #{ifEmbroider,jdbcType=VARCHAR},
+			</if>
+			<if test="embroiderAddress != null">
+				EMBROIDER_ADDRESS = #{embroiderAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="requireEmbroider != null">
+				REQUIRE_EMBROIDER = #{requireEmbroider,jdbcType=VARCHAR},
+			</if>
+			<if test="completeOrder != null">
+				COMPLETE_ORDER = #{completeOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="completeOrderTime != null">
+				COMPLETE_ORDER_TIME =
+				#{completeOrderTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.warehouse.entity.PrintingAndEmbroideredOrder">
+		update
+		printing_and_embroidered_order
+		set
+		PRINTING_OR_EMBROIDERED =
+		#{printingOrEmbroidered,jdbcType=VARCHAR},
+		IF_PRINTING =
+		#{ifPrinting,jdbcType=VARCHAR},
+		FABRIC_A =
+		#{fabricA,jdbcType=VARCHAR},
+		FABRIC_B = #{fabricB,jdbcType=VARCHAR},
+		FABRIC_C =
+		#{fabricC,jdbcType=VARCHAR},
+		FABRIC_D =
+		#{fabricD,jdbcType=VARCHAR},
+		FABRIC_E = #{fabricE,jdbcType=VARCHAR},
+		REQUIRE_PRINTING =
+		#{requirePrinting,jdbcType=VARCHAR},
+		IF_SLICE =
+		#{ifSlice,jdbcType=VARCHAR},
+		SLICE_ADDRESS =
+		#{sliceAddress,jdbcType=VARCHAR},
+		REQUIRE_SLICE =
+		#{requireSlice,jdbcType=VARCHAR},
+		IF_EMBROIDER =
+		#{ifEmbroider,jdbcType=VARCHAR},
+		EMBROIDER_ADDRESS =
+		#{embroiderAddress,jdbcType=VARCHAR},
+		REQUIRE_EMBROIDER =
+		#{requireEmbroider,jdbcType=VARCHAR},
+		COMPLETE_ORDER = '理单完成',
+		COMPLETE_ORDER_TIME = CURDATE()
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 根据波次修改信息 -->
+	<update id="updateDataByWave" parameterType="String">
+		UPDATE printing_and_embroidered_order
+		SET PRINTING_OR_EMBROIDERED = NULL,
+		  IF_PRINTING = NULL,
+		  FABRIC_A = NULL,
+		  FABRIC_B = NULL,
+		  FABRIC_C = NULL,
+		  FABRIC_D = NULL,
+		  FABRIC_E = NULL,
+		  REQUIRE_PRINTING = NULL,
+		  IF_SLICE = NULL,
+		  SLICE_ADDRESS=NULL,
+		  REQUIRE_SLICE=NULL,
+		  IF_EMBROIDER=NULL,
+		  EMBROIDER_ADDRESS=NULL,
+		  REQUIRE_EMBROIDER=NULL,
+		  COMPLETE_ORDER=NULL,
+		  COMPLETE_ORDER_TIME=NULL
+		WHERE
+		  WAVE=#{wave}
+	</update>
+</mapper>

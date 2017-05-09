@@ -1,0 +1,1610 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.BuildProgressMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.BuildProgress">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="DESIGNERS" property="designers" jdbcType="VARCHAR" />
+		<result column="REFERENCE_WAVE" property="referenceWave"
+			jdbcType="VARCHAR" />
+		<result column="REFERENCE_PRINTING" property="referencePrinting"
+			jdbcType="VARCHAR" />
+		<result column="CRAFTS_ORDER" property="craftsOrder" jdbcType="VARCHAR" />
+		<result column="PATTERN_CRAFTS_ORDER" property="patternCraftsOrder"
+			jdbcType="VARCHAR" />
+		<result column="SIZE_CHART" property="sizeChart" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="IMAGE" property="image" jdbcType="VARCHAR" />
+		<result column="ORDERS" property="orders" jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="COLOUR" property="colour" jdbcType="VARCHAR" />
+		<result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR" />
+		<result column="PIECES_APPROVED" property="piecesApproved"
+			jdbcType="VARCHAR" />
+		<result column="FOLWER_FACTORY" property="folwerFactory"
+			jdbcType="VARCHAR" />
+		<result column="PROOFING_TIME" property="proofingTime"
+			jdbcType="VARCHAR" />
+		<result column="PROOFING_COMPLETION_TIME" property="proofingCompletionTime"
+			jdbcType="VARCHAR" />
+		<result column="LARGE_CARGO_TIME" property="largeCargoTime"
+			jdbcType="VARCHAR" />
+		<result column="LARGE_CARGO_COMPLETION_TIME" property="largeCargoCompletionTime"
+			jdbcType="VARCHAR" />
+		<result column="CUT_LARGE_RECEIVE_TIME" property="cutLargeReceiveTime"
+			jdbcType="VARCHAR" />
+		<result column="CUT_LARGE_RETURN_TIME" property="cutLargeReturnTime"
+			jdbcType="VARCHAR" />
+		<result column="QUOT" property="quot" jdbcType="DECIMAL" />
+		<result column="PRINTING_PRICE" property="printingPrice"
+			jdbcType="DECIMAL" />
+		<result column="PIECES_PRICE" property="piecesPrice" jdbcType="DECIMAL" />
+		<result column="FLOWER_PRICE" property="flowerPrice" jdbcType="DECIMAL" />
+		<result column="ACCESSORIES_PURCHASING_TIME" property="accessoriesPurchasingTime"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_STORAGE_TIME" property="fabricStorageTime"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_RELEASE_TIME" property="fabricReleaseTime"
+			jdbcType="VARCHAR" />
+		<result column="CUTTING_TIME" property="cuttingTime" jdbcType="VARCHAR" />
+		<result column="CROP_COMPLETION_TIME" property="cropCompletionTime"
+			jdbcType="VARCHAR" />
+		<result column="CROP_NUMBER" property="cropNumber" jdbcType="VARCHAR" />
+		<result column="FACTORY_PICKING_TIME" property="factoryPickingTime"
+			jdbcType="VARCHAR" />
+		<result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+		<result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+		<result column="ORDER_PRICE" property="orderPrice" jdbcType="DECIMAL" />
+		<result column="PLANNED_SHIPPING_TIME" property="plannedShippingTime"
+			jdbcType="VARCHAR" />
+		<result column="STORAGE_TIME" property="storageTime" jdbcType="VARCHAR" />
+		<result column="STORAGE_NUMBER" property="storageNumber"
+			jdbcType="VARCHAR" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="STATE" property="state" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+		<result column="urgent_state" property="urgentState" jdbcType="INTEGER" />
+		<result column="patternCompletionTime" property="patternCompletionTime"
+			jdbcType="VARCHAR" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="PLATEMAKING_TIME" property="plateMakingTime" jdbcType="VARCHAR" />
+		<result column="PLAN_FACTORY_PICKING_TIME" property="planFactoryPickingTime" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DESIGNERS, REFERENCE_WAVE, REFERENCE_PRINTING,
+		CRAFTS_ORDER,
+		PATTERN_CRAFTS_ORDER,
+		SIZE_CHART, ORINGINAL_WAVE, WAVE,
+		IMAGE, ORDERS,
+		ORDER_DETAILS,
+		COLOUR,
+		RELEASE_TIME, PIECES_APPROVED,
+		FOLWER_FACTORY, PROOFING_TIME,
+		PROOFING_COMPLETION_TIME,
+		LARGE_CARGO_TIME,
+		LARGE_CARGO_COMPLETION_TIME, CUT_LARGE_RECEIVE_TIME,
+		CUT_LARGE_RETURN_TIME,
+		QUOT, PRINTING_PRICE, PIECES_PRICE,
+		FLOWER_PRICE,
+		ACCESSORIES_PURCHASING_TIME, FABRIC_STORAGE_TIME,
+		FABRIC_RELEASE_TIME, CUTTING_TIME, CROP_COMPLETION_TIME, CROP_NUMBER,
+		FACTORY_PICKING_TIME,
+		FACTORY, ORDER_TYPE, ORDER_PRICE,
+		PLANNED_SHIPPING_TIME, STORAGE_TIME,
+		STORAGE_NUMBER,
+		REMARKS, STATE,
+		ADD_TIME, MODIFY_TIME, DEL_TIME,urgent_state,patternCompletionTime,productCode,PLATEMAKING_TIME,PLAN_FACTORY_PICKING_TIME
+	</sql>
+	<select id="findProduct" resultMap="BaseResultMap"
+		parameterType="String">
+		SELECT DESIGNERS,WAVE,IMAGE FROM build_progress
+	</select>
+	<select id="getModifyBuildProgressByWave" resultMap="BaseResultMap"
+		parameterType="String">
+		SELECT * FROM build_progress WHERE STATE = '1' AND
+		WAVE=#{wave,jdbcType=VARCHAR}
+	</select>
+	<select id="getAnyValSumOrderNumber" resultType="java.lang.Integer">
+		SELECT SUM(ORDERS) as sumOrderNumber FROM build_progress where STATE =
+		'1' AND 1=1
+		<if
+			test='orderType != null and orderType != "" and orderType != "N" and orderType != "Y"'>
+			AND ORDER_TYPE LIKE CONCAT(CONCAT('%',
+			#{orderType,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='orderType =="N" '>
+			AND (ORDER_TYPE='' OR ORDER_TYPE
+			IS
+			NULL)
+		</if>
+		<if test='orderType =="Y"'>
+			AND ORDER_TYPE !=''
+		</if>
+		<if
+			test='cutLargeReceiveTime != null and cutLargeReceiveTime != "" and cutLargeReceiveTime != "N" and cutLargeReceiveTime != "Y"'>
+			AND CUT_LARGE_RECEIVE_TIME LIKE CONCAT(CONCAT('%',
+			#{cutLargeReceiveTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='cutLargeReceiveTime =="N" '>
+			AND (CUT_LARGE_RECEIVE_TIME='' OR CUT_LARGE_RECEIVE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cutLargeReceiveTime =="Y"'>
+			AND CUT_LARGE_RECEIVE_TIME !=''
+		</if>
+		<if
+			test='plannedShippingTime != null and plannedShippingTime != "" and plannedShippingTime != "N" and plannedShippingTime != "Y"'>
+			AND PLANNED_SHIPPING_TIME LIKE CONCAT(CONCAT('%',
+			#{plannedShippingTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='plannedShippingTime =="N" '>
+			AND (PLANNED_SHIPPING_TIME='' OR PLANNED_SHIPPING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='plannedShippingTime =="Y"'>
+			AND PLANNED_SHIPPING_TIME !=''
+		</if>
+		<if
+			test='cutLargeReturnTime != null and cutLargeReturnTime != "" and cutLargeReturnTime != "N" and cutLargeReturnTime != "Y"'>
+			AND CUT_LARGE_RETURN_TIME LIKE CONCAT(CONCAT('%',
+			#{cutLargeReceiveTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='cutLargeReturnTime =="N" '>
+			AND (CUT_LARGE_RETURN_TIME='' OR CUT_LARGE_RETURN_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cutLargeReturnTime =="Y"'>
+			AND CUT_LARGE_RETURN_TIME !=''
+		</if>
+		<if
+			test='fabricStorageTime != null and fabricStorageTime != "" and fabricStorageTime != "N" and fabricStorageTime != "Y"'>
+			AND FABRIC_STORAGE_TIME LIKE CONCAT(CONCAT('%',
+			#{fabricStorageTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricStorageTime =="N" '>
+			AND (FABRIC_STORAGE_TIME='' OR FABRIC_STORAGE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='fabricStorageTime =="Y"'>
+			AND FABRIC_STORAGE_TIME !=''
+		</if>
+		<if
+			test='fabricReleaseTime != null and fabricReleaseTime != "" and fabricReleaseTime != "N" and fabricReleaseTime != "Y"'>
+			AND FABRIC_RELEASE_TIME LIKE CONCAT(CONCAT('%',
+			#{fabricStorageTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricReleaseTime =="N" '>
+			AND (FABRIC_RELEASE_TIME='' OR FABRIC_RELEASE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='fabricReleaseTime =="Y"'>
+			AND FABRIC_RELEASE_TIME !=''
+		</if>
+		<if
+			test='designers != null and designers != "" and designers != "N" and designers != "Y"'>
+			AND DESIGNERS LIKE CONCAT(CONCAT('%',
+			#{designers,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='designers =="N" '>
+			AND (DESIGNERS='' OR DESIGNERS
+			IS
+			NULL)
+		</if>
+		<if test='designers =="Y"'>
+			AND DESIGNERS !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND WAVE ='' OR WAVE
+			IS
+			NULL
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='releaseTime != null and releaseTime != "" and releaseTime != "N" and releaseTime != "Y"'>
+			AND RELEASE_TIME LIKE
+			CONCAT('%',#{releaseTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='releaseTime == "N"'>
+			AND (RELEASE_TIME ='' OR RELEASE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='releaseTime == "Y"'>
+			AND RELEASE_TIME !=''
+		</if>
+		<if
+			test='piecesApproved != null  and piecesApproved != "" and piecesApproved != "N" and piecesApproved != "Y"'>
+
+			AND PIECES_APPROVED LIKE
+			CONCAT('%',#{piecesApproved,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='piecesApproved == "N"'>
+			AND (PIECES_APPROVED ='' OR PIECES_APPROVED
+			IS
+			NULL)
+		</if>
+		<if test='piecesApproved == "Y"'>
+			AND PIECES_APPROVED !=''
+		</if>
+		<if
+			test='folwerFactory != null and folwerFactory !="" and folwerFactory != "N" and folwerFactory != "Y"'>
+			AND FOLWER_FACTORY LIKE
+			CONCAT('%',#{folwerFactory,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='folwerFactory == "N"'>
+			AND (FOLWER_FACTORY ='' OR FOLWER_FACTORY
+			IS
+			NULL)
+		</if>
+		<if test='folwerFactory == "Y"'>
+			AND FOLWER_FACTORY !=''
+		</if>
+		<if
+			test='proofingTime != null and proofingTime !="" and proofingTime != "N" and proofingTime != "Y"'>
+			AND PROOFING_TIME LIKE
+			CONCAT('%',#{proofingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='proofingTime =="N"'>
+			AND (PROOFING_TIME ='' OR PROOFING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='proofingTime =="Y"'>
+			AND PROOFING_TIME !=''
+		</if>
+		<if
+			test='proofingCompletionTime != null and proofingCompletionTime !="" and proofingCompletionTime != "N" and proofingCompletionTime != "Y"'>
+			AND PROOFING_COMPLETION_TIME LIKE
+			CONCAT('%',#{proofingCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='proofingCompletionTime == "N"'>
+			AND (PROOFING_COMPLETION_TIME ='' OR
+			PROOFING_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if test='proofingCompletionTime == "Y"'>
+			AND (PROOFING_COMPLETION_TIME !='' OR
+			PROOFING_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if
+			test='largeCargoTime != null and largeCargoTime !="" and largeCargoTime != "N" and largeCargoTime != "Y"'>
+			AND LARGE_CARGO_TIME LIKE
+			CONCAT('%',#{largeCargoTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='largeCargoTime =="N" '>
+			AND (LARGE_CARGO_TIME ='' OR LARGE_CARGO_TIME
+			IS
+			NULL)
+		</if>
+		<if test='largeCargoTime =="Y" '>
+			AND LARGE_CARGO_TIME !=''
+		</if>
+		<if
+			test='largeCargoCompletionTime != null and largeCargoCompletionTime !="" and largeCargoCompletionTime != "N" and largeCargoCompletionTime != "Y"'>
+			AND LARGE_CARGO_COMPLETION_TIME LIKE
+			CONCAT('%',#{largeCargoCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='largeCargoCompletionTime =="N"'>
+			AND (LARGE_CARGO_COMPLETION_TIME ='' OR
+			LARGE_CARGO_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if test='largeCargoCompletionTime =="Y"'>
+			AND LARGE_CARGO_COMPLETION_TIME !=''
+		</if>
+		<if
+			test='accessoriesPurchasingTime != null and  accessoriesPurchasingTime !="" and accessoriesPurchasingTime != "N" and accessoriesPurchasingTime != "Y"'>
+			AND ACCESSORIES_PURCHASING_TIME LIKE
+			CONCAT('%',#{accessoriesPurchasingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='accessoriesPurchasingTime =="N"'>
+			AND (ACCESSORIES_PURCHASING_TIME ='' OR
+			ACCESSORIES_PURCHASING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='accessoriesPurchasingTime =="Y"'>
+			AND ACCESSORIES_PURCHASING_TIME !=''
+		</if>
+		<if
+			test='cuttingTime != null and cuttingTime !="" and cuttingTime != "N" and cuttingTime != "Y"'>
+			AND CUTTING_TIME LIKE
+			CONCAT('%',#{cuttingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cuttingTime =="N"'>
+			AND (CUTTING_TIME ='' OR CUTTING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cuttingTime =="Y"'>
+			AND CUTTING_TIME !=''
+		</if>
+		<if
+			test='cropCompletionTime != null and cropCompletionTime !="" and cropCompletionTime != "N" and cropCompletionTime != "Y"'>
+			AND CROP_COMPLETION_TIME LIKE
+			CONCAT('%',#{cropCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cropCompletionTime=="N"'>
+			AND (CROP_COMPLETION_TIME ='' OR CROP_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cropCompletionTime=="Y"'>
+			AND CROP_COMPLETION_TIME !=''
+		</if>
+		<if
+			test='cropNumber != null and cropNumber !="" and cropNumber != "N" and cropNumber != "Y"'>
+			AND CROP_NUMBER LIKE
+			CONCAT('%',#{cropNumber,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cropNumber=="N"'>
+			AND (CROP_NUMBER ='' OR CROP_NUMBER
+			IS
+			NULL)
+		</if>
+		<if test='cropNumber=="Y"'>
+			AND CROP_NUMBER !=''
+		</if>
+		<if
+			test='factoryPickingTime != null and factoryPickingTime !="" and factoryPickingTime != "N" and factoryPickingTime != "Y"'>
+			AND FACTORY_PICKING_TIME LIKE
+			CONCAT('%',#{factoryPickingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factoryPickingTime =="N"'>
+			AND (FACTORY_PICKING_TIME ='' OR FACTORY_PICKING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='factoryPickingTime =="Y"'>
+			AND FACTORY_PICKING_TIME !=''
+		</if>
+		<if
+			test='factory != null and factory !="" and factory != "N" and factory != "Y"'>
+			AND FACTORY LIKE
+			CONCAT('%',#{factory,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factory =="N"'>
+			AND (FACTORY ='' OR FACTORY
+			IS
+			NULL)
+		</if>
+		<if test='factory =="Y"'>
+			AND FACTORY !=''
+		</if>
+		<if
+			test='storageTime != null and storageTime !="" and storageTime != "N" and storageTime != "Y"'>
+			AND STORAGE_TIME LIKE
+			CONCAT('%',#{storageTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='storageTime =="N"'>
+			AND (STORAGE_TIME ='' OR STORAGE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='storageTime =="Y"'>
+			AND STORAGE_TIME !=''
+		</if>
+		<if
+			test='storageNumber != null and storageNumber !="" and storageNumber != "N"  and storageNumber != "Y" '>
+			AND
+			STORAGE_NUMBER LIKE
+			CONCAT('%',#{storageNumber,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='storageNumber =="N" '>
+			AND
+			(STORAGE_NUMBER ='' OR STORAGE_NUMBER
+			IS
+			NULL)
+		</if>
+		<if test='storageNumber =="Y" '>
+			AND
+			STORAGE_NUMBER !=''
+		</if>
+		<if
+			test='patternCompletionTime != null and patternCompletionTime !="" and patternCompletionTime != "N"  and patternCompletionTime != "Y" '>
+			AND
+			patternCompletionTime LIKE
+			CONCAT('%',#{patternCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='patternCompletionTime =="N" '>
+			AND
+			(patternCompletionTime ='' OR patternCompletionTime
+			IS
+			NULL)
+		</if>
+		<if test='patternCompletionTime =="Y" '>
+			AND
+			patternCompletionTime !=''
+		</if>
+		<if test='plateMakingTime =="N" '>
+			AND
+			(PLATEMAKING_TIME ='' OR PLATEMAKING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='plateMakingTime =="Y" '>
+			AND
+			PLATEMAKING_TIME !=''
+		</if>
+		<if	test='plateMakingTime != null and plateMakingTime !="" and plateMakingTime != "N" and plateMakingTime != "Y"'>
+			AND PLATEMAKING_TIME LIKE
+			CONCAT('%',#{plateMakingTime,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+	<!-- 带条件查询总条数 -->
+	<select id="getAnyVaTotalPageCount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM build_progress where STATE = '1' AND 1=1
+		<if
+			test='orderType != null and orderType != "" and orderType != "N" and orderType != "Y"'>
+			AND ORDER_TYPE LIKE CONCAT(CONCAT('%',
+			#{orderType,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='orderType =="N" '>
+			AND (ORDER_TYPE='' OR ORDER_TYPE
+			IS
+			NULL)
+		</if>
+		<if test='orderType =="Y"'>
+			AND ORDER_TYPE !=''
+		</if>
+		<if
+			test='cutLargeReceiveTime != null and cutLargeReceiveTime != "" and cutLargeReceiveTime != "N" and cutLargeReceiveTime != "Y"'>
+			AND CUT_LARGE_RECEIVE_TIME LIKE CONCAT(CONCAT('%',
+			#{cutLargeReceiveTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='cutLargeReceiveTime =="N" '>
+			AND (CUT_LARGE_RECEIVE_TIME='' OR CUT_LARGE_RECEIVE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cutLargeReceiveTime =="Y"'>
+			AND CUT_LARGE_RECEIVE_TIME !=''
+		</if>
+		<if
+			test='plannedShippingTime != null and plannedShippingTime != "" and plannedShippingTime != "N" and plannedShippingTime != "Y"'>
+			AND PLANNED_SHIPPING_TIME LIKE CONCAT(CONCAT('%',
+			#{plannedShippingTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='plannedShippingTime =="N" '>
+			AND (PLANNED_SHIPPING_TIME='' OR PLANNED_SHIPPING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='plannedShippingTime =="Y"'>
+			AND PLANNED_SHIPPING_TIME !=''
+		</if>
+		<if
+			test='cutLargeReturnTime != null and cutLargeReturnTime != "" and cutLargeReturnTime != "N" and cutLargeReturnTime != "Y"'>
+			AND CUT_LARGE_RETURN_TIME LIKE CONCAT(CONCAT('%',
+			#{cutLargeReceiveTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='cutLargeReturnTime =="N" '>
+			AND (CUT_LARGE_RETURN_TIME='' OR CUT_LARGE_RETURN_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cutLargeReturnTime =="Y"'>
+			AND CUT_LARGE_RETURN_TIME !=''
+		</if>
+		<if
+			test='fabricStorageTime != null and fabricStorageTime != "" and fabricStorageTime != "N" and fabricStorageTime != "Y"'>
+			AND FABRIC_STORAGE_TIME LIKE CONCAT(CONCAT('%',
+			#{fabricStorageTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricStorageTime =="N" '>
+			AND (FABRIC_STORAGE_TIME='' OR FABRIC_STORAGE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='fabricStorageTime =="Y"'>
+			AND FABRIC_STORAGE_TIME !=''
+		</if>
+		<if
+			test='fabricReleaseTime != null and fabricReleaseTime != "" and fabricReleaseTime != "N" and fabricReleaseTime != "Y"'>
+			AND FABRIC_RELEASE_TIME LIKE CONCAT(CONCAT('%',
+			#{fabricStorageTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricReleaseTime =="N" '>
+			AND (FABRIC_RELEASE_TIME='' OR FABRIC_RELEASE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='fabricReleaseTime =="Y"'>
+			AND FABRIC_RELEASE_TIME !=''
+		</if>
+		<if
+			test='designers != null and designers != "" and designers != "N" and designers != "Y"'>
+			AND DESIGNERS LIKE CONCAT(CONCAT('%',
+			#{designers,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='designers =="N" '>
+			AND (DESIGNERS='' OR DESIGNERS
+			IS
+			NULL)
+		</if>
+		<if test='designers =="Y"'>
+			AND DESIGNERS !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND WAVE ='' OR WAVE
+			IS
+			NULL
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='releaseTime != null and releaseTime != "" and releaseTime != "N" and releaseTime != "Y"'>
+			AND RELEASE_TIME LIKE
+			CONCAT('%',#{releaseTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='releaseTime == "N"'>
+			AND (RELEASE_TIME ='' OR RELEASE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='releaseTime == "Y"'>
+			AND RELEASE_TIME !=''
+		</if>
+		<if
+			test='piecesApproved != null  and piecesApproved != "" and piecesApproved != "N" and piecesApproved != "Y"'>
+
+			AND PIECES_APPROVED LIKE
+			CONCAT('%',#{piecesApproved,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='piecesApproved == "N"'>
+			AND (PIECES_APPROVED ='' OR PIECES_APPROVED
+			IS
+			NULL)
+		</if>
+		<if test='piecesApproved == "Y"'>
+			AND PIECES_APPROVED !=''
+		</if>
+		<if
+			test='folwerFactory != null and folwerFactory !="" and folwerFactory != "N" and folwerFactory != "Y"'>
+			AND FOLWER_FACTORY LIKE
+			CONCAT('%',#{folwerFactory,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='folwerFactory == "N"'>
+			AND (FOLWER_FACTORY ='' OR FOLWER_FACTORY
+			IS
+			NULL)
+		</if>
+		<if test='folwerFactory == "Y"'>
+			AND FOLWER_FACTORY !=''
+		</if>
+		<if
+			test='proofingTime != null and proofingTime !="" and proofingTime != "N" and proofingTime != "Y"'>
+			AND PROOFING_TIME LIKE
+			CONCAT('%',#{proofingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='proofingTime =="N"'>
+			AND (PROOFING_TIME ='' OR PROOFING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='proofingTime =="Y"'>
+			AND PROOFING_TIME !=''
+		</if>
+		<if
+			test='proofingCompletionTime != null and proofingCompletionTime !="" and proofingCompletionTime != "N" and proofingCompletionTime != "Y"'>
+			AND PROOFING_COMPLETION_TIME LIKE
+			CONCAT('%',#{proofingCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='proofingCompletionTime == "N"'>
+			AND (PROOFING_COMPLETION_TIME ='' OR
+			PROOFING_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if test='proofingCompletionTime == "Y"'>
+			AND (PROOFING_COMPLETION_TIME !='' OR
+			PROOFING_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if
+			test='largeCargoTime != null and largeCargoTime !="" and largeCargoTime != "N" and largeCargoTime != "Y"'>
+			AND LARGE_CARGO_TIME LIKE
+			CONCAT('%',#{largeCargoTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='largeCargoTime =="N" '>
+			AND (LARGE_CARGO_TIME ='' OR LARGE_CARGO_TIME
+			IS
+			NULL)
+		</if>
+		<if test='largeCargoTime =="Y" '>
+			AND LARGE_CARGO_TIME !=''
+		</if>
+		<if
+			test='largeCargoCompletionTime != null and largeCargoCompletionTime !="" and largeCargoCompletionTime != "N" and largeCargoCompletionTime != "Y"'>
+			AND LARGE_CARGO_COMPLETION_TIME LIKE
+			CONCAT('%',#{largeCargoCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='largeCargoCompletionTime =="N"'>
+			AND (LARGE_CARGO_COMPLETION_TIME ='' OR
+			LARGE_CARGO_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if test='largeCargoCompletionTime =="Y"'>
+			AND LARGE_CARGO_COMPLETION_TIME !=''
+		</if>
+		<if
+			test='accessoriesPurchasingTime != null and  accessoriesPurchasingTime !="" and accessoriesPurchasingTime != "N" and accessoriesPurchasingTime != "Y"'>
+			AND ACCESSORIES_PURCHASING_TIME LIKE
+			CONCAT('%',#{accessoriesPurchasingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='accessoriesPurchasingTime =="N"'>
+			AND (ACCESSORIES_PURCHASING_TIME ='' OR
+			ACCESSORIES_PURCHASING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='accessoriesPurchasingTime =="Y"'>
+			AND ACCESSORIES_PURCHASING_TIME !=''
+		</if>
+		<if
+			test='cuttingTime != null and cuttingTime !="" and cuttingTime != "N" and cuttingTime != "Y"'>
+			AND CUTTING_TIME LIKE
+			CONCAT('%',#{cuttingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cuttingTime =="N"'>
+			AND (CUTTING_TIME ='' OR CUTTING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cuttingTime =="Y"'>
+			AND CUTTING_TIME !=''
+		</if>
+		<if
+			test='cropCompletionTime != null and cropCompletionTime !="" and cropCompletionTime != "N" and cropCompletionTime != "Y"'>
+			AND CROP_COMPLETION_TIME LIKE
+			CONCAT('%',#{cropCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cropCompletionTime=="N"'>
+			AND (CROP_COMPLETION_TIME ='' OR CROP_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cropCompletionTime=="Y"'>
+			AND CROP_COMPLETION_TIME !=''
+		</if>
+		<if
+			test='cropNumber != null and cropNumber !="" and cropNumber != "N" and cropNumber != "Y"'>
+			AND CROP_NUMBER LIKE
+			CONCAT('%',#{cropNumber,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cropNumber=="N"'>
+			AND (CROP_NUMBER ='' OR CROP_NUMBER
+			IS
+			NULL)
+		</if>
+		<if test='cropNumber=="Y"'>
+			AND CROP_NUMBER !=''
+		</if>
+		<if
+			test='factoryPickingTime != null and factoryPickingTime !="" and factoryPickingTime != "N" and factoryPickingTime != "Y"'>
+			AND FACTORY_PICKING_TIME LIKE
+			CONCAT('%',#{factoryPickingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factoryPickingTime =="N"'>
+			AND (FACTORY_PICKING_TIME ='' OR FACTORY_PICKING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='factoryPickingTime =="Y"'>
+			AND FACTORY_PICKING_TIME !=''
+		</if>
+		<if
+			test='factory != null and factory !="" and factory != "N" and factory != "Y"'>
+			AND FACTORY LIKE
+			CONCAT('%',#{factory,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factory =="N"'>
+			AND (FACTORY ='' OR FACTORY
+			IS
+			NULL)
+		</if>
+		<if test='factory =="Y"'>
+			AND FACTORY !=''
+		</if>
+		<if
+			test='storageTime != null and storageTime !="" and storageTime != "N" and storageTime != "Y"'>
+			AND STORAGE_TIME LIKE
+			CONCAT('%',#{storageTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='storageTime =="N"'>
+			AND (STORAGE_TIME ='' OR STORAGE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='storageTime =="Y"'>
+			AND STORAGE_TIME !=''
+		</if>
+		<if
+			test='patternCompletionTime != null and patternCompletionTime !="" and patternCompletionTime != "N"  and patternCompletionTime != "Y" '>
+			AND
+			patternCompletionTime LIKE
+			CONCAT('%',#{patternCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='patternCompletionTime =="N" '>
+			AND
+			(patternCompletionTime ='' OR patternCompletionTime
+			IS
+			NULL)
+		</if>
+		<if test='patternCompletionTime =="Y" '>
+			AND
+			patternCompletionTime !=''
+		</if>
+		<if test='plateMakingTime != null and plateMakingTime !="" and plateMakingTime != "N" and plateMakingTime != "Y"'>
+			AND PLATEMAKING_TIME LIKE
+			CONCAT('%',#{plateMakingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='plateMakingTime =="N" '>
+			AND
+			(PLATEMAKING_TIME ='' OR PLATEMAKING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='plateMakingTime =="Y" '>
+			AND
+			PLATEMAKING_TIME !=''
+		</if>
+	</select>
+	<!-- 分頁查詢 这个 -->
+	<select id="findByAnyValPage" resultMap="BaseResultMap"
+		parameterType="Map">
+		select * from build_progress where STATE =
+		'1' AND 1=1
+		<if
+			test='orderType != null and orderType != "" and orderType != "N" and orderType != "Y"'>
+			AND ORDER_TYPE LIKE CONCAT(CONCAT('%',
+			#{orderType,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='orderType =="N" '>
+			AND (ORDER_TYPE='' OR ORDER_TYPE
+			IS
+			NULL)
+		</if>
+		<if test='orderType =="Y"'>
+			AND ORDER_TYPE !=''
+		</if>
+		<if
+			test='cutLargeReceiveTime != null and cutLargeReceiveTime != "" and cutLargeReceiveTime != "N" and cutLargeReceiveTime != "Y"'>
+			AND CUT_LARGE_RECEIVE_TIME LIKE CONCAT(CONCAT('%',
+			#{cutLargeReceiveTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='cutLargeReceiveTime =="N" '>
+			AND (CUT_LARGE_RECEIVE_TIME='' OR CUT_LARGE_RECEIVE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cutLargeReceiveTime =="Y"'>
+			AND CUT_LARGE_RECEIVE_TIME !=''
+		</if>
+
+		<if
+			test='plannedShippingTime != null and plannedShippingTime != "" and plannedShippingTime != "N" and plannedShippingTime != "Y"'>
+			AND PLANNED_SHIPPING_TIME LIKE CONCAT(CONCAT('%',
+			#{plannedShippingTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='plannedShippingTime =="N" '>
+			AND (PLANNED_SHIPPING_TIME='' OR PLANNED_SHIPPING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='plannedShippingTime =="Y"'>
+			AND PLANNED_SHIPPING_TIME !=''
+		</if>
+		<if
+			test='cutLargeReturnTime != null and cutLargeReturnTime != "" and cutLargeReturnTime != "N" and cutLargeReturnTime != "Y"'>
+			AND CUT_LARGE_RETURN_TIME LIKE CONCAT(CONCAT('%',
+			#{cutLargeReceiveTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='cutLargeReturnTime =="N" '>
+			AND (CUT_LARGE_RETURN_TIME='' OR CUT_LARGE_RETURN_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cutLargeReturnTime =="Y"'>
+			AND CUT_LARGE_RETURN_TIME !=''
+		</if>
+		<if
+			test='fabricStorageTime != null and fabricStorageTime != "" and fabricStorageTime != "N" and fabricStorageTime != "Y"'>
+			AND FABRIC_STORAGE_TIME LIKE CONCAT(CONCAT('%',
+			#{fabricStorageTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricStorageTime =="N" '>
+			AND (FABRIC_STORAGE_TIME='' OR FABRIC_STORAGE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='fabricStorageTime =="Y"'>
+			AND FABRIC_STORAGE_TIME !=''
+		</if>
+		<if
+			test='fabricReleaseTime != null and fabricReleaseTime != "" and fabricReleaseTime != "N" and fabricReleaseTime != "Y"'>
+			AND FABRIC_RELEASE_TIME LIKE CONCAT(CONCAT('%',
+			#{fabricStorageTime,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricReleaseTime =="N" '>
+			AND (FABRIC_RELEASE_TIME='' OR FABRIC_RELEASE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='fabricReleaseTime =="Y"'>
+			AND FABRIC_RELEASE_TIME !=''
+		</if>
+		<if
+			test='designers != null and designers != "" and designers != "N" and designers != "Y"'>
+			AND DESIGNERS LIKE CONCAT(CONCAT('%',
+			#{designers,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='designers =="N" '>
+			AND (DESIGNERS='' OR DESIGNERS
+			IS
+			NULL)
+		</if>
+		<if test='designers =="Y"'>
+			AND DESIGNERS !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND WAVE ='' OR WAVE
+			IS
+			NULL
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='releaseTime != null and releaseTime != "" and releaseTime != "N" and releaseTime != "Y"'>
+			AND RELEASE_TIME LIKE
+			CONCAT('%',#{releaseTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='releaseTime == "N"'>
+			AND (RELEASE_TIME ='' OR RELEASE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='releaseTime == "Y"'>
+			AND RELEASE_TIME !=''
+		</if>
+		<if
+			test='piecesApproved != null  and piecesApproved != "" and piecesApproved != "N" and piecesApproved != "Y"'>
+
+			AND PIECES_APPROVED LIKE
+			CONCAT('%',#{piecesApproved,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='piecesApproved == "N"'>
+			AND (PIECES_APPROVED ='' OR PIECES_APPROVED
+			IS
+			NULL)
+		</if>
+		<if test='piecesApproved == "Y"'>
+			AND PIECES_APPROVED !=''
+		</if>
+		<if
+			test='folwerFactory != null and folwerFactory !="" and folwerFactory != "N" and folwerFactory != "Y"'>
+			AND FOLWER_FACTORY LIKE
+			CONCAT('%',#{folwerFactory,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='folwerFactory == "N"'>
+			AND (FOLWER_FACTORY ='' OR FOLWER_FACTORY
+			IS
+			NULL)
+		</if>
+		<if test='folwerFactory == "Y"'>
+			AND FOLWER_FACTORY !=''
+		</if>
+		<if
+			test='proofingTime != null and proofingTime !="" and proofingTime != "N" and proofingTime != "Y"'>
+			AND PROOFING_TIME LIKE
+			CONCAT('%',#{proofingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='proofingTime =="N"'>
+			AND (PROOFING_TIME ='' OR PROOFING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='proofingTime =="Y"'>
+			AND PROOFING_TIME !=''
+		</if>
+		<if
+			test='proofingCompletionTime != null and proofingCompletionTime !="" and proofingCompletionTime != "N" and proofingCompletionTime != "Y"'>
+			AND PROOFING_COMPLETION_TIME LIKE
+			CONCAT('%',#{proofingCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='proofingCompletionTime == "N"'>
+			AND (PROOFING_COMPLETION_TIME ='' OR
+			PROOFING_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if test='proofingCompletionTime == "Y"'>
+			AND (PROOFING_COMPLETION_TIME !='' OR
+			PROOFING_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if
+			test='largeCargoTime != null and largeCargoTime !="" and largeCargoTime != "N" and largeCargoTime != "Y"'>
+			AND LARGE_CARGO_TIME LIKE
+			CONCAT('%',#{largeCargoTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='largeCargoTime =="N" '>
+			AND (LARGE_CARGO_TIME ='' OR LARGE_CARGO_TIME
+			IS
+			NULL)
+		</if>
+		<if test='largeCargoTime =="Y" '>
+			AND LARGE_CARGO_TIME !=''
+		</if>
+		<if
+			test='largeCargoCompletionTime != null and largeCargoCompletionTime !="" and largeCargoCompletionTime != "N" and largeCargoCompletionTime != "Y"'>
+			AND LARGE_CARGO_COMPLETION_TIME LIKE
+			CONCAT('%',#{largeCargoCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='largeCargoCompletionTime =="N"'>
+			AND (LARGE_CARGO_COMPLETION_TIME ='' OR
+			LARGE_CARGO_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if test='largeCargoCompletionTime =="Y"'>
+			AND LARGE_CARGO_COMPLETION_TIME !=''
+		</if>
+		<if
+			test='accessoriesPurchasingTime != null and  accessoriesPurchasingTime !="" and accessoriesPurchasingTime != "N" and accessoriesPurchasingTime != "Y"'>
+			AND ACCESSORIES_PURCHASING_TIME LIKE
+			CONCAT('%',#{accessoriesPurchasingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='accessoriesPurchasingTime =="N"'>
+			AND (ACCESSORIES_PURCHASING_TIME ='' OR
+			ACCESSORIES_PURCHASING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='accessoriesPurchasingTime =="Y"'>
+			AND ACCESSORIES_PURCHASING_TIME !=''
+		</if>
+		<if
+			test='cuttingTime != null and cuttingTime !="" and cuttingTime != "N" and cuttingTime != "Y"'>
+			AND CUTTING_TIME LIKE
+			CONCAT('%',#{cuttingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cuttingTime =="N"'>
+			AND (CUTTING_TIME ='' OR CUTTING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cuttingTime =="Y"'>
+			AND CUTTING_TIME !=''
+		</if>
+		<if
+			test='cropCompletionTime != null and cropCompletionTime !="" and cropCompletionTime != "N" and cropCompletionTime != "Y"'>
+			AND CROP_COMPLETION_TIME LIKE
+			CONCAT('%',#{cropCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cropCompletionTime=="N"'>
+			AND (CROP_COMPLETION_TIME ='' OR CROP_COMPLETION_TIME
+			IS
+			NULL)
+		</if>
+		<if test='cropCompletionTime=="Y"'>
+			AND CROP_COMPLETION_TIME !=''
+		</if>
+		<if
+			test='cropNumber != null and cropNumber !="" and cropNumber != "N" and cropNumber != "Y"'>
+			AND CROP_NUMBER LIKE
+			CONCAT('%',#{cropNumber,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cropNumber=="N"'>
+			AND (CROP_NUMBER ='' OR CROP_NUMBER
+			IS
+			NULL)
+		</if>
+		<if test='cropNumber=="Y"'>
+			AND CROP_NUMBER !=''
+		</if>
+		<if
+			test='factoryPickingTime != null and factoryPickingTime !="" and factoryPickingTime != "N" and factoryPickingTime != "Y"'>
+			AND FACTORY_PICKING_TIME LIKE
+			CONCAT('%',#{factoryPickingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factoryPickingTime =="N"'>
+			AND (FACTORY_PICKING_TIME ='' OR FACTORY_PICKING_TIME
+			IS
+			NULL)
+		</if>
+		<if test='factoryPickingTime =="Y"'>
+			AND FACTORY_PICKING_TIME !=''
+		</if>
+		<if
+			test='factory != null and factory !="" and factory != "N" and factory != "Y"'>
+			AND FACTORY LIKE
+			CONCAT('%',#{factory,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factory =="N"'>
+			AND (FACTORY ='' OR FACTORY
+			IS
+			NULL)
+		</if>
+		<if test='factory =="Y"'>
+			AND FACTORY !=''
+		</if>
+		<if
+			test='storageTime != null and storageTime !="" and storageTime != "N" and storageTime != "Y"'>
+			AND STORAGE_TIME LIKE
+			CONCAT('%',#{storageTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='storageTime =="N"'>
+			AND (STORAGE_TIME ='' OR STORAGE_TIME
+			IS
+			NULL)
+		</if>
+		<if test='storageTime =="Y"'>
+			AND STORAGE_TIME !=''
+		</if>
+		<if
+			test='storageNumber != null and storageNumber !="" and storageNumber != "N"  and storageNumber != "Y" '>
+			AND
+			STORAGE_NUMBER LIKE
+			CONCAT('%',#{storageNumber,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='storageNumber =="N" '>
+			AND
+			(STORAGE_NUMBER ='' OR STORAGE_NUMBER
+			IS
+			NULL)
+		</if>
+		<if test='storageNumber =="Y" '>
+			AND
+			STORAGE_NUMBER !=''
+		</if>
+		<if
+			test='patternCompletionTime != null and patternCompletionTime !="" and patternCompletionTime != "N"  and patternCompletionTime != "Y" '>
+			AND
+			patternCompletionTime LIKE
+			CONCAT('%',#{patternCompletionTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='patternCompletionTime =="N" '>
+			AND
+			(patternCompletionTime ='' OR patternCompletionTime
+			IS
+			NULL)
+		</if>
+		<if test='patternCompletionTime =="Y" '>
+			AND
+			patternCompletionTime !=''
+		</if>
+		<!-- 添加制版日期 -->
+		<if test='plateMakingTime != null and plateMakingTime !="" and plateMakingTime != "N" and plateMakingTime != "Y"'>
+			AND PLATEMAKING_TIME LIKE
+			CONCAT('%',#{plateMakingTime,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='plateMakingTime == "N" '>
+			AND
+			(PLATEMAKING_TIME ='' OR PLATEMAKING_TIME IS NULL)
+		</if>
+		<if test='plateMakingTime == "Y" '>
+			AND
+			PLATEMAKING_TIME !=''
+		</if>
+		ORDER BY
+		urgent_state DESC,ADD_TIME DESC
+		LIMIT
+		#{pageNow},#{pageSize}
+	</select>
+	<insert id="insertSelective" parameterType="com.warehouse.entity.BuildProgress">
+		insert into build_progress
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="designers != null">
+				DESIGNERS,
+			</if>
+			<if test="referenceWave != null">
+				REFERENCE_WAVE,
+			</if>
+			<if test="referencePrinting != null">
+				REFERENCE_PRINTING,
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER,
+			</if>
+			<if test="patternCraftsOrder != null">
+				PATTERN_CRAFTS_ORDER,
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART,
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="image != null">
+				IMAGE,
+			</if>
+			<if test="orders != null">
+				ORDERS,
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS,
+			</if>
+			<if test="colour != null">
+				COLOUR,
+			</if>
+			<if test="releaseTime != null">
+				RELEASE_TIME,
+			</if>
+			<if test="piecesApproved != null">
+				PIECES_APPROVED,
+			</if>
+			<if test="folwerFactory != null">
+				FOLWER_FACTORY,
+			</if>
+			<if test="proofingTime != null">
+				PROOFING_TIME,
+			</if>
+			<if test="proofingCompletionTime != null">
+				PROOFING_COMPLETION_TIME,
+			</if>
+			<if test="largeCargoTime != null">
+				LARGE_CARGO_TIME,
+			</if>
+			<if test="largeCargoCompletionTime != null">
+				LARGE_CARGO_COMPLETION_TIME,
+			</if>
+			<if test="cutLargeReceiveTime != null">
+				CUT_LARGE_RECEIVE_TIME,
+			</if>
+			<if test="cutLargeReturnTime != null">
+				CUT_LARGE_RETURN_TIME,
+			</if>
+			<if test="quot != null">
+				QUOT,
+			</if>
+			<if test="printingPrice != null">
+				PRINTING_PRICE,
+			</if>
+			<if test="piecesPrice != null">
+				PIECES_PRICE,
+			</if>
+			<if test="flowerPrice != null">
+				FLOWER_PRICE,
+			</if>
+			<if test="accessoriesPurchasingTime != null">
+				ACCESSORIES_PURCHASING_TIME,
+			</if>
+			<if test="fabricStorageTime != null">
+				FABRIC_STORAGE_TIME,
+			</if>
+			<if test="fabricReleaseTime != null">
+				FABRIC_RELEASE_TIME,
+			</if>
+			<if test="cuttingTime != null">
+				CUTTING_TIME,
+			</if>
+			<if test="cropCompletionTime != null">
+				CROP_COMPLETION_TIME,
+			</if>
+			<if test="cropNumber != null">
+				CROP_NUMBER,
+			</if>
+			<if test="factoryPickingTime != null">
+				FACTORY_PICKING_TIME,
+			</if>
+			<if test="factory != null">
+				FACTORY,
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE,
+			</if>
+			<if test="orderPrice != null">
+				ORDER_PRICE,
+			</if>
+			<if test="plannedShippingTime != null">
+				PLANNED_SHIPPING_TIME,
+			</if>
+			<if test="storageTime != null">
+				STORAGE_TIME,
+			</if>
+			<if test="storageNumber != null">
+				STORAGE_NUMBER,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+			<if test="urgentState != null">
+				urgent_state,
+			</if>
+			<if test="patternCompletionTime != null">
+				patternCompletionTime,
+			</if>
+			<!-- 添加制版日期 -->
+			<if test='plateMakingTime != null '>
+				PLATEMAKING_TIME,
+			</if>
+			<if test='planFactoryPickingTime != null '>
+				PLAN_FACTORY_PICKING_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="designers != null">
+				#{designers,jdbcType=VARCHAR},
+			</if>
+			<if test="referenceWave != null">
+				#{referenceWave,jdbcType=VARCHAR},
+			</if>
+			<if test="referencePrinting != null">
+				#{referencePrinting,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				#{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="patternCraftsOrder != null">
+				#{patternCraftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				#{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				#{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="image != null">
+				#{image,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				#{orders,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				#{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="colour != null">
+				#{colour,jdbcType=VARCHAR},
+			</if>
+			<if test="releaseTime != null">
+				#{releaseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="piecesApproved != null">
+				#{piecesApproved,jdbcType=VARCHAR},
+			</if>
+			<if test="folwerFactory != null">
+				#{folwerFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="proofingTime != null">
+				#{proofingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="proofingCompletionTime != null">
+				#{proofingCompletionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="largeCargoTime != null">
+				#{largeCargoTime,jdbcType=VARCHAR},
+			</if>
+			<if test="largeCargoCompletionTime != null">
+				#{largeCargoCompletionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cutLargeReceiveTime != null">
+				#{cutLargeReceiveTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cutLargeReturnTime != null">
+				#{cutLargeReturnTime,jdbcType=VARCHAR},
+			</if>
+			<if test="quot != null">
+				#{quot,jdbcType=DECIMAL},
+			</if>
+			<if test="printingPrice != null">
+				#{printingPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="piecesPrice != null">
+				#{piecesPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="flowerPrice != null">
+				#{flowerPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="accessoriesPurchasingTime != null">
+				#{accessoriesPurchasingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricStorageTime != null">
+				#{fabricStorageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricReleaseTime != null">
+				#{fabricReleaseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingTime != null">
+				#{cuttingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cropCompletionTime != null">
+				#{cropCompletionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cropNumber != null">
+				#{cropNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="factoryPickingTime != null">
+				#{factoryPickingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				#{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				#{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="orderPrice != null">
+				#{orderPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="plannedShippingTime != null">
+				#{plannedShippingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="storageTime != null">
+				#{storageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="storageNumber != null">
+				#{storageNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="urgentState != null">
+				#{urgentState,jdbcType=INTEGER},
+			</if>
+			<if test="patternCompletionTime != null">
+				#{patternCompletionTime,jdbcType=VARCHAR},
+			</if>
+			<if test='plateMakingTime != null '>
+				#{plateMakingTime,jdbcType=VARCHAR}
+			</if>
+			<if test='planFactoryPickingTime != null '>
+				#{planFactoryPickingTime,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+	<update id="modifyByBuildProgress" parameterType="com.warehouse.entity.BuildProgress">
+		update build_progress
+		<set>
+			<if test="designers != null">
+				DESIGNERS = #{designers,jdbcType=VARCHAR},
+			</if>
+			<if test="referenceWave != null">
+				REFERENCE_WAVE = #{referenceWave,jdbcType=VARCHAR},
+			</if>
+			<if test="referencePrinting != null">
+				REFERENCE_PRINTING =
+				#{referencePrinting,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER = #{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="patternCraftsOrder != null">
+				PATTERN_CRAFTS_ORDER =
+				#{patternCraftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="image != null">
+				IMAGE = #{image,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				ORDERS = #{orders,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="colour != null">
+				COLOUR = #{colour,jdbcType=VARCHAR},
+			</if>
+			<if test="releaseTime != null">
+				RELEASE_TIME = #{releaseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="piecesApproved != null">
+				PIECES_APPROVED = #{piecesApproved,jdbcType=VARCHAR},
+			</if>
+			<if test="folwerFactory != null">
+				FOLWER_FACTORY = #{folwerFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="proofingTime != null">
+				PROOFING_TIME = #{proofingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="proofingCompletionTime != null">
+				PROOFING_COMPLETION_TIME =
+				#{proofingCompletionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="largeCargoTime != null">
+				LARGE_CARGO_TIME = #{largeCargoTime,jdbcType=VARCHAR},
+			</if>
+			<if test="largeCargoCompletionTime != null">
+				LARGE_CARGO_COMPLETION_TIME =
+				#{largeCargoCompletionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cutLargeReceiveTime != null">
+				CUT_LARGE_RECEIVE_TIME =
+				#{cutLargeReceiveTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cutLargeReturnTime != null">
+				CUT_LARGE_RETURN_TIME =
+				#{cutLargeReturnTime,jdbcType=VARCHAR},
+			</if>
+			<if test="quot != null">
+				QUOT = #{quot,jdbcType=DECIMAL},
+			</if>
+			<if test="printingPrice != null">
+				PRINTING_PRICE = #{printingPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="piecesPrice != null">
+				PIECES_PRICE = #{piecesPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="flowerPrice != null">
+				FLOWER_PRICE = #{flowerPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="accessoriesPurchasingTime != null">
+				ACCESSORIES_PURCHASING_TIME =
+				#{accessoriesPurchasingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricStorageTime != null">
+				FABRIC_STORAGE_TIME =
+				#{fabricStorageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricReleaseTime != null">
+				FABRIC_RELEASE_TIME =
+				#{fabricReleaseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingTime != null">
+				CUTTING_TIME = #{cuttingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cropCompletionTime != null">
+				CROP_COMPLETION_TIME =
+				#{cropCompletionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cropNumber != null">
+				CROP_NUMBER = #{cropNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="factoryPickingTime != null">
+				FACTORY_PICKING_TIME =
+				#{factoryPickingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				FACTORY = #{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="orderPrice != null">
+				ORDER_PRICE = #{orderPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="plannedShippingTime != null">
+				PLANNED_SHIPPING_TIME =
+				#{plannedShippingTime,jdbcType=VARCHAR},
+			</if>
+			<if test="storageTime != null">
+				STORAGE_TIME = #{storageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="storageNumber != null">
+				STORAGE_NUMBER = #{storageNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="urgentState != null">
+				urgent_state = #{urgentState,jdbcType=INTEGER},
+			</if>
+			<if test="patternCompletionTime != null">
+				patternCompletionTime =
+				#{patternCompletionTime,jdbcType=VARCHAR},
+			</if>
+			<!-- 添加制版日期 -->
+			<if test='plateMakingTime != null '>
+				PLATEMAKING_TIME=#{plateMakingTime,jdbcType=VARCHAR}
+			</if>
+				<if test='planFactoryPickingTime != null '>
+				PLAN_FACTORY_PICKING_TIME=#{planFactoryPickingTime,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where WAVE = #{wave,jdbcType=VARCHAR}
+	</update>
+	<update id="delByPrimaryKey" parameterType="com.warehouse.entity.BuildProgress">
+		update build_progress
+		set
+		STATE = '0',
+		DEL_TIME = #{delTime,jdbcType=VARCHAR}
+		where WAVE =
+		#{wave,jdbcType=VARCHAR}
+	</update>
+</mapper>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.CancelOrderMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.CancelOrder">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="DESIGNER" property="designer" jdbcType="VARCHAR" />
+		<result column="GIRARD" property="girard" jdbcType="VARCHAR" />
+		<result column="ORIGINAL_WAVE" property="originalWave"
+			jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="CLOTH_NAME" property="clothName" jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="SIZE_CHART" property="sizeChart" jdbcType="VARCHAR" />
+		<result column="DEL_ORDER" property="delOrder" jdbcType="VARCHAR" />
+		<result column="RESTORE_ORDER" property="restoreOrder"
+			jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="PC_IP" property="pcIp" jdbcType="VARCHAR" />
+		<result column="OPERATION" property="operation" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="RESTORE_TIME" property="restoreTime" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 分页模糊查询 -->
+	<select id="selByPrimaryKeyCount" parameterType="com.warehouse.entity.CancelOrder"
+		resultType="java.lang.Integer">
+		select count(*) from cancel_order where 1=1
+		<if test="girard!=null">
+			and GIRARD like CONCAT("%",#{girard},"%")
+		</if>
+	</select>
+	<select id="selByPrimaryKeyPage" parameterType="com.warehouse.entity.CancelOrder"
+		resultMap="BaseResultMap">
+		select * from cancel_order where 1=1
+		<if test="girard!=null">
+			and GIRARD like CONCAT("%",#{girard},"%")
+		</if>
+		order by ADD_TIME desc  LIMIT #{begin},#{end}
+	</select>
+	<!-- 撤销订单 -->
+	<update id="deleteByPrimaryKey" parameterType="com.warehouse.entity.CancelOrder">
+		update
+		cancel_order set
+		RESTORE_ORDER=#{restoreOrder},RESTORE_TIME=#{restoreTime},STATUS='0'
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<insert id="insertSelective" parameterType="com.warehouse.entity.CancelOrder">
+		insert into cancel_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="designer != null">
+				DESIGNER,
+			</if>
+			<if test="girard != null">
+				GIRARD,
+			</if>
+			<if test="originalWave != null">
+				ORIGINAL_WAVE,
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID,
+			</if>
+			<if test="clothName != null">
+				CLOTH_NAME,
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG,
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG,
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART,
+			</if>
+			<if test="delOrder != null">
+				DEL_ORDER,
+			</if>
+			<if test="restoreOrder != null">
+				RESTORE_ORDER,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="pcIp != null">
+				PC_IP,
+			</if>
+			<if test="operation != null">
+				OPERATION,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="restoreTime != null">
+				RESTORE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="designer != null">
+				#{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="girard != null">
+				#{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="originalWave != null">
+				#{originalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				#{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				#{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				#{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="delOrder != null">
+				#{delOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="restoreOrder != null">
+				#{restoreOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="pcIp != null">
+				#{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				#{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="restoreTime != null">
+				#{restoreTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.CancelOrder" 
+		> update cancel_order <set > <if test="designer != null" > DESIGNER = #{designer,jdbcType=VARCHAR}, 
+		</if> <if test="girard != null" > GIRARD = #{girard,jdbcType=VARCHAR}, </if> 
+		<if test="originalWave != null" > ORIGINAL_WAVE = #{originalWave,jdbcType=VARCHAR}, 
+		</if> <if test="productId != null" > PRODUCT_ID = #{productId,jdbcType=VARCHAR}, 
+		</if> <if test="clothName != null" > CLOTH_NAME = #{clothName,jdbcType=VARCHAR}, 
+		</if> <if test="designImg != null" > DESIGN_IMG = #{designImg,jdbcType=VARCHAR}, 
+		</if> <if test="sampleImg != null" > SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR}, 
+		</if> <if test="sizeChart != null" > SIZE_CHART = #{sizeChart,jdbcType=VARCHAR}, 
+		</if> <if test="delOrder != null" > DEL_ORDER = #{delOrder,jdbcType=VARCHAR}, 
+		</if> <if test="restoreOrder != null" > RESTORE_ORDER = #{restoreOrder,jdbcType=VARCHAR}, 
+		</if> <if test="status != null" > STATUS = #{status,jdbcType=VARCHAR}, </if> 
+		<if test="remark != null" > REMARK = #{remark,jdbcType=VARCHAR}, </if> <if 
+		test="pcIp != null" > PC_IP = #{pcIp,jdbcType=VARCHAR}, </if> <if test="operation 
+		!= null" > OPERATION = #{operation,jdbcType=VARCHAR}, </if> <if test="operator 
+		!= null" > OPERATOR = #{operator,jdbcType=VARCHAR}, </if> <if test="addTime 
+		!= null" > ADD_TIME = #{addTime,jdbcType=VARCHAR}, </if> <if test="restoreTime 
+		!= null" > RESTORE_TIME = #{restoreTime,jdbcType=VARCHAR}, </if> </set> where 
+		ID = #{id,jdbcType=INTEGER} </update> -->
+</mapper>

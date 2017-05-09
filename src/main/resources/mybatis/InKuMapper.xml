@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.InKuMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.InKu" >
+    <id column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="rdate" property="rdate" jdbcType="VARCHAR" />
+    <result column="boci" property="boci" jdbcType="VARCHAR" />
+    <result column="mianliao" property="mianliao" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="cun1" property="cun1" jdbcType="VARCHAR" />
+    <result column="cun2" property="cun2" jdbcType="VARCHAR" />
+    <result column="cun3" property="cun3" jdbcType="VARCHAR" />
+    <result column="cun4" property="cun4" jdbcType="VARCHAR" />
+    <result column="cun5" property="cun5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rid, rdate, boci, mianliao, color, cun1, cun2, cun3, cun4, cun5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from inku
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from inku
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.warehouse.entity.InKu" >
+    insert into inku (rid, rdate, boci, 
+      mianliao, color, cun1, 
+      cun2, cun3, cun4, cun5
+      )
+    values (#{rid,jdbcType=INTEGER}, #{rdate,jdbcType=VARCHAR}, #{boci,jdbcType=VARCHAR}, 
+      #{mianliao,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{cun1,jdbcType=VARCHAR}, 
+      #{cun2,jdbcType=VARCHAR}, #{cun3,jdbcType=VARCHAR}, #{cun4,jdbcType=VARCHAR}, #{cun5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.warehouse.entity.InKu" >
+    insert into inku
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="rdate != null" >
+        rdate,
+      </if>
+      <if test="boci != null" >
+        boci,
+      </if>
+      <if test="mianliao != null" >
+        mianliao,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="cun1 != null" >
+        cun1,
+      </if>
+      <if test="cun2 != null" >
+        cun2,
+      </if>
+      <if test="cun3 != null" >
+        cun3,
+      </if>
+      <if test="cun4 != null" >
+        cun4,
+      </if>
+      <if test="cun5 != null" >
+        cun5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="rdate != null" >
+        #{rdate,jdbcType=VARCHAR},
+      </if>
+      <if test="boci != null" >
+        #{boci,jdbcType=VARCHAR},
+      </if>
+      <if test="mianliao != null" >
+        #{mianliao,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="cun1 != null" >
+        #{cun1,jdbcType=VARCHAR},
+      </if>
+      <if test="cun2 != null" >
+        #{cun2,jdbcType=VARCHAR},
+      </if>
+      <if test="cun3 != null" >
+        #{cun3,jdbcType=VARCHAR},
+      </if>
+      <if test="cun4 != null" >
+        #{cun4,jdbcType=VARCHAR},
+      </if>
+      <if test="cun5 != null" >
+        #{cun5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.InKu" >
+    update inku
+    <set >
+      <if test="rdate != null" >
+        rdate = #{rdate,jdbcType=VARCHAR},
+      </if>
+      <if test="boci != null" >
+        boci = #{boci,jdbcType=VARCHAR},
+      </if>
+      <if test="mianliao != null" >
+        mianliao = #{mianliao,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="cun1 != null" >
+        cun1 = #{cun1,jdbcType=VARCHAR},
+      </if>
+      <if test="cun2 != null" >
+        cun2 = #{cun2,jdbcType=VARCHAR},
+      </if>
+      <if test="cun3 != null" >
+        cun3 = #{cun3,jdbcType=VARCHAR},
+      </if>
+      <if test="cun4 != null" >
+        cun4 = #{cun4,jdbcType=VARCHAR},
+      </if>
+      <if test="cun5 != null" >
+        cun5 = #{cun5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.entity.InKu" >
+    update inku
+    set rdate = #{rdate,jdbcType=VARCHAR},
+      boci = #{boci,jdbcType=VARCHAR},
+      mianliao = #{mianliao,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      cun1 = #{cun1,jdbcType=VARCHAR},
+      cun2 = #{cun2,jdbcType=VARCHAR},
+      cun3 = #{cun3,jdbcType=VARCHAR},
+      cun4 = #{cun4,jdbcType=VARCHAR},
+      cun5 = #{cun5,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

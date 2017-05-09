@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<title>辅料 就绪</title> <@p.cache/><@p.css/> <@p.js/>
+</head>
+
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">辅料就绪</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<button class="btn btn-primary btn-lg" data-toggle="modal"
+						data-target="#myModal">添加</button>
+				</div>
+				<div class="col-md-12">
+					<form action="" id="anyVal-from">
+						<div id="val-input-empty" class="col-md-8">
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 波次号 </span> <input
+										name="wave"
+										onkeyup="this.value=this.value.replace(' ','')" value=""
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 商品编码 </span> <input name="productCode"
+										onkeyup="this.value=this.value.replace(' ','')" value=""
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">   图片 </span> <input name="designImg"
+										onkeyup="this.value=this.value.replace(' ','')" value=""
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 日期 </span> <input name="date"
+										onkeyup="this.value=this.value.replace(' ','')" value=""
+										type="text" class="form-control">
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">  备注 </span> <input name="remark"
+										onkeyup="this.value=this.value.replace(' ','')" value=""
+										type="text" class="form-control">
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-2">
+							<span class="input-group-btn">
+								<button id="anyVal-btn" class="btn btn-default" type="button">
+									查询</button>
+							</span>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12" style="height: 50px;"></div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr>
+										<th>波次号</th>
+										<th>商品编码</th>
+										<th>图片</th>
+										<th>日期</th>
+										<th>备注</th>
+										<th>数据操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 添加 模态框（Modal）那怎么搞？ -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加 就绪辅料信息</h4>
+					</div>
+					<form enctype="multipart/form-data" role="form" id="vender"
+						action="addAccessoryPrepared.do" method="post">
+						<div class="modal-body">
+							<div class="col-md-12">
+
+								<div class="col-md-4">
+									<label for="additionTime"> 波次号 </label> <input type="text"
+										class="form-control" name="wave" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave"> 备注</label> <input type="text"
+										class="form-control" name="remark" placeholder=" ">
+								</div>
+								
+							</div>
+
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="submit" class="btn btn-primary">提交</button>
+							</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+	<!-- .main-container-inner -->
+	<!--修改 模态框（Modal） -->
+	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">修改 就绪辅料数据</h4>
+				</div>
+				<form enctype="multipart/form-data" role="form"
+					id="modifyByDistribution" action="" method="post">
+					<div class="modal-body">
+						<div class="col-md-12">
+
+							<div class="col-md-4">
+								<label for="name"> 波次号 </label> <input type="text"
+									class="form-control" name="wave" id="wave" placeholder=" ">
+							</div>
+							<div class="col-md-4">
+								<label for="age"> 备注 </label> <input type="text"
+									class="form-control" name="remark" id="remark" placeholder=" ">
+							</div>
+							
+						</div>
+
+
+						<input hidden="hidden" id="fabricOutflowId" type="text" value=""
+							name="id">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							onclick="delDvi()">关闭</button>
+						<button type="button" onclick="modifyDistribution_btn()"
+							class="btn btn-primary" data-dismiss="modal">提交</button>
+					</div>
+				</form>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- 刪除 -->
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div id="myModal-prompt" class="modal-body">
+					你确定刪除波次号为: <span style="color: red" id="myModal2-wave-text">
+					</span> 的数据嗎？？？
+					<input type="hidden" id="myModal2-id-text" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="upt-btn" class="btn btn-default" data-dismiss="modal">
+						取消</button>
+					<button type="button" id="del-btn" class="btn btn-primary">
+						確認刪除</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- /.main-container-inner -->
+	<a href="#" id="btn-scroll-up"
+		class="btn-scroll-up btn btn-sm btn-inverse"> <i
+		class="icon-double-angle-up icon-only bigger-110"> </i>
+	</a>
+	<input type="hidden" value="${pageContext.request.contextPath}"
+		id="path">
+	</div>
+
+</body>
+<script type="text/javascript">
+	function delDvi() {
+		$("#modifyAddDiv").empty();
+
+	}
+	var index = 0;
+
+	function delByAccessoryPreparedId(wave,id) {
+		$("#myModal2-wave-text").text(wave);
+		$("#myModal2-id-text").val(id);
+		
+	}
+	$("#del-btn").on('click', function() {
+		var id = parseInt($("#myModal2-id-text").val());
+		$.post('delAccessoryPrepared.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-prompt").html("恭喜你刪除成功");
+				$("#del-btn").remove();
+				$("#upt-btn").html("完成");
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionAccessoryPageByVal(anyVal); //調用分頁查詢 在這裏才調用
+			} else {
+				$("#myModal-prompt").html("删除失败！原因可能是网络问题");
+				$("#del-btn").remove();
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionAccessoryPageByVal(anyVal); //調用分頁查詢 在這裏才調用
+			}
+		});
+	})
+	//点击查询获取查询的条件 数据
+	$(function() {
+		$("#anyVal-btn").on('click', function() { //点击事查詢事件
+			$("#pageSize").attr('name', ""); //去掉分页查询pageSize
+			$("#pageNow").attr('name', ""); //去掉分页查询pageNow
+			var anyVal = $("#anyVal-from").serialize(); //獲取條件查詢字段
+			$.post('getAccessoryPreparedByPageCount.do', anyVal, function(data) { //帶條件查詢縂條數
+				$("#pageSize").attr('name', "pageSize"); //给pageSize赋值name
+				$("#pageNow").attr('name', "pageNow"); //给pageNow赋name值
+				$("#pageNow").val(1);
+				var anyVal = $("#anyVal-from").serialize(); //獲取條件字段
+				findDistributionAccessoryPageByVal(anyVal);
+				$(".tcdPageCode").createPage({
+					pageCount : data.totalPageCount,
+					current : data.pageNow,
+					backFn : function(p) {
+						$("#pageSize").val(10);
+						$("#pageNow").val(p); //給當前頁賦值
+						var anyVal = $("#anyVal-from").serialize(); //获取form表单
+						//調用方法
+						findDistributionAccessoryPageByVal(anyVal); //調用分頁查詢 在這裏才調用
+					}
+				});
+			});
+		});
+		//修改赋值方法
+		$("#up").uploadPreview({
+			Img : "ImgPr",
+			Width : 120,
+			Height : 120
+		});
+	});
+	//修改方法
+	function modifyDistribution_btn() {
+		var formData = new FormData($("#modifyByDistribution")[0]);
+		$.ajax({
+			url : 'modifyAccessoryPrepared.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				var pageNow = $("#pageNow").val();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionAccessoryPageByVal(anyVal);
+			},
+			error : function(data) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(1); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionAccessoryPageByVal(anyVal);
+			}
+		});
+	}
+	/*页面加载执行的方法*/
+	$.post('getAccessoryPreparedByPageCount.do', {}, function(data) {
+		$("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+		$("#pageNow").val(data.pageNow);
+		//获取form参数进行查询
+		var anyVal = $("#anyVal-from").serialize();
+		//調用方法传参
+		findDistributionAccessoryPageByVal(anyVal);
+		// 进入后台进行分页查询
+		$(".tcdPageCode").createPage({ //哦哦
+			pageCount : data.totalPageCount,
+			//总页数
+			current : data.pageNow,
+			//当前页
+			backFn : function(p) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(p); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionAccessoryPageByVal(anyVal);
+			}
+		});
+	});
+	$("#val-input-empty").find('div').find('div').find(":input").each(
+			function() {
+				$(this).val("");
+			})
+	//查詢方法
+	function findDistributionAccessoryPageByVal(anyVal) { //你的数据都是从这里查的？
+		$.post("findConditionAccessoryPreparedByPage.do",anyVal, //from表单内容
+						function(data) {
+							var id = 1;
+							$(".table_app").empty(); //清空原有的数据
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr><td>"
+										
+										+ (data[i].wave = null ? ''
+												: data[i].wave)
+										+ "</td><td >"
+										+ (data[i].productCode == null ? ''
+												: data[i].productCode)
+										+ "</td><td >"
+										+ (data[i].designImg == null ? ''
+												: data[i].designImg)
+										+ "</td><td >"
+										+ (data[i].date == null ? ''
+												: data[i].date)
+										+ "</td><td >"
+										+ (data[i].remark == null ? ''
+												: data[i].remark)
+										+ "</td><td ><button type='button'  data-toggle='modal' data-target='#myModal1' onclick='modifyByAccessoryPrepared(\""
+										+ data[i].id
+										+ "\",this)' class='btn btn-primary icon-pencil'>修改</button><button type='button'  data-toggle='modal' data-target='#myModal2' onclick='delByAccessoryPreparedId(\""
+										+ data[i].wave +"\",\"" + data[i].id
+										+ "\")' class='icon-trash btn btn-danger'>删除</button></td></tr>";
+								$(".table_app").append(_HTML_TEBLE_);   
+							}
+						});
+	}
+	function modifyByAccessoryPrepared(id, tr) {
+		$(tr).parent().parent().find(".parameter").each(
+						function() {
+							//console.info($(this))
+							if ($(this).html() != "" && $(this).html() != null) {
+								var a = $("#modifyAddDiv").find("input");
+								$("#modifyAddDiv")
+										.append(
+												"<div class='col-md-4'><label for='parameter'>面料"
+														+ (a.length + 1)
+														+ " </label><input type='text' onkeyup='value=value.replace(/[^\\d.]/g,&#39;&#39;)' class='form-control' name='parameter"
+														+ (a.length + 1)
+														+ "'   id='parameter"
+														+ (a.length + 1)
+														+ "'></div>");
+							}
+						});
+
+		//修改获取最新数据
+		$.post("getAccessoryPreparedById.do", {
+			'id' : id
+		}, function(result) {
+			$("#fabricOutflowId").val(result.id);
+			$("#wave").val(result.wave);
+			$("#remark").val(result.remark);
+
+		});
+	};
+	$("#myselect").click(function() {
+		$("#mydiv").show();
+	});
+</script>
+
+</html>

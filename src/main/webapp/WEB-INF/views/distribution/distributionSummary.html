@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>经销单汇总表</title> <@p.cache/> <@p.css/> <@p.js/>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">经销单汇总表</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12">
+					<form enctype="multipart/form-data" role="form" action=""
+						id="form-anyVal" method="post">
+						<div id="val-input-empty" class="col-md-12">
+							<div class="col-md-3">
+								<label for="wave">波次号</label> <input type="text" name="wave" />
+							</div>
+						
+							<div class="col-md-3">
+								<label for="productCode">商品编码</label> <input type="text" name="productCode" />
+							</div>
+							<div class="col-md-3">
+								<label for=confirmOrder>下单状态</label> <input type="text" name="confirmOrder" />
+							</div>
+							<div class="col-md-3">
+								<label for=fabricArriveFactory>面料到厂</label> <input type="text" name="fabricArriveFactory" />
+							</div>
+							<div class="col-md-3">
+								<label for=accesArriveFactory>辅料到厂</label> <input type="text" name="accesArriveFactory" />
+							</div>
+							<div class="col-md-3">
+								<label for=startMake>生产上线</label> <input type="text" name="startMake" />
+							</div>
+							<div class="col-md-3">
+								<label for=startDeliver>开始出货</label> <input type="text" name="startDeliver" />
+							</div>
+							<div class="col-md-3">
+								<label for=confirmCompleteDelivery>出货完成</label> <input type="text" name="confirmCompleteDelivery" />
+							</div>
+							<div class="col-md-3">
+								<label for=confirmInWarehouse>确认入仓</label><input type="text" name="confirmInWarehouse" />
+							</div>
+							
+							
+							<div class="col-md-3">
+								<span class="input-group-btn">
+									<button id="queryDistributionSummaryInfo" class="btn btn-default" type="button">
+										查询</button>
+								</span>
+							</div>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-bordered" style="width: 100%; height: 100%;">
+								<thead>
+								<tr>								
+								<th colspan="50" style="text-align: center; font-size: 25px;"> 经销单汇总 </th>
+							</tr>
+								
+									<tr>
+										<th>编号</th>
+										<th>商品编号</th>
+										<th>服装名</th>
+										<th>原波次</th>
+										<th>波次号</th>
+										<th>商品图片</th>
+										<th>工艺单</th>
+										<th>尺码表</th>
+										<th>订单详情</th>
+										<th>订单数量</th>
+										<th>订单等级</th>
+										<th>订单类型</th>
+										<th>经销工厂</th>
+										<th>要求入库日期</th>
+										<th>下单日期</th>
+										<th>打样时间</th>
+										<th>打样完成时间</th>
+										<th>下单状态</th>
+										<th>确认下单时间</th>
+										<th>面料到厂</th>
+										<th>面料到厂时间</th>
+										<th>辅料到厂</th>
+										<th>辅料到厂时间</th>
+										<th>生产上线</th>
+										<th>生产上线时间</th>
+										<th>开始出货</th>
+										<th>开始出货时间</th>
+										<th>出货完成</th>
+										<th>出货完成时间</th>
+										<th>确认入仓</th>
+										<th>确认入仓时间</th>
+									
+									
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+</body>
+<script type="text/javascript">
+//页面加载就执行
+
+$(function () {
+
+    $(".col-md-2").find(":input").each(
+        function () {
+            $(this).val("");
+        });
+    var anyVal = $("#form-anyVal").serialize();
+    getDistributionSummaryInfoBpcnt(anyVal);
+
+   
+    //查询
+    $("#queryDistributionSummaryInfo").on("click", function () {
+        var anyVal = $("#form-anyVal").serialize();
+        getDistributionSummaryInfoBpcnt(anyVal);
+    });
+});
+
+
+
+//查询总条数
+function getDistributionSummaryInfoBpcnt(anyVal) {
+	
+    $.post('getDistributionSummaryInfoBpcnt.do', anyVal,
+        function (data) {
+    
+            $("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+            $("#pageNow").val(data.pageNow);
+          
+            var anyVal2 = $("#form-anyVal").serialize();
+            //获取form参数进行查询
+            //調用方法传参
+            findDistributionSummaryInfoCndbp(anyVal2);
+         
+            // 进入后台进行分页查询
+            $(".tcdPageCode").createPage({ //哦哦
+                pageCount: data.totalPageCount, //总页数
+                current: data.pageNow, //当前页
+                backFn: function (p) {
+                    $("#pageSize").val(10);
+                    $("#pageNow").val(p); //給當前頁賦值
+                    var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+                    //調用方法
+                    findDistributionSummaryInfoCndbp(anyVal1);
+                }
+            });
+        });
+}
+//查询
+function findDistributionSummaryInfoCndbp(anyVal) {
+	
+    $.post("findDistributionSummaryInfoCndbp.do", anyVal, //from表单内容
+        function (data) {
+            $(".table_app").empty(); //清空原有的数据
+           
+            for (var i = 0; i < data.length; i++) {
+                var _HTML_TEBLE_ = "";
+                _HTML_TEBLE_ = "<tr>" +"<input type='hidden' class='id' value='"
+                    + data[i].id
+                    + "'/>"
+                    + "<td>"
+                    + data[i].id
+                    + "</td><td >"
+                        //商品编号
+                    + (data[i].productCode == null ? '' : data[i].productCode)
+                    + "</td><td >"
+                        //服装名
+                    + (data[i].clothName == null ? '' : data[i].clothName)
+                    + "</td><td>"
+                        //原波次
+                    + (data[i].oringinalWave == null ? '' : data[i].oringinalWave)
+                    + "</td><td>"
+                        //波次号
+                    + (data[i].wave == null ? '' : data[i].wave)
+                    + "</td><td >"
+                        //商品图片
+                    + "<img  width='100px' height='80px'src='"
+                    + (data[i].productImg == null ? '' : data[i].productImg)
+                    + "'/>"
+                    + "</td><td>"
+					+ (data[i].sampleImg == null || data[i].sampleImg == "" ? ''
+							: "<a href='" + data[i].sampleImg + "' target='_blank'>工艺单</a>")
+					+ "</td><td>"
+						+ (data[i].sizeImg == null || data[i].sizeImg == "" ? ''
+								: "<a href='" + data[i].sizeImg + "' target='_blank'>尺码表</a>")
+						+ "</td><td>"
+                        //订单详情
+	                    + (data[i].orderDetails == null ? '' : data[i].orderDetails)
+	                    + "</td><td>"
+                        //订单数量
+	                    + (data[i].orderNum == null ? '' : data[i].orderNum)
+	                    + "</td><td>"
+                        //订单等级
+	                    + (data[i].orderGrade == null ? '' : data[i].orderGrade)
+	                    + "</td><td>"
+                        //订单类型
+	                    + (data[i].orderType == null ? '' : data[i].orderType)
+	                    + "</td><td>"
+                        //经销工厂
+                    + (data[i].distributtionFactory == null ? '' : data[i].distributtionFactory)
+                    + "</td><td>"
+                        //要求入库日期
+                    + (data[i].planInWarehouseTime == null ? '' : data[i].planInWarehouseTime)
+                    + "</td><td>"
+                        //下单日期
+                    + (data[i].releaseTime == null ? '' : data[i].releaseTime)
+                    + "</td><td>"
+                        //打样时间
+                    + (data[i].toMakeTheSample == null ? '' : data[i].toMakeTheSample)
+                    + "</td><td>"
+                        //打样完成时间
+                    + (data[i].toMakeTheSampleComplete == null ? '' : data[i].toMakeTheSampleComplete)
+                    + "</td><td>"
+                        //下单状态
+                    + (data[i].confirmOrder == null ? '' : data[i].confirmOrder)
+                    + "</td><td>"
+                    	//确认下单时间
+                    + (data[i].confirmOrderTime == null ? '' : data[i].confirmOrderTime)
+                    + "</td><td>"
+                        //面料到厂
+                    + (data[i].fabricArriveFactory  == null ? '' : data[i].fabricArriveFactory )
+                    + "</td><td>"
+                        //面料到厂时间
+                    + (data[i].fabricArriveFactoryTime  == null ? '' : data[i].fabricArriveFactoryTime )
+                    + "</td><td>"
+                        //辅料到厂
+                    + (data[i].accesArriveFactory  == null ? '' : data[i].accesArriveFactory )
+                    + "</td><td>"
+                        //辅料到厂时间
+                    + (data[i].accesArriveFactoryTime == null ? '' : data[i].accesArriveFactoryTime)
+                    + "</td><td>"
+                    	//生产上线
+                    + (data[i].startMake == null ? '' : data[i].startMake)
+                    + "</td><td class='myDblClick' name='remarks' >"
+                    	//生产上线时间
+                    + (data[i].startMakeTime == null ? '' : data[i].startMakeTime)
+                    + "</td><td>"
+                    	//开始出货
+                    + (data[i].startDeliver == null ? '' : data[i].startDeliver)
+                    + "</td><td>"
+                        //开始出货时间
+                    + (data[i].startDeliverTime  == null ? '' : data[i].startDeliverTime )
+                    + "</td><td>"
+                        //出货完成
+                    + (data[i].confirmCompleteDelivery  == null ? '' : data[i].confirmCompleteDelivery )
+                    + "</td><td>"  	
+                    	//出货完成时间
+                    + (data[i].confirmCompleteDeliveryTime == null ? '' :  data[i].confirmCompleteDeliveryTime)
+                    + "</td><td>"  	
+                    	//确认入仓
+                    + (data[i].confirmInWarehouse == null ? '' :  data[i].confirmInWarehouse )
+                    + "</td><td>"  	
+                    	//确认入仓时间
+                    + (data[i].confirmInWarehouseTime == null ? '' : data[i].confirmInWarehouseTime)
+                    + "</td></tr>";
+                $(".table_app").append(_HTML_TEBLE_);
+                
+            }
+            updbclick();
+         
+        });
+}
+
+
+
+
+
+
+function updbclick() {
+
+	$(".myDblClick").on("dblclick",function() {
+		
+	
+		var id = $(this).parent().find(".id").val();
+		var code = $(this).text().trim();
+		var name = $(this).attr("name");
+		//alert("code========"+code);
+		$(this).html("<input id='" + id + "' type='text' value='"+code+"' name='" + name + "' style='width:100px;'> ");
+		$("#" + id).focus();// 文本框获取光标事件
+
+		uppblur(id, name);
+	});
+}
+// 光标离开事件
+function uppblur(id, name) {
+	
+	$("#" + id).blur(function() {
+		var newtxt = $(this).val();
+	
+		
+		$(this).closest("td").text(newtxt);
+		var data = {id : id};
+		data[name] = newtxt;
+	    
+		$.ajax({
+			url : '/modifyDistributionSummaryInfo.do',
+			dataType : 'json',
+			type : 'post',
+			data : data,
+			success : function(data) {
+				if (data == 1) {
+					
+					 var anyVal = $("#form-anyVal").serialize();
+			            getPhotographyInfoBpcnt(anyVal);
+					
+				}
+			},error : function() {
+				alert("修改失败,输入的类型错误!");
+			}
+		});
+	});
+}
+
+
+</script>
+</html>

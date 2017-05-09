@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.BoardWorksScheduleDAO">
+	<select id="getAllCount" parameterType="com.warehouse.entity.BoardWorksSchedule"
+		resultType="java.lang.Integer">
+		select count(0) from
+		board_works_schedule where 1=1
+		<if test='wave!=null and wave!=""'>
+			and wave like concat("%",#{wave},"%")
+		</if>
+	</select>
+	<select id="getDataByPage" parameterType="com.warehouse.entity.BoardWorksSchedule"
+		resultType="com.warehouse.entity.BoardWorksSchedule">
+		SELECT * FROM board_works_schedule where 1=1
+		<if test='wave!=null and wave!=""'>
+			and wave like concat("%",#{wave},"%")
+		</if>
+		ORDER BY orders desc,wave desc
+		LIMIT #{begin},#{end}
+	</select>
+</mapper>

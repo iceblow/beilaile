@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.AccesOrderRationMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.AccesOrderRation" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SCHE_TIME" property="scheTime" jdbcType="VARCHAR" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER" />
+    <result column="ORDER_DETAILS" property="orderDetails" jdbcType="VARCHAR" />
+    <result column="CROP_NUM" property="cropNum" jdbcType="INTEGER" />
+    <result column="CROP_DETAILS" property="cropDetails" jdbcType="VARCHAR" />
+    <result column="NUM_DIFF" property="numDiff" jdbcType="INTEGER" />
+    <result column="IMG" property="img" jdbcType="VARCHAR" />
+    <result column="ORI_NAME" property="accesName" jdbcType="VARCHAR" />
+    <result column="ACCES_NAME" property="accesName" jdbcType="VARCHAR" />
+    <result column="ACCES_SERIAL_NUM" property="accesSerialNum" jdbcType="VARCHAR" />
+    <result column="ACCES_QUANTITY" property="accesQuantity" jdbcType="DOUBLE" />
+    <result column="ACCES_SINGLE_USE" property="accesSingleUse" jdbcType="DOUBLE" />
+    <result column="ACCES_ACTUAL_CSPT" property="accesActualCspt" jdbcType="INTEGER" />
+    <result column="ACCES_SCRAP_RATE" property="accesScrapRate" jdbcType="DOUBLE" />
+    <result column="ACCES_ETALON_DESCRIPTION" property="accesEtalonDescription" jdbcType="VARCHAR" />
+    <result column="RATION_SYNCH_TIME" property="rationSynchTime" jdbcType="VARCHAR" />
+    <result column="RATION_READY_TIME" property="rationReadyTime" jdbcType="VARCHAR" />
+    <result column="RATION_DISPOSE_TIME_CSPT" property="rationDisposeTimeCspt" jdbcType="VARCHAR" />
+    <result column="RATION_STATUS" property="rationStatus" jdbcType="VARCHAR" />
+    <result column="RATION_REMARKS" property="rationRemarks" jdbcType="VARCHAR" />
+    <result column="RATION_MARK_STATUS" property="rationMarkStatus" jdbcType="VARCHAR" />
+    <result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+    <result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+    <result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR" />
+    <result column="SUM_RATION" property="sumRation" jdbcType="VARCHAR" />
+    <result column="READY_SUM_RATION" property="readySumRation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SCHE_TIME, WAVE, ORDER_NUM, ORDER_DETAILS,CROP_NUM, CROP_DETAILS, NUM_DIFF, IMG, ORI_NAME, ACCES_NAME, ACCES_SERIAL_NUM, ACCES_QUANTITY,
+    ACCES_SINGLE_USE, ACCES_ACTUAL_CSPT, ACCES_SCRAP_RATE, ACCES_ETALON_DESCRIPTION, 
+    RATION_SYNCH_TIME, RATION_READY_TIME, RATION_DISPOSE_TIME_CSPT, RATION_STATUS, RATION_REMARKS, 
+    RATION_MARK_STATUS, FOUNDER, CREATED_TIME, MODIFY_TIME, DELETE_TIME, OPERATOR, OPERATOR_IP, SUM_RATION, READY_SUM_RATION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from acces_order_ration
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from acces_order_ration
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertSelective" parameterType="com.warehouse.entity.AccesOrderRation" >
+    insert into acces_order_ration
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="scheTime != null" >
+        SCHE_TIME,
+      </if>
+      <if test="wave != null" >
+        WAVE,
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM,
+      </if>
+      <if test="orderDetails != null" >
+        ORDER_DETAILS,
+      </if>
+      <if test="accesName != null" >
+        ACCES_NAME,
+      </if>
+      <if test="accesSerialNum != null" >
+        ACCES_SERIAL_NUM,
+      </if>
+      <if test="accesQuantity != null" >
+        ACCES_QUANTITY,
+      </if>
+      <if test="accesSingleUse != null" >
+        ACCES_SINGLE_USE,
+      </if>
+      <if test="accesActualCspt != null" >
+        ACCES_ACTUAL_CSPT,
+      </if>
+      <if test="accesScrapRate != null" >
+        ACCES_SCRAP_RATE,
+      </if>
+      <if test="accesEtalonDescription != null" >
+        ACCES_ETALON_DESCRIPTION,
+      </if>
+      <if test="rationSynchTime != null" >
+        RATION_SYNCH_TIME,
+      </if>
+      <if test="rationReadyTime != null" >
+        RATION_READY_TIME,
+      </if>
+      <if test="rationDisposeTimeCspt != null" >
+        RATION_DISPOSE_TIME_CSPT,
+      </if>
+      <if test="rationStatus != null" >
+        RATION_STATUS,
+      </if>
+      <if test="rationRemarks != null" >
+        RATION_REMARKS,
+      </if>
+      <if test="rationMarkStatus != null" >
+        RATION_MARK_STATUS,
+      </if>
+      <if test="founder != null" >
+        FOUNDER,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME,
+      </if>
+      <if test="operator != null" >
+        OPERATOR,
+      </if>
+      <if test="operatorIp != null" >
+        OPERATOR_IP,
+      </if>
+      <if test="sumRation != null" >
+        SUM_RATION,
+      </if>
+      <if test="readySumRation != null" >
+        READY_SUM_RATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scheTime != null" >
+        #{scheTime,jdbcType=VARCHAR},
+      </if>
+      <if test="wave != null" >
+        #{wave,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderDetails != null" >
+        #{orderDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="accesName != null" >
+        #{accesName,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSerialNum != null" >
+        #{accesSerialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="accesQuantity != null" >
+        #{accesQuantity,jdbcType=DOUBLE},
+      </if>
+      <if test="accesSingleUse != null" >
+        #{accesSingleUse,jdbcType=DOUBLE},
+      </if>
+      <if test="accesActualCspt != null" >
+        #{accesActualCspt,jdbcType=INTEGER},
+      </if>
+      <if test="accesScrapRate != null" >
+        #{accesScrapRate,jdbcType=DOUBLE},
+      </if>
+      <if test="accesEtalonDescription != null" >
+        #{accesEtalonDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="rationSynchTime != null" >
+        #{rationSynchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rationReadyTime != null" >
+        #{rationReadyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rationDisposeTimeCspt != null" >
+        #{rationDisposeTimeCspt,jdbcType=VARCHAR},
+      </if>
+      <if test="rationStatus != null" >
+        #{rationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="rationRemarks != null" >
+        #{rationRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="rationMarkStatus != null" >
+        #{rationMarkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorIp != null" >
+        #{operatorIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.AccesOrderRation" >
+    update acces_order_ration
+    <set >
+      <if test="scheTime != null" >
+        SCHE_TIME = #{scheTime,jdbcType=VARCHAR},
+      </if>
+      <if test="wave != null" >
+        WAVE = #{wave,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderDetails != null" >
+        ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="accesName != null" >
+        ACCES_NAME = #{accesName,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSerialNum != null" >
+        ACCES_SERIAL_NUM = #{accesSerialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="accesQuantity != null" >
+        ACCES_QUANTITY = #{accesQuantity,jdbcType=DOUBLE},
+      </if>
+      <if test="accesSingleUse != null" >
+        ACCES_SINGLE_USE = #{accesSingleUse,jdbcType=DOUBLE},
+      </if>
+      <if test="accesActualCspt != null" >
+        ACCES_ACTUAL_CSPT = #{accesActualCspt,jdbcType=INTEGER},
+      </if>
+      <if test="accesScrapRate != null" >
+        ACCES_SCRAP_RATE = #{accesScrapRate,jdbcType=DOUBLE},
+      </if>
+      <if test="accesEtalonDescription != null" >
+        ACCES_ETALON_DESCRIPTION = #{accesEtalonDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="rationSynchTime != null" >
+        RATION_SYNCH_TIME = #{rationSynchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rationReadyTime != null" >
+        RATION_READY_TIME = #{rationReadyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rationDisposeTimeCspt != null" >
+        RATION_DISPOSE_TIME_CSPT = #{rationDisposeTimeCspt,jdbcType=VARCHAR},
+      </if>
+      <if test="rationStatus != null" >
+        RATION_STATUS = #{rationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="rationRemarks != null" >
+        RATION_REMARKS = #{rationRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="rationMarkStatus != null" >
+        RATION_MARK_STATUS = #{rationMarkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        FOUNDER = #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorIp != null" >
+        OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="sumRation != null" >
+        SUM_RATION = #{sumRation,jdbcType=VARCHAR},
+      </if>
+      <if test="readySumRation != null" >
+        READY_SUM_RATION = #{readySumRation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getAccesOrderRationBpcnt" resultType="java.lang.Integer">
+    SELECT COUNT(0) FROM acces_order_ration where RATION_MARK_STATUS ='1' AND 1=1
+    <if test="addTime != null and addTime != &quot;&quot; and addTime != &quot;N&quot; and addTime != &quot;Y&quot;">
+      AND ADD_TIME LIKE CONCAT('%',#{addTime,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="addTime == &quot;N&quot;">
+      AND (ADD_TIME ='' OR ADD_TIME
+      IS
+      NULL)
+    </if>
+    <if test="addTime ==&quot;Y&quot;">
+      AND ADD_TIME !=''
+    </if>
+
+    <if test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+      AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="wave == &quot;N&quot;">
+      AND (WAVE ='' OR WAVE
+      IS
+      NULL)
+    </if>
+    <if test="wave ==&quot;Y&quot;">
+      AND WAVE !=''
+    </if>
+    <if test="orderNum != null and orderNum != &quot;&quot; and orderNum != &quot;N&quot; and orderNum != &quot;Y&quot;">
+      AND ORDER_NUM LIKE
+      CONCAT('%',#{orderNum,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="orderNum == &quot;N&quot;">
+      AND (ORDER_NUM ='' OR ORDER_NUM
+      IS
+      NULL)
+    </if>
+    <if test="orderNum ==&quot;Y&quot;">
+      AND ORDER_NUM !=''
+    </if>
+
+  </select>
+
+  <select id="findAccesOrderRationCndbp" parameterType="Map" resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    acces_order_ration
+    WHERE
+    RATION_MARK_STATUS = '1'
+    AND 1 = 1
+    <if test="scheTime != null and scheTime != &quot;&quot; and scheTime != &quot;N&quot; and scheTime != &quot;Y&quot;">
+      AND SCHE_TIME LIKE CONCAT('%',#{scheTime,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="scheTime == &quot;N&quot;">
+      AND (SCHE_TIME ='' OR SCHE_TIME
+      IS
+      NULL)
+    </if>
+    <if test="scheTime ==&quot;Y&quot;">
+      AND SCHE_TIME !=''
+    </if>
+    <if test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+      AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="wave == &quot;N&quot;">
+      AND (WAVE ='' OR WAVE
+      IS
+      NULL)
+    </if>
+    <if test="wave ==&quot;Y&quot;">
+      AND WAVE !=''
+    </if>
+    <if test="orderNum != null and orderNum != &quot;&quot; and orderNum != &quot;N&quot; and orderNum != &quot;Y&quot;">
+      AND ORDER_NUM LIKE
+      CONCAT('%',#{orderNum,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="orderNum == &quot;N&quot;">
+      AND (ORDER_NUM ='' OR ORDER_NUM
+      IS
+      NULL)
+    </if>
+    <if test="orderNum ==&quot;Y&quot;">
+      AND ORDER_NUM !=''
+    </if>
+    ORDER BY FIELD(RATION_STATUS,'可配发','采购中','未处理') DESC,RATION_SYNCH_TIME DESC,WAVE ASC LIMIT #{pageNow},#{pageSize}
+  </select>
+
+</mapper>

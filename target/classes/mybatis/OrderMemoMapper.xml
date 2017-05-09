@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.OrderMemoDAO">
+
+	<select id="getAllCount" resultType="java.lang.Integer">
+		select COUNT(1) from
+		ordermemodemo where delType=0
+	</select>
+	<!-- 分页查询 -->
+	<select id="getAllByPage" parameterType="com.warehouse.util.Pagess"
+		resultType="com.warehouse.entity.OrderMemoDemo">
+		select * from ordermemodemo where delType=0 order by id
+		desc LIMIT
+		#{begin},#{end}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.warehouse.entity.OrderMemoDemo">
+		update ordermemodemo set
+		date=#{date},consigneeMan=#{consigneeMan},b_id=#{b_id},color=#{color},g0=#{g0},g1=#{g1},g2=#{g2},g3=#{g3},g4=#{g4},g5=#{g5},g6=#{g6},g7=#{g7},g8=#{g8},g9=#{g9},g10=#{g10},g11=#{g11},g_num=#{g_num},horse=#{horse}
+		where id=#{id}
+	</update>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.warehouse.entity.OrderMemoDemo">
+		insert into ordermemodemo
+		values(NULL,#{date},#{consigneeMan},#{b_id},#{color},#{g0},#{g1},#{g2},#{g3},#{g4},#{g5},#{g6},#{g7},#{g8},#{g9},#{g10},#{g11},#{g_num},#{horse},0,NULL)
+	</insert>
+
+	<!-- 假删除 -->
+	<update id="fakeDel" parameterType="com.warehouse.entity.OrderMemoDemo">
+		update ordermemodemo set
+		delType=1,delTime=#{delTime}
+		where id=#{id}
+	</update>
+
+	<!-- 真删除 -->
+	<delete id="trueDel" parameterType="java.lang.Integer">
+		delete from ordermemodemo
+		where id=#{0}
+	</delete>
+	
+</mapper>

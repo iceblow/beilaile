@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>面料 理单</title> <@p.cache/> <@p.css/> <@p.js/>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">面料 理单</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<button id="add_button" class="btn btn-primary btn-lg"
+						data-toggle="modal" data-target="#myModal">添加</button>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12">
+					<form enctype="multipart/form-data" role="form" action=""
+						id="form-anyVal" method="post">
+						<div id="val-input-empty" class="col-md-12">
+							<div class="col-md-3">
+								<label for="addDate">日期</label> <input type="text"
+									name="addDate" />
+							</div>
+							<div class="col-md-3">
+								<label for="designers">设计师</label> <input type="text"
+									name="designers" />
+							</div>
+							<div class="col-md-3">
+								<label for="wave">波次号</label> <input type="text" name="wave" />
+							</div>
+							<div class="col-md-3">
+								<label for="remarks"> 款号</label> <input name="remarks"
+									type="text" />
+							</div>
+							<div class="col-md-3">
+								<label for="remarks"> 订单数量</label> <input name="remarks"
+									type="text" />
+							</div>
+							<div class="col-md-3">
+								<label for="remarks"> 供应商</label> <input name="remarks"
+									type="text" />
+							</div>
+							<div class="col-md-3">
+								<label for="inputfile"> 创建人</label> <input name="founder"
+									type="text" />
+							</div>
+							<div class="col-md-3">
+								<label for="inputfile"> 面料状态</label> <input name="issuedStatus"
+									type="text" value="" />
+							</div>
+							<div class="col-md-3">
+								<span class="input-group-btn">
+									<button id="anyVal-btn" class="btn btn-default" type="button">
+										查询</button>
+								</span>
+							</div>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>编号</th>
+										<th>设计师</th>
+										<th>日期</th>
+										<th>商品编码</th>
+										<th>原波次</th>
+										<th>波次</th>
+										<th>款号</th>
+										<th>图片</th>
+										<th>工艺单</th>
+										<th>尺码表</th>
+										<th>订单数量</th>
+										<th>订单明细</th>
+										<th>供应商</th>
+										<th>面料A</th>
+										<th>色号</th>
+										<th>门封</th>
+										<th>单件用料(米）</th>
+										<th>米/重量</th>
+
+										<th>面料B</th>
+										<th>色号</th>
+										<th>门封</th>
+										<th>单件用料（米）</th>
+										<th>米/重量</th>
+
+										<th>面料C</th>
+										<th>色号</th>
+										<th>门封</th>
+										<th>单件用料（米）</th>
+										<th>米/重量</th>
+										<th>面料D</th>
+										<th>色号</th>
+										<th>门封</th>
+										<th>单件用料（米）</th>
+										<th>米/重量</th>
+
+										<th>面料E</th>
+										<th>色号</th>
+										<th>门封</th>
+										<th>单件用料（米）</th>
+										<th>米/重量</th>
+
+										<th>面料F</th>
+										<th>色号</th>
+										<th>门封</th>
+										<th>单件用料（米）</th>
+										<th>米/重量</th>
+										<th>备注</th>
+										<th>创建时间</th>
+										<th>创建人</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 采购提醒 -->
+		<div class="modal fade" id="myModal_confirm" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-confirmPurchase" class="modal-body">
+						你确定发送波次号为:<span style="color: red" id="sms-text"></span>的产品进行
+						<sapn style="color: #97FFFF;">确认采购</sapn>
+						提醒 ??? <br> <span style="color: red; font-size: 18px;">提醒之前；你要确定写工厂和预计日期了哦!!!
+						</span><input hidden="hidden" type="text" id="sms-id" />
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" id="confirmPurchase_id"
+							class="btn btn-primary" data-dismiss="modal"
+							onclick="confirmPurchase()">确认采购</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 刪除 -->
+		<div class="modal fade" id="myModal_del" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">
+						你确定刪除编号为:<span style="color: red" id="myModal2-wave-text"></span>的数据吗？？？
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" id="delAccessoryMaterial"
+							class="btn btn-primary">确认刪除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+//页面加载就执行
+$(function(){$(".col-md-2").find(":input").each(
+			function() {
+				$(this).val("");
+			});
+	var anyVal = $("#form-anyVal").serialize();
+	　　getFabricMaterialByPageCount(anyVal);
+	　　});
+	//查询
+$("#anyVal-btn").on("click", function() {
+	var anyVal = $("#form-anyVal").serialize();
+	　getFabricMaterialByPageCount(anyVal);
+});
+//查询总条数  
+function getFabricMaterialByPageCount(anyVal){
+	$.post('getFabricMaterialByPageCount.do', anyVal, function(data) {
+		$("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+		$("#pageNow").val(data.pageNow);
+		var anyVal2 = $("#form-anyVal").serialize();
+		//获取form参数进行查询
+		//調用方法传参
+		findFabricMaterial(anyVal2);
+		// 进入后台进行分页查询
+		$(".tcdPageCode").createPage({ //哦哦
+			pageCount : data.totalPageCount, //总页数
+			current : data.pageNow, //当前页
+			backFn : function(p) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(p); //給當前頁賦值
+				var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+				//調用方法
+				findFabricMaterial(anyVal1);
+			}
+		});
+	});
+}
+	//查询
+	function findFabricMaterial(anyVal) {
+		$.post("findConditionFabricMaterialByPage.do",
+						anyVal, //from表单内容
+						function(data) {
+							$(".table_app").empty(); //清空原有的数据
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr><td name='id' >"
+										+ data[i].id
+										+ "</td><input type='hidden' class='fabricACode' value='"
+										+ data[i].fabricACode
+										+ "'/><input type='hidden' class='fabricBCode' value='"
+										+ data[i].fabricBCode
+										+ "'/><input type='hidden' class='fabricCCode' value='"
+										+ data[i].fabricCCode
+										+ "'/><input type='hidden' class='fabricDCode' value='"
+										+ data[i].fabricDCode
+										+ "'/><input type='hidden' class='fabricECode' value='"
+										+ data[i].fabricECode
+										+ "'/><input type='hidden' class='fabricFCode' value='"
+										+ data[i].fabricFCode
+										+ "'/><td>"
+										+ (data[i].designers == null || data[i].designers == "" ? '' : data[i].designers)
+										+ "</td><td >"
+										+ (data[i].addDate == null || data[i].addDate == "" ? '' :data[i].addDate)
+										+ "</td><td >"
+										+ (data[i].commodityCode == null || data[i].commodityCode == "" ? '' :data[i].commodityCode)
+										+ "</td><td >"
+										+ (data[i].oringinalWave == null || data[i].oringinalWave == "" ? '' :data[i].oringinalWave)
+										+ "</td><td >"
+										+ (data[i].wave == null || data[i].wave == "" ? '' :data[i].wave)
+										+ "</td><td >"
+										+ (data[i].clothesStyle == null || data[i].clothesStyle == "" ? '' :data[i].clothesStyle)
+										+ "</td><td><img style='width: 120px; height: 120px' src=" + data[i].designChart + "></td><td>"
+										+ (data[i].craftsOrder == null
+												|| data[i].craftsOrder == "" ? ''
+														: "<a href='" + data[i].craftsOrder+ "' target='_blank'>工艺单</a>")
+										+ "</td>"
+										+ "<td>"
+										+ (data[i].sizeChart == null
+												|| data[i].sizeChart == "" ? ''
+														: "<a href='" + data[i].sizeChart+ "' target='_blank'>尺码表</a>")
+										+ "</td><td name='numberOrder'>"
+										+ (data[i].numberOrder == null || data[i].numberOrder == "" ? '' :data[i].numberOrder)
+										+ "</td><td >"
+										+ (data[i].orderDetails == null || data[i].orderDetails == "" ? '' :data[i].orderDetails)
+										+ "</td><td class='modify-table-char' value='supplier'>"
+										+ (data[i].supplier == null || data[i].supplier == "" ? '' :data[i].supplier)
+										+ "</td><td class='mydblClickfabricCdoe' name='fabricACode'>"
+										+ (data[i].fabricA == null || data[i].fabricA == "" ? '' :data[i].fabricA)
+										+ "</td><td>"
+										+ (data[i].fabricAColor == null || data[i].fabricAColor == "" ? '' :data[i].fabricAColor)
+										+ "</td><td>"
+										+ (data[i].fabricALength == null || data[i].fabricALength == "" ? '' :data[i]. fabricALength)
+										+ "</td><td class='mydblClick' value='fabricASingleUse'>"
+										+ (data[i].fabricASingleUse == null || data[i].fabricASingleUse == "" ? '' :data[i]. fabricASingleUse)
+										+ "</td><td value='fabricAActualConsumption'>"
+										+ (data[i].fabricAActualConsumption == null || data[i].fabricAActualConsumption == "" ? '' :data[i]. fabricAActualConsumption)
+										+ "</td><td class='mydblClickfabricCdoe' name='fabricBCode'>"
+										+ (data[i].fabricB == null || data[i].fabricB == "" ? '' :data[i].fabricB)
+										+ "</td><td>"
+										+ (data[i].fabricBColor == null || data[i].fabricBColor == "" ? '' :data[i].fabricBColor)
+										+ "</td><td>"
+										+ (data[i].fabricBLength == null || data[i].fabricBLength == "" ? '' :data[i]. fabricBLength)
+										+ "</td><td class='mydblClick' value='fabricBSingleUse'>"
+										+ (data[i].fabricBSingleUse == null || data[i].fabricBSingleUse == "" ? '' :data[i]. fabricBSingleUse)
+										+ "</td><td value='fabricBActualConsumption'>"
+										+ (data[i].fabricBActualConsumption == null || data[i].fabricBActualConsumption == "" ? '' :data[i]. fabricBActualConsumption)
+										+ "</td><td class='mydblClickfabricCdoe' name='fabricCCode'>"
+										+ (data[i].fabricC == null || data[i].fabricC == "" ? '' :data[i].fabricC)
+										+ "</td><td >"
+										+ (data[i].fabricCColor == null || data[i].fabricCColor == "" ? '' :data[i].fabricCColor)
+										+ "</td><td >"
+										+ (data[i].fabricCLength == null || data[i].fabricCLength == "" ? '' :data[i]. fabricCLength)
+										+ "</td><td class='mydblClick' value='fabricCSingleUse'>"
+										+ (data[i].fabricCSingleUse == null || data[i].fabricCSingleUse == "" ? '' :data[i]. fabricCSingleUse)
+										+ "</td><td value='fabricCActualConsumption'>"
+										+ (data[i].fabricCActualConsumption == null || data[i].fabricCActualConsumption == "" ? '' :data[i]. fabricCActualConsumption)
+										+ "</td><td class='mydblClickfabricCdoe' name='fabricDCode'>"
+										+ (data[i].fabricD == null || data[i].fabricD == "" ? '' :data[i].fabricD)
+										+ "</td><td >"
+										+ (data[i].fabricDColor == null || data[i].fabricDColor == "" ? '' :data[i].fabricDColor)
+										+ "</td><td >"
+										+ (data[i].fabricDLength == null || data[i].fabricDLength == "" ? '' :data[i]. fabricDLength)
+										+ "</td><td class='mydblClick' value='fabricDSingleUse'>"
+										+ (data[i].fabricDSingleUse == null || data[i].fabricDSingleUse == "" ? '' :data[i]. fabricDSingleUse)
+										+ "</td><td value='fabricDActualConsumption'>"
+										+ (data[i].fabricDActualConsumption == null || data[i].fabricDActualConsumption == "" ? '' :data[i]. fabricDActualConsumption)
+										+ "</td><td class='mydblClickfabricCdoe' name='fabricECode'>"
+										+ (data[i].fabricE == null || data[i].fabricE == "" ? '' :data[i].fabricE)
+										+ "</td><td >"
+										+ (data[i].fabricEColor == null || data[i].fabricEColor == "" ? '' :data[i].fabricEColor)
+										+ "</td><td >"
+										+ (data[i].fabricELength == null || data[i].fabricELength == "" ? '' :data[i]. fabricELength)
+										+ "</td><td class='mydblClick' value='fabricESingleUse'>"
+										+ (data[i].fabricESingleUse == null || data[i].fabricESingleUse == "" ? '' :data[i]. fabricESingleUse)
+										+ "</td><td  value='fabricEActualConsumption'>"
+										+ (data[i].fabricEActualConsumption == null || data[i].fabricEActualConsumption == "" ? '' :data[i]. fabricEActualConsumption)
+										+ "</td><td class='mydblClickfabricCdoe' name='fabricFCode'>"
+										+ (data[i].fabricF == null || data[i].fabricF == "" ? '' :data[i].fabricF)
+										+ "</td><td >"
+										+ (data[i].fabricFColor == null || data[i].fabricFColor == "" ? '' :data[i].fabricFColor)
+										+ "</td><td >"
+										+ (data[i].fabricFLength == null || data[i].fabricFLength == "" ? '' :data[i]. fabricFLength)
+										+ "</td><td class='mydblClick' value='fabricFSingleUse'>"
+										+ (data[i].fabricFSingleUse == null || data[i].fabricFSingleUse == "" ? '' :data[i]. fabricFSingleUse)
+										+ "</td><td value='fabricFActualConsumption'>"
+										+ (data[i].fabricFActualConsumption == null || data[i].fabricFActualConsumption == "" ? '' :data[i]. fabricFActualConsumption)
+										+ "</td><td class='modify-table-char' value='remarks'>"
+										+ (data[i].remarks == null || data[i].remarks == "" ? '' :data[i].remarks)
+										+ "</td><td >"
+										+ (data[i].createdTime == null || data[i].createdTime == "" ? '' :data[i].createdTime)
+										+ "</td><td >"
+										+ (data[i].founder == null || data[i].founder == "" ? '' :data[i].founder)
+										+ "</td><td class='issuedStatus"+data[i].id+"'><button type='button' data-toggle='modal' id='confirm' data-target='#myModal_confirm'  onclick='confirmPurchase_id(\""
+										+ data[i].id
+										+ "\",\""
+										+ data[i].wave
+										+ "\")' class='btn btn-primary icon-lock'>确认采购</button><button type='button'  data-toggle='modal' data-target='#myModal_del' onclick='delObjectById(\""
+										+ data[i].id
+										+ "\")' class='icon-trash btn btn-danger'>确认删除</button></td></tr>";
+								$(".table_app").append(_HTML_TEBLE_);
+								var issuedStatus = data[i].issuedStatus;
+								if (issuedStatus != "" && issuedStatus != null && issuedStatus ==1 ) {
+									$(".issuedStatus" + data[i].id).parent().attr("bgcolor", "#00ffff");
+									$(".issuedStatus" + data[i].id).find('button').remove();
+									$(".issuedStatus" + data[i].id).append("<button class='btn icon-ok btn-inverse' disabled='disabled'>已确认采购</button>");
+									
+								}
+								if (issuedStatus != "" && issuedStatus != null && issuedStatus ==2) {
+									$(".issuedStatus" + data[i].id).parent().attr("bgcolor", "#CEFFCE");
+									$(".issuedStatus" + data[i].id).find('button').remove();
+									$(".issuedStatus" + data[i].id).append("<button class='btn icon-ok btn-success' disabled='disabled'>已采购</button>");
+								
+								}
+								if (issuedStatus != "" && issuedStatus != null && issuedStatus ==3) {
+									$(".issuedStatus" + data[i].id).append("<button class='btn icon-ok btn-success' disabled='disabled'>采购驳回</button>");
+									$(".issuedStatus" + data[i].id).parent().attr("bgcolor", "#FF7F50");
+								}
+								if (issuedStatus != "" && issuedStatus != null && issuedStatus ==5) {
+									$(".issuedStatus" + data[i].id).find('button').remove();
+									$(".issuedStatus" + data[i].id).append("<button class='btn icon-ok btn-success' disabled='disabled'>全经销</button>");
+									$(".issuedStatus" + data[i].id).parent().attr("bgcolor", "#2E8B57");
+								}
+								
+							};
+							mydblclick();
+							updbclickfabric();
+							modifyCellByNumeric("modifyFabricMaterial.do",findFabricMaterial);
+							modifyCellByChar("modifyFabricMaterial.do",findFabricMaterial);
+						});
+	};
+/////////////////双击修改面料////////////////
+	function updbclickfabric() {
+		$(".mydblClickfabricCdoe").on("dblclick",function() {
+			//var id = $(this).parent().find(".id").val();
+			var id = $(this).parent().find("td:eq(0)").text();
+			var name = $(this).attr("name");
+			var code ="";
+			if(name=="fabricACode"){
+				code=$(this).parent().find(".fabricACode").val()=="null"?"":$(this).parent().find(".fabricACode").val();
+			}else if(name=="fabricBCode"){
+				 code=$(this).parent().find(".fabricBCode").val()=="null"?"":$(this).parent().find(".fabricBCode").val();
+			}else if(name=="fabricCCode"){
+				 code=$(this).parent().find(".fabricCCode").val()=="null"?"":$(this).parent().find(".fabricCCode").val();
+			}else if(name=="fabricDCode"){
+				 code=$(this).parent().find(".fabricDCode").val()=="null"?"":$(this).parent().find(".fabricDCode").val();
+			}else if(name=="fabricECode"){
+				 code=$(this).parent().find(".fabricECode").val()=="null"?"":$(this).parent().find(".fabricECode").val();
+			}else if(name=="fabricFCode"){
+				 code=$(this).parent().find(".fabricFCode").val()=="null"?"":$(this).parent().find(".fabricFCode").val();
+			}
+			$(this).html("<input id='" + id + "' type='text' value='" + code+ "' name='" + name + "' style='width:100px;'> ");
+			$("#" + id).focus();// 文本框获取光标事件
+			uppfabricBlur(id, name);
+		});
+	};
+	// 光标离开事件
+	function uppfabricBlur(id, name) {
+		$("#" + id).blur(function() {
+			var newtxt = $(this).val();
+			$(this).closest("td").text(newtxt);
+			var data = {id : id,type:name};
+			data[name] = newtxt;
+			$.ajax({
+				url :'findFabricNameByCode.do',
+				dataType : 'json',
+				type : 'post',
+				data : data,
+				success : function(data) {
+				 if(data==2){
+						if(confirm("该编号不存在，是否跳转到面料添加？")){
+							window.open("fabricSupplier.html");
+						}
+					}
+				 var anyVal6 = $("#form-anyVal").serialize(); //获取form表单
+				//調用方法
+				findFabricMaterial(anyVal6);
+				},error : function() {
+					alert("修改失败,系统错误!");
+				}
+			});
+		});
+	}
+	function confirmPurchase_id(id, wave) {
+		//window.location.reload();
+		$("#myModal-confirmPurchase").html("你确定采购波次号为:<span style='color: red' id='sms-text'></span>的产品进行<sapn style='color: #97FFFF;'>确认采购</sapn>提醒 ??? <br> <span style='color: red; font-size: 18px;'>提醒之前；你要确定面料数据都是对的哦!!!</span><input hidden='hidden' type='text' id='sms-id' />");
+		$("#confirmPurchase_id").show();
+		$("#sms-text").text(wave);
+		$("#sms-id").text(id);
+	};
+	function confirmPurchase() {
+		var id = $("#sms-id").text();
+		$.post('updateFabricMaterialByStatus.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-confirmPurchase").html("恭喜你！已经确认成功");
+				$("#confirmPurchase_id").hide();
+				var pageNow = $("#pageNow").val();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				//window.location.reload();
+				var anyVal4 = $("#form-anyVal").serialize();
+				//調用方法传参
+				findFabricMaterial(anyVal4);
+			} else {
+				$(" #myModal-confirmPurchase").html("发送失败！原因可能是网络问题" + data);
+				$("#confirmPurchase_id").hide();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				//window.location.reload();
+				var anyVal4 = $("#form-anyVal").serialize();
+				//获取form参数进行查询
+				//調用方法传参
+				findFabricMaterial(anyVal4);
+
+			}
+			$("#sms-id").text("");
+			$("#sms-text").text("");
+		});
+	}
+	//删除 
+	$("#delAccessoryMaterial").on('click', function() {
+		var id = $("#myModal2-wave-text").text();
+		$.post('delFabricMaterialById.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-prompt").html("恭喜你刪除成功");
+				$("#del-btn").remove();
+				window.location.reload();
+			} else {
+				$(" #myModal-prompt").html("删除失败！原因可能是网络问题");
+				$("#del-btn").remove();
+				window.location.reload();
+			}
+		});
+	});
+	//删除 
+	function delObjectById(id) {
+		$("#myModal2-wave-text").text(id);
+	};
+</script>
+</html>

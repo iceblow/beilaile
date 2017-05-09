@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/inputstorage/salesNotSaleHangZhou.js"></script>
+<title>未售杭州</title>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">未售杭州</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div>
+					<div class="col-md-12">
+						<div style="float: left;">
+							<form id="mySelect_From">
+								<font>波次查询</font> <input type="text" name="girard"
+									id="checkByGirard" /> <font>工厂查询</font> <input type="text"
+									name="factory" id="checkByFactory" /> <font>商品编码查询</font> <input
+									type="text" name="commoditycCode" id="checkByCommoditycCode" />
+								<a id="checkbtn" class="btn btn-default">查 询</a>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-12"></div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="19" style="text-align: center; font-size: 16px;">未售杭州</th>
+							</tr>
+							<tr id="head">
+								<th style="text-align: center;">时间</th>
+								<th style="text-align: center;">供应商编码</th>
+								<th style="text-align: center;">商品编码</th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">工 厂</th>
+								<th style="text-align: center;">设计图</th>
+								<th style="text-align: center;">59码</th>
+								<th style="text-align: center;">66码</th>
+								<th style="text-align: center;">73码</th>
+								<th style="text-align: center;">80码</th>
+								<th style="text-align: center;">90码</th>
+								<th style="text-align: center;">100码</th>
+								<th style="text-align: center;">110码</th>
+								<th style="text-align: center;">120码</th>
+								<th style="text-align: center;">130码</th>
+								<th style="text-align: center;">160码</th>
+								<th style="text-align: center;">170码</th>
+								<th style="text-align: center;">总件数</th>
+								<th style="text-align: center;">备注</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 隐藏的绝对路径，供jquery使用 -->
+		<input type="hidden" value="${pageContext.request.contextPath}"
+			id="path">
+</body>
+</html>

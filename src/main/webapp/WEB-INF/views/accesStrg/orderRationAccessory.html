@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>库存准备</title> <@p.cache/> <@p.css/> <@p.js/>
+    <script type="text/babel" src="/res/js/acces/accesCommon.js"></script>
+    <script type="text/babel" src="/res/js/acces/accesOderSort.js"></script>
+</head>
+<body>
+<@p.top/>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <@p.left/>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li><i class="icon-home home-icon"> </i> <a href="#">
+                        Home </a></li>
+                    <li><a href="#"> Tables </a></li>
+                    <li class="active">库存准备</li>
+                </ul>
+                <!-- .breadcrumb -->
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+            <div class="col-md-12">
+                <button id="add_button" class="btn btn-primary btn-lg"
+                        data-toggle="modal" data-target="#myModal">添加
+                </button>
+            </div>
+            <!-- /.col-lg-6 -->
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-anyVal" method="post">
+                    <div id="val-input-empty" class="col-md-12">
+                        <div class="col-md-2">
+                            <label for="queryAddDate">日期</label>
+                            <input type="text" name="addDate" id="queryAddDate"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="queryWave">波次号</label>
+                            <input type="text" name="wave" id="queryWave"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="queryRationStatus">状态</label>
+                            <input type="text" name="rationStatus" id="queryRationStatus"/>
+                        </div>
+                        <div class="col-md-2">
+								<span class="input-group-btn">
+									<button id="queryAccesOrderRation" class="btn btn-default" type="button"> 查询</button>
+								</span>
+                        </div>
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="">
+                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+                    </div>
+                </form>
+            </div>
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                            <tr>
+                                <th>编号</th>
+                                <th>日期</th>
+                                <th>波段</th>
+                                <th>订单数</th>
+                                <th>订单详情</th>
+                                <th>序列号</th>
+                                <th>图片</th>
+                                <th>辅料名称</th>
+                                <th>辅料规格</th>
+                                <th>辅料损耗率</th>
+                                <th>辅料单耗</th>
+                                <th>辅料数量</th>
+                                <th>数量差值</th>
+                                <th>数据同步时间</th>
+                                <th>配齐数量</th>
+                                <th>辅料总数</th>
+                                <th>备注</th>
+                                <th>状态</th>
+                                <th colspan="1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    //页面加载就执行
+    $(function () {
+        $(".col-md-2").find(":input").each(
+            function () {
+                $(this).val("");
+            });
+        var anyVal = $("#form-anyVal").serialize();
+        getAccesOrderRationBpcnt(anyVal);
+    });
+    //查询
+    $("#queryAccesOrderRation").on("click", function () {
+        var anyVal = $("#form-anyVal").serialize();
+        getAccesOrderRationBpcnt(anyVal);
+    });
+    //提交
+    $("#submit-btn").on("click", function () {
+        var formData = new FormData($("#form-input")[0]);
+        var if_input_Id = $("#obj_hidden_id").val();
+        if (if_input_Id != "" && if_input_Id != null) {
+            //修改
+            modifyAccessoryMaterial(formData);
+        } else {
+            //添加
+            addAccessoryMaterial(formData);
+        }
+    });
+    //查询总条数
+    function getAccesOrderRationBpcnt(anyVal) {
+        $.post('getAccesOrderRationBpcnt.do', anyVal,
+            function (data) {
+            $("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+            $("#pageNow").val(data.pageNow);
+            var anyVal2 = $("#form-anyVal").serialize();
+            //获取form参数进行查询
+            //調用方法传参
+                findAccesOrderRation(anyVal2);
+            // 进入后台进行分页查询
+            $(".tcdPageCode").createPage({ //哦哦
+                pageCount: data.totalPageCount, //总页数
+                current: data.pageNow, //当前页
+                backFn: function (p) {
+                    $("#pageSize").val(10);
+                    $("#pageNow").val(p); //給當前頁賦值
+                    var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+                    //調用方法
+                    findAccesOrderRation(anyVal1);
+                }
+            });
+        });
+    }
+    //查询
+    function findAccesOrderRation(anyVal) {
+        $.post("findAccesOrderRationCndbp.do", anyVal, //from表单内容
+            function (data) {
+                $(".table_app").empty(); //清空原有的数据
+                for (var i = 0; i < data.length; i++) {
+                    var _HTML_TEBLE_ = "";
+                    _HTML_TEBLE_ = "<tr>" +
+                        + "<input type='hidden' class='id' value='"
+                        + data[i].id
+                        + "'/>"
+                        +"<td>"
+                        + data[i].id
+                        + "</td><td >"
+                        + (data[i].scheTime == null ? '': data[i].scheTime)
+                        + "</td><td >"
+                        + (data[i].wave == null ? '': data[i].wave)
+                        + "</td><td >"
+                        + (data[i].orderNum == null ? '': data[i].orderNum)
+                        + "</td><td >"
+                        + (data[i].orderDetails == null ? '': data[i].orderDetails)
+                        + "</td><td >"
+
+                        + (data[i].accesSerialNum == null ? '': data[i].accesSerialNum)
+                        + "</td><td >"
+                        + (data[i].img == null ? '': data[i].img)
+                        + "</td><td>"
+                        + (data[i].accesName == null ? '': data[i].accesName)
+                        + "</td><td >"
+                        + (data[i].accesEtalonDescription == null ? '': data[i].accesEtalonDescription)
+                        + "</td><td>"
+                        + (data[i].accesScrapRate == null ? '': data[i].accesScrapRate)
+                        + "</td><td>"
+                        + (data[i].accesSingleUse == null ? '': data[i].accesSingleUse)
+                        + "</td><td>"
+                        + (data[i].accesQuantity == null ? '': data[i].accesQuantity)
+                        + "</td><td>"
+                        + (data[i].numDiff == null ? '': data[i].numDiff)
+                        + "</td><td>"
+                        + (data[i].rationSynchTime == null ? '': data[i].rationSynchTime)
+                        + "</td><td>"
+                        + (data[i].readySumRation == null ? '': data[i].readySumRation)
+                        + "</td><td>"
+                        + (data[i].sumRation == null ? '': data[i].sumRation)
+                        + "</td><td>"
+                        + (data[i].rationRemarks == null ? '': data[i].rationRemarks)
+                        + "</td><td class='rationStatus" + data[i].id + "'>"
+                        + (data[i].rationStatus == null ? '': data[i].rationStatus)
+                        + "</td><td class='btnStatus" + data[i].id + "'>"
+                        + "<button type='button'  onclick='rationPurchasing(\""
+                        + data[i].id
+                        + "\")' class='btn btn-success '>去采购</button>"
+                        +"<button type='button'   onclick='rationPrepareComplete(\""
+                        + data[i].id
+                        + "\")' class=' btn btn-danger'>可配发</button>"
+
+                        + "</td></tr>";
+                    $(".table_app").append(_HTML_TEBLE_);
+                    var rationStatus = data[i].rationStatus;
+                    var issId = data[i].id;
+                    var btnStatus = data[i].rationStatus;
+                    var btn = $(".btnStatus" + issId).find("button");
+                    if (btnStatus=='采购中') {
+                        btn.eq(0).attr('disabled',"true");
+                    }else if (btnStatus=='可配发') {
+                        btn.eq(1).attr('disabled',"true");
+                        btn.eq(0).attr('disabled',"true");
+                    }
+                    addRationBackGroundColor(rationStatus, issId);
+                }
+            });
+    }
+    //库存准备状态改为 可配发
+    function rationPrepareComplete(id) {
+        var flag = confirm("确认 可配发？");
+        var data = {
+            amId: id
+        };
+        var tdArgs =  $(".rationStatus" + id);
+        if (flag) {
+            $.ajax({
+                url: "orderRationPrepareComplete.do",
+                dataType: 'json',
+                type: 'post',
+                data: data,
+                success: function (result) {
+                    var rationStatus = "可配发";
+                    var issId = id;
+                    tdArgs.text(rationStatus);
+                    addRationBackGroundColor(rationStatus, issId);
+                    disableAcPreparedBtn(issId);
+                }
+            });
+        }
+    }
+
+    //    可配发按钮失效
+    function disableAcPreparedBtn(issId) {
+        var tdArgs = $(".rationStatus" + issId).parent();
+        var btn = tdArgs.last().find('button');
+        btn.eq(0).attr('disabled',"true");
+        btn.eq(1).attr('disabled',"true");
+    }
+    //状态改为 去采购
+    function rationPurchasing(id) {
+        var flag = confirm("确认去采购？");
+        var data = {
+            amId: id
+        };
+        var tdArgs =  $(".rationStatus" + id);
+        if (flag) {
+            $.ajax({
+                url: "orderRationPurchasing.do",
+                dataType: 'json',
+                type: 'post',
+                data: data,
+                success: function (result) {
+                    var rationStatus = "采购中";
+                    var issId = id;
+                    tdArgs.text(rationStatus);
+                    addRationBackGroundColor(rationStatus, issId);
+                    disableAcPurchaseBtn(issId)
+                }
+            });
+        }
+    }
+
+    function disableAcPurchaseBtn(issId) {
+        var tdArgs = $(".rationStatus" + issId).parent();
+        var btn = tdArgs.last().find('button').eq(0);
+        btn.attr('disabled',"true");
+    }
+
+
+    function addRationBackGroundColor(rationStatus, issId) {
+        if (rationStatus == "准备发放") {
+            $(".rationStatus" + issId).parent().css("background", "#ffdcb9");
+        } else if (rationStatus == "采购中") {
+            $(".rationStatus" + issId).parent().css("background", "#d9ffff");
+        } else if (rationStatus == "可配发") {
+            $(".rationStatus" + issId).parent().css("background", "#ffd9ec");
+        } else if (rationStatus == "驳回") {
+            $(".rationStatus" + issId).parent().css("background", "#ffbb77");
+        } else {
+            $(".rationStatus" + issId).parent().css("background", "none");
+        }
+    }
+
+    $("#queryAddDate").keyup(function () {
+        if (event.keyCode == 13) {
+            $("#anyVal-btn").click();
+        }
+    });
+    $("#queryWave").keyup(function () {
+        if (event.keyCode == 13) {
+            $("#anyVal-btn").click();
+        }
+    });
+
+
+</script>
+</html>

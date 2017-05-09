@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>设计师</title> <@p.cache/><@p.css/> <@p.js/>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li class="active">公司产品</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="page-content">
+					<div class="page-header">
+						<h1>产列表</h1>
+					</div>
+					<!-- /.page-header -->
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							<div class="row-fluid">
+								<ul class="ace-thumbnails">
+									<@listProduct> 
+										<#list listProduct as list >
+											<li>
+												<a href="&" data-rel="colorbox" class="cboxElement">
+														<img alt="120x120" src="${list.image}">
+														<div class="text">
+															<div class="inner">${list.wave}</div>
+														</div>
+												</a>
+												<div class="tools tools-bottom">
+														<span>${list.designers}</span>
+												</div>
+											</li> 
+										</#list>
+									</@listProduct>
+								</ul>
+							</div>
+							<!-- PAGE CONTENT ENDS -->
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.page-content -->
+			</div>
+			<!-- /.main-content -->
+		</div>
+		<!-- /.回到顶部 -->
+	</div>
+</body>
+</html>

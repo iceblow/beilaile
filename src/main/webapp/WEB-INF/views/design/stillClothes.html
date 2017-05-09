@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>问题反馈</title> <@p.cache/> <@p.css/> <@p.js/>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">样衣</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<button id="add_button" class="btn btn-primary btn-lg"
+						data-toggle="modal" data-target="#myModal">添加</button>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12">
+					<form action="" id="anyVal-from">
+						<div id="val-input-empty" class="col-md-10">
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">波次号</span> <input name="wave"
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<span class="input-group-btn">
+									<button id="anyVal-btn" class="btn btn-default" type="button">
+										查询</button>
+								</span>
+							</div>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr>
+										<th>编号</th>
+										<th>添加日期</th>
+										<th>波次号</th>
+										<th>尺码表</th>
+										<th>备注</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--添加/修改》》模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加</h4>
+					</div>
+					<form enctype="multipart/form-data" role="form" action=""
+						id="form-input" method="post">
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<label for="wave">波次号</label> <input type="text"
+										class="form-control" name="wave" id="wave" placeholder="">
+								</div>
+								<div class="col-md-6">
+									<label for="inputfile"> 添加图片 </label> <input name="imageFile"
+										type="file" id="up" />
+								</div>
+								<div class="col-md-6">
+									<label for="image"> 图片预览 </label>
+									<div style="width: 120px; height: 120px;">
+										<img id="ImgPr" width="120" height="120" src="" />
+									</div>
+								</div>
+								<div class="col-md-12">
+									<label for="remarks">备注</label> <input type="text"
+										class="form-control" name="remarks" id="remarks"
+										placeholder="">
+								</div>
+							</div>
+							<input type="hidden" class="form-control" name="id"
+								placeholder="" id="obj_hidden_id">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" id="submit-btn" class="btn btn-primary"
+								data-dismiss="modal">提交</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 刪除 -->
+		<div class="modal fade" id="myModal_del" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">
+						你确定刪除编号为:<span style="color: red" id="myModal2-wave-text"></span>的数据吗？？？
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" id="del-btn" class="btn btn-primary">确认刪除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$("#add_button").on("click", function() {
+		$("#obj_hidden_id").val("");
+	});
+	//删除
+	$("#del-btn").on('click', function() {
+		var id = $("#myModal2-wave-text").text();
+		$.post('delStillClothesById.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-prompt").html("恭喜你刪除成功");
+				$("#del-btn").remove();
+				window.location.reload();
+			} else {
+				$(" #myModal-prompt").html("删除失败！原因可能是网络问题");
+				$("#del-btn").remove();
+				window.location.reload();
+			}
+		});
+	});
+	//提交
+	$("#submit-btn").on("click", function() {
+		var formData = new FormData($("#form-input")[0]);
+		var if_input_Id = $("#obj_hidden_id").val();
+		if (if_input_Id != "" && if_input_Id != null) {
+			modify_btn(formData);
+		} else {
+			add_btn(formData);
+		}
+	});
+	//修改
+	function modify_btn(formData) {
+		$.ajax({
+			url : 'modifyStillClothes.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				var pageNow = $("#pageNow").val();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findStillClothes(anyVal);
+			},
+			error : function(data) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(1); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findStillClothes(anyVal);
+				window.location.reload();
+			}
+		});
+	};
+	function add_btn(formData) {
+		$.ajax({
+			url : 'addStillClothes.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				window.location.reload();
+			},
+			error : function(data) {
+				window.location.reload();//刷新当前页面.
+			}
+		});
+	}
+	$("#up").uploadPreview({
+		Img : "ImgPr",
+		Width : 120,
+		Height : 120
+	});
+	$(function() {
+
+		/*页面加载执行的方法*/
+		var anyVal = $("#anyVal-from").serialize();//获取form表单
+		index(anyVal);
+
+	});
+	$("#anyVal-btn").on("click", function() {
+		var anyVal = $("#anyVal-from").serialize();//获取form表单
+		index(anyVal);
+	});
+	function index(anyVal) {
+		$.post('getStillClothesByPageCount.do', anyVal, function(data) {
+			$("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+			$("#pageNow").val(data.pageNow);
+			//获取form参数进行查询
+			var anyVal = $("#anyVal-from").serialize();
+			//調用方法传参
+			findStillClothes(anyVal);
+			// 进入后台进行分页查询
+			$(".tcdPageCode").createPage({ //哦哦
+				pageCount : data.totalPageCount, //总页数
+				current : data.pageNow, //当前页
+				backFn : function(p) {
+					$("#pageSize").val(10);
+					$("#pageNow").val(p); //給當前頁賦值
+					var anyVal = $("#anyVal-from").serialize(); //获取form表单
+					//調用方法
+					findStillClothes(anyVal);
+				}
+			});
+		});
+	}
+	function findStillClothes(anyVal) {
+		$
+				.post(
+						"findConditionStillClothesByPage.do",
+						anyVal, //from表单内容
+						function(data) {
+							$(".table_app").empty(); //清空原有的数据
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr><td >"
+										+ data[i].id
+										+ "</td><td >"
+										+ (data[i].addDate == null ? ''
+												: data[i].addDate)
+										+ "</td><td >"
+										+ (data[i].wave == null ? ''
+												: data[i].wave)
+										+ "</td><td><img style='width: 120px; height: 120px' src=" + data[i].sizeChart + "></td><td >"
+										+ (data[i].remarks == null ? ''
+												: data[i].remarks)
+										+ "</td><td ><button type='button'  data-toggle='modal' data-target='#myModal' onclick='modifyObjectById(\""
+										+ data[i].id
+										+ "\")' class='btn btn-primary icon-pencil'>修改</button><button type='button'  data-toggle='modal' data-target='#myModal_del' onclick='delObjectById(\""
+										+ data[i].id
+										+ "\")' class='icon-trash btn btn-danger'>删除</button></td></tr>";
+								$(".table_app").append(_HTML_TEBLE_);
+							}
+						});
+	}
+	//修改获取最新数据
+	function modifyObjectById(id) {
+		$.post("getStillClothesById.do", {
+			'id' : id
+		}, function(result) {
+			$("#obj_hidden_id").val(result.id);//id
+			$("#wave").val(result.wave);//波次号
+			$("#ImgPr").attr('src', result.sizeChart);
+			$("#remarks").val(result.remarks);//备注
+		});
+	};
+	function delObjectById(id) {
+		$("#myModal2-wave-text").text(id);
+	}
+</script>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>印绣花任务分发</title><@p.cache/> <@p.js/><@p.css/>
+<script src="res/js/getDiscrepantDays/getDiscrepantDays.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/cutting/TaskDistribution.js"></script>
+
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">印绣花任务分发</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2">
+								<label for="designer"></label>设计师<input type="text"
+									class="form-control" name="designer">
+							</div>
+							<div class="col-md-2">
+								<label for="wave"></label>波次号<input type="text"
+									class="form-control" name="wave">
+							</div>
+							<div class="col-md-2">
+								<label for="folwerFactory"></label>印绣花厂<input type="text"
+									class="form-control" name="folwerFactory">
+							</div>
+							<div class="col-md-2">
+								<label for="pieceApproved"></label>印花或裁片<input type="text"
+									class="form-control" name="pieceApproved">
+							</div>
+							<div class="col-md-2">
+								<label for="flowerPrice"></label>绣花单价<input type="text"
+									class="form-control" name="flowerPrice">
+							</div>
+							<div class="col-md-2">
+								<label for="orderType"></label>订单类型<input type="text"
+									class="form-control" name="orderType">
+							</div>
+							<div class="col-md-2">
+								<label for="fabricStorageTime"></label>面料入库时间<input type="text"
+									class="form-control" name="fabricStorageTime">
+							</div>
+							<div class="col-md-2">
+								<label for="fabricReleaseTime"></label>面料发放时间<input type="text"
+									class="form-control" name="fabricReleaseTime">
+							</div>
+							<div class="col-md-2">
+								<label for="largeCargoTime"></label>匹印领料<input type="text"
+									class="form-control" name="largeCargoTime">
+							</div>
+							<div class="col-md-2">
+								<label for="largeCargoCompletionTime"></label>匹印出货<input
+									type="text" class="form-control"
+									name="largeCargoCompletionTime">
+							</div>
+							<div class="col-md-2">
+								<label for="cropCompletionTime"></label>裁剪完成时间<input type="text"
+									class="form-control" name="cropCompletionTime">
+							</div>
+							<div class="col-md-2">
+								<label for="cropNumber"></label>裁剪数<input type="text"
+									class="form-control" name="cropNumber">
+							</div>
+							<div class="col-md-2">
+								<label for="cutLargeReceiveTime"></label>片印领料<input type="text"
+									class="form-control" name="cutLargeReceiveTime">
+							</div>
+							<div class="col-md-2">
+								<label for="cutLargeReturnTime"></label>片印回料<input type="text"
+									class="form-control" name="cutLargeReturnTime">
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="myselect">查询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered"
+						style="width: 100%; height: 100%;">
+						<thead>
+							<tr>
+								<th colspan="30" style="text-align: center; font-size: 25px;">印绣花任务分发</th>
+							</tr>
+							<tr>
+								<th style="text-align: center; font-size: 16px;">编号</th>
+								<th style="text-align: center; font-size: 16px;">设计师</th>
+								<th style="text-align: center; font-size: 16px;">原波次</th>
+								<th style="text-align: center; font-size: 16px;">图片</th>
+								<th style="text-align: center; font-size: 16px;">波次</th>
+								<th style="text-align: center; font-size: 16px;">工艺单</th>
+								<th style="text-align: center; font-size: 16px;">印花稿</th>
+								<th style="text-align: center; font-size: 16px;">订单数量</th>
+								<th style="text-align: center; font-size: 16px;">订单明细</th>
+								<th style="text-align: center; font-size: 16px;">印绣花工厂</th>
+								<th style="text-align: center; font-size: 16px;">印花或裁片</th>
+								<th style="text-align: center; font-size: 16px;">绣花单价</th>
+								<th style="text-align: center; font-size: 16px;">匹印单价</th>
+								<th style="text-align: center; font-size: 16px;">裁片印单价</th>
+								<th style="text-align: center; font-size: 16px;">订单类型</th>
+								<th style="text-align: center; font-size: 16px;">发版时间</th>
+								<th style="text-align: center; font-size: 16px;">印绣花给样时间</th>
+								<th style="text-align: center; font-size: 16px;">印绣花回样时间</th>
+								<th style="text-align: center; font-size: 16px;">制单/样衣->给到裁床日期</th>
+								<th style="text-align: center; font-size: 16px;">面料入库时间</th>
+								<th style="text-align: center; font-size: 16px;">面料发放时间</th>
+								<th style="text-align: center; font-size: 16px;">匹印领料</th>
+								<th style="text-align: center; font-size: 16px;">匹印出货</th>
+								<th style="text-align: center; font-size: 16px;">裁剪完成时间</th>
+								<th style="text-align: center; font-size: 16px;">裁剪数</th>
+								<th style="text-align: center; font-size: 16px;">片印领料</th>
+								<th style="text-align: center; font-size: 16px;">片印回料</th>
+								<th style="text-align: center; font-size: 16px;">备注</th>
+								<th style="text-align: center; font-size: 16px;" colspan="2">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+					<div style="display: none;">
+						<img id="printImg" src="" width="100%" height="100%">
+					</div>
+				</div>
+			</div>
+
+			<!-- 修改模态框 -->
+			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">修改理单跟踪数据</h4>
+						</div>
+						<div class="modal-body">
+							<form id="myUpdataForm">
+								<div class="col-md-12">
+									<input type="hidden" name="id" id="id" value="">
+									<div class="col-md-4" style="float: left;">
+										<label for="folwerFactory">印绣花工厂</label> <input type="text"
+											class="form-control date" name="folwerFactory"
+											id="folwerFactory">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="pieceApproved">印花或裁片</label> <input type="text"
+											class="form-control date" name="pieceApproved"
+											id="pieceApproved">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="flowerPrice">绣花单价</label> <input type="text"
+											class="form-control date" name="flowerPrice" id="flowerPrice">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="printingPrice">匹印单价</label> <input type="text"
+											class="form-control date" name="printingPrice"
+											id="printingPrice">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="piecesPrice">裁片印单价</label> <input type="text"
+											class="form-control date" name="piecesPrice" id="piecesPrice">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="orderType">订单类型</label> <input type="text"
+											class="form-control date" name="orderType" id="orderType">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="releaseTime">发版时间</label> <input type="text"
+											class="form-control input-date" name="releaseTime"
+											id="releaseTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="proofingTime">印绣花给样时间</label> <input type="text"
+											class="form-control input-date" name="proofingTime"
+											id="proofingTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="proofingCompletionTime">印绣花回样时间</label> <input
+											type="text" class="form-control input-date"
+											name="proofingCompletionTime" id="proofingCompletionTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="cuttingTime">制单/样衣->给到裁床日期</label> <input
+											type="text" class="form-control input-date"
+											name="cuttingTime" id="cuttingTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="fabricStorageTime">面料入库时间</label> <input
+											type="text" class="form-control input-date"
+											name="fabricStorageTime" id="fabricStorageTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="fabricReleaseTime">面料发放时间</label> <input
+											type="text" class="form-control input-date"
+											name="fabricReleaseTime" id="fabricReleaseTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="largeCargoTime">匹印领料</label> <input type="text"
+											class="form-control input-date" name="largeCargoTime"
+											id="largeCargoTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="largeCargoCompletionTime">匹印出货</label> <input
+											type="text" class="form-control input-date"
+											name="largeCargoCompletionTime" id="largeCargoCompletionTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="cropCompletionTime">裁剪完成时间</label> <input
+											type="text" class="form-control input-date"
+											name="cropCompletionTime" id="cropCompletionTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="cropNumber">裁剪数</label> <input type="text"
+											class="form-control date" name="cropNumber" id="cropNumber">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="cutLargeReceiveTime">片印领料</label> <input
+											type="text" class="form-control input-date"
+											name="cutLargeReceiveTime" id="cutLargeReceiveTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="cutLargeReturnTime">片印回料</label> <input
+											type="text" class="form-control input-date"
+											name="cutLargeReturnTime" id="cutLargeReturnTime">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="remark">备注</label> <input type="text"
+											class="form-control date" name="remark" id="remark">
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="updateSub"
+								style="background-color: #428bca;">修改</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

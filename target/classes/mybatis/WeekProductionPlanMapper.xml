@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.WeekProductionPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.WeekProductionPlan" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+    <result column="TARGER" property="targer" jdbcType="VARCHAR" />
+    <result column="MONDAY" property="monday" jdbcType="VARCHAR" />
+    <result column="TUESDAY" property="tuesday" jdbcType="VARCHAR" />
+    <result column="WEDNESDAY" property="wednesday" jdbcType="VARCHAR" />
+    <result column="THURSDAY" property="thursday" jdbcType="VARCHAR" />
+    <result column="FIRDAY" property="firday" jdbcType="VARCHAR" />
+    <result column="SATURDAY" property="saturday" jdbcType="VARCHAR" />
+    <result column="SUNDAY" property="sunday" jdbcType="VARCHAR" />
+    <result column="DATE" property="date" jdbcType="VARCHAR" />
+    <result column="DATASTATE" property="dataState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FACTORY, TARGER, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FIRDAY, SATURDAY, SUNDAY, DATE,DATASTATE
+  </sql>
+  
+  
+  <select id="selectAllDate" resultMap="BaseResultMap" parameterType="com.warehouse.entity.WeekProductionPlan">
+  	SELECT factory, TARGER  , GROUP_CONCAT(MONDAY SEPARATOR ',') as MONDAY ,
+  	 GROUP_CONCAT(TUESDAY SEPARATOR ',') as TUESDAY , GROUP_CONCAT(WEDNESDAY SEPARATOR ',') as WEDNESDAY ,
+  	 GROUP_CONCAT(THURSDAY SEPARATOR ',')as THURSDAY , GROUP_CONCAT(FIRDAY SEPARATOR ',') as FIRDAY , 
+  	 GROUP_CONCAT(SATURDAY SEPARATOR ',') as SATURDAY , GROUP_CONCAT(SUNDAY SEPARATOR ',')as SUNDAY 
+  	 from week_production_plan
+  	 WHERE DATE BETWEEN #{date,jdbcType=VARCHAR} AND date_add(#{date,jdbcType=VARCHAR}, INTERVAL 6 day)  
+  	 group by factory
+  </select>
+  
+  <select id="selectAllDateTwo" resultMap="BaseResultMap" parameterType="com.warehouse.entity.WeekProductionPlan">
+  	 SELECT factory, TARGER  , GROUP_CONCAT(MONDAY SEPARATOR ',') as MONDAY ,
+  	 GROUP_CONCAT(TUESDAY SEPARATOR ',') as TUESDAY , GROUP_CONCAT(WEDNESDAY SEPARATOR ',') as WEDNESDAY ,
+  	 GROUP_CONCAT(THURSDAY SEPARATOR ',')as THURSDAY , GROUP_CONCAT(FIRDAY SEPARATOR ',') as FIRDAY , 
+  	 GROUP_CONCAT(SATURDAY SEPARATOR ',') as SATURDAY , GROUP_CONCAT(SUNDAY SEPARATOR ',')as SUNDAY  
+  	 from week_production_plan 
+  	 WHERE DATE BETWEEN #{date,jdbcType=VARCHAR} AND date_add(#{date,jdbcType=VARCHAR}, INTERVAL 6 day) 
+  	 group by factory
+  </select>
+  
+ 	<!--  查询表中是否有这个工厂名 -->
+  <select id="selectFactory" parameterType="String" resultType="String">
+  	 SELECT factory   from week_production_plan 
+  	 WHERE DATE BETWEEN #{date,jdbcType=VARCHAR} AND date_add(#{date,jdbcType=VARCHAR}, INTERVAL 6 day) 
+     and factory=#{factoryNow,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="selectAllSundayDate"  resultMap="BaseResultMap" >
+  	select * FROM  week_production_plan  where DAYOFWEEK(date)='1' GROUP BY DATE order by DATE DESC limit #{begin},#{end}
+  </select>
+  
+	<!--   查询总条数 -->
+  <select id="selectAllPage" parameterType="com.warehouse.entity.WeekProductionPlan" resultType="java.lang.Integer"> 
+  	SELECT COUNT(0) FROM  week_production_plan where DAYOFWEEK(date)='1'
+  </select>
+  <!-- 添加一条数据 -->
+  <insert id="insertFactoryData" parameterType="com.warehouse.entity.WeekProductionPlan">
+  	insert into week_production_plan 
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test='factory != null and factory!="" '>
+				FACTORY,
+			</if>
+			<if test='targer != null and targer!="" '>
+				TARGER,
+			</if>
+			<if test='monday != null and monday!="" '>
+				MONDAY,
+			</if>
+			<if test='tuesday != null and tuesday!="" '>
+				TUESDAY,
+			</if>
+			<if test='wednesday != null and wednesday!="" '>
+				WEDNESDAY,
+			</if>
+			<if test='thursday != null and thursday!="" '>
+				THURSDAY,
+			</if>
+			<if test='firday != null and firday!="" '>
+				FIRDAY,
+			</if>
+			<if test='saturday != null and saturday!="" '>
+				SATURDAY,
+			</if>
+			<if test='sunday != null and sunday!="" '>
+				SUNDAY,
+			</if>
+			<if test='date != null and date!="" '>
+				DATE,
+			</if>
+				DATASTATE
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test='factory != null and factory!=""'>
+				#{factory,jdbcType=VARCHAR},
+			</if>
+			<if test='targer != null and targer!="" '>
+				#{targer,jdbcType=VARCHAR},
+			</if>
+			<if test='monday != null and monday!="" '>
+				#{monday,jdbcType=VARCHAR},
+			</if>
+			<if test='tuesday != null and tuesday!="" '>
+				#{tuesday,jdbcType=VARCHAR},
+			</if>
+			<if test='wednesday != null and wednesday!="" '>
+				#{wednesday,jdbcType=VARCHAR},
+			</if>
+			<if test='thursday != null and thursday!="" '>
+				#{thursday,jdbcType=VARCHAR},
+			</if>
+			<if test='firday != null and firday!="" '>
+				#{firday,jdbcType=VARCHAR},
+			</if>
+			<if test='saturday != null and saturday!="" '>
+				#{saturday,jdbcType=VARCHAR},
+			</if>
+			<if test='sunday != null and sunday!="" '>
+				#{sunday,jdbcType=VARCHAR},
+			</if>
+			<if test='date != null and date!="" '>
+				#{date,jdbcType=VARCHAR},
+			</if>
+				'1'
+	</trim>
+  </insert>
+  
+   <!-- 添加一条数据 -->
+  <insert id="insertData" parameterType="com.warehouse.entity.WeekProductionPlan">
+  	insert into week_production_plan 
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test='factory != null and factory!="" '>
+				FACTORY,
+			</if>
+			<if test='targer != null and targer!="" '>
+				TARGER,
+			</if>
+			<if test='monday != null and monday!="" '>
+				MONDAY,
+			</if>
+			<if test='tuesday != null and tuesday!="" '>
+				TUESDAY,
+			</if>
+			<if test='wednesday != null and wednesday!="" '>
+				WEDNESDAY,
+			</if>
+			<if test='thursday != null and thursday!="" '>
+				THURSDAY,
+			</if>
+			<if test='firday != null and firday!="" '>
+				FIRDAY,
+			</if>
+			<if test='saturday != null and saturday!="" '>
+				SATURDAY,
+			</if>
+			<if test='sunday != null and sunday!="" '>
+				SUNDAY,
+			</if>
+			<if test='date != null and date!="" '>
+				DATE,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test='factory != null and factory!=""'>
+				#{factory,jdbcType=VARCHAR},
+			</if>
+			<if test='targer != null and targer!="" '>
+				#{targer,jdbcType=VARCHAR},
+			</if>
+			<if test='monday != null and monday!="" '>
+				#{monday,jdbcType=VARCHAR},
+			</if>
+			<if test='tuesday != null and tuesday!="" '>
+				#{tuesday,jdbcType=VARCHAR},
+			</if>
+			<if test='wednesday != null and wednesday!="" '>
+				#{wednesday,jdbcType=VARCHAR},
+			</if>
+			<if test='thursday != null and thursday!="" '>
+				#{thursday,jdbcType=VARCHAR},
+			</if>
+			<if test='firday != null and firday!="" '>
+				#{firday,jdbcType=VARCHAR},
+			</if>
+			<if test='saturday != null and saturday!="" '>
+				#{saturday,jdbcType=VARCHAR},
+			</if>
+			<if test='sunday != null and sunday!="" '>
+				#{sunday,jdbcType=VARCHAR},
+			</if>
+			<if test='date != null and date!="" '>
+				#{date,jdbcType=VARCHAR},
+			</if>
+	</trim>
+  </insert>
+  
+  <!-- 修改数据 -->
+  <update id="updateData" parameterType="com.warehouse.entity.WeekProductionPlan" >
+ 	 update week_production_plan
+ 	 <set>
+		<if test='targer != null and targer!="" '>
+			TARGER = #{targer,jdbcType=VARCHAR},
+		</if>
+		<if test='monday != null and monday!="" '>
+			MONDAY = #{monday,jdbcType=VARCHAR},
+		</if>
+		<if test='tuesday != null and tuesday!="" ' >
+			TUESDAY = #{tuesday,jdbcType=VARCHAR},
+		</if>
+		<if test='wednesday != null and wednesday!="" '>
+			WEDNESDAY = #{wednesday,jdbcType=VARCHAR},
+		</if>
+		<if test='thursday != null and thursday!="" '>
+			THURSDAY = #{thursday,jdbcType=VARCHAR},
+		</if>
+		<if test='firday != null and firday!="" '>
+			FIRDAY = #{firday,jdbcType=VARCHAR},
+		</if>
+		<if test='saturday != null and saturday!="" '>
+			SATURDAY = #{saturday,jdbcType=VARCHAR},
+		</if>
+		<if test='sunday != null and sunday!="" '>
+			SUNDAY = #{sunday,jdbcType=VARCHAR},
+		</if>
+ 	 </set>
+ 	where date=#{date,jdbcType=VARCHAR} and factory=#{factory,jdbcType=VARCHAR} AND  DATASTATE is NULL
+  </update>
+  
+  <update id="updateTarger"  parameterType="com.warehouse.entity.WeekProductionPlan" >
+  	 update week_production_plan
+ 	 <set>
+		<if test='targer != null and targer!="" '>
+			TARGER = #{targer,jdbcType=VARCHAR},
+		</if>
+	 </set>
+ 		where  DATE BETWEEN #{date,jdbcType=VARCHAR} AND date_add(#{date,jdbcType=VARCHAR}, INTERVAL 6 day) 
+ 		and factory=#{factory,jdbcType=VARCHAR}	
+  </update>
+  
+  <!--  修改工厂名 -->
+  <update id="updateFactory" parameterType="String">
+  	update week_production_plan
+  	  <set>
+		<if test='factoryNow != null and factory!="" '>
+			FACTORY = #{factoryNow,jdbcType=VARCHAR},
+		</if>
+	  </set>
+	 where DATE BETWEEN  #{date,jdbcType=VARCHAR} AND date_add(#{date,jdbcType=VARCHAR}, INTERVAL 6 day)
+	 and factory=#{factory,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="deleteByFactory" parameterType="com.warehouse.entity.WeekProductionPlan">
+  	DELETE from week_production_plan 
+  	where DATE BETWEEN #{date,jdbcType=VARCHAR} AND date_add(#{date,jdbcType=VARCHAR}, INTERVAL 6 day) 
+  	and  factory=#{factory,jdbcType=VARCHAR} 
+  </delete>
+  
+  
+  <!-- 添加一条数据 -->
+  <insert id="insertNextFactoryData" parameterType="com.warehouse.entity.WeekProductionPlan">
+  	insert into week_production_plan 
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test='factory != null and factory!="" '>
+				FACTORY,
+			</if>
+			<if test='targer != null and targer!="" '>
+				TARGER,
+			</if>
+			<if test='monday != null and monday!="" '>
+				MONDAY,
+			</if>
+			<if test='tuesday != null and tuesday!="" '>
+				TUESDAY,
+			</if>
+			<if test='wednesday != null and wednesday!="" '>
+				WEDNESDAY,
+			</if>
+			<if test='thursday != null and thursday!="" '>
+				THURSDAY,
+			</if>
+			<if test='firday != null and firday!="" '>
+				FIRDAY,
+			</if>
+			<if test='saturday != null and saturday!="" '>
+				SATURDAY,
+			</if>
+			<if test='sunday != null and sunday!="" '>
+				SUNDAY,
+			</if>
+			<if test='date != null and date!="" '>
+				DATE,
+			</if>
+				DATASTATE
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test='factory != null and factory!=""'>
+				#{factory,jdbcType=VARCHAR},
+			</if>
+			<if test='targer != null and targer!="" '>
+				#{targer,jdbcType=VARCHAR},
+			</if>
+			<if test='monday != null and monday!="" '>
+				#{monday,jdbcType=VARCHAR},
+			</if>
+			<if test='tuesday != null and tuesday!="" '>
+				#{tuesday,jdbcType=VARCHAR},
+			</if>
+			<if test='wednesday != null and wednesday!="" '>
+				#{wednesday,jdbcType=VARCHAR},
+			</if>
+			<if test='thursday != null and thursday!="" '>
+				#{thursday,jdbcType=VARCHAR},
+			</if>
+			<if test='firday != null and firday!="" '>
+				#{firday,jdbcType=VARCHAR},
+			</if>
+			<if test='saturday != null and saturday!="" '>
+				#{saturday,jdbcType=VARCHAR},
+			</if>
+			<if test='sunday != null and sunday!="" '>
+				#{sunday,jdbcType=VARCHAR},
+			</if>
+			<if test='date != null and date!="" '>
+				#{date,jdbcType=VARCHAR},
+			</if>
+				'1'
+	</trim>
+  </insert>
+  
+  
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.BuildProgressWeeklyReportDAO">
+	<select id="getDate" resultType="java.lang.String">
+		select STATISTICS_DATE from build_progress_weekly_report group by
+		STATISTICS_DATE ORDER BY
+		STATISTICS_DATE
+		DESC LIMIT 0,30
+	</select>
+
+	<select id="getNameType" resultType="java.lang.String">
+		select NAME_TYPE from build_progress_weekly_report
+		WHERE
+		NAME_TYPE!='' group by
+		NAME_TYPE ORDER BY
+		STATISTICS_DATE DESC
+	</select>
+
+	<select id="getAll" resultType="com.warehouse.entity.BuildProgressReport">
+		select * from build_progress_weekly_report WHERE STATISTICS_DATE>=#{date} ORDER BY
+		STATISTICS_DATE DESC
+	</select>
+</mapper>

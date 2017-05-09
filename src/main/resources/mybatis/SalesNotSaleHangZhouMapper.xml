@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.SalesNotSaleHangZhouDAO">
+
+	<select id="getCountByPage" parameterType="com.warehouse.entity.SalesNotSaleHangZhou"
+		resultType="java.lang.Integer">
+		select count(*) from sales_not_sale_hangzhou where 1=1
+		<if
+			test='girard!=null and girard!="" and girard!="y" and girard!="Y" and girard!="N" and girard!="n"'>
+			and girard like concat("%",#{girard},"%")	
+		</if>
+		<if test='girard=="Y" or girard=="y"'>
+			and (girard IS NOT NULL AND girard!="")
+		</if>
+		<if test='girard=="N" or girard=="n"'>
+			and (girard IS NULL OR girard="")
+		</if>
+		<if
+			test='factory!=null and factory!="" and factory!="y" and factory!="Y" and factory!="N" and factory!="n"'>
+			and factory like concat("%",#{factory},"%")	
+		</if>
+		<if test='factory=="Y" or factory=="y"'>
+			and (factory IS NOT NULL AND factory!="")
+		</if>
+		<if test='factory=="N" or factory=="n"'>
+			and (factory IS NULL OR factory="")
+		</if>
+		<if
+			test='commodityc_code!=null and commodityc_code!="" and commodityc_code!="y" and commodityc_code!="Y" and commodityc_code!="N" and commodityc_code!="n"'>
+			and commodityc_code like concat("%",#{commodityc_code},"%")	
+		</if>
+		<if test='commodityc_code=="Y" or commodityc_code=="y"'>
+			and (commodityc_code IS NOT NULL AND commodityc_code!="")
+		</if>
+		<if test='commodityc_code=="N" or commodityc_code=="n"'>
+			and (commodityc_code IS NULL OR commodityc_code="")
+		</if>
+	</select>
+	<select id="getDataByPage" parameterType="com.warehouse.entity.SalesNotSaleHangZhou"
+		resultType="com.warehouse.entity.SalesNotSaleHangZhou">
+		select * from sales_not_sale_hangzhou where 1=1
+		<if
+			test='girard!=null and girard!="" and girard!="y" and girard!="Y" and girard!="N" and girard!="n"'>
+			and girard like concat("%",#{girard},"%")	
+		</if>
+		<if test='girard=="Y" or girard=="y"'>
+			and (girard IS NOT NULL AND girard!="")
+		</if>
+		<if test='girard=="N" or girard=="n"'>
+			and (girard IS NULL OR girard="")
+		</if>
+		<if
+			test='factory!=null and factory!="" and factory!="y" and factory!="Y" and factory!="N" and factory!="n"'>
+			and factory like concat("%",#{factory},"%")	
+		</if>
+		<if test='factory=="Y" or factory=="y"'>
+			and (factory IS NOT NULL AND factory!="")
+		</if>
+		<if test='factory=="N" or factory=="n"'>
+			and (factory IS NULL OR factory="")
+		</if>
+		<if
+			test='commodityc_code!=null and commodityc_code!="" and commodityc_code!="y" and commodityc_code!="Y" and commodityc_code!="N" and commodityc_code!="n"'>
+			and commodityc_code like concat("%",#{commodityc_code},"%")	
+		</if>
+		<if test='commodityc_code=="Y" or commodityc_code=="y"'>
+			and (commodityc_code IS NOT NULL AND commodityc_code!="")
+		</if>
+		<if test='commodityc_code=="N" or commodityc_code=="n"'>
+			and (commodityc_code IS NULL OR commodityc_code="")
+		</if>
+		order by sdate asc
+		limit #{begin},#{end}
+	</select>
+
+</mapper>

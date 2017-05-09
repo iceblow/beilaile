@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FabricmanagementMapper">
+	<!-- 让数据库中的字段与实体中的字段一一对应 (数据库字段与实体不一样时要写,一般不写也不报错) -->
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.Fabricmanagement">
+		<id column="INPUT_ID" property="inputId" jdbcType="INTEGER" />
+		<result column="INPUT_DATE" property="inputDate" jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="FABRIC_MATERIAL" property="fabricMaterial"
+			jdbcType="VARCHAR" />
+		<result column="TOTAL_PURCHASES" property="totalPurchases"
+			jdbcType="VARCHAR" />
+		<result column="INPUT_GAP_AMOUNT" property="inputGapAmount"
+			jdbcType="VARCHAR" />
+		<result column="INPUT_AMOUNT" property="inputAmount" jdbcType="VARCHAR" />
+		<result column="OUTPUT_AMOUNT" property="outputAmount"
+			jdbcType="VARCHAR" />
+		<result column="GAP_AMOUNT" property="gapAmount" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 模糊查询 -->
+	<!-- 查询个数 -->
+	<select id="getCountByFabricmanagement" parameterType="com.warehouse.entity.Fabricmanagement"
+		resultType="java.lang.Integer">
+		select count(1) from fabric_management where 1=1
+		<if test="wave!='' and wave!=null">
+			and wave like
+			concat("%",#{wave},"%") <!-- 根据波次模糊查询条件的个数 -->
+		</if>
+		<if test="fabricMaterial!='' and fabricMaterial!=null">
+			and fabric_Material
+			like concat("%",#{fabricMaterial},"%")<!-- 根据面料模糊查询满足条件个数 -->
+		</if>
+		<if test='inputAmount=="Y"'><!-- 有入库数量 -->
+			and INPUT_AMOUNT !=''
+		</if>
+		<if test='inputAmount=="N"'><!-- 没有入库数量 -->
+			and (INPUT_AMOUNT is NULL or INPUT_AMOUNT='')
+		</if>
+		<if test='outputAmount=="Y"'><!-- 有出库数量 -->
+			and OUTPUT_AMOUNT !=''
+		</if>
+		<if test='outputAmount=="N"'><!-- 没有出库数量 -->
+			and (OUTPUT_AMOUNT is NULL or OUTPUT_AMOUNT='')
+		</if>
+	</select>
+	<!-- 查询数据 -->
+	<select id="getPageByFabricmanagement" parameterType="com.warehouse.util.Pagess"
+		resultMap="BaseResultMap">
+		select * from fabric_management
+		where 1=1
+		<if test="wave!='' and  wave!=null"><!--波次不为空 根据输入的波次模糊查询 -->
+			and wave like concat("%",#{wave},"%")
+		</if>
+		<if test="fabricMaterial!=''  and fabricMaterial!=null"><!-- 面料不为空 根据输入的面料模糊查询 -->
+			and fabric_Material
+			like concat("%",#{fabricMaterial},"%")
+		</if>
+		<if test='inputAmount=="Y"'> <!-- 有入库数量的数据 -->
+			and INPUT_AMOUNT !=''
+		</if>
+		<if test='inputAmount=="N"'><!-- 没有入库数量的数据 -->
+			and (INPUT_AMOUNT is NULL or INPUT_AMOUNT='')
+		</if>
+		<if test='outputAmount=="Y"'><!-- 有出库数量的数据 -->
+			and OUTPUT_AMOUNT !=''
+		</if>
+		<if test='outputAmount=="N"'><!-- 没有出库数量的数据 -->
+			and (OUTPUT_AMOUNT is NULL or OUTPUT_AMOUNT='')
+		</if>
+		order by INPUT_DATE desc limit #{begin},#{end}<!-- 根据日期倒序排列 -->
+	</select>
+	<!-- 根据波次进行精确查询 -->
+	<select id="selFabricmanagementByWave" parameterType="com.warehouse.entity.Fabricmanagement"
+		resultMap="BaseResultMap">
+		select * from fabric_management where
+		wave=#{wave,jdbcType=VARCHAR}
+		order by INPUT_DATE desc limit #{begin},#{end}<!-- 根据日期倒序排列 -->
+	</select>
+
+</mapper>

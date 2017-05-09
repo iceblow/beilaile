@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>经销单原料采购</title> <@p.cache/> <@p.css/> <@p.js/>
+<script type="text/javascript" src="/res/js/distribution/distributionBuyMaterial.js"></script>
+
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<!-- 头部 -->
+		<div class="main-container-inner">
+			<!-- 静态引入左部控制台 -->
+			<@p.left/>
+			<!-- 主体页面 -->
+			<div class="main-content">
+				<!-- 最上层静态Home栏 -->
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">经销单原料采购</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+
+
+				<!-- ========查询模块 =========== form-anyVal  anyVal-from  -->
+				<div class="col-md-12">
+					<form role="form" action="DistributionBuyMaterial/downDistributionBuyMaterial.do" id="form-anyVal" method="post">
+						<div id="val-input-empty" class="col-md-12">
+							<div class="col-md-2" style="padding: 20px 0 20px 0;">
+								<label>商品编号</label> <input type="text" name="productCode" />
+							</div>
+							<div class="col-md-2" style="padding: 20px 0 20px 0;">
+								<label>波次号</label> <input type="text" name="wave" />
+							</div>
+							<div class="col-md-2" style="padding: 20px 0 20px 0;">
+								<label>服装名</label> <input type="text" name="clothName" />
+							</div>
+							<div class="col-md-1" style="padding: 20px 0 20px 0;">
+								<select name="fabricArriveFactory">
+									<option value="">面料是否到厂</option>
+									<option value="0">面料未到厂</option>
+									<option value="1">面料已到厂</option>
+								</select>
+							</div>
+							<div class="col-md-1" style="padding: 20px 0 20px 0;">
+								<select name="accesArriveFactory">
+									<option value="" selected="selected">辅料是否到厂</option>
+									<option value="0">辅料未到厂</option>
+									<option value="1">辅料已到厂</option>
+								</select>
+							</div>
+							<br> <br> <br> <br>
+							<div class="col-md-2" style="padding: 20px 0 20px 0;">
+								<label>下单日期</label> <input type="text" name="releaseTime" />
+							</div>
+							<div class="col-md-2" style="padding: 20px 0 20px 0;">
+								<label>经销工厂</label> <input type="text" name="distributtionFactory" />
+							</div>
+							<div class="col-md-2" style="padding: 20px 0 20px 0;">
+								<label>跟单员</label> <input type="text" name="trackingOfficer" />
+							</div>
+							<div class="col-md-1" style="padding: 20px 0 20px 0;">
+								<select name="orderType">
+									<option value="">订单类型</option>
+									<option value="全经销">全经销</option>
+									<option value="半经销">半经销</option>
+								</select>
+							</div>
+							<div class="col-md-2" style="padding: 20px 0 20px 0;">
+								<span class="input-group-btn">
+									<button id="anyVal-btn" class="btn btn-default" type="button">查询</button>
+								</span>
+							</div>
+							<div class="col-md-2" style="padding: 20px 0 20px 0;">
+								<button id="export-btn" class="btn btn-info">导出Excel</button>
+							</div>
+						</div>
+						<!-- 隐藏区域，设置当前页和页面大小 -->
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"value="">
+							<input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				<!-- =======查询模块 结束 ======-->
+
+				<!-- ==================数据部分，表格 ========================-->
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table  table-bordered">
+								<thead >
+									<tr>
+										<th colspan="30" style="text-align: center; font-size: 25px;">经销单原料采购</th>
+									</tr>
+									<tr>
+										<th style="text-align: center;">商品编号</th>
+										<th style="text-align: center;">原波次</th>
+										<th style="text-align: center;">波次</th>
+										<th style="text-align: center;">服装名</th>
+										<th style="text-align: center;">设计图</th>
+										<th style="text-align: center;">工艺单</th>
+										<th style="text-align: center;">尺码图</th>
+										<th style="text-align: center;">订单明细</th>
+										<th style="text-align: center;">订单数量</th>
+										<th style="text-align: center;">预计入库日期</th>
+										<th style="text-align: center;">订单等级</th>
+										<th style="text-align: center;">订单类型</th>
+										<th style="text-align: center;">经销工厂</th>
+										<th style="text-align: center;">跟踪员</th>
+										<th style="text-align: center;">备注</th>
+										<th style="text-align: center;">下单号</th>
+										<th style="text-align: center;">下单时间</th>
+										<th style="text-align: center;">环节开始时间</th>
+										<th style="text-align: center;">面料到厂时间</th>
+										<th style="text-align: center;">面料到厂</th>
+										<th style="text-align: center;">辅料到厂时间</th>
+										<th style="text-align: center;">辅料到厂</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode"></ul>
+						</div>
+					</div>
+				</div>
+				<!--==================表格 结束============================-->
+			</div>
+		</div>
+
+		<!--添加/修改》》模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="modalTitle">添加</h4>
+					</div>
+					<form enctype="multipart/form-data" id="form-input">
+						<div class="modal-body">
+							<!-- 数据 -->
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="">商品编号</label> <input type="text"
+										class="form-control" name="productCode" id="productCode" />
+								</div>
+								<div class="col-md-4">
+									<label for="">波次号</label> <input type="text"
+										class="form-control" name="wave" id="wave" />
+								</div>
+								<div class="col-md-4">
+									<label for="">原波次</label> <input type="text"
+										class="form-control" name="oringinalWave" id="oringinalWave" />
+								</div>
+								<div class="col-md-4">
+									<label for="">服装名</label> <input type="text"
+										class="form-control" name="clothName" id="clothName" />
+								</div>
+								<div class="col-md-4">
+									<label for="">订单明细</label> <input type="text"
+										class="form-control" name="orderDetails" id="orderDetails" />
+								</div>
+								<div class="col-md-4">
+									<label for="">订单数量</label> <input type="text"
+										onkeyup="value=value.replace(/\D/g,'')" class="form-control"
+										name="orderNum" id="orderNum" />
+								</div>
+								<div class="col-md-4">
+									<label for="">订单等级</label> <input type="text"
+										class="form-control" name="orderGrade" id="orderGrade" />
+								</div>
+								<div class="col-md-4">
+									<label for="">订单类型</label> <input type="text"
+										class="form-control" name="orderType" id="orderType" />
+								</div>
+								<div class="col-md-4">
+									<label for="">经销工厂</label> <input type="text"
+										class="form-control" name="distributtionFactory"
+										id="distributtionFactory" />
+								</div>
+
+								<div class="col-md-4">
+									<br> 工艺单<input type="file" name="file1">
+								</div>
+								<div class="col-md-4">
+									<br> 尺码图<input type="file" name="file1"> <br>
+								</div>
+								<div class="col-md-4">
+									<label for="">设计图</label> <input type="file"
+										name="productImgFile" id="up"> <label for="image">
+										图片预览 </label>
+									<div style="width: 120px; height: 120px;">
+										<img id="ImgPr" width="120" height="120" src="" />
+									</div>
+								</div>
+								<!--id这个数据的流向
+					                      	1.刚查询出来时，字符串拼接时,通过<button class="btn btn-primary " onclick="update(\' '+data[i].id+' \')">修改订单</button><br>'; 
+					                      	     来触发，只要点击修改按钮或者删除按钮，id就会通过onclick的点击事件传递到修改方法或者删除方法里
+					                      	2.再通过这个id去数据库里查数据，并赋值到模态框中，
+					                     		修改时点击提交按钮是提交表单的提交方式，如果这里不加id，还需要单独提交一个id值，不然没法修改，因为修改需要用到id
+					                     	3.提交表单修改数据，这时id跟随表单一起提交上去，作为修改的条件
+					                     	   -->
+								<input type="hidden" name="id" id="obj_hidden_id" value="" />
+							</div>
+						</div>
+						<!-- 提交，关闭 按钮 -->
+						<div class="form-group" style="padding: 0 0 0 230px;">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="submit" id="submit-btn" name="submit"
+								class="btn btn-primary" data-dismiss="modal">提交</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="nowDiv"></div>
+</body>
+</html>

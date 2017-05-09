@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ProductInfoDAO">
+	<!-- 查询数据量 -->
+	<select id="getCountByPage" parameterType="com.warehouse.entity.ProductInfo"
+		resultType="java.lang.Integer">
+		select count(0) from productInfo where 1=1
+		<if test='productCodes!="" and productCodes!=null'>
+			and productCodes like concat("%",#{productCodes},"%")
+		</if>
+		<if test='productName!="" and productName!=null'>
+			and productName like concat("%",#{productName},"%")
+		</if>
+		<if test='productShortName!="" and productShortName!=null'>
+			and productShortName like
+			concat("%",#{productShortName},"%")
+		</if>
+		<if test='productOldName!="" and productOldName!=null'>
+			and productOldName like concat("%",#{productOldName},"%")
+		</if>
+		<if test='wave!="" and wave!=null'>
+			and wave like concat("%",#{wave},"%")
+		</if>
+		<if test='excleFile!="" and excleFile!=null'>
+			and excleFile like concat("%",#{excleFile},"%")
+		</if>
+		and deleteType=1
+	</select>
+	<!-- 查询分页数据 -->
+	<select id="getDataByPage" parameterType="com.warehouse.entity.ProductInfo"
+		resultType="com.warehouse.entity.ProductInfo">
+		select * from
+		productInfo where 1=1
+		<if test='productCodes!="" and productCodes!=null'>
+			and productCodes like concat("%",#{productCodes},"%")
+		</if>
+		<if test='productName!="" and productName!=null'>
+			and productName like concat("%",#{productName},"%")
+		</if>
+		<if test='productShortName!="" and productShortName!=null'>
+			and productShortName like
+			concat("%",#{productShortName},"%")
+		</if>
+		<if test='productOldName!="" and productOldName!=null'>
+			and productOldName like concat("%",#{productOldName},"%")
+		</if>
+		<if test='wave!="" and wave!=null'>
+			and wave like concat("%",#{wave},"%")
+		</if>
+		<if test='excleFile!="" and excleFile!=null'>
+			and excleFile like concat("%",#{excleFile},"%")
+		</if>
+		and deleteType=1 LIMIT
+		#{begin},#{end}
+	</select>
+	<!-- 根据编号查询单条信息 -->
+	<select id="getOne" parameterType="java.lang.Integer"
+		resultType="com.warehouse.entity.ProductInfo">
+		select * from productInfo where id=#{id}
+	</select>
+
+	<!-- 根据商品编号查询单条信息 -->
+	<select id="getOneByCodes" parameterType="java.lang.String"
+		resultType="com.warehouse.entity.ProductInfo">
+		select * from productInfo where
+		productCodes=#{productCodes}
+	</select>
+	<!-- 添加 -->
+	<insert id="addProductData" parameterType="com.warehouse.entity.ProductInfo">
+		insert into
+		productInfo
+		values(NULL,#{wave},#{productCodes},#{productShortName},#{productName},#{productOldName},#{excleFile},#{productImg},NULL,NULL,NOW(),NULL,NULL,1)
+	</insert>
+	<update id="updateData" parameterType="com.warehouse.entity.ProductInfo">
+		update productInfo SET
+		wave=#{wave},
+		productCodes=#{productCodes},
+		productName=#{productName},
+		productShortName=#{productShortName},
+		excleFile=#{excleFile},
+		productImg=#{productImg},
+		productOldName=#{productOldName},
+		updateTime=NOW()
+		where id=#{id}
+	</update>
+	<!-- 删除信息 -->
+	<update id="deleteOne" parameterType="java.lang.Integer">
+		update productInfo SET
+		deleteType=0,
+		deleteTime=NOW()
+		where id=#{id}
+	</update>
+</mapper>

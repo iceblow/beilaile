@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.WeeklyReportDAO">
+	<select id="getDate" resultType="java.lang.String"
+		statementType="STATEMENT">
+		select sdate from ${form} group by
+		sdate ORDER BY
+		sdate
+		DESC LIMIT 0,${cdate}
+	</select>
+
+	<select id="getFactory" resultType="java.lang.String"
+		statementType="STATEMENT">
+		select factory from ${form} WHERE
+		factory!='' group by
+		factory ORDER BY
+		sdate DESC
+	</select>
+
+	<select id="getAll" resultType="com.warehouse.entity.MyStorage"
+		statementType="STATEMENT">
+		select * from ${form} WHERE sdate>=${date} ORDER BY
+		sdate DESC
+	</select>
+</mapper>

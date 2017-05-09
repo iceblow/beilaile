@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributionMakSampleMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.DistributionMakSample">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="CLOTH_NAME" property="clothName" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_IMG" property="productImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="SIZE_IMG" property="sizeImg" jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER" />
+		<result column="PLAN_IN_WAREHOUSE_TIME" property="planInWarehouseTime"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+		<result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+		<result column="DISTRIBUTTION_FACTORY" property="distributtionFactory"
+			jdbcType="VARCHAR" />
+		<result column="TO_MAKE_THE_SAMPLE" property="toMakeTheSample"
+			jdbcType="VARCHAR" />
+		<result column="TO_MAKE_THE_SAMPLE_COMPLETE" property="toMakeTheSampleComplete"
+			jdbcType="VARCHAR" />
+		<result column="STATE" property="state" jdbcType="VARCHAR" />
+		<result column="DEL_STATE" property="delState" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="ADD_PERSION" property="addPersion" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="MODIFY_PERSION" property="modifyPersion"
+			jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+		<result column="DEL_PERSION" property="delPersion" jdbcType="VARCHAR" />
+
+		<result column="TRACKING_OFFICER" property="trackingOfficer"
+			jdbcType="VARCHAR" />
+		<result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="TACHE_START_TIME" property="tacheStartTime"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+
+		<result column="MODEL_SEND_TIME" property="modelSendTime"
+			jdbcType="VARCHAR" />
+		<result column="ADD_PROOFING_FACTORY" property="addProofingFactory"
+			jdbcType="VARCHAR" />
+		<result column="MODEL_STATE" property="modelState" jdbcType="VARCHAR" />
+
+
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PRODUCT_CODE, CLOTH_NAME, ORINGINAL_WAVE, WAVE,
+		PRODUCT_IMG,
+		SAMPLE_IMG, SIZE_IMG,
+		ORDER_DETAILS, ORDER_NUM,
+		PLAN_IN_WAREHOUSE_TIME, ORDER_GRADE, ORDER_TYPE,
+		DISTRIBUTTION_FACTORY,
+		TO_MAKE_THE_SAMPLE, TO_MAKE_THE_SAMPLE_COMPLETE,
+		STATE, DEL_STATE, ADD_TIME, ADD_PERSION,
+		MODIFY_TIME, MODIFY_PERSION,
+		DEL_TIME, DEL_PERSION
+	</sql>
+	<!--修改 -->
+	<update id="updateDistributionMakSample" parameterType="com.warehouse.entity.DistributionMakSample">
+		update distribution_make_sample
+		<set>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				CLOTH_NAME = #{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productImg != null">
+				PRODUCT_IMG = #{productImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeImg != null">
+				SIZE_IMG = #{sizeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNum != null">
+				ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+			</if>
+			<if test="planInWarehouseTime != null">
+				PLAN_IN_WAREHOUSE_TIME =
+				#{planInWarehouseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orderGrade != null">
+				ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="distributtionFactory != null">
+				DISTRIBUTTION_FACTORY =
+				#{distributtionFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="toMakeTheSample != null">
+				TO_MAKE_THE_SAMPLE = #{toMakeTheSample,jdbcType=VARCHAR},
+			</if>
+			<if test="toMakeTheSampleComplete != null">
+				TO_MAKE_THE_SAMPLE_COMPLETE =
+				#{toMakeTheSampleComplete,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=VARCHAR},
+			</if>
+			<if test="delState != null">
+				DEL_STATE = #{delState,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="addPersion != null">
+				ADD_PERSION = #{addPersion,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyPersion != null">
+				MODIFY_PERSION = #{modifyPersion,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delPersion != null">
+				DEL_PERSION = #{delPersion,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 模糊查询 -->
+	<select id="getCountDistributionMakSample" parameterType="com.warehouse.entity.DistributionMakSample"
+		resultType="java.lang.Integer">
+		select count(1) from distribution_make_sample where 1=1 and DEL_STATE IS NULL
+		AND (DEL_PERSION IS NULL OR DEL_PERSION='')
+		AND (DEL_TIME IS NULL OR DEL_TIME='')
+		<if test="wave !='' and wave !=null">
+			and WAVE like concat("%",#{wave},"%")
+		</if>
+		<if test="clothName !=null and clothName !=''">
+			and CLOTH_NAME like concat("%",#{clothName},"%")
+		</if>
+		<if test="oringinalWave !='' and oringinalWave !=null">
+			and ORINGINAL_WAVE like concat("%",#{oringinalWave},"%")
+		</if>
+		<if test='distributtionFactory != null and distributtionFactory !="" and distributtionFactory !="Y" and distributtionFactory !="N"'>
+			and DISTRIBUTTION_FACTORY like
+			concat('%',#{distributtionFactory},'%')
+		</if>
+		<if test='distributtionFactory =="N"'>
+			AND(DISTRIBUTTION_FACTORY ='' OR DISTRIBUTTION_FACTORY IS NULL)
+		</if>
+		<if test='distributtionFactory =="Y"'>
+			AND DISTRIBUTTION_FACTORY !=''
+		</if>
+
+
+		<if test="productCode !='' and productCode !=null">
+			and PRODUCT_CODE like concat("%",#{productCode},"%")
+		</if>
+		<if test="trackingOfficer !='' and trackingOfficer !=null">
+			and TRACKING_OFFICER like
+			concat("%",#{trackingOfficer},"%")
+		</if>
+		<if test="modelState !='' and modelState !=null">
+			and MODEL_STATE like concat("%",#{modelState},"%")
+		</if>
+	</select>
+	<select id="distributionMakSampleByLike" parameterType="com.warehouse.entity.DistributionMakSample"
+		resultMap="BaseResultMap">
+		select * from distribution_make_sample where  1=1 and DEL_STATE IS NULL
+		AND (DEL_PERSION IS NULL OR DEL_PERSION='')
+		AND (DEL_TIME IS NULL OR DEL_TIME='')
+		<if test="wave !='' and wave !=null">
+			and WAVE like concat("%",#{wave},"%")
+		</if>
+		<if test="clothName !=null and clothName !=''">
+			and CLOTH_NAME like concat("%",#{clothName},"%")
+		</if>
+		<if test="oringinalWave !='' and oringinalWave !=null">
+			and ORINGINAL_WAVE like concat("%",#{oringinalWave},"%")
+		</if>
+
+		<if test='distributtionFactory != null and distributtionFactory !="" and distributtionFactory !="Y" and distributtionFactory !="N"'>
+			and DISTRIBUTTION_FACTORY like
+			concat('%',#{distributtionFactory},'%')
+		</if>
+		<if test='distributtionFactory =="N"'>
+			AND(DISTRIBUTTION_FACTORY ='' OR DISTRIBUTTION_FACTORY IS NULL)
+		</if>
+		<if test='distributtionFactory =="Y"'>
+			AND DISTRIBUTTION_FACTORY !=''
+		</if>
+		<if test="productCode !='' and productCode !=null">
+			and PRODUCT_CODE like concat("%",#{productCode},"%")
+		</if>
+		<if test="trackingOfficer !='' and trackingOfficer!=null">
+			and TRACKING_OFFICER like
+			concat("%",#{trackingOfficer},"%")
+		</if>
+		<if test="modelState !='' and modelState !=null">
+			and MODEL_STATE like concat("%",#{modelState},"%")
+		</if>
+		order by STATE asc,TO_MAKE_THE_SAMPLE asc limit #{begin},#{end}
+	</select>
+	<!-- 双击修改 -->
+	<update id="updateByText" parameterType="com.warehouse.entity.DistributionMakSample">
+		update distribution_make_sample
+		<set>
+			<if test="distributtionFactory != null">
+				DISTRIBUTTION_FACTORY
+				=#{distributtionFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="trackingOfficer != null">
+				TRACKING_OFFICER =#{trackingOfficer,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 添加打样工厂 -->
+	<insert id="addProofingFactory" parameterType="com.warehouse.entity.DistributionMakSample">
+		INSERT INTO
+		distribution_make_sample (
+		PRODUCT_CODE ,
+		CLOTH_NAME,
+		ORINGINAL_WAVE,
+		WAVE,
+		PRODUCT_IMG,
+		SAMPLE_IMG,
+		SIZE_IMG,
+		ORDER_DETAILS,
+		ORDER_NUM,
+		PLAN_IN_WAREHOUSE_TIME,
+		ORDER_GRADE,
+		ORDER_TYPE,
+		STATE,
+		ADD_TIME,
+		ADD_PERSION,
+		TRACKING_OFFICER,
+		RELEASE_TIME,
+		REMARK,
+		TACHE_START_TIME,
+		MODEL_SEND_TIME,
+		ADD_PROOFING_FACTORY,
+		MODEL_STATE,
+		ORDER_ID
+		)
+		SELECT
+		b.PRODUCT_CODE ,
+		b.CLOTH_NAME,
+		b.ORINGINAL_WAVE,
+		b.WAVE,
+		b.PRODUCT_IMG,
+		b.SAMPLE_IMG,
+		b.SIZE_IMG,
+		b.ORDER_DETAILS,
+		b.ORDER_NUM,
+		b.PLAN_IN_WAREHOUSE_TIME,
+		b.ORDER_GRADE,
+		b.ORDER_TYPE,
+		b.STATE,
+		b.ADD_TIME,
+		b.ADD_PERSION,
+		b.TRACKING_OFFICER,
+		b.RELEASE_TIME,
+		b.REMARK,
+		b.TACHE_START_TIME,
+		b.MODEL_SEND_TIME,
+		b.ADD_PROOFING_FACTORY,
+		b.MODEL_STATE,
+		b.ORDER_ID
+		FROM
+		distribution_make_sample b where ID =
+		#{id,jdbcType=INTEGER}
+
+	</insert>
+</mapper>

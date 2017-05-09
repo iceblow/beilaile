@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ProductTaoBaoInfoDAO">
+	<select id="getCountByPage" parameterType="com.warehouse.entity.ProductTaoBaoInfo"
+		resultType="java.lang.Integer">
+		select count(*) from product_taobao_info where 1=1
+		<if
+			test='product_name!=null and product_name!="" and product_name!="Y" and product_name!="y" and product_name!="N" and product_name!="n"'>
+			and product_name like concat("%",#{product_name},"%")
+		</if>
+		<if test='product_name=="Y" or product_name=="y"'>
+			and (product_name is not null and product_name!='')
+		</if>
+		<if test='product_name=="N" or product_name=="n"'>
+			and (product_name is null or product_name='')
+		</if>
+		<if
+			test='product_code!=null and product_code!="" and product_code!="Y" and product_code!="y" and product_code!="N" and product_code!="n"'>
+			and product_code like concat("%",#{product_code},"%")
+		</if>
+		<if test='product_code=="Y" or product_code=="y"'>
+			and (product_code is not null and product_code!='')
+		</if>
+		<if test='product_code=="N" or product_code=="n"'>
+			and (product_code is null or product_code='')
+		</if>
+	</select>
+	<select id="getDataByPage" parameterType="com.warehouse.entity.ProductTaoBaoInfo"
+		resultType="com.warehouse.entity.ProductTaoBaoInfo">
+		select * from product_taobao_info where 1=1
+		<if
+			test='product_name!=null and product_name!="" and product_name!="Y" and product_name!="y" and product_name!="N" and product_name!="n"'>
+			and product_name like concat("%",#{product_name},"%")
+		</if>
+		<if test='product_name=="Y" or product_name=="y"'>
+			and (product_name is not null and product_name!='')
+		</if>
+		<if test='product_name=="N" or product_name=="n"'>
+			and (product_name is null or product_name='')
+		</if>
+		<if
+			test='product_code!=null and product_code!="" and product_code!="Y" and product_code!="y" and product_code!="N" and product_code!="n"'>
+			and product_code like concat("%",#{product_code},"%")
+		</if>
+		<if test='product_code=="Y" or product_code=="y"'>
+			and (product_code is not null and product_code!='')
+		</if>
+		<if test='product_code=="N" or product_code=="n"'>
+			and (product_code is null or product_code='')
+		</if>
+		order by taobao_inventory desc limit #{begin},#{end}
+	</select>
+</mapper>

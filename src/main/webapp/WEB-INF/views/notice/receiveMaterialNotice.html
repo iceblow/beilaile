@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>领料通知</title> <@p.cache/> <@p.css/> <@p.js/>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">领料通知</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12">
+					<form enctype="multipart/form-data" role="form" action=""
+						id="form-anyVal" method="post">
+						<div id="val-input-empty" class="col-md-12">
+							<div class="col-md-3">
+								<label for="wave">波次号</label> <input type="text" name="wave" />
+							</div>
+							<div class="col-md-3">
+								<label for="cropDate">裁剪日期</label> <input type="text"
+									name="cropDate" />
+							</div>
+
+							<div class="col-md-3">
+								<label for="printingType"> 印花类型 </label> <input
+									name="printingType" type="text" />
+							</div>
+							<div class="col-md-3">
+								<label for="factoryPicking">领料工厂</label> <input type="text"
+									name="factoryPicking" />
+							</div>
+							<div class="col-md-3">
+								<label for="factoryReceiveMaterialTime">领料日期</label> <input
+									type="text" name="wave" />
+							</div>
+							<div class="col-md-3">
+								<label for="noticeManner">提醒方式</label> <input
+									name="noticeManner" type="text" />
+							</div>
+							<div class="col-md-3">
+								<span class="input-group-btn">
+									<button id="anyVal-btn" class="btn btn-default" type="button">
+										查询</button>
+								</span>
+							</div>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>编号</th>
+										<th>波段</th>
+										<th>裁剪日期</th>
+										<th>裁剪数</th>
+										<th>裁剪详情</th>
+										<th>设计图</th>
+										<th>工艺单</th>
+										<th>尺码表</th>
+										<th>印花类型</th>
+										<th>准备就绪日期</th>
+										<th>领料工厂</th>
+										<th>预计领料日期</th>
+										<th>领料日期</th>
+										<th>通知</th>
+										<th>提醒方式</th>
+										<th>备注</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 刪除 -->
+		<div class="modal fade" id="myModal_del" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">
+						你确定刪除编号为:<span style="color: red" id="myModal2-wave-text"></span>的数据吗？？？
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" id="delReceiveMaterialNotice"
+							class="btn btn-primary">确认刪除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 短信提醒 -->
+		<div class="modal fade" id="myModal_sms" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt-sms" class="modal-body">
+						你确定发送波次号为:<span style="color: red" id="sms-text"></span>的产品进行
+						<sapn style="color: #97FFFF;">短信</sapn>
+						提醒 ??? <br> <span style="color: red; font-size: 18px;">提醒之前；你要确定写工厂和预计日期了哦!!!
+						</span><input hidden="hidden" type="text" id="sms-id" />
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" id="SMSAlert" class="btn btn-primary"
+							data-dismiss="modal" onclick="duanxin()">确认短信提醒</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!--邮件提醒 -->
+		<div class="modal fade" id="myModal_mail" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt-mail" class="modal-body">
+						你确定发送波次号为:<span style="color: red" id="mail-text"></span>的产品进行
+						<sapn style="color: #97FFFF;">邮件</sapn>
+						提醒 ？？？ <br> <span style="color: red; font-size: 18px;">提醒之前；你要确定写工厂和预计日期了哦!!!
+						</span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" id="EailAlert" class="btn btn-primary">确认邮件提醒</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	//页面加载就执行
+	$(function() {
+
+		$(".col-md-2").find(":input").each(function() {
+			$(this).val("");
+		});
+		var anyVal = $("#form-anyVal").serialize();
+
+		getReceiveMaterialNoticeByPageCount(anyVal);
+	});
+	//查询
+	$("#anyVal-btn").on("click", function() {
+		var anyVal = $("#form-anyVal").serialize();
+		getReceiveMaterialNoticeByPageCount(anyVal);
+	});
+	//查询总条数
+	function getReceiveMaterialNoticeByPageCount(anyVal) {
+		$.post('getReceiveMaterialNoticeByPageCount.do', anyVal,
+				function(data) {
+					$("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+					$("#pageNow").val(data.pageNow);
+					var anyVal2 = $("#form-anyVal").serialize();
+					//获取form参数进行查询
+					//調用方法传参
+					findReceiveMaterialNotice(anyVal2);
+					// 进入后台进行分页查询
+					$(".tcdPageCode").createPage({ //哦哦
+						pageCount : data.totalPageCount, //总页数
+						current : data.pageNow, //当前页
+						backFn : function(p) {
+							$("#pageSize").val(10);
+							$("#pageNow").val(p); //給當前頁賦值
+							var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+							//調用方法
+							findReceiveMaterialNotice(anyVal1);
+						}
+					});
+				});
+	}
+	//查询
+	function findReceiveMaterialNotice(anyVal) {
+		$
+				.post(
+						"findConditionReceiveMaterialNoticeByPage.do",
+						anyVal, //from表单内容
+						function(data) {
+							$(".table_app").empty(); //清空原有的数据
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr style=''><td>"
+										+ data[i].id
+										+ "</td><td >"
+										+ (data[i].wave == null
+												|| data[i].wave == "" ? ''
+												: data[i].wave)
+										+ "</td><td >"
+										+ (data[i].cropDate == null
+												|| data[i].cropDate == "" ? ''
+												: data[i].cropDate)
+										+ "</td><td >"
+										+ (data[i].cropNumber == null
+												|| data[i].cropNumber == "" ? ''
+												: data[i].cropNumber)
+										+ "</td><td >"
+										+ (data[i].cropDetails == null
+												|| data[i].cropDetails == "" ? ''
+												: data[i].cropDetails)
+										+ "</td><td><img style='width: 120px; height: 120px' src=" + data[i].designChart + "></td><td>"
+										+ (data[i].craftsOrder == null
+												|| data[i].craftsOrder == "" ? ''
+												: "<a href='" + data[i].craftsOrder+ "' target='_blank'>工艺单</a>")
+										+ "</td>"
+										+ "<td>"
+										+ (data[i].sizeChart == null
+												|| data[i].sizeChart == "" ? ''
+												: "<a href='" + data[i].sizeChart+ "' target='_blank'>尺码表</a>")
+										+ "</td><td class='modify-table-char' value='printingType'>"
+										+ (data[i].printingType == null
+												|| data[i].printingType == "" ? ''
+												: data[i].printingType)
+										+ "</td><td >"
+										+ (data[i].readinessDate == null
+												|| data[i].readinessDate == "" ? ''
+												: data[i].readinessDate)
+										+ "</td><td class='modify-table-char' value='factoryPicking'>"
+										+ (data[i].factoryPicking == null
+												|| data[i].factoryPicking == "" ? ''
+												: data[i].factoryPicking)
+										+ "</td><td class='modify-table-char' value='expectedReceiveMaterialDate'>"
+										+ (data[i].expectedReceiveMaterialDate == null
+												|| data[i].expectedReceiveMaterialDate == "" ? ''
+												: data[i].expectedReceiveMaterialDate)
+										+ "</td><td >"
+										+ (data[i].factoryReceiveMaterialTime == null
+												|| data[i].factoryReceiveMaterialTime == "" ? ''
+												: data[i].factoryReceiveMaterialTime)
+										+ "</td><td ><button type='button' data-toggle='modal' data-target='#myModal_sms'  onclick='SMSAlert(\""
+										+ data[i].id
+										+ "\",\""
+										+ data[i].wave
+										+ "\")' class='btn btn-primary icon-lock'>		短信提醒</button>		<button type='button' data-toggle='modal' data-target='#myModal_mail' onclick='EailAlert(\""
+										+ data[i].id
+										+ "\",\""
+										+ data[i].wave
+										+ "\")' class='btn btn-warning icon-envelope'>		邮件提醒</button></td><td class='issuedStatus"+data[i].id+"'>"
+										+ (data[i].issuedStatus == null
+												|| data[i].issuedStatus == "" ? ''
+												: data[i].issuedStatus)
+										+ "</td><td class='modify-table-char' value='remarks'>"
+										+ (data[i].remarks == null
+												|| data[i].remarks == "" ? ''
+												: data[i].remarks)
+										+ "</td><td ><button type='button'  data-toggle='modal' data-target='#myModal_del' onclick='delObjectById(\""
+										+ data[i].id
+										+ "\")' class='icon-trash btn btn-danger'>删除</button></td></tr>";
+								$(".table_app").append(_HTML_TEBLE_);
+								var issuedStatus = data[i].issuedStatus;
+								if (issuedStatus != "" && issuedStatus != null) {
+									$(".issuedStatus" + data[i].id).parent().attr("bgcolor", "#DCDCDC");
+									$(".issuedStatus" + data[i].id).each(function() {
+									$(".issuedStatus"+ data[i].id).prev().find("button").attr({"disabled" : "disabled"});});
+								}
+							};
+							modifyCellByNumeric("modifyReceiveMaterialNotice.do",findReceiveMaterialNotice);
+							modifyCellByChar("modifyReceiveMaterialNotice.do",findReceiveMaterialNotice);
+							modifyCellByDate("modifyReceiveMaterialNotice.do",findReceiveMaterialNotice);
+						});
+	};
+	function SMSAlert(id, wave) {
+		//window.location.reload();
+		$("#myModal-prompt-sms")
+				.html(
+						"你确定发送波次号为:<span style='color: red' id='sms-text'></span>的产品进行<sapn style='color: #97FFFF;'>短信</sapn>提醒 ??? <br> <span style='color: red; font-size: 18px;'>提醒之前；你要确定写工厂和预计日期了哦!!!</span><input hidden='hidden' type='text' id='sms-id' />");
+		$("#SMSAlert").show();
+		$("#sms-text").text(wave);
+		$("#sms-id").text(id);
+	};
+
+	function duanxin() {
+		var id = $("#sms-id").text();
+		$.post('SMSAlertById.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-prompt-sms").html("恭喜你！短信已经发送成功");
+				$("#SMSAlert").hide();
+				var pageNow = $("#pageNow").val();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				//window.location.reload();
+				var anyVal4 = $("#form-anyVal").serialize();
+				//調用方法传参
+				findReceiveMaterialNotice(anyVal4);
+			} else {
+				$(" #myModal-prompt-sms").html("发送失败！原因可能是网络问题" + data);
+				$("#SMSAlert").hide();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				//window.location.reload();
+				var anyVal4 = $("#form-anyVal").serialize();
+				//获取form参数进行查询
+				//調用方法传参
+				findReceiveMaterialNotice(anyVal4);
+
+			}
+			$("#sms-id").text("");
+			$("#sms-text").text("");
+		});
+	}
+
+	/* function EailAlert(id, wave) {
+		$("#mail-text").text(wave);
+		$("#EailAlert").on('click', function() {
+			$.post('EailAlertById.do', {
+				'id' : id
+			}, function(data) {
+				if (data = 1) {
+					$("#myModal-prompt-mail").html("恭喜你邮件成功");
+					$("#EailAlert").remove();
+					window.location.reload();
+				} else {
+					$(" #myModal-prompt-mail").html("发送失败！原因可能是网络问题" + data);
+					$("#EailAlert").remove();
+					window.location.reload();
+				}
+			});
+		});
+	}; */
+	//删除
+	function delObjectById(id) {
+		$("#myModal2-wave-text").text(id);
+		$("#delReceiveMaterialNotice").on('click', function() {
+			var id = $("#myModal2-wave-text").text();
+			$.post('delReceiveMaterialNoticeById.do', {
+				'id' : id
+			}, function(data) {
+				if (data = 1) {
+					$("#myModal-prompt").html("恭喜你刪除成功");
+					$("#delReceiveMaterialNotice").remove();
+					//window.location.reload();
+				} else {
+					$("#myModal-prompt").html("删除失败！原因可能是网络问题");
+					$("#delReceiveMaterialNotice").remove();
+					//window.location.reload();
+				}
+			});
+		});
+	};
+</script>
+
+</html>

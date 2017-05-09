@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.SalesNotSaleHaoXunDAO">
+	<!-- 得到数据量 -->
+	<select id="getCountByPage" parameterType="com.warehouse.entity.SalesNotSaleHaoXun"
+		resultType="java.lang.Integer">
+		select count(*) from sales_not_sale_haoxun where 1=1
+		<if
+			test='product_code!=null and product_code!="" and product_code!="y" and product_code!="Y" and product_code!="n" and product_code!="N"'>
+			and product_code like concat("%",#{product_code},"%")
+		</if>
+		<if test='product_code=="y" or product_code=="Y"'>
+			and (product_code is not null and product_code !="")
+		</if>
+		<if test='product_code=="n" or product_code=="N"'>
+			and (product_code is null or product_code="")
+		</if>
+		<if
+			test='artNo!=null and artNo!="" and artNo!="y" and artNo!="Y" and artNo!="n" and artNo!="N"'>
+			and artNo like concat("%",#{artNo},"%")
+		</if>
+		<if test='artNo=="y" or artNo=="Y"'>
+			and (artNo is not null and artNo !="")
+		</if>
+		<if test='artNo=="n" or artNo=="N"'>
+			and (artNo is null or artNo="")
+		</if>
+		<if
+			test='wave!=null and wave!="" and wave!=y and wave!=Y and wave!=n and wave!=N'>
+			and wave like concat("%",#{wave},"%")
+		</if>
+		<if test='wave=="y" or wave=="Y"'>
+			and (wave is not null and wave !="")
+		</if>
+		<if test='wave=="n" or wave=="N"'>
+			and (wave is null or wave="")
+		</if>
+	</select>
+	<!-- 得到总的数据 -->
+	<select id="getDataByPage" parameterType="com.warehouse.entity.SalesNotSaleHaoXun"
+		resultType="com.warehouse.entity.SalesNotSaleHaoXun">
+		select * from sales_not_sale_haoxun where 1=1
+		<if
+			test='product_code!=null and product_code!="" and product_code!="y" and product_code!="Y" and product_code!="n" and product_code!="N"'>
+			and product_code like concat("%",#{product_code},"%")
+		</if>
+		<if test='product_code=="y" or product_code=="Y"'>
+			and (product_code is not null and product_code !="")
+		</if>
+		<if test='product_code=="n" or product_code=="N"'>
+			and (product_code is null or product_code="")
+		</if>
+		<if
+			test='artNo!=null and artNo!="" and artNo!="y" and artNo!="Y" and artNo!="n" and artNo!="N"'>
+			and artNo like concat("%",#{artNo},"%")
+		</if>
+		<if test='artNo=="y" or artNo=="Y"'>
+			and (artNo is not null and artNo !="")
+		</if>
+		<if test='artNo=="n" or artNo=="N"'>
+			and (artNo is null or artNo="")
+		</if>
+		<if
+			test='wave!=null and wave!="" and wave!=y and wave!=Y and wave!=n and wave!=N'>
+			and wave like concat("%",#{wave},"%")
+		</if>
+		<if test='wave=="y" or wave=="Y"'>
+			and (wave is not null and wave !="")
+		</if>
+		<if test='wave=="n" or wave=="N"'>
+			and (wave is null or wave="")
+		</if>
+		order by deliveryDate ASC
+		LIMIT #{begin},#{end}
+	</select>
+	<insert id="addData" parameterType="com.warehouse.entity.SalesNotSaleHaoXun">
+		insert into
+		sales_not_sale_haoxun
+		values(NULL,NULL,#{deliveryDate},#{artNo},#{season},#{series},#{wave},#{num},#{code52},#{code59},#{code66},#{code73},#{code80},#{code90},#{code100},#{code110},#{code120},#{code130},#{code160},#{code170})
+	</insert>
+</mapper>

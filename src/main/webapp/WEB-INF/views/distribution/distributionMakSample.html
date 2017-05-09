@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 经销单打样 </title><@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script type="text/javascript" src="res/js/getDiscrepantDays/getDiscrepantDays.js"></script>
+<script src="/res/js/distribution/distributionMakSample.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {ace.settings.check('main-container', 'fixed')} catch (e) {}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active"> 经销单打样 </li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2">
+								<label for="wave">波次号</label><input type="text" class="form-control" name="wave">
+							</div>
+							<div class="col-md-2">
+								<label for="oringinalWave">原波次号</label><input type="text" class="form-control" name="oringinalWave">
+							</div>
+							<div class="col-md-2">
+								<label for="clothName">服装名</label><input type="text" class="form-control" name="clothName">
+							</div>
+							<div class="col-md-2">
+								<label for="productCode">商品编码</label><input type="text" class="form-control" name="productCode">
+							</div>
+							<div class="col-md-2">
+								<label for="trackingOfficer">跟单人</label><input type="text" class="form-control" name="trackingOfficer">
+							</div>
+							<div class="col-md-2">
+								<label for="modelState">纸样状态</label><input type="text" class="form-control" name="modelState">
+							</div>
+							<div class="col-md-2">
+								<label for="distributtionFactory">经销工厂</label><input type="text" class="form-control" name="distributtionFactory">
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="myselect">查询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered" style="width: 100%; height: 100%;">
+						<thead>
+							<tr>								
+								<th colspan="30" style="text-align: center; font-size: 25px;"> 经销单打样 </th>
+							</tr>
+							<tr>
+								<th style="text-align: center; font-size: 16px;">原波次号</th>
+								<th style="text-align: center; font-size: 16px;">波次号</th>
+								<th style="text-align: center; font-size: 16px;">设计图</th>
+								<th style="text-align: center; font-size: 16px;">工艺单</th>
+								<th style="text-align: center; font-size: 16px;">尺码表</th>
+								<th style="text-align: center; font-size: 16px;">订单明细</th>
+								<th style="text-align: center; font-size: 16px;">订单数</th>
+								<th style="text-align: center; font-size: 16px;">服装名</th>
+								<th style="text-align: center; font-size: 16px;">服装编码</th>
+								<th style="text-align: center; font-size: 16px;">订单类型</th>
+								<th style="text-align: center; font-size: 16px;">订单等级</th>
+								<th style="text-align: center; font-size: 16px;">下单时间</th>
+								<th style="text-align: center; font-size: 16px;">要求入库时间</th>
+								<th style="text-align: center; font-size: 16px;">纸板发送日期</th>
+								<th style="text-align: center; font-size: 16px;">跟单人</th>
+								<th style="text-align: center; font-size: 16px;">备注</th>
+								<th style="text-align: center; font-size: 16px;">订单号</th>
+								<th style="text-align: center; font-size: 16px;">纸样情况</th>
+								<th style="text-align: center; font-size: 16px;">环节开始时间</th>
+								<th style="text-align: center; font-size: 16px;">打样剩余天数</th>
+								<th style="text-align: center; font-size: 16px;">本环节耗费天数</th>
+								<th style="text-align: center; font-size: 16px;">经销工厂</th>
+								<th style="text-align: center; font-size: 16px;">确认打样时间</th>
+								<th style="text-align: center; font-size: 16px;">打样完成时间</th>
+								<th style="text-align: center; font-size: 16px;">增加打样工厂</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem" style="width: 100%; position: relative; top: 10px;"></div>
+					<div style="display: none;">
+						<img id="printImg" src="" width="100%" height="100%">
+					</div>
+				</div>
+			</div>
+			<input type="hidden" value="${pageContext.request.contextPath}" id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js">
+</script>
+</html>
+</body>
+</html>

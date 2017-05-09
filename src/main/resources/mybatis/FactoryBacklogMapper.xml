@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FactoryBacklogMapper">
+    <resultMap id="BaseResultMap" type="com.warehouse.entity.FactoryBacklog">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="FACTORY_NAME" property="factoryName" jdbcType="VARCHAR"/>
+        <result column="FACTORY_PHONE" property="factoryPhone" jdbcType="VARCHAR"/>
+        <result column="FACTORY_TEL" property="factoryTel" jdbcType="VARCHAR"/>
+        <result column="FACTORY_ID" property="factoryId" jdbcType="VARCHAR"/>
+        <result column="AFFAIR_NAME" property="affairName" jdbcType="VARCHAR"/>
+        <result column="AFFAIR_TYPE" property="affairType" jdbcType="VARCHAR"/>
+        <result column="PROCESSIBLE_TIME" property="processibleTime" jdbcType="VARCHAR"/>
+        <result column="DEADLINE_TIME" property="deadlineTime" jdbcType="VARCHAR"/>
+        <result column="HANDOVER_INVENTORY" property="handoverInventory" jdbcType="VARCHAR"/>
+        <result column="INVENTORY_CODE" property="inventoryCode" jdbcType="VARCHAR"/>
+        <result column="INVENTORY_WAVE" property="inventoryWave" jdbcType="VARCHAR"/>
+        <result column="COMPLETION_TIME" property="completionTime" jdbcType="VARCHAR"/>
+        <result column="COMPLETION_STATE" property="completionState" jdbcType="VARCHAR"/>
+        <result column="CONTACT_PERSON_NAME" property="contactPersonName" jdbcType="VARCHAR"/>
+        <result column="CONTACT_PERSON_PHONE" property="contactPersonPhone" jdbcType="VARCHAR"/>
+        <result column="STANDBY_FIR" property="standbyFir" jdbcType="VARCHAR"/>
+        <result column="STANDBY_SEC" property="standbySec" jdbcType="VARCHAR"/>
+        <result column="STANDBY_THR" property="standbyThr" jdbcType="VARCHAR"/>
+        <result column="MARK_STATUS" property="markStatus" jdbcType="VARCHAR"/>
+        <result column="CREATED_TIME" property="createTime" jdbcType="VARCHAR"/>
+        <result column="FOUNDER" property="founder" jdbcType="VARCHAR"/>
+        <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR"/>
+        <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getFactoryBacklogById" parameterType="java.lang.Integer"
+            resultMap="BaseResultMap">
+        select
+        *
+        from factory_backlog
+        where MARK_STATUS ='1' AND ID
+        =
+        #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getFactoryBacklogByPageCount" resultType="java.lang.Integer">
+        SELECT COUNT(0) FROM factory_backlog where MARK_STATUS ='1' AND 1=1
+        <if
+                test='factoryName != null and factoryName != "" and factoryName != "N" and factoryName != "Y"'>
+            AND FACTORY_NAME LIKE CONCAT('%',#{factoryName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='factoryName == "N"'>
+            AND (FACTORY_NAME ='' OR FACTORY_NAME
+            IS
+            NULL)
+        </if>
+        <if test='factoryName =="Y"'>
+            AND FACTORY_NAME !=''
+        </if>
+        <if test='affairName != null and affairName != "" and affairName != "N" and affairName != "Y"'>
+            AND AFFAIR_NAME LIKE CONCAT('%',#{affairName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='affairName == "N"'>
+            AND (AFFAIR_NAME ='' OR AFFAIR_NAME
+            IS
+            NULL)
+        </if>
+        <if test='affairName =="Y"'>
+            AND AFFAIR_NAME !=''
+        </if>
+        <if
+                test='AFFAIR_TYPE != null and AFFAIR_TYPE != "" and AFFAIR_TYPE != "N" and AFFAIR_TYPE != "Y"'>
+            AND AFFAIR_TYPE LIKE
+            CONCAT('%',#{AFFAIR_TYPE,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='AFFAIR_TYPE == "N"'>
+            AND (AFFAIR_TYPE ='' OR AFFAIR_TYPE
+            IS
+            NULL)
+        </if>
+        <if test='AFFAIR_TYPE =="Y"'>
+            AND AFFAIR_TYPE !=''
+        </if>
+        <if
+                test='handoverInventory != null and handoverInventory != "" and handoverInventory != "N" and handoverInventory != "Y"'>
+            AND HANDOVER_INVENTORY LIKE
+            CONCAT('%',#{handoverInventory,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='handoverInventory == "N"'>
+            AND (HANDOVER_INVENTORY ='' OR HANDOVER_INVENTORY
+            IS
+            NULL)
+        </if>
+        <if test='handoverInventory =="Y"'>
+            AND HANDOVER_INVENTORY !=''
+        </if>
+        <if test='inventoryWave != null and inventoryWave != "" and inventoryWave != "N" and inventoryWave != "Y"'>
+            AND INVENTORY_WAVE LIKE
+            CONCAT('%',#{inventoryWave,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='inventoryWave == "N"'>
+            AND (INVENTORY_WAVE ='' OR INVENTORY_WAVE
+            IS
+            NULL)
+        </if>
+        <if test='inventoryWave =="Y"'>
+            AND INVENTORY_WAVE !=''
+        </if>
+        <if  test='completionState != null and completionState != "" and completionState != "N" and completionState != "Y"'>
+            AND COMPLETION_STATE LIKE CONCAT('%',#{affairName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='completionState == "N"'>
+            AND (COMPLETION_STATE ='' OR COMPLETION_STATE
+            IS
+            NULL)
+        </if>
+        <if test='completionState =="Y"'>
+            AND COMPLETION_STATE !=''
+        </if>
+        <if test='contactPersonName != null and contactPersonName != "" and contactPersonName != "N" and contactPersonName != "Y"'>
+            AND CONTACT_PERSON_NAME LIKE
+            CONCAT('%',#{contactPersonName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='contactPersonName == "N"'>
+            AND (CONTACT_PERSON_NAME ='' OR CONTACT_PERSON_NAME
+            IS
+            NULL)
+        </if>
+        <if test='contactPersonName =="Y"'>
+            AND CONTACT_PERSON_NAME !=''
+        </if>
+        <if test='editionType != null and editionType != "" and editionType != "N" and editionType != "Y"'>
+            AND EDITION_TYPE LIKE
+            CONCAT('%',#{editionType,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='editionType == "N"'>
+            AND (EDITION_TYPE ='' OR EDITION_TYPE
+            IS
+            NULL)
+        </if>
+        <if test='editionType =="Y"'>
+            AND EDITION_TYPE !=''
+        </if>
+        <if test='founder != null and founder != "" and founder != "N" and founder != "Y"'>
+            AND FOUNDER LIKE CONCAT('%',#{founder,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='founder == "N"'>
+            AND (FOUNDER ='' OR FOUNDER
+            IS
+            NULL)
+        </if>
+        <if test='founder =="Y"'>
+            AND FOUNDER !=''
+        </if>
+    </select>
+    <select id="findConditionFactoryBacklogByPage" parameterType="Map"
+            resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM
+        factory_backlog
+        WHERE
+        MARK_STATUS = '1'
+        AND 1 = 1
+        <if test='factoryName != null and factoryName != "" and factoryName != "N" and factoryName != "Y"'>
+            AND FACTORY_NAME LIKE CONCAT('%',#{factoryName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='factoryName == "N"'>
+            AND (FACTORY_NAME ='' OR FACTORY_NAME
+            IS
+            NULL)
+        </if>
+        <if test='factoryName =="Y"'>
+            AND FACTORY_NAME !=''
+        </if>
+        <if test='affairName != null and affairName != "" and affairName != "N" and affairName != "Y"'>
+            AND AFFAIR_NAME LIKE CONCAT('%',#{affairName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='affairName == "N"'>
+            AND (AFFAIR_NAME ='' OR AFFAIR_NAME
+            IS
+            NULL)
+        </if>
+        <if test='affairName =="Y"'>
+            AND AFFAIR_NAME !=''
+        </if>
+        <if
+                test='AFFAIR_TYPE != null and AFFAIR_TYPE != "" and AFFAIR_TYPE != "N" and AFFAIR_TYPE != "Y"'>
+            AND AFFAIR_TYPE LIKE
+            CONCAT('%',#{AFFAIR_TYPE,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='AFFAIR_TYPE == "N"'>
+            AND (AFFAIR_TYPE ='' OR AFFAIR_TYPE
+            IS
+            NULL)
+        </if>
+        <if test='AFFAIR_TYPE =="Y"'>
+            AND AFFAIR_TYPE !=''
+        </if>
+        <if
+                test='handoverInventory != null and handoverInventory != "" and handoverInventory != "N" and handoverInventory != "Y"'>
+            AND HANDOVER_INVENTORY LIKE
+            CONCAT('%',#{handoverInventory,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='handoverInventory == "N"'>
+            AND (HANDOVER_INVENTORY ='' OR HANDOVER_INVENTORY
+            IS
+            NULL)
+        </if>
+        <if test='handoverInventory =="Y"'>
+            AND HANDOVER_INVENTORY !=''
+        </if>
+        <if
+                test='inventoryWave != null and inventoryWave != "" and inventoryWave != "N" and inventoryWave != "Y"'>
+            AND INVENTORY_WAVE LIKE
+            CONCAT('%',#{inventoryWave,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='inventoryWave == "N"'>
+            AND (INVENTORY_WAVE ='' OR INVENTORY_WAVE
+            IS
+            NULL)
+        </if>
+        <if test='inventoryWave =="Y"'>
+            AND INVENTORY_WAVE !=''
+        </if>
+        <if
+                test='completionState != null and completionState != "" and completionState != "N" and completionState != "Y"'>
+            AND COMPLETION_STATE LIKE CONCAT('%',#{affairName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='completionState == "N"'>
+            AND (COMPLETION_STATE ='' OR COMPLETION_STATE
+            IS
+            NULL)
+        </if>
+        <if test='completionState =="Y"'>
+            AND COMPLETION_STATE !=''
+        </if>
+        <if
+                test='contactPersonName != null and contactPersonName != "" and contactPersonName != "N" and contactPersonName != "Y"'>
+            AND CONTACT_PERSON_NAME LIKE
+            CONCAT('%',#{contactPersonName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='contactPersonName == "N"'>
+            AND (CONTACT_PERSON_NAME ='' OR CONTACT_PERSON_NAME
+            IS
+            NULL)
+        </if>
+        <if test='contactPersonName =="Y"'>
+            AND AFFAIR_NAME !=''
+        </if>
+        <if
+                test='founder != null and founder != "" and founder != "N" and founder != "Y"'>
+            AND FOUNDER LIKE CONCAT('%',#{founder,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='founder == "N"'>
+            AND (FOUNDER ='' OR FOUNDER
+            IS
+            NULL)
+        </if>
+        <if test='founder =="Y"'>
+            AND FOUNDER !=''
+        </if>
+        ORDER BY FIELD(COMPLETION_STATE,'等待处理','已完成','超时未完成') ASC,CREATED_TIME DESC,AFFAIR_NAME
+        ASC LIMIT #{pageNow},#{pageSize}
+    </select>
+
+    <update id="updateBacklogCompletionStatus" parameterType="com.warehouse.entity.FactoryBacklog">
+        update factory_backlog
+        <set>
+            <if test="completionState != null">
+                COMPLETION_STATE = #{completionState,jdbcType=VARCHAR},
+            </if>
+
+            <if test="modifyTime != null">
+                MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+            </if>
+
+            <if test="operator != null">
+                OPERATOR = #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorIp != null">
+                OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

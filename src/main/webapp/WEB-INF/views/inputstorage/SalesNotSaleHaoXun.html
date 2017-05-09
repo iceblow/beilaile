@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/inputstorage/SalesNotSaleHaoXun.js"></script>
+<title>未售浩讯</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">未售浩讯</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div class="col-md-12">
+					<div style="float: left;">
+						<form id="mySelect_From">
+							<font>商品编码查询</font> <input type="text" name="product_code"
+								id="product_code" /> <font>订单号</font> <input type="text"
+								name="wave" id="wave" /> <a id="checkbtn"
+								class="btn btn-default">查 询</a>
+						</form>
+					</div>
+				</div>
+				<div class="col-md-12"></div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="20" style="text-align: center; font-size: 16px;">未售浩讯</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">商品编号</th>
+								<th style="text-align: center;">商品图片</th>
+								<th style="text-align: center;">发货日期</th>
+								<th style="text-align: center;">货号</th>
+								<th style="text-align: center;">季节</th>
+								<th style="text-align: center;">系列</th>
+								<th style="text-align: center;">订单号</th>
+								<th style="text-align: center;">数量</th>
+								<th style="text-align: center;">尺码52</th>
+								<th style="text-align: center;">尺码59</th>
+								<th style="text-align: center;">尺码66</th>
+								<th style="text-align: center;">尺码73</th>
+								<th style="text-align: center;">尺码80</th>
+								<th style="text-align: center;">尺码90</th>
+								<th style="text-align: center;">尺码100</th>
+								<th style="text-align: center;">尺码110</th>
+								<th style="text-align: center;">尺码120</th>
+								<th style="text-align: center;">尺码130</th>
+								<th style="text-align: center;">尺码160</th>
+								<th style="text-align: center;">尺码170</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+</html>

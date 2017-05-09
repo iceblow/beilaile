@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/operate/productBack.js"></script>
+<title>返单库存分析</title>
+<!-- <style type="text/css">{font-size: 13px;line-height: 25px;}</style> -->
+<style type="text/css">
+table tr:hover {
+	background-color: #dafdf3;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">返单库存分析</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<div class="col-md-1.5" style="margin-top: 15px; float: right;">
+							<button id="analysis" class="btn btn-danger btn-lg">分 析</button>
+						</div>
+						<div class="col-md-1.5" style="margin-top: 0px; float: right;">
+							<button id="importSalesSku" class="btn btn-info">导入销售数据</button>
+							<input type="file" id="importSalesSkuData"
+								name="importSalesSkuData" />
+						</div>
+						<div class="col-md-1.5" style="margin-top: 0px; float: right;">
+							<button id="importSalesReport" class="btn btn-info">导入库存数据</button>
+							<input type="file" id="importSalesReportData"
+								name="importSalesReportData" />
+						</div>
+						<form id="mySelect_From">
+							<div class="col-md-1.5" style="float: left;">
+								<label for="girardOld">原波次</label> <input type="text"
+									class="form-control date" name="girardOld">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="productcodes">商品编号</label> <input type="text"
+									class="form-control date" name="productcodes">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="productname">商品名称</label> <input type="text"
+									class="form-control date" name="productname">
+							</div>
+							<!-- 	<div class="col-md-2" style="float: left;">
+								<label for="productoldname">商品名称(旧)</label> <input type="text"
+									class="form-control date" name="productoldname">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for=productshortname>商品简称</label> <input type="text"
+									class="form-control date" name="productshortname">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="exclefile">excle文件</label> <input type="text"
+									class="form-control date" name="exclefile">
+							</div> -->
+							<input type="hidden" id="delb" name="delb" value="0" />
+						</form>
+						<div class="col-md-1.5">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="mySelectProduct">查 询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="48" style="text-align: center; font-size: 16px;">库存分析信息表</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">商品编号</th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">原波次</th>
+								<th style="text-align: center;">52存</th>
+								<th style="text-align: center;">59存</th>
+								<th style="text-align: center;">66存</th>
+								<th style="text-align: center;">73存</th>
+								<th style="text-align: center;">80存</th>
+								<th style="text-align: center;">90存</th>
+								<th style="text-align: center;">100存</th>
+								<th style="text-align: center;">110存</th>
+								<th style="text-align: center;">120存</th>
+								<th style="text-align: center;">130存</th>
+								<th style="text-align: center;">160存</th>
+								<th style="text-align: center;">170存</th>
+								<th style="text-align: center;">商品图片</th>
+								<th style="text-align: center;">52销</th>
+								<th style="text-align: center;">59销</th>
+								<th style="text-align: center;">66销</th>
+								<th style="text-align: center;">73销</th>
+								<th style="text-align: center;">80销</th>
+								<th style="text-align: center;">90销</th>
+								<th style="text-align: center;">100销</th>
+								<th style="text-align: center;">110销</th>
+								<th style="text-align: center;">120销</th>
+								<th style="text-align: center;">130销</th>
+								<th style="text-align: center;">160销</th>
+								<th style="text-align: center;">170销</th>
+								<th style="text-align: center;">商品图片</th>
+								<th style="text-align: center;">52码</th>
+								<th style="text-align: center;">59码</th>
+								<th style="text-align: center;">66码</th>
+								<th style="text-align: center;">73码</th>
+								<th style="text-align: center;">80码</th>
+								<th style="text-align: center;">90码</th>
+								<th style="text-align: center;">100码</th>
+								<th style="text-align: center;">110码</th>
+								<th style="text-align: center;">120码</th>
+								<th style="text-align: center;">130码</th>
+								<th style="text-align: center;">160码</th>
+								<th style="text-align: center;">170码</th>
+								<th style="text-align: center;">返单数</th>
+								<th style="text-align: center;">预计出货时间</th>
+								<th style="text-align: center;">操 作</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 修改模态框 -->
+			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">修改商品信息</h4>
+						</div>
+						<div class="modal-body">
+							<div class="col-md-12">
+								<input type="hidden" name="id" id="id">
+								<div class="col-md-4" style="float: left;">
+									<label for="code52">52码</label> <input type="text"
+										class="form-control date" name="code52" id="ucode52">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code59">59码</label> <input type="text"
+										class="form-control date" name="code59" id="ucode59">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code66">66码</label> <input type="text"
+										class="form-control date" name="code66" id="ucode66">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code73">73码</label> <input type="text"
+										class="form-control date" name="code73" id="ucode73">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code80">80码</label> <input type="text"
+										class="form-control date" name="code80" id="ucode80">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code90">90码</label> <input type="text"
+										class="form-control date" name="code90" id="ucode90">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code100">100码</label> <input type="text"
+										class="form-control date" name="code100" id="ucode100">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code110">110码</label> <input type="text"
+										class="form-control date" name="code110" id="ucode110">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code120">120码</label> <input type="text"
+										class="form-control date" name="code120" id="ucode120">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code130">130码</label> <input type="text"
+										class="form-control date" name="code130" id="ucode130">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code160">160码</label> <input type="text"
+										class="form-control date" name="code160" id="ucode160">
+								</div>
+								<div class="col-md-4" style="float: left;">
+									<label for="code170">170码</label> <input type="text"
+										class="form-control date" name="code170" id="ucode170">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="updateSub"
+								style="background-color: #428bca;">修改</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">提交返单申请</h4>
+						</div>
+						<div class="modal-body">
+							<div class="col-md-12">
+								<input type="hidden" name="id" id="ids" />
+								<div class="col-md-6" style="float: center;">
+									<label for="expectTime">预计出货时间</label> <input type="text"
+										class="form-control date input-date" name="expectTime"
+										id="expectTime">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal" id="addSub"
+									style="background-color: #428bca;">添加</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 添加模态框 -->
+			<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加数量信息</h4>
+			</div>
+			<form action="" method="post" id="add_form">
+				<div class="modal-body">
+					<div class="col-md-12">
+						<input type="hidden" name="id" id="id" />
+						<div class="col-md-4" style="float: left;">
+							<label for="code52">52码</label> <input type="text"
+								class="form-control date" name="code52" id="code52">
+						</div>
+						<div class="col-md-4" style="float: left;">
+							<label for="code59">59码</label> <input type="text"
+								class="form-control date" name="code59" id="code59">
+						</div>
+						<div class="col-md-4" style="float: left;">
+							<label for="code66">66码</label> <input type="text"
+								class="form-control date" name="code66" id="code66">
+						</div>
+						<div class="col-md-4" style="float: left;">
+							<label for="code73">73码</label> <input type="text"
+								class="form-control date" name="code73" id="code73">
+						</div>
+						<div class="col-md-4" style="float: left;">
+							<label for="code80">80码</label> <input type="text"
+								class="form-control date" name="code80" id="code80">
+						</div>
+						<div class="col-md-4" style="float: left;">
+							<label for="code90">90码</label> <input type="text"
+								class="form-control date" name="code90" id="code90">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default"
+						data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary"
+						data-dismiss="modal" id="addSub"
+						style="background-color: #428bca;">添加</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>-->
+
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

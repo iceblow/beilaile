@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>裁剪完成</title><@p.cache/> <@p.js/><@p.css/>
+<script src="res/js/getDiscrepantDays/getDiscrepantDays.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/cutting/PrintingCuttingCompleted.js"></script>
+
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">裁剪完成</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2">
+								<label for="wave">波次号</label><input type="text"
+									class="form-control" name="wave">
+							</div>
+							<div class="col-md-2">
+								<label for="cutLargeReceiveDate">片印领料日期</label><input
+									type="text" class="form-control" name="cutLargeReceiveDate">
+							</div>
+							<div class="col-md-2">
+								<label for="cutLargeReturnDate">片印回料日期</label><input type="text"
+									class="form-control" name="cutLargeReturnDate">
+							</div>
+							<div class="col-md-2">
+								<label for="printingFactory">印花工厂</label><input type="text"
+									class="form-control" name="printingFactory">
+							</div>
+							<div class="col-md-2">
+								<label for="factory">车缝工厂</label><input type="text"
+									class="form-control" name="factory">
+							</div>
+							<div class="col-md-2">
+								<label for="factoryPickingDate">车缝领料日期</label><input type="text"
+									class="form-control" name="factoryPickingDate">
+							</div>
+							<div class="col-md-2">
+								<label for="remark">备注</label><input type="text"
+									class="form-control" name="remark">
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="myselect">查询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered"
+						style="width: 100%; height: 100%;">
+						<thead>
+							<tr>
+								<th colspan="11" style="text-align: center; font-size: 25px;">裁剪完成数据表</th>
+							</tr>
+							<tr>
+								<th style="text-align: center; font-size: 16px;">波次号</th>
+								<th style="text-align: center; font-size: 16px;">裁剪完成日期</th>
+								<th style="text-align: center; font-size: 16px;">裁剪数</th>
+								<th style="text-align: center; font-size: 16px;">印绣类型</th>
+								<th style="text-align: center; font-size: 16px;">产品图</th>
+								<th style="text-align: center; font-size: 16px;">片印领料时间</th>
+								<th style="text-align: center; font-size: 16px;">片印回料时间</th>
+								<th style="text-align: center; font-size: 16px;">印花工厂</th>
+								<th style="text-align: center; font-size: 16px;">车缝工厂</th>
+								<th style="text-align: center; font-size: 16px;">车缝领料日期</th>
+								<th style="text-align: center; font-size: 16px;">备注</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+					<div style="display: none;">
+						<img id="printImg" src="" width="100%" height="100%">
+					</div>
+				</div>
+			</div>
+
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

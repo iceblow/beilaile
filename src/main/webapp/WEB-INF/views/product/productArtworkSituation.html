@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>修图情况信息</title> <@p.cache/> <@p.css/> <@p.js/>
+     <script src="/res/js/ajaxfileupload.js"></script>
+  
+    <style>
+        .chia-file-up{padding: 0px 0px;}
+        .chia-file-up, select{border: 0px solid #d5d5d5;}
+    </style>
+</head>
+<body>
+<@p.top/>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <@p.left/>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li><i class="icon-home home-icon"> </i> <a href="#">
+                        Home </a></li>
+                    <li><a href="#"> Tables </a></li>
+                    <li class="active">美工情况信息</li>
+                </ul>
+                <!-- .breadcrumb -->
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+          
+            <!-- /.col-lg-6 -->
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-anyVal" method="post">
+                    <div id="val-input-empty" class="col-md-12">
+                        <div class="col-md-2">
+                            <label for="waved">波次号</label>
+                            <input type="text" name="wave" id="waved"/>
+                        </div>
+                         <div class="col-md-2">
+                            <label for="productNamed">商品名称</label>
+                            <input type="text" name="productName" id="productNamed"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="productCoded">商品编号</label>
+                            <input type="text" name="productCode" id="productCoded"/>
+                        </div>
+                       
+                        
+                        
+                        <div class="col-md-2">
+								<span class="input-group-btn">
+									<button id="queryArtworkInfo" class="btn btn-default" type="button"> 查询</button>
+								</span>
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="">
+                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+                    </div>
+                    
+                </form>
+                 
+                
+            </div>
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+								<th colspan="30" style="text-align: center; font-size: 16px;">美工情况</th>
+							</tr>
+                            <tr>
+                                <th>编号</th>
+                                <th>序列号</th>
+                                <th>波次号</th>
+                                <th>商品编码</th>
+                                <th>图片</th>
+                                <th>订单等级</th>
+                                <th>修图状况</th>
+                                <th>备注</th>
+                                <th>修图时间</th>
+                                <th>创建时间</th>
+                                <th colspan="1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 添加模态框 add_acces_info_form -->
+<div class="modal fade" id="addArtworkInfo" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" method="post" id="add_artwork_info_form"
+              enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">添加摄影信息</h4>
+                </div>
+                <div id="add_form_input" class="modal-body">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label for="sid">序列号</label>
+                            <input type="text" class="form-control"
+                                   name="sid" placeholder=""
+                                   id="sid">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="wave">波次号</label>
+                            <input type="text" class="form-control"
+                                   name="wave"
+                                   placeholder=""
+                                   id="wave">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="productCode">商品编码</label>
+                            <input type="text" class="form-control"
+                                   name="productCode"
+                                   placeholder=""
+                                   id="productCode">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="designImg">图片</label>
+                            <input type="file"
+                                   class="form-control chia-file-up"
+                                   name="file" id="designImg">
+                        </div>
+
+                        
+                        <div class="col-md-6">
+                            <label for="orderGrade">订单等级</label>
+                            <input type="text"  class="form-control"
+                                   name="orderGrade"
+                                   placeholder=""
+                                   id="orderGrade">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="remarks">备注</label>
+                            <input type="text" class="form-control"
+                                   name="remarks"
+                                   placeholder=""
+                                   id="remarks">
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal" id="ajaxAddArtworkInfo">
+                        添加
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+
+
+
+
+
+/**
+ * Created by admin on 2017/4/28.
+ */
+//页面加载就执行
+
+$(function () {
+
+    $(".col-md-2").find(":input").each(
+        function () {
+            $(this).val("");
+        });
+    var anyVal = $("#form-anyVal").serialize();
+    getArtworkInfoBpcnt(anyVal);
+
+   
+    //查询
+    $("#queryArtworkInfo").on("click", function () {
+        var anyVal = $("#form-anyVal").serialize();
+        getArtworkInfoBpcnt(anyVal);
+    });
+    
+	$("#ajaxAddArtworkInfo").on("click", function () {
+		
+	var formData = new FormData($("#add_artwork_info_form")[0]);
+
+
+	$.ajax({
+		url : '/ajaxAddArtworkInfo.do',
+		type : 'POST',
+		data : formData,
+		async : false,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(data) {
+			
+			 var anyVal = $("#form-anyVal").serialize();
+			 getArtworkInfoBpcnt(anyVal);
+			
+		},
+		error : function(data) {
+			
+		}
+	});
+  
+   }); 
+});
+//提交
+$("#submit-btn").on("click", function () {
+    console.log("+==========================2==============");
+    var formData = new FormData($("#form-input")[0]);
+    var if_input_Id = $("#obj_hidden_id").val();
+    if (if_input_Id != "" && if_input_Id != null) {
+        //修改
+        modifyArtworkMaterial(formData);
+    } else {
+        //添加
+        addArtworkMaterial(formData);
+    }
+});
+
+
+//查询总条数
+function getArtworkInfoBpcnt(anyVal) {
+
+    $.post('getArtworkInfoBpcnt.do', anyVal,
+        function (data) {
+    		
+            $("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+            $("#pageNow").val(data.pageNow);
+         	
+            var anyVal2 = $("#form-anyVal").serialize();
+            //获取form参数进行查询
+            //調用方法传参
+            findArtworkInfo(anyVal2);
+         
+            // 进入后台进行分页查询
+            $(".tcdPageCode").createPage({ //哦哦
+                pageCount: data.totalPageCount, //总页数
+                current: data.pageNow, //当前页
+                backFn: function (p) {
+                    $("#pageSize").val(10);
+                    $("#pageNow").val(p); //給當前頁賦值
+                    var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+                    //調用方法
+                    findArtworkInfo(anyVal1);
+                }
+            });
+        });
+}
+//查询
+function findArtworkInfo(anyVal) {
+    $.post("findArtworkInfoCndbp.do", anyVal, //from表单内容
+        function (data) {
+            $(".table_app").empty(); //清空原有的数据
+            for (var i = 0; i < data.length; i++) {
+                var _HTML_TEBLE_ = "";
+                _HTML_TEBLE_ = "<tr>" +"<input type='hidden' class='id' value='"
+                    + data[i].id
+                    + "'/>"
+                    + "<td>"
+                    + data[i].id
+                    + "</td><td >"
+                        //序列号
+                    + (data[i].sid == null ? '' : data[i].sid)
+                    + "</td><td >"
+                        //波次号
+                    + (data[i].wave == null ? '' : data[i].wave)
+                    + "</td><td >"
+                        //商品编码
+                    + (data[i].productCode == null ? '' : data[i].productCode)
+                    + "</td><td>"
+                        //图片
+                         + "<img  width='120px' height='120px'src='"
+                    + (data[i].designImg == null ? '' : data[i].designImg)
+                     + "'/>"
+                    + "</td><td >"
+                        //订单等级
+                   
+                    + (data[i].orderGrade == null ? '' : data[i].orderGrade)
+                   
+                    + "</td><td class='myDataStatus'>"
+                        //修图状况
+                    + (data[i].dataStatus == null ? '' : data[i].dataStatus)
+                    + "</td><td class='myDblClick' name='remarks' >"
+                        //备注
+                    + (data[i].remarks == null ? '' : data[i].remarks)
+                    +"</td><td>"
+                        //修图时间
+                    + (data[i].artworkTime == null ? '' : data[i].artworkTime)
+                    + "</td><td>"
+                        //创建时间
+                    + (data[i].createTime == null ? '' : data[i].createTime)
+                    + "</td><td  class='dataStatus" + data[i].dataStatus+"'><button type='button'  data-toggle='modal' onclick='confirmShipment(\""
+		                    + data[i].id
+		                    + "\")' class='btn btn-primary btn-sm icon-confirm'>确认修图</button></td></tr>";
+                $(".table_app").append(_HTML_TEBLE_);
+                var dataStatus = data[i].dataStatus;
+                
+				if (dataStatus =='已修图') {
+					
+					$(".dataStatus" + data[i].dataStatus)
+							.parent().attr("bgcolor", "#FF7D00");
+					$(".dataStatus" + data[i].dataStatus).find(
+					'button').remove();
+					$(".dataStatus" + data[i].dataStatus)
+					.append(
+							"<button disabled='disabled'  type='button'  data-toggle='modal'  class='btn btn-primary btn-sm icon-confirm'>已修图</button>");
+				
+				}
+            }
+            updbclick();
+        });
+}
+
+
+
+function confirmShipment(id) {
+	if(window.confirm('您确定修图吗？')){
+	    
+	      
+    }else{
+   
+       return;
+   }
+    console.log(id);
+    argArr = {id: id};
+    $.ajax({
+        url : '/confirmShipmentArtwork.do',
+        dataType : 'json',
+        type : 'post',
+        data : argArr,
+        success : function(data) {
+            console.log("confirmShipmentArtwork==============="+data);
+            var anyVal = $("#form-anyVal").serialize();
+            getArtworkInfoBpcnt(anyVal);
+           
+        },
+        error : function() {
+            alert("服务异常!");
+        }
+    });
+}
+
+function updbclick() {
+
+	$(".myDblClick").on("dblclick",function() {
+		if($(this).parent().find(".myDataStatus").text().trim()=='已修图')
+			{
+			return;
+			}
+	
+		var id = $(this).parent().find(".id").val();
+		var code = $(this).text().trim();
+		var name = $(this).attr("name");
+		//alert("code========"+code);
+		$(this).html("<input id='" + id + "' type='text' value='"+code+"' name='" + name + "' style='width:100px;'> ");
+		$("#" + id).focus();// 文本框获取光标事件
+
+		uppblur(id, name);
+	});
+}
+// 光标离开事件
+function uppblur(id, name) {
+	
+	$("#" + id).blur(function() {
+		var newtxt = $(this).val();
+	
+		
+		$(this).closest("td").text(newtxt);
+		var data = {id : id};
+		data[name] = newtxt;
+	    
+		$.ajax({
+			url : '/modifyArtworkInfo.do',
+			dataType : 'json',
+			type : 'post',
+			data : data,
+			success : function(data) {
+				if (data == 1) {
+					
+					 var anyVal = $("#form-anyVal").serialize();
+			            getArtworkInfoBpcnt(anyVal);
+					
+				}
+			},error : function() {
+				alert("修改失败,输入的类型错误!");
+			}
+		});
+	});
+}
+
+
+
+
+
+</script>
+</html>

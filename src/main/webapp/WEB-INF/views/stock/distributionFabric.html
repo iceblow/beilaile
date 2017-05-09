@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>工厂经销单仓库面料出库数据</title><@p.cache/><@p.css/> <@p.js/>
+</head>
+
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">工厂经销单仓库面料出库数据</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<button class="btn btn-primary btn-lg" data-toggle="modal"
+						data-target="#myModal">添加</button>
+				</div>
+				<div class="col-md-12">
+					<form action="" id="form-anyVal">
+						<div id="val-input-empty" class="col-md-8">
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">波次号</span> <input name="wave"
+										
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">日期</span> <input
+										name="additionTime" id="additionTime_select"
+										
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">供货商</span> <input
+										name="supplier"
+										
+										type="text" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div id="val-input-empty" class="col-md-8"
+							style="margin-top: 20px"></div>
+						<div id="val-input-empty1" class="col-md-8">
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">收货人</span> <input
+										name="consignee"
+										
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">摘要</span> <input name="summary"
+										
+										type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="input-group">
+									<span class="input-group-addon">备注</span> <input name="remarks"
+									
+										type="text" class="form-control">
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<span class="input-group-btn">
+								<button id="anyVal-btn" class="btn btn-default" type="button">
+									查询</button>
+							</span>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12" style="height: 50px;"></div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>波号</th>
+										<th>商品编码</th>
+										<th>设计图</th>
+										<th>工艺图</th>
+										<th>面料入仓日期</th>
+										<th>供货商</th>
+										<th>收货人</th>
+										<th>面料材质</th>
+										<th>用料位置</th>
+										<th>颜色</th>
+										<th>面料1</th>
+										<th>面料2</th>
+										<th>面料3</th>
+										<th>面料4</th>
+										<th>面料5</th>
+										<th>面料6</th>
+										<th>面料7</th>
+										<th>条数</th>
+										<th>合计</th>
+										<th>单价</th>
+										<th>金额</th>
+										<th>备注</th>
+										<th>添加时间</th>
+										<th>数据操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 添加 模态框（Modal）那怎么搞？ -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加 裁片外发生产进度数据</h4>
+					</div>
+					<form enctype="multipart/form-data" role="form" id="vender"
+						action="addDistributionFabric.do" method="post">
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">波号</label> <input type="text"
+										class="form-control" name="wave" placeholder=" ">
+								</div>
+
+								<div class="col-md-4">
+									<label for="oringinalWave">日期</label> <input type="text"
+										class="form-control input-date" name="additionTime"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">供货商</label> <input type="text"
+										class="form-control" name="supplier">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">收货人</label> <input type="text"
+										class="form-control" name="consignee" placeholder=" ">
+								</div>
+
+								<div class="col-md-4">
+									<label for="oringinalWave">摘要</label> <input type="text"
+										class="form-control" name="summary" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="oringinalWave">单价</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="unitprice" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">面料1</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric1">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">面料2</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric2" placeholder=" ">
+								</div>
+
+								<div class="col-md-4">
+									<label for="oringinalWave">面料3</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric3" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">面料4</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric4">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">面料5</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric5" placeholder=" ">
+								</div>
+
+								<div class="col-md-4">
+									<label for="oringinalWave">面料6</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric6" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">面料7</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric7">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="submit" class="btn btn-primary">提交</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- .main-container-inner -->
+		<!--修改 模态框（Modal） -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改 裁片外发生产进度数据</h4>
+					</div>
+					<form enctype="multipart/form-data" role="form"
+						id="modifyByDistribution" action="" method="post">
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">波号</label> <input type="text"
+										class="form-control" name="wave" id="wave" placeholder="">
+								</div>
+								<div class="col-md-4">
+									<label for="oringinalWave">日期</label> <input type="text"
+										class="form-control input-date" name="additionTime"
+										id="additionTime" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">供货商</label> <input type="text"
+										class="form-control" name="supplier" id="supplier">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">收货人</label> <input type="text"
+										class="form-control" name="consignee" id="consignee"
+										placeholder="">
+								</div>
+
+								<div class="col-md-4">
+									<label for="oringinalWave">摘要</label> <input type="text"
+										class="form-control" name="summary" id="summary"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="oringinalWave">单价</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="unitprice" id="unitprice"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">面料1</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric1" id="fabric1">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">面料2</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric2" id="fabric2"
+										placeholder=" ">
+								</div>
+
+								<div class="col-md-4">
+									<label for="oringinalWave">面料3</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric3" id="fabric3"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">面料4</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric4" id="fabric4">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="designers">面料5</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric5" id="fabric5"
+										placeholder=" ">
+								</div>
+
+								<div class="col-md-4">
+									<label for="oringinalWave">面料6</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric6" id="fabric6"
+										placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave">面料7</label> <input type="text"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
+										class="form-control" name="fabric7" id="fabric7">
+								</div>
+							</div>
+							<input hidden="hidden" id="distributionId" type="text" value=""
+								name="id">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" onclick="modifyDistribution_btn()"
+								class="btn btn-primary" data-dismiss="modal">提交</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 提醒 -->
+		<div class="modal fade" id="myModal_remind" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-ReminderRontent" class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button type="button" id="modal-submit-btn"
+							class="btn btn-primary" data-dismiss="modal"
+							onclick="ConfirmReminder()">确认</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- 刪除 -->
+			<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+						</div>
+						<div id="myModal-prompt" class="modal-body">
+							你确定刪除波次号为:<span style="color: red" id="myModal2-wave-text"></span>的数据嗎？？？
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">取消</button>
+							<button type="button" id="del-btn" class="btn btn-primary">確認刪除</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal -->
+			</div>
+			<!-- /.main-container-inner -->
+			<a href="#" id="btn-scroll-up"
+				class="btn-scroll-up btn btn-sm btn-inverse"> <i
+				class="icon-double-angle-up icon-only bigger-110"> </i>
+			</a> <input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+		</div>
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+<script type="text/javascript">
+	var url = location.href;
+	var argArr = [];
+	if (url) {
+		console.info(url)
+		var argStr = url.split("?");
+		if (argStr.length > 1) {
+			var arg = argStr[1].split("&");
+			for (var a = 0; a < arg.length; a++) {
+				var temp = arg[a].split("=");
+				argArr[temp[0]] = temp[1]
+			}
+		}
+	}
+	//赋值    //你要看
+	for ( var a in argArr) {
+		alert(argArr[a])
+		$("#additionTime_select").val(argArr[a]);
+	}
+	function delByDistributionFabric(wave) {
+		$("#myModal2-wave-text").text(wave);
+	}
+	$("#del-btn").on('click', function() {
+		var id = $("#myModal2-wave-text").text();
+		$.post('delByDistributionFabric.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-prompt").html("恭喜你刪除成功");
+				$("#del-btn").remove();
+				var anyVal = $("#form-anyVal").serialize();//获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal);//調用分頁查詢 在這裏才調用
+
+			} else {
+				$("#myModal-prompt").html("删除失败！原因可能是网络问题");
+				$("#del-btn").remove();
+				var anyVal = $("#form-anyVal").serialize();//获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal);//調用分頁查詢 在這裏才調用
+			}
+		});
+	})
+	//点击查询获取查询的条件 数据
+	$(function() {
+		$("#anyVal-btn")
+				.on(
+						'click',
+						function() {//点击事查詢事件
+							$("#pageSize").attr('name', "");//去掉分页查询pageSize
+							$("#pageNow").attr('name', ""); //去掉分页查询pageNow
+							var anyVal = $("#form-anyVal").serialize();//獲取條件查詢字段
+							$
+									.post(
+											'getDistributionFabricTotalPageByVal.do',
+											anyVal,
+											function(data) {//帶條件查詢縂條數
+												$("#pageSize").attr('name',
+														"pageSize");//给pageSize赋值name
+												$("#pageNow").attr('name',
+														"pageNow");//给pageNow赋name值
+												$("#pageNow").val(1);
+												var anyVal = $("#form-anyVal")
+														.serialize();//獲取條件字段
+												findDistributionFabricPageByVal(anyVal);
+												$(".tcdPageCode")
+														.createPage(
+																{
+																	pageCount : data.totalPageCount,
+																	current : data.pageNow,
+																	backFn : function(
+																			p) {
+																		$(
+																				"#pageSize")
+																				.val(
+																						10);
+																		$(
+																				"#pageNow")
+																				.val(
+																						p);//給當前頁賦值
+																		var anyVal = $(
+																				"#form-anyVal")
+																				.serialize();//获取form表单
+																		//調用方法
+																		findDistributionFabricPageByVal(anyVal);//調用分頁查詢 在這裏才調用
+																	}
+																});
+											});
+							//清空所有的input
+
+						});
+
+		//修改赋值方法 
+		$("#up").uploadPreview({
+			Img : "ImgPr",
+			Width : 120,
+			Height : 120
+		});
+	});
+	function modifyDistribution_btn() {
+		var formData = new FormData($("#modifyByDistribution")[0]);
+		alert(formData);
+		$.ajax({
+			url : 'modifyDistributionFabric.do',
+			type : 'POST',
+			data : formData,
+			async : false,
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				var pageNow = $("#pageNow").val();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow);//給當前頁賦值
+				var anyVal = $("#form-anyVal").serialize();//获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal);
+			},
+			error : function(data) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(1);//給當前頁賦值
+				var anyVal = $("#form-anyVal").serialize();//获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal);
+			}
+		});
+	}
+	/*页面加载执行的方法*/
+	var anyVal = $("#form-anyVal").serialize();//获取form表单
+	$.post('getDistributionFabricTotalPageByVal.do', anyVal, function(data) {
+		$("#pageSize").val(10);//默認查 10條數據这里啊 默认值是10
+		$("#pageNow").val(data.pageNow);
+		//获取form参数进行查询
+		var anyVal = $("#form-anyVal").serialize();
+		//調用方法传参
+		findDistributionFabricPageByVal(anyVal);
+		// 进入后台进行分页查询
+		$(".tcdPageCode").createPage({//哦哦
+			pageCount : data.totalPageCount,//总页数
+			current : data.pageNow,//当前页
+			backFn : function(p) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(p);//給當前頁賦值
+				var anyVal = $("#form-anyVal").serialize();//获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal);
+			}
+		});
+	});
+
+	//查詢方法
+	function findDistributionFabricPageByVal(anyVal) { //你的数据都是从这里查的？
+		$
+				.post(
+						"findDistributionFabricPageByVal.do",
+						anyVal,//from表单内容
+						function(data) {
+							var id = 1;
+							$(".table_app").empty();//清空原有的数据
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr><td >"
+										+ data[i].id
+										+ "</td><td id='wave-val'>"
+										+ (data[i].wave = null ? ''
+												: data[i].wave)
+										+ "</td><td >"
+										+ (data[i].productCode == null
+												|| data[i].productCode == '' ? ''
+												: data[i].productCode)
+										+ "</td><td><img style='width: 120px; height: 120px' src=" + data[i].designImg + "></td><td>"
+										+ (data[i].craftsOrder == null
+												|| data[i].craftsOrder == "" ? ''
+												: "<a href='" + data[i].craftsOrder+ "' target='_blank'>工艺单</a>")
+										+ "</td><td >"
+										+ (data[i].additionTime == null ? ''
+												: data[i].additionTime)
+										+ "</td><td >"
+										+ (data[i].supplier == null ? ''
+												: data[i].supplier)
+										+ "</td><td >"
+										+ (data[i].consignee == null ? ''
+												: data[i].consignee)
+										+ "</td><td >"
+										+ (data[i].summary == null ? ''
+												: data[i].summary)
+										+ "</td><td >"
+										+ (data[i].materialsLocation == null ? ''
+												: data[i].materialsLocation)
+										+ "</td><td >"
+										+ (data[i].color == null ? ''
+												: data[i].color)
+										+ "</td><td >"
+										+ (data[i].fabric1 == null ? ''
+												: data[i].fabric1)
+										+ "</td><td >"
+										+ (data[i].fabric2 == null ? ''
+												: data[i].fabric2)
+										+ "</td><td >"
+										+ (data[i].fabric3 == null ? ''
+												: data[i].fabric3)
+										+ "</td><td >"
+										+ (data[i].fabric4 == null ? ''
+												: data[i].fabric4)
+										+ "</td><td >"
+										+ (data[i].fabric5 == null ? ''
+												: data[i].fabric5)
+										+ "</td><td >"
+										+ (data[i].fabric6 == null ? ''
+												: data[i].fabric6)
+										+ "</td><td >"
+										+ (data[i].fabric7 == null ? ''
+												: data[i].fabric7)
+										+ "</td><td >"
+										+ (data[i].totalNumber == null ? ''
+												: data[i].totalNumber)
+										+ "</td><td >"
+										+ (data[i].total == null ? ''
+												: data[i].total)
+										+ "</td><td >"
+										+ (data[i].unitprice == null ? ''
+												: data[i].unitprice)
+										+ "</td><td >"
+										+ (data[i].amount == null ? ''
+												: data[i].amount)
+										+ "</td><td >"
+										+ (data[i].remarks == null ? ''
+												: data[i].remarks)
+										+ "</td><td >"
+										+ (data[i].addTime == null ? ''
+												: data[i].addTime)
+										+ "</td><td class='issuedStatus"+data[i].id+"'><button type='button'  data-toggle='modal' data-target='#myModal1' onclick='modifyByDistributionFabric(\""
+										+ data[i].id
+										+ "\",this)' class='btn btn-primary icon-pencil'>修改</button><button type='button'  data-toggle='modal' data-target='#myModal2' onclick='delByDistributionFabric(\""
+										+ data[i].id
+										+ "\")' class='icon-trash btn btn-danger'>删除</button><button type='button'  data-toggle='modal'  data-target='#myModal_remind' class='icon-trash btn btn-warning btn-val'>已发放</button></td></tr>";
+								$(".table_app").append(_HTML_TEBLE_);
+								$(".btn-val")
+										.on(
+												"click",
+												function() {
+													var goodsId = $(this)
+															.parent().parent()
+															.find("td:eq(0)")
+															.text().trim();
+													var wave = $(this).parent()
+															.parent().find(
+																	"#wave-val")
+															.text().trim();
+													$(
+															"#myModal-ReminderRontent")
+															.html(
+																	"你要确定波次号为:<span style='color: red' id='wave-text'></span>的产品进行<sapn style='color: #97FFFF;'>确认</sapn>工作 吗??? <br> <span style='color: red; font-size: 18px;'>确认之前；你要确定所有数据都填写完整了哦!!!</span><input hidden='hidden' type='text' id='goods-id' /><input hidden='hidden' type='text' id='goods-status' />");
+													$("#wave-text").text(wave);
+													$("#goods-id")
+															.text(goodsId);
+													$("#modal-submit-btn")
+															.show();
+												});
+								var issuedStatus = data[i].issuedStatus;
+								if (issuedStatus != "" && issuedStatus != null
+										&& issuedStatus == 2) {
+									$(".issuedStatus" + data[i].id).parent()
+											.attr("bgcolor", "#00ffff");
+									$(".issuedStatus" + data[i].id).find(
+											'button').remove();
+									$(".issuedStatus" + data[i].id)
+											.append(
+													"<button class='btn icon-ok btn-inverse' disabled='disabled'>已确认发放</button>");
+
+								}
+							}
+							;
+
+							$("#val-input-empty").find('div').find('div').find(
+									":input").each(function() {
+								$(this).val("");
+							});
+							$("#val-input-empty1").find('div').find('div')
+									.find(":input").each(function() {
+										$(this).val("");
+									});
+						});
+	}
+	function ConfirmReminder() {
+		var goodsId = $("#goods-id").text();
+		var status = $("#goods-status").text();
+		$.post('modifyDistributionFabricIssuedStatus.do', {
+			'id' : goodsId,
+			'purchasingStatus' : status
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-ReminderRontent").html("恭喜你！已经确认成功");
+				$("#modal-submit-btn").hide();
+				var pageNow = $("#pageNow").val();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				var formAnyVal = $("#form-anyVal").serialize();
+				findDistributionFabricPageByVal(formAnyVal);
+			} else {
+				$(" #myModal-ReminderRontent").html("发送失败！原因可能是网络问题" + data);
+				$("#modal-submit-btn").hide();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				var formAnyVal = $("#form-anyVal").serialize();
+				findDistributionFabricPageByVal(formAnyVal);
+			}
+		});
+	};
+	function modifyByDistributionFabric(id, tr) {
+		$.post("getDistributionFabricById.do", {
+			'id' : id
+		}, function(result) {
+			$("#distributionId").val(result.id);
+			$("#wave").val(result.wave);
+			$("#additionTime").val(result.additionTime);
+			$("#supplier").val(result.supplier);
+			$("#consignee").val(result.consignee);
+			$("#summary").val(result.summary);
+			$("#fabric1").val(result.fabric1);
+			$("#fabric2").val(result.fabric2);
+			$("#fabric3").val(result.fabric3);
+			$("#fabric4").val(result.fabric4);
+			$("#fabric5").val(result.fabric5);
+			$("#fabric6").val(result.fabric6);
+			$("#fabric7").val(result.fabric7);
+			$("#unitprice").val(result.unitprice);
+		});
+	};
+	$("#myselect").click(function() {
+		$("#mydiv").show();
+	});
+</script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>板房工作计划</title><@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/cutting/BoardWorksSchedule.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">板房工作计划</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2">
+								<label for="wave"></label>波次号<input type="text"
+									class="form-control" name="wave">
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="myselect">查询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="7" style="text-align: center; font-size: 25px;">板房工作计划表</th>
+							</tr>
+							<tr>
+								<th style="text-align: center; font-size: 16px;">编号</th>
+								<th style="text-align: center; font-size: 16px;">波次</th>
+								<th style="text-align: center; font-size: 16px;">原返单波次</th>
+								<th style="text-align: center; font-size: 16px;">图片</th>
+								<th style="text-align: center; font-size: 16px;">订单数量</th>
+								<th style="text-align: center; font-size: 16px;">订单类型</th>
+								<th style="text-align: center; font-size: 16px;">面料入库时间</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+</html>

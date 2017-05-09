@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.AuxiliaryFabricDAO">
+	<select id="getCount" parameterType="com.warehouse.entity.AuxiliaryFabric"
+		resultType="java.lang.Integer">
+		select COUNT(0) from
+		auxiliary_fabric
+		where 1=1
+		<if
+			test='cloth_name!="" and cloth_name!=null and cloth_name!="Y" and cloth_name!="y" and cloth_name!="N" and cloth_name!="N"'>
+			and cloth_name like concat("%",#{cloth_name},"%")
+		</if>
+		<if test='cloth_name=="Y" or cloth_name=="y"'>
+			and cloth_name IS NOT NULL AND cloth_name !=""
+		</if>
+		<if test='cloth_name=="N" or cloth_name=="n"'>
+			and cloth_name IS NULL OR cloth_name =""
+		</if>
+		<if
+			test='design_time!="" and design_time!=null and design_time!="Y" and design_time!="y" and design_time!="N" and design_time!="n"'>
+			and design_time like concat("%",#{design_time},"%")
+		</if>
+		<if test='design_time=="Y" or design_time=="y"'>
+			and design_time IS NOT NULL AND design_time !=""
+		</if>
+		<if test='design_time=="N" or design_time=="n"'>
+			and design_time IS NULL OR design_time =""
+		</if>
+		<if
+			test='girard!="" and girard!=null and girard!="Y" and girard!="y" and girard!="N" and girard!="n"'>
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test='girard=="Y" or girard=="y"'>
+			and girard IS NOT NULL AND girard !=""
+		</if>
+		<if test='girard=="N" or girard=="n"'>
+			and girard IS NULL OR girard =""
+		</if>
+		<if
+			test='model!="" and model!=null and model!="Y" and model!="y" and model!="N" and model!="n"'>
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test='model=="Y" or model=="y"'>
+			and model IS NOT NULL AND model !=""
+		</if>
+		<if test='model=="N" or model=="n"'>
+			and model IS NULL OR model =""
+		</if>
+		<if test='design_img=="Y" or design_img=="y"'>
+			and design_img IS NOT NULL AND design_img !=""
+		</if>
+		<if test='design_img=="N" or design_img=="n"'>
+			and design_img IS NULL OR design_img =""
+		</if>
+		<if test='sample_img=="Y" or sample_img=="y"'>
+			and sample_img IS NOT NULL AND sample_img !=""
+		</if>
+		<if test='sample_img=="N" or sample_img=="n"'>
+			and sample_img IS NULL OR sample_img =""
+		</if>
+		<if test='child_img=="Y" or child_img=="y"'>
+			and child_img IS NOT NULL AND child_img !=""
+		</if>
+		<if test='child_img=="N" or child_img=="n"'>
+			and child_img IS NULL OR child_img =""
+		</if>
+		<if test='paperpattern_emf_file=="Y" or paperpattern_emf_file=="y"'>
+			and paperpattern_emf_file IS NOT NULL AND
+			paperpattern_emf_file !=""
+		</if>
+		<if test='paperpattern_emf_file=="N" or paperpattern_emf_file=="n"'>
+			and paperpattern_emf_file IS NULL OR paperpattern_emf_file
+			=""
+		</if>
+		<if test='paperpattern_prj_file=="Y" or paperpattern_prj_file=="y"'>
+			and paperpattern_prj_file IS NOT NULL AND
+			paperpattern_prj_file !=""
+		</if>
+		<if test='paperpattern_prj_file=="N" or paperpattern_prj_file=="n"'>
+			and paperpattern_prj_file IS NULL OR paperpattern_prj_file
+			=""
+		</if>
+		<if
+			test='popper_color!="" and popper_color!=null and popper_color!="Y" and popper_color!="y" and popper_color!="N" and popper_color!="n"'>
+			and popper_color like concat("%",#{popper_color},"%")
+		</if>
+		<if test='popper_color=="Y" or popper_color=="y"'>
+			and popper_color IS NOT NULL AND popper_color !=""
+		</if>
+		<if test='popper_color=="N" or popper_color=="n"'>
+			and popper_color IS NULL OR popper_color =""
+		</if>
+		<if
+			test='mark_washORdrop!="" and mark_washORdrop!=null and mark_washORdrop!="Y" and mark_washORdrop!="y" and mark_washORdrop!="N" and mark_washORdrop!="n"'>
+			and mark_washORdrop like
+			concat("%",#{mark_washORdrop},"%")
+		</if>
+		<if test='mark_washORdrop=="Y" or mark_washORdrop=="y"'>
+			and mark_washORdrop IS NOT NULL AND mark_washORdrop !=""
+		</if>
+		<if test='mark_washORdrop=="N" or mark_washORdrop=="n"'>
+			and mark_washORdrop IS NULL OR mark_washORdrop =""
+		</if>
+		<if
+			test='mark_wash_element!="" and mark_wash_element!=null and mark_wash_element!="Y" and mark_wash_element!="y" and mark_wash_element!="N" and mark_wash_element!="n"'>
+			and mark_wash_element like
+			concat("%",#{mark_wash_element},"%")
+		</if>
+		<if test='mark_wash_element=="Y" or mark_wash_element=="y"'>
+			and mark_wash_element IS NOT NULL AND mark_wash_element
+			!=""
+		</if>
+		<if test='mark_wash_element=="N" or mark_wash_element=="n"'>
+			and mark_wash_element IS NULL OR mark_wash_element =""
+		</if>
+		<if
+			test='accessoryAName!="" and accessoryAName!=null and accessoryAName!="Y" and accessoryAName!="y" and accessoryAName!="N" and accessoryAName!="n"'>
+			and accessoryAName like concat("%",#{accessoryAName},"%")
+		</if>
+		<if test='accessoryAName=="Y" or accessoryAName=="y"'>
+			and accessoryAName IS NOT NULL AND accessoryAName !=""
+		</if>
+		<if test='accessoryAName=="N" or accessoryAName=="n"'>
+			and accessoryAName IS NULL OR accessoryAName =""
+		</if>
+		<if
+			test='accessoryBName!="" and accessoryBName!=null and accessoryBName!="Y" and accessoryBName!="y" and accessoryBName!="N" and accessoryBName!="n"'>
+			and accessoryBName like concat("%",#{accessoryBName},"%")
+		</if>
+		<if test='accessoryAName=="Y" or accessoryAName=="y"'>
+			and accessoryBName IS NOT NULL AND accessoryBName !=""
+		</if>
+		<if test='accessoryAName=="N" or accessoryAName=="n"'>
+			and accessoryBName IS NULL OR accessoryBName =""
+		</if>
+		<if
+			test='accessoryCName!="" and accessoryCName!=null and accessoryCName!="Y" and accessoryCName!="y" and accessoryCName!="N" and accessoryCName!="n"'>
+			and accessoryCName like concat("%",#{accessoryCName},"%")
+		</if>
+		<if test='accessoryCName=="Y" or accessoryCName=="y"'>
+			and accessoryCName IS NOT NULL AND accessoryCName !=""
+		</if>
+		<if test='accessoryCName=="N" or accessoryCName=="n"'>
+			and accessoryCName IS NULL OR accessoryCName =""
+		</if>
+		<if
+			test='remark!="" and remark!=null and remark!="Y" and remark!="y" and remark!="N" and remark!="n"'>
+			and remark like concat("%",#{remark},"%")
+		</if>
+		<if test='remark=="Y" or remark=="y"'>
+			and remark IS NOT NULL AND remark !=""
+		</if>
+		<if test='remark=="N" or remark=="n"'>
+			and remark IS NULL OR remark =""
+		</if>
+	</select>
+
+	<select id="getAllByPage" parameterType="com.warehouse.entity.AuxiliaryFabric"
+		resultType="com.warehouse.entity.AuxiliaryFabric">
+		SELECT
+		*
+		FROM
+		auxiliary_fabric
+		where 1=1
+		<if
+			test='cloth_name!="" and cloth_name!=null and cloth_name!="Y" and cloth_name!="y" and cloth_name!="N" and cloth_name!="N"'>
+			and cloth_name like concat("%",#{cloth_name},"%")
+		</if>
+		<if test='cloth_name=="Y" or cloth_name=="y"'>
+			and cloth_name IS NOT NULL AND cloth_name !=""
+		</if>
+		<if test='cloth_name=="N" or cloth_name=="n"'>
+			and cloth_name IS NULL OR cloth_name =""
+		</if>
+		<if
+			test='design_time!="" and design_time!=null and design_time!="Y" and design_time!="y" and design_time!="N" and design_time!="n"'>
+			and design_time like concat("%",#{design_time},"%")
+		</if>
+		<if test='design_time=="Y" or design_time=="y"'>
+			and design_time IS NOT NULL AND design_time !=""
+		</if>
+		<if test='design_time=="N" or design_time=="n"'>
+			and design_time IS NULL OR design_time =""
+		</if>
+		<if
+			test='girard!="" and girard!=null and girard!="Y" and girard!="y" and girard!="N" and girard!="n"'>
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test='girard=="Y" or girard=="y"'>
+			and girard IS NOT NULL AND girard !=""
+		</if>
+		<if test='girard=="N" or girard=="n"'>
+			and girard IS NULL OR girard =""
+		</if>
+		<if
+			test='model!="" and model!=null and model!="Y" and model!="y" and model!="N" and model!="n"'>
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test='model=="Y" or model=="y"'>
+			and model IS NOT NULL AND model !=""
+		</if>
+		<if test='model=="N" or model=="n"'>
+			and model IS NULL OR model =""
+		</if>
+		<if test='design_img=="Y" or design_img=="y"'>
+			and design_img IS NOT NULL AND design_img !=""
+		</if>
+		<if test='design_img=="N" or design_img=="n"'>
+			and design_img IS NULL OR design_img =""
+		</if>
+		<if test='sample_img=="Y" or sample_img=="y"'>
+			and sample_img IS NOT NULL AND sample_img !=""
+		</if>
+		<if test='sample_img=="N" or sample_img=="n"'>
+			and sample_img IS NULL OR sample_img =""
+		</if>
+		<if test='child_img=="Y" or child_img=="y"'>
+			and child_img IS NOT NULL AND child_img !=""
+		</if>
+		<if test='child_img=="N" or child_img=="n"'>
+			and child_img IS NULL OR child_img =""
+		</if>
+		<if test='paperpattern_emf_file=="Y" or paperpattern_emf_file=="y"'>
+			and paperpattern_emf_file IS NOT NULL AND
+			paperpattern_emf_file !=""
+		</if>
+		<if test='paperpattern_emf_file=="N" or paperpattern_emf_file=="n"'>
+			and paperpattern_emf_file IS NULL OR paperpattern_emf_file
+			=""
+		</if>
+		<if test='paperpattern_prj_file=="Y" or paperpattern_prj_file=="y"'>
+			and paperpattern_prj_file IS NOT NULL AND
+			paperpattern_prj_file !=""
+		</if>
+		<if test='paperpattern_prj_file=="N" or paperpattern_prj_file=="n"'>
+			and paperpattern_prj_file IS NULL OR paperpattern_prj_file
+			=""
+		</if>
+		<if
+			test='popper_color!="" and popper_color!=null and popper_color!="Y" and popper_color!="y" and popper_color!="N" and popper_color!="n"'>
+			and popper_color like concat("%",#{popper_color},"%")
+		</if>
+		<if test='popper_color=="Y" or popper_color=="y"'>
+			and popper_color IS NOT NULL AND popper_color !=""
+		</if>
+		<if test='popper_color=="N" or popper_color=="n"'>
+			and popper_color IS NULL OR popper_color =""
+		</if>
+		<if
+			test='mark_washORdrop!="" and mark_washORdrop!=null and mark_washORdrop!="Y" and mark_washORdrop!="y" and mark_washORdrop!="N" and mark_washORdrop!="n"'>
+			and mark_washORdrop like
+			concat("%",#{mark_washORdrop},"%")
+		</if>
+		<if test='mark_washORdrop=="Y" or mark_washORdrop=="y"'>
+			and mark_washORdrop IS NOT NULL AND mark_washORdrop !=""
+		</if>
+		<if test='mark_washORdrop=="N" or mark_washORdrop=="n"'>
+			and mark_washORdrop IS NULL OR mark_washORdrop =""
+		</if>
+		<if
+			test='mark_wash_element!="" and mark_wash_element!=null and mark_wash_element!="Y" and mark_wash_element!="y" and mark_wash_element!="N" and mark_wash_element!="n"'>
+			and mark_wash_element like
+			concat("%",#{mark_wash_element},"%")
+		</if>
+		<if test='mark_wash_element=="Y" or mark_wash_element=="y"'>
+			and mark_wash_element IS NOT NULL AND mark_wash_element
+			!=""
+		</if>
+		<if test='mark_wash_element=="N" or mark_wash_element=="n"'>
+			and mark_wash_element IS NULL OR mark_wash_element =""
+		</if>
+		<if
+			test='accessoryAName!="" and accessoryAName!=null and accessoryAName!="Y" and accessoryAName!="y" and accessoryAName!="N" and accessoryAName!="n"'>
+			and accessoryAName like concat("%",#{accessoryAName},"%")
+		</if>
+		<if test='accessoryAName=="Y" or accessoryAName=="y"'>
+			and accessoryAName IS NOT NULL AND accessoryAName !=""
+		</if>
+		<if test='accessoryAName=="N" or accessoryAName=="n"'>
+			and accessoryAName IS NULL OR accessoryAName =""
+		</if>
+		<if
+			test='accessoryBName!="" and accessoryBName!=null and accessoryBName!="Y" and accessoryBName!="y" and accessoryBName!="N" and accessoryBName!="n"'>
+			and accessoryBName like concat("%",#{accessoryBName},"%")
+		</if>
+		<if test='accessoryAName=="Y" or accessoryAName=="y"'>
+			and accessoryBName IS NOT NULL AND accessoryBName !=""
+		</if>
+		<if test='accessoryAName=="N" or accessoryAName=="n"'>
+			and accessoryBName IS NULL OR accessoryBName =""
+		</if>
+		<if
+			test='accessoryCName!="" and accessoryCName!=null and accessoryCName!="Y" and accessoryCName!="y" and accessoryCName!="N" and accessoryCName!="n"'>
+			and accessoryCName like concat("%",#{accessoryCName},"%")
+		</if>
+		<if test='accessoryCName=="Y" or accessoryCName=="y"'>
+			and accessoryCName IS NOT NULL AND accessoryCName !=""
+		</if>
+		<if test='accessoryCName=="N" or accessoryCName=="n"'>
+			and accessoryCName IS NULL OR accessoryCName =""
+		</if>
+		<if
+			test='remark!="" and remark!=null and remark!="Y" and remark!="y" and remark!="N" and remark!="n"'>
+			and remark like concat("%",#{remark},"%")
+		</if>
+		<if test='remark=="Y" or remark=="y"'>
+			and remark IS NOT NULL AND remark !=""
+		</if>
+		<if test='remark=="N" or remark=="n"'>
+			and remark IS NULL OR remark =""
+		</if>
+		ORDER BY
+		design_time DESC
+		LIMIT #{begin},
+		#{end}
+	</select>
+
+	<select id="getOneById" parameterType="java.lang.Integer"
+		resultType="com.warehouse.entity.AuxiliaryFabric">
+		SELECT
+		*
+		FROM
+		auxiliary_fabric
+		WHERE
+		id =#{id}
+	</select>
+
+	<update id="update" parameterType="com.warehouse.entity.AuxiliaryFabric">
+		UPDATE auxiliary_fabric
+		SET
+		total =#{total},
+		code52=#{code52},
+		code59 =#{code59},
+		code66 =#{code66},
+		code73
+		=#{code73},
+		code80 =#{code80},
+		code90 =#{code90},
+		popper_color
+		=#{popper_color},
+		popper_num =#{popper_num},
+		mark_washORdrop
+		=#{mark_washORdrop},
+		mark_wash_element =#{mark_wash_element},
+		accessoryAName =#{accessoryAName},
+		accessoryANum =#{accessoryANum},
+		accessoryBName =#{accessoryBName},
+		accessoryBNum =#{accessoryBNum},
+		accessoryCName =#{accessoryCName},
+		accessoryCNum =#{accessoryCNum},
+		remark=#{remark}
+		where
+		id=#{id}
+	</update>
+
+	<update id="myDBupdate" parameterType="com.warehouse.entity.AuxiliaryFabric">
+		UPDATE auxiliary_fabric
+		SET
+		<if test="popper_color!=null">
+			popper_color=#{popper_color}
+		</if>
+		<if
+			test="popper_color==null and mark_washORdrop==null and mark_wash_element==null and accessoryAName==null and accessoryANum==null and accessoryBName==null and accessoryBNum==null and accessoryCName==null and accessoryCNum==null and remark==null">
+			popper_num =#{popper_num}
+		</if>
+		<if test="mark_washORdrop!=null">
+			mark_washORdrop=#{mark_washORdrop}
+		</if>
+		<if test="mark_wash_element!=null">
+			mark_wash_element =#{mark_wash_element}
+		</if>
+		<if test="accessoryAName!=null">
+			accessoryAName =#{accessoryAName}
+		</if>
+		<if test="accessoryANum!=null">
+			accessoryANum =#{accessoryANum}
+		</if>
+		<if test="accessoryBName!=null">
+			accessoryBName =#{accessoryBName}
+		</if>
+		<if test="accessoryBNum!=null">
+			accessoryBNum =#{accessoryBNum}
+		</if>
+		<if test="accessoryCName!=null">
+			accessoryCName =#{accessoryCName}
+		</if>
+		<if test="accessoryCNum!=null">
+			accessoryCNum =#{accessoryCNum}
+		</if>
+		<if test="remark!=null">
+			remark=#{remark}
+		</if>
+		where
+		id=#{id}
+	</update>
+</mapper>

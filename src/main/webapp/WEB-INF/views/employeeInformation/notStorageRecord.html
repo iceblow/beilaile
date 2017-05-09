@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>车缝问题反馈</title><@p.cache/><@p.css/> <@p.js/>
+<script src="/res/js/laypage/laypage.js"></script>
+
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="notStorage" >
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">车缝问题反馈</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<form id="selectFormData" enctype=‘mutipart/form-data’>
+					<div class="col-md-2">
+						<label for=wave></label>波次号<input type="text"class="form-control" name="wave">
+					</div>
+					<div class="col-md-2">
+						<label for="materialTime"></label>领料日期<input type="text"class="form-control" name="materialTime">
+					</div>
+					<div class="col-md-2">
+						<label for="productName"></label>商品名称<input type="text"class="form-control" name="productName">
+					</div>
+					<div class="col-md-2">
+						<label for="productCode"></label>商品编码<input type="text"class="form-control" name="productCode">
+					</div>
+					<div class="col-md-2">
+						<label for="factory"></label>工厂<input type="text"class="form-control" name="factory">
+					</div>
+					<div class="col-md-2">
+						<label for="problemFeedback"></label>问题反馈<input type="text"class="form-control" name="problemFeedback">
+					</div>
+					<div class="col-md-2">
+						<label for="reasonForDelay"></label>延期原因<input type="text"class="form-control" name="reasonForDelay">
+					</div>
+					<div class="col-md-2">
+						<label for="personInCharge"></label>负责人<input type="text"class="form-control" name="personInCharge">
+					</div>
+				</form>
+				<div class="col-md-2">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #428bca;"
+						id="myselect">查询</button>
+				</div>
+			</div>
+			
+			<div class="main-content">
+				<table class="table table-bordered" style="width: 100%; height: 100%;">
+					<thead>
+						<tr>
+							<th colspan="30" style="text-align: center; font-size: 25px;">车缝问题反馈</th>
+						</tr>
+						<tr>
+							<th>编号</th>
+							<th>波次</th>
+							<th>图片</th>
+							<th>工厂</th>
+							<th>商品编码</th>
+							<th>加工类型</th>
+							<th>领料日期</th>
+							<th>领料天数</th>
+							<th>预计出货日期</th>
+							<th>问题反馈</th>
+							<th>延期原因</th>
+							<th>负责人</th>
+							<th>入库时间</th>
+							<th>备注</th>
+							<th>问题解决</th>
+							<th>问题解决时间</th>
+							<th>问题是否解决</th>
+						</tr>
+					</thead>
+					<tbody id="tbody"></tbody>
+				</table>
+					<!-- 分页 -->
+				<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>			
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+$(function() {
+	loadPageDatas(1);
+	selectButton();
+});
+
+//分页查询
+function loadPageDatas(index) {
+	firstLoadData("notStorageRecord/getDataByPage.do",index); // 指定url
+}
+
+//模糊查询
+var mySelectForm;
+function selectButton() {
+	$("#myselect").click(function() {
+		mySelectForm= $("#selectFormData").serialize();
+		firstLoadData("notStorageRecord/getDataByPage.do?"+mySelectForm,1);
+	});
+}
+
+// 分页查询以后打印数据
+function loadData(mydata) {
+	$("#tbody").empty();
+	$.each (mydata, function(index, x) {
+		var id = "<td>" + x.id + "</td>";
+		var wave = "<td>" + x.wave + "</td>";
+		var image=  "<td><img style='width: 50px; height: 50px' src='" + x.image + "'></td>";  
+		var factory = "<td>" + x.factory + "</td>";
+		var productCode = x.productCode == null ? "<td></td>" : "<td>" + x.productCode + "</td>"; 	//商品编码
+		var processingType = x.processingType == null ? "<td></td>" : "<td>" + x.processingType + "</td>";
+		var materialTime = x.materialTime == null ? "<td></td>" : "<td>" + x.materialTime + "</td>"; 
+		var materialDays =x.materialDays == null ? "<td></td>" : "<td>" + x.materialDays + "</td>"; 
+		var estimatedDeliveryTime =x.estimatedDeliveryTime == null ? "<td class='mydblClick' name='estimatedDeliveryTime'></td>" :"<td class='mydblClick' name='estimatedDeliveryTime'>" +  x.estimatedDeliveryTime + "</td>"; 
+		var problemFeedback =x.problemFeedback == null ? "<td class='mydblClick' name='problemFeedback'></td>" :"<td class='mydblClick' name='problemFeedback'>" +  x.problemFeedback + "</td>";
+		var reasonForDelay =x.reasonForDelay == null ? "<td class='mydblClick' name='reasonForDelay'></td>" :"<td class='mydblClick' name='reasonForDelay'>" +  x.reasonForDelay + "</td>";
+		var personInCharge =x.personInCharge == null ? "<td class='mydblClick' name='personInCharge'></td>" :"<td class='mydblClick' name='personInCharge'>" +  x.personInCharge + "</td>";
+		var storageTime = x.storageTime == null ? "<td></td>" :"<td>" + x.storageTime + "</td>";
+		var memo = x.memo == null ? "<td class='mydblClick' name='memo'></td>" :"<td class='mydblClick' name='memo'>" + x.memo + "</td>";																			
+		var problemSolving = x.problemSolving == null ? "<td class='mydblClick' name='problemSolving'></td>" :"<td class='mydblClick' name='problemSolving'>" + x.problemSolving + "</td>";		
+		var problemSolvingTime =x.problemSolvingTime == null ? "<td></td>" :"<td>" +  x.problemSolvingTime + "</td>";
+		var problemState=x.problemState == null ? "<td> </td>" : "<td>" +  x.problemState + "</td>";
+		$("tbody").append(
+				"<tr>"
+					+ id
+					+ wave
+					+ image
+					+ factory
+					+ productCode
+					+ processingType
+					+ materialTime
+					+ materialDays
+					+ estimatedDeliveryTime
+					+ problemFeedback
+					+ reasonForDelay
+					+ personInCharge
+					+ storageTime
+					+ memo
+					+ problemSolving
+					+ problemSolvingTime
+					+ problemState   
+					+ "</tr>");
+	});
+	mydblclick();
+}
+	//设置文本框
+	function mydblclick(){
+		 $(".mydblClick").on("dblclick",function() {
+			var myid= $(this).parent().find("td:eq(0)").text().trim();//获取到id值	
+			var thisText = $(this).text().trim();    //文本框中原有的值
+			var thisName = $(this).attr("name");    //获取文本框的属性名
+			var thisVal = $(this).attr("value");   //获取文本框属性值
+			if(thisName == "problemSolving"){
+				$(this).html(
+						"<form id='dbUpdateForm'><input type='hidden' name='id' value="+
+								myid+" /><input type='text' id='my"+thisName +"' name='" + thisName+ "' value='" + thisText+ "'></form>");
+				$(this).attr("class", "sn");
+				twomyblur("my" + thisName);
+			
+			} else if (thisName != "estimatedDeliveryTime") {
+					$(this).html(
+							"<form id='dbUpdateForm'><input type='hidden' name='id' value="+
+									myid+" /><input type='text' id='my"+thisName +"' name='" + thisName+ "' value='" + thisText+ "'></form>");
+					$(this).attr("class", "sn");
+					myblur("my" + thisName);
+			}  else {
+			$(this).html(
+						"<form id='dbUpdateForm'><input type='hidden' name='id' value="+ 
+								myid+" /><input class='form-control input-date' type='text' id='my"+ thisName 
+					+ "' name='"+ thisName + "' value='"+ thisText + "'></form>");
+				$(this).attr("class", "sn");
+			
+			var input_date = $(".input-date").datetimepicker({
+			format : "yyyy-mm-dd",
+			autoclose : true,
+			todayBtn : true,
+			todayHighlight : true,
+			showMeridian : true,
+			pickerPosition : "bottom-left",
+			language : 'zh-CN', // 中文，需要引用zh-CN.js包
+			startView : 2, // 月视图
+			minView : 2
+			// 日期时间选择器所能够提供的最精确的时间选择视图
+			});
+			var input_date_readOnly = $(".input-date").prop("readOnly", "true");
+			timeBlur("my" + thisName);
+			} 
+			$("#my"+ thisName).focus();
+		}); 
+	} 
+	
+	//提交对文本框中数据
+	 function myblur(id){
+		 $("#" + id).blur(function() {
+					 var myform = $("#dbUpdateForm").serialize();
+					 $.ajax({
+						 url : 'notStorageRecord/updateByText.do',//指定路勁下的指定方法
+						 type : 'POST',
+						 dataType : 'json',
+						 data : myform ,
+						 success : function(data){
+							 if(data==1){
+								 firstLoadData("/notStorageRecord/getDataByPage.do?"+mySelectForm,$(".laypage_curr").text()); // 指定url
+							 }else{
+								 alert("修改失败");
+							 }
+						 }
+					 });
+				 });
+	 	}
+	
+	 //问题解决并添加解决时间
+	 function twomyblur(id){
+		 $("#" + id).blur(function() {
+				var myform = $("#dbUpdateForm").serialize();
+				var obj=$("#myproblemSolving");
+				if(obj.val()=="" || obj.val()==null){
+					firstLoadData("/notStorageRecord/getDataByPage.do?"+mySelectForm,$(".laypage_curr").text()); // 指定url
+				}else{
+					$.ajax({
+					url : 'notStorageRecord/updateAndTime.do',      //指定路勁下的指定方法
+					type : 'POST',
+					dataType : 'json',
+					data : myform,
+					success : function(data){
+						if(data==1){
+							firstLoadData("/notStorageRecord/getDataByPage.do?"+mySelectForm,$(".laypage_curr").text()); // 指定url
+						}else{
+							 alert("修改失败");
+						}
+					}
+				}); 
+			}
+					 
+		 });
+	 }
+	
+function timeBlur(id) {
+	$("#" + id).blur(function() {
+		setTimeout('commitTime()', 200);
+	});
+}
+
+function commitTime() {
+	var myform = $("#dbUpdateForm").serialize();
+	$.ajax({
+		url :'notStorageRecord/updateByText.do',
+		type : 'POST',
+		dataType : 'json',
+		data : myform,
+		async : false,
+		success : function(data) {
+			if (data == 1) {
+				firstLoadData("notStorageRecord/getDataByPage.do?"+mySelectForm,$(".laypage_curr").text());
+			} else {
+				alert("未修改");
+			}
+		}
+	});
+}
+
+</script>
+</html>

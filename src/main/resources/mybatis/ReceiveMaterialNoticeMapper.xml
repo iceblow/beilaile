@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ReceiveMaterialNoticeMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.ReceiveMaterialNotice">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="DESIGN_CHART" property="designChart" jdbcType="VARCHAR" />
+		<result column="CRAFTS_ORDER" property="craftsOrder" jdbcType="VARCHAR" />
+		<result column="SIZE_CHART" property="sizeChart" jdbcType="VARCHAR" />
+		<result column="CROP_NUMBER" property="cropNumber" jdbcType="VARCHAR" />
+		<result column="CROP_DETAILS" property="cropDetails" jdbcType="VARCHAR" />
+		<result column="FACTORY_RECEIVE_MATERIAL_TIME" property="factoryReceiveMaterialTime"
+			jdbcType="VARCHAR" />
+		<result column="EXPECTED_RECEIVE_MATERIAL_DATE" property="expectedReceiveMaterialDate"
+			jdbcType="VARCHAR" />
+		<result column="FACTORY_PICKING" property="factoryPicking"
+			jdbcType="VARCHAR" />
+		<result column="RECEIVE_MATERIAL_DATE" property="receiveMaterialDate"
+			jdbcType="VARCHAR" />
+		<result column="CROP_DATE" property="cropDate" jdbcType="VARCHAR" />
+		<result column="READINESS_DATE" property="readinessDate"
+			jdbcType="VARCHAR" />
+		<result column="PRINTING_TYPE" property="printingType"
+			jdbcType="VARCHAR" />
+		<result column="NOTICE_MANNER" property="noticeManner"
+			jdbcType="VARCHAR" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="ISSUED_STATUS" property="issuedStatus"
+			jdbcType="VARCHAR" />
+		<result column="MARK_STATUS" property="markStatus" jdbcType="VARCHAR" />
+		<result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+		<result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, WAVE, DESIGN_CHART, CRAFTS_ORDER, SIZE_CHART,
+		CROP_NUMBER,
+		CROP_DETAILS, FACTORY_RECEIVE_MATERIAL_TIME,
+		EXPECTED_RECEIVE_MATERIAL_DATE, FACTORY_PICKING,
+		RECEIVE_MATERIAL_DATE, CROP_DATE,
+		READINESS_DATE, PRINTING_TYPE,
+		NOTICE_MANNER, REMARKS, ISSUED_STATUS, MARK_STATUS,
+		CREATED_TIME,
+		FOUNDER, MODIFY_TIME, DELETE_TIME, OPERATOR, OPERATOR_IP
+	</sql>
+	<select id="getReceiveMaterialNoticeById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		*
+		from receive_material_notice
+		where MARK_STATUS ='1'
+		AND ID
+		=
+		#{id,jdbcType=INTEGER}
+	</select>
+	<select id="getReceiveMaterialNoticeByPageCount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM receive_material_notice where MARK_STATUS ='1'
+		AND 1=1
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND (WAVE ='' OR WAVE
+			IS
+			NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='cropDate != null and cropDate != "" and cropDate != "N" and cropDate != "Y"'>
+			AND CROP_DATE LIKE CONCAT('%',#{cropDate,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cropDate == "N"'>
+			AND (CROP_DATE ='' OR CROP_DATE
+			IS
+			NULL)
+		</if>
+		<if test='cropDate =="Y"'>
+			AND CROP_DATE !=''
+		</if>
+		<if
+			test='printingType != null and printingType != "" and printingType != "N" and printingType != "Y"'>
+			AND PRINTING_TYPE LIKE
+			CONCAT('%',#{printingType,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='printingType == "N"'>
+			AND (PRINTING_TYPE ='' OR PRINTING_TYPE
+			IS
+			NULL)
+		</if>
+		<if test='printingType =="Y"'>
+			AND PRINTING_TYPE !=''
+		</if>
+		<if
+			test='factoryPicking != null and factoryPicking != "" and factoryPicking != "N" and factoryPicking != "Y"'>
+			AND FACTORY_PICKING LIKE
+			CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factoryPicking == "N"'>
+			AND (FACTORY_PICKING ='' OR FACTORY_PICKING
+			IS
+			NULL)
+		</if>
+		<if test='factoryPicking =="Y"'>
+			AND FACTORY_PICKING !=''
+		</if>
+		<if
+			test='factoryReceiveMaterialTime != null and factoryReceiveMaterialTime != "" and factoryReceiveMaterialTime != "N" and factoryReceiveMaterialTime != "Y"'>
+			AND FACTORY_RECEIVE_MATERIAL_TIME LIKE
+			CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factoryReceiveMaterialTime == "N"'>
+			AND (FACTORY_RECEIVE_MATERIAL_TIME ='' OR
+			FACTORY_RECEIVE_MATERIAL_TIME
+			IS
+			NULL)
+		</if>
+		<if test='factoryReceiveMaterialTime =="Y"'>
+			AND FACTORY_RECEIVE_MATERIAL_TIME !=''
+		</if>
+		<if
+			test='noticeManner != null and noticeManner != "" and noticeManner != "N" and noticeManner != "Y"'>
+			AND NOTICE_MANNER LIKE
+			CONCAT('%',#{noticeManner,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='noticeManner == "N"'>
+			AND (NOTICE_MANNER ='' OR NOTICE_MANNER
+			IS
+			NULL)
+		</if>
+		<if test='noticeManner =="Y"'>
+			AND NOTICE_MANNER !=''
+		</if>
+
+	</select>
+	<select id="findConditionReceiveMaterialNoticeByPage"
+		parameterType="Map" resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM receive_material_notice
+		where MARK_STATUS ='1' AND
+		1=1
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND (WAVE ='' OR WAVE
+			IS
+			NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='cropDate != null and cropDate != "" and cropDate != "N" and cropDate != "Y"'>
+			AND CROP_DATE LIKE CONCAT('%',#{cropDate,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='cropDate == "N"'>
+			AND (CROP_DATE ='' OR CROP_DATE
+			IS
+			NULL)
+		</if>
+		<if test='cropDate =="Y"'>
+			AND CROP_DATE !=''
+		</if>
+		<if
+			test='printingType != null and printingType != "" and printingType != "N" and printingType != "Y"'>
+			AND PRINTING_TYPE LIKE
+			CONCAT('%',#{printingType,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='printingType == "N"'>
+			AND (PRINTING_TYPE ='' OR PRINTING_TYPE
+			IS
+			NULL)
+		</if>
+		<if test='printingType =="Y"'>
+			AND PRINTING_TYPE !=''
+		</if>
+		<if
+			test='factoryPicking != null and factoryPicking != "" and factoryPicking != "N" and factoryPicking != "Y"'>
+			AND FACTORY_PICKING LIKE
+			CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factoryPicking == "N"'>
+			AND (FACTORY_PICKING ='' OR FACTORY_PICKING
+			IS
+			NULL)
+		</if>
+		<if test='factoryPicking =="Y"'>
+			AND FACTORY_PICKING !=''
+		</if>
+		<if
+			test='factoryReceiveMaterialTime != null and factoryReceiveMaterialTime != "" and factoryReceiveMaterialTime != "N" and factoryReceiveMaterialTime != "Y"'>
+			AND FACTORY_RECEIVE_MATERIAL_TIME LIKE
+			CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='factoryReceiveMaterialTime == "N"'>
+			AND (FACTORY_RECEIVE_MATERIAL_TIME ='' OR
+			FACTORY_RECEIVE_MATERIAL_TIME
+			IS
+			NULL)
+		</if>
+		<if test='factoryReceiveMaterialTime =="Y"'>
+			AND FACTORY_RECEIVE_MATERIAL_TIME !=''
+		</if>
+		<if
+			test='noticeManner != null and noticeManner != "" and noticeManner != "N" and noticeManner != "Y"'>
+			AND NOTICE_MANNER LIKE
+			CONCAT('%',#{noticeManner,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='noticeManner == "N"'>
+			AND (NOTICE_MANNER ='' OR NOTICE_MANNER
+			IS
+			NULL)
+		</if>
+		<if test='noticeManner =="Y"'>
+			AND NOTICE_MANNER !=''
+		</if>
+		ORDER BY CREATED_TIME DESC LIMIT #{pageNow},#{pageSize}
+	</select>
+	<update id="delReceiveMaterialNoticeById" parameterType="com.warehouse.entity.ReceiveMaterialNotice">
+		update receive_material_notice
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="designChart != null">
+				DESIGN_CHART = #{designChart,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER = #{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="cropNumber != null">
+				CROP_NUMBER = #{cropNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="cropDetails != null">
+				CROP_DETAILS = #{cropDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="factoryReceiveMaterialTime != null">
+				FACTORY_RECEIVE_MATERIAL_TIME =
+				#{factoryReceiveMaterialTime,jdbcType=VARCHAR},
+			</if>
+			<if test="expectedReceiveMaterialDate != null">
+				EXPECTED_RECEIVE_MATERIAL_DATE =
+				#{expectedReceiveMaterialDate,jdbcType=VARCHAR},
+			</if>
+			<if test="factoryPicking != null">
+				FACTORY_PICKING = #{factoryPicking,jdbcType=VARCHAR},
+			</if>
+			<if test="receiveMaterialDate != null">
+				RECEIVE_MATERIAL_DATE =
+				#{receiveMaterialDate,jdbcType=VARCHAR},
+			</if>
+			<if test="cropDate != null">
+				CROP_DATE = #{cropDate,jdbcType=VARCHAR},
+			</if>
+			<if test="readinessDate != null">
+				READINESS_DATE = #{readinessDate,jdbcType=VARCHAR},
+			</if>
+			<if test="printingType != null">
+				PRINTING_TYPE = #{printingType,jdbcType=VARCHAR},
+			</if>
+			<if test="noticeManner != null">
+				NOTICE_MANNER = #{noticeManner,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedStatus != null">
+				ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="markStatus != null">
+				MARK_STATUS = #{markStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="modifyReceiveMaterialNotice" parameterType="com.warehouse.entity.ReceiveMaterialNotice">
+		update receive_material_notice
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="designChart != null">
+				DESIGN_CHART = #{designChart,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER = #{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="cropNumber != null">
+				CROP_NUMBER = #{cropNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="cropDetails != null">
+				CROP_DETAILS = #{cropDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="factoryReceiveMaterialTime != null">
+				FACTORY_RECEIVE_MATERIAL_TIME =
+				#{factoryReceiveMaterialTime,jdbcType=VARCHAR},
+			</if>
+			<if test="expectedReceiveMaterialDate != null">
+				EXPECTED_RECEIVE_MATERIAL_DATE =
+				#{expectedReceiveMaterialDate,jdbcType=VARCHAR},
+			</if>
+			<if test="factoryPicking != null">
+				FACTORY_PICKING = #{factoryPicking,jdbcType=VARCHAR},
+			</if>
+			<if test="receiveMaterialDate != null">
+				RECEIVE_MATERIAL_DATE =
+				#{receiveMaterialDate,jdbcType=VARCHAR},
+			</if>
+			<if test="cropDate != null">
+				CROP_DATE = #{cropDate,jdbcType=VARCHAR},
+			</if>
+			<if test="readinessDate != null">
+				READINESS_DATE = #{readinessDate,jdbcType=VARCHAR},
+			</if>
+			<if test="printingType != null">
+				PRINTING_TYPE = #{printingType,jdbcType=VARCHAR},
+			</if>
+			<if test="noticeManner != null">
+				NOTICE_MANNER = #{noticeManner,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedStatus != null">
+				ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="markStatus != null">
+				MARK_STATUS = #{markStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

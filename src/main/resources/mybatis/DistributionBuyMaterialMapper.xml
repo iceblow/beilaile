@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributionBuyMaterialMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.DistributionBuyMaterial">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="CLOTH_NAME" property="clothName" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_IMG" property="productImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="SIZE_IMG" property="sizeImg" jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER" />
+		<result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+		<result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+		<result column="DISTRIBUTTION_FACTORY" property="distributtionFactory"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_ARRIVE_FACTORY" property="fabricArriveFactory"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_ARRIVE_FACTORY_TIME" property="fabricArriveFactoryTime"
+			jdbcType="VARCHAR" />
+		<result column="ACCES_ARRIVE_FACTORY" property="accesArriveFactory"
+			jdbcType="VARCHAR" />
+		<result column="ACCES_ARRIVE_FACTORY_TIME" property="accesArriveFactoryTime"
+			jdbcType="VARCHAR" />
+		<result column="local_status" property="localStatus" jdbcType="INTEGER" />
+		<result column="PLAN_IN_WAREHOUSE_TIME" property="planInWarehouseTime"
+			jdbcType="VARCHAR" />
+
+		<result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="TRACKING_OFFICER" property="trackingOfficer"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+		<result column="TACHE_START_TIME" property="tacheStartTime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PRODUCT_CODE, CLOTH_NAME, ORINGINAL_WAVE, WAVE,
+		PRODUCT_IMG,
+		SAMPLE_IMG, SIZE_IMG,
+		ORDER_DETAILS, ORDER_NUM,
+		ORDER_GRADE, ORDER_TYPE, DISTRIBUTTION_FACTORY,
+		FABRIC_ARRIVE_FACTORY,
+		FABRIC_ARRIVE_FACTORY_TIME, ACCES_ARRIVE_FACTORY,
+		ACCES_ARRIVE_FACTORY_TIME,local_status,PLAN_IN_WAREHOUSE_TIME,RELEASE_TIME,REMARK,TRACKING_OFFICER,ORDER_ID,TACHE_START_TIME
+	</sql>
+	<!-- 根据条件查询 -->
+	<select id="select" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from distribution_buy_material where 1=1
+			AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+			AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test="productCode != null and productCode !=''">
+			and PRODUCT_CODE like concat('%',#{productCode},'%')
+		</if>
+		<if test="wave != null and wave != ''">
+			and WAVE like concat('%',#{wave},'%')
+		</if>
+		<if test="clothName != null and clothName != ''">
+			and CLOTH_NAME like concat('%',#{clothName},'%')
+		</if>
+		<if test="fabricArriveFactory != null and fabricArriveFactory !='' ">
+			and FABRIC_ARRIVE_FACTORY like CONCAT('%',#{fabricArriveFactory},'%')
+		</if>
+		
+		<if test='distributtionFactory != null and distributtionFactory !=""  and distributtionFactory !="Y" and distributtionFactory !="N" '>
+			and DISTRIBUTTION_FACTORY like CONCAT('%',#{distributtionFactory},'%')
+		</if>
+		<if test='distributtionFactory =="N" '>
+			AND(DISTRIBUTTION_FACTORY ='' OR DISTRIBUTTION_FACTORY IS NULL)
+		</if>
+		<if test='distributtionFactory =="Y" '>
+			AND DISTRIBUTTION_FACTORY !=''
+		</if>
+		
+		<if test="accesArriveFactory != null and accesArriveFactory != ''">
+			and ACCES_ARRIVE_FACTORY like
+			concat('%',#{accesArriveFactory},'%')
+		</if>
+
+		<if test="releaseTime != null and releaseTime != ''">
+			and RELEASE_TIME like concat('%',#{releaseTime},'%')
+		</if>
+		
+		<if test="trackingOfficer != null and trackingOfficer != ''">
+			and TRACKING_OFFICER like
+			concat('%',#{trackingOfficer},'%')
+		</if>
+		<if test="orderType!=null and orderType!=''">
+			and ORDER_TYPE =#{orderType}
+		</if>
+		order by  local_status ASC ,RELEASE_TIME ASC ,ORDER_GRADE DESC 
+		limit #{pageNow},#{pageSize}
+	</select>
+
+
+	<!-- 查询总条数 -->
+	<select id="getPageCount" resultType="java.lang.Integer" parameterType="map" >
+		select count(0) from distribution_buy_material where 1=1
+			AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+			AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test="productCode != null and productCode !=''">
+			and PRODUCT_CODE like concat('%',#{productCode},'%')
+		</if>
+		<if test="wave != null and wave != ''">
+			and WAVE like concat('%',#{wave},'%')
+		</if>
+		<if test="clothName != null and clothName != ''">
+			and CLOTH_NAME like concat('%',#{clothName},'%')
+		</if>
+		<if test="fabricArriveFactory != null and fabricArriveFactory != ''  ">
+			and FABRIC_ARRIVE_FACTORY like concat('%',#{fabricArriveFactory},'%')
+		</if>
+		
+		<if test='distributtionFactory!=null and distributtionFactory!="" and distributtionFactory!= "N" and distributtionFactory!="Y" '>
+			AND DISTRIBUTTION_FACTORY LIKE CONCAT("%",#{distributtionFactory}, "%")
+		</if>
+		<if test='distributtionFactory =="N"' >
+			AND(DISTRIBUTTION_FACTORY ='' OR DISTRIBUTTION_FACTORY IS NULL)
+		</if>
+		<if test='distributtionFactory =="Y"' >
+			AND DISTRIBUTTION_FACTORY !=''
+		</if>
+		
+		<if test="accesArriveFactory != null and accesArriveFactory != ''">
+			and ACCES_ARRIVE_FACTORY like concat('%',#{accesArriveFactory},'%')
+		</if>
+		<if test="releaseTime != null and releaseTime != ''">
+			and RELEASE_TIME like concat('%',#{releaseTime},'%')
+		</if>
+		
+		<if test="trackingOfficer != null and trackingOfficer != ''">
+			and TRACKING_OFFICER like
+			concat('%',#{trackingOfficer},'%')
+		</if>
+		<if test="orderType!=null and orderType!=''">
+			and ORDER_TYPE =#{orderType}
+		</if>
+	</select>
+
+	<!-- 根据id查询 -->
+	<select id="selectById" parameterType="java.lang.Integer"  resultType="java.lang.Integer" >
+		select local_status from distribution_buy_material where id=#{id}
+	</select>
+
+	<insert id="addDistributionBuyMaterial" parameterType="com.warehouse.entity.DistributionBuyMaterial">
+		insert into distribution_buy_material
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE,
+			</if>
+			<if test="clothName != null">
+				CLOTH_NAME,
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="productImg != null">
+				PRODUCT_IMG,
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG,
+			</if>
+			<if test="sizeImg != null">
+				SIZE_IMG,
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS,
+			</if>
+			<if test="orderNum != null">
+				ORDER_NUM,
+			</if>
+			<if test="orderGrade != null">
+				ORDER_GRADE,
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE,
+			</if>
+			<if test="distributtionFactory != null">
+				DISTRIBUTTION_FACTORY,
+			</if>
+			<if test="fabricArriveFactory != null">
+				FABRIC_ARRIVE_FACTORY,
+			</if>
+			<if test="fabricArriveFactoryTime != null">
+				FABRIC_ARRIVE_FACTORY_TIME,
+			</if>
+			<if test="accesArriveFactory != null">
+				ACCES_ARRIVE_FACTORY,
+			</if>
+			<if test="accesArriveFactoryTime != null">
+				ACCES_ARRIVE_FACTORY_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="productCode != null">
+				#{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				#{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				#{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productImg != null">
+				#{productImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				#{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeImg != null">
+				#{sizeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				#{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNum != null">
+				#{orderNum,jdbcType=INTEGER},
+			</if>
+			<if test="orderGrade != null">
+				#{orderGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				#{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="distributtionFactory != null">
+				#{distributtionFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricArriveFactory != null">
+				#{fabricArriveFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricArriveFactoryTime != null">
+				#{fabricArriveFactoryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="accesArriveFactory != null">
+				#{accesArriveFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="accesArriveFactoryTime != null">
+				#{accesArriveFactoryTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateDistributionBuyMaterial" parameterType="com.warehouse.entity.DistributionBuyMaterial">
+		update distribution_buy_material
+		<set>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				CLOTH_NAME = #{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productImg != null">
+				PRODUCT_IMG = #{productImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeImg != null">
+				SIZE_IMG = #{sizeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNum != null">
+				ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+			</if>
+			<if test="orderGrade != null">
+				ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="distributtionFactory != null">
+				DISTRIBUTTION_FACTORY =
+				#{distributtionFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricArriveFactory != null">
+				FABRIC_ARRIVE_FACTORY =
+				#{fabricArriveFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricArriveFactoryTime != null">
+				FABRIC_ARRIVE_FACTORY_TIME =
+				#{fabricArriveFactoryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="accesArriveFactory != null">
+				ACCES_ARRIVE_FACTORY =
+				#{accesArriveFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="accesArriveFactoryTime != null">
+				ACCES_ARRIVE_FACTORY_TIME =
+				#{accesArriveFactoryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="localStatus != null">
+				local_status = #{localStatus,jdbcType=INTEGER},
+			</if>
+			<if test="trackingOfficer != null">
+				TRACKING_OFFICER = #{trackingOfficer,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>

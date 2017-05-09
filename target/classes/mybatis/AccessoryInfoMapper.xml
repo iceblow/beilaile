@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.AccessoryInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.AccessoryInfo" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ACCES_NAME_AI" property="accesNameAi" jdbcType="VARCHAR" />
+    <result column="ACCES_SERIAL_NUM_AI" property="accesSerialNumAi" jdbcType="VARCHAR" />
+    <result column="ACCES_BARCODE_AI" property="accesBarcodeAi" jdbcType="VARCHAR" />
+    <result column="ACCES_ACRONYM_AI" property="accesAcronymAi" jdbcType="VARCHAR" />
+    <result column="ACCES_HISTORY_CODE_AI" property="accesHistoryCodeAi" jdbcType="VARCHAR" />
+    <result column="ACCES_COLOR_AI" property="accesColorAi" jdbcType="VARCHAR" />
+    <result column="ACCES_LENGTH_AI" property="accesLengthAi" jdbcType="VARCHAR" />
+    <result column="ACCES_WIDTH_AI" property="accesWidthAi" jdbcType="VARCHAR" />
+    <result column="ACCES_WEIGHT_AI" property="accesWeightAi" jdbcType="VARCHAR" />
+    <result column="ACCES_UNIT_AI" property="accesUnitAi" jdbcType="VARCHAR" />
+    <result column="ACCES_STORE_METHOD_AI" property="accesStoreMethodAi" jdbcType="VARCHAR" />
+    <result column="ACCES_STORE_UNIT_AI" property="accesStoreUnitAi" jdbcType="VARCHAR" />
+    <result column="ACCES_ETALON_AI" property="accesEtalonAi" jdbcType="VARCHAR" />
+    <result column="ACCES_SUPPLIER_NAME_AI" property="accesSupplierNameAi" jdbcType="VARCHAR" />
+    <result column="ACCES_SUPPLIER_CONTACT_AI" property="accesSupplierContactAi" jdbcType="VARCHAR" />
+    <result column="ACCES_SUPPLIER_ADDRESS_AI" property="accesSupplierAddressAi" jdbcType="VARCHAR" />
+    <result column="ACCES_SUPPLY_MODE_AI" property="accesSupplyModeAi" jdbcType="VARCHAR" />
+    <result column="ACCES_IMG_AI" property="accesImgAi" jdbcType="VARCHAR" />
+    <result column="ACCES_HITORY_WAVE_AI" property="accesHitoryWaveAi" jdbcType="VARCHAR" />
+    <result column="ACCES_REFERENCE_PRICE_AI" property="accesReferencePriceAi" jdbcType="DECIMAL" />
+    <result column="ACCES_USING_FEEDBACK_AI" property="accesUsingFeedbackAi" jdbcType="VARCHAR" />
+    <result column="ACCES_QUALITY_EVAL_REF_AI" property="accesQualityEvalRefAi" jdbcType="INTEGER" />
+    <result column="ACCES_COOPER_SATISFACTION_AI" property="accesCooperSatisfactionAi" jdbcType="INTEGER" />
+    <result column="ACCES_SUPPLY_DEGREE_AI" property="accesSupplyDegreeAi" jdbcType="VARCHAR" />
+    <result column="STANDBY_FIR" property="standbyFir" jdbcType="VARCHAR" />
+    <result column="STANDBY_SEC" property="standbySec" jdbcType="VARCHAR" />
+    <result column="STANDBY_THR" property="standbyThr" jdbcType="VARCHAR" />
+    <result column="MARK_STATUS" property="markStatus" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+    <result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+    <result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+    <result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ACCES_NAME_AI, ACCES_SERIAL_NUM_AI, ACCES_BARCODE_AI, ACCES_ACRONYM_AI, ACCES_HISTORY_CODE_AI,
+    ACCES_COLOR_AI, ACCES_LENGTH_AI, ACCES_WIDTH_AI, ACCES_WEIGHT_AI, ACCES_UNIT_AI,
+    ACCES_STORE_METHOD_AI, ACCES_STORE_UNIT_AI, ACCES_ETALON_AI, ACCES_SUPPLIER_NAME_AI,
+    ACCES_SUPPLIER_CONTACT_AI, ACCES_SUPPLIER_ADDRESS_AI, ACCES_SUPPLY_MODE_AI, ACCES_IMG_AI,
+    ACCES_HITORY_WAVE_AI, ACCES_REFERENCE_PRICE_AI, ACCES_USING_FEEDBACK_AI, ACCES_QUALITY_EVAL_REF_AI,
+    ACCES_COOPER_SATISFACTION_AI, ACCES_SUPPLY_DEGREE_AI, STANDBY_FIR, STANDBY_SEC, STANDBY_THR,
+    MARK_STATUS, CREATED_TIME, FOUNDER, MODIFY_TIME, DELETE_TIME, OPERATOR, OPERATOR_IP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from accessory_info
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from accessory_info
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.warehouse.entity.AccessoryInfo" >
+    insert into accessory_info (ID, ACCES_NAME_AI, ACCES_SERIAL_NUM_AI,
+      ACCES_BARCODE_AI, ACCES_ACRONYM_AI, ACCES_HISTORY_CODE_AI,
+      ACCES_COLOR_AI, ACCES_LENGTH_AI, ACCES_WIDTH_AI,
+      ACCES_WEIGHT_AI, ACCES_UNIT_AI, ACCES_STORE_METHOD_AI,
+      ACCES_STORE_UNIT_AI, ACCES_ETALON_AI, ACCES_SUPPLIER_NAME_AI,
+      ACCES_SUPPLIER_CONTACT_AI, ACCES_SUPPLIER_ADDRESS_AI,
+      ACCES_SUPPLY_MODE_AI, ACCES_IMG_AI, ACCES_HITORY_WAVE_AI,
+      ACCES_REFERENCE_PRICE_AI, ACCES_USING_FEEDBACK_AI,
+      ACCES_QUALITY_EVAL_REF_AI, ACCES_COOPER_SATISFACTION_AI,
+      ACCES_SUPPLY_DEGREE_AI, STANDBY_FIR, STANDBY_SEC,
+      STANDBY_THR, MARK_STATUS, CREATED_TIME,
+      FOUNDER, MODIFY_TIME, DELETE_TIME,
+      OPERATOR, OPERATOR_IP)
+    values (#{id,jdbcType=INTEGER}, #{accesNameAi,jdbcType=VARCHAR}, #{accesSerialNumAi,jdbcType=VARCHAR},
+      #{accesBarcodeAi,jdbcType=VARCHAR}, #{accesAcronymAi,jdbcType=VARCHAR}, #{accesHistoryCodeAi,jdbcType=VARCHAR},
+      #{accesColorAi,jdbcType=VARCHAR}, #{accesLengthAi,jdbcType=VARCHAR}, #{accesWidthAi,jdbcType=VARCHAR},
+      #{accesWeightAi,jdbcType=VARCHAR}, #{accesUnitAi,jdbcType=VARCHAR}, #{accesStoreMethodAi,jdbcType=VARCHAR},
+      #{accesStoreUnitAi,jdbcType=VARCHAR}, #{accesEtalonAi,jdbcType=VARCHAR}, #{accesSupplierNameAi,jdbcType=VARCHAR},
+      #{accesSupplierContactAi,jdbcType=VARCHAR}, #{accesSupplierAddressAi,jdbcType=VARCHAR},
+      #{accesSupplyModeAi,jdbcType=VARCHAR}, #{accesImgAi,jdbcType=VARCHAR}, #{accesHitoryWaveAi,jdbcType=VARCHAR},
+      #{accesReferencePriceAi,jdbcType=DECIMAL}, #{accesUsingFeedbackAi,jdbcType=VARCHAR},
+      #{accesQualityEvalRefAi,jdbcType=INTEGER}, #{accesCooperSatisfactionAi,jdbcType=INTEGER},
+      #{accesSupplyDegreeAi,jdbcType=VARCHAR}, #{standbyFir,jdbcType=VARCHAR}, #{standbySec,jdbcType=VARCHAR},
+      #{standbyThr,jdbcType=VARCHAR}, #{markStatus,jdbcType=VARCHAR}, #{createdTime,jdbcType=VARCHAR},
+      #{founder,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{deleteTime,jdbcType=VARCHAR},
+      #{operator,jdbcType=VARCHAR}, #{operatorIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.warehouse.entity.AccessoryInfo" >
+    insert into accessory_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="accesNameAi != null" >
+        ACCES_NAME_AI,
+      </if>
+      <if test="accesSerialNumAi != null" >
+        ACCES_SERIAL_NUM_AI,
+      </if>
+      <if test="accesBarcodeAi != null" >
+        ACCES_BARCODE_AI,
+      </if>
+      <if test="accesAcronymAi != null" >
+        ACCES_ACRONYM_AI,
+      </if>
+      <if test="accesHistoryCodeAi != null" >
+        ACCES_HISTORY_CODE_AI,
+      </if>
+      <if test="accesColorAi != null" >
+        ACCES_COLOR_AI,
+      </if>
+      <if test="accesLengthAi != null" >
+        ACCES_LENGTH_AI,
+      </if>
+      <if test="accesWidthAi != null" >
+        ACCES_WIDTH_AI,
+      </if>
+      <if test="accesWeightAi != null" >
+        ACCES_WEIGHT_AI,
+      </if>
+      <if test="accesUnitAi != null" >
+        ACCES_UNIT_AI,
+      </if>
+      <if test="accesStoreMethodAi != null" >
+        ACCES_STORE_METHOD_AI,
+      </if>
+      <if test="accesStoreUnitAi != null" >
+        ACCES_STORE_UNIT_AI,
+      </if>
+      <if test="accesEtalonAi != null" >
+        ACCES_ETALON_AI,
+      </if>
+      <if test="accesSupplierNameAi != null" >
+        ACCES_SUPPLIER_NAME_AI,
+      </if>
+      <if test="accesSupplierContactAi != null" >
+        ACCES_SUPPLIER_CONTACT_AI,
+      </if>
+      <if test="accesSupplierAddressAi != null" >
+        ACCES_SUPPLIER_ADDRESS_AI,
+      </if>
+      <if test="accesSupplyModeAi != null" >
+        ACCES_SUPPLY_MODE_AI,
+      </if>
+      <if test="accesImgAi != null" >
+        ACCES_IMG_AI,
+      </if>
+      <if test="accesHitoryWaveAi != null" >
+        ACCES_HITORY_WAVE_AI,
+      </if>
+      <if test="accesReferencePriceAi != null" >
+        ACCES_REFERENCE_PRICE_AI,
+      </if>
+      <if test="accesUsingFeedbackAi != null" >
+        ACCES_USING_FEEDBACK_AI,
+      </if>
+      <if test="accesQualityEvalRefAi != null" >
+        ACCES_QUALITY_EVAL_REF_AI,
+      </if>
+      <if test="accesCooperSatisfactionAi != null" >
+        ACCES_COOPER_SATISFACTION_AI,
+      </if>
+      <if test="accesSupplyDegreeAi != null" >
+        ACCES_SUPPLY_DEGREE_AI,
+      </if>
+      <if test="standbyFir != null" >
+        STANDBY_FIR,
+      </if>
+      <if test="standbySec != null" >
+        STANDBY_SEC,
+      </if>
+      <if test="standbyThr != null" >
+        STANDBY_THR,
+      </if>
+      <if test="markStatus != null" >
+        MARK_STATUS,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+      <if test="founder != null" >
+        FOUNDER,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME,
+      </if>
+      <if test="operator != null" >
+        OPERATOR,
+      </if>
+      <if test="operatorIp != null" >
+        OPERATOR_IP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accesNameAi != null" >
+        #{accesNameAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSerialNumAi != null" >
+        #{accesSerialNumAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesBarcodeAi != null" >
+        #{accesBarcodeAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesAcronymAi != null" >
+        #{accesAcronymAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesHistoryCodeAi != null" >
+        #{accesHistoryCodeAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesColorAi != null" >
+        #{accesColorAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesLengthAi != null" >
+        #{accesLengthAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesWidthAi != null" >
+        #{accesWidthAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesWeightAi != null" >
+        #{accesWeightAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesUnitAi != null" >
+        #{accesUnitAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesStoreMethodAi != null" >
+        #{accesStoreMethodAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesStoreUnitAi != null" >
+        #{accesStoreUnitAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesEtalonAi != null" >
+        #{accesEtalonAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSupplierNameAi != null" >
+        #{accesSupplierNameAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSupplierContactAi != null" >
+        #{accesSupplierContactAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSupplierAddressAi != null" >
+        #{accesSupplierAddressAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSupplyModeAi != null" >
+        #{accesSupplyModeAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesImgAi != null" >
+        #{accesImgAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesHitoryWaveAi != null" >
+        #{accesHitoryWaveAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesReferencePriceAi != null" >
+        #{accesReferencePriceAi,jdbcType=DECIMAL},
+      </if>
+      <if test="accesUsingFeedbackAi != null" >
+        #{accesUsingFeedbackAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesQualityEvalRefAi != null" >
+        #{accesQualityEvalRefAi,jdbcType=INTEGER},
+      </if>
+      <if test="accesCooperSatisfactionAi != null" >
+        #{accesCooperSatisfactionAi,jdbcType=INTEGER},
+      </if>
+      <if test="accesSupplyDegreeAi != null" >
+        #{accesSupplyDegreeAi,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyFir != null" >
+        #{standbyFir,jdbcType=VARCHAR},
+      </if>
+      <if test="standbySec != null" >
+        #{standbySec,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyThr != null" >
+        #{standbyThr,jdbcType=VARCHAR},
+      </if>
+      <if test="markStatus != null" >
+        #{markStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorIp != null" >
+        #{operatorIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.AccessoryInfo" >
+    update accessory_info
+    <set >
+      <if test="accesNameAi != null" >
+        ACCES_NAME_AI = #{accesNameAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSerialNumAi != null" >
+        ACCES_SERIAL_NUM_AI = #{accesSerialNumAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesBarcodeAi != null" >
+        ACCES_BARCODE_AI = #{accesBarcodeAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesAcronymAi != null" >
+        ACCES_ACRONYM_AI = #{accesAcronymAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesHistoryCodeAi != null" >
+        ACCES_HISTORY_CODE_AI = #{accesHistoryCodeAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesColorAi != null" >
+        ACCES_COLOR_AI = #{accesColorAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesLengthAi != null" >
+        ACCES_LENGTH_AI = #{accesLengthAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesWidthAi != null" >
+        ACCES_WIDTH_AI = #{accesWidthAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesWeightAi != null" >
+        ACCES_WEIGHT_AI = #{accesWeightAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesUnitAi != null" >
+        ACCES_UNIT_AI = #{accesUnitAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesStoreMethodAi != null" >
+        ACCES_STORE_METHOD_AI = #{accesStoreMethodAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesStoreUnitAi != null" >
+        ACCES_STORE_UNIT_AI = #{accesStoreUnitAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesEtalonAi != null" >
+        ACCES_ETALON_AI = #{accesEtalonAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSupplierNameAi != null" >
+        ACCES_SUPPLIER_NAME_AI = #{accesSupplierNameAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSupplierContactAi != null" >
+        ACCES_SUPPLIER_CONTACT_AI = #{accesSupplierContactAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSupplierAddressAi != null" >
+        ACCES_SUPPLIER_ADDRESS_AI = #{accesSupplierAddressAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSupplyModeAi != null" >
+        ACCES_SUPPLY_MODE_AI = #{accesSupplyModeAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesImgAi != null" >
+        ACCES_IMG_AI = #{accesImgAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesHitoryWaveAi != null" >
+        ACCES_HITORY_WAVE_AI = #{accesHitoryWaveAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesReferencePriceAi != null" >
+        ACCES_REFERENCE_PRICE_AI = #{accesReferencePriceAi,jdbcType=DECIMAL},
+      </if>
+      <if test="accesUsingFeedbackAi != null" >
+        ACCES_USING_FEEDBACK_AI = #{accesUsingFeedbackAi,jdbcType=VARCHAR},
+      </if>
+      <if test="accesQualityEvalRefAi != null" >
+        ACCES_QUALITY_EVAL_REF_AI = #{accesQualityEvalRefAi,jdbcType=INTEGER},
+      </if>
+      <if test="accesCooperSatisfactionAi != null" >
+        ACCES_COOPER_SATISFACTION_AI = #{accesCooperSatisfactionAi,jdbcType=INTEGER},
+      </if>
+      <if test="accesSupplyDegreeAi != null" >
+        ACCES_SUPPLY_DEGREE_AI = #{accesSupplyDegreeAi,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyFir != null" >
+        STANDBY_FIR = #{standbyFir,jdbcType=VARCHAR},
+      </if>
+      <if test="standbySec != null" >
+        STANDBY_SEC = #{standbySec,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyThr != null" >
+        STANDBY_THR = #{standbyThr,jdbcType=VARCHAR},
+      </if>
+      <if test="markStatus != null" >
+        MARK_STATUS = #{markStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        FOUNDER = #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorIp != null" >
+        OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.entity.AccessoryInfo" >
+    update accessory_info
+    set ACCES_NAME_AI = #{accesNameAi,jdbcType=VARCHAR},
+      ACCES_SERIAL_NUM_AI = #{accesSerialNumAi,jdbcType=VARCHAR},
+      ACCES_BARCODE_AI = #{accesBarcodeAi,jdbcType=VARCHAR},
+      ACCES_ACRONYM_AI = #{accesAcronymAi,jdbcType=VARCHAR},
+      ACCES_HISTORY_CODE_AI = #{accesHistoryCodeAi,jdbcType=VARCHAR},
+      ACCES_COLOR_AI = #{accesColorAi,jdbcType=VARCHAR},
+      ACCES_LENGTH_AI = #{accesLengthAi,jdbcType=VARCHAR},
+      ACCES_WIDTH_AI = #{accesWidthAi,jdbcType=VARCHAR},
+      ACCES_WEIGHT_AI = #{accesWeightAi,jdbcType=VARCHAR},
+      ACCES_UNIT_AI = #{accesUnitAi,jdbcType=VARCHAR},
+      ACCES_STORE_METHOD_AI = #{accesStoreMethodAi,jdbcType=VARCHAR},
+      ACCES_STORE_UNIT_AI = #{accesStoreUnitAi,jdbcType=VARCHAR},
+      ACCES_ETALON_AI = #{accesEtalonAi,jdbcType=VARCHAR},
+      ACCES_SUPPLIER_NAME_AI = #{accesSupplierNameAi,jdbcType=VARCHAR},
+      ACCES_SUPPLIER_CONTACT_AI = #{accesSupplierContactAi,jdbcType=VARCHAR},
+      ACCES_SUPPLIER_ADDRESS_AI = #{accesSupplierAddressAi,jdbcType=VARCHAR},
+      ACCES_SUPPLY_MODE_AI = #{accesSupplyModeAi,jdbcType=VARCHAR},
+      ACCES_IMG_AI = #{accesImgAi,jdbcType=VARCHAR},
+      ACCES_HITORY_WAVE_AI = #{accesHitoryWaveAi,jdbcType=VARCHAR},
+      ACCES_REFERENCE_PRICE_AI = #{accesReferencePriceAi,jdbcType=DECIMAL},
+      ACCES_USING_FEEDBACK_AI = #{accesUsingFeedbackAi,jdbcType=VARCHAR},
+      ACCES_QUALITY_EVAL_REF_AI = #{accesQualityEvalRefAi,jdbcType=INTEGER},
+      ACCES_COOPER_SATISFACTION_AI = #{accesCooperSatisfactionAi,jdbcType=INTEGER},
+      ACCES_SUPPLY_DEGREE_AI = #{accesSupplyDegreeAi,jdbcType=VARCHAR},
+      STANDBY_FIR = #{standbyFir,jdbcType=VARCHAR},
+      STANDBY_SEC = #{standbySec,jdbcType=VARCHAR},
+      STANDBY_THR = #{standbyThr,jdbcType=VARCHAR},
+      MARK_STATUS = #{markStatus,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      FOUNDER = #{founder,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      OPERATOR = #{operator,jdbcType=VARCHAR},
+      OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="getAccesInfoBpcnt" resultType="java.lang.Integer">
+    SELECT COUNT(0) FROM accessory_info where MARK_STATUS ='1' AND 1=1
+    <if test="accesNameAi != null and accesNameAi != &quot;&quot; and accesNameAi != &quot;N&quot; and accesNameAi != &quot;Y&quot;">
+      AND ACCES_NAME_AI LIKE CONCAT('%',#{accesNameAi,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="accesNameAi == &quot;N&quot;">
+      AND (ACCES_NAME_AI ='' OR ACCES_NAME_AI
+      IS
+      NULL)
+    </if>
+    <if test="accesNameAi ==&quot;Y&quot;">
+      AND ACCES_NAME_AI !=''
+    </if>
+
+    <if test="accesSerialNumAi != null and accesSerialNumAi != &quot;&quot; and accesSerialNumAi != &quot;N&quot; and accesSerialNumAi != &quot;Y&quot;">
+      AND ACCES_SERIAL_NUM_AI LIKE CONCAT('%',#{accesSerialNumAi,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="accesSerialNumAi == &quot;N&quot;">
+      AND (ACCES_SERIAL_NUM_AI ='' OR ACCES_SERIAL_NUM_AI
+      IS
+      NULL)
+    </if>
+    <if test="accesSerialNumAi ==&quot;Y&quot;">
+      AND ACCES_SERIAL_NUM_AI !=''
+    </if>
+    <if test="accesBarcodeAi != null and accesBarcodeAi != &quot;&quot; and accesBarcodeAi != &quot;N&quot; and accesBarcodeAi != &quot;Y&quot;">
+      AND ACCES_BARCODE_AI LIKE
+      CONCAT('%',#{accesBarcodeAi,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="accesBarcodeAi == &quot;N&quot;">
+      AND (ACCES_BARCODE_AI ='' OR ACCES_BARCODE_AI
+      IS
+      NULL)
+    </if>
+    <if test="accesBarcodeAi ==&quot;Y&quot;">
+      AND ACCES_BARCODE_AI !=''
+    </if>
+
+  </select>
+
+  <select id="findAccesInfoCndbp" parameterType="Map" resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    accessory_info
+    WHERE
+    MARK_STATUS = '1'
+    AND 1 = 1
+    <if test="accesNameAi != null and accesNameAi != &quot;&quot; and accesNameAi != &quot;N&quot; and accesNameAi != &quot;Y&quot;">
+      AND ACCES_NAME_AI LIKE CONCAT('%',#{accesNameAi,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="accesNameAi == &quot;N&quot;">
+      AND (ACCES_NAME_AI ='' OR ACCES_NAME_AI
+      IS
+      NULL)
+    </if>
+    <if test="accesNameAi ==&quot;Y&quot;">
+      AND ACCES_NAME_AI !=''
+    </if>
+    <if test="accesSerialNumAi != null and accesSerialNumAi != &quot;&quot; and accesSerialNumAi != &quot;N&quot; and accesSerialNumAi != &quot;Y&quot;">
+      AND ACCES_SERIAL_NUM_AI LIKE CONCAT('%',#{accesSerialNumAi,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="accesSerialNumAi == &quot;N&quot;">
+      AND (ACCES_SERIAL_NUM_AI ='' OR ACCES_SERIAL_NUM_AI
+      IS
+      NULL)
+    </if>
+    <if test="accesSerialNumAi ==&quot;Y&quot;">
+      AND ACCES_SERIAL_NUM_AI !=''
+    </if>
+    <if test="accesBarcodeAi != null and accesBarcodeAi != &quot;&quot; and accesBarcodeAi != &quot;N&quot; and accesBarcodeAi != &quot;Y&quot;">
+      AND ACCES_BARCODE_AI LIKE
+      CONCAT('%',#{accesBarcodeAi,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="accesBarcodeAi == &quot;N&quot;">
+      AND (ACCES_BARCODE_AI ='' OR ACCES_BARCODE_AI
+      IS
+      NULL)
+    </if>
+    <if test="accesBarcodeAi ==&quot;Y&quot;">
+      AND ACCES_BARCODE_AI !=''
+    </if>
+    ORDER BY ACCES_SERIAL_NUM_AI ASC LIMIT #{pageNow},#{pageSize}
+  </select>
+
+</mapper>

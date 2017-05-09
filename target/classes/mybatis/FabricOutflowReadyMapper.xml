@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FabricOutflowReadyMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.FabricOutflowReady">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ADDITION_TIME" property="additionTime"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="FABRIC_MATERIAL" property="fabricMaterial"
+			jdbcType="VARCHAR" />
+		<result column="COLOUR" property="colour" jdbcType="VARCHAR" />
+		<result column="PARAMETER1" property="parameter1" jdbcType="DOUBLE" />
+		<result column="PARAMETER2" property="parameter2" jdbcType="DOUBLE" />
+		<result column="PARAMETER3" property="parameter3" jdbcType="DOUBLE" />
+		<result column="PARAMETER4" property="parameter4" jdbcType="DOUBLE" />
+		<result column="PARAMETER5" property="parameter5" jdbcType="DOUBLE" />
+		<result column="PARAMETER6" property="parameter6" jdbcType="DOUBLE" />
+		<result column="PARAMETER7" property="parameter7" jdbcType="DOUBLE" />
+		<result column="PARAMETER8" property="parameter8" jdbcType="DOUBLE" />
+		<result column="PARAMETER9" property="parameter9" jdbcType="DOUBLE" />
+		<result column="PARAMETER10" property="parameter10" jdbcType="DOUBLE" />
+		<result column="PARAMETER11" property="parameter11" jdbcType="DOUBLE" />
+		<result column="PARAMETER12" property="parameter12" jdbcType="DOUBLE" />
+		<result column="PARAMETER13" property="parameter13" jdbcType="DOUBLE" />
+		<result column="PARAMETER14" property="parameter14" jdbcType="DOUBLE" />
+		<result column="PARAMETER15" property="parameter15" jdbcType="DOUBLE" />
+		<result column="PARAMETER16" property="parameter16" jdbcType="DOUBLE" />
+		<result column="PARAMETER17" property="parameter17" jdbcType="DOUBLE" />
+		<result column="PARAMETER18" property="parameter18" jdbcType="DOUBLE" />
+		<result column="KG_M" property="kgM" jdbcType="VARCHAR" />
+		<result column="TOTAL_COUNT" property="totalCount" jdbcType="INTEGER" />
+		<result column="STATE" property="state" jdbcType="VARCHAR" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+		<result column="MATERIALS" property="materials" jdbcType="VARCHAR" />
+		<result column="NUMBER_ORDER" property="numberOrder" jdbcType="VARCHAR" />
+		<result column="SUPPLIER" property="supplier" jdbcType="VARCHAR" />
+		<result column="SCHEDULED_NUMBER" property="scheduledNumber"
+			jdbcType="VARCHAR" />
+		<result column="RECIPIENT" property="recipient" jdbcType="VARCHAR" />
+		<result column="RECIPIENT_ADDRESS" property="recipientAddress"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_TYPE" property="fabricType" jdbcType="VARCHAR" />
+		<result column="PURCHASING_STATUS" property="purchasingStatus"
+			jdbcType="VARCHAR" />
+		<result column="actualDosage" property="actualdosage" jdbcType="DOUBLE" />
+		<result column="fabricPrices" property="fabricprices" jdbcType="DECIMAL" />
+		<result column="weight" property="weight" jdbcType="DOUBLE" />
+		<result column="combinedWave" property="combinedwave" jdbcType="VARCHAR" />
+		<result column="difference" property="difference" jdbcType="DOUBLE" />
+		<result column="totalWeight" property="totalweight" jdbcType="DOUBLE" />
+		<result column="totalMount" property="totalmount" jdbcType="DECIMAL" />
+		<result column="PURCHASING_ORDER_TIME" property="purchasingOrderTime"
+			jdbcType="TIMESTAMP" />
+		<result column="PURCHASING_PAYMENT_TIME" property="purchasingPaymentTime"
+			jdbcType="TIMESTAMP" />
+		<result column="PURCHASING_RECEIPT_TIME" property="purchasingReceiptTime"
+			jdbcType="TIMESTAMP" />
+		<result column="PURCHASING_GIVEOUT_TIME" property="purchasingGiveoutTime"
+			jdbcType="TIMESTAMP" />
+		<result column="CRAFTS_ORDER" property="craftsOrder" jdbcType="VARCHAR" />
+		<result column="PIECES_APPROVED" property="piecesApproved"
+			jdbcType="VARCHAR" />
+		<result column="fabricFreight" property="fabricfreight"
+			jdbcType="DECIMAL" />
+		<result column="KINDS_OF_FABRIC" property="kindsOfFabric"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+		<result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+		<result column="FOLWER_FACTORY" property="folwerFactory"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_IS_READY_STATUS" property="fabricIsReadyStatus"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_IS_READY_TIME" property="fabricIsReadyTime"
+			jdbcType="TIMESTAMP" />
+		<result column="FABRIC_FEEDBACK" property="fabricFeedback"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_ISSUE_STATE" property="fabrciIssueState"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getCountByPage" parameterType="com.warehouse.entity.FabricOutflowReady"
+		resultType="java.lang.Integer">
+		select count(*) from
+		fabric_outflow_ready where 1=1
+		<if test='wave!=null and wave!=""'>
+			and WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if test='fabricIsReadyStatus=="Y" or fabricIsReadyStatus=="y"'>
+			and FABRIC_IS_READY_STATUS ="已配备"
+		</if>
+		<if test='fabricIsReadyStatus=="N" or fabricIsReadyStatus=="n"'>
+			and FABRIC_IS_READY_STATUS !="已配备"
+		</if>
+		<if test='fabrciIssueState=="Y" or fabrciIssueState=="y"'>
+			and FABRIC_ISSUE_STATE='已发放'
+		</if>
+		<if test='fabrciIssueState=="N" or fabrciIssueState=="n"'>
+			and (FABRIC_ISSUE_STATE IS NULL OR FABRIC_ISSUE_STATE!='已发放')
+		</if>
+		and (DEL_TIME IS NULL OR DEL_TIME='')
+	</select>
+	<select id="getDataByPage" parameterType="com.warehouse.entity.FabricOutflowReady"
+		resultMap="BaseResultMap">
+		select * from
+		fabric_outflow_ready where 1=1
+		<if test='wave!=null and wave!=""'>
+			and WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if test='fabricIsReadyStatus=="Y" or fabricIsReadyStatus=="y"'>
+			and FABRIC_IS_READY_STATUS ="已配备"
+		</if>
+		<if test='fabricIsReadyStatus=="N" or fabricIsReadyStatus=="n"'>
+			and FABRIC_IS_READY_STATUS !="已配备"
+		</if>
+		<if test='fabrciIssueState=="Y" or fabrciIssueState=="y"'>
+			and FABRIC_ISSUE_STATE='已发放'
+		</if>
+		<if test='fabrciIssueState=="N" or fabrciIssueState=="n"'>
+			and (FABRIC_ISSUE_STATE IS NULL OR FABRIC_ISSUE_STATE!='已发放')
+		</if>
+		and (DEL_TIME IS NULL OR DEL_TIME='')
+		ORDER BY
+		FABRIC_IS_READY_STATUS
+		ASC,ADDITION_TIME DESC
+		LIMIT #{begin},#{end}
+	</select>
+
+	<update id="completeReady" parameterType="java.lang.Integer">
+		UPDATE
+		fabric_outflow_ready SET
+		FABRIC_IS_READY_TIME=now(),
+		FABRIC_IS_READY_STATUS='已配备',
+		UPDATE_TIME=NOW()
+		where id=#{id}
+	</update>
+	
+	<update id="completeSuccess" parameterType="java.lang.Integer">
+		UPDATE
+		fabric_outflow_ready SET
+		FABRIC_ISSUE_TIME=NOW(),
+		FABRIC_ISSUE_STATE='已发放',
+		UPDATE_TIME=NOW()
+		where id=#{id}
+	</update>
+	<update id="dbUpdateData" parameterType="com.warehouse.entity.FabricOutflowReady">
+		UPDATE
+		fabric_outflow_ready SET
+		<if test='parameter1!=null'>
+			PARAMETER1=#{parameter1},
+		</if>
+		<if test='parameter2!=null'>
+			PARAMETER2=#{parameter2},
+		</if>
+		<if test='parameter3!=null'>
+			PARAMETER3=#{parameter3},
+		</if>
+		<if test='parameter4!=null'>
+			PARAMETER4=#{parameter4},
+		</if>
+		<if test='parameter5!=null'>
+			PARAMETER5=#{parameter5},
+		</if>
+		<if test='parameter6!=null'>
+			PARAMETER6=#{parameter6},
+		</if>
+		<if test='parameter7!=null'>
+			PARAMETER7=#{parameter7},
+		</if>
+		<if test='parameter8!=null'>
+			PARAMETER8=#{parameter8},
+		</if>
+		<if test='parameter9!=null'>
+			PARAMETER9=#{parameter9},
+		</if>
+		<if test='parameter10!=null'>
+			PARAMETER10=#{parameter10},
+		</if>
+		<if test='parameter11!=null'>
+			PARAMETER11=#{parameter11},
+		</if>
+		<if test='parameter12!=null'>
+			PARAMETER12=#{parameter12},
+		</if>
+		<if test='parameter13!=null'>
+			PARAMETER13=#{parameter13},
+		</if>
+		<if test='parameter14!=null'>
+			PARAMETER14=#{parameter14},
+		</if>
+		<if test='parameter15!=null'>
+			PARAMETER15=#{parameter15},
+		</if>
+		<if test='parameter16!=null'>
+			PARAMETER16=#{parameter16},
+		</if>
+		<if test='parameter17!=null'>
+			PARAMETER17=#{parameter17},
+		</if>
+		<if test='parameter18!=null'>
+			PARAMETER18=#{parameter18},
+		</if>
+		<if test='totalCount!=null'>
+			TOTAL_COUNT=#{totalCount},
+		</if>
+		<if test='remarks!=null'>
+			REMARKS=#{remarks},
+		</if>
+		<if test='fabricFeedback!=null'>
+			FABRIC_FEEDBACK=#{fabricFeedback},
+		</if>
+		UPDATE_TIME=NOW()
+		where id=#{id}
+	</update>
+
+	<select id="toExcle" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from fabric_outflow_ready where id in ${idList}
+	</select>
+</mapper>

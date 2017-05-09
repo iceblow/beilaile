@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributionProductionMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.DistributionProduction" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="CLOTH_NAME" property="clothName" jdbcType="VARCHAR" />
+    <result column="ORINGINAL_WAVE" property="oringinalWave" jdbcType="VARCHAR" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="PRODUCT_IMG" property="productImg" jdbcType="VARCHAR" />
+    <result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+    <result column="SIZE_IMG" property="sizeImg" jdbcType="VARCHAR" />
+    <result column="ORDER_DETAILS" property="orderDetails" jdbcType="VARCHAR" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER" />
+    <result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+    <result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+    <result column="DISTRIBUTTION_FACTORY" property="distributtionFactory" jdbcType="VARCHAR" />
+    <result column="PLAN_START_MAKE_TIME" property="planStartMakeTime" jdbcType="VARCHAR" />
+    <result column="START_MAKE" property="startMake" jdbcType="VARCHAR" />
+    <result column="START_MAKE_TIME" property="startMakeTime" jdbcType="VARCHAR" />
+    
+    <result column="PLAN_IN_WAREHOUSE_TIME" property="planInWarehouseTime" jdbcType="VARCHAR" />
+    <result column="TRACKING_OFFICER" property="trackingOfficer" jdbcType="VARCHAR" />
+	<result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR"/> 
+	<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	<result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+	<result column="TACHE_START_TIME" property="tacheStartTime" jdbcType="VARCHAR" />
+    
+    <result column="S52" property="s52" jdbcType="INTEGER" />
+    <result column="S59" property="s59" jdbcType="INTEGER" />
+    <result column="S66" property="s66" jdbcType="INTEGER" />
+    <result column="S73" property="s73" jdbcType="INTEGER" />
+    <result column="S80" property="s80" jdbcType="INTEGER" />
+    <result column="S90" property="s90" jdbcType="INTEGER" />
+    <result column="S100" property="s100" jdbcType="INTEGER" />
+    <result column="S110" property="s110" jdbcType="INTEGER" />
+    <result column="S120" property="s120" jdbcType="INTEGER" />
+    <result column="S130" property="s130" jdbcType="INTEGER" />
+    <result column="S160" property="s160" jdbcType="INTEGER" />
+    <result column="S170" property="s170" jdbcType="INTEGER" />
+  </resultMap>
+  
+   <!-- 根据条件查询 -->
+  <select id="getDistributionProductionPage" resultMap="BaseResultMap" parameterType="map" >
+    select  *  from distribution_production where 1=1 
+     	AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+    
+		<if test='productCode != null and productCode !=""'>
+			 and PRODUCT_CODE like concat('%',#{productCode},'%')
+		</if>
+		
+		<if test='wave != null and wave !=""'>
+			 and wave like concat('%',#{wave},'%')
+		</if>
+		
+		<if test='clothName != null and clothName !=""'>
+		 	and CLOTH_NAME like concat('%',#{clothName},'%')
+		</if>
+		
+		<if test='trackingOfficer != null and trackingOfficer!= ""'>
+			 and TRACKING_OFFICER like concat('%',#{trackingOfficer},'%')
+		</if>
+		
+		<if test='distributtionFactory != null and distributtionFactory !=""  and distributtionFactory !="Y" and distributtionFactory !="N" '>
+			and DISTRIBUTTION_FACTORY like concat('%',#{distributtionFactory},'%')
+		</if>
+		<if test='distributtionFactory =="N" '>
+			AND(DISTRIBUTTION_FACTORY ='' OR DISTRIBUTTION_FACTORY IS NULL)
+		</if>
+		<if test='distributtionFactory =="Y" '>
+			AND DISTRIBUTTION_FACTORY !=''
+		</if>
+		
+		<if test='releaseTime != null and releaseTime !=""'>
+			 and RELEASE_TIME like concat('%',#{releaseTime},'%')
+		</if>
+		<if test='orderType != null and orderType !=""'>
+			 and ORDER_TYPE like concat('%',#{orderType},'%')
+		</if>
+		<if test='startMake != null and startMake !=""'>
+			 and START_MAKE like concat('%',#{startMake},'%')
+		</if>
+  	     order by START_MAKE_TIME ASC ,RELEASE_TIME   ASC , order_grade DESC 
+  	     limit #{begin},#{end}
+  </select>
+  
+   <!-- 查询总条数 -->
+  <select id="selectAllCount" resultType="java.lang.Integer" parameterType="com.warehouse.entity.DistributionProduction">
+	select count(*) from distribution_production  where 1=1
+		 AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		 AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+	
+		<if test='productCode != null and productCode !=""'>
+		 	and PRODUCT_CODE like concat('%',#{productCode},'%')
+		</if>
+		
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave,jdbcType=VARCHAR}, "%")
+		</if>
+		
+		<if test='clothName != null and clothName !=""'>
+			 and CLOTH_NAME like concat('%',#{clothName},'%')
+		</if>
+
+		<if test='trackingOfficer!=null and trackingOfficer!=""'>
+			AND TRACKING_OFFICER LIKE CONCAT("%" ,#{trackingOfficer,jdbcType=VARCHAR}, "%")
+		</if>
+		
+		<if test='distributtionFactory != null and distributtionFactory !="" and distributtionFactory !="Y" and distributtionFactory !="N" '>
+			and DISTRIBUTTION_FACTORY like concat('%',#{distributtionFactory},'%')
+		</if>
+		<if test='distributtionFactory =="N" '>
+			AND(DISTRIBUTTION_FACTORY ='' OR DISTRIBUTTION_FACTORY IS NULL)
+		</if>
+		<if test='distributtionFactory =="Y" '>
+			AND DISTRIBUTTION_FACTORY !=''
+		</if>
+		
+		<if test='releaseTime != null and releaseTime !=""'>
+		 	and RELEASE_TIME like concat('%',#{releaseTime},'%')
+		</if>
+		
+		<if test='orderType != null and orderType !=""'>
+		 	and ORDER_TYPE like concat('%',#{orderType},'%')
+		</if>
+		
+		<if test='startMake != null and startMake !=""'>
+		 	and START_MAKE like concat('%',#{startMake},'%')
+		</if>
+  </select>
+  
+  <!-- 根据id查询 -->
+  <select id="select" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  		 select *  from distribution_production
+  		  where id=#{id}
+  </select>
+  
+  
+  <select id="toExcelNum" parameterType="com.warehouse.entity.DistributionProduction" resultType="java.lang.Integer">
+  	select count(*) from distribution_production  where 1=1
+  		 AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		 AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+  		
+		<if test='productCode != null and productCode !=""'>
+		 	and PRODUCT_CODE like concat('%',#{productCode},'%')
+		</if>
+		
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave,jdbcType=VARCHAR}, "%")
+		</if>
+		
+		<if test='clothName != null and clothName !=""'>
+			 and CLOTH_NAME like concat('%',#{clothName},'%')
+		</if>
+
+		<if test='trackingOfficer!=null and trackingOfficer!=""'>
+			AND TRACKING_OFFICER LIKE CONCAT("%" ,#{trackingOfficer,jdbcType=VARCHAR}, "%")
+		</if>
+		
+		<if test='distributtionFactory != null and distributtionFactory !=""  and distributtionFactory !="Y" and distributtionFactory !="N" '>
+			and DISTRIBUTTION_FACTORY like concat('%',#{distributtionFactory},'%')
+		</if>
+		<if test='distributtionFactory =="N" '>
+			AND(DISTRIBUTTION_FACTORY ='' OR DISTRIBUTTION_FACTORY IS NULL)
+		</if>
+		<if test='distributtionFactory =="Y" '>
+			AND DISTRIBUTTION_FACTORY !=''
+		</if>
+		
+		<if test='releaseTime != null and releaseTime !=""'>
+		 	and RELEASE_TIME like concat('%',#{releaseTime},'%')
+		</if>
+		
+		<if test='orderType != null and orderType !=""'>
+		 	and ORDER_TYPE like concat('%',#{orderType},'%')
+		</if>
+		
+		<if test='startMake != null and startMake !=""'>
+		 	and START_MAKE like concat('%',#{startMake},'%')
+		</if>
+  </select>
+  
+  <select id="toExcel" parameterType="com.warehouse.entity.DistributionProduction" resultMap="BaseResultMap">
+  		select  *  from distribution_production where 1=1
+  		 	AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+			AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test='productCode != null and productCode !="" '>
+			 and PRODUCT_CODE like concat('%',#{productCode},'%')
+		</if>
+		
+		<if test='wave != null and wave !=""'>
+			 and wave like concat('%',#{wave},'%')
+		</if>
+		
+		<if test='clothName != null and clothName !=""'>
+		 	and CLOTH_NAME like concat('%',#{clothName},'%')
+		</if>
+		
+		<if test='trackingOfficer != null and trackingOfficer!= ""'>
+			 and TRACKING_OFFICER like concat('%',#{trackingOfficer},'%')
+		</if>
+		
+		<if test='distributtionFactory != null and distributtionFactory !="" and distributtionFactory !="Y" and distributtionFactory !="N" '>
+			and DISTRIBUTTION_FACTORY like concat('%',#{distributtionFactory},'%')
+		</if>
+		<if test='distributtionFactory =="N" '>
+			AND(DISTRIBUTTION_FACTORY ='' OR DISTRIBUTTION_FACTORY IS NULL)
+		</if>
+		<if test='distributtionFactory =="Y" '>
+			AND DISTRIBUTTION_FACTORY !=''
+		</if>
+		
+		<if test='releaseTime != null and releaseTime !=""'>
+			 and RELEASE_TIME like concat('%',#{releaseTime},'%')
+		</if>
+		<if test='orderType != null and orderType !=""'>
+			 and ORDER_TYPE like concat('%',#{orderType},'%')
+		</if>
+		<if test='startMake != null and startMake !=""'>
+			 and START_MAKE like concat('%',#{startMake},'%')
+		</if>
+  	     order by START_MAKE_TIME ASC ,RELEASE_TIME ASC ,ORDER_GRADE DESC 
+  	     
+  </select>
+  
+   
+   <!-- 修改 -->
+  <update id="updateDistributionProduction" parameterType="com.warehouse.entity.DistributionProduction" >
+    update distribution_production
+    <set >
+      <if test="productCode != null" >
+        PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="clothName != null" >
+        CLOTH_NAME = #{clothName,jdbcType=VARCHAR},
+      </if>
+      <if test="oringinalWave != null" >
+        ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+      </if>
+      <if test="wave != null" >
+        WAVE = #{wave,jdbcType=VARCHAR},
+      </if>
+      <if test="productImg != null" >
+        PRODUCT_IMG = #{productImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleImg != null" >
+        SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeImg != null" >
+        SIZE_IMG = #{sizeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDetails != null" >
+        ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderGrade != null" >
+        ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="distributtionFactory != null" >
+        DISTRIBUTTION_FACTORY = #{distributtionFactory,jdbcType=VARCHAR},
+      </if>
+      <if test="planStartMakeTime != null" >
+        PLAN_START_MAKE_TIME = #{planStartMakeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="startMake != null" >
+        START_MAKE = #{startMake,jdbcType=VARCHAR},
+      </if>
+      <if test="startMakeTime != null" >
+        START_MAKE_TIME = #{startMakeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="planInWarehouseTime != null" >
+        PLAN_IN_WAREHOUSE_TIME =#{planInWarehouseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingOfficer != null" >
+     	TRACKING_OFFICER =  #{trackingOfficer,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+      	REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+      	ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="s52 != null  " >
+      	S52 = #{s52,jdbcType=INTEGER},
+      </if>
+     <if test="s59 != null  " >
+      	S59 = #{s59,jdbcType=INTEGER},
+      </if>
+      <if test="s66 != null  " >
+      	S66 = #{s66,jdbcType=INTEGER},
+      </if>
+      <if test="s73 != null" >
+      	S73 = #{s73,jdbcType=INTEGER},
+      </if>
+      <if test="s80 != null" >
+      	S80 = #{s80,jdbcType=INTEGER},
+      </if>
+      <if test="s90 != null" >
+      	S90 = #{s90,jdbcType=INTEGER},
+      </if>
+      <if test="s100 != null" >
+      	S100 = #{s100,jdbcType=INTEGER},
+      </if>
+      <if test="s110 != null" >
+      	S110 = #{s110,jdbcType=INTEGER},
+      </if>
+      <if test="s120 != null" >
+      	S120 = #{s120,jdbcType=INTEGER},
+      </if>
+      <if test="s130 != null" >
+      	S130 = #{s130,jdbcType=INTEGER},
+      </if>
+      <if test="s160 != null" >
+      	S160 = #{s160,jdbcType=INTEGER},
+      </if>
+      <if test="s170 != null" >
+      	S170 = #{s170,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

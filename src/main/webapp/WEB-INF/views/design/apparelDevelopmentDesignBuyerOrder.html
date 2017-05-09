@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>买手订单</title> <@p.cache/> <@p.css/> <@p.js/>
+    <script type="text/javascript" src="/res/js/design/apparelDevelopmentDesignBuyerOrder.js"></script>
+   
+</head>
+<body>
+<@p.top/>
+<div class="main-container" id="main-container">
+				<!-- 头部 -->
+			    <div class="main-container-inner">
+			    	<!-- 静态引入左部控制台 -->
+			        <@p.left/>
+			        <!-- 主体页面 -->
+			        <div class="main-content">
+			        			<!-- 最上层静态Home栏 -->
+					            <div class="breadcrumbs" id="breadcrumbs">
+					                <ul class="breadcrumb">
+					                    <li><i class="icon-home home-icon"> </i> <a href="#">
+					                        Home </a></li>
+					                    <li><a href="#"> Tables </a></li>
+					                    <li class="active">买手订单</li>
+					                </ul>
+					                <div class="nav-search" id="nav-search"></div>
+					            </div>
+					            
+					            <!-- 添加按钮 -->
+					            <div class="col-md-12">
+					                <button id="add_button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#myModal">添加   </button>
+					            </div>
+					            
+					            <!-- ========查询模块 ===========-->
+					            <div class="col-md-12">
+					                <form enctype="multipart/form-data" role="form" action=""
+					                      id="form-anyVal" method="post">
+					                   
+					                    
+					                    <div id="val-input-empty" class="col-md-12">
+					                        <div class="col-md-2">
+					                            <label>商品编号</label> <input type="text" name="goodsId" />
+					                        </div>
+					                     
+					                        <div class="col-md-2">
+													<span class="input-group-btn">
+														<button id="anyVal-btn" class="btn btn-default" type="button">查询</button>
+													</span>
+					                        </div>
+					                    </div>
+					                    <!-- 隐藏区域，设置当前页和页面大小 -->
+					                    <div>
+					                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="1"> 
+					                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="10">
+					                    </div>
+					                </form>
+					            </div>
+					             <!-- =======查询模块 结束 ======-->
+					             
+								<!-- ==================数据部分，表格 ========================-->
+					            <div class="page-content">
+					                <div class="col-xs-12">
+					                    <div class="tabbable">
+					                        <table class="table  table-bordered">
+					                            <thead>
+					                            <tr>
+					                                <th>波次号</th>
+					                                <th>商品编号</th>
+					                                <th>设计图</th>
+					                                <th style="width:50px;text-align: center;">连接</th>
+					                                <th style="width:100px;">需求描述</th>
+					                                <th>52码</th>
+					                                <th>59码</th>
+					                                <th>66码</th>
+					                                <th>73码</th>
+					                                <th>80码</th>
+					                                <th>90码</th>
+					                                <th>100码</th>
+					                                <th>110码</th>
+					                                <th>120码</th>
+					                                <th>130码</th>
+					                                <th>160码</th>
+					                                <th>170码</th>
+					                                <th>总件数</th>
+					                                <th>订单状态</th>
+					                                <th>添加订单时间</th>
+					                                <th>采购时间</th>
+					                                <th>取消订单时间</th>
+					                                <th>操作</th>
+					                            </tr>
+					                            </thead>
+					                            <tbody class="table_app" id="t_body">
+					                            </tbody>
+					                        </table>
+					                        <ul class="pager pagination-lg tcdPageCode">
+					                        </ul>
+					                    </div>
+					                </div>
+					            </div>
+					            <!--==================表格 结束============================-->
+			          </div>
+			    </div>
+	    <!--添加/修改》》模态框（Modal） -->
+	    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                    <h4 class="modal-title" id="modalTitle">添加</h4>
+	                </div>
+	                <form enctype="multipart/form-data"  id="form-input" >
+		                    <div class="modal-body">
+		                    	<!-- 数据 -->
+		                        <div class="col-md-12">
+			                            <div class="col-md-4">
+			                                <label for="">波次号</label> <input type="text" class="form-control" name="wave" id="wave"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="wave">商品编号</label> <input type="text"  class="form-control" name="goodsId" id="goodsId"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">链接</label> <input type="text" class="form-control" name="link" id="link"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">52码(件)</label> <input type="text"  onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code52"  id="code52"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">59码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code59" id="code59" />
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">66码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code66"  id="code66"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">73码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code73"  id="code73"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">80码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code80"  id="code80"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">90码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code90"  id="code90"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">100码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code100" id="code100"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">110码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code110"  id="code110"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">120码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code120" id="code120"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">130码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code130"  id="code130"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">160码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code160"  id="code160"/>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">170码(件)</label> <input type="text" onkeyup="value=value.replace(/\D/g,'')" class="form-control" name="code170"  id="code170"/>
+			                            </div>
+			                            <div>
+			                            	设计图<input type="file" name="file1" id="up">
+			                            	<label for="image"> 图片预览 </label>
+											<div style="width: 120px; height: 120px;">
+												<img id="ImgPr" width="120" height="120" src="" />
+											</div>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <label for="">需求描述</label> 
+			                                <textarea class="form-control" rows="3" name="requireDescription" id="requireDescription"style="width:490px;"></textarea>
+			                            </div>
+					                     <!--id这个数据的流向
+					                      	1.刚查询出来时，字符串拼接时,通过<button class="btn btn-primary " onclick="update(\' '+data[i].id+' \')">修改订单</button><br>'; 
+					                      	     来触发，只要点击修改按钮或者删除按钮，id就会通过onclick的点击事件传递到修改方法或者删除方法里
+					                      	2.再通过这个id去数据库里查数据，并赋值到模态框中，
+					                     		修改时点击提交按钮是提交表单的提交方式，如果这里不加id，还需要单独提交一个id值，不然没法修改，因为修改需要用到id
+					                     	3.提交表单修改数据，这时id跟随表单一起提交上去，作为修改的条件
+					                     	   -->
+				                         <input type="hidden" name="id" id="obj_hidden_id" value=""/>
+			                    </div>
+		                    </div>
+		                    <!-- 提交，关闭 按钮 -->
+		                    <div class="form-group" style="padding: 0 0 0 230px">
+		                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                        <button type="submit" id="submit-btn" name="submit" class="btn btn-primary" data-dismiss="modal">提交</button>
+		                    </div>
+	                </form>
+	            </div>
+	        </div>
+	    </div>
+</div>
+</body>
+</html>

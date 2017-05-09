@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ApparelDevelopmentManagementCollectDAO">
+	<select id="select"
+		resultType="com.warehouse.entity.ApparelDevelopmentManagementCollect">
+		select * from apparel_development_management_collect
+		where
+		date >= DATE_SUB(curdate(), INTERVAL 1 DAY) and date &lt;
+		current_date()
+	</select>
+</mapper>

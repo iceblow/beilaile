@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.CuttingDAO">
+	<!-- 根據編號查詢出 數據量 -->
+	<select id="getCutCountByBid" parameterType="com.warehouse.entity.Cutting"
+		resultType="java.lang.Integer">
+		select count(1) from
+		cuttingDemo where 1=1
+		<if
+			test='b_id!=null and b_id!="" and b_id !="Y" and b_id !="y" and b_id !="N" and b_id !="n"'>
+			AND b_id LIKE CONCAT("%",#{b_id},"%")
+		</if>
+		<if test='b_id=="Y" or b_id=="y"'>
+			AND (b_id IS NOT NULL AND b_id !="")
+		</if>
+		<if test='b_id=="N" or b_id=="n"'>
+			AND (b_id IS NULL OR b_id="")
+		</if>
+		<if
+			test='CuttingMan!=null and CuttingMan!="" and CuttingMan !="Y" and CuttingMan !="y" and CuttingMan !="N" and CuttingMan !="n"'>
+			AND CuttingMan LIKE CONCAT("%",#{CuttingMan},"%")
+		</if>
+		<if test='CuttingMan=="Y" or CuttingMan=="y"'>
+			AND (CuttingMan IS NOT NULL AND CuttingMan !="")
+		</if>
+		<if test='CuttingMan=="N" or CuttingMan=="n"'>
+			AND (CuttingMan IS NULL OR CuttingMan="")
+		</if>
+	</select>
+
+	<!-- 根據波次號分頁查詢 -->
+	<select id="getAllByBid" parameterType="com.warehouse.entity.Cutting"
+		resultType="com.warehouse.entity.Cutting">
+		SELECT * FROM cuttingdemo where 1=1
+		<if
+			test='b_id!=null and b_id!="" and b_id !="Y" and b_id !="y" and b_id !="N" and b_id !="n"'>
+			AND b_id LIKE CONCAT("%",#{b_id},"%")
+		</if>
+		<if test='b_id=="Y" or b_id=="y"'>
+			AND (b_id IS NOT NULL AND b_id !="")
+		</if>
+		<if test='b_id=="N" or b_id=="n"'>
+			AND (b_id IS NULL OR b_id="")
+		</if>
+		<if
+			test='CuttingMan!=null and CuttingMan!="" and CuttingMan !="Y" and CuttingMan !="y" and CuttingMan !="N" and CuttingMan !="n"'>
+			AND CuttingMan LIKE CONCAT("%",#{CuttingMan},"%")
+		</if>
+		<if test='CuttingMan=="Y" or CuttingMan=="y"'>
+			AND (CuttingMan IS NOT NULL AND CuttingMan !="")
+		</if>
+		<if test='CuttingMan=="N" or CuttingMan=="n"'>
+			AND (CuttingMan IS NULL OR CuttingMan="")
+		</if>
+		order by id
+		desc LIMIT #{begin},#{end}
+	</select>
+
+	<!-- 全查询方法 -->
+	<select id="getAll" resultType="com.warehouse.entity.Cutting">
+		select * from cuttingDemo
+	</select>
+
+	<!-- 添加方法 -->
+	<insert id="add" parameterType="com.warehouse.entity.Cutting">
+		insert into cuttingDemo
+		values(NULL,#{date},#{b_id},#{type},'',#{S52},#{S59},#{S66},#{S73},#{S80},#{S90},#{S100},#{S110},#{S120},#{S130},#{S160},#{S170},#{Num},#{OneCursumption},#{oneCursumptionB},#{oneCursumptionC},#{oneCursumptionD},#{oneCursumptionE},#{FlowerOutTime},#{FlowerInTime},#{wages},#{InTime},#{CuttingMan},#{PriceOutingTime},#{packets},#{shelves},#{remark},'未完成')
+	</insert>
+
+	<!-- 修改方法 -->
+	<update id="update" parameterType="com.warehouse.entity.Cutting">
+		update cuttingdemo set
+		date=#{date},b_id=#{b_id},type=#{type},S52=#{S52},S59=#{S59},S66=#{S66},S73=#{S73},S80=#{S80},S90=#{S90},S100=#{S100},S110=#{S110},S120=#{S120},S130=#{S130},S160=#{S160},S170=#{S170},Num=#{Num},OneCursumption=#{OneCursumption},
+		OneCursumptionB=#{OneCursumptionB},OneCursumptionC=#{OneCursumptionC},OneCursumptionD=#{OneCursumptionD},OneCursumptionE=#{OneCursumptionE},FlowerOutTime=#{FlowerOutTime},FlowerInTime=#{FlowerInTime},wages=#{wages},InTime=#{InTime},CuttingMan=#{CuttingMan},PriceOutingTime=#{PriceOutingTime},packets=#{packets},shelves=#{shelves},remark=#{remark}
+		where id=#{id}
+	</update>
+
+	<!-- 查询所有数据量 -->
+	<select id="getCutCounts" resultType="java.lang.Integer">
+		select count(1) from
+		cuttingdemo
+	</select>
+
+	<!-- 所有数据的分页查询 -->
+	<select id="getAllByPage" parameterType="com.warehouse.util.Pagess"
+		resultType="com.warehouse.entity.Cutting">
+		SELECT * FROM cuttingdemo order by id desc LIMIT
+		#{begin},#{end}
+	</select>
+
+	<!-- 根据编号删除裁床信息 -->
+	<delete id="delCut" parameterType="java.lang.Integer">
+		DELETE FROM cuttingdemo where
+		id=#{id};
+	</delete>
+
+	<select id="getOne" resultType="com.warehouse.entity.Cutting">
+		select * from cuttingdemo where
+		id=#{id}
+	</select>
+
+	<!-- 完成方法 -->
+	<update id="complete" parameterType="com.warehouse.entity.Cutting">
+		update cuttingdemo set
+		completeType='已完成'
+		where id=#{id}
+	</update>
+
+</mapper>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.PrintingQuoteMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.PrintingQuote">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="DESIGNER" property="designer" jdbcType="VARCHAR" />
+		<result column="REFERENCE_PRINTING" property="referencePrinting"
+			jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="PATTERN_CRAFTS_ORDER" property="patternCraftsOrder"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDERS" property="orders" jdbcType="INTEGER" />
+		<result column="PRINTING_TYPE" property="printingType"
+			jdbcType="VARCHAR" />
+		<result column="PRINTING_ADDRESS" property="printingAddress"
+			jdbcType="VARCHAR" />
+		<result column="PRINTING_REQUIRE" property="printingRequire"
+			jdbcType="VARCHAR" />
+		<result column="PRINTING_FACTORY" property="printingFactory"
+			jdbcType="VARCHAR" />
+		<result column="PRINTING_UNIT_PRICE" property="printingUnitPrice"
+			jdbcType="VARCHAR" />
+		<result column="OUT_SAMPLE_DATE" property="outSampleDate"
+			jdbcType="VARCHAR" />
+		<result column="IN_SAMPLE_DATE" property="inSampleDate"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_PIECE" property="confirmPiece"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_PIECE_TIME" property="confirmPieceTime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, WAVE, PRODUCT_CODE, DESIGNER, REFERENCE_PRINTING,
+		DESIGN_IMG,
+		SAMPLE_IMG, PATTERN_CRAFTS_ORDER,
+		ORDER_DETAILS, ORDERS,
+		PRINTING_TYPE, PRINTING_ADDRESS, PRINTING_REQUIRE,
+		PRINTING_FACTORY,
+		PRINTING_UNIT_PRICE, OUT_SAMPLE_DATE, IN_SAMPLE_DATE, CONFIRM_PIECE,
+		CONFIRM_PIECE_TIME
+	</sql>
+	<!-- 得到数据量 -->
+	<select id="getCount" parameterType="com.warehouse.entity.PrintingQuote"
+		resultType="java.lang.Integer">
+		select count(*) from printing_quote where 1=1
+		<if test='wave!=null and wave!=""'>
+			and WAVE like concat("%",#{wave},"%")
+		</if>
+		<if
+			test='printingType!="" and printingType!=null and printingType!="Y" and printingType!="y" and printingType!="N" and printingType!="n"'>
+			and PRINTING_TYPE like concat("%",#{printingType},"%")	
+		</if>
+		<if test='printingType=="Y" or printingType=="y"'>
+			and (PRINTING_TYPE IS NOT NULL AND PRINTING_TYPE!="") 
+		</if>
+		<if test='printingType=="N" or printingType=="n"'>
+			and (PRINTING_TYPE IS NULL OR PRINTING_TYPE="")
+		</if>
+		<!-- 设计师 -->
+		<if test='designer!="" and designer!=null'>
+			and DESIGNER LIKE CONCAT("%",#{designer},"%")
+		</if>
+		<if
+			test='printingFactory!="" and printingFactory!=null and printingFactory!="Y" and printingFactory!="y" and printingFactory!="N" and printingFactory!="n"'>
+			and PRINTING_FACTORY like concat("%",#{printingFactory},"%")	
+		</if>
+		<if test='printingFactory=="Y" or printingFactory=="y"'>
+			and (PRINTING_FACTORY IS NOT NULL AND PRINTING_FACTORY!="") 
+		</if>
+		<if test='printingFactory=="N" or printingFactory=="n"'>
+			and (PRINTING_FACTORY IS NULL OR PRINTING_FACTORY="")
+		</if>
+		<!-- 给样时间 -->
+		<if test='outSampleDate=="Y" or outSampleDate=="y"'>
+			and (OUT_SAMPLE_DATE IS NOT NULL AND OUT_SAMPLE_DATE!="") 
+		</if>
+		<if test='outSampleDate=="N" or outSampleDate=="n"'>
+			and (OUT_SAMPLE_DATE IS NULL OR OUT_SAMPLE_DATE="")
+		</if>
+		<!-- 回样时间 -->
+		<if test='inSampleDate=="Y" or inSampleDate=="y"'>
+			and (IN_SAMPLE_DATE IS NOT NULL AND IN_SAMPLE_DATE!="") 
+		</if>
+		<if test='inSampleDate=="N" or inSampleDate=="n"'>
+			and (IN_SAMPLE_DATE IS NULL OR IN_SAMPLE_DATE="")
+		</if>
+	</select>
+
+	<!-- 分页查询数据 -->
+	<select id="getDataByPage" parameterType="com.warehouse.entity.PrintingQuote"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from printing_quote where 1=1
+		<if test='wave!=null and wave!=""'>
+			and WAVE like concat("%",#{wave},"%")
+		</if>
+		<if
+			test='printingType!="" and printingType!=null and printingType!="Y" and printingType!="y" and printingType!="N" and printingType!="n"'>
+			and PRINTING_TYPE like concat("%",#{printingType},"%")	
+		</if>
+		<if test='printingType=="Y" or printingType=="y"'>
+			and (PRINTING_TYPE IS NOT NULL AND PRINTING_TYPE!="") 
+		</if>
+		<if test='printingType=="N" or printingType=="n"'>
+			and (PRINTING_TYPE IS NULL OR PRINTING_TYPE="")
+		</if>
+		<!-- 设计师 -->
+		<if test='designer!="" and designer!=null'>
+			and DESIGNER LIKE CONCAT("%",#{designer},"%")
+		</if>
+		<if
+			test='printingFactory!="" and printingFactory!=null and printingFactory!="Y" and printingFactory!="y" and printingFactory!="N" and printingFactory!="n"'>
+			and PRINTING_FACTORY like concat("%",#{printingFactory},"%")	
+		</if>
+		<if test='printingFactory=="Y" or printingFactory=="y"'>
+			and (PRINTING_FACTORY IS NOT NULL AND PRINTING_FACTORY!="") 
+		</if>
+		<if test='printingFactory=="N" or printingFactory=="n"'>
+			and (PRINTING_FACTORY IS NULL OR PRINTING_FACTORY="")
+		</if>
+		<!-- 给样时间 -->
+		<if test='outSampleDate=="Y" or outSampleDate=="y"'>
+			and (OUT_SAMPLE_DATE IS NOT NULL AND OUT_SAMPLE_DATE!="") 
+		</if>
+		<if test='outSampleDate=="N" or outSampleDate=="n"'>
+			and (OUT_SAMPLE_DATE IS NULL OR OUT_SAMPLE_DATE="")
+		</if>
+		<!-- 回样时间 -->
+		<if test='inSampleDate=="Y" or inSampleDate=="y"'>
+			and (IN_SAMPLE_DATE IS NOT NULL AND IN_SAMPLE_DATE!="") 
+		</if>
+		<if test='inSampleDate=="N" or inSampleDate=="n"'>
+			and (IN_SAMPLE_DATE IS NULL OR IN_SAMPLE_DATE="")
+		</if>
+		ORDER BY CONFIRM_PIECE DESC,WAVE ASC LIMIT
+		#{begin},#{end}
+	</select>
+
+	<!-- 根据id查询单个 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from printing_quote
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- 根据传入的字段修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.PrintingQuote">
+		update printing_quote
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="designer != null">
+				DESIGNER = #{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="referencePrinting != null">
+				REFERENCE_PRINTING =
+				#{referencePrinting,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="patternCraftsOrder != null">
+				PATTERN_CRAFTS_ORDER =
+				#{patternCraftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				ORDERS = #{orders,jdbcType=INTEGER},
+			</if>
+			<if test="printingType != null">
+				PRINTING_TYPE = #{printingType,jdbcType=VARCHAR},
+			</if>
+			<if test="printingAddress != null">
+				PRINTING_ADDRESS = #{printingAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="printingRequire != null">
+				PRINTING_REQUIRE = #{printingRequire,jdbcType=VARCHAR},
+			</if>
+			<if test="printingFactory != null">
+				PRINTING_FACTORY = #{printingFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="printingUnitPrice != null">
+				PRINTING_UNIT_PRICE =
+				#{printingUnitPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="outSampleDate != null">
+				OUT_SAMPLE_DATE = #{outSampleDate,jdbcType=VARCHAR},
+			</if>
+			<if test="inSampleDate != null">
+				IN_SAMPLE_DATE = #{inSampleDate,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmPiece != null">
+				CONFIRM_PIECE = #{confirmPiece,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmPieceTime != null">
+				CONFIRM_PIECE_TIME =
+				#{confirmPieceTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 修改所有 -->
+	<update id="updateByPrimaryKey" parameterType="com.warehouse.entity.PrintingQuote">
+		update
+		printing_quote
+		set WAVE = #{wave,jdbcType=VARCHAR},
+		PRODUCT_CODE =
+		#{productCode,jdbcType=VARCHAR},
+		DESIGNER =
+		#{designer,jdbcType=VARCHAR},
+		REFERENCE_PRINTING =
+		#{referencePrinting,jdbcType=VARCHAR},
+		DESIGN_IMG =
+		#{designImg,jdbcType=VARCHAR},
+		SAMPLE_IMG =
+		#{sampleImg,jdbcType=VARCHAR},
+		PATTERN_CRAFTS_ORDER =
+		#{patternCraftsOrder,jdbcType=VARCHAR},
+		ORDER_DETAILS =
+		#{orderDetails,jdbcType=VARCHAR},
+		ORDERS = #{orders,jdbcType=INTEGER},
+		PRINTING_TYPE = #{printingType,jdbcType=VARCHAR},
+		PRINTING_ADDRESS =
+		#{printingAddress,jdbcType=VARCHAR},
+		PRINTING_REQUIRE =
+		#{printingRequire,jdbcType=VARCHAR},
+		PRINTING_FACTORY =
+		#{printingFactory,jdbcType=VARCHAR},
+		PRINTING_UNIT_PRICE =
+		#{printingUnitPrice,jdbcType=VARCHAR},
+		OUT_SAMPLE_DATE =
+		#{outSampleDate,jdbcType=VARCHAR},
+		IN_SAMPLE_DATE =
+		#{inSampleDate,jdbcType=VARCHAR},
+		CONFIRM_PIECE =
+		#{confirmPiece,jdbcType=VARCHAR},
+		CONFIRM_PIECE_TIME =
+		#{confirmPieceTime,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 确认报价 -->
+	<update id="confirmPiece" parameterType="com.warehouse.entity.PrintingQuote">
+		update printing_quote
+		set
+		CONFIRM_PIECE='已确认',
+		CONFIRM_PIECE_TIME=CURDATE()
+		where ID=#{id}
+	</update>
+	
+	<!-- 删除报价信息 -->
+	<delete id="delDataByWave" parameterType="String">
+		DELETE FROM printing_quote WHERE WAVE=#{wave}
+	</delete>
+</mapper>

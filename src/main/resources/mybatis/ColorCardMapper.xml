@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ColorCardMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.ColorCard">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="add_Color_Card" property="addColorCard"
+			jdbcType="VARCHAR" />
+		<result column="color_Card_Code" property="colorCardCode"
+			jdbcType="VARCHAR" />
+		<result column="color_Card_Name" property="colorCardName"
+			jdbcType="VARCHAR" />
+		<result column="supplier_Code" property="supplierCode"
+			jdbcType="VARCHAR" />
+		<result column="supplier_name" property="supplierName"
+			jdbcType="VARCHAR" />
+		<result column="create_Time" property="createTime" jdbcType="VARCHAR" />
+		<result column="founder" property="founder" jdbcType="VARCHAR" />
+		<result column="modify_Time" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="modify_Operator" property="modifyOperator"
+			jdbcType="VARCHAR" />
+		<result column="delete_Time" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="delete_Operator" property="deleteOperator"
+			jdbcType="VARCHAR" />
+		<result column="color_Card_Status" property="colorCardStatus"
+			jdbcType="INTEGER" />
+		<result column="fabricLength" property="fabricLength" jdbcType="DOUBLE" />
+		<result column="gramWeight" property="gramWeight" jdbcType="DOUBLE" />
+		<result column="kilogramMeter" property="kilogramMeter" jdbcType="DOUBLE" />
+		<result column="cardCode" property="cardCode" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, add_Color_Card, color_Card_Code, color_Card_Name,
+		supplier_Code,supplier_name,
+		create_Time,
+		founder, modify_Time,
+		modify_Operator,
+		delete_Time, delete_Operator,
+		color_Card_Status,fabricLength,gramWeight,kilogramMeter,cardCode
+	</sql>
+	<select id="findColorCardBySupplierCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from color_card
+		where supplier_Code =
+		#{supplierCode,jdbcType=VARCHAR}
+	</select>
+	<select id="findColorCardByColorCardName" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from color_card
+		where color_Card_Name =
+		#{colorCardName,jdbcType=VARCHAR}
+	</select>
+	<select id="findColorCardByAll" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from color_card
+	</select>
+	<select id="findColorCardByColorCardCode" resultType="Integer"
+		parameterType="java.lang.String">
+		select
+		COUNT(0)
+		from color_card
+		where color_Card_Code =
+		#{colorCardCode,jdbcType=VARCHAR} and
+		supplier_Code =
+		#{supplierCode,jdbcType=VARCHAR}
+	</select>
+	<select id="getColorCardByPageCount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM color_card
+		WHERE color_Card_Status = 1 AND 1=1
+		<if test='colorCardName != null and colorCardName != ""'>
+			AND color_Card_Name LIKE
+			CONCAT(CONCAT('%',#{colorCardName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierCode != null and supplierCode != ""'>
+			AND supplier_Code LIKE
+			CONCAT(CONCAT('%',#{supplierCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierName != null and supplierName != ""'>
+			AND supplier_name LIKE
+			CONCAT(CONCAT('%',#{supplierName,jdbcType=VARCHAR}),'%')
+		</if>
+	</select>
+	<select id="findColorCardById" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select * from color_card
+		where id =
+		#{id,jdbcType=INTEGER}
+	</select>
+	<select id="getColorCardByColorCardCode" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select * from color_card
+		where color_Card_Code =
+		#{colorCardCode,jdbcType=INTEGER}
+	</select>
+	<select id="findConditionColorCardByPage" resultMap="BaseResultMap"
+		parameterType="Map">
+		select * from color_card
+		WHERE color_Card_Status = 1 AND 1=1
+		<if test='colorCardName != null and colorCardName != ""'>
+			AND color_Card_Name LIKE
+			CONCAT(CONCAT('%',#{colorCardName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierCode != null and supplierCode != ""'>
+			AND supplier_Code LIKE
+			CONCAT(CONCAT('%',#{supplierCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierName != null and supplierName != ""'>
+			AND supplier_name LIKE
+			CONCAT(CONCAT('%',#{supplierName,jdbcType=VARCHAR}),'%')
+		</if>
+		ORDER BY create_time DESC LIMIT #{pageNow},#{pageSize}
+	</select>
+	<insert id="addColorCard" parameterType="com.warehouse.entity.ColorCard">
+		insert into color_card
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="addColorCard != null">
+				add_Color_Card,
+			</if>
+			<if test="colorCardCode != null">
+				color_Card_Code,
+			</if>
+			<if test="colorCardName != null">
+				color_Card_Name,
+			</if>
+			<if test="supplierCode != null">
+				supplier_Code,
+			</if>
+			<if test="supplierName != null">
+				supplier_name,
+			</if>
+			<if test="createTime != null">
+				create_Time,
+			</if>
+			<if test="founder != null">
+				founder,
+			</if>
+			<if test="modifyTime != null">
+				modify_Time,
+			</if>
+			<if test="modifyOperator != null">
+				modify_Operator,
+			</if>
+			<if test="deleteTime != null">
+				delete_Time,
+			</if>
+			<if test="deleteOperator != null">
+				delete_Operator,
+			</if>
+			<if test="colorCardStatus != null">
+				color_Card_Status,
+			</if>
+			<if test='fabricLength != null and fabricLength != ""'>
+				fabricLength,
+			</if>
+			<if test='gramWeight != null and gramWeight != ""'>
+				gramWeight,
+			</if>
+			<if test='kilogramMeter != null and kilogramMeter != ""'>
+				kilogramMeter,
+			</if>
+			<if test='cardCode != null and cardCode != ""'>
+				cardCode,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="addColorCard != null">
+				#{addColorCard,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardCode != null">
+				#{colorCardCode,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardName != null">
+				#{colorCardName,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierCode != null">
+				#{supplierCode,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierName != null">
+				#{supplierName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				#{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyOperator != null">
+				#{modifyOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				#{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteOperator != null">
+				#{deleteOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardStatus != null">
+				#{colorCardStatus,jdbcType=INTEGER},
+			</if>
+			<if test='fabricLength != null and fabricLength != ""'>
+				#{fabricLength,jdbcType=DOUBLE},
+			</if>
+			<if test='gramWeight != null and gramWeight != ""'>
+				#{gramWeight,jdbcType=DOUBLE},
+			</if>
+			<if test='kilogramMeter != null and kilogramMeter != ""'>
+				#{kilogramMeter,jdbcType=DOUBLE},
+			</if>
+			<if test='cardCode != null and cardCode != ""'>
+				#{cardCode,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="modifyColorCard" parameterType="com.warehouse.entity.ColorCard">
+		update color_card
+		<set>
+			<if test="addColorCard != null">
+				add_Color_Card = #{addColorCard,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardCode != null">
+				color_Card_Code = #{colorCardCode,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardName != null">
+				color_Card_Name = #{colorCardName,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierCode != null">
+				supplier_Code = #{supplierCode,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierName != null">
+				supplier_name = #{supplierName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_Time = #{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				founder = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				modify_Time = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyOperator != null">
+				modify_Operator = #{modifyOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				delete_Time = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteOperator != null">
+				delete_Operator = #{deleteOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="colorCardStatus != null">
+				color_Card_Status = #{colorCardStatus,jdbcType=INTEGER},
+			</if>
+			<if test="fabricLength != null">
+				fabricLength = #{fabricLength,jdbcType=DOUBLE},
+			</if>
+			<if test="gramWeight != null">
+				gramWeight = #{gramWeight,jdbcType=DOUBLE},
+			</if>
+			<if test="kilogramMeter != null">
+				kilogramMeter = #{kilogramMeter,jdbcType=DOUBLE},
+			</if>
+			<if test="cardCode != null">
+				cardCode = #{cardCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

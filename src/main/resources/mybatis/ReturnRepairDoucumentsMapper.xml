@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ReturnRepairDoucumentsMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.ReturnRepairDoucuments" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+    <result column="vendor_code" property="vendorCode" jdbcType="VARCHAR" />
+    <result column="commodityc_code" property="commoditycCode" jdbcType="VARCHAR" />
+    <result column="girard" property="girard" jdbcType="VARCHAR" />
+    <result column="factory" property="factory" jdbcType="VARCHAR" />
+    <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+    <result column="code52" property="code52" jdbcType="INTEGER" />
+    <result column="code59" property="code59" jdbcType="INTEGER" />
+    <result column="code66" property="code66" jdbcType="INTEGER" />
+    <result column="code73" property="code73" jdbcType="INTEGER" />
+    <result column="code80" property="code80" jdbcType="INTEGER" />
+    <result column="code90" property="code90" jdbcType="INTEGER" />
+    <result column="code100" property="code100" jdbcType="INTEGER" />
+    <result column="code110" property="code110" jdbcType="INTEGER" />
+    <result column="code120" property="code120" jdbcType="INTEGER" />
+    <result column="code130" property="code130" jdbcType="INTEGER" />
+    <result column="code160" property="code160" jdbcType="INTEGER" />
+    <result column="code170" property="code170" jdbcType="INTEGER" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="RE_ENTRY" property="reEntry" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid,ADD_TIME, vendor_code, commodityc_code, girard, factory, DESIGN_IMG, code52, code59, code66, 
+    code73, code80, code90, code100, code110, code120, code130, code160, code170, total, 
+    REMARKS, UPDATE_TIME, RE_ENTRY
+  </sql>
+  <!-- 修改前查询 -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from return_repair_doucuments
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <!-- 删除返修开单 -->
+<!--   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from return_repair_doucuments
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete> -->
+   <!-- 假删除返修开单 -->
+  <update id="deleteByPrimaryKey" parameterType="com.warehouse.entity.ReturnRepairDoucuments" >
+    update problem_not_grant
+    <set >
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+       </if>
+       <if test="orderStatus != null" >
+        delete_time = #{deleteTime,jdbcType=VARCHAR}
+      </if>
+   </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+
+  <!-- 新增返修开单-->
+  <insert id="insert" parameterType="com.warehouse.entity.ReturnRepairDoucuments" >
+    insert into return_repair_doucuments
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+       <if test="buildTime != null" >
+        build_time,
+      </if>
+      <if test="vendorCode != null" >
+        vendor_code,
+      </if>
+      <if test="commoditycCode != null" >
+        commodityc_code,
+      </if>
+      <if test="girard != null" >
+        girard,
+      </if>
+      <if test="factory != null" >
+        factory,
+      </if>
+      <if test="designImg != null" >
+        DESIGN_IMG,
+      </if>
+      <if test="code52 != null" >
+        code52,
+      </if>
+      <if test="code59 != null" >
+        code59,
+      </if>
+      <if test="code66 != null" >
+        code66,
+      </if>
+      <if test="code73 != null" >
+        code73,
+      </if>
+      <if test="code80 != null" >
+        code80,
+      </if>
+      <if test="code90 != null" >
+        code90,
+      </if>
+      <if test="code100 != null" >
+        code100,
+      </if>
+      <if test="code110 != null" >
+        code110,
+      </if>
+      <if test="code120 != null" >
+        code120,
+      </if>
+      <if test="code130 != null" >
+        code130,
+      </if>
+      <if test="code160 != null" >
+        code160,
+      </if>
+      <if test="code170 != null" >
+        code170,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="reEntry != null" >
+        RE_ENTRY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+       <if test="addTime != null" >
+        #{addTime,jdbcType=VARCHAR},
+      </if>
+        <if test="buildTime != null" >
+        #{buildTime,jdbcType=VARCHAR},
+      </if>
+      <if test="vendorCode != null" >
+        #{vendorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditycCode != null" >
+        #{commoditycCode,jdbcType=VARCHAR},
+      </if>
+      <if test="girard != null" >
+        #{girard,jdbcType=VARCHAR},
+      </if>
+      <if test="factory != null" >
+        #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="designImg != null" >
+        #{designImg,jdbcType=VARCHAR},
+      </if>
+      <if test="code52 != null" >
+        #{code52,jdbcType=INTEGER},
+      </if>
+      <if test="code59 != null" >
+        #{code59,jdbcType=INTEGER},
+      </if>
+      <if test="code66 != null" >
+        #{code66,jdbcType=INTEGER},
+      </if>
+      <if test="code73 != null" >
+        #{code73,jdbcType=INTEGER},
+      </if>
+      <if test="code80 != null" >
+        #{code80,jdbcType=INTEGER},
+      </if>
+      <if test="code90 != null" >
+        #{code90,jdbcType=INTEGER},
+      </if>
+      <if test="code100 != null" >
+        #{code100,jdbcType=INTEGER},
+      </if>
+      <if test="code110 != null" >
+        #{code110,jdbcType=INTEGER},
+      </if>
+      <if test="code120 != null" >
+        #{code120,jdbcType=INTEGER},
+      </if>
+      <if test="code130 != null" >
+        #{code130,jdbcType=INTEGER},
+      </if>
+      <if test="code160 != null" >
+        #{code160,jdbcType=INTEGER},
+      </if>
+      <if test="code170 != null" >
+        #{code170,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reEntry != null" >
+        #{reEntry,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 更改返修开单 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.ReturnRepairDoucuments" >
+    update return_repair_doucuments
+    <set >
+      <if test="vendorCode != null" >
+        vendor_code = #{vendorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=VARCHAR},
+      </if>
+       <if test="changeTime != null" >
+        change_time =now(), 
+      </if>	
+      <if test="commoditycCode != null" >
+        commodityc_code = #{commoditycCode,jdbcType=VARCHAR},
+      </if>
+      <if test="girard != null" >
+        girard = #{girard,jdbcType=VARCHAR},
+      </if>
+      <if test="factory != null" >
+        factory = #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="designImg != null" >
+        DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+      </if>
+      <if test="code52 != null" >
+        code52 = #{code52,jdbcType=INTEGER},
+      </if>
+      <if test="code59 != null" >
+        code59 = #{code59,jdbcType=INTEGER},
+      </if>
+      <if test="code66 != null" >
+        code66 = #{code66,jdbcType=INTEGER},
+      </if>
+      <if test="code73 != null" >
+        code73 = #{code73,jdbcType=INTEGER},
+      </if>
+      <if test="code80 != null" >
+        code80 = #{code80,jdbcType=INTEGER},
+      </if>
+      <if test="code90 != null" >
+        code90 = #{code90,jdbcType=INTEGER},
+      </if>
+      <if test="code100 != null" >
+        code100 = #{code100,jdbcType=INTEGER},
+      </if>
+      <if test="code110 != null" >
+        code110 = #{code110,jdbcType=INTEGER},
+      </if>
+      <if test="code120 != null" >
+        code120 = #{code120,jdbcType=INTEGER},
+      </if>
+      <if test="code130 != null" >
+        code130 = #{code130,jdbcType=INTEGER},
+      </if>
+      <if test="code160 != null" >
+        code160 = #{code160,jdbcType=INTEGER},
+      </if>
+      <if test="code170 != null" >
+        code170 = #{code170,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reEntry != null" >
+        RE_ENTRY = #{reEntry,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <!-- 模糊查询 -->
+  <select id="getCountByOutsideLike" parameterType="com.warehouse.entity.ReturnRepairDoucuments"
+		resultType="java.lang.Integer">
+		select count(1) from return_repair_doucuments where  1=1 and order_status IS NULL 
+		<if test="vendorCode !='' and vendorCode !=null">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="factory!=null and factory!=''">
+			and factory like concat("%",#{factory},"%")
+		</if>
+		<if test="girard !='' and girard !=null">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="commoditycCode!=null and commoditycCode!=''">
+			and commodityc_code like concat("%",#{commoditycCode},"%")
+		</if>
+	</select>
+	<select id="ReturnRepairDoucumentsbylike" parameterType="com.warehouse.entity.ReturnRepairDoucuments"
+		resultMap="BaseResultMap">
+		select * from return_repair_doucuments where  1=1 and order_status IS NULL 
+		<if test="vendorCode !='' and vendorCode !=null">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="factory!=null and factory!=''">
+			and factory like concat("%",#{factory},"%")
+		</if>
+		<if test="girard !='' and girard !=null">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="commoditycCode!=null and commoditycCode!=''">
+			and commodityc_code like concat("%",#{commoditycCode},"%")
+		</if>
+		order by ADD_TIME desc limit #{begin},#{end}
+	</select>
+	
+	<!-- 查询波次号 -->
+	<select id="girardcount" parameterType="com.warehouse.entity.ReturnRepairDoucuments"
+		resultType="java.lang.Integer">
+		select count(1) from return_repair_doucuments where  1=1 
+		and girard =#{girard,jdbcType=VARCHAR}
+	</select>
+</mapper>

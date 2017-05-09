@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.FabricDAO">
+	<insert id="add" parameterType="com.warehouse.entity.FabricDemo">
+		insert into fabricDemo
+		values(NULL,#{date},#{b_id},'',#{fabric},#{consumption},#{company},0,NULL,#{addtime},NULL)
+	</insert>
+
+	<update id="update" parameterType="com.warehouse.entity.FabricDemo">
+		update fabricdemo set
+		date=#{date},b_id=#{b_id},fabric=#{fabric},consumption=#{consumption},company=#{company}
+		where id=#{id}
+	</update>
+	
+	<!-- 查询出b_id和fabric不重复的数据 -->
+	<select id="getBidAndFabric" resultType="com.warehouse.entity.FabricDemo">
+		select DISTINCT b_id,fabric,date,design_img from fabricdemo where delType=0 order by mytime desc LIMIT
+		#{begin},#{end}
+	</select>
+	
+	<!-- 查询出b_id和fabric不重复的数据量 -->
+	<select id="getAllCountByBidAndFabric" resultType="java.lang.Integer">
+		select count(DISTINCT b_id,fabric) from
+		fabricDemo where delType=0
+	</select>
+	
+	<!-- 得到用量和单位 -->
+	<select id="getConsumptionByBidAndFabric" resultType="com.warehouse.entity.FabricDemo">
+		SELECT id,consumption,company,mytime from fabricdemo where b_id=#{0} and fabric=#{1} and delType=0 order by addtime desc
+	</select>
+	
+	<!-- 将用料日报表数据的状态修改为已经被删除 -->
+	<update id="delete" parameterType="com.warehouse.entity.FabricDemo">
+		update fabricDemo set delType=1,delTime=#{delTime} where id=#{id}
+	</update>
+	
+	<!-- 查询出b_id和fabric不重复的数据量（b_id模糊查询） -->
+	<select id="getCountByBid" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(DISTINCT b_id,fabric) from fabricDemo where delType=0 and b_id LIKE concat('%',#{bid},'%')
+	</select>
+	
+	<!-- 模糊查询 -->
+	<select id="getAllByBid" resultType="com.warehouse.entity.FabricDemo">
+		select DISTINCT b_id,fabric,date from fabricdemo where delType=0 and b_id like concat('%',#{bid},'%') order by mytime desc LIMIT
+		#{begin},#{end}
+	</select>
+		
+	<!-- 根据波次号修改日期 -->
+	<update id="updateDateByBid" parameterType="com.warehouse.entity.FabricDemo">
+		 update fabricDemo set date=#{date} 
+		 <if test="mytime!=''">
+		 ,mytime=#{mytime}
+		 </if>
+		 where b_id=#{b_id}
+	</update>
+	<!-- 根据 -->
+	<select id="getOne" resultType="com.warehouse.entity.FabricDemo">
+		SELECT * FROM fabricdemo WHERE ID=#{id}
+	</select>	
+</mapper>

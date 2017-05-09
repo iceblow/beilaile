@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FabricTotalPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.FabricTotalPrice" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="FABRIC_MATERIAL" property="fabricMaterial" jdbcType="VARCHAR" />
+    <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+    <result column="COLOUR" property="colour" jdbcType="VARCHAR" />
+    <result column="FABRIC_OUT_WEIGHT" property="fabricOutWeight" jdbcType="VARCHAR" />
+    <result column="FABRIC_RETURN_WEIGHT" property="fabricReturnWeight" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="VARCHAR" />
+    <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+    <result column="DATA_STATE" property="dataState" jdbcType="VARCHAR" />
+     <result column="KG_M" property="kgM" jdbcType="VARCHAR" />
+     <result column="USER_FABRIC_WEIGHT" property="userFabricWeight" jdbcType="VARCHAR" />
+     <result column="CUT_NUMBER" property="cutNumber" jdbcType="VARCHAR" />
+     <result column="FABRIC_OUT_PRICE" property="fabricOutPrice" jdbcType="VARCHAR" />
+     <result column="FABRIC_RETURN_PRICE" property="fabricReturnPrice" jdbcType="VARCHAR" />
+     <result column="USER_FABRIC_PRICE" property="userFabricPrice" jdbcType="VARCHAR" />
+     <result column="A_PRICE" property="aPrice" jdbcType="VARCHAR" />
+     <result column="A_WEIGHT" property="aWeight" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  	
+  	<!-- 查询分页总条数 -->
+ <select id="selectFabric"  parameterType="com.warehouse.entity.FabricTotalPrice" resultType="java.lang.Integer">
+ 	SELECT COUNT(0) FROM fabric_total_price  where 1=1
+ 		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave}, "%")
+		</if>
+		<if test='fabricMaterial!=null and fabricMaterial!="" '> AND  FABRIC_MATERIAL
+			like
+			CONCAT(CONCAT("%",#{fabricMaterial,jdbcType=VARCHAR}),"%")
+		 </if>
+		<if test='colour!=null  and colour!="" '> AND COLOUR like
+			CONCAT(CONCAT("%",#{colour,jdbcType=VARCHAR}),"%")
+		</if>
+		<if test='price!=null and price!="" '>
+			AND PRICE like
+			CONCAT("%",#{price,jdbcType=VARCHAR},"%")
+		</if>
+ </select>
+ 
+ 	<!-- 查询返回的结果 -->
+ <select id="getFabricPage" parameterType="com.warehouse.entity.FabricTotalPrice" resultMap="BaseResultMap" >
+ 	select * from fabric_total_price where 1=1 
+ 		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='fabricMaterial!=null and fabricMaterial!="" '>
+			AND FABRIC_MATERIAL like CONCAT("%",#{fabricMaterial,jdbcType=VARCHAR},"%")
+		</if>
+		<if test='colour!=null and colour!="" '>
+			AND COLOUR like CONCAT("%", #{colour,jdbcType=VARCHAR},"%")
+		</if>
+		<if test='price!=null and price!="" '>
+			AND PRICE like CONCAT("%", #{price,jdbcType=VARCHAR},"%")
+		</if>
+ 	limit #{begin},#{end}
+ </select>
+  
+  
+ 
+  
+</mapper>

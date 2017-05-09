@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script
+	src="${pageContext.request.contextPath }/res/js/orderMemo/orderMemo.js"></script>
+
+
+<title>订单备忘表</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">订单备忘表</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="18" style="text-align: center; font-size: 16px;">订单备忘表</th>
+								<th colspan="2" style="border-left: 0px;">
+									<div class="col-md-12" style="border-left: 0px;">
+										<button style="float: right;" class="btn btn-primary btn-lg"
+											data-toggle="modal" data-target="#myModal" id="add">添加</button>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">编号</th>
+								<th style="text-align: center;">日期</th>
+								<th style="text-align: center;">取货人</th>
+								<th style="text-align: center;">波次</th>
+								<th style="text-align: center;">颜色</th>
+								<th style="text-align: center;" colspan="12">重量(KG)</th>
+								<th style="text-align: center;">合计</th>
+								<th style="text-align: center;">匹数</th>
+								<th style="text-align: center;">删除|修改</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 添加模态框 -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">添加订单备忘数据</h4>
+						</div>
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div id="div">
+									<div id="1" class="mydiv" style="float: left;">
+										<div class="col-md-6" style="float: left;">
+											<label for="date">日期</label> <input type="text"
+												class="form-control date" name="date" id="date"
+												readonly="readonly">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="consigneeMan"> 取货人</label> <input type="text"
+												class="form-control consumptions" name="consigneeMan"
+												id="consigneeMan">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="b_id">波次</label> <input type="text"
+												class="form-control b_id" name="b_id" id="b_id">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="color">颜色</label> <input type="text"
+												class="form-control color" name="color" id="color">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g0">重量一</label> <input type="text"
+												class="form-control g0" name="g0" id="g0" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g1">重量二</label> <input type="text"
+												class="form-control g1" name="g1" id="g1" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g2">重量三</label> <input type="text"
+												class="form-control g2" name="g2" id="g2" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g3">重量四</label> <input type="text"
+												class="form-control g3" name="g3" id="g3" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g4">重量五</label> <input type="text"
+												class="form-control g4" name="g4" id="g4" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g5">重量六</label> <input type="text"
+												class="form-control g5" name="g5" id="g5" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g6">重量七</label> <input type="text"
+												class="form-control g6" name="g6" id="g6" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g7">重量八</label> <input type="text"
+												class="form-control g7" name="g7" id="g7" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g8">重量九</label> <input type="text"
+												class="form-control g8" name="g8" id="g8" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g9">重量十</label> <input type="text"
+												class="form-control g9" name="g9" id="g9" onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g10">重量十一</label> <input type="text"
+												class="form-control g10" name="g10" id="g10"
+												onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g11">重量十二</label> <input type="text"
+												class="form-control g11" name="g11" id="g11"
+												onkeyup="getNum()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g_num">合计</label> <input type="text"
+												class="form-control g_num" name="g_num" id="g_num"
+												readonly="readonly">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="horse">匹数</label> <input type="text"
+												class="form-control horse" name="horse" id="horse">
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="addSub"
+								style="background-color: #428bca;">添加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- 添加模态框 -->
+			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">修改订单数据</h4>
+						</div>
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div id="div">
+									<div id="1" class="mydiv" style="float: left;">
+										<input type="hidden" id="ids">
+										<div class="col-md-6" style="float: left;">
+											<label for="dates">日期</label> <input type="text"
+												class="form-control date" name="date" id="dates"
+												readonly="readonly">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="consigneeMans"> 取货人</label> <input type="text"
+												class="form-control consumptions" name="consigneeMan"
+												id="consigneeMans">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="b_ids">波次</label> <input type="text"
+												class="form-control b_id" name="b_id" id="b_ids">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="colors">颜色</label> <input type="text"
+												class="form-control color" name="color" id="colors">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g0s">重量一</label> <input type="text"
+												class="form-control g0" name="g0" id="g0s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g1s">重量二</label> <input type="text"
+												class="form-control g1" name="g1" id="g1s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g2s">重量三</label> <input type="text"
+												class="form-control g2" name="g2" id="g2s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g3s">重量四</label> <input type="text"
+												class="form-control g3" name="g3" id="g3s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g4s">重量五</label> <input type="text"
+												class="form-control g4" name="g4" id="g4s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g5s">重量六</label> <input type="text"
+												class="form-control g5" name="g5" id="g5s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g6s">重量七</label> <input type="text"
+												class="form-control g6" name="g6" id="g6s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g7s">重量八</label> <input type="text"
+												class="form-control g7" name="g7" id="g7s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g8s">重量九</label> <input type="text"
+												class="form-control g8" name="g8" id="g8s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g9s">重量十</label> <input type="text"
+												class="form-control g9" name="g9" id="g9s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g10s">重量十一</label> <input type="text"
+												class="form-control g10" name="g10" id="g10s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g11s">重量十二</label> <input type="text"
+												class="form-control g11" name="g11" id="g11s"
+												onkeyup="getNums()">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="g_nums">合计</label> <input type="text"
+												class="form-control g_num" name="g_num" id="g_nums"
+												readonly="readonly">
+										</div>
+										<div class="col-md-6" style="float: left;">
+											<label for="horses">匹数</label> <input type="text"
+												class="form-control horse" name="horse" id="horses">
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="updateSub"
+								style="background-color: #428bca;">修改</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+</html>

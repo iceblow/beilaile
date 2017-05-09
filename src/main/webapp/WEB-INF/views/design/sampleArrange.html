@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>样衣安排</title><@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/design/sampleArrange.js"></script>
+
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">样衣安排</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2">
+								<label for="wave"></label>波次<input type="text"
+									class="form-control" name="wave">
+							</div>
+							<div class="col-md-2">
+								<label for="wave"></label>商品编号<input type="text"
+									class="form-control" name="productCode">
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="myselect">查询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered"
+						style="width: 100%; height: 100%;">
+						<thead>
+							<tr>
+								<th colspan="6" style="text-align: center; font-size: 25px;">样衣安排</th>
+							</tr>
+							<tr>
+								<th style="text-align: center; font-size: 16px;">波次</th>
+								<th style="text-align: center; font-size: 16px;">产品图</th>
+								<th style="text-align: center; font-size: 16px;">商品编码</th>
+								<th style="text-align: center; font-size: 16px;">收货人</th>
+								<th style="text-align: center; font-size: 16px;">收货地址</th>
+								<th style="text-align: center; font-size: 16px;">是否发出</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+					<div style="display: none;">
+						<img id="printImg" src="" width="100%" height="100%">
+					</div>
+				</div>
+			</div>
+
+		<input type="hidden" value="${pageContext.request.contextPath}"
+			id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

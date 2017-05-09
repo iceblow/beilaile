@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.OutsideProcesMapper">
+	<!-- 添加 -->
+	<insert id="addproces" parameterType="com.warehouse.entity.Outsideproces">
+		insert into outsideproces
+		values(null,#{girard},#{bnumber},#{category},#{workprice},#{cpprice},#{remark},#{hejia},#{delb},#{bdate})
+	</insert>
+	<!-- 删除 -->
+	<delete id="delProce" parameterType="java.lang.Integer">
+		update outsideproces set
+		delb=1 where bid=#{bid}
+	</delete>
+	<!-- 修改 -->
+	<update id="uppProce" parameterType="com.warehouse.entity.Outsideproces">
+		update outsideproces set
+		girard=#{girard},bnumber=#{bnumber},category=#{category},cpprice=#{cpprice},workprice=#{workprice},remark=#{remark},hejia=#{hejia},delb=#{delb},bdate=#{bdate}
+		where bid=#{bid}
+	</update>
+
+	<!-- 模糊查询 -->
+	<select id="getCountByOutsideLike" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(1) from
+		outsideProces where delb=0 and girard
+		like concat("%",#{girard},"%")
+	</select>
+	<select id="OutsideProcesByLike" parameterType="com.warehouse.util.Pagess"
+		resultType="com.warehouse.entity.Outsideproces">
+		select * from
+		outsideProces where delb=0 and girard
+		like
+		concat("%",#{bid},"%")
+		order by bdate desc limit #{begin},#{end}
+	</select>
+
+	<!-- ********************************************************* -->
+
+	<!--查询是否重复 -->
+	<select id="getDistinct" parameterType="com.warehouse.entity.Outsideproces"
+		resultType="com.warehouse.entity.Outsideproces">
+		select * from outsideproces where delb=0 and
+		girard=#{girard} and category=#{category} and hejia=#{hejia} and
+		workprice=#{workprice} and cpprice=#{cpprice}
+	</select>
+	<!-- 修改件数 -->
+	<update id="uppNum" parameterType="java.lang.Integer">
+		update outsideproces set
+		bnumber=#{bnumber} where bid=#{bid}
+	</update>
+</mapper>

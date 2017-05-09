@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>经销单生产</title> <@p.cache/> <@p.css/> <@p.js/>
+     <script type="text/javascript" src="/res/js/distribution/DistributionProduction.js"></script>
+  <script src="/res/js/laypage/laypage.js"></script>
+ <script type="text/javascript" src="res/js/getDiscrepantDays/getDiscrepantDays.js"></script>
+</head>
+<body>
+<@p.top/>
+<div class="main-container" id="main-container">
+				<!-- 头部 -->
+			    <div class="main-container-inner">
+			    	<!-- 静态引入左部控制台 -->
+			        <@p.left/>
+			        <!-- 主体页面 -->
+			        <div class="main-content">
+			        			<!-- 最上层静态Home栏 -->
+					            <div class="breadcrumbs" id="breadcrumbs">
+					                <ul class="breadcrumb">
+					                    <li><i class="icon-home home-icon"> </i> <a href="#">
+					                        Home </a></li>
+					                    <li><a href="#"> Tables </a></li>
+					                    <li class="active">经销单生产</li>
+					                </ul>
+					                <div class="nav-search" id="nav-search"></div>
+					            </div>
+					            
+					            <!-- ========查询模块 ===========-->
+					            <div class="col-md-12">
+					                <form enctype="multipart/form-data" role="form" action="/DistributionProduction/downDistributionProduction.do"  id="form-anyVal" method="post">
+					                    <div id="val-input-empty" class="col-md-12">
+					                    	<div class="col-md-2"  style="padding: 20px 0 20px 0;">
+					                            <label>波次号</label> <input type="text" name="wave" />
+					                        </div>
+					                        <div class="col-md-2" style="padding: 20px 0 20px 0;">
+					                            <label>商品编号</label> <input type="text" name="productCode" />
+					                        </div>
+					                        <div class="col-md-2"  style="padding: 20px 0 20px 0;">
+					                            <label>服装名</label> <input type="text" name="clothName" />
+					                        </div>
+					                        <div class="col-md-2"  style="padding: 20px 0 20px 0;">
+					                            <label>跟踪人</label> <input type="text" name=trackingOfficer />
+					                        </div>
+					                        <div class="col-md-2"  style="padding: 20px 0 20px 0;">
+					                            <label>经销工厂</label> <input type="text" name="distributtionFactory" />
+					                        </div>
+					                        <div class="col-md-2"  style="padding: 20px 0 20px 0;">
+					                            <label>下单时间</label> <input type="text" name="releaseTime" />
+					                        </div>
+					                        <div class="col-md-2"  style="padding: 20px 0 20px 0;">
+					                            <label>订单类型</label> <input type="text" name="orderType" />
+					                        </div>
+					                        <div class="col-md-2"  style="padding: 20px 0 20px 0;">
+					                            <select name="startMake">
+													<option value="">是否上线</option>
+													<option value="1">已上线</option>
+													<option value="0">未上线</option>
+												</select>
+					                        </div>
+					                        
+					                        
+					                        <div class="col-md-2"  style="padding: 20px 0 20px 0;">
+												<span class="input-group-btn">
+													<button id="myselect" class="btn btn-default" type="button">查询</button>
+												</span>
+												
+												<span class="input-group-btn">
+													<button id="exportExcel" class="btn btn-default">导出Excel</button>
+												</span>
+					                        </div>
+					                    </div>
+					                    <!-- 隐藏区域，设置当前页和页面大小 -->
+					                    <div>
+					                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="1"> 
+					                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="10">
+					                    </div>
+					                </form>
+					            </div>
+					             <!-- =======查询模块 结束 ======-->
+					             
+								<!-- ==================数据部分，表格 ========================-->
+					            <div class="page-content">
+					                <div class="col-xs-12">
+					                    <div class="tabbable">
+					                        <table class="table  table-bordered">
+					                            <thead>
+					                            	<tr>
+														<th colspan="40" style="text-align: center; font-size: 25px;">经销单生产</th>
+													</tr>
+					                            <tr>
+					                            	<th>ID</th>
+					                                <th>商品编号</th>
+					                                <th>订单号</th>
+					                                <th>原波次</th>
+					                                <th>波次</th>
+					                                <th>服装名</th>
+					                                <th>设计图</th>
+					                                <th>工艺单</th>
+					                                <th>尺码图</th>
+					                                <th>订单明细</th>
+					                                <th>订单数量</th>
+					                                <th>订单等级</th>
+					                                <th>订单类型</th>
+					                                <th>经销工厂</th>
+					                                <th>52裁</th>
+					                                <th>59裁</th>
+					                                <th>66裁</th>
+					                                <th>73裁</th>
+					                                <th>80裁</th>
+					                                <th>90裁</th>
+					                                <th>100裁</th>
+					                                <th>110裁</th>
+					                                <th>120裁</th>
+					                                <th>130裁</th>
+					                                <th>160裁</th>
+					                                <th>170裁</th>
+					                                <th>跟踪人</th>
+					                                <th>备注</th>
+					                                <th>订单号</th>
+					                                <th>要求到货日期</th>
+					                                <th>环节开始时间</th>
+					                     		    <th>订单剩余天数</th>
+					                     		    <th>本环节耗费天数</th>
+					                                <th>下单时间</th>
+					                                <th>确认上线</th>
+					                            </tr>
+					                            </thead>
+					                           		<tbody id="tbody"></tbody>
+					                        </table>
+					                     	 <!--   分页 -->
+					                       <div id="pageSystem" style="width: 100%; position: relative; top: 10px;"></div>	
+					                    </div>
+					                </div>
+					            </div>
+		  </div>	          
+	</div>	   
+</div>
+</body>
+</html>

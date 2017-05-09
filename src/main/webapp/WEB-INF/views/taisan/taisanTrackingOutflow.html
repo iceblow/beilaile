@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>车缝安排</title><@p.cache/> <@p.js/><@p.css/>
+<script src="res/js/getDiscrepantDays/getDiscrepantDays.js"></script>
+<script src="/res/js/cutting/layer/layer.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/taisan/taisanTrackingOutflow.js"></script>
+
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">车缝排单</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2">
+								<label for="wave">波次号</label><input type="text"
+									class="form-control" name="wave">
+							</div>
+							<div class="col-md-2">
+								<label for="factory">车缝厂</label><input type="text"
+									class="form-control" name="factory">
+							</div>
+							<div class="col-md-2">
+								<label for="arrangeFabricAndAssistMaterial">排单状态</label><input type="text"
+									class="form-control" name="arrangeFabricAndAssistMaterial">
+							</div>
+							<div class="col-md-2">
+								<label for="assistMaterialReady">辅料就绪</label><input type="text"
+									class="form-control" name="assistMaterialReady">
+							</div>
+							<div class="col-md-2">
+								<label for="cuttingPieceReady">裁片就绪</label><input type="text"
+									class="form-control" name="cuttingPieceReady">
+							</div>
+							<div class="col-md-2">
+								<label for="informFactoryTime">通知工厂时间</label><input type="text"
+									class="form-control input-date" name="informFactoryTime">
+							</div>
+							<div class="col-md-2">
+								<label for="informFactory">通知工厂状态</label><input type="text"
+									class="form-control" name="informFactory">
+							</div>
+							<div class="col-md-2">
+								<label for="assistOut">辅料发放状态</label><input type="text"
+									class="form-control" name="assistOut">
+							</div>
+							<div class="col-md-2">
+								<label for="cuttingPieceOut">裁片发放状态</label><input type="text"
+									class="form-control" name="cuttingPieceOut">
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="myselect">查询</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered"
+						style="width: 100%; height: 100%;">
+						<thead>
+							<tr>
+								<!-- <th colspan="2" style="text-align: center; font-size: 13px;">
+									<font color="red" style="">订单总数:<span id="orderSum"></span></font><br>
+									<font color="red" style="">款式总数:<span id="styleSum"></span></font>
+								</th> -->
+								<th colspan="27" style="text-align: center; font-size: 25px;">车缝安排</th>
+							</tr>
+							<tr>
+								<th style="text-align: center; font-size: 16px;">波次号</th>
+								<th style="text-align: center; font-size: 16px;">商品编码</th>
+								<th style="text-align: center; font-size: 16px;">工艺单</th>
+								<th style="text-align: center; font-size: 16px;">原波次</th>
+								<th style="text-align: center; font-size: 16px;">版型参考波次</th>
+								<th style="text-align: center; font-size: 16px;">印花参考波次</th>
+								<th style="text-align: center; font-size: 16px;">商品图片</th>
+								<th style="text-align: center; font-size: 16px;">裁剪日期</th>
+								<th style="text-align: center; font-size: 16px;">裁剪数量</th>
+								<th style="text-align: center; font-size: 16px;">裁剪人</th>
+								<th style="text-align: center; font-size: 16px;">是否片印</th>
+								<th style="text-align: center; font-size: 16px;">片印领料日期</th>
+								<th style="text-align: center; font-size: 16px;">片印回料日期</th>
+								<th style="text-align: center; font-size: 16px;">印花厂</th>
+								<th style="text-align: center; font-size: 16px;">参考工厂</th>
+								<th style="text-align: center; font-size: 16px;">车缝厂</th>
+								<th style="text-align: center; font-size: 16px;">排单</th>
+								<th style="text-align: center; font-size: 16px;">排单时间</th>
+								<th style="text-align: center; font-size: 16px;">辅料就绪</th>
+								<th style="text-align: center; font-size: 16px;">辅料就绪时间</th>
+								<th style="text-align: center; font-size: 16px;">裁片就绪</th>
+								<th style="text-align: center; font-size: 16px;">裁片就绪时间</th>
+								<!-- <th style="text-align: center; font-size: 16px;">通知工厂</th> -->
+								<th style="text-align: center; font-size: 16px;">辅料发放</th>
+								<th style="text-align: center; font-size: 16px;">辅料外发时间</th>
+								<th style="text-align: center; font-size: 16px;">裁片发放</th>
+								<th style="text-align: center; font-size: 16px;">裁片外发时间</th>
+								<th style="text-align: center; font-size: 16px;">申请重新排单</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+					<div style="display: none;">
+						<img id="printImg" src="" width="100%" height="100%">
+					</div>
+				</div>
+			</div>
+
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

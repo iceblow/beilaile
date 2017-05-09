@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FinanceAccountReconciliationMapper">
+	<resultMap id="BaseResultMap"
+		type="com.warehouse.entity.FinanceAccountReconciliation">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+
+		<result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+		<result column="RECONCILIATION_UTIL" property="reconciliationUtil"
+			jdbcType="VARCHAR" />
+		<result column="CROP_NUMBER" property="cropNumber" jdbcType="INTEGER" />
+		<result column="SHIPMENT_NUM" property="shipmentNum" jdbcType="INTEGER" />
+		<result column="RECONCILIATION_UNIT_PRICE" property="reconciliationUnitPrice"
+			jdbcType="DOUBLE" />
+		<result column="DELIVERY_TOTAL" property="deliveryTotal"
+			jdbcType="DOUBLE" />
+		<result column="DEVIATION_NUM" property="deviationNum"
+			jdbcType="VARCHAR" />
+		<result column="RECONCILIATION_TIME" property="reconciliationTime"
+			jdbcType="VARCHAR" />
+		<result column="ACTUAL_DELIVERY_NUM" property="actualDeliveryNum"
+			jdbcType="VARCHAR" />
+		<result column="FACTORY_FEEDBACK" property="factoryFeedback"
+			jdbcType="VARCHAR" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+		<result column="RECONCILIATION_STATUS" property="reconciliationStatus"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, WAVE, FACTORY,PRODUCT_CODE,PRODUCT_NAME,DESIGN_IMG,
+		ORDER_TYPE, RECONCILIATION_UTIL,
+		CROP_NUMBER,
+		SHIPMENT_NUM,
+		RECONCILIATION_UNIT_PRICE,
+		DELIVERY_TOTAL,
+		DEVIATION_NUM,
+		RECONCILIATION_TIME, ACTUAL_DELIVERY_NUM,
+		FACTORY_FEEDBACK,
+		REMARKS,
+		ADD_TIME, UPDATE_TIME, DEL_TIME,
+		RECONCILIATION_STATUS
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from finance_account_reconciliation
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+
+	<insert id="insertSelective" parameterType="com.warehouse.entity.FinanceAccountReconciliation">
+		insert into finance_account_reconciliation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="factory != null">
+				FACTORY,
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE,
+			</if>
+			<if test="reconciliationUtil != null">
+				RECONCILIATION_UTIL,
+			</if>
+			<if test="cropNumber != null">
+				CROP_NUMBER,
+			</if>
+			<if test="shipmentNum != null">
+				SHIPMENT_NUM,
+			</if>
+			<if test="reconciliationUnitPrice != null">
+				RECONCILIATION_UNIT_PRICE,
+			</if>
+			<if test="deliveryTotal != null">
+				DELIVERY_TOTAL,
+			</if>
+			<if test="deviationNum != null">
+				DEVIATION_NUM,
+			</if>
+			<if test="reconciliationTime != null">
+				RECONCILIATION_TIME,
+			</if>
+			<if test="actualDeliveryNum != null">
+				ACTUAL_DELIVERY_NUM,
+			</if>
+			<if test="factoryFeedback != null">
+				FACTORY_FEEDBACK,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+			<if test="reconciliationStatus != null">
+				RECONCILIATION_STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				#{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				#{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="reconciliationUtil != null">
+				#{reconciliationUtil,jdbcType=VARCHAR},
+			</if>
+			<if test="cropNumber != null">
+				#{cropNumber,jdbcType=INTEGER},
+			</if>
+			<if test="shipmentNum != null">
+				#{shipmentNum,jdbcType=INTEGER},
+			</if>
+			<if test="reconciliationUnitPrice != null">
+				#{reconciliationUnitPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="deliveryTotal != null">
+				#{deliveryTotal,jdbcType=DOUBLE},
+			</if>
+			<if test="deviationNum != null">
+				#{deviationNum,jdbcType=VARCHAR},
+			</if>
+			<if test="reconciliationTime != null">
+				#{reconciliationTime,jdbcType=VARCHAR},
+			</if>
+			<if test="actualDeliveryNum != null">
+				#{actualDeliveryNum,jdbcType=VARCHAR},
+			</if>
+			<if test="factoryFeedback != null">
+				#{factoryFeedback,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="reconciliationStatus != null">
+				#{reconciliationStatus,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.FinanceAccountReconciliation">
+		update finance_account_reconciliation
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				FACTORY = #{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null">
+				PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{DesignImg,jdbcType=VARCHAR},
+			</if>
+
+			<if test="orderType != null">
+				ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="reconciliationUtil != null">
+				RECONCILIATION_UTIL =
+				#{reconciliationUtil,jdbcType=VARCHAR},
+			</if>
+			<if test="cropNumber != null">
+				CROP_NUMBER = #{cropNumber,jdbcType=INTEGER},
+			</if>
+			<if test="shipmentNum != null">
+				SHIPMENT_NUM = #{shipmentNum,jdbcType=INTEGER},
+			</if>
+			<if test="reconciliationUnitPrice != null">
+				RECONCILIATION_UNIT_PRICE =
+				#{reconciliationUnitPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="deliveryTotal != null">
+				DELIVERY_TOTAL = #{deliveryTotal,jdbcType=DOUBLE},
+			</if>
+			<if test="deviationNum != null">
+				DEVIATION_NUM = #{deviationNum,jdbcType=VARCHAR},
+			</if>
+			<if test="reconciliationTime != null">
+				RECONCILIATION_TIME =
+				#{reconciliationTime,jdbcType=VARCHAR},
+			</if>
+			<if test="actualDeliveryNum != null">
+				ACTUAL_DELIVERY_NUM =
+				#{actualDeliveryNum,jdbcType=VARCHAR},
+			</if>
+			<if test="factoryFeedback != null">
+				FACTORY_FEEDBACK = #{factoryFeedback,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="reconciliationStatus != null">
+				RECONCILIATION_STATUS =
+				#{reconciliationStatus,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 分页查询 -->
+	<select id="getCountByPrimaryKey" parameterType="com.warehouse.entity.FinanceAccountReconciliation"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM finance_account_reconciliation WHERE 1=1
+		<if test="factory!=null and factory!=''">
+			and FACTORY LIKE CONCAT
+			(CONCAT('%',#{factory,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="wave!=null and wave!=''">
+			and WAVE LIKE CONCAT
+			(CONCAT('%',#{wave,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="productCode!=null and productCode!='' ">
+			and PRODUCT_CODE LIKE CONCAT
+			(CONCAT('%',#{productCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="productName!=null and productName!=''">
+			and PRODUCT_NAME LIKE CONCAT
+			(CONCAT('%',#{productName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="orderType!=null and orderType!=''">
+			and ORDER_TYPE =#{orderType,jdbcType=VARCHAR}
+		</if>
+		<if test="reconciliationTime!=null and reconciliationTime!=''">
+			and RECONCILIATION_TIME LIKE CONCAT
+			(#{reconciliationTime,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+	<select id="selectByPrimaryKeyPage" parameterType="com.warehouse.entity.FinanceAccountReconciliation"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM finance_account_reconciliation WHERE 1=1
+		<if test="factory!=null and factory!=''">
+			and FACTORY LIKE CONCAT
+			(CONCAT('%',#{factory,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="wave!=null and wave!=''">
+			and WAVE LIKE CONCAT
+			(CONCAT('%',#{wave,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="productCode!=null and productCode!='' ">
+			and PRODUCT_CODE LIKE CONCAT
+			(CONCAT('%',#{productCode,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="productName!=null and productName!=''">
+			and PRODUCT_NAME LIKE CONCAT
+			(CONCAT('%',#{productName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="orderType!=null and orderType!=''">
+			and ORDER_TYPE =#{orderType,jdbcType=VARCHAR}
+		</if>
+		<if test="reconciliationTime!=null and reconciliationTime!=''">
+			and RECONCILIATION_TIME LIKE CONCAT
+			(#{reconciliationTime,jdbcType=VARCHAR},'%')
+		</if>
+		ORDER BY RECONCILIATION_TIME DESC LIMIT #{begin},#{end}
+	</select>
+
+	<insert id="insertSelectiveByExcle">
+		${sql}
+	</insert>
+</mapper>

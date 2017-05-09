@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ProblemNotReceiveMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.ProblemNotReceiveMaterial" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="CLOUTH_NAME" property="clouthName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+    <result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+    <result column="FABRIC_STORAGE_TIME" property="fabricStorageTime" jdbcType="VARCHAR" />
+    <result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR" />
+    <result column="TIME_DIFFERECE" property="timeDifferece" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+    <result column="ADD_PERSION" property="addPersion" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_PERSION" property="modifyPersion" jdbcType="VARCHAR" />
+    <result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+    <result column="DEL_PERSION" property="delPersion" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="DEL_STATE" property="delState" jdbcType="VARCHAR" />
+    <result column="PROBLEM_FEEDBACK" property="problemFeedback" jdbcType="VARCHAR" />
+	<result column="REASON_FOR_DELAY" property="reasonForDelay" jdbcType="VARCHAR" />
+	<result column="PERSON_IN_CHARGE" property="personInCharge" jdbcType="VARCHAR" />
+	<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+	<result column="PROBLEM_SOLVING" property="problemSolving" jdbcType="VARCHAR" />
+	<result column="PROBLEM_SOLVING_TIME" property="problemSolvingTime" jdbcType="VARCHAR" />
+	<result column="PROBLEM_STATE" property="problemState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, WAVE, TRADE_NAME,PRODUCT_CODE, FACTORY, ORDER_TYPE, FABRIC_STORAGE_TIME, RELEASE_TIME, TIME_DIFFERECE, 
+    ADD_TIME, ADD_PERSION, MODIFY_TIME, MODIFY_PERSION, DEL_TIME, DEL_PERSION, STATE, 
+    DEL_STATE,PROBLEM_FEEDBACK,
+		REASON_FOR_DELAY, PERSON_IN_CHARGE, MEMO,
+		PROBLEM_SOLVING,
+		PROBLEM_SOLVING_TIME,PROBLEM_STATE
+  </sql>
+   <!-- 假删除已裁剪未领料 -->
+  <update id="deleteByProblemNotReceiveMaterialId" parameterType="com.warehouse.entity.ProblemNotReceiveMaterial" >
+    update problem_not_receive_material
+    <set >
+      <if test="delState != null" >
+        DEL_STATE = #{delState,jdbcType=VARCHAR},
+       </if>
+       <if test="delTime != null" >
+        DEL_TIME = #{delTime,jdbcType=VARCHAR}
+      </if>
+   </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 模糊查询 -->
+   <select id="getCountByProblemNotReceiveMaterialLike" parameterType="com.warehouse.entity.ProblemNotReceiveMaterial"
+		resultType="java.lang.Integer">
+		select count(1) from problem_not_receive_material where  1=1 and DEL_STATE IS NULL 
+		<if test="wave !='' and wave !=null">
+			and WAVE like concat("%",#{wave},"%")
+		</if>
+		<if test="clouthName !=null and clouthName !=''">
+			and CLOUTH_NAME like concat("%",#{clouthName},"%")
+		</if>
+		<if test="productCode !=null and productCode !=''">
+			and PRODUCT_CODE like concat("%",#{productCode},"%")
+		</if>
+		<if test="factory !=null and factory !=''">
+			and FACTORY like concat("%",#{factory},"%")
+		</if>
+		<if test="orderType !='' and orderType !=null">
+			and ORDER_TYPE like concat("%",#{orderType},"%")
+		</if>
+	</select>
+	<select id="ProblemNotReceiveMaterialbylike" parameterType="com.warehouse.entity.ProblemNotGrant"
+		resultMap="BaseResultMap">
+		select * from problem_not_receive_material where  1=1 and DEL_STATE IS NULL 
+		<if test="wave !='' and wave !=null">
+			and WAVE like concat("%",#{wave},"%")
+		</if>
+		<if test="clouthName !=null and clouthName !=''">
+			and CLOUTH_NAME like concat("%",#{clouthName},"%")
+		</if>
+		<if test="productCode !=null and productCode !=''">
+			and PRODUCT_CODE like concat("%",#{productCode},"%")
+		</if>
+		<if test="factory !=null and factory !=''">
+			and FACTORY like concat("%",#{factory},"%")
+		</if>
+		<if test="orderType !='' and orderType !=null">
+			and ORDER_TYPE like concat("%",#{orderType},"%")
+		</if>
+		order by PROBLEM_STATE ,PROBLEM_SOLVING_TIME,RELEASE_TIME limit #{begin},#{end}
+	</select>
+			<!-- 通过双击文本框修改表中数据 -->
+	<update id="updateByText" parameterType="com.warehouse.entity.ProblemNotGrant">
+		update problem_not_receive_material
+		<set>
+			<if test="problemFeedback != null">
+				PROBLEM_FEEDBACK = #{problemFeedback,jdbcType=VARCHAR},
+			</if>
+			<if test="reasonForDelay != null">
+				REASON_FOR_DELAY = #{reasonForDelay,jdbcType=VARCHAR},
+			</if>
+			<if test="personInCharge != null">
+				PERSON_IN_CHARGE = #{personInCharge,jdbcType=VARCHAR},
+			</if>
+			<if test="memo != null">
+				MEMO = #{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="problemSolving != null">
+				PROBLEM_SOLVING = #{problemSolving,jdbcType=VARCHAR},
+			</if>
+			<if test="problemSolvingTime != null">
+				PROBLEM_SOLVING_TIME =
+				#{problemSolvingTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="problemState != null">
+				PROBLEM_STATE = #{problemState,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER} 
+	</update>
+</mapper>

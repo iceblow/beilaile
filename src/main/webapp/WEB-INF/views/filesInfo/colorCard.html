@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>色卡资料</title><@p.cache/><@p.css/> <@p.js/>
+<script src="/res/js/jquery.PrintArea.min.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+
+		<div style="text-align: center; margin-top: 30px; display: none;">
+			<div id="printArea"></div>
+
+			<br> <br>
+
+
+		</div>
+
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">色卡资料</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<button id="add_button" class="btn btn-primary btn-lg"
+						data-toggle="modal" data-target="#myModal">添加色卡</button>
+				</div>
+				<div class="col-md-12">
+					<form action="" id="form-anyVal" enctype="multipart/form-data"
+						role="form" method="post">
+						<div id="val-input-empty" class="col-md-8">
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon">色卡名称</span> <input
+										name="colorCardName" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 供应商编号</span> <input
+										name="supplierCode" id="url_supplierCode" value="" type="text"
+										class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 供应商名称</span> <input
+										name="supplierName" value="" type="text" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"
+								value=""> <input hidden="hidden" type="text"
+								id="pageSize" name="pageSize" value="">
+						</div>
+						<div class="col-md-2">
+							<span class="input-group-btn">
+								<button id="anyVal-btn" class="btn btn-default" type="button">
+									查询</button>
+							</span>
+						</div>
+					</form>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12" style="height: 50px;"></div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<!-- <th>序号</th> -->
+										<th>色卡编码</th>
+										<th>色卡号</th>
+										<th>色卡名称</th>
+										<th>色卡克重</th>
+										<th>色卡门幅</th>
+										<th>米/公斤</th>
+										<th>供应商名称</th>
+										<th>创建时间</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--修改 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改 /添加色卡</h4>
+					</div>
+					<form enctype="multipart/form-data" role="form"
+						id="addOrUpdateColorCard" action="" method="post">
+						<div class="modal-body" id="modify-prompt">
+							<div class="col-md-12">
+								<div class="col-md-3">
+									<label for="supplierCode">供应商名称</label> <select
+										class="form-control" name="supplierCode" id="selectSupplier">
+									</select>
+								</div>
+								<div class="col-md-4">
+									<label for="cardCode">色卡编号</label> <input type="text"
+										class="form-control inputLength" onkeyup="chkNum(this)"
+										name="cardCode" id="cardCode" style="color: red;">
+								</div>
+								<div class="col-md-4">
+									<label for="colorCardName">色卡名称</label> <input type="text"
+										class="form-control" name="colorCardName" id="colorCardName"
+										placeholder="">
+								</div>
+								<div class="col-md-4">
+									<label for="gramWeight">色卡克重</label> <input type="text"
+										class="form-control" name="gramWeight" id="gramWeight"
+										placeholder="">
+								</div>
+								<div class="col-md-4">
+									<label for="fabricLength">色卡门幅</label> <input type="text"
+										onkeyup="chkNum(this)" class="form-control"
+										name="fabricLength" id="fabricLength" placeholder="">
+								</div>
+								<div class="col-md-4">
+									<input hidden="hidden" type="text" class="form-control"
+										name="id" id="findColorCardById">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="submit-btn">提交</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<div class="modal fade" id="addColorCode" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">你确定该供应商的色卡吗？？？</div>
+					<input hidden="hidden" id="add-input-colorCardCode"
+						name="colorCardCode" type="text">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							取消</button>
+						<button type="button" id="add-colcrCode-btn"
+							class="btn btn-primary">确认添加色号</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 刪除 -->
+		<div class="modal fade" id="delModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">
+						你确定刪除该: <span style="color: red" id="myModal-wave-text"> </span>
+						吗？？？
+					</div>
+					<input hidden="hidden" id="del-input-id" name="del-id" type="text">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							取消</button>
+						<button type="button" id="del-btn" class="btn btn-primary">
+							确认刪除</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+<script type="text/javascript">
+	function print(colorCardCode, colorCardName, fabricLength, supplierName,
+			createTime) {
+		//先清除原来的数据
+		$('#printArea').empty();
+		//把时间阶段到日，不要时分秒
+		createTime = createTime.substring(0, 11);
+		var s_print = "";
+		s_print += ' <div>色卡编号：' + colorCardCode + '</div>';
+		s_print += ' <div>色卡名称：' + colorCardName + '</div>';
+		s_print += ' <div>色卡门幅：' + fabricLength + '</div>';
+		s_print += ' <div>供应商名称：' + supplierName + '</div>';
+		s_print += '<div>创建时间：' + createTime + ' </div>';
+		$print = $(s_print);
+		$('#printArea').append($print);
+
+		$("#printArea").printArea();
+	}
+
+	$("#btnPrintFull").click(function() {
+		$("body").printArea();
+	});
+
+	var url = location.href;
+	var argArr = [];
+	if (url) {
+		console.info(url)
+		var argStr = url.split("?");
+		if (argStr.length > 1) {
+			var arg = argStr[1].split("&");
+			for (var a = 0; a < arg.length; a++) {
+				var temp = arg[a].split("=");
+				argArr[temp[0]] = temp[1]
+			}
+		}
+	}
+	//赋值    //你要看
+	for ( var a in argArr) {
+		$("#url_supplierCode").val(argArr[a]);
+	}
+
+	//页面加载执行
+	$(function() {
+		var Val = $("#form-anyVal").serialize();
+		$.post('getColorCardByPageCount.do', Val, function(data) {
+			$("#pageSize").val(10);
+			$("#pageNow").val(data.pageNow);
+			var anyVal = $("#form-anyVal").serialize();
+			findConditionColorCardByPage(anyVal);
+			$(".tcdPageCode").createPage({
+				pageCount : data.totalPageCount,
+				current : data.pageNow,
+				backFn : function(p) {
+					$("#pageSize").val(10);
+					$("#pageNow").val(p);
+					var anyVal = $("#form-anyVal").serialize();
+					findConditionColorCardByPage(anyVal);
+				}
+			});
+		});
+	});
+	//点击提交
+	$("#submit-btn").on("click", function() {
+		//var formData = new FormData($("#form-input")[0]);
+		var anyVal = $("#addOrUpdateColorCard").serialize();
+		var if_input_Id = $("#findColorCardById").val();
+		if (if_input_Id != "" && if_input_Id != null) {
+			updateColorCard(anyVal);
+		} else {
+			addColorCard(anyVal);
+		}
+	});
+	//删除
+	$("#del-btn").on('click', function() {
+		var id = $("#del-input-id").val();
+		alert("因为是档案 所以没有删除功能.请联系管理员 谢谢");
+		/* 	$.post('delFabricFiles.do', {
+		 'id' : id
+		 }, function(data) {
+		 alert(data);
+		 if (data = 1) {
+		 $("#myModal-prompt").html("恭喜你刪除成功");
+		 $("#del-btn").remove();
+		 var anyVal = $("#form-anyVal").serialize();
+		 //調用方法
+		 findDistributionFabricPageByVal(anyVal);
+		 } else {
+		 $("#myModal-prompt").html("删除失败！原因可能是网络问题");
+		 $("#del-btn").remove();
+		 var anyVal = $("#form-anyVal").serialize();
+		 //調用方法
+		 findDistributionFabricPageByVal(anyVal);
+		 }
+		 }); */
+	});
+	//点击查询获取查询的条件 数据
+	$("#anyVal-btn").on('click', function() {
+		$("#pageSize").attr('name', "");
+		$("#pageNow").attr('name', "");
+		var anyVal = $("#form-anyVal").serialize();
+		$.post('getColorCardByPageCount.do', anyVal, function(data) {
+			$("#pageSize").attr('name', "pageSize");
+			$("#pageNow").attr('name', "pageNow");
+			$("#pageNow").val(1);
+			var anyVal1 = $("#form-anyVal").serialize();
+			findConditionColorCardByPage(anyVal1);
+			$(".tcdPageCode").createPage({
+				pageCount : data.totalPageCount,
+				current : data.pageNow,
+				backFn : function(p) {
+					$("#pageSize").val(10);
+					$("#pageNow").val(p);
+					var anyVal2 = $("#form-anyVal").serialize();
+					findConditionColorCardByPage(anyVal2);
+				}
+			});
+		});
+	});
+	//添加
+	function addColorCard(anyVal) {
+		$.post('addColorCard.do', anyVal, function(data) {
+			if (data == 18) {
+				alert("你要添加的供应商已经存在了!!请对其修改!!");
+			} else {
+				window.location.reload();//刷新当前页面.
+			}
+
+		});
+	};
+	//修改
+	function updateColorCard(anyVal) {
+		$.post('modifyColorCard.do', anyVal, function(data) {
+			var pageNow = $("#pageNow").val();
+			$("#pageSize").val(10);
+			$("#pageNow").val(pageNow); //給當前頁賦值
+			var anyVal = $("#form-anyVal").serialize(); //获取form表单
+			//調用方法
+			findConditionColorCardByPage(anyVal);
+		});
+	};
+	//查询
+	function findConditionColorCardByPage(anyVal) {
+		$
+				.post(
+						"findConditionColorCardByPage.do",
+						anyVal,
+						function(data) {
+							$(".table_app").empty();
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr><td class='colorCardCode'>"
+										+ (data[i].colorCardCode == null ? ''
+												: data[i].colorCardCode)
+										+ "</td><td class='cardCode'>"
+										+ (data[i].cardCode == null ? ''
+												: data[i].cardCode)
+										+ "</td><td >"
+										+ (data[i].colorCardName == null ? ''
+												: data[i].colorCardName)
+										+ "</td><td >"
+										+ (data[i].gramWeight == null ? ''
+												: data[i].gramWeight)
+										+ "</td><td >"
+										+ (data[i].fabricLength == null ? ''
+												: data[i].fabricLength)
+										+ "</td><td >"
+										+ (data[i].kilogramMeter == null ? ''
+												: data[i].kilogramMeter)
+										+ "</td><td >"
+										+ (data[i].supplierName == null ? ''
+												: data[i].supplierName)
+										+ "</td><td >"
+										+ (data[i].createTime == null ? ''
+												: data[i].createTime)
+										+ "</td><td ><button type='button'  data-toggle='modal' data-target='#myModal'  onclick='findColorCardById(\""
+										+ data[i].id
+										+ "\")'  class='btn btn-primary icon-pencil'>修改</button><button type='button'  data-toggle='modal' data-target='#delModal' onclick='delFabricFilesById(\""
+										+ data[i].id
+										+ "\",\""
+										+ data[i].factoryName
+										+ "\")' class='icon-trash btn btn-danger'>删除</button><button type='button'  data-toggle='modal' data-target='#addColorCode' onclick='addColorCode(\""
+										+ data[i].colorCardCode
+										+ "\")' class='btn btn-primary icon-pencil'>添加颜色</button>    <button  type='button'  data-toggle='modal'  data-target='' onclick='print(\" "
+										+ data[i].colorCardCode
+										+ "\",\" "
+										+ data[i].colorCardName
+										+ "\",\" "
+										+ data[i].fabricLength
+										+ "\",\" "
+										+ data[i].supplierName
+										+ "\",\" "
+										+ data[i].createTime
+										+ "\")'  class='btn btn-primary icon-pencil'>打印</button></td></tr> ";
+								$(".table_app").append(_HTML_TEBLE_);
+							}
+						});
+	};
+
+	$("#add-colcrCode-btn").on(
+			'click',
+			function() {
+				var supplierCode = $("#add-input-supplierCode").val();
+				var colorCardCode = $("#add-input-colorCardCode").val();
+				window.location.href = "/fabricFiles.html?colorCardCode="
+						+ colorCardCode;
+				//alert(code);
+			});
+	function addColorCode(colorCardCode) {
+
+		$("#add-input-colorCardCode").val(colorCardCode);
+	};
+	//根据id获取当前数据
+	function findColorCardById(id) {
+		$.post("findColorCardById.do", {
+			'id' : id
+		}, function(result) {
+			$("#findColorCardById").val(result.id);
+			$("#cardCode").val(result.colorCardCode);
+			$("#colorCardName").val(result.colorCardName);
+			$("#fabricLength").val(result.fabricLength);
+			$("#supplierCode").val(result.supplierCode);
+			$("#gramWeight").val(result.gramWeight);
+		});
+	};//点击添加添加清空id
+	$("#add_button").on("click", function() {
+		$("#obj_hidden_id").val("");
+
+	});
+	//动态加载供应商
+	$("#add_button").on(
+			"click",
+			function() {
+				$("#selectSupplier").find("option").remove();
+				for ( var a in argArr) {
+					var supplierCode = argArr[a];
+				}
+				if (supplierCode != null && supplierCode != "") {
+					for ( var a in argArr) {
+						$("#selectSupplier").append(
+								"<option value="+argArr[a]+">" + argArr[a]
+										+ "</option>");
+					}
+				} else {
+					$.post('findFabricSupplierByAll.do', {}, function(data) {
+						for (var i = 0; i < data.length; i++) {
+							$("#selectSupplier").append(
+									"<option value="+data[i].supplierCode+">"
+											+ data[i].supplierName
+											+ "</option>");
+						}
+					});
+				}
+			});
+	$(".inputLength").blur(function() {
+		var length = $(this).val().length;
+		if (length != 4) {
+			$("#submit-btn").hide();
+			alert("你输入的格式不正确:如:0001");
+		} else {
+			$("#submit-btn").show();
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<@p.cache/><@p.css/> <@p.js/>
+<title>经销单报价</title>
+<script src="/res/js/laypage/laypage.js"></script>
+<script type="text/javascript" src="res/js/getDiscrepantDays/getDiscrepantDays.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {ace.settings.check('main-container', 'fixed')} catch (e) {}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">Home</a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">经销单报价</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+			</div>
+
+			<form id="selectFromData" enctype='mutipart/form-data'>
+				<div class="col-md-2">
+					<label for=wave></label>波次<input id="wave" type="text"
+						class="form-control" name="wave">
+				</div>
+				<div class="col-md-2">
+					<label for=oringinalWave></label>原波次<input id="oringinalWave"
+						type="text" class="form-control" name="oringinalWave">
+				</div>
+
+				<div class="col-md-2">
+					<label for=clothName></label>服装名<input id="clothName" type="text"
+						class="form-control" name="clothName">
+				</div>
+				<div class="col-md-2">
+					<label for=productCode></label>商品编码<input id="productCode"
+						type="text" class="form-control" name="productCode">
+				</div>
+				<div class="col-md-2">
+					<label for=trackingOfficer></label>跟单人<input id="trackingOfficer"
+						type="text" class="form-control" name="trackingOfficer">
+				</div>
+				<div class="col-md-2">
+					<label for=orderType></label>订单类型<input id="orderType" type="text"
+						class="form-control" name="orderType">
+				</div>
+				<div class="col-md-2">
+					<label for=distributtionFactory></label>经销工厂<input
+						id="distributtionFactory" type="text" class="form-control"
+						name="distributtionFactory">
+				</div>
+			</form>
+
+			<div class="col-md-2">
+				<button type="button" class="btn btn-default" data-dismiss="modal"
+					style="background-color: #428bca;" id="myselect">查询</button>
+			</div>
+
+			<div class="main-content">
+				<table class="table table-bordered"
+					style="width: 100%; height: 100%;">
+					<thead>
+						<tr>
+							<th colspan="30" style="text-align: center; font-size: 25px;">经销单报价</th>
+						</tr>
+						<tr>
+							<th>编号</th>
+							<th>原波次</th>
+							<th>波次</th>
+							<th>设计图</th>
+							<th>工艺单</th>
+							<th>尺码表</th>
+							<th>订单明细</th>
+							<th>订单数</th>
+							<th>服装名</th>
+							<th>商品编码</th>
+							<th>订单类型</th>
+							<th>订单等级</th>
+							<th>经销工厂</th>
+							<th>要求到货日期</th>
+							<th>下单日期</th>
+							<th>跟踪人</th>
+							<th>备注</th>
+							<th>打样单号</th>
+							<th>环节开始时间</th>
+							<th>确定打样时间</th>
+							<th>确定打样完成时间</th>
+							<th>订单剩余天数</th>
+							<th>本环节耗费天数</th>
+							<th>经销价格(元/件)</th>
+							<th>确认报价</th>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+					</tbody>
+				</table>
+				<!-- 分页 -->
+				<div id="pageSystem"
+					style="width: 100%; position: relative; top: 10px;"></div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		loadPageDatas(1);
+		selectButton();
+
+	});
+
+	//模糊查询
+	var mySelectForm;
+	function selectButton() {
+		$("#myselect").click(function() {
+			mySelectForm = $("#selectFromData").serialize();
+			firstLoadData("distributionQuote/getdistributionQuotePage.do?"+ mySelectForm, 1);
+		});
+	}
+
+	//进入后台进行分页查询
+	function loadPageDatas(index) {
+		firstLoadData("distributionQuote/getdistributionQuotePage.do", index);
+	}
+
+	//查询完成,打印数据
+	function loadData(mydata) {
+		$("#tbody").empty();
+		$.each(mydata,function(index, x) {
+							var id = "<td>" + x.id + "</td>";
+							var wave = "<td>" + x.wave + "</a></td>"; //波次号
+							var oringinalWave = x.oringinalWave == null ? "<td></td>"
+									: "<td>" + x.oringinalWave + "</td>"; //原波次
+							var clothName = x.clothName == null ? "<td></td>"
+									: "<td>" + x.clothName + "</td>"; //商品 
+							var productCode = x.productCode == null ? "<td></td>"
+									: "<td>" + x.productCode + "</td>"; //商品编码
+							
+							var productImg = x.productImg==null ? "<td></td>" : "<td><img style='width: 50px; height: 50px' src='" + x.productImg + "'></td>"; //设计图
+							var sampleImg = x.sampleImg == null ? "<td></td>"
+									: "<td><a href='" + x.sampleImg + "' target='_blank'>工艺单</a></td>";//工艺单
+							var sizeImg = x.sizeImg == null ? "<td></td>"
+									: "<td><a href='" + x.sizeImg + "' target='_blank '>尺码图</a></td>"; //尺码图
+							var orderDetails = x.orderDetails == null ? "<td></td>"
+									: "<td>" + x.orderDetails + "</td>"; //订单明细
+							var orderNum = x.orderNum == null ? "<td></td>"
+									: "<td>" + x.orderNum + "</td>"; //订单数量
+							var planInWarehouseTime = x.planInWarehouseTime == null ? "<td></td>"
+									: "<td>" + x.planInWarehouseTime + "</td>"; //计划入库时间
+							var orderGrade = x.orderGrade == null ? "<td></td>"
+									: "<td>" + x.orderGrade + "</td>"; //订单等级
+							var orderType = x.orderType == null ? "<td></td>"
+									: "<td>" + x.orderType + "</td>"; //订单类型
+							var distributtionFactory = x.distributtionFactory == null ? "<td></td>"
+									: "<td>" + x.distributtionFactory + "</td>"; //经销工厂
+							var toMakeTheSample = x.toMakeTheSample == null ? "<td></td>"
+									: "<td>" + x.toMakeTheSample + "</td>"; //确定打样	
+							var toMakeTheSampleComplete = x.toMakeTheSampleComplete == null ? "<td></td>"
+									: "<td>" + x.toMakeTheSampleComplete
+											+ "</td>"; //打样完成
+
+							var releaseTime = x.releaseTime == null ? "<td></td>"
+									: "<td>" + x.releaseTime + "</td>"; //下单时间
+							var orderId = "<td>"
+									+ (x.orderId == null ? '' : x.orderId)
+									+ "</td>"; //打样单号
+							var tacheStartTime = "<td>"
+									+ (x.tacheStartTime == null ? ''
+											: x.tacheStartTime) + "</td>"; //环节开始时间
+							var mydate = new Date();
+							var month = mydate.getMonth() + 1;
+							var strDate = mydate.getDate();
+							if (month >= 1 && month <= 9) {
+								month = "0" + month;
+							}
+							if (strDate >= 0 && strDate <= 9) {
+								strDate = "0" + strDate;
+							}
+							var currentdate = mydate.getFullYear() + "-"
+									+ month + "-" + strDate;
+							var quoteRemainTime = "<td>"
+									+ getDiscrepantDays(currentdate,
+											x.planInWarehouseTime) + "</td>";
+							;//报价剩余天数
+							var quoteConsumeTime = "<td>"
+									+ getDiscrepantDays(currentdate,
+											x.tacheStartTime) + "</td>";
+							;//报价剩余天数
+							if (x.dataState == '完成报价' || x.dataState == '放弃报价') {
+								var clothPrice = "<td>"
+										+ (x.clothPrice == null ? ''
+												: x.clothPrice) + "</td>";
+								var remark = "<td>"
+										+ (x.remark == null ? '' : x.remark)
+										+ "</td>"; //备注
+								var trackingOfficer = "<td>"
+										+ (x.trackingOfficer == null ? ''
+												: x.trackingOfficer) + "</td>"; //跟单人
+							} else {
+								var clothPrice = "<td class='mydblClick' name='clothPrice'>"
+										+ (x.clothPrice == null ? ''
+												: x.clothPrice) + "</td>";
+								var remark = "<td class='mydblClick' name='remark'>"
+										+ (x.remark == null ? '' : x.remark)
+										+ "</td>"; //跟单人
+								var trackingOfficer = "<td class='mydblClick' name='trackingOfficer'>"
+										+ (x.trackingOfficer == null ? ''
+												: x.trackingOfficer) + "</td>"; //跟单人
+							}
+							var distributionQuotes = x.distributionQuotes == null ? "<td></td>"
+									: "<td>" + x.distributionQuotes + "</td>"; //确认报价
+
+							$("tbody")
+									.append(
+											"<tr>"
+													+ id
+													+ oringinalWave
+													+ wave
+													+ productImg
+													+ sampleImg
+													+ sizeImg
+													+ orderDetails
+													+ orderNum
+													+ clothName
+													+ productCode
+													+ orderType
+													+ orderGrade
+													+ distributtionFactory
+													+ planInWarehouseTime
+													+ releaseTime
+													+ trackingOfficer
+													+ remark
+													+ orderId
+													+ tacheStartTime
+													+ toMakeTheSample
+													+ toMakeTheSampleComplete
+													+ quoteRemainTime
+													+ quoteConsumeTime
+													+ clothPrice
+													+ "<td class='dataState"+x.id+"'><button class='btn btn-app btn-purple btn-sm deleteById'>确认报价</button><button class='btn btn-app btn-purple btn-sm deleteByIds'>放弃报价</button></td> "
+													+ "</tr>");
+
+							var dataState = x.dataState;
+							if (dataState == '完成报价') {
+								$(".dataState" + x.id).parent().attr("bgcolor",
+										"#00ff00");
+								$(".dataState" + x.id).find('button').remove();
+								$(".dataState" + x.id)
+										.append(
+												"<button class='btn icon-ok btn-inverse' disabled='disabled'>完成报价</button>");
+							} else if (dataState == '放弃报价') {
+								$(".dataState" + x.id).parent().attr("bgcolor",
+										"#00ffff");
+								$(".dataState" + x.id).find('button').remove();
+								$(".dataState" + x.id)
+										.append(
+												"<button class='btn icon-ok btn-inverse' disabled='disabled'>放弃报价</button>");
+							}
+						});
+		mydblclick();
+		deleteById();
+		deleteByIds();
+	}
+
+	//设置文本框
+	function mydblclick() {
+		$(".mydblClick")
+				.on(
+						"dblclick",
+						function() {
+							var myid = $(this).parent().find("td:eq(0)").text()
+									.trim();//获取到id值	
+							var thisText = $(this).text().trim(); //文本框中原有的值
+							var thisName = $(this).attr("name"); //获取文本框的属性名
+							var thisVal = $(this).attr("value"); //获取文本框属性值
+							$(this)
+									.html(
+											"<form id='dbUpdateForm'><input type='hidden' name='id' value="+
+					myid+" /><input type='text' id='my"+thisName +"' name='" + thisName+ "' value='" + thisText+ "'></form>");
+							$(this).attr("class", "sn");
+							myblur("my" + thisName);
+							$("#my" + thisName).focus();
+
+						});
+	}
+
+	//提交对文本框中数据
+	function myblur(id) {
+		$("#" + id)
+				.blur(
+						function() {
+							var myform = $("#dbUpdateForm").serialize();
+							$
+									.ajax({
+										url : 'distributionQuote/updateDistributionQuoteById.do',//指定路勁下的指定方法
+										type : 'POST',
+										dataType : 'json',
+										data : myform,
+										success : function(data) {
+											if (data == 1) {
+												firstLoadData(
+														"/distributionQuote/getdistributionQuotePage.do?"
+																+ mySelectForm,
+														$(".laypage_curr")
+																.text()); // 指定url
+											} else {
+												alert("修改失败");
+											}
+										}
+									});
+						});
+	}
+
+	//修改数据状态
+	function deleteById() {
+		$(".deleteById")
+				.on(
+						"click",
+						function() {
+							var id = $(this).parent().parent().find("td:eq(0)")
+									.text().trim(); //获取id
+							if (confirm('确认报价吗?')) {
+								$
+										.ajax({
+											url : 'distributionQuote/sureDistributionQuoteById.do',
+											type : 'POST',
+											dataType : 'json',
+											data : {
+												id : id
+											},
+											success : function(data) {
+												if (data = 1) {
+													firstLoadData(
+															"/distributionQuote/getdistributionQuotePage.do?"
+																	+ mySelectForm,
+															$(".laypage_curr")
+																	.text()); // 指定url
+												} else {
+													alert("添加失败");
+												}
+											}
+										});
+							} else {
+								return false;
+							}
+						});
+	}
+
+	//修改数据状态
+	function deleteByIds() {
+		$(".deleteByIds")
+				.on(
+						"click",
+						function() {
+							var id = $(this).parent().parent().find("td:eq(0)")
+									.text().trim(); //获取id
+							if (confirm('放弃报价吗?')) {
+								$
+										.ajax({
+											url : 'distributionQuote/giveUpDistributionQuoteById.do',
+											type : 'POST',
+											dataType : 'json',
+											data : {
+												id : id
+											},
+											success : function(data) {
+												if (data = 1) {
+													firstLoadData(
+															"/distributionQuote/getdistributionQuotePage.do?"
+																	+ mySelectForm,
+															$(".laypage_curr")
+																	.text()); // 指定url
+												} else {
+													alert("添加失败");
+												}
+											}
+										});
+							} else {
+								return false;
+							}
+						});
+	}
+</script>
+</html>

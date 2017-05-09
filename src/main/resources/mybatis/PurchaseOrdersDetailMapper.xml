@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.PurchaseOrdersDetailDAO">
+	<!-- 查询数据量 -->
+	<select id="getCountByPage" parameterType="com.warehouse.entity.PurchaseOrdersDetail"
+		resultType="java.lang.Integer">
+		select count(*) from purchase_orders_detail where 1=1
+		<if test='WAVE!=null and WAVE!=""'>
+			and WAVE like concat("%",#{WAVE},"%")
+		</if>
+		<if test='PRODUCT_CODE!=null and PRODUCT_CODE!=""'>
+			and PRODUCT_CODE like concat("%",#{PRODUCT_CODE},"%")
+		</if>
+	</select>
+	<!-- 分页查询数据 -->
+	<select id="getDataByPage" parameterType="com.warehouse.entity.PurchaseOrdersDetail"
+		resultType="com.warehouse.entity.PurchaseOrdersDetail">
+		select * from
+		purchase_orders_detail where 1=1
+		<if test='WAVE!=null and WAVE!=""'>
+			and WAVE like concat("%",#{WAVE},"%")
+		</if>
+		<if test='PRODUCT_CODE!=null and PRODUCT_CODE!=""'>
+			and PRODUCT_CODE like concat("%",#{PRODUCT_CODE},"%")
+		</if>
+		order by ORDER_CODE
+		limit #{begin},#{end}
+	</select>
+	<!-- 根据编号查询 -->
+	<select id="getDataById" parameterType="java.lang.Integer"
+		resultType="com.warehouse.entity.PurchaseOrdersDetail">
+		select *
+		from purchase_orders_detail where
+		ORDER_CODE=#{ORDER_CODE}
+	</select>
+</mapper>

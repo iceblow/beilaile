@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>辅料理单</title> <@p.cache/> <@p.css/> <@p.js/>
+    <script type="text/javascript" src="/res/js/acces/layer/layer.js"></script>
+</head>
+<body>
+<@p.top/>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <@p.left/>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li><i class="icon-home home-icon"> </i> <a href="#">
+                        Home </a></li>
+                    <li><a href="#"> Tables </a></li>
+                    <li class="active">辅料理单</li>
+                </ul>
+                <!-- .breadcrumb -->
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+            <div class="col-md-12">
+                <button id="add_button" class="btn btn-primary btn-lg"
+                        data-toggle="modal" data-target="#myModal">添加
+                </button>
+            </div>
+            <!-- /.col-lg-6 -->
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-anyVal" method="post">
+                    <div id="val-input-empty" class="col-md-12">
+                        <div class="col-md-2">
+                            <label for="queryAddDate">订单日期</label>
+                            <input type="text" name="addTime" id="queryAddDate"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="queryWave">波次号</label>
+                            <input type="text" name="wave" id="queryWave"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="queryStatus">状态</label>
+                            <input type="text" name="accesStatus" id="queryStatus"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="querySynchT">同步时间</label>
+                            <input type="text" name="accesOderSynchTime" id="querySynchT"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="querySynchT">商品编码</label>
+                            <input type="text" name="productCode" id="queryProductCode"/>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="input-group-btn">
+                                <button id="queryAccesOrderSort" class="btn btn-default" type="button"> 查询</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="" />
+                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="" />
+                    </div>
+                </form>
+            </div>
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>日期</th>
+                                <th>波段</th>
+                                <th>原波段</th>
+                                <th>商品编码</th>
+                                <th>订单数</th>
+                                <th>订单详情</th>
+                                <th>裁剪数</th>
+                                <th>裁剪日期</th>
+                                <th>图片</th>
+                                <th>工艺单</th>
+                                <th>面料成分</th>
+                                <th>成衣类型</th>
+                                <th>辅料1</th>
+                                <th>序列号1</th>
+                                <th>规格1</th>
+                                <th>数量1</th>
+                                <th>辅料2</th>
+                                <th>序列号2</th>
+                                <th>规格2</th>
+                                <th>数量2</th>
+                                <th>辅料3</th>
+                                <th>序列号3</th>
+                                <th>规格3</th>
+                                <th>单耗3</th>
+                                <th>数量3</th>
+                                <th>辅料4</th>
+                                <th>序列号4</th>
+                                <th>损耗率4</th>
+                                <th>单耗4</th>
+                                <th>数量4</th>
+                                <th>辅料5</th>
+                                <th>序列号5</th>
+                                <th>损耗率5</th>
+                                <th>单耗5</th>
+                                <th>数量5</th>
+                                <th>辅料6</th>
+                                <th>序列号6</th>
+                                <th>损耗率6</th>
+                                <th>单耗6</th>
+                                <th>数量6</th>
+                                <th>备注</th>
+                                <th>状态</th>
+                                <th>完成数</th>
+                                <th>辅料总数</th>
+                                <th>创建人</th>
+                                <th colspan="1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="paramField" value="" hidden="hidden">
+</body>
+<script type="text/javascript">
+    //页面加载就执行
+    $(function () {
+        $(".col-md-2").find(":input").each(
+            function () {
+                $(this).val("");
+            });
+        var anyVal = $("#form-anyVal").serialize();
+        getAccesOrderSortBpcnt(anyVal);
+    });
+
+    //条件查询
+    $("#queryAccesOrderSort").on("click", function () {
+        var anyVal = $("#form-anyVal").serialize();
+        getAccesOrderSortBpcnt(anyVal);
+    });
+
+//    //提交---未使用
+//    $("#submit-btn").on("click", function () {
+//        var formData = new FormData($("#form-input")[0]);
+//        var if_input_Id = $("#obj_hidden_id").val();
+//        if (if_input_Id != "" && if_input_Id != null) {
+//            //修改
+//            modifyAccessoryMaterial(formData);
+//        } else {
+//            //添加
+//            addAccessoryMaterial(formData);
+//        }
+//    });
+    //查询总条数
+    function getAccesOrderSortBpcnt(anyVal) {
+        $.post('getAccesOrderSortBpcnt.do', anyVal,
+            function (data) {
+                $("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+                $("#pageNow").val(data.pageNow);
+                var anyVal2 = $("#form-anyVal").serialize();
+                //获取form参数进行查询
+                //調用方法传参
+                findAccesOrderSort(anyVal2);
+                // 进入后台进行分页查询
+                $(".tcdPageCode").createPage({ //哦哦
+                    pageCount: data.totalPageCount, //总页数
+                    current: data.pageNow, //当前页
+                    backFn: function (p) {
+                        $("#pageSize").val(10);
+                        $("#pageNow").val(p); //給當前頁賦值
+                        var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+                        //調用方法
+                        findAccesOrderSort(anyVal1);
+                    }
+                });
+            });
+    }
+    //查询
+    function findAccesOrderSort(anyVal) {
+        $.post("findAccesOrderSortCndbp.do", anyVal, //from表单内容
+            function (data) {
+                $(".table_app").empty(); //清空原有的数据
+                for (var i = 0; i < data.length; i++) {
+                    var _HTML_TEBLE_ = "";
+                    _HTML_TEBLE_ = "<tr>" + +"<input type='hidden' class='id' value='"
+                        + data[i].id
+                        + "'/>"
+                        + "<td>"
+                        + data[i].id
+                        + "</td><td >"
+                        + (data[i].addTime == null ? '' : data[i].addTime)
+                        + "</td><td >"
+                        + (data[i].wave == null ? '' : data[i].wave)
+                        + "</td><td >"
+                        + (data[i].oriWave == null ? '' : data[i].oriWave)
+                        + "</td><td >"
+                        + (data[i].product_code == null ? '' : data[i].product_code)
+                        + "</td><td >"
+                        + (data[i].orderNum == null ? '' : data[i].orderNum)
+                        + "</td><td >"
+                        + (data[i].orderDetails == null ? '' : data[i].orderDetails)
+                        + "</td><td >"
+                        + (data[i].cropNum == null ? '' : data[i].cropNum)
+                        + "</td><td >"
+                        + (data[i].cropDate == null ? '' : data[i].cropDate)
+                        +"</td><td ><img style='width: 120px; height: 120px' src=" + data[i].img + "></td><td >"
+						+(data[i].sampleImg ==null ? '':"<a href='"+data[i].sampleImg+"' target='_blank'>工艺单</a>")
+						+"</td><td class='fillOrderSort' name='clothCategories'>"
+                        + (data[i].clothCategories == null ? '' : data[i].clothCategories)
+                        +"</td><td class='fillOrderSort' name='fabricComponent'>"
+                        + (data[i].fabricComponent == null ? '' : data[i].fabricComponent)
+                        +"</td><td class='fillOrderSort' name='accesOne'>"
+                        + (data[i].accesOne == null ? '' : data[i].accesOne)
+                        + "</td><td class='fillOrderSort' name='accesOneSerialNum'>"
+                        + (data[i].accesOneSerialNum == null ? '' : data[i].accesOneSerialNum)
+                        + "</td><td class='fillOrderSort' name='accesOneEtalonDescription'>"
+                        + (data[i].accesOneEtalonDescription == null ? '' : data[i].accesOneEtalonDescription)
+                        + "</td><td name='accesOneQuantity'>"
+                        + (data[i].accesOneQuantity == null ? '' : data[i].accesOneQuantity)
+                        + "</td><td class='fillOrderSort'  name='accesTwo'>"
+                        + (data[i].accesTwo == null ? '' : data[i].accesTwo)
+                        + "</td><td class='fillOrderSort' name='accesTwoSerialNum'>"
+                        + (data[i].accesTwoSerialNum == null ? '' : data[i].accesTwoSerialNum)
+                        + "</td><td class='fillOrderSort' name='accesTwoEtalonDescription'>"
+                        + (data[i].accesTwoEtalonDescription == null ? '' : data[i].accesTwoEtalonDescription)
+                        + "</td><td name='accesTwoQuantity'>"
+                        + (data[i].accesTwoQuantity == null ? '' : data[i].accesTwoQuantity)
+                        + "</td><td  class='fillOrderSort' name='accesThree'>"
+                        + (data[i].accesThree == null ? '' : data[i].accesThree)
+                        + "</td><td class='fillOrderSort' name='accesThreeSerialNum'>"
+                        + (data[i].accesThreeSerialNum == null ? '' : data[i].accesThreeSerialNum)
+                        + "</td><td class='fillOrderSort' name='accesThreeEtalonDescription'>"
+                        + (data[i].accesThreeEtalonDescription == null ? '' : data[i].accesThreeEtalonDescription)
+                        + "</td><td class='calOrderSort' name='accesThreeSingleUse'>"
+                        + (data[i].accesThreeSingleUse == null ? '' : data[i].accesThreeSingleUse)
+                        + "</td><td name='accesThreeQuantity'>"
+                        + (data[i].accesThreeQuantity == null ? '' : data[i].accesThreeQuantity)
+                        + "</td><td class='fillOrderSort' name='accesFour'>"
+                        + (data[i].accesFour == null ? '' : data[i].accesFour)
+                        + "</td><td class='fillOrderSort' name='accesFourSerialNum'>"
+                        + (data[i].accesFourSerialNum == null ? '' : data[i].accesFourSerialNum)
+                        + "</td><td class='calOrderSort' name='accesFourScrapRate'>"
+                        + (data[i].accesFourScrapRate == null ? '' : data[i].accesFourScrapRate)
+                        + "</td><td class='calOrderSort' name='accesFourSingleUse'>"
+                        + (data[i].accesFourSingleUse == null ? '' : data[i].accesFourSingleUse)
+                        + "</td><td name='accesFourQuantity'>"
+                        + (data[i].accesFourQuantity == null ? '' : data[i].accesFourQuantity)
+                        + "</td><td class='fillOrderSort' name='accesFive'>"
+                        + (data[i].accesFive == null ? '' : data[i].accesFive)
+                        + "</td><td class='fillOrderSort' name='accesFiveSerialNum'>"
+                        + (data[i].accesFiveSerialNum == null ? '' : data[i].accesFiveSerialNum)
+                        + "</td><td class='calOrderSort' name='accesFiveScrapRate'>"
+                        + (data[i].accesFiveScrapRate == null ? '' : data[i].accesFiveScrapRate)
+                        + "</td><td class='calOrderSort'name='accesFiveSingleUse' >"
+                        + (data[i].accesFiveSingleUse == null ? '' : data[i].accesFiveSingleUse)
+                        + "</td><td name='accesFiveQuantity'>"
+                        + (data[i].accesFiveQuantity == null ? '' : data[i].accesFiveQuantity)
+                        + "</td><td class='fillOrderSort' name='accesSix'>"
+                        + (data[i].accesSix == null ? '' : data[i].accesSix)
+                        + "</td><td class='fillOrderSort' name='accesSixSerialNum'>"
+                        + (data[i].accesSixSerialNum == null ? '' : data[i].accesSixSerialNum)
+                        + "</td><td class='calOrderSort' name='accesSixScrapRate'>"
+                        + (data[i].accesSixScrapRate == null ? '' : data[i].accesSixScrapRate)
+                        + "</td><td class='calOrderSort' name='accesSixSingleUse'>"
+                        + (data[i].accesSixSingleUse == null ? '' : data[i].accesSixSingleUse)
+                        + "</td><td name='accesSixQuantity'>"
+                        + (data[i].accesSixQuantity == null ? '' : data[i].accesSixQuantity)
+                        + "</td><td class='fillOrderSort' name='accesRemarks'>"
+                        + (data[i].accesRemarks == null ? '' : data[i].accesRemarks)
+                        + "</td><td class='accesStatus" + data[i].id + "'>"
+                        + (data[i].accesStatus == null ? '' : data[i].accesStatus)
+                        + "</td><td>"
+                        + (data[i].readySumSort == null || data[i].readySumSort == "" ? '' : data[i].readySumSort)
+                        + "</td><td>"
+                        + (data[i].sumSort == null || data[i].sumSort == "" ? '' : data[i].sumSort)
+                        + "</td><td>"
+                        + (data[i].founder == null || data[i].founder == "" ? '' : data[i].founder)
+                        + "</td><td class='btnStatus" + data[i].id + "'>"
+                        + "<button type='button' onclick='oderSortComplete(\""
+                        + data[i].id
+                        + "\")' class='btn btn-primary btn-sm icon-confirm'>理单完成</button>"
+                        + "<button type='button' onclick='layerSort(\""
+                        + data[i].id
+                        + "\")' class='btn btn-primary btn-sm icon-confirm'>弹出页面</button>"
+                        + "</td></tr>";
+                    $(".table_app").append(_HTML_TEBLE_);
+                    var accesStatus = data[i].accesStatus;
+                    var issId = data[i].id;
+                    changeOrderSortBgc(accesStatus, issId);//背景色   bgc   :  background color
+                    var btnStatus = data[i].accesStatus;// 理单据完成后  里单按钮失效
+                    if (btnStatus=='理单完成') {
+                        $(".btnStatus" + issId).find("button").attr('disabled',"true");
+                    }
+
+                }
+                calOrderSort();
+                fillOrderSort();
+            });
+    }
+    function layerSort(param) {
+        $("#paramField").val(param);
+        //iframe窗
+        layer.open({
+            type: 2,
+            title: '理单弹出层页面。',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['893px', '600px'],
+            content: 'sortLayer.do',
+            end: function () {
+//                console.log("this is end function!");
+            }
+        });
+    }
+
+    //修改更新计算 辅料 包装袋 吊牌 五爪扣 辅料A 辅料B 辅料C 的数量  cal  计算
+    function calOrderSort() {
+        $(".calOrderSort").on(
+            "dblclick",
+            function (e) {
+                var id = $(this).parent().children("td:first").html();
+                id = parseInt(id);
+                var code = $(this).text().trim();
+                var name = $(this).attr("name");
+                $(this).html(
+                    "<input id='" + id + "' type='text' value='" + code
+                    + "' name='" + name + "'> ");
+
+                $("#" + id).focus();// 文本框获取光标事件
+                savaOrderSortUpdate(id, name);
+                stopDefault(e);
+                stopBubble(e);
+            });
+    }
+
+    //calOrderSort调用 保存更新数据 及回填计算所得数量
+    function savaOrderSortUpdate(id, name) {
+        $("#" + id).blur(
+            function (e) {
+                var updatedArgs = $(this).val();
+                var trlabele = $(this).closest("td");
+                trlabele.text(updatedArgs);
+                var data = {
+                    id: id
+                };
+                data[name] = updatedArgs;
+                $.ajax({
+                    url: 'savaOrderSortUpdate.do',
+                    dataType: 'json',
+                    type: 'post',
+                    data: data,
+                    success: function (data) {
+                        var trlabel = trlabele.parents();
+                        if (data.accesOneQuantity != null) {
+                            trlabel.children("td[name='accesOneQuantity']").html(data.accesOneQuantity);
+                        }
+                        if (data.accesTwoQuantity != null) {
+                            trlabel.children("td[name='accesTwoQuantity']").html(data.accesTwoQuantity);
+                        }
+                        if (data.accesThreeQuantity != null) {
+                            trlabel.children("td[name='accesThreeQuantity']").html(data.accesThreeQuantity);
+                        }
+                        if (data.accesFourQuantity != null) {
+                            trlabel.children("td[name='accesFourQuantity']").html(data.accesFourQuantity);
+                        }
+                        if (data.accesFiveQuantity != null) {
+                            trlabel.children("td[name='accesFiveQuantity']").html(data.accesFiveQuantity);
+                        }
+                        if (data.accesSixQuantity != null) {
+                            trlabel.children("td[name='accesSixQuantity']").html(data.accesSixQuantity);
+                        }
+                        if (data.accesOneSingleUse != null) {
+                            trlabel.children("td[name='accesOneSingleUse']").html(data.accesOneSingleUse);
+                        }
+                        if (data.accesOneScrapRate != null) {
+                            trlabel.children("td[name='accesOneScrapRate']").html(data.accesOneScrapRate);
+                        }
+                        if (data.accesTwoScrapRate != null) {
+                            trlabel.children("td[name='accesTwoScrapRate']").html(data.accesTwoScrapRate);
+                        }
+                        if (data.accesTwoSingleUse != null) {
+                            trlabel.children("td[name='accesTwoSingleUse']").html(data.accesTwoSingleUse);
+                        }
+                    },
+                    error: function () {
+                        alert("修改失败,输入的类型错误!");
+                    }
+                });
+                stopDefault(e);
+                stopBubble(e);
+            });
+    }
+//fill  填写文字信息
+    function fillOrderSort() {
+        $(".fillOrderSort").on(
+            "dblclick",
+            function (e) {
+                stopDefault(e);
+                stopBubble(e);
+                var id = $(this).parent().children("td:first").html();
+                id = parseInt(id);
+                var code = $(this).text().trim();
+                var name = $(this).attr("name");
+                $(this).html(
+                    "<input id='" + id + "' type='text' value='" + code
+                    + "' name='" + name + "'> ");
+                $("#" + id).focus();// 文本框获取光标事件
+                savaOrderSortFill(id, name);
+
+            });
+    }
+
+    function savaOrderSortFill(id, name) {
+        $("#" + id).dblclick(function (e) {
+            stopBubble(e);
+        });
+        $("#" + id).blur(
+            function (e) {
+                var updatedArgs = $(this).val();
+                var trlabele = $(this).closest("td");
+                trlabele.text(updatedArgs);
+                var data = {
+                    id: id
+                };
+                data[name] = updatedArgs;
+                $.ajax({
+                    url: 'savaOrderSortFill.do',
+                    dataType: 'json',
+                    type: 'post',
+                    data: data,
+                    success: function (data) {
+                        var trlabel = trlabele.parents();
+                        //
+                    },
+                    error: function () {
+                        alert("修改失败!");
+                    }
+                });
+
+            });
+    }
+
+    function oderSortComplete(id) {
+        var flag = confirm("确认 理单完成？");
+        var data = {
+            id: id
+        };
+        if (flag) {
+            var tdArgs = $(".accesStatus" + id);
+            $.ajax({
+                url: "oderSortComplete.do",
+                dataType: 'json',
+                type: 'post',
+                data: data,
+                success: function (result) {
+                    var accesStatus = "理单完成";
+                    tdArgs.text(accesStatus);
+                    var issId = id;
+                    changeOrderSortBgc(accesStatus, issId);
+                    disableAcCompleteBtn(issId);
+                }
+            });
+        }
+    }
+
+    //    完成按钮失效
+    function disableAcCompleteBtn(issId) {
+        var tdArgs = $(".accesStatus" + issId).parent();
+        var btn = tdArgs.last().find('button');
+        btn.attr('disabled',"true");
+    }
+    //改变辅料理单背景色
+    function changeOrderSortBgc(accesStatus, issId) {
+        if (accesStatus == "理单完成") {
+            $(".accesStatus" + issId).parent().css("background", "#bbffbb");
+        } else if (accesStatus == "未理单") {
+            $(".accesStatus" + issId).parent().css("background", "none");
+        } else if (accesStatus == "被退回") {
+            $(".accesStatus" + issId).parent().css("background", "#ffbb77");
+        } else if (accesStatus == "已发放") {
+            $(".accesStatus" + issId).parent().css("background", "#84c1ff");
+        } else if (accesStatus == "配包完成") {
+            $(".accesStatus" + issId).parent().css("background", "#ffaad5");
+        } else {
+            $(".accesStatus" + issId).parent().css("background", "none");
+        }
+    }
+
+
+    function stopBubble(e) {
+//如果提供了事件对象，则这是一个非IE浏览器
+        if ( e && e.stopPropagation )
+        //因此它支持W3C的stopPropagation()方法
+            e.stopPropagation();
+        else
+        //否则，我们需要使用IE的方式来取消事件冒泡
+            window.event.cancelBubble = true;
+    }
+    //阻止浏览器的默认行为
+    function stopDefault( e ) {
+        //阻止默认浏览器动作(W3C)
+        if ( e && e.preventDefault )
+            e.preventDefault();
+        //IE中阻止函数器默认动作的方式
+        else
+            window.event.returnValue = false;
+        return false;
+    }
+</script>
+</html>

@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.AccesStorageInMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.AccesStorageIn" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ACCES_NAME_WH" property="accesNameWh" jdbcType="VARCHAR" />
+    <result column="ACCES_SERIAL_NUM_WH" property="accesSerialNumWh" jdbcType="VARCHAR" />
+    <result column="ACCES_BARCODE_WH" property="accesBarcodeWh" jdbcType="VARCHAR" />
+    <result column="ACCES_ACRONYM_WH" property="accesAcronymWh" jdbcType="VARCHAR" />
+    <result column="ACCES_HISTORY_CODE_WH" property="accesHistoryCodeWh" jdbcType="VARCHAR" />
+    <result column="ACCES_COLOR_WH" property="accesColorWh" jdbcType="VARCHAR" />
+    <result column="ACCES_LENGTH_WH" property="accesLengthWh" jdbcType="VARCHAR" />
+    <result column="ACCES_WIDTH_WH" property="accesWidthWh" jdbcType="VARCHAR" />
+    <result column="ACCES_WEIGHT_WH" property="accesWeightWh" jdbcType="VARCHAR" />
+    <result column="ACCES_UNIT_WH" property="accesUnitWh" jdbcType="VARCHAR" />
+    <result column="ACCES_STORE_METHOD_WH" property="accesStoreMethodWh" jdbcType="VARCHAR" />
+    <result column="ACCES_STORE_UNIT_WH" property="accesStoreUnitWh" jdbcType="VARCHAR" />
+    <result column="ACCES_ETALON_WH" property="accesEtalonWh" jdbcType="VARCHAR" />
+    <result column="ACCES_INVNTRY_NUM_WH" property="accesInvntryNumWh" jdbcType="DOUBLE" />
+    <result column="ACCES_FREE_NUM_SI" property="accesFreeNumSi" jdbcType="DOUBLE" />
+    <result column="ACCES_LOCKED_NUM_SI" property="accesLockedNumSi" jdbcType="DOUBLE" />
+    <result column="STORAGE_IN_TIME" property="storageInTime" jdbcType="VARCHAR" />
+    <result column="STORAGE_IN_REMARK" property="storageInRemark" jdbcType="VARCHAR" />
+    <result column="STANDBY_FIR" property="standbyFir" jdbcType="VARCHAR" />
+    <result column="STANDBY_SEC" property="standbySec" jdbcType="VARCHAR" />
+    <result column="STANDBY_THR" property="standbyThr" jdbcType="VARCHAR" />
+    <result column="MARK_STATUS" property="markStatus" jdbcType="VARCHAR" />
+    <result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+    <result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+    <result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ACCES_NAME_WH, ACCES_SERIAL_NUM_WH, ACCES_BARCODE_WH, ACCES_ACRONYM_WH, ACCES_HISTORY_CODE_WH, 
+    ACCES_COLOR_WH, ACCES_LENGTH_WH, ACCES_WIDTH_WH, ACCES_WEIGHT_WH, ACCES_UNIT_WH, 
+    ACCES_STORE_METHOD_WH, ACCES_STORE_UNIT_WH, ACCES_ETALON_WH, ACCES_INVNTRY_NUM_WH, 
+    ACCES_FREE_NUM_SI, ACCES_LOCKED_NUM_SI, STORAGE_IN_TIME, STORAGE_IN_REMARK, STANDBY_FIR, 
+    STANDBY_SEC, STANDBY_THR, MARK_STATUS, FOUNDER, CREATED_TIME, MODIFY_TIME, DELETE_TIME, 
+    OPERATOR, OPERATOR_IP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from acces_storage_in
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from acces_storage_in
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.warehouse.entity.AccesStorageIn" >
+    insert into acces_storage_in (ID, ACCES_NAME_WH, ACCES_SERIAL_NUM_WH, 
+      ACCES_BARCODE_WH, ACCES_ACRONYM_WH, ACCES_HISTORY_CODE_WH, 
+      ACCES_COLOR_WH, ACCES_LENGTH_WH, ACCES_WIDTH_WH, 
+      ACCES_WEIGHT_WH, ACCES_UNIT_WH, ACCES_STORE_METHOD_WH, 
+      ACCES_STORE_UNIT_WH, ACCES_ETALON_WH, ACCES_INVNTRY_NUM_WH, 
+      ACCES_FREE_NUM_SI, ACCES_LOCKED_NUM_SI, STORAGE_IN_TIME, 
+      STORAGE_IN_REMARK, STANDBY_FIR, STANDBY_SEC, 
+      STANDBY_THR, MARK_STATUS, FOUNDER, 
+      CREATED_TIME, MODIFY_TIME, DELETE_TIME, 
+      OPERATOR, OPERATOR_IP)
+    values (#{id,jdbcType=INTEGER}, #{accesNameWh,jdbcType=VARCHAR}, #{accesSerialNumWh,jdbcType=VARCHAR}, 
+      #{accesBarcodeWh,jdbcType=VARCHAR}, #{accesAcronymWh,jdbcType=VARCHAR}, #{accesHistoryCodeWh,jdbcType=VARCHAR}, 
+      #{accesColorWh,jdbcType=VARCHAR}, #{accesLengthWh,jdbcType=VARCHAR}, #{accesWidthWh,jdbcType=VARCHAR}, 
+      #{accesWeightWh,jdbcType=VARCHAR}, #{accesUnitWh,jdbcType=VARCHAR}, #{accesStoreMethodWh,jdbcType=VARCHAR}, 
+      #{accesStoreUnitWh,jdbcType=VARCHAR}, #{accesEtalonWh,jdbcType=VARCHAR}, #{accesInvntryNumWh,jdbcType=DOUBLE}, 
+      #{accesFreeNumSi,jdbcType=DOUBLE}, #{accesLockedNumSi,jdbcType=DOUBLE}, #{storageInTime,jdbcType=VARCHAR}, 
+      #{storageInRemark,jdbcType=VARCHAR}, #{standbyFir,jdbcType=VARCHAR}, #{standbySec,jdbcType=VARCHAR}, 
+      #{standbyThr,jdbcType=VARCHAR}, #{markStatus,jdbcType=VARCHAR}, #{founder,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{deleteTime,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{operatorIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.warehouse.entity.AccesStorageIn" >
+    insert into acces_storage_in
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="accesNameWh != null" >
+        ACCES_NAME_WH,
+      </if>
+      <if test="accesSerialNumWh != null" >
+        ACCES_SERIAL_NUM_WH,
+      </if>
+      <if test="accesBarcodeWh != null" >
+        ACCES_BARCODE_WH,
+      </if>
+      <if test="accesAcronymWh != null" >
+        ACCES_ACRONYM_WH,
+      </if>
+      <if test="accesHistoryCodeWh != null" >
+        ACCES_HISTORY_CODE_WH,
+      </if>
+      <if test="accesColorWh != null" >
+        ACCES_COLOR_WH,
+      </if>
+      <if test="accesLengthWh != null" >
+        ACCES_LENGTH_WH,
+      </if>
+      <if test="accesWidthWh != null" >
+        ACCES_WIDTH_WH,
+      </if>
+      <if test="accesWeightWh != null" >
+        ACCES_WEIGHT_WH,
+      </if>
+      <if test="accesUnitWh != null" >
+        ACCES_UNIT_WH,
+      </if>
+      <if test="accesStoreMethodWh != null" >
+        ACCES_STORE_METHOD_WH,
+      </if>
+      <if test="accesStoreUnitWh != null" >
+        ACCES_STORE_UNIT_WH,
+      </if>
+      <if test="accesEtalonWh != null" >
+        ACCES_ETALON_WH,
+      </if>
+      <if test="accesInvntryNumWh != null" >
+        ACCES_INVNTRY_NUM_WH,
+      </if>
+      <if test="accesFreeNumSi != null" >
+        ACCES_FREE_NUM_SI,
+      </if>
+      <if test="accesLockedNumSi != null" >
+        ACCES_LOCKED_NUM_SI,
+      </if>
+      <if test="storageInTime != null" >
+        STORAGE_IN_TIME,
+      </if>
+      <if test="storageInRemark != null" >
+        STORAGE_IN_REMARK,
+      </if>
+      <if test="standbyFir != null" >
+        STANDBY_FIR,
+      </if>
+      <if test="standbySec != null" >
+        STANDBY_SEC,
+      </if>
+      <if test="standbyThr != null" >
+        STANDBY_THR,
+      </if>
+      <if test="markStatus != null" >
+        MARK_STATUS,
+      </if>
+      <if test="founder != null" >
+        FOUNDER,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME,
+      </if>
+      <if test="operator != null" >
+        OPERATOR,
+      </if>
+      <if test="operatorIp != null" >
+        OPERATOR_IP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accesNameWh != null" >
+        #{accesNameWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSerialNumWh != null" >
+        #{accesSerialNumWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesBarcodeWh != null" >
+        #{accesBarcodeWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesAcronymWh != null" >
+        #{accesAcronymWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesHistoryCodeWh != null" >
+        #{accesHistoryCodeWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesColorWh != null" >
+        #{accesColorWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesLengthWh != null" >
+        #{accesLengthWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesWidthWh != null" >
+        #{accesWidthWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesWeightWh != null" >
+        #{accesWeightWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesUnitWh != null" >
+        #{accesUnitWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesStoreMethodWh != null" >
+        #{accesStoreMethodWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesStoreUnitWh != null" >
+        #{accesStoreUnitWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesEtalonWh != null" >
+        #{accesEtalonWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesInvntryNumWh != null" >
+        #{accesInvntryNumWh,jdbcType=DOUBLE},
+      </if>
+      <if test="accesFreeNumSi != null" >
+        #{accesFreeNumSi,jdbcType=DOUBLE},
+      </if>
+      <if test="accesLockedNumSi != null" >
+        #{accesLockedNumSi,jdbcType=DOUBLE},
+      </if>
+      <if test="storageInTime != null" >
+        #{storageInTime,jdbcType=VARCHAR},
+      </if>
+      <if test="storageInRemark != null" >
+        #{storageInRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyFir != null" >
+        #{standbyFir,jdbcType=VARCHAR},
+      </if>
+      <if test="standbySec != null" >
+        #{standbySec,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyThr != null" >
+        #{standbyThr,jdbcType=VARCHAR},
+      </if>
+      <if test="markStatus != null" >
+        #{markStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorIp != null" >
+        #{operatorIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.AccesStorageIn" >
+    update acces_storage_in
+    <set >
+      <if test="accesNameWh != null" >
+        ACCES_NAME_WH = #{accesNameWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesSerialNumWh != null" >
+        ACCES_SERIAL_NUM_WH = #{accesSerialNumWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesBarcodeWh != null" >
+        ACCES_BARCODE_WH = #{accesBarcodeWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesAcronymWh != null" >
+        ACCES_ACRONYM_WH = #{accesAcronymWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesHistoryCodeWh != null" >
+        ACCES_HISTORY_CODE_WH = #{accesHistoryCodeWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesColorWh != null" >
+        ACCES_COLOR_WH = #{accesColorWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesLengthWh != null" >
+        ACCES_LENGTH_WH = #{accesLengthWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesWidthWh != null" >
+        ACCES_WIDTH_WH = #{accesWidthWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesWeightWh != null" >
+        ACCES_WEIGHT_WH = #{accesWeightWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesUnitWh != null" >
+        ACCES_UNIT_WH = #{accesUnitWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesStoreMethodWh != null" >
+        ACCES_STORE_METHOD_WH = #{accesStoreMethodWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesStoreUnitWh != null" >
+        ACCES_STORE_UNIT_WH = #{accesStoreUnitWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesEtalonWh != null" >
+        ACCES_ETALON_WH = #{accesEtalonWh,jdbcType=VARCHAR},
+      </if>
+      <if test="accesInvntryNumWh != null" >
+        ACCES_INVNTRY_NUM_WH = #{accesInvntryNumWh,jdbcType=DOUBLE},
+      </if>
+      <if test="accesFreeNumSi != null" >
+        ACCES_FREE_NUM_SI = #{accesFreeNumSi,jdbcType=DOUBLE},
+      </if>
+      <if test="accesLockedNumSi != null" >
+        ACCES_LOCKED_NUM_SI = #{accesLockedNumSi,jdbcType=DOUBLE},
+      </if>
+      <if test="storageInTime != null" >
+        STORAGE_IN_TIME = #{storageInTime,jdbcType=VARCHAR},
+      </if>
+      <if test="storageInRemark != null" >
+        STORAGE_IN_REMARK = #{storageInRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyFir != null" >
+        STANDBY_FIR = #{standbyFir,jdbcType=VARCHAR},
+      </if>
+      <if test="standbySec != null" >
+        STANDBY_SEC = #{standbySec,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyThr != null" >
+        STANDBY_THR = #{standbyThr,jdbcType=VARCHAR},
+      </if>
+      <if test="markStatus != null" >
+        MARK_STATUS = #{markStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null" >
+        FOUNDER = #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorIp != null" >
+        OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.entity.AccesStorageIn" >
+    update acces_storage_in
+    set ACCES_NAME_WH = #{accesNameWh,jdbcType=VARCHAR},
+      ACCES_SERIAL_NUM_WH = #{accesSerialNumWh,jdbcType=VARCHAR},
+      ACCES_BARCODE_WH = #{accesBarcodeWh,jdbcType=VARCHAR},
+      ACCES_ACRONYM_WH = #{accesAcronymWh,jdbcType=VARCHAR},
+      ACCES_HISTORY_CODE_WH = #{accesHistoryCodeWh,jdbcType=VARCHAR},
+      ACCES_COLOR_WH = #{accesColorWh,jdbcType=VARCHAR},
+      ACCES_LENGTH_WH = #{accesLengthWh,jdbcType=VARCHAR},
+      ACCES_WIDTH_WH = #{accesWidthWh,jdbcType=VARCHAR},
+      ACCES_WEIGHT_WH = #{accesWeightWh,jdbcType=VARCHAR},
+      ACCES_UNIT_WH = #{accesUnitWh,jdbcType=VARCHAR},
+      ACCES_STORE_METHOD_WH = #{accesStoreMethodWh,jdbcType=VARCHAR},
+      ACCES_STORE_UNIT_WH = #{accesStoreUnitWh,jdbcType=VARCHAR},
+      ACCES_ETALON_WH = #{accesEtalonWh,jdbcType=VARCHAR},
+      ACCES_INVNTRY_NUM_WH = #{accesInvntryNumWh,jdbcType=DOUBLE},
+      ACCES_FREE_NUM_SI = #{accesFreeNumSi,jdbcType=DOUBLE},
+      ACCES_LOCKED_NUM_SI = #{accesLockedNumSi,jdbcType=DOUBLE},
+      STORAGE_IN_TIME = #{storageInTime,jdbcType=VARCHAR},
+      STORAGE_IN_REMARK = #{storageInRemark,jdbcType=VARCHAR},
+      STANDBY_FIR = #{standbyFir,jdbcType=VARCHAR},
+      STANDBY_SEC = #{standbySec,jdbcType=VARCHAR},
+      STANDBY_THR = #{standbyThr,jdbcType=VARCHAR},
+      MARK_STATUS = #{markStatus,jdbcType=VARCHAR},
+      FOUNDER = #{founder,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      OPERATOR = #{operator,jdbcType=VARCHAR},
+      OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

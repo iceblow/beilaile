@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ProductStorageSituationMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.ProductStorageSituation" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SID" property="sid" jdbcType="VARCHAR" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+    <result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+    <result column="DATA_STATUS" property="dataStatus" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="STORAGE_TIME" property="storageTime" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
+    <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+    <result column="DELETE_PEOPLE" property="deletePeople" jdbcType="VARCHAR" />
+    <result column="DEL_STATUS" property="delStatus" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 查询总条数 -->
+  	<select id="selectAllcount" resultType="java.lang.Integer">
+  		SELECT COUNT(0) FROM product_storage_situation where 1=1
+  		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave}, "%")
+		</if>
+		<if test='productName!=null and productName!=""'>
+			AND PRODUCT_NAME LIKE CONCAT("%" ,#{productName}, "%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%" ,#{productCode}, "%")
+		</if>
+		
+		<if test='orderGrade!=null and orderGrade!=""'>
+			AND ORDER_GRADE LIKE CONCAT("%" ,#{orderGrade}, "%")
+		</if>
+		<if test='createTime!=null and createTime!=""'>
+			AND CREATE_TIME LIKE CONCAT("%" ,#{createTime}, "%")
+		</if>
+  	</select>
+  	
+  		<!-- 分页查询 -->
+  <select id="getProductStorageSituationPage" parameterType="com.warehouse.entity.ProductStorageSituation" resultMap="BaseResultMap">
+  	select * from product_storage_situation where 1=1
+  		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave,jdbcType=VARCHAR}, "%")
+		</if>
+		
+		<if test='productName!=null and productName!=""'>
+			AND PRODUCT_NAME LIKE CONCAT("%" ,#{productName,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%" ,#{productCode,jdbcType=VARCHAR}, "%")
+		</if>
+		
+		<if test='orderGrade!=null and orderGrade!=""'>
+			AND ORDER_GRADE LIKE CONCAT("%" ,#{orderGrade,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='createTime!=null and createTime!=""'>
+			AND CREATE_TIME LIKE CONCAT("%" ,#{createTime,jdbcType=VARCHAR}, "%")
+		</if>
+		and DEL_STATUS='0' order by data_status asc 
+  	limit #{begin},#{end}
+  </select>
+  
+  		<!-- 数据假删除 -->
+  	<update id="deleteProductStorageSituationById" parameterType="com.warehouse.dao.ProductStorageSituationMapper">
+		update product_storage_situation
+		<set>
+			DEL_STATUS ='1',
+			DELETE_TIME=now(),
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+  
+  
+  		<!-- 双击修改备注 -->
+  	<update id="updateProductStorageSituationById" parameterType="com.warehouse.dao.ProductStorageSituationMapper">
+		update product_storage_situation
+		<set>
+			<if test="remarks != null" >
+        		REMARKS = #{remarks,jdbcType=VARCHAR},
+        		MODIFY_TIME=now(),
+      		</if>
+      		
+      		<if test="orderGrade != null" >
+        		ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+        		MODIFY_TIME=now(),
+      		</if>
+		</set>
+		 where ID = #{id,jdbcType=INTEGER}
+	</update>
+  
+  		<!-- 修改数据状态 -->
+  	<update id="updateDataStateById" parameterType="com.warehouse.dao.ProductStorageSituationMapper">
+		update product_storage_situation
+		<set>
+			DATA_STATUS='已入库',
+			STORAGE_TIME=now(),
+		</set>
+		 where ID = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="findDataStateById" parameterType="com.warehouse.entity.ProductStorageSituation" resultMap="BaseResultMap">
+		select * from product_storage_situation where ID = #{id,jdbcType=INTEGER}
+	</select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.ProductStorageSituation" >
+    update product_storage_situation
+    <set >
+      <if test="sid != null" >
+        SID = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="wave != null" >
+        WAVE = #{wave,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="designImg != null" >
+        DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderGrade != null" >
+        ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="dataStatus != null" >
+        DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="storageTime != null" >
+        STORAGE_TIME = #{storageTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deletePeople != null" >
+        DELETE_PEOPLE = #{deletePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="delStatus != null" >
+        DEL_STATUS = #{delStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.entity.ProductStorageSituation" >
+    update product_storage_situation
+    set SID = #{sid,jdbcType=VARCHAR},
+      WAVE = #{wave,jdbcType=VARCHAR},
+      PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+      ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+      DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      STORAGE_TIME = #{storageTime,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+      DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      DELETE_PEOPLE = #{deletePeople,jdbcType=VARCHAR},
+      DEL_STATUS = #{delStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

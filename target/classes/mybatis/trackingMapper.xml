@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.TrackingDAO">
+	<select id="getAllCount" resultType="java.lang.Integer">
+		SELECT COUNT(1) FROM
+		TRACKING
+	</select>
+	<select id="getAllByPage" parameterType="com.warehouse.util.Pagess"
+		resultType="com.warehouse.entity.Tracking">
+		select * from tracking order by id desc limit
+		#{begin},#{end}
+	</select>
+
+	<insert id="addTrack" parameterType="com.warehouse.entity.Tracking">
+		insert into tracking
+		values(NULL,#{fabricReserve},#{clippingReserve},#{designer},#{trackingOfficer},#{supplier},#{b_id},#{img},NULL,#{color},#{type},#{publishedTime},#{versionTime},#{prenatalSample},#{orderNum},'','',#{estimatedPrice},#{costPrice},#{component},#{productionSchedule},#{orderType},#{cutNum},#{arrivalNumbe},#{delivaTime},#{deliveryConfirmation},#{returnDate},curdate(),#{printingCompleteTime},#{fabricAndAuxiliaryCompleteTime},NOW(),1,'','',NULL)
+	</insert>
+
+	<!-- 不修改图片的时候调用的 -->
+	<update id="updateFile" parameterType="com.warehouse.entity.Tracking">
+		update tracking set
+		fabricReserve=#{fabricReserve},
+		clippingReserve=#{clippingReserve},
+		designer=#{designer},
+		trackingOfficer=#{trackingOfficer},
+		b_id=#{b_id},
+		img=#{img},
+		type=#{type},
+		publishedTime=#{publishedTime},
+		versionTime=#{versionTime},
+		prenatalSample=#{prenatalSample},
+		orderNum=#{orderNum},
+		estimatedPrice=#{estimatedPrice},
+		costPrice=#{costPrice},
+		component=#{component},
+		productionSchedule=#{productionSchedule},
+		orderType=#{orderType},
+		cutNum=#{cutNum},
+		arrivalNumbe=#{arrivalNumbe},
+		delivaTime=#{delivaTime},
+		deliveryConfirmation=#{deliveryConfirmation},
+		returnDate=#{returnDate},
+		printingCompleteTime=#{printingCompleteTime},
+		fabricAndAuxiliaryCompleteTime=#{fabricAndAuxiliaryCompleteTime},
+		reportShipment=#{reportShipment},
+		updateTime=NOW()
+		where id=#{id}
+	</update>
+
+	<!-- 双击修改 -->
+	<update id="dbUpdateTrack" parameterType="com.warehouse.entity.Tracking">
+		update tracking set
+		<if test='fabricReserve!=null and fabricReserve!=""'>
+			fabricReserve=#{fabricReserve},
+		</if>
+		<if test='clippingReserve!=null and clippingReserve!=""'>
+			clippingReserve=#{clippingReserve},
+		</if>
+		<if test='designer!=null and designer!=""'>
+			designer=#{designer},
+		</if>
+		<if test='trackingOfficer!=null and trackingOfficer!=""'>
+			trackingOfficer=#{trackingOfficer},
+		</if>
+		<if test='supplier!=null and supplier!=""'>
+			supplier=#{supplier},
+		</if>
+		<if test='b_id!=null and b_id!=""'>
+			b_id=#{b_id},
+		</if>
+		<if test='type!=null and type!=""'>
+			type=#{type},
+		</if>
+		<if test='publishedTime!=null and publishedTime!=""'>
+			publishedTime=#{publishedTime},
+		</if>
+		<if test='versionTime!=null and versionTime!=""'>
+			versionTime=#{versionTime},
+		</if>
+		<if test='prenatalSample!=null and prenatalSample!=""'>
+			prenatalSample=#{prenatalSample},
+		</if>
+		<if test='orderNum!=null and orderNum!=""'>
+			orderNum=#{orderNum},
+		</if>
+		<if test='estimatedPrice!=null and estimatedPrice!=""'>
+			estimatedPrice=#{estimatedPrice},
+		</if>
+		<if test='costPrice!=null and costPrice!=""'>
+			costPrice=#{costPrice},
+		</if>
+		<if test='component!=null and component!=""'>
+			component=#{component},
+		</if>
+		<if test='productionSchedule!=null and productionSchedule!=""'>
+			productionSchedule=#{productionSchedule},
+		</if>
+		<if test='orderType!=null and orderType!=""'>
+			orderType=#{orderType},
+		</if>
+		<if test='cutNum!=null and cutNum!=""'>
+			cutNum=#{cutNum},
+		</if>
+		<if test='arrivalNumbe!=null and arrivalNumbe!=""'>
+			arrivalNumbe=#{arrivalNumbe},
+		</if>
+		<if test='delivaTime!=null and delivaTime!=""'>
+			delivaTime=#{delivaTime},
+		</if>
+		<if test='deliveryConfirmation!=null and deliveryConfirmation!=""'>
+			deliveryConfirmation=#{deliveryConfirmation},
+		</if>
+		<if test='returnDate!=null and returnDate!=""'>
+			returnDate=#{returnDate},
+		</if>
+		<if test='deleteType!=null and deleteType!=""'>
+			deleteType=#{deleteType},
+		</if>
+		<if test="reportShipment!=null">
+			reportShipment=#{reportShipment},
+		</if>
+		updateTime=NOW()
+		where id=#{id}
+	</update>
+	<select id="getOne" resultType="com.warehouse.entity.Tracking">
+		select * from tracking where
+		id=#{id}
+	</select>
+
+	<select id="getConditionCountByPage" parameterType="com.warehouse.entity.Tracking"
+		resultType="java.lang.Integer">
+		select count(0) from
+		tracking where 1=1
+		<if
+			test='fabricReserve!=null and fabricReserve!="" and fabricReserve!="Y" and fabricReserve!="y" and fabricReserve!="n" and fabricReserve!="N"'>
+			and fabricReserve like concat("%",#{fabricReserve},"%")
+		</if>
+		<if test='fabricReserve=="Y" or fabricReserve=="y"'>
+			and fabricReserve IS NOT NULL AND fabricReserve !=""
+		</if>
+		<if test='fabricReserve=="N" or fabricReserve=="n"'>
+			and (fabricReserve IS NULL OR fabricReserve ="")
+		</if>
+		<if
+			test='clippingReserve!=null and clippingReserve!="" and clippingReserve!="Y" and clippingReserve!="y" and clippingReserve!="n" and clippingReserve!="N"'>
+			and clippingReserve like concat("%",#{clippingReserve},"%")
+		</if>
+		<if test='clippingReserve=="Y" or clippingReserve=="y"'>
+			and clippingReserve IS NOT NULL AND clippingReserve!=""
+		</if>
+		<if test='clippingReserve=="N" or clippingReserve=="n"'>
+			and (clippingReserve IS NULL OR clippingReserve ="")
+		</if>
+		<if
+			test='trackingOfficer!=null and trackingOfficer!="" and trackingOfficer!="Y" and trackingOfficer!="y" and trackingOfficer!="n" and trackingOfficer!="N"'>
+			and trackingOfficer like concat("%",#{trackingOfficer},"%")
+		</if>
+		<if test='trackingOfficer=="Y" or trackingOfficer=="y"'>
+			and trackingOfficer IS NOT NULL AND trackingOfficer!=""
+		</if>
+		<if test='trackingOfficer=="N" or trackingOfficer=="n"'>
+			and (trackingOfficer IS NULL OR trackingOfficer="")
+		</if>
+		<if
+			test='supplier!=null and supplier!="" and supplier!="Y" and supplier!="y" and supplier!="n" and supplier!="N"'>
+			and supplier like concat("%",#{supplier},"%")
+		</if>
+		<if test='supplier=="Y" or supplier=="y"'>
+			and supplier IS NOT NULL AND supplier!=""
+		</if>
+		<if test='supplier=="N" or supplier=="n"'>
+			and (supplier IS NULL OR supplier="")
+		</if>
+		<if
+			test='b_id!=null and b_id!="" and b_id!="Y" and b_id!="y" and b_id!="n" and b_id!="N"'>
+			and b_id like concat("%",#{b_id},"%")
+		</if>
+		<if test='b_id=="Y" or b_id=="y"'>
+			and b_id IS NOT NULL AND b_id!=""
+		</if>
+		<if test='b_id=="N" or b_id=="n"'>
+			and (b_id IS NULL OR b_id="")
+		</if>
+		<if
+			test='type!=null and type!="" and type!="Y" and type!="y" and type!="n" and type!="N"'>
+			and type like concat("%",#{type},"%")
+		</if>
+		<if test='type=="Y" or type=="y"'>
+			and type IS NOT NULL AND type!=""
+		</if>
+		<if test='type=="N" or type=="n"'>
+			and (type IS NULL OR type="")
+		</if>
+		<if
+			test='publishedTime!=null and publishedTime!="" and publishedTime!="Y" and publishedTime!="y" and publishedTime!="n" and publishedTime!="N"'>
+			and publishedTime like concat("%",#{publishedTime},"%")
+		</if>
+		<if test='publishedTime=="Y" or publishedTime=="y"'>
+			and publishedTime IS NOT NULL AND publishedTime!=""
+		</if>
+		<if test='publishedTime=="N" or publishedTime=="n"'>
+			and (publishedTime IS NULL OR publishedTime="")
+		</if>
+		<if
+			test='versionTime!=null and versionTime!="" and versionTime!="Y" and versionTime!="y" and versionTime!="n" and versionTime!="N"'>
+			and versionTime like concat("%",#{versionTime},"%")
+		</if>
+		<if test='versionTime=="Y" or versionTime=="y"'>
+			and versionTime IS NOT NULL AND versionTime!=""
+		</if>
+		<if test='versionTime=="N" or versionTime=="n"'>
+			and (versionTime IS NULL OR versionTime="")
+		</if>
+		<if
+			test='prenatalSample!=null and prenatalSample!="" and prenatalSample!="Y" and prenatalSample!="y" and prenatalSample!="n" and prenatalSample!="N"'>
+			and prenatalSample like concat("%",#{prenatalSample},"%")
+		</if>
+		<if test='prenatalSample=="Y" or prenatalSample=="y"'>
+			and prenatalSample IS NOT NULL AND prenatalSample!=""
+		</if>
+		<if test='prenatalSample=="N" or prenatalSample=="n"'>
+			and (prenatalSample IS NULL OR prenatalSample="")
+		</if>
+		<if
+			test='estimatedPrice!=null and estimatedPrice!="" and estimatedPrice!="Y" and estimatedPrice!="y" and estimatedPrice!="n" and estimatedPrice!="N"'>
+			and estimatedPrice like concat("%",#{estimatedPrice},"%")
+		</if>
+		<if test='estimatedPrice=="Y" or estimatedPrice=="y"'>
+			and estimatedPrice IS NOT NULL AND estimatedPrice!=""
+		</if>
+		<if test='estimatedPrice=="N" or estimatedPrice=="n"'>
+			and (estimatedPrice IS NULL OR estimatedPrice="")
+		</if>
+		<if
+			test='costPrice!=null and costPrice!="" and costPrice!="Y" and costPrice!="y" and costPrice!="n" and costPrice!="N"'>
+			and costPrice like concat("%",#{costPrice},"%")
+		</if>
+		<if test='costPrice=="Y" or costPrice=="y"'>
+			and costPrice IS NOT NULL AND costPrice!=""
+		</if>
+		<if test='costPrice=="N" or costPrice=="n"'>
+			and (costPrice IS NULL OR costPrice="")
+		</if>
+		<if
+			test='productionSchedule!=null and productionSchedule!="" and productionSchedule!="Y" and productionSchedule!="y" and productionSchedule!="n" and productionSchedule!="N"'>
+			and productionSchedule like
+			concat("%",#{productionSchedule},"%")
+		</if>
+		<if test='productionSchedule=="Y" or productionSchedule=="y"'>
+			and productionSchedule IS NOT NULL AND
+			productionSchedule!=""
+		</if>
+		<if test='productionSchedule=="N" or productionSchedule=="n"'>
+			and (productionSchedule IS NULL OR productionSchedule="")
+		</if>
+		<if
+			test='orderType!=null and orderType!="" and orderType!="Y" and orderType!="y" and orderType!="n" and orderType!="N"'>
+			and orderType like concat("%",#{orderType},"%")
+		</if>
+		<if test='orderType=="Y" or orderType=="y"'>
+			and orderType IS NOT NULL AND orderType!=""
+		</if>
+		<if test='orderType=="N" or orderType=="n"'>
+			and (orderType IS NULL OR orderType="")
+		</if>
+		<if
+			test='cutNum!=null and cutNum!="" and cutNum!="Y" and cutNum!="y" and cutNum!="n" and cutNum!="N"'>
+			and cutNum like concat("%",#{cutNum},"%")
+		</if>
+		<if test='cutNum=="Y" or cutNum=="y"'>
+			and cutNum IS NOT NULL AND cutNum!=""
+		</if>
+		<if test='cutNum=="N" or cutNum=="n"'>
+			and (cutNum IS NULL OR cutNum="")
+		</if>
+		<if
+			test='arrivalNumbe!=null and arrivalNumbe!="" and arrivalNumbe!="Y" and arrivalNumbe!="y" and arrivalNumbe!="n" and arrivalNumbe!="N"'>
+			and arrivalNumbe like concat("%",#{arrivalNumbe},"%")
+		</if>
+		<if test='arrivalNumbe=="Y" or arrivalNumbe=="y"'>
+			and arrivalNumbe IS NOT NULL AND arrivalNumbe!=""
+		</if>
+		<if test='arrivalNumbe=="N" or arrivalNumbe=="n"'>
+			and (arrivalNumbe IS NULL OR arrivalNumbe="")
+		</if>
+		<if
+			test='delivaTime!=null and delivaTime!="" and delivaTime!="Y" and delivaTime!="y" and delivaTime!="n" and delivaTime!="N"'>
+			and delivaTime like concat("%",#{delivaTime},"%")
+		</if>
+		<if test='delivaTime=="Y" or delivaTime=="y"'>
+			and delivaTime IS NOT NULL AND delivaTime!=""
+		</if>
+		<if test='delivaTime=="N" or delivaTime=="n"'>
+			and (delivaTime IS NULL OR delivaTime="")
+		</if>
+		<if
+			test='deliveryConfirmation!=null and deliveryConfirmation!="" and deliveryConfirmation!="Y" and deliveryConfirmation!="y" and deliveryConfirmation!="n" and deliveryConfirmation!="N"'>
+			and deliveryConfirmation like
+			concat("%",#{deliveryConfirmation},"%")
+		</if>
+		<if test='deliveryConfirmation=="Y" or deliveryConfirmation=="y"'>
+			and deliveryConfirmation IS NOT NULL AND
+			deliveryConfirmation!=""
+		</if>
+		<if test='deliveryConfirmation=="N" or deliveryConfirmation=="n"'>
+			and (deliveryConfirmation IS NULL OR
+			deliveryConfirmation="")
+		</if>
+		<if
+			test='returnDate!=null and returnDate!="" and returnDate!="Y" and returnDate!="y" and returnDate!="n" and returnDate!="N"'>
+			and returnDate like concat("%",#{returnDate},"%")
+		</if>
+		<if test='returnDate=="Y" or returnDate=="y"'>
+			and returnDate IS NOT NULL AND returnDate!=""
+		</if>
+		<if test='returnDate=="N" or returnDate=="n"'>
+			and (returnDate IS NULL OR returnDate="")
+		</if>
+		<if
+			test='primaryWave!=null and primaryWave!="" and primaryWave!="Y" and primaryWave!="y" and primaryWave!="n" and primaryWave!="N"'>
+			and primaryWave like concat("%",#{primaryWave},"%")
+		</if>
+		<if test='primaryWave=="Y" or primaryWave=="y"'>
+			and primaryWave IS NOT NULL AND primaryWave!=""
+		</if>
+		<if test='primaryWave=="N" or primaryWave=="n"'>
+			and (primaryWave IS NULL OR primaryWave="")
+		</if>
+		and deleteType=#{deleteType}
+	</select>
+
+	<select id="getConditionAllByPage" parameterType="com.warehouse.entity.Tracking"
+		resultType="com.warehouse.entity.Tracking">
+
+		select * from tracking
+		where 1=1
+		<if
+			test='fabricReserve!=null and fabricReserve!="" and fabricReserve!="Y" and fabricReserve!="y" and fabricReserve!="n" and fabricReserve!="N"'>
+			and fabricReserve like concat("%",#{fabricReserve},"%")
+		</if>
+		<if test='fabricReserve=="Y" or fabricReserve=="y"'>
+			and fabricReserve IS NOT NULL AND fabricReserve !=""
+		</if>
+		<if test='fabricReserve=="N" or fabricReserve=="n"'>
+			and (fabricReserve IS NULL OR fabricReserve ="")
+		</if>
+		<if
+			test='clippingReserve!=null and clippingReserve!="" and clippingReserve!="Y" and clippingReserve!="y" and clippingReserve!="n" and clippingReserve!="N"'>
+			and clippingReserve like concat("%",#{clippingReserve},"%")
+		</if>
+		<if test='clippingReserve=="Y" or clippingReserve=="y"'>
+			and clippingReserve IS NOT NULL AND clippingReserve!=""
+		</if>
+		<if test='clippingReserve=="N" or clippingReserve=="n"'>
+			and (clippingReserve IS NULL OR clippingReserve ="")
+		</if>
+		<if
+			test='trackingOfficer!=null and trackingOfficer!="" and trackingOfficer!="Y" and trackingOfficer!="y" and trackingOfficer!="n" and trackingOfficer!="N"'>
+			and trackingOfficer like concat("%",#{trackingOfficer},"%")
+		</if>
+		<if test='trackingOfficer=="Y" or trackingOfficer=="y"'>
+			and trackingOfficer IS NOT NULL AND trackingOfficer!=""
+		</if>
+		<if test='trackingOfficer=="N" or trackingOfficer=="n"'>
+			and (trackingOfficer IS NULL OR trackingOfficer="")
+		</if>
+		<if
+			test='supplier!=null and supplier!="" and supplier!="Y" and supplier!="y" and supplier!="n" and supplier!="N"'>
+			and supplier like concat("%",#{supplier},"%")
+		</if>
+		<if test='supplier=="Y" or supplier=="y"'>
+			and supplier IS NOT NULL AND supplier!=""
+		</if>
+		<if test='supplier=="N" or supplier=="n"'>
+			and (supplier IS NULL OR supplier="")
+		</if>
+		<if
+			test='b_id!=null and b_id!="" and b_id!="Y" and b_id!="y" and b_id!="n" and b_id!="N"'>
+			and b_id like concat("%",#{b_id},"%")
+		</if>
+		<if test='b_id=="Y" or b_id=="y"'>
+			and b_id IS NOT NULL AND b_id!=""
+		</if>
+		<if test='b_id=="N" or b_id=="n"'>
+			and (b_id IS NULL OR b_id="")
+		</if>
+		<if
+			test='type!=null and type!="" and type!="Y" and type!="y" and type!="n" and type!="N"'>
+			and type like concat("%",#{type},"%")
+		</if>
+		<if test='type=="Y" or type=="y"'>
+			and type IS NOT NULL AND type!=""
+		</if>
+		<if test='type=="N" or type=="n"'>
+			and (type IS NULL OR type="")
+		</if>
+		<if
+			test='publishedTime!=null and publishedTime!="" and publishedTime!="Y" and publishedTime!="y" and publishedTime!="n" and publishedTime!="N"'>
+			and publishedTime like concat("%",#{publishedTime},"%")
+		</if>
+		<if test='publishedTime=="Y" or publishedTime=="y"'>
+			and publishedTime IS NOT NULL AND publishedTime!=""
+		</if>
+		<if test='publishedTime=="N" or publishedTime=="n"'>
+			and (publishedTime IS NULL OR publishedTime="")
+		</if>
+		<if
+			test='versionTime!=null and versionTime!="" and versionTime!="Y" and versionTime!="y" and versionTime!="n" and versionTime!="N"'>
+			and versionTime like concat("%",#{versionTime},"%")
+		</if>
+		<if test='versionTime=="Y" or versionTime=="y"'>
+			and versionTime IS NOT NULL AND versionTime!=""
+		</if>
+		<if test='versionTime=="N" or versionTime=="n"'>
+			and (versionTime IS NULL OR versionTime="")
+		</if>
+		<if
+			test='prenatalSample!=null and prenatalSample!="" and prenatalSample!="Y" and prenatalSample!="y" and prenatalSample!="n" and prenatalSample!="N"'>
+			and prenatalSample like concat("%",#{prenatalSample},"%")
+		</if>
+		<if test='prenatalSample=="Y" or prenatalSample=="y"'>
+			and prenatalSample IS NOT NULL AND prenatalSample!=""
+		</if>
+		<if test='prenatalSample=="N" or prenatalSample=="n"'>
+			and (prenatalSample IS NULL OR prenatalSample="")
+		</if>
+		<if
+			test='estimatedPrice!=null and estimatedPrice!="" and estimatedPrice!="Y" and estimatedPrice!="y" and estimatedPrice!="n" and estimatedPrice!="N"'>
+			and estimatedPrice like concat("%",#{estimatedPrice},"%")
+		</if>
+		<if test='estimatedPrice=="Y" or estimatedPrice=="y"'>
+			and estimatedPrice IS NOT NULL AND estimatedPrice!=""
+		</if>
+		<if test='estimatedPrice=="N" or estimatedPrice=="n"'>
+			and (estimatedPrice IS NULL OR estimatedPrice="")
+		</if>
+		<if
+			test='costPrice!=null and costPrice!="" and costPrice!="Y" and costPrice!="y" and costPrice!="n" and costPrice!="N"'>
+			and costPrice like concat("%",#{costPrice},"%")
+		</if>
+		<if test='costPrice=="Y" or costPrice=="y"'>
+			and costPrice IS NOT NULL AND costPrice!=""
+		</if>
+		<if test='costPrice=="N" or costPrice=="n"'>
+			and (costPrice IS NULL OR costPrice="")
+		</if>
+		<if
+			test='productionSchedule!=null and productionSchedule!="" and productionSchedule!="Y" and productionSchedule!="y" and productionSchedule!="n" and productionSchedule!="N"'>
+			and productionSchedule like
+			concat("%",#{productionSchedule},"%")
+		</if>
+		<if test='productionSchedule=="Y" or productionSchedule=="y"'>
+			and productionSchedule IS NOT NULL AND
+			productionSchedule!=""
+		</if>
+		<if test='productionSchedule=="N" or productionSchedule=="n"'>
+			and (productionSchedule IS NULL OR productionSchedule="")
+		</if>
+		<if
+			test='orderType!=null and orderType!="" and orderType!="Y" and orderType!="y" and orderType!="n" and orderType!="N"'>
+			and orderType like concat("%",#{orderType},"%")
+		</if>
+		<if test='orderType=="Y" or orderType=="y"'>
+			and orderType IS NOT NULL AND orderType!=""
+		</if>
+		<if test='orderType=="N" or orderType=="n"'>
+			and (orderType IS NULL OR orderType="")
+		</if>
+		<if
+			test='cutNum!=null and cutNum!="" and cutNum!="Y" and cutNum!="y" and cutNum!="n" and cutNum!="N"'>
+			and cutNum like concat("%",#{cutNum},"%")
+		</if>
+		<if test='cutNum=="Y" or cutNum=="y"'>
+			and cutNum IS NOT NULL AND cutNum!=""
+		</if>
+		<if test='cutNum=="N" or cutNum=="n"'>
+			and (cutNum IS NULL OR cutNum="")
+		</if>
+		<if
+			test='arrivalNumbe!=null and arrivalNumbe!="" and arrivalNumbe!="Y" and arrivalNumbe!="y" and arrivalNumbe!="n" and arrivalNumbe!="N"'>
+			and arrivalNumbe like concat("%",#{arrivalNumbe},"%")
+		</if>
+		<if test='arrivalNumbe=="Y" or arrivalNumbe=="y"'>
+			and arrivalNumbe IS NOT NULL AND arrivalNumbe!=""
+		</if>
+		<if test='arrivalNumbe=="N" or arrivalNumbe=="n"'>
+			and (arrivalNumbe IS NULL OR arrivalNumbe="")
+		</if>
+		<if
+			test='delivaTime!=null and delivaTime!="" and delivaTime!="Y" and delivaTime!="y" and delivaTime!="n" and delivaTime!="N"'>
+			and delivaTime like concat("%",#{delivaTime},"%")
+		</if>
+		<if test='delivaTime=="Y" or delivaTime=="y"'>
+			and delivaTime IS NOT NULL AND delivaTime!=""
+		</if>
+		<if test='delivaTime=="N" or delivaTime=="n"'>
+			and (delivaTime IS NULL OR delivaTime="")
+		</if>
+		<if
+			test='deliveryConfirmation!=null and deliveryConfirmation!="" and deliveryConfirmation!="Y" and deliveryConfirmation!="y" and deliveryConfirmation!="n" and deliveryConfirmation!="N"'>
+			and deliveryConfirmation like
+			concat("%",#{deliveryConfirmation},"%")
+		</if>
+		<if test='deliveryConfirmation=="Y" or deliveryConfirmation=="y"'>
+			and deliveryConfirmation IS NOT NULL AND
+			deliveryConfirmation!=""
+		</if>
+		<if test='deliveryConfirmation=="N" or deliveryConfirmation=="n"'>
+			and (deliveryConfirmation IS NULL OR
+			deliveryConfirmation="")
+		</if>
+		<if
+			test='returnDate!=null and returnDate!="" and returnDate!="Y" and returnDate!="y" and returnDate!="n" and returnDate!="N"'>
+			and returnDate like concat("%",#{returnDate},"%")
+		</if>
+		<if test='returnDate=="Y" or returnDate=="y"'>
+			and returnDate IS NOT NULL AND returnDate!=""
+		</if>
+		<if test='returnDate=="N" or returnDate=="n"'>
+			and (returnDate IS NULL OR returnDate="")
+		</if>
+		<if
+			test='primaryWave!=null and primaryWave!="" and primaryWave!="Y" and primaryWave!="y" and primaryWave!="n" and primaryWave!="N"'>
+			and primaryWave like concat("%",#{primaryWave},"%")
+		</if>
+		<if test='primaryWave=="Y" or primaryWave=="y"'>
+			and primaryWave IS NOT NULL AND primaryWave!=""
+		</if>
+		<if test='primaryWave=="N" or primaryWave=="n"'>
+			and (primaryWave IS NULL OR primaryWave="")
+		</if>
+		and deleteType=#{deleteType}
+		order by urgent_state desc,id desc limit
+		#{begin},#{end}
+	</select>
+	
+	
+	<select id="getOrderNum" parameterType="com.warehouse.entity.Tracking"
+		resultType="java.lang.Integer">
+		select SUM(orderNum) from
+		tracking where 1=1
+		<if
+			test='fabricReserve!=null and fabricReserve!="" and fabricReserve!="Y" and fabricReserve!="y" and fabricReserve!="n" and fabricReserve!="N"'>
+			and fabricReserve like concat("%",#{fabricReserve},"%")
+		</if>
+		<if test='fabricReserve=="Y" or fabricReserve=="y"'>
+			and fabricReserve IS NOT NULL AND fabricReserve !=""
+		</if>
+		<if test='fabricReserve=="N" or fabricReserve=="n"'>
+			and (fabricReserve IS NULL OR fabricReserve ="")
+		</if>
+		<if
+			test='clippingReserve!=null and clippingReserve!="" and clippingReserve!="Y" and clippingReserve!="y" and clippingReserve!="n" and clippingReserve!="N"'>
+			and clippingReserve like concat("%",#{clippingReserve},"%")
+		</if>
+		<if test='clippingReserve=="Y" or clippingReserve=="y"'>
+			and clippingReserve IS NOT NULL AND clippingReserve!=""
+		</if>
+		<if test='clippingReserve=="N" or clippingReserve=="n"'>
+			and (clippingReserve IS NULL OR clippingReserve ="")
+		</if>
+		<if
+			test='trackingOfficer!=null and trackingOfficer!="" and trackingOfficer!="Y" and trackingOfficer!="y" and trackingOfficer!="n" and trackingOfficer!="N"'>
+			and trackingOfficer like concat("%",#{trackingOfficer},"%")
+		</if>
+		<if test='trackingOfficer=="Y" or trackingOfficer=="y"'>
+			and trackingOfficer IS NOT NULL AND trackingOfficer!=""
+		</if>
+		<if test='trackingOfficer=="N" or trackingOfficer=="n"'>
+			and (trackingOfficer IS NULL OR trackingOfficer="")
+		</if>
+		<if
+			test='supplier!=null and supplier!="" and supplier!="Y" and supplier!="y" and supplier!="n" and supplier!="N"'>
+			and supplier like concat("%",#{supplier},"%")
+		</if>
+		<if test='supplier=="Y" or supplier=="y"'>
+			and supplier IS NOT NULL AND supplier!=""
+		</if>
+		<if test='supplier=="N" or supplier=="n"'>
+			and (supplier IS NULL OR supplier="")
+		</if>
+		<if
+			test='b_id!=null and b_id!="" and b_id!="Y" and b_id!="y" and b_id!="n" and b_id!="N"'>
+			and b_id like concat("%",#{b_id},"%")
+		</if>
+		<if test='b_id=="Y" or b_id=="y"'>
+			and b_id IS NOT NULL AND b_id!=""
+		</if>
+		<if test='b_id=="N" or b_id=="n"'>
+			and (b_id IS NULL OR b_id="")
+		</if>
+		<if
+			test='type!=null and type!="" and type!="Y" and type!="y" and type!="n" and type!="N"'>
+			and type like concat("%",#{type},"%")
+		</if>
+		<if test='type=="Y" or type=="y"'>
+			and type IS NOT NULL AND type!=""
+		</if>
+		<if test='type=="N" or type=="n"'>
+			and (type IS NULL OR type="")
+		</if>
+		<if
+			test='publishedTime!=null and publishedTime!="" and publishedTime!="Y" and publishedTime!="y" and publishedTime!="n" and publishedTime!="N"'>
+			and publishedTime like concat("%",#{publishedTime},"%")
+		</if>
+		<if test='publishedTime=="Y" or publishedTime=="y"'>
+			and publishedTime IS NOT NULL AND publishedTime!=""
+		</if>
+		<if test='publishedTime=="N" or publishedTime=="n"'>
+			and (publishedTime IS NULL OR publishedTime="")
+		</if>
+		<if
+			test='versionTime!=null and versionTime!="" and versionTime!="Y" and versionTime!="y" and versionTime!="n" and versionTime!="N"'>
+			and versionTime like concat("%",#{versionTime},"%")
+		</if>
+		<if test='versionTime=="Y" or versionTime=="y"'>
+			and versionTime IS NOT NULL AND versionTime!=""
+		</if>
+		<if test='versionTime=="N" or versionTime=="n"'>
+			and (versionTime IS NULL OR versionTime="")
+		</if>
+		<if
+			test='prenatalSample!=null and prenatalSample!="" and prenatalSample!="Y" and prenatalSample!="y" and prenatalSample!="n" and prenatalSample!="N"'>
+			and prenatalSample like concat("%",#{prenatalSample},"%")
+		</if>
+		<if test='prenatalSample=="Y" or prenatalSample=="y"'>
+			and prenatalSample IS NOT NULL AND prenatalSample!=""
+		</if>
+		<if test='prenatalSample=="N" or prenatalSample=="n"'>
+			and (prenatalSample IS NULL OR prenatalSample="")
+		</if>
+		<if
+			test='estimatedPrice!=null and estimatedPrice!="" and estimatedPrice!="Y" and estimatedPrice!="y" and estimatedPrice!="n" and estimatedPrice!="N"'>
+			and estimatedPrice like concat("%",#{estimatedPrice},"%")
+		</if>
+		<if test='estimatedPrice=="Y" or estimatedPrice=="y"'>
+			and estimatedPrice IS NOT NULL AND estimatedPrice!=""
+		</if>
+		<if test='estimatedPrice=="N" or estimatedPrice=="n"'>
+			and (estimatedPrice IS NULL OR estimatedPrice="")
+		</if>
+		<if
+			test='costPrice!=null and costPrice!="" and costPrice!="Y" and costPrice!="y" and costPrice!="n" and costPrice!="N"'>
+			and costPrice like concat("%",#{costPrice},"%")
+		</if>
+		<if test='costPrice=="Y" or costPrice=="y"'>
+			and costPrice IS NOT NULL AND costPrice!=""
+		</if>
+		<if test='costPrice=="N" or costPrice=="n"'>
+			and (costPrice IS NULL OR costPrice="")
+		</if>
+		<if
+			test='productionSchedule!=null and productionSchedule!="" and productionSchedule!="Y" and productionSchedule!="y" and productionSchedule!="n" and productionSchedule!="N"'>
+			and productionSchedule like
+			concat("%",#{productionSchedule},"%")
+		</if>
+		<if test='productionSchedule=="Y" or productionSchedule=="y"'>
+			and productionSchedule IS NOT NULL AND
+			productionSchedule!=""
+		</if>
+		<if test='productionSchedule=="N" or productionSchedule=="n"'>
+			and (productionSchedule IS NULL OR productionSchedule="")
+		</if>
+		<if
+			test='orderType!=null and orderType!="" and orderType!="Y" and orderType!="y" and orderType!="n" and orderType!="N"'>
+			and orderType like concat("%",#{orderType},"%")
+		</if>
+		<if test='orderType=="Y" or orderType=="y"'>
+			and orderType IS NOT NULL AND orderType!=""
+		</if>
+		<if test='orderType=="N" or orderType=="n"'>
+			and (orderType IS NULL OR orderType="")
+		</if>
+		<if
+			test='cutNum!=null and cutNum!="" and cutNum!="Y" and cutNum!="y" and cutNum!="n" and cutNum!="N"'>
+			and cutNum like concat("%",#{cutNum},"%")
+		</if>
+		<if test='cutNum=="Y" or cutNum=="y"'>
+			and cutNum IS NOT NULL AND cutNum!=""
+		</if>
+		<if test='cutNum=="N" or cutNum=="n"'>
+			and (cutNum IS NULL OR cutNum="")
+		</if>
+		<if
+			test='arrivalNumbe!=null and arrivalNumbe!="" and arrivalNumbe!="Y" and arrivalNumbe!="y" and arrivalNumbe!="n" and arrivalNumbe!="N"'>
+			and arrivalNumbe like concat("%",#{arrivalNumbe},"%")
+		</if>
+		<if test='arrivalNumbe=="Y" or arrivalNumbe=="y"'>
+			and arrivalNumbe IS NOT NULL AND arrivalNumbe!=""
+		</if>
+		<if test='arrivalNumbe=="N" or arrivalNumbe=="n"'>
+			and (arrivalNumbe IS NULL OR arrivalNumbe="")
+		</if>
+		<if
+			test='delivaTime!=null and delivaTime!="" and delivaTime!="Y" and delivaTime!="y" and delivaTime!="n" and delivaTime!="N"'>
+			and delivaTime like concat("%",#{delivaTime},"%")
+		</if>
+		<if test='delivaTime=="Y" or delivaTime=="y"'>
+			and delivaTime IS NOT NULL AND delivaTime!=""
+		</if>
+		<if test='delivaTime=="N" or delivaTime=="n"'>
+			and (delivaTime IS NULL OR delivaTime="")
+		</if>
+		<if
+			test='deliveryConfirmation!=null and deliveryConfirmation!="" and deliveryConfirmation!="Y" and deliveryConfirmation!="y" and deliveryConfirmation!="n" and deliveryConfirmation!="N"'>
+			and deliveryConfirmation like
+			concat("%",#{deliveryConfirmation},"%")
+		</if>
+		<if test='deliveryConfirmation=="Y" or deliveryConfirmation=="y"'>
+			and deliveryConfirmation IS NOT NULL AND
+			deliveryConfirmation!=""
+		</if>
+		<if test='deliveryConfirmation=="N" or deliveryConfirmation=="n"'>
+			and (deliveryConfirmation IS NULL OR
+			deliveryConfirmation="")
+		</if>
+		<if
+			test='returnDate!=null and returnDate!="" and returnDate!="Y" and returnDate!="y" and returnDate!="n" and returnDate!="N"'>
+			and returnDate like concat("%",#{returnDate},"%")
+		</if>
+		<if test='returnDate=="Y" or returnDate=="y"'>
+			and returnDate IS NOT NULL AND returnDate!=""
+		</if>
+		<if test='returnDate=="N" or returnDate=="n"'>
+			and (returnDate IS NULL OR returnDate="")
+		</if>
+		<if
+			test='primaryWave!=null and primaryWave!="" and primaryWave!="Y" and primaryWave!="y" and primaryWave!="n" and primaryWave!="N"'>
+			and primaryWave like concat("%",#{primaryWave},"%")
+		</if>
+		<if test='primaryWave=="Y" or primaryWave=="y"'>
+			and primaryWave IS NOT NULL AND primaryWave!=""
+		</if>
+		<if test='primaryWave=="N" or primaryWave=="n"'>
+			and (primaryWave IS NULL OR primaryWave="")
+		</if>
+		and deleteType=#{deleteType}
+	</select>
+	
+	<!-- 假删除 -->
+	<update id="del" parameterType="java.lang.Integer">
+		UPDATE tracking SET
+		deleteType=0,deleteTime=NOW() where id=#{id}
+	</update>
+
+</mapper>

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<title>面料退料表</title><@p.cache/><@p.css/> <@p.js/>
+</head>
+
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i><a href="#">Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">面料退料表</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">添加</button>
+				</div>
+				<div class="col-md-12">
+					<form action="" id="anyVal-from">
+						<div id="val-input-empty" class="col-md-8">
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 退货人 </span> <input name="returnPeople" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 退货日期 </span> <input name="returnTime" value="" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 波次号 </span>
+									 <input name="wave" value="" type="text" class="form-control">
+								</div>
+							</div>
+
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 面料材质 </span><input name="fabricMaterial" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 颜色 </span><input name="colour" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon"> 备注 </span> <input name="remarks" type="text" class="form-control">
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<span class="input-group-btn">
+								<button id="anyVal-btn" class="btn btn-default" type="button">查询</button>
+							</span>
+						</div>
+						<div>
+							<input hidden="hidden" type="text" id="pageNow" name="pageNow"value=""> 
+							<input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+						</div>
+					</form>
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-md-12" style="height: 50px;"></div>
+				<div class="page-content">
+					<div class="col-xs-12">
+						<div class="tabbable">
+							<table class="table  table-bordered">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>退货人</th>
+										<th>退货日期</th>
+										<th>波次号</th>
+										<th>设计图</th>
+										<th>面料材质</th>
+										<th>颜色</th>
+										<th>面料1</th>
+										<th>面料2</th>
+										<th>面料3</th>
+										<th>面料4</th>
+										<th>面料5</th>
+										<th>面料6</th>
+										<th>面料7</th>
+										<th>面料8</th>
+										<th>面料9</th>
+										<th>面料10</th>
+										<th>面料11</th>
+										<th>面料12</th>
+										<th>面料13</th>
+										<th>面料14</th>
+										<th>面料15</th>
+										<th>面料16</th>
+										<th>面料17</th>
+										<th>面料18</th>
+										<th>面料19</th>
+										<th>面料20</th>
+										<th>单位</th>
+										<th>单价</th>
+										<th>退货量</th>
+										<th>退货总金额</th>
+										<th>已完成</th>
+										<th>总条数</th>
+										<th>备注</th>
+										<th>添加时间</th>
+										<th>数据操作</th>
+									</tr>
+								</thead>
+								<tbody class="table_app">
+								</tbody>
+							</table>
+							<ul class="pager pagination-lg tcdPageCode">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 添加 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加退料信息</h4>
+					</div>
+					<form id="add_form">
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="returnPeople"> 退货人 </label>
+									 <input type="text" class="form-control" name="returnPeople">
+								</div>
+								<div class="col-md-4">
+									<label for="returnTime"> 退货日期 </label>
+									<input type="text" class="form-control input-date" name="returnTime" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="wave"> 波号 </label> 
+									<!-- <input type="text" name="asfdas" onkeyup="this.value = this.value.toUpperCase();"/> -->
+									<input type="text" class="form-control" name="wave" onkeyup="this.value = this.value.toUpperCase();" placeholder=" ">
+								</div>
+							</div>
+							 <div class="col-md-12">
+								<div class="col-md-4">
+									<label for="fabricMaterial"> 面料材质 </label> 
+									<input type="text" class="form-control" name="fabricMaterial" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="colour"> 颜色 </label> 
+								<input type="text" class="form-control" name="colour" placeholder=" ">
+								</div>
+								<div class="col-md-4" >
+									<label class="control-label bolder blue">面料单位</label>
+									<div class="radio">
+										<label> <input name="kgMeret" type="radio" class="" value="KG" > 
+											<span class="lbl">KG</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input name="kgMeret" type="radio" class="" value="M"> 
+											<span class="lbl">M</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input name="kgMeret" type="radio" class="" value="码" >
+											 <span class="lbl">码</span>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="remarks"> 备注 </label> 
+									<input type="text" class="form-control" name="remarks" placeholder=" ">
+								</div>
+								<div class="col-md-4">
+									<label for="oringinalWave"> 点下面按钮添加输入框 </label>
+									<div class="btn btn-primary" onclick="addFabricinput()">
+										<i class="icon-edit bigger-130"> </i> 添加
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12" id="addFabricDiv">
+								<div class="col-md-4">
+									<label for="parameter1"> 面料1 </label> 
+									<input type="text" onkeyup="chkNum(this)" class="form-control" name="parameter1">
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" id="addForm" class="btn btn-primary" data-dismiss="modal">提交</button>
+					</div>
+				</div>
+				
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- .main-container-inner -->
+		<!--修改 模态框（Modal） -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改 退料信息</h4>
+					</div>
+					<form enctype="multipart/form-data" role="form" id="modifyByDistribution" action="" method="post">
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="returnPeople"> 退料人 </label> <input type="text"
+										class="form-control" name="returnPeople" id="returnPeople" placeholder="">
+								</div>
+								<div class="col-md-4">
+									<label for="returnTime"> 退货日期 </label> <input type="text"
+										class="form-control input-date" name="returnTime" id="returnTime" placeholder="">
+								</div>
+								<div class="col-md-4">
+									<label for="wave"> 波次号 </label> 
+									<input type="text" class="form-control" name="wave" onkeyup="this.value = this.value.toUpperCase();" id="wave" placeholder=" ">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<label for="fabricMaterial"> 面料材质 </label> <input type="text" class="form-control" name="fabricMaterial" id="fabricMaterial">
+								</div>
+								<div class="col-md-4">
+									<label for="colour"> 颜色 </label> <input type="text"
+										class="form-control" name="colour" id="colour" placeholder="">
+								</div>
+								<div class="col-md-4">
+									<label class="control-label bolder blue">面料单位</label>
+									<div class="radio">
+										<label> <input name="kgMeret" type="radio" class="" value="KG" id="radio_kg_input"> 
+											<span class="lbl">KG</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input name="kgMeret" type="radio" class="" value="M" id="radio_m_input"> 
+											<span class="lbl">M</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input name="kgMeret" type="radio" class="" value="码" id="radio_code_input">
+											 <span class="lbl">码</span>
+										</label>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<label for="remarks"> 备注 </label> <input type="text"
+										class="form-control" name="remarks" id="remarks" placeholder="" >
+								</div>
+							</div>
+							<div class="col-md-12" id="modifyAddDiv"></div>
+							<input hidden="hidden" id="fabricOutflowId" type="text" value="" name="id">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" onclick="delDvi()">关闭</button>
+							<button type="button" onclick="modifyDistribution_btn()" class="btn btn-primary" data-dismiss="modal">提交</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- 刪除 -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div id="myModal-prompt" class="modal-body">
+						你确定刪除波次号为: <span style="color: red" id="myModal2-wave-text"></span> 的数据嗎？？？
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+						<button type="button" id="del-btn" class="btn btn-primary">確認刪除</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.main-container-inner -->
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> 
+			<i class="icon-double-angle-up icon-only bigger-110"> </i>
+		</a> <input type="hidden" value="${pageContext.request.contextPath}" id="path">
+	</div>
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+<script type="text/javascript">
+	$(function(){
+		addForm();
+	})
+	function delDvi() {
+		$("#modifyAddDiv").empty();
+	}
+	var index = 0;
+	function addFabricinput() {
+		index = index + 1;
+		if (index < 20) {
+			var a = $("#addFabricDiv").find("input");
+			$("#addFabricDiv").append(
+				"<div class='col-md-4'><label for='parameter'>面料"
+					+ (a.length + 1)
+					+ " </label><input type='text' onkeyup='value=value.replace(/[^\\d.]/g,&#39;&#39;)' class='form-control' name='parameter"
+					+ (a.length + 1) + "'></div>");
+
+		} else {
+			alert("面料只能添加20个");
+		}
+	}
+	//删除数据
+	function delByDistributionFabric(wave) {
+		 $("#myModal2-wave-text").text(wave); //val
+	}
+	
+	$("#del-btn").on('click', function() {
+		var id = $("#myModal2-wave-text").html();
+		$.post('delFabricReturnBack.do', {
+			'id' : id
+		}, function(data) {
+			if (data = 1) {
+				$("#myModal-prompt").html("恭喜你刪除成功");
+				$("#del-btn").remove();
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal); //調用分頁查詢 在這裏才調用
+			} else {
+				$("#myModal-prompt").html("删除失败！原因可能是网络问题");
+				$("#del-btn").remove();
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal); //調用分頁查詢 在這裏才調用
+			}
+		});
+	})
+	
+	//点击查询获取查询的条件 数据
+	$(function() {
+		$("#anyVal-btn").on('click', function() { //点击事查詢事件
+			$("#pageSize").attr('name', ""); //去掉分页查询pageSize
+			$("#pageNow").attr('name', ""); //去掉分页查询pageNow
+			var anyVal = $("#anyVal-from").serialize(); //獲取條件查詢字段
+			$.post('getFabricReturnBackByPageCount.do', anyVal, function(data) { //帶條件查詢縂條數
+				$("#pageSize").attr('name', "pageSize"); //给pageSize赋值name
+				$("#pageNow").attr('name', "pageNow"); //给pageNow赋name值
+				$("#pageNow").val(1);
+				var anyVal = $("#anyVal-from").serialize(); //獲取條件字段
+				findDistributionFabricPageByVal(anyVal);
+				$(".tcdPageCode").createPage({
+					pageCount : data.totalPageCount,
+					current : data.pageNow,
+					backFn : function(p) {
+						$("#pageSize").val(10);
+						$("#pageNow").val(p); //給當前頁賦值
+						var anyVal = $("#anyVal-from").serialize(); //获取form表单
+						//調用方法
+						findDistributionFabricPageByVal(anyVal); //調用分頁查詢 在這裏才調用
+					}
+				});
+			});
+		});
+		//修改赋值方法 
+		$("#up").uploadPreview({
+			Img : "ImgPr",
+			Width : 120,
+			Height : 120
+		});
+	});
+	//修改方法
+	function modifyDistribution_btn() {
+		var formData = $("#modifyByDistribution").serialize();
+		$.ajax({
+			url : 'modifyFabricReturnBack.do',
+			type : 'POST',
+			data : formData,
+			success : function(data) {
+				var pageNow = $("#pageNow").val();
+				$("#pageSize").val(10);
+				$("#pageNow").val(pageNow); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal);
+			},
+			error : function(data) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(1); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal);
+			}
+		});
+	}
+	/*页面加载执行的方法*/
+	$.post('getFabricReturnBackByPageCount.do', {}, function(data) {
+		$("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+		$("#pageNow").val(data.pageNow);
+		//获取form参数进行查询
+		var anyVal = $("#anyVal-from").serialize();
+		//調用方法传参
+		findDistributionFabricPageByVal(anyVal);
+		// 进入后台进行分页查询
+		$(".tcdPageCode").createPage({ 
+			pageCount : data.totalPageCount,
+			//总页数
+			current : data.pageNow,
+			//当前页
+			backFn : function(p) {
+				$("#pageSize").val(10);
+				$("#pageNow").val(p); //給當前頁賦值
+				var anyVal = $("#anyVal-from").serialize(); //获取form表单
+				//調用方法
+				findDistributionFabricPageByVal(anyVal);
+			}
+		});
+	});
+	$("#val-input-empty").find('div').find('div').find(":input").each(
+			function() {
+				$(this).val("");
+			})
+	//查詢方法
+	function findDistributionFabricPageByVal(anyVal) { //你的数据都是从这里查的？
+		$.post(
+						"findConditionFabricReturnBackByPage.do",
+						anyVal, //from表单内容
+						function(data) {
+							var id = 1;
+							$(".table_app").empty(); //清空原有的数据
+							for (var i = 0; i < data.length; i++) {
+								var _HTML_TEBLE_ = "";
+								_HTML_TEBLE_ = "<tr><td >"
+										+ data[i].id
+										+ "</td><td >"
+										+ (data[i].returnPeople = null ? ''
+												: data[i].returnPeople)
+										+ "</td><td >"
+										+ (data[i].returnTime == null ? ''
+												: data[i].returnTime)
+										+ "</td><td >"
+										+ (data[i].wave == null ? ''
+												: data[i].wave)
+										+ "</td><td><img style='width: 120px; height: 120px' src=" + data[i].designImg + "></td><td >"
+										+ (data[i].fabricMaterial == null ? ''
+												: data[i].fabricMaterial)
+										+ "</td><td >"
+										+ (data[i].colour == null ? ''
+												: data[i].colour)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter1 == null ? ''
+												: data[i].parameter1)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter2 == null ? ''
+												: data[i].parameter2)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter3 == null ? ''
+												: data[i].parameter3)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter4 == null ? ''
+												: data[i].parameter4)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter5 == null ? ''
+												: data[i].parameter5)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter6 == null ? ''
+												: data[i].parameter6)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter7 == null ? ''
+												: data[i].parameter7)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter8 == null ? ''
+												: data[i].parameter8)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter9 == null ? ''
+												: data[i].parameter9)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter10 == null ? ''
+												: data[i].parameter10)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter11 == null ? ''
+												: data[i].parameter11)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter12 == null ? ''
+												: data[i].parameter12)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter13 == null ? ''
+												: data[i].parameter13)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter14 == null ? ''
+												: data[i].parameter14)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter15 == null ? ''
+												: data[i].parameter15)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter16 == null ? ''
+												: data[i].parameter16)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter17 == null ? ''
+												: data[i].parameter17)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter18 == null ? ''
+												: data[i].parameter18)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter19 == null ? ''
+												: data[i].parameter19)
+										+ "</td><td class='parameter' >"
+										+ (data[i].parameter20 == null ? ''
+												: data[i].parameter20)
+										+ "</td><td >"
+										+ (data[i].kgMeret == null ? ''
+												: data[i].kgMeret)
+										+ "</td><td >"
+										+ (data[i].price == null ? ''
+												: data[i].price)
+										+ "</td><td >" 
+										+ (data[i].fabriceReturnWeight == null ? ''
+												: data[i].fabriceReturnWeight)
+										+ "</td><td >" 
+										+ (data[i].fabriceReturnPrice == null ? ''
+												: data[i].fabriceReturnPrice)
+										+ "</td><td class='colourState"+data[i].id+"'>" 
+										 +"<button type='button'  onclick='updateById(\"" + data[i].id + "\",this)' >确认完成</button> " 
+										 + "</td><td >" 
+										+ (data[i].totalAmount == null ? ''
+												: data[i].totalAmount)
+										+ "</td><td >"
+										+ (data[i].remarks == null ? ''
+												: data[i].remarks)
+										+ "</td><td >"
+										+ (data[i].addTime == null ? ''
+												: data[i].addTime)
+										+ "</td><td class='dataState"+data[i].id+"'><button type='button'  data-toggle='modal' data-target='#myModal1' onclick='modifyByDistributionFabric(\""
+										+ data[i].id
+										+ "\",this)' class='btn btn-primary icon-pencil"+data[i].id+"''>修改</button><button type='button'  data-toggle='modal' data-target='#myModal2' onclick='delByDistributionFabric(\""
+										+ data[i].id
+										+ "\")' class='icon-trash btn btn-danger'>删除</button></td></tr>";
+							
+								$(".table_app").append(_HTML_TEBLE_);
+								var colourState = data[i].colourState;
+								if (colourState != "" && colourState != null && colourState ==1 ) {
+									$(".colourState" + data[i].id).parent().attr("bgcolor", "#00ffff");
+									$(".colourState" + data[i].id).find('button').remove();
+									$(".colourState" + data[i].id).append("<button class='btn icon-ok btn-inverse' disabled='disabled'>已确认</button>");
+									$(".dataState"+ data[i].id).find('button').remove();
+									$(".dataState" + data[i].id).append("<button class='btn icon-ok btn-inverse' disabled='disabled'>已确认</button>");
+								}
+							}
+						});
+	};
+	
+	//修改颜色状态值
+	function updateById(id){
+		$.ajax({
+			url:'updateColourById.do',
+			type:'post',
+			dataType:'json',
+			data:{id : id},
+			success:function(mydata){
+				if(mydata==1){
+					findDistributionFabricPageByVal(anyVal); 
+				}else{
+					alert("修改失败");
+				}
+			}
+		});
+	}
+	
+	function modifyByDistributionFabric(id, tr) {
+		$(tr).parent().parent().find(".parameter")
+			.each(function() {
+				if ($(this).html() != "" && $(this).html() != null) {
+					var a = $("#modifyAddDiv").find("input");
+					$("#modifyAddDiv").append(
+						"<div class='col-md-4'><label for='parameter'>面料"
+							+ (a.length + 1)
+							+ " </label><input type='text' onkeyup='value=value.replace(/[^\\d.]/g,&#39;&#39;)' class='form-control' name='parameter"
+							+ (a.length + 1)
+							+ "'   id='parameter"
+							+ (a.length + 1)
+							+ "'></div>");
+				}
+			});
+		//获取修改最新数据
+		$.post("getFabricReturnBackById.do", {
+			'id' : id
+		}, function(result) {
+			$("#fabricOutflowId").val(result.id);
+			$("#returnPeople").val(result.returnPeople);
+			$("#returnTime").val(result.returnTime);
+			$("#additionTime").val(result.additionTime);
+			$("#wave").val(result.wave);
+			$("#fabricMaterial").val(result.fabricMaterial);
+			$("#colour").val(result.colour);//这些可以 正常回去表格的数据的 
+			$("#radio_code_input").val(result.kgMeret); 
+			$("#parameter1").val(result.parameter1);
+			$("#parameter2").val(result.parameter2);
+			$("#parameter3").val(result.parameter3);
+			$("#parameter4").val(result.parameter4);
+			$("#parameter5").val(result.parameter5);
+			$("#parameter6").val(result.parameter6);
+			$("#parameter7").val(result.parameter7);
+			$("#parameter8").val(result.parameter8);
+			$("#parameter9").val(result.parameter9);
+			$("#parameter10").val(result.parameter10);
+			$("#parameter11").val(result.parameter11);
+			$("#parameter12").val(result.parameter12);
+			$("#parameter13").val(result.parameter13);
+			$("#parameter14").val(result.parameter14);
+			$("#parameter15").val(result.parameter15);
+			$("#parameter16").val(result.parameter16);
+			$("#parameter17").val(result.parameter17);
+			$("#parameter18").val(result.parameter18);
+			$("#parameter19").val(result.parameter19);
+			$("#parameter20").val(result.parameter20);
+
+			var Company = result.kgMeret;
+			if (Company == 'KG') {
+				$("#radio_code_input").removeAttr('checked');
+				$("#radio_m_input").removeAttr('checked');
+				$("#radio_kg_input").prop('checked', "checked");
+			} else if (Company == 'M') {
+				$("#radio_kg_input").removeAttr('checked');
+				$("#radio_code_input").removeAttr('checked');
+				$("#radio_m_input").prop('checked', "checked");
+			} else if (Company == '码') {
+				$("#radio_kg_input").removeAttr('checked');
+				$("#radio_m_input").removeAttr('checked');
+				$("#radio_code_input").prop('checked', "checked");
+			}
+			$("#remarks").val(result.remarks);
+		});
+	};
+	$("#myselect").click(function() {
+		$("#mydiv").show();
+	});
+	function addForm(){
+		$("#addForm").click(function(){
+			var addForm=$("#add_form").serialize().trim();
+			var anyVal = $("#anyVal-from").serialize();
+			$.ajax({
+				url:'addFabricReturnBack.do',
+				type:'post',
+				dataType:'json',
+				data:addForm,
+				success:function(mydata){
+					if(mydata==1){
+						findDistributionFabricPageByVal(anyVal); 
+					}else{
+						alert("添加失败");
+					}
+				}
+			});
+		});
+	}
+	
+</script>
+</html>

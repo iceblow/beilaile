@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.PrintingProcessCaseMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.PrintingProcessCase">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="DESIGNER" property="designer" jdbcType="VARCHAR" />
+		<result column="REFERENCE_PRINTING" property="referencePrinting"
+			jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="PATTERN_CRAFTS_ORDER" property="patternCraftsOrder"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDERS" property="orders" jdbcType="INTEGER" />
+		<result column="PRINTING_FACTORY" property="printingFactory"
+			jdbcType="VARCHAR" />
+		<result column="PRINTING_FABRIC_ARRANGE_OUT" property="printingFabricArrangeOut"
+			jdbcType="VARCHAR" />
+		<result column="PRINTING_FABRIC_ARRANGE_IN" property="printingFabricArrangeIn"
+			jdbcType="VARCHAR" />
+		<result column="REQUIRE" property="require" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, WAVE, PRODUCT_CODE, DESIGNER, REFERENCE_PRINTING,
+		DESIGN_IMG,
+		SAMPLE_IMG, PATTERN_CRAFTS_ORDER,
+		ORDER_DETAILS, ORDERS,
+		PRINTING_FACTORY, PRINTING_FABRIC_ARRANGE_OUT,
+		PRINTING_FABRIC_ARRANGE_IN,
+		`REQUIRE`
+	</sql>
+
+	<!-- 根据编号单个查询 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from printing_process_case
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- 得到数据量 -->
+	<select id="getCount" parameterType="com.warehouse.entity.PrintingProcessCase"
+		resultType="java.lang.Integer">
+		select count(*) from printing_process_case where 1=1
+		<if test='wave!=null and wave!=""'>
+			and WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+	
+		<if
+			test='printingFactory !="" and printingFactory !=null'>
+			and PRINTING_FACTORY like concat("%",#{printingFactory},"%")	
+		</if>
+		
+		<if
+			test='printingFabricArrangeIn !="" and printingFabricArrangeIn !=null and printingFabricArrangeIn !="Y" and printingFabricArrangeIn !="y" and printingFabricArrangeIn !="N" and printingFabricArrangeIn !="n"'>
+			and PRINTING_FABRIC_ARRANGE_IN like concat("%",#{printingFabricArrangeIn},"%")	
+		</if>
+		
+		<if test='printingFabricArrangeIn =="Y" or printingFabricArrangeIn =="y"'>
+			and (PRINTING_FABRIC_ARRANGE_IN IS NOT NULL AND PRINTING_FABRIC_ARRANGE_IN !="") 
+		</if>
+		<if test='printingFabricArrangeIn =="N" or printingFabricArrangeIn =="n"'>
+			and (PRINTING_FABRIC_ARRANGE_IN IS NULL OR PRINTING_FABRIC_ARRANGE_IN ="")
+		</if>
+			
+		
+		<if
+			test='printingFabricArrangeOut !="" and printingFabricArrangeOut !=null and printingFabricArrangeOut !="Y" and printingFactory !="y" and printingFabricArrangeOut !="N" and printingFabricArrangeOut !="n"'>
+			and PRINTING_FABRIC_ARRANGE_OUT like concat("%",#{printingFabricArrangeOut},"%")	
+		</if>
+		
+		<if test='printingFabricArrangeOut =="Y" or printingFabricArrangeOut =="y"'>
+			and (PRINTING_FABRIC_ARRANGE_OUT IS NOT NULL AND PRINTING_FABRIC_ARRANGE_OUT !="") 
+		</if>
+		<if test='printingFabricArrangeOut =="N" or printingFabricArrangeOut =="n"'>
+			and (PRINTING_FABRIC_ARRANGE_OUT IS NULL OR PRINTING_FABRIC_ARRANGE_OUT ="")
+		</if>
+		
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="getDataByPage" parameterType="com.warehouse.entity.PrintingProcessCase"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from printing_process_case where 1=1
+		<if test='wave!=null and wave!=""'>
+			and WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+	
+		<if
+			test='printingFactory !="" and printingFactory !=null'>
+			and PRINTING_FACTORY like concat("%",#{printingFactory},"%")	
+		</if>
+		
+		
+		<if
+			test='printingFabricArrangeIn !="" and printingFabricArrangeIn !=null and printingFabricArrangeIn !="Y" and printingFabricArrangeIn !="y" and printingFabricArrangeIn !="N" and printingFabricArrangeIn !="n"'>
+			and PRINTING_FABRIC_ARRANGE_IN like concat("%",#{printingFabricArrangeIn},"%")	
+		</if>
+		
+		<if test='printingFabricArrangeIn =="Y" or printingFabricArrangeIn =="y"'>
+			and (PRINTING_FABRIC_ARRANGE_IN IS NOT NULL AND PRINTING_FABRIC_ARRANGE_IN !="") 
+		</if>
+		<if test='printingFabricArrangeIn =="N" or printingFabricArrangeIn =="n"'>
+			and (PRINTING_FABRIC_ARRANGE_IN IS NULL OR PRINTING_FABRIC_ARRANGE_IN ="")
+		</if>
+			
+		
+		<if
+			test='printingFabricArrangeOut !="" and printingFabricArrangeOut !=null and printingFabricArrangeOut !="Y" and printingFactory !="y" and printingFabricArrangeOut !="N" and printingFabricArrangeOut !="n"'>
+			and PRINTING_FABRIC_ARRANGE_OUT like concat("%",#{printingFabricArrangeOut},"%")	
+		</if>
+		
+		<if test='printingFabricArrangeOut =="Y" or printingFabricArrangeOut =="y"'>
+			and (PRINTING_FABRIC_ARRANGE_OUT IS NOT NULL AND PRINTING_FABRIC_ARRANGE_OUT !="") 
+		</if>
+		<if test='printingFabricArrangeOut =="N" or printingFabricArrangeOut =="n"'>
+			and (PRINTING_FABRIC_ARRANGE_OUT IS NULL OR PRINTING_FABRIC_ARRANGE_OUT ="")
+		</if>
+		order by PRINTING_FABRIC_ARRANGE_OUT ASC,wave ASC limit #{begin},#{end}
+	</select>
+
+	<!-- 根据传入条件修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.PrintingProcessCase">
+		update printing_process_case
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="designer != null">
+				DESIGNER = #{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="referencePrinting != null">
+				REFERENCE_PRINTING =
+				#{referencePrinting,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="patternCraftsOrder != null">
+				PATTERN_CRAFTS_ORDER =
+				#{patternCraftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				ORDERS = #{orders,jdbcType=INTEGER},
+			</if>
+			<if test="printingFactory != null">
+				PRINTING_FACTORY = #{printingFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="printingFabricArrangeOut != null">
+				PRINTING_FABRIC_ARRANGE_OUT =
+				#{printingFabricArrangeOut,jdbcType=VARCHAR},
+			</if>
+			<if test="printingFabricArrangeIn != null">
+				PRINTING_FABRIC_ARRANGE_IN =
+				#{printingFabricArrangeIn,jdbcType=VARCHAR},
+			</if>
+			<if test="require != null">
+				REQUIRE = #{require,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 修改所有数据 -->
+	<update id="updateByPrimaryKey" parameterType="com.warehouse.entity.PrintingProcessCase">
+		update
+		printing_process_case
+		set WAVE = #{wave,jdbcType=VARCHAR},
+		PRODUCT_CODE
+		= #{productCode,jdbcType=VARCHAR},
+		DESIGNER =
+		#{designer,jdbcType=VARCHAR},
+		REFERENCE_PRINTING =
+		#{referencePrinting,jdbcType=VARCHAR},
+		DESIGN_IMG =
+		#{designImg,jdbcType=VARCHAR},
+		SAMPLE_IMG =
+		#{sampleImg,jdbcType=VARCHAR},
+		PATTERN_CRAFTS_ORDER =
+		#{patternCraftsOrder,jdbcType=VARCHAR},
+		ORDER_DETAILS =
+		#{orderDetails,jdbcType=VARCHAR},
+		ORDERS = #{orders,jdbcType=INTEGER},
+		PRINTING_FACTORY = #{printingFactory,jdbcType=VARCHAR},
+		PRINTING_FABRIC_ARRANGE_OUT =
+		#{printingFabricArrangeOut,jdbcType=VARCHAR},
+		PRINTING_FABRIC_ARRANGE_IN =
+		#{printingFabricArrangeIn,jdbcType=VARCHAR},
+		REQUIRE =
+		#{require,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 匹印领料 -->
+	<update id="fabricOut" parameterType="java.lang.Integer">
+		update printing_process_case set
+		PRINTING_FABRIC_ARRANGE_OUT = CURDATE()
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 匹印回料 -->
+	<update id="fabricIn" parameterType="java.lang.Integer">
+		update printing_process_case set
+		PRINTING_FABRIC_ARRANGE_IN = CURDATE()
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

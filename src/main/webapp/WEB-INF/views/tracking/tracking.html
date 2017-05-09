@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/cutting/layer/layer.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/tracking/tracking.js"></script>
+<title>理单跟踪表</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">理单跟踪表</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-1">
+								<label for="fabricReserve">面料储备</label> <input type="text"
+									class="form-control" name="fabricReserve" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="clippingReserve">裁剪储备</label> <input type="text"
+									class="form-control" name="clippingReserve" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="trackingOfficer">跟踪员</label> <input type="text"
+									class="form-control" name="trackingOfficer" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="supplier">供货商</label><input type="text"
+									class="form-control" name="supplier" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="b_id">波次号</label><input type="text"
+									class="form-control" name="b_id" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="primaryWave">原波次</label><input type="text"
+									class="form-control" name="primaryWave" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="type">类目</label><input type="text"
+									class="form-control" name="type" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="publishedTime">板房出版时间</label> <input type="text"
+									class="form-control" name="publishedTime" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="versionTime">车缝领料时间</label> <input type="text"
+									class="form-control" name="versionTime" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="prenatalSample">产前样时间</label> <input type="text"
+									class="form-control" name="prenatalSample" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="estimatedPrice">预估价</label> <input type="text"
+									class="form-control" name="estimatedPrice" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="costPrice">成本价</label> <input type="text"
+									class="form-control" name="costPrice" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="productionSchedule">业务员校对进度</label> <input
+									type="text" class="form-control" name="productionSchedule"
+									placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="orderType">订单类型</label> <input type="text"
+									class="form-control" name="orderType" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="cutNum">裁剪数量</label> <input type="text"
+									class="form-control" name="cutNum" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="arrivalNumbe">到货数量</label> <input type="text"
+									class="form-control" name="arrivalNumbe" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="delivaTime">交货日期</label> <input type="text"
+									class="form-control" name="delivaTime" placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="deliveryConfirmation">货期确认</label> <input
+									type="text" class="form-control" name="deliveryConfirmation"
+									placeholder="">
+							</div>
+							<div class="col-md-1">
+								<label for="returnDate">样衣归还时间</label> <input type="text"
+									class="form-control" name="returnDate" placeholder="">
+							</div>
+							<input type="hidden" id="mySelectDeleteType" name="deleteType"
+								value="">
+						</form>
+						<div class="col-md-1">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="mySelectOffComplete">查询未完成</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="mySelectOnComplete">查询已完成</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="4"><font color="red">订单总数:<span
+										id="orderSum"></span></font><br> <font color="red">款式总数:<span
+										id="styleSum"></span></font></th>
+								<!-- <th colspan="3" align="center"><a
+									href="javascript:void(0);" class="btn btn-danger"
+									data-toggle="modal" data-target="#myModalProblem"
+									id="lookProblemForm">发现问题</a></th> -->
+								<th colspan="29" style="text-align: center; font-size: 16px;">理单跟踪表</th>
+								<!-- <th colspan="2" style="border-left: 0px;">
+									<div class="col-md-12" style="border-left: 0px;">
+										<button style="float: right;" class="btn btn-primary btn-lg"
+											data-toggle="modal" data-target="#myModal" id="add"
+											onclick="Clear()">添加</button>
+									</div>
+								</th> -->
+							</tr>
+							<tr>
+								<th style="text-align: center;">编号</th>
+								<th style="text-align: center;">面料储备</th>
+								<th style="text-align: center;">裁剪储备</th>
+								<th style="text-align: center;">设计师</th>
+								<th style="text-align: center;">跟踪员</th>
+								<th style="text-align: center;">供货商</th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">原波次</th>
+								<th style="text-align: center;">工艺单</th>
+								<th style="text-align: center;">图片</th>
+								<th style="text-align: center;">类目</th>
+								<th style="text-align: center;">板房出版时间</th>
+								<th style="text-align: center;">车缝领料时间</th>
+								<th style="text-align: center;">产前样时间</th>
+								<th style="text-align: center;">订单数量</th>
+								<th style="text-align: center;">预估价</th>
+								<th style="text-align: center;">成本价</th>
+								<th style="text-align: center;">成分</th>
+								<th style="text-align: center;">业务员校对生产进度</th>
+								<th style="text-align: center;">订单类型</th>
+								<th style="text-align: center;">裁剪数量</th>
+								<th style="text-align: center;">到货数量</th>
+								<th style="text-align: center;">报告出货量</th>
+								<th style="text-align: center;">交货日期</th>
+								<th style="text-align: center;">货期确认</th>
+								<th style="text-align: center;">样衣归还日期</th>
+								<th style="text-align: center;">发布时间</th>
+								<th style="text-align: center;">订单详情</th>
+								<th style="text-align: center;">尺码图</th>
+								<th style="text-align: center;">印绣花完成时间</th>
+								<th style="text-align: center;">面辅料完成时间</th>
+								<th style="text-align: center;" colspan="3">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 添加模态框 -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">添加理单跟踪数据</h4>
+						</div>
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div id="div">
+									<div class="mydiv">
+										<div class="col-md-4" style="float: left;">
+											<label for="fabricReserve">面料储备</label> <input type="text"
+												class="form-control date" name="fabricReserve"
+												id="fabricReserve">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="clippingReserve">裁剪储备</label> <input type="text"
+												class="form-control date" name="clippingReserve"
+												id="clippingReserve">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="designer">设计师</label> <input type="text"
+												class="form-control date" name="designer" id="designer">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="trackingOfficer">跟踪员</label> <input type="text"
+												class="form-control date" name="trackingOfficer"
+												id="trackingOfficer">
+										</div>
+										<!-- <div class="col-md-4" style="float: left;">
+											<label for="supplier">供货商</label> <input type="text"
+												class="form-control date" name="supplier" id="supplier">
+										</div> -->
+										<div class="col-md-4" style="float: left;">
+											<label for="b_id">波次号</label> <input type="text"
+												class="form-control date" name="b_id" id="b_id">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="img">图片:</label>
+											<!-- <input type="text"
+										class="form-control date" name="img" id="img"> -->
+											<input type="file" id="file" name="file">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="type">类目</label> <input type="text"
+												class="form-control date" name="type" id="type">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="publishedTime">板房出版时间</label> <input type="text"
+												class="form-control date" name="publishedTime"
+												id="publishedTime">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="versionTime">发版时间</label> <input type="text"
+												class="form-control date" name="versionTime"
+												id="versionTime">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="prenatalSample">产前样时间</label> <input type="text"
+												class="form-control date" name="prenatalSample"
+												id="prenatalSample">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="orderNum">订单数量</label> <input type="text"
+												class="form-control date" name="orderNum" id="orderNum">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="estimatedPrice">预估价</label> <input type="text"
+												class="form-control date" name="estimatedPrice"
+												id="estimatedPrice">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="costPrice">成本价</label> <input type="text"
+												class="form-control date" name="costPrice" id="costPrice">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="component">成分</label> <input type="text"
+												class="form-control date" name="component" id="component">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="productionSchedule">业务员校对生产进度</label> <input
+												type="text" class="form-control date"
+												name="productionSchedule" id="productionSchedule">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="orderType">订单类型</label><input type="text"
+												class="form-control date" name="orderType" id="orderType">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="cutNum">裁剪数量</label> <input type="text"
+												class="form-control date" name="cutNum" id="cutNum">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="arrivalNumbe">到货数量</label> <input type="text"
+												class="form-control date" name="arrivalNumbe"
+												id="arrivalNumbe">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="delivaTime">交货日期</label> <input type="text"
+												class="form-control date" name="delivaTime" id="delivaTime">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="deliveryConfirmation">货期确认</label> <input
+												type="text" class="form-control date"
+												name="deliveryConfirmation" id="deliveryConfirmation">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="returnDate">样衣归还时间</label> <input type="text"
+												class="form-control date" name="returnDate" id="returnDate">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="printingCompleteTime">印绣花完成时间</label> <input
+												type="text" class="form-control date"
+												name="printingCompleteTime" id="printingCompleteTime">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="fabricAndAuxiliaryCompleteTime">面/辅料完成时间</label>
+											<input type="text" class="form-control date"
+												name="fabricAndAuxiliaryCompleteTime"
+												id="fabricAndAuxiliaryCompleteTime">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="addSub"
+								style="background-color: #428bca;">添加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<!-- 修改模态框 -->
+			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">修改理单跟踪数据</h4>
+						</div>
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div id="div">
+									<div class="mydiv">
+										<input type="hidden" name="id" id="ids" value="">
+										<div class="col-md-4" style="float: left;">
+											<label for="fabricReserve">面料储备</label> <input type="text"
+												class="form-control date" name="fabricReserve"
+												id="fabricReserves">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="clippingReserve">裁剪储备</label> <input type="text"
+												class="form-control date" name="clippingReserve"
+												id="clippingReserves">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="designer">设计师</label> <input type="text"
+												class="form-control date" name="designer" id="designers">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="trackingOfficer">跟踪员</label> <input type="text"
+												class="form-control date" name="trackingOfficer"
+												id="trackingOfficers">
+										</div>
+										<!-- <div class="col-md-4" style="float: left;">
+											<label for="supplier">供货商</label> <input type="text"
+												class="form-control date" name="supplier" id="suppliers">
+										</div> -->
+										<div class="col-md-4" style="float: left;">
+											<label for="b_id">波次号</label> <input type="text"
+												class="form-control date" name="b_id" id="b_ids">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="img">图片:</label> <input type="file" id="files"
+												name="file">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="type">类目</label> <input type="text"
+												class="form-control date" name="type" id="types">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="publishedTime">板房出版时间</label> <input type="text"
+												class="form-control date" name="publishedTime"
+												id="publishedTimes">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="versionTime">发版时间</label> <input type="text"
+												class="form-control date" name="versionTime"
+												id="versionTimes">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="prenatalSample">产前样时间</label> <input type="text"
+												class="form-control date" name="prenatalSample"
+												id="prenatalSamples">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="orderNum">订单数量</label> <input type="text"
+												class="form-control date" name="orderNum" id="orderNums">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="estimatedPrice">预估价</label> <input type="text"
+												class="form-control date" name="estimatedPrice"
+												id="estimatedPrices">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="costPrice">成本价</label> <input type="text"
+												class="form-control date" name="costPrice" id="costPrices">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="component">成分</label> <input type="text"
+												class="form-control date" name="component" id="components">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="productionSchedule">业务员校对生产进度
+											</label> <input type="text" class="form-control date"
+												name="productionSchedule" id="productionSchedules">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="orderType">订单类型</label> <input type="text"
+												class="form-control date" name="orderType" id="orderTypes">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="cutNum">裁剪数量</label> <input type="text"
+												class="form-control date" name="cutNum" id="cutNums">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="arrivalNumbe">到货数量</label> <input type="text"
+												class="form-control date" name="arrivalNumbe"
+												id="arrivalNumbes">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="reportShipment">报告出货量</label> <input type="text"
+												class="form-control date" name="reportShipment"
+												id="reportShipments">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="delivaTime">交货日期</label> <input type="text"
+												class="form-control date" name="delivaTime" id="delivaTimes">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="deliveryConfirmation">货期确认</label> <input
+												type="text" class="form-control date"
+												name="deliveryConfirmation" id="deliveryConfirmations">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="returnDate">样衣归还时间</label> <input type="text"
+												class="form-control date" name="returnDate" id="returnDates">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="printingCompleteTime">印绣花完成时间</label> <input
+												type="text" class="form-control date"
+												name="printingCompleteTime" id="printingCompleteTimes">
+										</div>
+										<div class="col-md-4" style="float: left;">
+											<label for="fabricAndAuxiliaryCompleteTime">面/辅料完成时间</label>
+											<input type="text" class="form-control date"
+												name="fabricAndAuxiliaryCompleteTime"
+												id="fabricAndAuxiliaryCompleteTimes">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="updateSub"
+								style="background-color: #428bca;">修改</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 发现问题模态框 -->
+			<div class="modal fade" id="myModalProblem" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">发现问题</h4>
+						</div>
+						<div class="modal-body">
+							<form action="" id="problemForm">
+								<div class="col-md-12">
+									<div class="col-md-4" style="float: left;">
+										<label for="printingCompleteTime">波次号</label> <input
+											type="text" class="form-control" name="wave">
+									</div>
+									<div class="col-md-4" style="float: left;">
+										<label for="printingCompleteTime">问题产生日期</label> <input
+											type="text" class="form-control input-date"
+											name="problemTime">
+									</div>
+									<div class="col-md-12" style="float: left;">
+										<label for="printingCompleteTime">产生的问题</label>
+										<textarea class="form-control" rows="5" cols="20"
+											name="problem"></textarea>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="" id="problemBtn"
+								style="background-color: #428bca;">添加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

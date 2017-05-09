@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributionCompletedOrderMapper">
+	<resultMap id="BaseResultMap"
+		type="com.warehouse.entity.DistributionCompletedOrder">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="SID" property="sid" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="SIZE_CHART" property="sizeChart" jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDERS" property="orders" jdbcType="VARCHAR" />
+		<result column="CLOTHING_NAME" property="clothingName"
+			jdbcType="VARCHAR" />
+		<result column="ORDERS_TYPE" property="ordersType" jdbcType="VARCHAR" />
+		<result column="DISTRIBUTOR_FACTORY" property="distributorFactory"
+			jdbcType="VARCHAR" />
+		<result column="DISTRIBUTOR_PRICE" property="distributorPrice"
+			jdbcType="DECIMAL" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="SHIPMENT_NUMBER" property="shipmentNumber"
+			jdbcType="INTEGER" />
+		<result column="STORAGE_NUMBER" property="storageNumber"
+			jdbcType="INTEGER" />
+		<result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="DATA_STATUS" property="dataStatus" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+		<result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
+		<result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="DELETE_PEOPLE" property="deletePeople"
+			jdbcType="VARCHAR" />
+		<result column="CONFIRM_STORAGE_TIME" property="confirmStorageTime"
+			jdbcType="VARCHAR" />
+		<result column="PLAN_STORAGE_DATE" property="planStorageDate" jdbcType="VARCHAR" />
+		<result column="TRACKING_PEOPLE" property="trackingPeople" jdbcType="VARCHAR" />
+		<result column="ORDER_DATE" property="orderDate" jdbcType="VARCHAR" />
+		<result column="BOARD_SEND_DATE" property="boardSendDate" jdbcType="VARCHAR" />
+		<result column="PROOFING_FACTORY" property="proofingFactory" jdbcType="VARCHAR" />
+		<result column="COMPLETED_ORDER_NUMBER" property="completedOrderNumber" jdbcType="VARCHAR" />
+		<result column="LINK_START_TIME" property="linkStartTime" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SID, ORINGINAL_WAVE, WAVE, DESIGN_IMG, SAMPLE_IMG,
+		SIZE_CHART,
+		ORDER_DETAILS,
+		ORDERS, CLOTHING_NAME, ORDERS_TYPE,
+		DISTRIBUTOR_FACTORY, DISTRIBUTOR_PRICE,
+		REMARKS,
+		SHIPMENT_NUMBER,
+		STORAGE_NUMBER, ORDER_GRADE, PRODUCT_CODE, DATA_STATUS, CREATE_TIME,
+		FOUNDER, MODIFY_TIME, MODIFIED_BY, DELETE_TIME,
+		DELETE_PEOPLE,CONFIRM_STORAGE_TIME,PLAN_STORAGE_DATE,TRACKING_PEOPLE,ORDER_DATE,BOARD_SEND_DATE,
+		PROOFING_FACTORY,COMPLETED_ORDER_NUMBER,LINK_START_TIME
+	</sql>
+	<select id="findDistributionCompletedOrderById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from distribution_completed_order
+		where (DATA_STATUS !='已删除'OR
+		DATA_STATUS IS NULL) AND
+		ID=#{id}
+	</select>
+
+	<select id="getDistributionCompletedOrderByPageCount" parameterType="Map"
+		resultType="java.lang.Integer">
+		SELECT
+		COUNT(0) FROM distribution_completed_order where(
+		DATA_STATUS
+		!='已删除' OR DATA_STATUS IS NULL) AND 1=1
+		AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE
+			CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='clothingName != null and clothingName != "" and clothingName != "N" and clothingName != "Y"'>
+			AND CLOTHING_NAME LIKE
+			CONCAT('%',#{clothingName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='productCode != null and productCode != "" and productCode != "N" and productCode != "Y"'>
+			AND PRODUCT_CODE LIKE
+			CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='trackingPeople != null and trackingPeople != "" and trackingPeople != "N" and trackingPeople != "Y"'>
+			AND TRACKING_PEOPLE LIKE
+			CONCAT('%',#{trackingPeople,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='boardSendDate != null and boardSendDate != ""' >
+			<if test="boardSendDate == '有'.toString() or boardSendDate == 'Y'.toString() or boardSendDate == 'y'.toString()">
+			AND BOARD_SEND_DATE IS NOT NULL
+			</if>
+			<if test="boardSendDate == '无'.toString() or boardSendDate == 'N'.toString() or boardSendDate == 'n'.toString()">
+			AND BOARD_SEND_DATE IS NULL
+			</if>
+			<if test="boardSendDate != '无'.toString() and boardSendDate != 'N'.toString() and boardSendDate != 'n'.toString()
+			and boardSendDate != '有'.toString() and boardSendDate != 'Y'.toString() and boardSendDate != 'y'.toString() ">
+				 AND BOARD_SEND_DATE LIKE
+				CONCAT('%',#{boardSendDate,jdbcType=VARCHAR},'%') 
+			</if>
+		</if>
+		<if test='distributorFactory != null and distributorFactory != ""'>
+			<if test="distributorFactory == 'Y'.toString() or distributorFactory == 'y'.toString()">
+			AND DISTRIBUTOR_FACTORY IS NOT NULL 
+			</if>
+			<if test="distributorFactory == 'N'.toString() or distributorFactory == 'n'.toString()">
+			AND DISTRIBUTOR_FACTORY IS NULL
+			</if>
+			<if test="distributorFactory != 'N'.toString() and distributorFactory != 'n'.toString()
+			and distributorFactory != 'Y'.toString() and distributorFactory != 'y'.toString() ">
+				 AND DISTRIBUTOR_FACTORY LIKE
+				CONCAT('%',#{distributorFactory,jdbcType=VARCHAR},'%') 
+			</if>
+		</if> 
+	</select>
+	<select id="findConditionDistributionCompletedOrderByPage"
+		parameterType="Map" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM distribution_completed_order WHERE (DATA_STATUS !='已删除' OR
+		DATA_STATUS IS NULL) AND 1=1
+		AND (DELETE_TYPE IS NULL OR DELETE_TYPE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE
+			CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='clothingName != null and clothingName != "" and clothingName != "N" and clothingName != "Y"'>
+			AND CLOTHING_NAME LIKE
+			CONCAT('%',#{clothingName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='productCode != null and productCode != "" and productCode != "N" and productCode != "Y"'>
+			AND PRODUCT_CODE LIKE
+			CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='trackingPeople != null and trackingPeople != "" and trackingPeople != "N" and trackingPeople != "Y"'>
+			AND TRACKING_PEOPLE LIKE
+			CONCAT('%',#{trackingPeople,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='boardSendDate != null and boardSendDate != ""'>
+			<if test="boardSendDate == '有'.toString() or boardSendDate == 'Y'.toString() or boardSendDate == 'y'.toString()">
+			AND BOARD_SEND_DATE IS NOT NULL 
+			</if>
+			<if test="boardSendDate == '无'.toString() or boardSendDate == 'N'.toString() or boardSendDate == 'n'.toString()">
+			AND BOARD_SEND_DATE IS NULL
+			</if>
+			<if test="boardSendDate != '无'.toString() and boardSendDate != 'N'.toString() and boardSendDate != 'n'.toString()
+			and boardSendDate != '有'.toString() and boardSendDate != 'Y'.toString() and boardSendDate != 'y'.toString() ">
+				 AND BOARD_SEND_DATE LIKE
+				CONCAT('%',#{boardSendDate,jdbcType=VARCHAR},'%') 
+			</if>
+			
+		</if>
+		<if test='distributorFactory != null and distributorFactory != ""'>
+			<if test="distributorFactory == 'Y'.toString() or distributorFactory == 'y'.toString()">
+			AND DISTRIBUTOR_FACTORY IS NOT NULL 
+			</if>
+			<if test="distributorFactory == 'N'.toString() or distributorFactory == 'n'.toString()">
+			AND DISTRIBUTOR_FACTORY IS NULL
+			</if>
+			<if test="distributorFactory != 'N'.toString() and distributorFactory != 'n'.toString() 
+			and distributorFactory != 'Y'.toString() and distributorFactory != 'y'.toString() ">
+				 AND DISTRIBUTOR_FACTORY LIKE
+				CONCAT('%',#{distributorFactory,jdbcType=VARCHAR},'%') 
+			</if>
+		</if> 
+		ORDER BY DATA_STATUS ASC ,CREATE_TIME ASC , ORDER_DATE DESC
+		LIMIT
+		#{pageNow},#{pageSize}
+	</select>
+
+	<update id="modifyDistributionCompletedOrder" parameterType="com.warehouse.entity.DistributionCompletedOrder">
+		update distribution_completed_order
+		<set>
+			<if test="sid != null">
+				SID = #{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				ORDERS = #{orders,jdbcType=VARCHAR},
+			</if>
+			<if test="clothingName != null">
+				CLOTHING_NAME = #{clothingName,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersType != null">
+				ORDERS_TYPE = #{ordersType,jdbcType=VARCHAR},
+			</if>
+			<if test="distributorFactory != null">
+				DISTRIBUTOR_FACTORY =
+				#{distributorFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="distributorPrice != null">
+				DISTRIBUTOR_PRICE = #{distributorPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="shipmentNumber != null">
+				SHIPMENT_NUMBER = #{shipmentNumber,jdbcType=INTEGER},
+			</if>
+			<if test="storageNumber != null">
+				STORAGE_NUMBER = #{storageNumber,jdbcType=INTEGER},
+			</if>
+			<if test="orderGrade != null">
+				ORDER_GRADE = #{orderGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="dataStatus != null">
+				DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifiedBy != null">
+				MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deletePeople != null">
+				DELETE_PEOPLE = #{deletePeople,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmStorageTime != null">
+				CONFIRM_STORAGE_TIME =
+				#{confirmStorageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="trackingPeople != null">
+				TRACKING_PEOPLE =
+				#{trackingPeople,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="delDistributionCompletedOrder" parameterType="com.warehouse.entity.DistributionCompletedOrder">
+		update distribution_completed_order
+		<set>
+			<if test="dataStatus != null">
+				DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deletePeople != null">
+				DELETE_PEOPLE = #{deletePeople,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateDistributionCompletedOrderByStorage"
+		parameterType="com.warehouse.entity.DistributionCompletedOrder">
+		update distribution_completed_order
+		<set>
+			<if test="dataStatus != null">
+				DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmStorageTime != null">
+				CONFIRM_STORAGE_TIME =
+				#{confirmStorageTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

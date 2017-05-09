@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/orderMemo/purchaseOrdersDetail.js"></script>
+<title>订单详情</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">订单备忘表</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div class="col-md-12">
+						<form id="mySelect_From">
+							<div class="col-md-2">
+								<label for="fabricReserve">波次号</label> <input type="text"
+									class="form-control" name="WAVE" placeholder="">
+							</div>
+							<div class="col-md-2">
+								<label for="fabricReserve">产品编号</label> <input type="text"
+									class="form-control" name="PRODUCT_CODE" placeholder="">
+							</div>
+						</form>
+						<div class="col-md-1">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="mySelect">查询</button>
+						</div>
+					</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="9" style="text-align: center; font-size: 16px;">订单详情</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">订单编码</th>
+								<th style="text-align: center;">采购人</th>
+								<th style="text-align: center;">供应商</th>
+								<th style="text-align: center;">采购时间</th>
+								<th style="text-align: center;">商家编码</th>
+								<th style="text-align: center;">产品编码</th>
+								<th style="text-align: center;">产品名称</th>
+								<th style="text-align: center;">采购总数</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+</html>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.AccessoryPreparedMapper">
+    <resultMap id="BaseResultMap" type="com.warehouse.entity.AccessoryPrepared">
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+        <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+        <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+        <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+        <result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+        <result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+        <result column="STATE" property="state" jdbcType="VARCHAR" />
+        <result column="DATE" property="date" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID,WAVE,PRODUCT_CODE,DESIGN_IMG,REMARK,ADD_TIME,UPDATE_TIME,DEL_TIME,STATE,DATE
+    </sql>
+    
+    <select id="getAccessoryPreparedById" parameterType="java.lang.Integer"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from accessory_prepared
+        where STATE ='1' AND ID
+        =
+        #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getAccessoryPreparedByPageCount" resultType="java.lang.Integer">
+        SELECT COUNT(0) FROM accessory_prepared where STATE ='1' AND 1=1
+        <if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+            AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='wave == "N"'>
+            AND (WAVE ='' OR WAVE
+            IS
+            NULL)
+        </if>
+        <if test='wave =="Y"'>
+            AND WAVE !=''
+        </if>
+        <if test='productCode != null and productCode != "" and productCode != "N" and productCode != "Y"'>
+            AND PRODUCT_CODE LIKE CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='productCode == "N"'>
+            AND (PRODUCT_CODE ='' OR PRODUCT_CODE
+            IS
+            NULL)
+        </if>
+        <if test='productCode =="Y"'>
+            AND PRODUCT_CODE !=''
+        </if>
+        <if test='designImg != null and designImg != "" and designImg != "N" and designImg != "Y"'>
+            AND DESIGN_IMG LIKE CONCAT('%',#{designImg,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='designImg == "N"'>
+            AND (DESIGN_IMG ='' OR DESIGN_IMG
+            IS
+            NULL)
+        </if>
+        <if test='designImg =="Y"'>
+            AND DESIGN_IMG !=''
+        </if>
+        <if test='DATE != null and DATE != "" and DATE != "N" and DATE != "Y"'>
+            AND DATE LIKE CONCAT('%',#{date,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='date == "N"'>
+            AND (DATE ='' OR DATE
+            IS
+            NULL)
+        </if>
+        <if test='date =="Y"'>
+            AND DATE !=''
+        </if>
+        <if  test='REMARK != null and REMARK != "" and REMARK != "N" and REMARK != "Y"'>
+            AND REMARK LIKE CONCAT('%',#{remark,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='remark == "N"'>
+            AND (REMARK ='' OR REMARK
+            IS
+            NULL)
+        </if>
+        <if test='remark =="Y"'>
+            AND REMARK !=''
+        </if>
+      
+    </select>
+    
+	
+	<select id="findConditionAccessoryPreparedByPage" resultMap="BaseResultMap"
+		parameterType="Map">
+		select
+		*
+		from accessory_prepared where STATE = '1' AND 1=1
+		<if
+                test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+            AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='wave == "N"'>
+            AND (WAVE ='' OR WAVE
+            IS
+            NULL)
+        </if>
+        <if test='wave =="Y"'>
+            AND WAVE !=''
+        </if>
+        
+        <if test='productCode != null and productCode != "" and productCode != "N" and productCode != "Y"'>
+            AND PRODUCT_CODE LIKE CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='productCode == "N"'>
+            AND (PRODUCT_CODE ='' OR PRODUCT_CODE
+            IS
+            NULL)
+        </if>
+        <if test='productCode =="Y"'>
+            AND PRODUCT_CODE !=''
+        </if>
+        <if test='designImg != null and designImg != "" and designImg != "N" and designImg != "Y"'>
+            AND DESIGN_IMG LIKE CONCAT('%',#{designImg,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='designImg == "N"'>
+            AND (DESIGN_IMG ='' OR DESIGN_IMG
+            IS
+            NULL)
+        </if>
+        <if test='designImg =="Y"'>
+            AND DESIGN_IMG !=''
+        </if>
+        <if test='DATE != null and DATE != "" and DATE != "N" and DATE != "Y"'>
+            AND DATE LIKE CONCAT('%',#{date,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='date == "N"'>
+            AND (DATE ='' OR DATE
+            IS
+            NULL)
+        </if>
+        <if test='date =="Y"'>
+            AND DATE !=''
+        </if>
+        <if test='REMARK != null and REMARK != "" and REMARK != "N" and REMARK != "Y"'>
+            AND REMARK LIKE CONCAT('%',#{remark,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='remark == "N"'>
+            AND (REMARK ='' OR REMARK
+            IS
+            NULL)
+        </if>
+        <if test='remark =="Y"'>
+            AND REMARK !=''
+        </if>
+        
+		ORDER BY ADD_TIME DESC LIMIT #{pageNow},#{pageSize}
+	</select>
+	
+	<insert id="addAccessoryPrepared" parameterType="com.warehouse.entity.AccessoryPrepared">
+        insert into accessory_prepared
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="wave != null">
+                WAVE,
+            </if>
+            <if test="productCode != null">
+                PRODUCT_CODE,
+            </if>
+            <if test="designImg != null">
+                DESIGN_IMG,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="addTime != null">
+                ADD_TIME,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+            <if test="delTime != null">
+                DEL_TIME,
+            </if>
+            <if test="state != null">
+                STATE,
+            </if>
+            <if test="date != null">
+                DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="wave != null">
+                #{wave,jdbcType=VARCHAR},
+            </if>
+            <if test="productCode != null">
+                #{productCode,jdbcType=VARCHAR},
+            </if>
+            <if test="designImg != null">
+                #{designImg,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="delTime != null">
+                #{delTime,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null">
+                #{date,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+	    <update id="modifyAccessoryPrepared" parameterType="com.warehouse.entity.AccessoryPrepared">
+        update accessory_prepared
+        <set>
+            <if test="wave != null">
+                WAVE = #{wave,jdbcType=VARCHAR},
+            </if>
+            <if test="productCode != null">
+                PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+            </if>
+            <if test="designImg != null">
+                DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                ADD_TIME = #{addTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="delTime != null">
+                DEL_TIME = #{delTime,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null">
+                DATE = #{date,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="delAccessoryPreparedById" parameterType="com.warehouse.entity.AccessoryPrepared">
+        update accessory_prepared
+		set
+		STATE = '0',
+		DEL_TIME = #{delTime,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+    </update>
+    
+    
+	
+	
+</mapper>

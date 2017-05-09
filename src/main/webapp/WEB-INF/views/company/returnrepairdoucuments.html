@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/company/returnrepairdoucuments.js"></script>
+<title>返修开单表</title>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">返修开单</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div>
+					<div class="col-md-12">
+						<button style="float: right;" class="btn btn-primary btn-lg"
+							data-toggle="modal" data-target="#myModal" id="add">添 加</button>
+						<div style="float: left;">
+							<form id="mySelect_From">
+								<font>波次查询</font> <input type="text" name="girard"id="checkByGirard" /> 
+								<font>工厂查询</font> <input type="text" name="factory" id="checkByFactory" />
+							    <font>商品编码查询</font> <input type="text" name="commoditycCode" id="checkcommoditycCode" />
+							    <font>供应商编码查询</font> <input type="text" name="vendorCode" id="checkByvendorCode" />
+								<a id="checkbtn" class="btn btn-default">查 询</a>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-12"></div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="30" style="text-align: center; font-size: 16px;">返修开单表</th>
+							</tr>
+							<tr id="head">
+								<th style="text-align: center;">返修日期</th>
+								<th style="text-align: center;">供应商编码</th>
+								<th style="text-align: center;">商品编码</th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">工 厂</th>
+								<th style="text-align: center;">设计图</th>
+								<th style="text-align: center;">52码</th>
+								<th style="text-align: center;">59码</th>
+								<th style="text-align: center;">66码</th>
+								<th style="text-align: center;">73码</th>
+								<th style="text-align: center;">80码</th>
+								<th style="text-align: center;">90码</th>
+								<th style="text-align: center;">100码</th>
+								<th style="text-align: center;">110码</th>
+								<th style="text-align: center;">120码</th>
+								<th style="text-align: center;">130码</th>
+								<th style="text-align: center;">160码</th>
+								<th style="text-align: center;">170码</th>
+								<th style="text-align: center;">总件数</th>
+								<th style="text-align: center;">备注</th>
+								<th style="text-align: center;">返修日期</th>
+								<th style="text-align: center;">返修入库件数</th>
+								<th style="text-align: center;" colspan="3">操 作</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+		</div>
+		<!-- 添加模态框 -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加返修入库信息</h4>
+					</div>
+					<div class="modal-body">
+						<div id="add_form_input" class="modal-body">
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<label for="girard">波次号</label> <input type="text"
+										class="form-control" name="girard" placeholder="" id="girard">
+								</div>
+								
+								<div class="col-md-6">
+								<label for="sdate">返修日期</label> <input type="text"
+									class="form-control input-date" name="sdate" placeholder=""
+									id="sdate">
+								</div>
+								
+								<div class="col-md-6">
+									<label for="vendorCode">供应商编码</label> <input type="text"
+										class="form-control" name="vendorCode" placeholder="" id="vendorCode">
+								</div>
+								<div class="col-md-6">
+									<label for="commoditycCode">商品编码</label> <input type="text"
+										class="form-control" name="commoditycCode" placeholder="" id="commoditycCode">
+								</div>
+								<div class="col-md-6">
+									<label for="factory">工厂</label> <input type="text"
+										class="form-control" name="factory" placeholder=""
+										id="factory">
+								</div>
+								
+								
+								
+								
+						<!-- 		
+								<div class="col-md-6">
+									<label for="inputfile"> 设计图 </label> <input name="imageFile"
+										type="file" id="imageFile" />
+								</div>
+								<div class="col-md-6">
+									<label for="image"> 图片预览 </label>
+									<div style="width: 120px; height: 120px;">
+										<img id="ImgPr" width="120" height="120" src="" />
+									</div>
+								</div>
+								 -->
+								
+								
+								
+								<div class="col-md-6">
+									<label for="code52">52码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code52" placeholder="" id="code52">
+								</div>
+								<div class="col-md-6">
+									<label for="code59">59码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code59" placeholder="" id="code59">
+								</div>
+								<div class="col-md-6">
+									<label for="code66">66码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code66" placeholder="" id="code66">
+								</div>
+								<div class="col-md-6">
+									<label for="code73">73码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code73" placeholder="" id="code73">
+								</div>
+								<div class="col-md-6">
+									<label for="code80">80码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code80" placeholder="" id="code80">
+								</div>
+								<div class="col-md-6">
+									<label for="code90">90码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code90" placeholder="" id="code90">
+								</div>
+								<div class="col-md-6">
+									<label for="code100">100码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code100" placeholder="" id="code100">
+								</div>
+								<div class="col-md-6">
+									<label for="code110">110码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code6" placeholder="" id="code110">
+								</div>
+								<div class="col-md-6">
+									<label for="code120">120码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code120" placeholder="" id="code120">
+								</div>
+								<div class="col-md-6">
+									<label for="code130">130码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code130" placeholder="" id="code130">
+								</div>
+								<div class="col-md-6">
+									<label for="code160">160码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code160" placeholder="" id="code160">
+								</div>
+								<div class="col-md-6">
+									<label for="code170">170码</label> <input type="text"
+										class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+										name="code170" placeholder="" id="code170">
+								</div>
+								<div class="col-md-6">
+									<label for="remarks">备注</label> <input type="text"
+										class="form-control" name="remarks" placeholder="" id="remark">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="addInputstorage">添加</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--修改 模态框（Modal） -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改采购入库信息</h4>
+					</div>
+					<div class="modal-body">
+						<div class="col-md-12">
+							<input type="hidden" class="form-control" name="sid" id="sid"
+								readonly="readonly">
+
+							<div class="col-md-6">
+								<label for="girard">波次号</label> <input type="text"
+									class="form-control" name="girard" placeholder="" id="ugirard">
+							</div>
+							
+							<!-- 	<div class="col-md-6">
+								<label for="usdate">重新日期</label> <input type="text"
+									class="form-control input-date" name="usdate" placeholder=""
+									id="usdate">
+							</div> -->
+							
+							<div class="col-md-6">
+								<label for="factory">工厂</label> <input type="text"
+									class="form-control" name="factory" placeholder=""
+									id="ufactory">
+							</div>
+							<div class="col-md-6">
+								<label for="code52">52码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code52" placeholder="" id="ucode52">
+							</div>
+							<div class="col-md-6">
+								<label for="code59">59码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code59" placeholder="" id="ucode59">
+							</div>
+							<div class="col-md-6">
+								<label for="code66">66码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code66" placeholder="" id="ucode66">
+							</div>
+							<div class="col-md-6">
+								<label for="code73">73码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code73" placeholder="" id="ucode73">
+							</div>
+							<div class="col-md-6">
+								<label for="code80">80码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code80" placeholder="" id="ucode80">
+							</div>
+							<div class="col-md-6">
+								<label for="code90">90码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code90" placeholder="" id="ucode90">
+							</div>
+							<div class="col-md-6">
+								<label for="code100">100码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code100" placeholder="" id="ucode100">
+							</div>
+							<div class="col-md-6">
+								<label for="code110">110码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code110" placeholder="" id="ucode110">
+							</div>
+							<div class="col-md-6">
+								<label for="code120">120码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code120" placeholder="" id="ucode120">
+							</div>
+							<div class="col-md-6">
+								<label for="code130">130码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code130" placeholder="" id="ucode130">
+							</div>
+							<div class="col-md-6">
+								<label for="code160">160码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code160" placeholder="" id="ucode160">
+							</div>
+							<div class="col-md-6">
+								<label for="code170">170码</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="code170" placeholder="" id="ucode170">
+							</div>
+							<!-- <div class="col-md-6">
+								<label for="reEntry">重新入库数</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name="reEntry" placeholder="" id="reEntry">
+							</div> -->
+							<div class="col-md-6">
+								<label for="remarks">备注</label> <input type="text"
+									class="form-control" name="remarks" placeholder="" id="uremark">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							id="uppInputstorage" style="background-color: #428bca;">修改</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 打印 -->
+		<!-- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">
+							确认打印<span style="color: red" id="code" value=""></span>码条形码？
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="col-md-12">
+							<input type="hidden" class="form-control" name="sid" id="sid"
+								readonly="readonly">
+							<div class="col-ma-10">
+								<div class="">
+									<label> <input name="name" type="radio" id="radio1">
+										<span class="lbl"> 默认打印</span>
+									</label>
+								</div>
+								<div class="">
+									<label> <input name="name" type="radio" id="radio2">
+										<span class="lbl">手动打印</span>
+									</label>
+								</div>
+							</div>
+							<div class="col-md-5" id="check2">
+								<label for="num">打印个数</label> <input type="text"
+									class="form-control" onkeyup="value=value.replace(/\D/g,'')"
+									name=num id="num">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							id="printBarCode" style="background-color: #428bca;">打印</button>
+					</div>
+				</div>
+			</div>
+		</div>
+ -->
+		<!-- 隐藏的绝对路径，供jquery使用 -->
+		<input type="hidden" value="${pageContext.request.contextPath}"
+			id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

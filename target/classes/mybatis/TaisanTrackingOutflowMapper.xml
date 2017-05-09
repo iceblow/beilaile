@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.TaisanTrackingOutflowMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.TaisanTrackingOutflow">
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="CRAFTS_ORDER" property="craftsOrder" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="VERSION_REFERENCE_WAVE" property="versionReferenceWave"
+			jdbcType="VARCHAR" />
+		<result column="PRINTING_REFERENCE_WAVE" property="printingReferenceWave"
+			jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="CUTTING_DATE" property="cuttingDate" jdbcType="VARCHAR" />
+		<result column="CUTTING_NUM" property="cuttingNum" jdbcType="INTEGER" />
+		<result column="CUTTING_MAN" property="cuttingMan" jdbcType="VARCHAR" />
+		<result column="FLOWER_TYPE" property="flowerType" jdbcType="VARCHAR" />
+		<result column="CUT_LARGE_RECEIVE_DATE" property="cutLargeReceiveDate"
+			jdbcType="VARCHAR" />
+		<result column="CUT_LARGE_RETURN_DATE" property="cutLargeReturnDate"
+			jdbcType="VARCHAR" />
+		<result column="FLOWER_FACTORY" property="flowerFactory"
+			jdbcType="VARCHAR" />
+		<result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+		<result column="ARRANGE_FABRIC_AND_ASSIST_MATERIAL" property="arrangeFabricAndAssistMaterial"
+			jdbcType="VARCHAR" />
+		<result column="ARRANGE_FABRIC_AND_ASSIST_MATERIAL_TIME"
+			property="arrangeFabricAndAssistMaterialTime" jdbcType="VARCHAR" />
+		<result column="ASSIST_MATERIAL_READY" property="assistMaterialReady"
+			jdbcType="VARCHAR" />
+		<result column="ASSIST_MATERIAL_READY_TIME" property="assistMaterialReadyTime"
+			jdbcType="VARCHAR" />
+		<result column="CUTTING_PIECE_READY" property="cuttingPieceReady"
+			jdbcType="VARCHAR" />
+		<result column="CUTTING_PIECE_READY_TIME" property="cuttingPieceReadyTime"
+			jdbcType="VARCHAR" />
+		<result column="INFORM_FACTORY" property="informFactory"
+			jdbcType="VARCHAR" />
+		<result column="INFORM_FACTORY_TIME" property="informFactoryTime"
+			jdbcType="VARCHAR" />
+		<result column="ASSIST_OUT" property="assistOut" jdbcType="VARCHAR" />
+		<result column="ASSIST_OUT_TIME" property="assistOutTime"
+			jdbcType="VARCHAR" />
+		<result column="CUTTING_PIECE_OUT" property="cuttingPieceOut"
+			jdbcType="VARCHAR" />
+		<result column="CUTTING_PIECE_OUT_TIME" property="cuttingPieceOutTime"
+			jdbcType="VARCHAR" />
+		<result column="ROW_OF_SINGLE_AGAIN" property="rowOfSingleAgain"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getCount" parameterType="com.warehouse.entity.TaisanTrackingOutflow"
+		resultType="java.lang.Integer">
+		select count(*) from taisan_tracking_outflow where 1=1
+		<!-- 波次号 -->
+		<if test='wave!="" and wave!=null'>
+			and WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<!-- 车缝工厂 -->
+		<if
+			test='factory!=null and factory!="" and factory!="Y" and factory!="y" and factory!="N" and factory!="n"'>
+			and FACTORY LIKE CONCAT("%",#{factory},"%")
+		</if>
+		<if test='factory=="Y" or factory=="y"'>
+			and (FACTORY!='' and FACTORY IS NOT NULL)
+		</if>
+		<if test='factory=="N" or factory=="n"'>
+			and( FACTORY='' or FACTORY IS NULL)
+		</if>
+		<!-- 安排辅料/裁片 -->
+		<if
+			test='arrangeFabricAndAssistMaterial=="Y" or arrangeFabricAndAssistMaterial=="y"'>
+			and ARRANGE_FABRIC_AND_ASSIST_MATERIAL='裁片辅料已安排'
+		</if>
+		<if
+			test='arrangeFabricAndAssistMaterial=="N" or arrangeFabricAndAssistMaterial=="n"'>
+			and( ARRANGE_FABRIC_AND_ASSIST_MATERIAL!='裁片辅料已安排' or
+			ARRANGE_FABRIC_AND_ASSIST_MATERIAL IS NULL)
+		</if>
+		<!-- 辅料就绪 -->
+		<if test='assistMaterialReady=="Y" or assistMaterialReady=="y"'>
+			and ASSIST_MATERIAL_READY='辅料已就绪'
+		</if>
+		<if test='assistMaterialReady=="N" or assistMaterialReady=="n"'>
+			and( ASSIST_MATERIAL_READY!='辅料已就绪' or
+			ASSIST_MATERIAL_READY IS NULL)
+		</if>
+		<!-- 裁片就绪 -->
+		<if test='cuttingPieceReady=="Y" or cuttingPieceReady=="y"'>
+			and CUTTING_PIECE_READY='裁片已就绪'
+		</if>
+		<if test='cuttingPieceReady=="N" or cuttingPieceReady=="n"'>
+			and( CUTTING_PIECE_READY!='裁片已就绪' or CUTTING_PIECE_READY
+			IS NULL)
+		</if>
+		<!-- 通知工厂领料 -->
+		<if test='informFactory=="Y" or informFactory=="y"'>
+			and INFORM_FACTORY='已通知'
+		</if>
+		<if test='informFactory=="N" or informFactory=="n"'>
+			and( INFORM_FACTORY!='已通知' or INFORM_FACTORY IS NULL)
+		</if>
+		<!-- 通知工厂领料时间 -->
+		<if test='informFactoryTime!="" and informFactoryTime!=null'>
+			and INFORM_FACTORY_TIME LIKE
+			CONCAT("%",#{informFactoryTime},"%")
+		</if>
+		<!-- 辅料外发 -->
+		<if test='assistOut=="Y" or assistOut=="y"'>
+			and ASSIST_OUT='工厂已领(辅)'
+		</if>
+		<if test='assistOut=="N" or assistOut=="n"'>
+			and( ASSIST_OUT!='工厂已领(辅)' or ASSIST_OUT IS NULL)
+		</if>
+		<!-- 裁片外发 -->
+		<if test='cuttingPieceOut=="Y" or cuttingPieceOut=="y"'>
+			and CUTTING_PIECE_OUT='工厂已领(裁)'
+		</if>
+		<if test='cuttingPieceOut=="N" or cuttingPieceOut=="n"'>
+			and( CUTTING_PIECE_OUT!='工厂已领(裁)' or CUTTING_PIECE_OUT IS
+			NULL)
+		</if>
+	</select>
+	<select id="getDataByPage" parameterType="com.warehouse.entity.TaisanTrackingOutflow"
+		resultMap="BaseResultMap">
+		select * from taisan_tracking_outflow where 1=1
+		<!-- 波次号 -->
+		<if test='wave!="" and wave!=null'>
+			and WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<!-- 车缝工厂 -->
+		<if
+			test='factory!=null and factory!="" and factory!="Y" and factory!="y" and factory!="N" and factory!="n"'>
+			and FACTORY LIKE CONCAT("%",#{factory},"%")
+		</if>
+		<if test='factory=="Y" or factory=="y"'>
+			and (FACTORY!='' and FACTORY IS NOT NULL)
+		</if>
+		<if test='factory=="N" or factory=="n"'>
+			and( FACTORY='' or FACTORY IS NULL)
+		</if>
+		<!-- 安排辅料/裁片 -->
+		<if
+			test='arrangeFabricAndAssistMaterial=="Y" or arrangeFabricAndAssistMaterial=="y"'>
+			and ARRANGE_FABRIC_AND_ASSIST_MATERIAL='裁片辅料已安排'
+		</if>
+		<if
+			test='arrangeFabricAndAssistMaterial=="N" or arrangeFabricAndAssistMaterial=="n"'>
+			and( ARRANGE_FABRIC_AND_ASSIST_MATERIAL!='裁片辅料已安排' or
+			ARRANGE_FABRIC_AND_ASSIST_MATERIAL IS NULL)
+		</if>
+		<!-- 辅料就绪 -->
+		<if test='assistMaterialReady=="Y" or assistMaterialReady=="y"'>
+			and ASSIST_MATERIAL_READY='辅料已就绪'
+		</if>
+		<if test='assistMaterialReady=="N" or assistMaterialReady=="n"'>
+			and( ASSIST_MATERIAL_READY!='辅料已就绪' or
+			ASSIST_MATERIAL_READY IS NULL)
+		</if>
+		<!-- 裁片就绪 -->
+		<if test='cuttingPieceReady=="Y" or cuttingPieceReady=="y"'>
+			and CUTTING_PIECE_READY='裁片已就绪'
+		</if>
+		<if test='cuttingPieceReady=="N" or cuttingPieceReady=="n"'>
+			and( CUTTING_PIECE_READY!='裁片已就绪' or CUTTING_PIECE_READY
+			IS NULL)
+		</if>
+		<!-- 通知工厂领料 -->
+		<if test='informFactory=="Y" or informFactory=="y"'>
+			and INFORM_FACTORY='已通知'
+		</if>
+		<if test='informFactory=="N" or informFactory=="n"'>
+			and( INFORM_FACTORY!='已通知' or INFORM_FACTORY IS NULL)
+		</if>
+		<!-- 通知工厂领料时间 -->
+		<if test='informFactoryTime!="" and informFactoryTime!=null'>
+			and INFORM_FACTORY_TIME LIKE
+			CONCAT("%",#{informFactoryTime},"%")
+		</if>
+		<!-- 辅料外发 -->
+		<if test='assistOut=="Y" or assistOut=="y"'>
+			and ASSIST_OUT='工厂已领(辅)'
+		</if>
+		<if test='assistOut=="N" or assistOut=="n"'>
+			and( ASSIST_OUT!='工厂已领(辅)' or ASSIST_OUT IS NULL)
+		</if>
+		<!-- 裁片外发 -->
+		<if test='cuttingPieceOut=="Y" or cuttingPieceOut=="y"'>
+			and CUTTING_PIECE_OUT='工厂已领(裁)'
+		</if>
+		<if test='cuttingPieceOut=="N" or cuttingPieceOut=="n"'>
+			and( CUTTING_PIECE_OUT!='工厂已领(裁)' or CUTTING_PIECE_OUT IS
+			NULL)
+		</if>
+		ORDER BY WAVE DESC
+		LIMIT #{begin},#{end}
+	</select>
+
+	<!-- 安排辅料和裁片 -->
+	<update id="arrangeFabricAndAssistMaterial" parameterType="java.lang.String">
+		UPDATE taisan_tracking_outflow SET
+		ARRANGE_FABRIC_AND_ASSIST_MATERIAL='裁片辅料已安排',
+		ARRANGE_FABRIC_AND_ASSIST_MATERIAL_TIME=CURDATE()
+		WHERE WAVE=#{wave}
+	</update>
+
+	<!-- 通知工厂 -->
+	<update id="informFactory" parameterType="java.lang.String">
+		UPDATE
+		taisan_tracking_outflow SET
+		INFORM_FACTORY='已通知',
+		INFORM_FACTORY_TIME=CURDATE()
+		WHERE WAVE=#{wave}
+	</update>
+
+	<!-- 根据波次号查询当前内容 -->
+	<select id="getOneByWave" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select * from taisan_tracking_outflow where WAVE=#{wave}
+	</select>
+
+	<update id="updateFactory" parameterType="com.warehouse.entity.TaisanTrackingOutflow">
+		UPDATE
+		taisan_tracking_outflow SET
+		FACTORY=#{factory}
+		WHERE WAVE=#{wave}
+	</update>
+
+	<!-- 全部添加 -->
+	<insert id="insert" parameterType="com.warehouse.entity.TaisanTrackingOutflow">
+		insert into
+		taisan_tracking_outflow (WAVE, PRODUCT_CODE, CRAFTS_ORDER,
+		ORINGINAL_WAVE, VERSION_REFERENCE_WAVE, PRINTING_REFERENCE_WAVE,
+		DESIGN_IMG, CUTTING_DATE, CUTTING_NUM,
+		CUTTING_MAN, FLOWER_TYPE,
+		CUT_LARGE_RECEIVE_DATE,
+		CUT_LARGE_RETURN_DATE, FLOWER_FACTORY, FACTORY,
+		ARRANGE_FABRIC_AND_ASSIST_MATERIAL,
+		ARRANGE_FABRIC_AND_ASSIST_MATERIAL_TIME,
+		ASSIST_MATERIAL_READY,
+		ASSIST_MATERIAL_READY_TIME,
+		CUTTING_PIECE_READY,
+		CUTTING_PIECE_READY_TIME,
+		INFORM_FACTORY, INFORM_FACTORY_TIME,
+		ASSIST_OUT,
+		ASSIST_OUT_TIME, CUTTING_PIECE_OUT, CUTTING_PIECE_OUT_TIME
+		)
+		values (#{wave,jdbcType=VARCHAR}, #{productCode,jdbcType=VARCHAR},
+		#{craftsOrder,jdbcType=VARCHAR},
+		#{oringinalWave,jdbcType=VARCHAR},
+		#{versionReferenceWave,jdbcType=VARCHAR},
+		#{printingReferenceWave,jdbcType=VARCHAR},
+		#{designImg,jdbcType=VARCHAR}, #{cuttingDate,jdbcType=VARCHAR},
+		#{cuttingNum,jdbcType=INTEGER},
+		#{cuttingMan,jdbcType=VARCHAR},
+		#{flowerType,jdbcType=VARCHAR},
+		#{cutLargeReceiveDate,jdbcType=VARCHAR},
+		#{cutLargeReturnDate,jdbcType=VARCHAR},
+		#{flowerFactory,jdbcType=VARCHAR}, #{factory,jdbcType=VARCHAR},
+		#{arrangeFabricAndAssistMaterial,jdbcType=VARCHAR},
+		#{arrangeFabricAndAssistMaterialTime,jdbcType=VARCHAR},
+		#{assistMaterialReady,jdbcType=VARCHAR},
+		#{assistMaterialReadyTime,jdbcType=VARCHAR},
+		#{cuttingPieceReady,jdbcType=VARCHAR},
+		#{cuttingPieceReadyTime,jdbcType=VARCHAR},
+		#{informFactory,jdbcType=VARCHAR},
+		#{informFactoryTime,jdbcType=VARCHAR}, #{assistOut,jdbcType=VARCHAR},
+		#{assistOutTime,jdbcType=VARCHAR},
+		#{cuttingPieceOut,jdbcType=VARCHAR},
+		#{cuttingPieceOutTime,jdbcType=VARCHAR}
+		)
+	</insert>
+
+
+	<!-- 按添加的字段添加 -->
+	<insert id="insertSelective" parameterType="com.warehouse.entity.TaisanTrackingOutflow">
+		insert into taisan_tracking_outflow
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE,
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER,
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE,
+			</if>
+			<if test="versionReferenceWave != null">
+				VERSION_REFERENCE_WAVE,
+			</if>
+			<if test="printingReferenceWave != null">
+				PRINTING_REFERENCE_WAVE,
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG,
+			</if>
+			<if test="cuttingDate != null">
+				CUTTING_DATE,
+			</if>
+			<if test="cuttingNum != null">
+				CUTTING_NUM,
+			</if>
+			<if test="cuttingMan != null">
+				CUTTING_MAN,
+			</if>
+			<if test="flowerType != null">
+				FLOWER_TYPE,
+			</if>
+			<if test="cutLargeReceiveDate != null">
+				CUT_LARGE_RECEIVE_DATE,
+			</if>
+			<if test="cutLargeReturnDate != null">
+				CUT_LARGE_RETURN_DATE,
+			</if>
+			<if test="flowerFactory != null">
+				FLOWER_FACTORY,
+			</if>
+			<if test="factory != null">
+				FACTORY,
+			</if>
+			<if test="arrangeFabricAndAssistMaterial != null">
+				ARRANGE_FABRIC_AND_ASSIST_MATERIAL,
+			</if>
+			<if test="arrangeFabricAndAssistMaterialTime != null">
+				ARRANGE_FABRIC_AND_ASSIST_MATERIAL_TIME,
+			</if>
+			<if test="assistMaterialReady != null">
+				ASSIST_MATERIAL_READY,
+			</if>
+			<if test="assistMaterialReadyTime != null">
+				ASSIST_MATERIAL_READY_TIME,
+			</if>
+			<if test="cuttingPieceReady != null">
+				CUTTING_PIECE_READY,
+			</if>
+			<if test="cuttingPieceReadyTime != null">
+				CUTTING_PIECE_READY_TIME,
+			</if>
+			<if test="informFactory != null">
+				INFORM_FACTORY,
+			</if>
+			<if test="informFactoryTime != null">
+				INFORM_FACTORY_TIME,
+			</if>
+			<if test="assistOut != null">
+				ASSIST_OUT,
+			</if>
+			<if test="assistOutTime != null">
+				ASSIST_OUT_TIME,
+			</if>
+			<if test="cuttingPieceOut != null">
+				CUTTING_PIECE_OUT,
+			</if>
+			<if test="cuttingPieceOutTime != null">
+				CUTTING_PIECE_OUT_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productCode != null">
+				#{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				#{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				#{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="versionReferenceWave != null">
+				#{versionReferenceWave,jdbcType=VARCHAR},
+			</if>
+			<if test="printingReferenceWave != null">
+				#{printingReferenceWave,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingDate != null">
+				#{cuttingDate,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingNum != null">
+				#{cuttingNum,jdbcType=INTEGER},
+			</if>
+			<if test="cuttingMan != null">
+				#{cuttingMan,jdbcType=VARCHAR},
+			</if>
+			<if test="flowerType != null">
+				#{flowerType,jdbcType=VARCHAR},
+			</if>
+			<if test="cutLargeReceiveDate != null">
+				#{cutLargeReceiveDate,jdbcType=VARCHAR},
+			</if>
+			<if test="cutLargeReturnDate != null">
+				#{cutLargeReturnDate,jdbcType=VARCHAR},
+			</if>
+			<if test="flowerFactory != null">
+				#{flowerFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				#{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="arrangeFabricAndAssistMaterial != null">
+				#{arrangeFabricAndAssistMaterial,jdbcType=VARCHAR},
+			</if>
+			<if test="arrangeFabricAndAssistMaterialTime != null">
+				#{arrangeFabricAndAssistMaterialTime,jdbcType=VARCHAR},
+			</if>
+			<if test="assistMaterialReady != null">
+				#{assistMaterialReady,jdbcType=VARCHAR},
+			</if>
+			<if test="assistMaterialReadyTime != null">
+				#{assistMaterialReadyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingPieceReady != null">
+				#{cuttingPieceReady,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingPieceReadyTime != null">
+				#{cuttingPieceReadyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="informFactory != null">
+				#{informFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="informFactoryTime != null">
+				#{informFactoryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="assistOut != null">
+				#{assistOut,jdbcType=VARCHAR},
+			</if>
+			<if test="assistOutTime != null">
+				#{assistOutTime,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingPieceOut != null">
+				#{cuttingPieceOut,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingPieceOutTime != null">
+				#{cuttingPieceOutTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 将重新排单状态修改为:申请重新排单 -->
+	<update id="updateRowOfSingleAgain" parameterType="java.lang.String">
+		UPDATE taisan_tracking_outflow SET ROW_OF_SINGLE_AGAIN ='已申请重新排单' WHERE WAVE=#{wave}
+	</update>
+</mapper>

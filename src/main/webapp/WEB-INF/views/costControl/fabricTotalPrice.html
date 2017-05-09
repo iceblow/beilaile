@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<@p.cache/><@p.css/> <@p.js/>
+<title>面料核价表</title>
+<script src="/res/js/laypage/laypage.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="notStorage">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">面料核价表</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+
+			</div>
+			<form id="selectFromData" enctype='mutipart/form-data'>
+					<div class="col-md-2">
+						<label for=wave></label>波次<input id="wave"  type="text" class="form-control" name="wave" >
+					</div>
+					<div class="col-md-2">
+						<label for="fabricMaterial"></label>面料材质<input id="fabricMaterial" type="text"class="form-control" name="fabricMaterial">
+					</div>
+					<div class="col-md-2">
+						<label for="colour"></label>颜色<input id="colour" type="text"class="form-control" name="colour">
+					</div>
+					<div class="col-md-2">
+						<label for="price"></label>单价<input id="price" type="text"class="form-control" name="price">
+					</div>
+			</form>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #428bca;" id="myselect">查询</button>
+			</div> 
+			<div class="main-content">
+				<table class="table table-bordered"
+					style="width: 100%; height: 100%;">
+					<thead>
+						<tr>
+							<th colspan="30" style="text-align: center; font-size: 25px;">面料核价表</th>
+						</tr>
+						<tr>
+							<th>序列</th>
+							<th>波次</th>
+							<th>设计图</th>
+							<th>面料材质</th>
+							<th>颜色</th>
+							<th>领料重量</th>
+							<th>退料重量</th>
+							<th>单价</th>
+							<th>领料总金额 </th>
+							<th>退料总金额</th>
+							<th>总用量</th>
+							<th>单位</th>
+							<th>用量总金额</th>
+							<th>裁剪数</th>
+							<th>单件重量</th>
+							<th>单件金额</th>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+					</tbody>
+				</table>
+				<!-- 分页 -->
+				<div id="pageSystem" style="width: 100%; position: relative; top: 10px;"></div>				
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		loadPageDatas(1);
+		selectButton();
+		
+	});
+	
+	//模糊查询
+	var mySelectForm;
+	function selectButton() {
+		$("#myselect").click(function() {
+			mySelectForm= $("#selectFromData").serialize();
+			firstLoadData("fabricTotalPrice/getFabricPage.do?"+mySelectForm,1);
+		});
+	}
+	
+	//进入后台进行分页查询
+	function loadPageDatas(index) {
+		var dataWave= window.location.search;   //获取超链接传来的值
+		 if(dataWave!=""){
+			firstLoadData("fabricTotalPrice/getFabricPage.do"+dataWave,1);   //注意是否有问号 ,如果路劲后有问号就不要在加了
+		}else{
+			firstLoadData("/fabricTotalPrice/getFabricPage.do", index);
+		}
+		
+	}
+	
+	// 查询完成,打印数据
+	function loadData(mydata) {
+		$("#tbody").empty();
+		$.each (mydata, function(index, x) {
+			var id = "<td>" + x.id + "</td>";
+			var wave = "<td>" + x.wave + "</td>";
+			var fabricMaterial = "<td>" + x.fabricMaterial + "</td>";//面料
+			var designImg= "<td><img style='width: 50px; height: 50px' src='" + x.designImg + "'></td>";  //设计图
+			var colour = x.colour == null ? "<td></td>" : "<td>" + x.colour + "</td>";//颜色
+			var fabricOutWeight = x.fabricOutWeight == null ? "<td></td>" : "<td>" + x.fabricOutWeight + "</td>"; //出库重量
+			var fabricReturnWeight =x.fabricReturnWeight == null ? "<td></td>" : "<td>" + x.fabricReturnWeight + "</td>"; //退料重量
+			var price =x.price == null ? "<td class='mydblClick' name='price'></td>" :"<td class='mydblClick' name='price'>" +  x.price + "</td>";//单价 
+			var fabricOutPrice= x.fabricOutPrice == null ? "<td></td>" : "<td>" + x.fabricOutPrice + "</td>";		//出料总金额
+			var fabricReturnPrice= x.fabricReturnPrice == null ? "<td></td>" : "<td>" + x.fabricReturnPrice + "</td>";//颜色  //退料总金额
+			var userFabricWeight =x.userFabricWeight == null ? "<td></td>" : "<td>" + x.userFabricWeight + "</td>";//颜色    //使用总重量
+			var kgM =x.kgM == null ? "<td></td>" : "<td>" + x.kgM + "</td>";		//补料单位
+			var userFabricPrice 	=x.userFabricPrice == null ? "<td></td>" : "<td>" + x.userFabricPrice + "</td>";	//使用总金额
+			var cutNumber=x.cutNumber == null ? "<td></td>" : "<td>" + x.cutNumber + "</td>";			//裁剪数
+			var aWeight =x.aWeight == null ? "<td></td>" : "<td>" + x.aWeight + "</td>";		//单件重量
+			var aPrice =x.aPrice == null ? "<td></td>" : "<td>" + x.aPrice + "</td>";		//单件金额
+			$("tbody").append(
+					"<tr>"
+						+ id
+						+ wave
+						+ designImg
+						+ fabricMaterial
+						+ colour
+						+ fabricOutWeight
+						+ fabricReturnWeight
+						+ price
+						+ fabricOutPrice
+						+ fabricReturnPrice
+						+ userFabricWeight
+						+ kgM
+						+ userFabricPrice
+						+ cutNumber
+						+ aWeight
+						+ aPrice
+						+ "</tr>");
+		}); 
+	}
+	
+</script>
+
+</html>

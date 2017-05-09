@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ApprovalApplicationMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.ApprovalApplication">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="designer" property="designer" jdbcType="VARCHAR" />
+		<result column="girard" property="girard" jdbcType="VARCHAR" />
+		<result column="original_wave" property="originalWave"
+			jdbcType="VARCHAR" />
+		<result column="refer_wave" property="referWave" jdbcType="VARCHAR" />
+		<result column="print_wave" property="printWave" jdbcType="VARCHAR" />
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="product_id" property="productId" jdbcType="VARCHAR" />
+		<result column="vendor_code" property="vendorCode" jdbcType="VARCHAR" />
+		<result column="cloth_name" property="clothName" jdbcType="VARCHAR" />
+		<result column="design_img" property="designImg" jdbcType="VARCHAR" />
+		<result column="sample_img" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="size_chart" property="sizeChart" jdbcType="VARCHAR" />
+		<result column="paperpattern_emf_file" property="paperpatternEmfFile"
+			jdbcType="VARCHAR" />
+		<result column="paperpattern_prj_file" property="paperpatternPrjFile"
+			jdbcType="VARCHAR" />
+		<result column="code52" property="code52" jdbcType="INTEGER" />
+		<result column="code59" property="code59" jdbcType="INTEGER" />
+		<result column="code66" property="code66" jdbcType="INTEGER" />
+		<result column="code73" property="code73" jdbcType="INTEGER" />
+		<result column="code80" property="code80" jdbcType="INTEGER" />
+		<result column="code90" property="code90" jdbcType="INTEGER" />
+		<result column="code100" property="code100" jdbcType="INTEGER" />
+		<result column="code110" property="code110" jdbcType="INTEGER" />
+		<result column="code120" property="code120" jdbcType="INTEGER" />
+		<result column="code130" property="code130" jdbcType="INTEGER" />
+		<result column="code160" property="code160" jdbcType="INTEGER" />
+		<result column="code170" property="code170" jdbcType="INTEGER" />
+		<result column="count" property="count" jdbcType="INTEGER" />
+		<result column="expect_time" property="expectTime" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="delb" property="delb" jdbcType="INTEGER" />
+		<result column="PC_IP" property="pcIp" jdbcType="VARCHAR" />
+		<result column="OPERATION" property="operation" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+		<result column="RETURN_TIME" property="returnTime" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- <sql id="Base_Column_List"> id, designer, girard, original_wave, refer_wave, 
+		print_wave, model, product_id, vendor_code, cloth_name, design_img, sample_img, 
+		size_chart, paperpattern_emf_file, paperpattern_prj_file, code52, code59, 
+		code66, code73, code80, code90, code100, code110, code120, code130, code160, 
+		code170, count, expect_time, remark, delb, PC_IP, OPERATION, OPERATOR, ADD_TIME, 
+		UPDATE_TIME, DEL_TIME </sql> -->
+	<!-- 删除 -->
+	<update id="deleteByPrimaryKey" parameterType="com.warehouse.entity.ApprovalApplication">
+		update
+		approval_application set delb=0,DEL_TIME=#{delTime,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<insert id="insertSelective" parameterType="com.warehouse.entity.ApprovalApplication">
+		insert into approval_application
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="designer != null">
+				designer,
+			</if>
+			<if test="girard != null">
+				girard,
+			</if>
+			<if test="originalWave != null">
+				original_wave,
+			</if>
+			<if test="referWave != null">
+				refer_wave,
+			</if>
+			<if test="printWave != null">
+				print_wave,
+			</if>
+			<if test="model != null">
+				model,
+			</if>
+			<if test="productId != null">
+				product_id,
+			</if>
+			<if test="vendorCode != null">
+				vendor_code,
+			</if>
+			<if test="clothName != null">
+				cloth_name,
+			</if>
+			<if test="designImg != null">
+				design_img,
+			</if>
+			<if test="sampleImg != null">
+				sample_img,
+			</if>
+			<if test="sizeChart != null">
+				size_chart,
+			</if>
+			<if test="paperpatternEmfFile != null">
+				paperpattern_emf_file,
+			</if>
+			<if test="paperpatternPrjFile != null">
+				paperpattern_prj_file,
+			</if>
+			<if test="code52 != null">
+				code52,
+			</if>
+			<if test="code59 != null">
+				code59,
+			</if>
+			<if test="code66 != null">
+				code66,
+			</if>
+			<if test="code73 != null">
+				code73,
+			</if>
+			<if test="code80 != null">
+				code80,
+			</if>
+			<if test="code90 != null">
+				code90,
+			</if>
+			<if test="code100 != null">
+				code100,
+			</if>
+			<if test="code110 != null">
+				code110,
+			</if>
+			<if test="code120 != null">
+				code120,
+			</if>
+			<if test="code130 != null">
+				code130,
+			</if>
+			<if test="code160 != null">
+				code160,
+			</if>
+			<if test="code170 != null">
+				code170,
+			</if>
+			<if test="count != null">
+				count,
+			</if>
+			<if test="expectTime != null">
+				expect_time,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="delb != null">
+				delb,
+			</if>
+			<if test="pcIp != null">
+				PC_IP,
+			</if>
+			<if test="operation != null">
+				OPERATION,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+			<if test="returnTime != null">
+				RETURN_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="designer != null">
+				#{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="girard != null">
+				#{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="originalWave != null">
+				#{originalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="referWave != null">
+				#{referWave,jdbcType=VARCHAR},
+			</if>
+			<if test="printWave != null">
+				#{printWave,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="vendorCode != null">
+				#{vendorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				#{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				#{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				#{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="paperpatternEmfFile != null">
+				#{paperpatternEmfFile,jdbcType=VARCHAR},
+			</if>
+			<if test="paperpatternPrjFile != null">
+				#{paperpatternPrjFile,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				#{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code59 != null">
+				#{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				#{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				#{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				#{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				#{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				#{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				#{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				#{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				#{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				#{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				#{code170,jdbcType=INTEGER},
+			</if>
+			<if test="count != null">
+				#{count,jdbcType=INTEGER},
+			</if>
+			<if test="expectTime != null">
+				#{expectTime,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="delb != null">
+				#{delb,jdbcType=INTEGER},
+			</if>
+			<if test="pcIp != null">
+				#{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				#{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="returnTime != null">
+				#{returnTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据id查询 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from approval_application where id =
+		#{id,jdbcType=INTEGER}
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.ApprovalApplication">
+		update approval_application
+		<set>
+			<if test="designer != null">
+				designer = #{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="girard != null">
+				girard = #{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="originalWave != null">
+				original_wave = #{originalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="referWave != null">
+				refer_wave = #{referWave,jdbcType=VARCHAR},
+			</if>
+			<if test="printWave != null">
+				print_wave = #{printWave,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				model = #{model,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				product_id = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="vendorCode != null">
+				vendor_code = #{vendorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="clothName != null">
+				cloth_name = #{clothName,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				design_img = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				sample_img = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				size_chart = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="paperpatternEmfFile != null">
+				paperpattern_emf_file =
+				#{paperpatternEmfFile,jdbcType=VARCHAR},
+			</if>
+			<if test="paperpatternPrjFile != null">
+				paperpattern_prj_file =
+				#{paperpatternPrjFile,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				code52 = #{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code59 != null">
+				code59 = #{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				code66 = #{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				code73 = #{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				code80 = #{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				code90 = #{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				code100 = #{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				code110 = #{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				code120 = #{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				code130 = #{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				code160 = #{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				code170 = #{code170,jdbcType=INTEGER},
+			</if>
+			<if test="count != null">
+				count = #{count,jdbcType=INTEGER},
+			</if>
+			<if test="expectTime != null">
+				expect_time = #{expectTime,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="delb != null">
+				delb = #{delb,jdbcType=INTEGER},
+			</if>
+			<if test="pcIp != null">
+				PC_IP = #{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="returnTime != null">
+				RETURN_TIME=#{returnTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 分页 -->
+	<select id="selApprovalApplicationCount" parameterType="com.warehouse.entity.ApprovalApplication"
+		resultType="java.lang.Integer">
+		select count(1) from approval_application
+		where delb=1 and 1=1
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="designer != null and designer != ''">
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test="originalWave != null and originalWave !=''">
+			and original_wave like concat("%",#{originalWave},"%")
+		</if>
+		<if test="referWave != null and referWave !=''">
+			and refer_wave like concat("%",#{referWave},"%")
+		</if>
+		<if test="printWave != null and printWave !=''">
+			and print_wave like concat("%",#{printWave},"%")
+		</if>
+		<if test="model != null and model!='' ">
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test="productId != null and productId !=''">
+			and product_id like concat("%",#{productId},"%")
+		</if>
+		<if test="vendorCode != null and vendorCode !=''">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="clothName != null and clothName!=''">
+			and cloth_name like concat("%",#{clothName},"%")
+		</if>
+		<if test='sizeChart=="Y" or sizeChart=="y"'>
+			and size_chart !=''
+		</if>
+		<if test='sizeChart=="N" or sizeChart=="n"'>
+			and (size_chart is NULL or size_chart='')
+		</if>
+
+	</select>
+	<select id="ApprovalApplicationReturns" parameterType="com.warehouse.entity.ApprovalApplication"
+		resultMap="BaseResultMap">
+		select * from approval_application
+		where delb=1 and 1=1
+		<if test="girard != null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		<if test="designer != null and designer != ''">
+			and designer like concat("%",#{designer},"%")
+		</if>
+		<if test="originalWave != null and originalWave !=''">
+			and original_wave like concat("%",#{originalWave},"%")
+		</if>
+		<if test="referWave != null and referWave !=''">
+			and refer_wave like concat("%",#{referWave},"%")
+		</if>
+		<if test="printWave != null and printWave !=''">
+			and print_wave like concat("%",#{printWave},"%")
+		</if>
+		<if test="model != null and model!='' ">
+			and model like concat("%",#{model},"%")
+		</if>
+		<if test="productId != null and productId !=''">
+			and product_id like concat("%",#{productId},"%")
+		</if>
+		<if test="vendorCode != null and vendorCode !=''">
+			and vendor_code like concat("%",#{vendorCode},"%")
+		</if>
+		<if test="clothName != null and clothName!=''">
+			and cloth_name like concat("%",#{clothName},"%")
+		</if>
+		<if test='sizeChart=="Y" or sizeChart=="y"'>
+			and size_chart !=''
+		</if>
+		<if test='sizeChart=="N" or sizeChart=="n"'>
+			and (size_chart is NULL or size_chart='')
+		</if>
+		order by ADD_TIME desc limit #{begin},#{end}
+	</select>
+	<!-- 计算总订单值 -->
+	<select id="calculations" parameterType="com.warehouse.entity.ApprovalApplication"
+		resultType="java.lang.Integer">
+		SELECT IFNULL(SUM(count),0) FROM approval_application WHERE delb=1
+		<if test='girard != null and girard != ""'>
+			AND girard LIKE
+			CONCAT(CONCAT('%',#{girard,jdbcType=VARCHAR}),'%')
+		</if>
+	</select>
+	<insert id="insertSelectives">
+		${insertData}
+	</insert>
+</mapper>

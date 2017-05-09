@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.BuildProgressFactoryFailyReportDAO">
+	<select id="getDate" resultType="java.lang.String">
+		select report_date from build_progress_factory_daily_report group by
+		report_date ORDER BY
+		report_date
+		DESC LIMIT 0,30
+	</select>
+
+	<select id="getNameType" resultType="java.lang.String">
+		select factory from build_progress_factory_daily_report
+		WHERE
+		factory!='' group by
+		factory ORDER BY
+		report_date DESC
+	</select>
+
+	<select id="getAll" resultType="com.warehouse.entity.BuildProgressFactoryDailyReport">
+		select * from build_progress_factory_daily_report WHERE report_date>=#{date} ORDER BY
+		report_date DESC
+	</select>
+</mapper>

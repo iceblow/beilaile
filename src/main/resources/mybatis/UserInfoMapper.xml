@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.UserInfoMapper">
+	<!-- 登录 -->
+	<select id="queryObject" parameterType="String"
+		resultType="com.warehouse.entity.UserInfo">
+		select * from UserInfo where username=#{uname}
+	</select>
+	<!-- 注册 -->
+	<!-- <insert id="insertUser" parameterType="com.warehouse.entity.UserInfo"> 
+		insert into userinfo values(NULL,#{username},#{password},#{department},#{position},null,#{usex},null,null,null,1,null,null,#{ADD_TIME},null,null,null); 
+		</insert> -->
+
+	<update id="updateUser" parameterType="com.warehouse.entity.UserInfo">
+		UPDATE userinfo
+		SET
+		<if test='password!=null and password!=""'>
+			`password`=#{password},
+		</if>
+		<if test='trueName!=null and trueName!=""'>
+			truename=#{trueName},
+		</if>
+		<if test='department!=null and department!=""'>
+			department=#{department},
+		</if>
+		<if test='position!=null and position!=""'>
+			position=#{position},
+		</if>
+		<if test='birthday!=null and birthday!=""'>
+			birthday=#{birthday},
+		</if>
+		<if test='usex!=null and usex!=""'>
+			usex=#{usex},
+		</if>
+		<if test='email!=null and email!=""'>
+			email=#{email},
+		</if>
+		<if test='phone!=null and phone!=""'>
+			phone=#{phone},
+		</if>
+		<if test='remark!=null and remark!=""'>
+			remark=#{remark},
+		</if>
+		<if test='delb!=null and delb!=""'>
+			delb=#{delb},
+		</if>
+		<if test='PC_IP!=null and PC_IP!=""'>
+			PC_IP=#{PC_IP},
+		</if>
+		<if test='operation!=null and operation!=""'>
+			operation=#{operation},
+		</if>
+		UPDATE_TIME=NOW()
+		where uid=#{uid}
+	</update>
+</mapper>

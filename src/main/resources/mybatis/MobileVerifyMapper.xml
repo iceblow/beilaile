@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.MobileVerifyMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.MobileVerify">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="CONTENT" property="content" jdbcType="VARCHAR" />
+		<result column="SEND_TIME" property="sendTime" jdbcType="VARCHAR" />
+		<result column="REMINDER_TYPE" property="reminderType"
+			jdbcType="VARCHAR" />
+		<result column="TRANSMIT_STATE" property="transmitState"
+	jdbcType="VARCHAR" />
+
+		<result column="SENDER_IP" property="senderIp" jdbcType="VARCHAR" />
+		<result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+		<result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, MOBILE, WAVE, CONTENT, SEND_TIME,
+		REMINDER_TYPE,TRANSMIT_STATE,
+		SENDER_IP,
+		CREATED_TIME, FOUNDER,
+		MODIFY_TIME, DELETE_TIME, OPERATOR,
+		OPERATOR_IP
+	</sql>
+	<insert id="addMobileVerify" parameterType="com.warehouse.entity.MobileVerify">
+		insert into mobile_verify
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="mobile != null">
+				MOBILE,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="sendTime != null">
+				SEND_TIME,
+			</if>
+			<if test="reminderType != null">
+				REMINDER_TYPE,
+			</if>
+			<if test="transmitState != null">
+				TRANSMIT_STATE,
+			</if>
+			<if test="senderIp != null">
+				SENDER_IP,
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME,
+			</if>
+			<if test="founder != null">
+				FOUNDER,
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME,
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="sendTime != null">
+				#{sendTime,jdbcType=VARCHAR},
+			</if>
+			<if test="reminderType != null">
+				#{reminderType,jdbcType=VARCHAR},
+			</if>
+			<if test="transmitState != null">
+				#{transmitState,jdbcType=VARCHAR},
+			</if>
+			<if test="senderIp != null">
+				#{senderIp,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				#{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				#{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				#{operatorIp,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

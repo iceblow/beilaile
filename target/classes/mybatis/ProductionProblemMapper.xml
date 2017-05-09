@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ProductionProblemMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.ProductionProblem">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="CRAFTS_ORDER" property="craftsOrder" jdbcType="VARCHAR" />
+		<result column="SIZE_CHART" property="sizeChart" jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDERS" property="orders" jdbcType="INTEGER" />
+		<result column="CUTTING_MAN" property="cuttingMan" jdbcType="VARCHAR" />
+		<result column="CUTTING_NUM" property="cuttingNum" jdbcType="INTEGER" />
+		<result column="FABRIC_GIVING_OUT_MAN" property="fabricGivingOutMan"
+			jdbcType="VARCHAR" />
+		<result column="TRACKING_MAN" property="trackingMan" jdbcType="VARCHAR" />
+		<result column="PROBLEM" property="problem" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="PROBLEM_TIME" property="problemTime" jdbcType="VARCHAR" />
+		<result column="COMPLETE_TYPE" property="completeType" jdbcType="VARCHAR" />
+		<result column="COMPLETE_TIME" property="completeTime" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, WAVE, ORINGINAL_WAVE, DESIGN_IMG, CRAFTS_ORDER,
+		SIZE_CHART,
+		ORDER_DETAILS, ORDERS,
+		CUTTING_MAN, CUTTING_NUM,
+		FABRIC_GIVING_OUT_MAN, TRACKING_MAN, PROBLEM, ADD_TIME,
+		PROBLEM_TIME
+	</sql>
+	<!-- 根据编号查询单个 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from production_problem
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<!-- 根据编号删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		production_problem
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 全部添加 -->
+	<insert id="insert" parameterType="com.warehouse.entity.ProductionProblem">
+		insert into production_problem
+		(ID, WAVE,
+		PROBLEM, ADD_TIME, PROBLEM_TIME
+		)
+		values (NULL,
+		#{wave,jdbcType=VARCHAR},
+		#{problem,jdbcType=VARCHAR}, NOW(),
+		#{problemTime,jdbcType=VARCHAR}
+		)
+	</insert>
+	<!-- 按传入条件添加 -->
+	<insert id="insertSelective" parameterType="com.warehouse.entity.ProductionProblem">
+		insert into production_problem
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE,
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG,
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER,
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART,
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS,
+			</if>
+			<if test="orders != null">
+				ORDERS,
+			</if>
+			<if test="cuttingMan != null">
+				CUTTING_MAN,
+			</if>
+			<if test="cuttingNum != null">
+				CUTTING_NUM,
+			</if>
+			<if test="fabricGivingOutMan != null">
+				FABRIC_GIVING_OUT_MAN,
+			</if>
+			<if test="trackingMan != null">
+				TRACKING_MAN,
+			</if>
+			<if test="problem != null">
+				PROBLEM,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="problemTime != null">
+				PROBLEM_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				#{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				#{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				#{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				#{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				#{orders,jdbcType=INTEGER},
+			</if>
+			<if test="cuttingMan != null">
+				#{cuttingMan,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingNum != null">
+				#{cuttingNum,jdbcType=INTEGER},
+			</if>
+			<if test="fabricGivingOutMan != null">
+				#{fabricGivingOutMan,jdbcType=VARCHAR},
+			</if>
+			<if test="trackingMan != null">
+				#{trackingMan,jdbcType=VARCHAR},
+			</if>
+			<if test="problem != null">
+				#{problem,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="problemTime != null">
+				#{problemTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 按条件修改(双击修改可用) -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.ProductionProblem">
+		update production_problem
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER = #{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				ORDERS = #{orders,jdbcType=INTEGER},
+			</if>
+			<if test="cuttingMan != null">
+				CUTTING_MAN = #{cuttingMan,jdbcType=VARCHAR},
+			</if>
+			<if test="cuttingNum != null">
+				CUTTING_NUM = #{cuttingNum,jdbcType=INTEGER},
+			</if>
+			<if test="fabricGivingOutMan != null">
+				FABRIC_GIVING_OUT_MAN =
+				#{fabricGivingOutMan,jdbcType=VARCHAR},
+			</if>
+			<if test="trackingMan != null">
+				TRACKING_MAN = #{trackingMan,jdbcType=VARCHAR},
+			</if>
+			<if test="problem != null">
+				PROBLEM = #{problem,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="problemTime != null">
+				PROBLEM_TIME = #{problemTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 修改所有信息 -->
+	<update id="updateByPrimaryKey" parameterType="com.warehouse.entity.ProductionProblem">
+		update
+		production_problem
+		set WAVE = #{wave,jdbcType=VARCHAR},
+		ORINGINAL_WAVE =
+		#{oringinalWave,jdbcType=VARCHAR},
+		DESIGN_IMG =
+		#{designImg,jdbcType=VARCHAR},
+		CRAFTS_ORDER =
+		#{craftsOrder,jdbcType=VARCHAR},
+		SIZE_CHART =
+		#{sizeChart,jdbcType=VARCHAR},
+		ORDER_DETAILS =
+		#{orderDetails,jdbcType=VARCHAR},
+		ORDERS = #{orders,jdbcType=INTEGER},
+		CUTTING_MAN = #{cuttingMan,jdbcType=VARCHAR},
+		CUTTING_NUM =
+		#{cuttingNum,jdbcType=INTEGER},
+		FABRIC_GIVING_OUT_MAN =
+		#{fabricGivingOutMan,jdbcType=VARCHAR},
+		TRACKING_MAN =
+		#{trackingMan,jdbcType=VARCHAR},
+		PROBLEM = #{problem,jdbcType=VARCHAR},
+		ADD_TIME = #{addTime,jdbcType=VARCHAR},
+		PROBLEM_TIME =
+		#{problemTime,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="complete" parameterType="java.lang.Integer">
+		UPDATE production_problem SET
+		COMPLETE_TYPE='已解决',
+		COMPLETE_TIME=CURDATE()
+		WHERE ID=#{id} 
+	</update>
+	<select id="getCountByPage" parameterType="com.warehouse.entity.ProductionProblem"
+		resultType="java.lang.Integer">
+		select count(*) from production_problem where 1=1
+		<if test='wave!=null and wave!=""'>
+		and WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+	</select>
+	<select id="getDataByPage" parameterType="com.warehouse.entity.ProductionProblem"
+		resultMap="BaseResultMap">
+		select * from production_problem where 1=1
+		<if test='wave!=null and wave!=""'>
+		and WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		order by ADD_TIME desc LIMIT
+		#{begin},#{end}
+	</select>
+</mapper>

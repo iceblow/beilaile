@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.UserInfoEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.UserInfoEntity" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="EMPLOYEE_NO" property="employeeNo" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="HIREDATE" property="hiredate" jdbcType="VARCHAR" />
+    <result column="WORKAGE" property="workage" jdbcType="VARCHAR" />
+    <result column="NOTE" property="note" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_STATUS" property="employeeStatus" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATER" property="creater" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="UPDATER" property="updater" jdbcType="VARCHAR" />
+    <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+    <result column="DELETER" property="deleter" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, EMPLOYEE_NO, NAME, SEX, HIREDATE, WORKAGE, NOTE, EMPLOYEE_STATUS, CREATE_TIME, 
+    CREATER, UPDATE_TIME, UPDATER, DELETE_TIME, DELETER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo_employee
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from userinfo_employee
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.warehouse.entity.UserInfoEntity" >
+    insert into userinfo_employee (ID, EMPLOYEE_NO, NAME, 
+      SEX, HIREDATE, WORKAGE, 
+      NOTE, EMPLOYEE_STATUS, CREATE_TIME, 
+      CREATER, UPDATE_TIME, UPDATER, 
+      DELETE_TIME, DELETER)
+    values (#{id,jdbcType=INTEGER}, #{employeeNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{hiredate,jdbcType=VARCHAR}, #{workage,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{employeeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
+      #{deleteTime,jdbcType=VARCHAR}, #{deleter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.warehouse.entity.UserInfoEntity" >
+    insert into userinfo_employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="employeeNo != null" >
+        EMPLOYEE_NO,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="hiredate != null" >
+        HIREDATE,
+      </if>
+      <if test="workage != null" >
+        WORKAGE,
+      </if>
+      <if test="note != null" >
+        NOTE,
+      </if>
+      <if test="employeeStatus != null" >
+        EMPLOYEE_STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="creater != null" >
+        CREATER,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updater != null" >
+        UPDATER,
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME,
+      </if>
+      <if test="deleter != null" >
+        DELETER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="employeeNo != null" >
+        #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="hiredate != null" >
+        #{hiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="workage != null" >
+        #{workage,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeStatus != null" >
+        #{employeeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleter != null" >
+        #{deleter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.UserInfoEntity" >
+    update userinfo_employee
+    <set >
+      <if test="employeeNo != null" >
+        EMPLOYEE_NO = #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="hiredate != null" >
+        HIREDATE = #{hiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="workage != null" >
+        WORKAGE = #{workage,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        NOTE = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeStatus != null" >
+        EMPLOYEE_STATUS = #{employeeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleter != null" >
+        DELETER = #{deleter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.entity.UserInfoEntity" >
+    update userinfo_employee
+    set EMPLOYEE_NO = #{employeeNo,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      HIREDATE = #{hiredate,jdbcType=VARCHAR},
+      WORKAGE = #{workage,jdbcType=VARCHAR},
+      NOTE = #{note,jdbcType=VARCHAR},
+      EMPLOYEE_STATUS = #{employeeStatus,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      DELETER = #{deleter,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findAll" parameterType="Map" resultMap="BaseResultMap">
+  	select * from userinfo_employee limit #{pageNow},#{pageSize}
+  </select>
+  
+  <select id="findCount" resultType="int">
+  	select count(0) from userinfo_employee
+  </select>
+  
+  <update id="update" parameterType="Map">
+  	 update userinfo_employee
+    <set >
+      <if test="employeeNo != null" >
+        EMPLOYEE_NO = #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="hiredate != null" >
+        HIREDATE = #{hiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="workage != null" >
+        WORKAGE = #{workage,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        NOTE = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeStatus != null" >
+        EMPLOYEE_STATUS = #{employeeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null" >
+        DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deleter != null" >
+        DELETER = #{deleter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 根据名字和工号模糊查询 -->
+  <select id="findByNameEmployeeNo" parameterType="Map" resultMap="BaseResultMap">
+  	select * from userinfo_employee where 1=1
+	  	<if test="employeeNo != null" >
+	        and EMPLOYEE_NO = #{employeeNo,jdbcType=VARCHAR}
+	    </if>
+	    <if test="name != null" >
+	        and NAME like '%${name,jdbcType=VARCHAR}%'
+	    </if>
+  </select>
+</mapper>

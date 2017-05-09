@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>辅料配发</title> <@p.cache/> <@p.css/> <@p.js/>
+    <link href="/res/js/acces/bootstrap4chia.css" type="text/css" rel="stylesheet"/>
+    <script src="/res/js/acces/jquery-barcode.js" ></script>
+</head>
+<body>
+<div id="excelContainer"></div>
+<div id="htPaperContainer" class="text-center"></div>
+<@p.top/>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <@p.left/>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li><i class="icon-home home-icon"> </i> <a href="#">
+                        Home </a></li>
+                    <li><a href="#"> Tables </a></li>
+                    <li class="active">辅料配发</li>
+                </ul>
+                <!-- .breadcrumb -->
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+            <div class="col-md-12">
+                <button id="add_button" class="btn btn-primary btn-lg"
+                        data-toggle="modal" data-target="#myModal">添加
+                </button>
+            </div>
+            <!-- /.col-lg-6 -->
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-anyVal" method="post" class="inline">
+                    <div id="val-input-empty" class="col-md-12">
+                        <div class="control-group">
+                            <div class="col-md-2">
+                                <label for="queryAddDate">日期</label>
+                                <input type="text" name="addDate" id="queryAddDate"/>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="queryWave">波次号</label>
+                                <input type="text" name="wave" id="queryWave"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="col-md-2">
+                                <label class="control-label" for="queryOriName">原始名称</label>
+                                <select style="WIDTH: 100px" onchange="this.parentNode.nextSibling.value=this.value"
+                                        name="oriName" id="queryOriName">
+                                    <option value=""></option>
+                                    <option value="辅料1">辅料1</option>
+                                    <option value="辅料2">辅料2</option>
+                                    <option value="辅料3">辅料3</option>
+                                    <option value="辅料4">辅料4</option>
+                                    <option value="辅料5">辅料5</option>
+                                    <option value="辅料6">辅料6</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+								<span class="input-group-btn">
+									<button id="queryAccesOrderIssue" class="btn btn-default" type="button"
+                                            style="border:none;width:100px"> 查询</button>
+								</span>
+                            <span class="input-group-btn">
+									<button id="printIssueSheet" class="btn btn-default" type="button"
+                                            style="border:none;width:100px"> 打印</button>
+								</span>
+                            <span class="input-group-btn">
+									<button id="printHTPaper" class="btn btn-default" type="button"
+                                            style="border:none;width:100px"> 热敏纸打印</button>
+								</span>
+                        </div>
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="">
+                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+                    </div>
+                </form>
+            </div>
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                            <tr>
+                                <th><input type="checkbox" id="checkboxId"/></th>
+                                <th>编号</th>
+                                <th>日期</th>
+                                <th>波段</th>
+                                <th>配料数量</th>
+                                <th>配料详情</th>
+                                <th>辅料名称</th>
+                                <th>辅料规格</th>
+                                <th>辅料损耗率</th>
+                                <th>辅料单耗</th>
+                                <th>辅料数量</th>
+                                <th>数据同步时间</th>
+                                <th>配齐数量</th>
+                                <th>辅料总数</th>
+                                <th>配发方式</th>
+                                <th>备注</th>
+                                <th>状态</th>
+                                <th colspan="1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+    //页面加载就执行
+    $(function () {
+        $(".col-md-2").find(":input").each(
+            function () {
+                $(this).val("");
+            });
+        var anyVal = $("#form-anyVal").serialize();
+        getAccesOrderIssueBpcnt(anyVal);
+        checkAll();
+    });
+    //查询
+    $("#queryAccesOrderIssue").on("click", function () {
+        var anyVal = $("#form-anyVal").serialize();
+        getAccesOrderIssueBpcnt(anyVal);
+    });
+    //打印
+    $("#printIssueSheet").on("click", function () {
+        printIssueFnc();
+    });
+    $("#printHTPaper").on("click", function () {
+        printHTPaperFnc();
+    });
+
+    //提交
+    $("#submit-btn").on("click", function () {
+        var formData = new FormData($("#form-input")[0]);
+        var if_input_Id = $("#obj_hidden_id").val();
+        if (if_input_Id != "" && if_input_Id != null) {
+            //修改
+            modifyAccessoryMaterial(formData);
+        } else {
+            //添加
+            addAccessoryMaterial(formData);
+        }
+    });
+    //查询总条数
+    function getAccesOrderIssueBpcnt(anyVal) {
+        $.post('getAccesOrderIssueBpcnt.do', anyVal,
+            function (data) {
+                $("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+                $("#pageNow").val(data.pageNow);
+                var anyVal2 = $("#form-anyVal").serialize();
+                //获取form参数进行查询
+                //調用方法传参
+                findAccesOrderIssue(anyVal2);
+                // 进入后台进行分页查询
+                $(".tcdPageCode").createPage({ //哦哦
+                    pageCount: data.totalPageCount, //总页数
+                    current: data.pageNow, //当前页
+                    backFn: function (p) {
+                        $("#pageSize").val(10);
+                        $("#pageNow").val(p); //給當前頁賦值
+                        var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+                        //調用方法
+                        findAccesOrderIssue(anyVal1);
+                    }
+                });
+            });
+    }
+    //查询
+    function findAccesOrderIssue(anyVal) {
+        $.post("findAccesOrderIssueCndbp.do", anyVal, //from表单内容
+            function (data) {
+                $(".table_app").empty(); //清空原有的数据
+                for (var i = 0; i < data.length; i++) {
+                    var _HTML_TEBLE_ = "";
+                    _HTML_TEBLE_ = "<tr>" + +"<input type='hidden' class='id' value='"
+                        + data[i].id
+                        + "'/>"
+                        + "<td>"
+                        + "<input type='checkbox' class='checkbox' name='checkName'>"
+                        + "</td><td >"
+                        + data[i].id
+                        + "</td><td >"
+                        + (data[i].scheTime == null ? '' : data[i].scheTime)
+                        + "</td><td >"
+                        + (data[i].wave == null ? '' : data[i].wave)
+                        + "</td><td >"
+                        + (data[i].issueNum == null ? '' : data[i].issueNum)
+                        + "</td><td >"
+                        + (data[i].orderDetails == null ? '' : data[i].orderDetails)
+                        + "</td><td >"
+                        + (data[i].accesName == null ? '' : data[i].accesName)
+                        + "</td><td>"
+                        + (data[i].accesEtalonDescription == null ? '' : data[i].accesEtalonDescription)
+                        + "</td><td>"
+                        + (data[i].accesScrapRate == null ? '' : data[i].accesScrapRate)
+                        + "</td><td>"
+                        + (data[i].accesSingleUse == null ? '' : data[i].accesSingleUse)
+                        + "</td><td>"
+                        + (data[i].accesQuantity == null ? '' : data[i].accesQuantity)
+                        + "</td><td>"
+                        + (data[i].readyTime == null ? '' : data[i].readyTime)
+                        + "</td><td>"
+                        + (data[i].readySumIssue == null ? '' : data[i].readySumIssue)
+                        + "</td><td>"
+                        + (data[i].sumIssue == null ? '' : data[i].sumIssue)
+                        + "</td><td>"
+                        + (data[i].issueMethod == null ? '' : data[i].issueMethod)
+                        + "</td><td class='fillRemarkIssue' name='rationRemarks'>"
+                        + (data[i].rationRemarks == null ? '' : data[i].rationRemarks)
+                        + "</td><td class='issueStatus" + data[i].id + "'>"
+                        + (data[i].issueStatus == null ? '' : data[i].issueStatus)
+                        + "</td><td>"
+                        + "<button type='button'  onclick='issueDone(\""
+                        + data[i].id
+                        + "\")' class='btn btn-success '>完成配发</button>"
+                        + "</td></tr>";
+                    $(".table_app").append(_HTML_TEBLE_);
+                    var issueStatus = data[i].issueStatus;
+                    var issId = data[i].id;
+                    addIssueBGColor(issueStatus, issId);
+                    console.log(data[i]);
+                }
+            });
+    }
+    //辅料出库配发完成
+    function issueDone(id) {
+        var flag = confirm("确认完成配发？");
+        var data = {
+            amId: id
+        };
+        var tdArgs = $(".issueStatus" + id);
+        if (flag) {
+            $.ajax({
+                url: "issueDone.do",
+                dataType: 'json',
+                type: 'post',
+                data: data,
+                success: function (result) {
+                    var issueStatus = "配发完成";
+                    var issId = id;
+                    tdArgs.text(issueStatus);
+                    addIssueBGColor(issueStatus, issId);
+                }
+            });
+        }
+    }
+
+
+    function addIssueBGColor(issueStatus, issId) {
+        if (issueStatus == "完成配发") {
+            $(".issueStatus" + issId).parent().css("background", "#ffdcb9");
+        } else if (issueStatus == "未处理") {
+            $(".issueStatus" + issId).parent().css("background", "#d9ffff");
+        } else if (issueStatus == "已发放") {
+            $(".issueStatus" + issId).parent().css("background", "#ffd9ec");
+        } else if (issueStatus == "配发完成") {
+            $(".issueStatus" + issId).parent().css("background", "#ffbb77");
+        } else {
+            $(".issueStatus" + issId).parent().css("background", "none");
+        }
+    }
+
+    $("#queryAddDate").keyup(function () {
+        if (event.keyCode == 13) {
+            $("#anyVal-btn").click();
+        }
+    });
+    $("#queryWave").keyup(function () {
+        if (event.keyCode == 13) {
+            $("#anyVal-btn").click();
+        }
+    });
+
+    function fillRemarkIssue() {
+        $(".fillRemarkIssue").on(
+            "dblclick",
+            function () {
+                var id = $(this).parent().children("td:first").html();
+                id = parseInt(id);
+                var code = $(this).text().trim();
+                var name = $(this).attr("name");
+                $(this).html(
+                    "<input id='" + id + "' type='text' value='" + code
+                    + "' name='" + name + "'> ");
+                $("#" + id).focus();// 文本框获取光标事件
+                savaRemarkIssue(id, name);
+            });
+    }
+
+    function savaRemarkIssue(id, name) {
+        $("#" + id).blur(
+            function () {
+                var updatedArgs = $(this).val();
+                var trlabele = $(this).closest("td");
+                trlabele.text(updatedArgs);
+                var data = {
+                    id: id
+                };
+                data[name] = updatedArgs;
+                $.ajax({
+                    url: 'savaRemarkIssue.do',
+                    dataType: 'json',
+                    type: 'post',
+                    data: data,
+                    success: function (data) {
+                        var trlabel = trlabele.parents();
+                        //
+                    },
+                    error: function () {
+                        alert("修改失败!");
+                    }
+                });
+            });
+    }
+    function checkAll() {
+        var checkTag = $("#checkboxId");
+        checkTag.attr("checked", false);
+        checkTag.click(function () {
+            if (this.checked) {
+                $("input[name='checkName']").each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $("input[name='checkName']").each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+        $("[name='checkName']").click(function () {
+            if ($("[name='checkName']").is("checked")) {
+            } else {
+                $('#checkboxId').attr("checked", false);
+            }
+        });
+    }
+
+
+    function printIssueFnc() {
+        var idList = '';
+        $(":checkbox[name='checkName']:checked").each(function () {
+            idList += parseInt($(this).parent().next().text()) + ",";
+        });
+        console.log(idList);
+        if (idList.length > 0) {
+            $.ajax({
+                url: 'printIssueSheet.do',
+                dataType: 'json',
+                type: 'post',
+                data: {idList: idList},
+                success: function (result) {
+                    createExcelSuccess(result);
+                }
+            });
+        } else {
+            console.log("idList is NULL")
+        }
+
+    }
+
+    function printHTPaperFnc() {
+        var idList = '';
+        $(":checkbox[name='checkName']:checked").each(function () {
+            idList += parseInt($(this).parent().next().text()) + ",";
+        });
+        console.log(idList);
+        if (idList.length > 0) {
+            $.ajax({
+                url: 'printHTPaper.do',
+                dataType: 'json',
+                type: 'post',
+                data: {idList: idList},
+                success: function (result) {
+//                    $.each(result,function (index,item) {
+                    createHTPaperTmp(result);
+
+//                    });
+
+                }
+            });
+        } else {
+            console.log("idList is NULL")
+        }
+
+    }
+
+
+    function createHTPaperTmp(result) {
+        console.log(result);
+        var htpTmp = $("#htPaperContainer").empty();
+        $.each(result, function (index, item) {
+            htpTmp.append(
+                "<div align=\"center\" id=\"printContentOne\" class=\"\" style=\"height: 100%;width: 160px\">" +
+                    "<div align=\"left\" style=\"padding-left: 10px;\">" +
+                    "<div class=\"row\" style='padding: 0px;line-height: 1.4;vertical-align: top;'>" +
+                    "<div class=\"\" style=\"font-size:15px\">" +
+                    "<label style=\"margin-bottom: 0px\">日期：</label><span ' name=\"synchTime\">"+item.synchTime.substr(0,10) +"</span>" +
+                "</div>" +
+                "<div class=\"\" style=\"font-size:15px\">" +
+                "<label style=\"margin-bottom: 0px\">波次：</label><span ' name=\"wave\">"+ item.wave +"</span>" +
+                "</div>" +
+                "<div class=\"\" style=\"font-size:15px\">" +
+                "<label style=\"margin-bottom: 0px\">名称：</label><span ' name=\"accesName\">"+ item.accesName +"</span>" +
+                "</div>" +
+                "<div class=\"\" style=\"font-size:15px\">" +
+                "<label style=\"margin-bottom: 0px\">数量：</label><span ' name=\"accesQuantity\">"+ item.accesQuantity +"<span name=\"unit\">个</span></span>" +
+                "</div>" +
+                "<div class=\"\" style=\"font-size:15px\">" +
+                "<label style=\"margin-bottom: 0px\">规格：</label><span ' name=\"accesEtalonDescription\" style=\"margin-right: 50px;\">"+ item.accesEtalonDescription +"</span>" +
+                "</div>" +
+                "<div class=\"\" style=\"font-size:15px\">" +
+                "</div>" +
+                "</div>" +
+                "<div class=\"row\" id=\"canvas"+ item.id+"\">" +
+                "<div id=\"bcTarget"+ item.id+"\" style=\"display: none;\"></div>" +
+                "</div>" +
+                "</div>" +
+                "</div>");
+            createBarCode(item.accesQuantity,item.id);
+        });
+        htpTmp.jqprint();
+        htpTmp.empty();
+    }
+    function PrefixInteger(num, length) {
+        if (num.length>6) {
+            alert("超出6位数初始设定，联系开发人员");
+        }else {
+            return (Array(length).join('0') + num).slice(-length);
+        }
+
+    }
+    function createBarCode(num,id) {
+
+//        var timef = new Date(Date.parse(time.replace(/-/g, "/")));
+//        timef = timef.getTime();
+        var idp = PrefixInteger(id, 6);
+        var nump = PrefixInteger(num, 6);
+
+        var param = nump + idp;
+        $("#bcTarget"+id).barcode( param , "code128");
+
+
+        var divContent = document.getElementById("bcTarget"+id).innerHTML;
+        var data = "data:image/svg+xml," +
+            "<svg xmlns='http://www.w3.org/2000/svg' width='280' height='67'>" +
+            "<foreignObject width='100%' height='100%'>" +
+            "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:16px;font-family:Helvetica'>" +
+            divContent +
+            "</div>" +
+            "</foreignObject>" +
+            "</svg>";
+        var img = new Image();
+        img.src = data;
+        document.getElementById('canvas'+id).appendChild(img);
+
+
+        //2.svg转成canvas
+        var canvas = document.createElement('canvas');  //准备空画布
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        var context = canvas.getContext('2d');  //取得画布的2d绘图上下文
+        context.drawImage(img, 0, 0);
+        img.width = img.width * 1.3;
+        img.height = img.height * 1.3;
+    }
+
+    function createExcelSuccess(result) {
+        var excelSheet = $("#excelContainer").empty();
+        excelSheet.append("<table id='tblExc' style='width: 1080px;max-width: 1080px;margin-bottom: 0px'>" +
+            "<thead style=\"display: table-header-group;vertical-align: middle;border-color: inherit;\">" +
+            "<tr style=\"display: table-row;vertical-align: inherit;border-color: inherit;\">" +
+            "<th style=\"padding: 8px;line-height: 1.42857143;vertical-align: bottom;border-bottom: 2px solid #ddd;\">波段</th>" +
+            "<th style=\"padding: 8px;line-height: 1.42857143;vertical-align: bottom;border-bottom: 2px solid #ddd;\">名称</th>" +
+            "<th style=\"padding: 8px;line-height: 1.42857143;vertical-align: bottom;border-bottom: 2px solid #ddd;\">编号</th>" +
+            "<th style=\"padding: 8px;line-height: 1.42857143;vertical-align: bottom;border-bottom: 2px solid #ddd;\">辅料数量</th>" +
+            "<th style=\"padding: 8px;line-height: 1.42857143;vertical-align: bottom;border-bottom: 2px solid #ddd;\">规格</th>" +
+            "<th style=\"padding: 8px;line-height: 1.42857143;vertical-align: bottom;border-bottom: 2px solid #ddd;\">波次数量</th>" +
+            "</tr>" +
+            "</thead>" +
+            "<tbody id='excelTbody' style='display:table-row-group;vertical-align: middle;border-color: inherit;'>" +
+            "</tbody>" +
+            "</table>"
+        );
+
+
+        $.each(result, function (index, item) {
+            if (item == 0) {
+                return true;
+            }
+            console.log(item.id);
+            $("#excelTbody").append(
+                "<tr style='display: table-row;vertical-align: inherit;border-color: inherit;'><td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;'>"
+                + item.wave
+                + "</td><td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;'>"
+                + item.accesName
+                + "</td><td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;'>"
+                + item.accesSerialNum
+                + "</td><td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;'>"
+                + item.accesQuantity
+                + "</td><td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;'>"
+                + item.accesEtalonDescription
+                + "</td><td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;'>"
+                + item.issueNum
+                + "</td></tr>"
+            );
+        });
+
+
+        excelSheet.jqprint();
+        excelSheet.empty();
+    }
+    function printIssueSuccess(param) {
+        console.log(param.id);
+        console.log("printIssueSuccess!");
+    }
+    //打印热敏纸
+    function printHTPaper() {
+
+    }
+
+</script>
+
+
+</html>

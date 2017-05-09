@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>辅料理单弹出层</title> <@p.cache/> <@p.css/> <@p.js/>
+    <link href="/res/js/acces/bootstrap4chia.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/res/js/acces/layer/layer.js"></script>
+</head>
+<body>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <div class="main-content">
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="col-xs-12">
+                        <div class="sortForm">
+                            <form class="form-horizontal" role="form" id="sortLayer">
+                                <div class="fixedInfo">
+                                    <input type="text" class="form-control" id="id" name="id"
+                                           value="" disabled="true" style="display:none">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="addTime"
+                                                                   class="col-sm-3 control-label">订单时间</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="addTime"
+                                                                       name="addTime"
+                                                                       value="" disabled="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="wave" class="col-sm-3 control-label">波次</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="wave"
+                                                                       name="wave" value="" disabled="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="oriWave"
+                                                                   class="col-sm-3 control-label">原波次</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="oriWave"
+                                                                       name="oriWave"
+                                                                       value="" disabled="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="orderNum"
+                                                                   class="col-sm-3 control-label">订单数</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="orderNum"
+                                                                       name="orderNum" value="" disabled="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="cropDate"
+                                                                   class="col-sm-3 control-label">裁剪时间</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="cropDate"
+                                                                       name="cropDate"
+                                                                       value="" disabled="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="cropNum"
+                                                                   class="col-sm-3 control-label">裁剪数</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="cropNum"
+                                                                       name="cropNum" value="" disabled="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group ">
+                                                            <label for="fabricComponent" class="col-sm-3 control-label">面料成分</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control"
+                                                                       id="fabricComponent" name="fabricComponent"
+                                                                       placeholder="请输入面料成分">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group ">
+                                                            <label for="clothCategories" class="col-sm-3 control-label">成衣类型</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control"
+                                                                       id="clothCategories" name="clothCategories"
+                                                                       placeholder="请输入成衣类型">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="row">
+                                                    <div class="center-block"style="height:200px;background-color:#ccc;">
+                                                        <img src="" class="img-thumbnail"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>辅料名称</th>
+                                                    <th>序列号</th>
+                                                    <th>规格</th>
+                                                    <th>单耗</th>
+                                                    <th>损耗率</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td><input type="text" class="form-control" id="accesOne"
+                                                               placeholder="辅料1名称"></td>
+                                                    <td><input type="text" class="form-control" id="accesOneSerialNum"
+                                                               placeholder="辅料1序列号"></td>
+                                                    <td><input type="text" class="form-control"
+                                                               id="accesOneEtalonDescription" placeholder="辅料1规格"></td>
+                                                    <td><input type="text" class="form-control" id="accesOneSingleUse"
+                                                               placeholder="辅料1单耗"></td>
+                                                    <td><input type="text" class="form-control" id="accesOneScrapRate"
+                                                               placeholder="辅料1损耗率"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="text" class="form-control" id="accesTwo"
+                                                               placeholder="辅料2名称"></td>
+                                                    <td><input type="text" class="form-control" id="accesTwoSerialNum"
+                                                               placeholder="辅料2序列号"></td>
+                                                    <td><input type="text" class="form-control"
+                                                               id="accesTwoEtalonDescription" placeholder="辅料2规格"></td>
+                                                    <td><input type="text" class="form-control" id="accesTwoSingleUse"
+                                                               placeholder="辅料2单耗"></td>
+                                                    <td><input type="text" class="form-control" id="accesTwoScrapRate"
+                                                               placeholder="辅料2损耗率"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="text" class="form-control" id="accesThree"
+                                                               placeholder="辅料3名称"></td>
+                                                    <td><input type="text" class="form-control" id="accesThreeSerialNum"
+                                                               placeholder="辅料3序列号"></td>
+                                                    <td><input type="text" class="form-control"
+                                                               id="accesThreeEtalonDescription" placeholder="辅料3规格">
+                                                    </td>
+                                                    <td><input type="text" class="form-control" id="accesThreeSingleUse"
+                                                               placeholder="辅料3单耗"></td>
+                                                    <td><input type="text" class="form-control" id="accesThreeScrapRate"
+                                                               placeholder="辅料3损耗率"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="text" class="form-control" id="accesFour"
+                                                               placeholder="辅料4名称"></td>
+                                                    <td><input type="text" class="form-control" id="accesFourSerialNum"
+                                                               placeholder="辅料4序列号"></td>
+                                                    <td><input type="text" class="form-control"
+                                                               id="accesFourEtalonDescription" placeholder="辅料4规格"></td>
+                                                    <td><input type="text" class="form-control" id="accesFourSingleUse"
+                                                               placeholder="辅料4单耗"></td>
+                                                    <td><input type="text" class="form-control" id="accesFourScrapRate"
+                                                               placeholder="辅料4损耗率"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="text" class="form-control" id="accesFive"
+                                                               placeholder="辅料5名称"></td>
+                                                    <td><input type="text" class="form-control" id="accesFiveSerialNum"
+                                                               placeholder="辅料5序列号"></td>
+                                                    <td><input type="text" class="form-control"
+                                                               id="accesFiveEtalonDescription" placeholder="辅料5规格"></td>
+                                                    <td><input type="text" class="form-control" id="accesFiveSingleUse"
+                                                               placeholder="辅料5单耗"></td>
+                                                    <td><input type="text" class="form-control" id="accesFiveScrapRate"
+                                                               placeholder="辅料5损耗率"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="text" class="form-control" id="accesSix"
+                                                               placeholder="辅料6名称"></td>
+                                                    <td><input type="text" class="form-control" id="accesSixSerialNum"
+                                                               placeholder="辅料6序列号"></td>
+                                                    <td><input type="text" class="form-control"
+                                                               id="accesSixEtalonDescription" placeholder="辅料6规格"></td>
+                                                    <td><input type="text" class="form-control" id="accesSixSingleUse"
+                                                               placeholder="辅料6单耗"></td>
+                                                    <td><input type="text" class="form-control" id="accesSixScrapRate"
+                                                               placeholder="辅料6损耗率"></td>
+                                                </tr>
+
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="accesRemarks">理单备注</label>
+                                                <textarea class="form-control" rows="3" id="accesRemarks"
+                                                          name="accesRemark"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="" id="btnSubmit" class="btn-lg btn-default pull-right"
+                                        onclick="sortSubmit()">提交
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    //跟据 父页面传递的 id 来查询已有信息
+    $(function () {
+        console.log("执行查询函数");
+        var layerParentId = parent.$("#paramField").val();
+        console.log(layerParentId);
+        var s = {
+            id: layerParentId
+        };
+        $.ajax({
+            url: 'getAccesOrderSortBid.do',
+            dataType: 'json',
+            type: 'post',
+            data: s,
+            success: function (data) {
+                console.log(data.img);
+                if (data.img != null) {
+                    $("#img").attr("src", data.img);
+                }
+                if (data.id != null) {
+                    $("#id").val(data.id)
+                }
+
+                $.each(data, function (index, item) {
+                    if (item != null || item != "") {
+                        $("#" + index).val(item);
+                    }
+
+                });
+            }
+        });
+    });
+
+    function sortSubmit(e) {
+        stopDefault(e);
+        stopBubble(e);
+        var id = $("#id").val();
+        var orderNum = $("#orderNum").val();
+        var clothCategories = $("#clothCategories").val();
+        var fabricComponent = $("#fabricComponent").val();
+        var accesOne = $("#accesOne").val();
+        var accesOneSerialNum = $("#accesOneSerialNum").val();
+        var accesOneSingleUse = $("#accesOneSingleUse").val();
+        var accesOneScrapRate = $("#accesOneScrapRate").val();
+        var accesOneEtalonDescription = $("#accesOneEtalonDescription").val();
+        var accesTwo = $("#accesTwo").val();
+        var accesTwoSerialNum = $("#accesTwoSerialNum").val();
+        var accesTwoSingleUse = $("#accesTwoSingleUse").val();
+        var accesTwoScrapRate = $("#accesTwoScrapRate").val();
+        var accesTwoEtalonDescription = $("#accesTwoEtalonDescription").val();
+        var accesThree = $("#accesThree").val();
+        var accesThreeSerialNum = $("#accesThreeSerialNum").val();
+        var accesThreeSingleUse = $("#accesThreeSingleUse").val();
+        var accesThreeScrapRate = $("#accesThreeScrapRate").val();
+        var accesThreeEtalonDescription = $("#accesThreeEtalonDescription").val();
+        var accesFour = $("#accesFour").val();
+        var accesFourSerialNum = $("#accesFourSerialNum").val();
+        var accesFourSingleUse = $("#accesFourSingleUse").val();
+        var accesFourScrapRate = $("#accesFourScrapRate").val();
+        var accesFourEtalonDescription = $("#accesFourEtalonDescription").val();
+        var accesFive = $("#accesFive").val();
+        var accesFiveSerialNum = $("#accesFiveSerialNum").val();
+        var accesFiveSingleUse = $("#accesFiveSingleUse").val();
+        var accesFiveScrapRate = $("#accesFiveScrapRate").val();
+        var accesFiveEtalonDescription = $("#accesFiveEtalonDescription").val();
+        var accesSix = $("#accesSix").val();
+        var accesSixSerialNum = $("#accesSixSerialNum").val();
+        var accesSixSingleUse = $("#accesSixSingleUse").val();
+        var accesSixScrapRate = $("#accesSixScrapRate").val();
+        var accesSixEtalonDescription = $("#accesSixEtalonDescription").val();
+        var accesRemarks = $("#accesRemarks").val();
+
+        var data = {
+            id: id,
+            orderNum: orderNum,
+            clothCategories: clothCategories,
+            fabricComponent: fabricComponent,
+            accesOne: accesOne,
+            accesOneSerialNum: accesOneSerialNum,
+            accesOneSingleUse: accesOneSingleUse,
+            accesOneScrapRate: accesOneScrapRate,
+            accesOneEtalonDescription: accesOneEtalonDescription,
+            accesTwo: accesTwo,
+            accesTwoSerialNum: accesTwoSerialNum,
+            accesTwoSingleUse: accesTwoSingleUse,
+            accesTwoScrapRate: accesTwoScrapRate,
+            accesTwoEtalonDescription: accesTwoEtalonDescription,
+            accesThree: accesThree,
+            accesThreeSerialNum: accesThreeSerialNum,
+            accesThreeSingleUse: accesThreeSingleUse,
+            accesThreeScrapRate: accesThreeScrapRate,
+            accesThreeEtalonDescription: accesThreeEtalonDescription,
+            accesFour: accesFour,
+            accesFourSerialNum: accesFourSerialNum,
+            accesFourSingleUse: accesFourSingleUse,
+            accesFourScrapRate: accesFourScrapRate,
+            accesFourEtalonDescription: accesFourEtalonDescription,
+            accesFive: accesFive,
+            accesFiveSerialNum: accesFiveSerialNum,
+            accesFiveSingleUse: accesFiveSingleUse,
+            accesFiveScrapRate: accesFiveScrapRate,
+            accesFiveEtalonDescription: accesFiveEtalonDescription,
+            accesSix: accesSix,
+            accesSixSerialNum: accesSixSerialNum,
+            accesSixSingleUse: accesSixSingleUse,
+            accesSixScrapRate: accesSixScrapRate,
+            accesSixEtalonDescription: accesSixEtalonDescription,
+            accesRemarks: accesRemarks
+    }
+
+        $.ajax({
+            url: 'layerSort.do',
+            dataType: 'json',
+            type: 'post',
+            data: data,
+            success: function (data) {
+                console.log(data);
+                layer.msg('保存成功');
+
+            },
+            error: function (data) {
+                console.log("asdfas");
+                layer.msg("error")
+
+            }
+        })
+    }
+
+    function stopBubble(e) {
+//如果提供了事件对象，则这是一个非IE浏览器
+        if (e && e.stopPropagation)
+        //因此它支持W3C的stopPropagation()方法
+            e.stopPropagation();
+        else
+        //否则，我们需要使用IE的方式来取消事件冒泡
+            window.event.cancelBubble = true;
+    }
+    //阻止浏览器的默认行为
+    function stopDefault(e) {
+        //阻止默认浏览器动作(W3C)
+        if (e && e.preventDefault)
+            e.preventDefault();
+        //IE中阻止函数器默认动作的方式
+        else
+            window.event.returnValue = false;
+        return false;
+    }
+
+</script>
+</html>

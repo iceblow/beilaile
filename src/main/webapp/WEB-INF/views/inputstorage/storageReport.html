@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/inputstorage/storageReport.js"></script>
+<title>生产情况报表</title>
+</head>
+<body>
+	<@p.top/>
+
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">生产情况报表</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<!-- 此div盛放报表图片 -->
+					<div id="container"
+						style="border: 1px black; width: 1280px; height: 768px; margin: 0 auto;"></div>
+					<!-- 隐藏的绝对路径，供jquery使用 -->
+					<input type="hidden" value="${pageContext.request.contextPath}"
+						id="path">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

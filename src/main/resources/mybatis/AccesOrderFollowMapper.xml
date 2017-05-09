@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.AccesOrderFollowMapper">
+    <resultMap id="BaseResultMap" type="com.warehouse.entity.AccesOrderFollow">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="ADD_TIME" property="addTime" jdbcType="VARCHAR"/>
+        <result column="WAVE" property="wave" jdbcType="VARCHAR"/>
+        <result column="ORI_WAVE" property="oriwave" jdbcType="VARCHAR"/>
+        <result column="ORDER_NUM" property="orderNum" jdbcType="INTEGER"/>
+        <result column="ORDER_DETAILS" property="orderDetails" jdbcType="VARCHAR"/>
+        <result column="CROP_DETAILS" property="cropDetails" jdbcType="VARCHAR"/>
+        <result column="CROP_NUM" property="cropNum" jdbcType="INTEGER"/>
+        <result column="CROP_DATE" property="cropDate" jdbcType="VARCHAR"/>
+        <result column="CROP_INFO_UPTT" property="cropInfoUptt" jdbcType="INTEGER"/>
+        <result column="SPEC_FCTRY" property="specFctry" jdbcType="VARCHAR"/>
+        <result column="SPEC_FCTRY_ID" property="specFctryId" jdbcType="VARCHAR"/>
+        <result column="SPEC_FCTRY_DATE" property="specFctryDate" jdbcType="VARCHAR"/>
+        <result column="SPEC_FCTRY_INFO_UPTT" property="specFctryInfoUptt" jdbcType="VARCHAR"/>
+        <result column="ACCES_ONE" property="accesOne" jdbcType="VARCHAR"/>
+        <result column="ACCES_ONE_SERIAL_NUM" property="accesOneSerialNum" jdbcType="VARCHAR"/>
+        <result column="ACCES_ONE_QUANTITY" property="accesOneQuantity" jdbcType="DOUBLE"/>
+        <result column="ACCES_ONE_SINGLE_USE" property="accesOneSingleUse" jdbcType="DOUBLE"/>
+        <result column="ACCES_ONE_ACTUAL_CSPT" property="accesOneActualCspt" jdbcType="INTEGER"/>
+        <result column="ACCES_ONE_SCRAP_RATE" property="accesOneScrapRate" jdbcType="DOUBLE"/>
+        <result column="ACCES_ONE_ETALON_DESCRIPTION" property="accesOneEtalonDescription" jdbcType="VARCHAR"/>
+        <result column="ACCES_TWO" property="accesTwo" jdbcType="VARCHAR"/>
+        <result column="ACCES_TWO_SERIAL_NUM" property="accesTwoSerialNum" jdbcType="VARCHAR"/>
+        <result column="ACCES_TWO_QUANTITY" property="accesTwoQuantity" jdbcType="DOUBLE"/>
+        <result column="ACCES_TWO_SINGLE_USE" property="accesTwoSingleUse" jdbcType="DOUBLE"/>
+        <result column="ACCES_TWO_ACTUAL_CSPT" property="accesTwoActualCspt" jdbcType="INTEGER"/>
+        <result column="ACCES_TWO_SCRAP_RATE" property="accesTwoScrapRate" jdbcType="DOUBLE"/>
+        <result column="ACCES_TWO_ETALON_DESCRIPTION" property="accesTwoEtalonDescription" jdbcType="VARCHAR"/>
+        <result column="ACCES_THREE" property="accesThree" jdbcType="VARCHAR"/>
+        <result column="ACCES_THREE_SERIAL_NUM" property="accesThreeSerialNum" jdbcType="VARCHAR"/>
+        <result column="ACCES_THREE_QUANTITY" property="accesThreeQuantity" jdbcType="DOUBLE"/>
+        <result column="ACCES_THREE_SINGLE_USE" property="accesThreeSingleUse" jdbcType="DOUBLE"/>
+        <result column="ACCES_THREE_ACTUAL_CSPT" property="accesThreeActualCspt" jdbcType="INTEGER"/>
+        <result column="ACCES_THREE_SCRAP_RATE" property="accesThreeScrapRate" jdbcType="DOUBLE"/>
+        <result column="ACCES_THREE_ETALON_DESCRIPTION" property="accesThreeEtalonDescription" jdbcType="VARCHAR"/>
+        <result column="ACCES_FOUR" property="accesFour" jdbcType="VARCHAR"/>
+        <result column="ACCES_FOUR_SERIAL_NUM" property="accesFourSerialNum" jdbcType="VARCHAR"/>
+        <result column="ACCES_FOUR_QUANTITY" property="accesFourQuantity" jdbcType="DOUBLE"/>
+        <result column="ACCES_FOUR_SINGLE_USE" property="accesFourSingleUse" jdbcType="DOUBLE"/>
+        <result column="ACCES_FOUR_ACTUAL_CSPT" property="accesFourActualCspt" jdbcType="INTEGER"/>
+        <result column="ACCES_FOUR_SCRAP_RATE" property="accesFourScrapRate" jdbcType="DOUBLE"/>
+        <result column="ACCES_FOUR_ETALON_DESCRIPTION" property="accesFourEtalonDescription" jdbcType="VARCHAR"/>
+        <result column="ACCES_FIVE" property="accesFive" jdbcType="VARCHAR"/>
+        <result column="ACCES_FIVE_SERIAL_NUM" property="accesFiveSerialNum" jdbcType="VARCHAR"/>
+        <result column="ACCES_FIVE_QUANTITY" property="accesFiveQuantity" jdbcType="DOUBLE"/>
+        <result column="ACCES_FIVE_SINGLE_USE" property="accesFiveSingleUse" jdbcType="DOUBLE"/>
+        <result column="ACCES_FIVE_ACTUAL_CSPT" property="accesFiveActualCspt" jdbcType="INTEGER"/>
+        <result column="ACCES_FIVE_SCRAP_RATE" property="accesFiveScrapRate" jdbcType="DOUBLE"/>
+        <result column="ACCES_FIVE_ETALON_DESCRIPTION" property="accesFiveEtalonDescription" jdbcType="VARCHAR"/>
+        <result column="ACCES_SIX" property="accesSix" jdbcType="VARCHAR"/>
+        <result column="ACCES_SIX_SERIAL_NUM" property="accesSixSerialNum" jdbcType="VARCHAR"/>
+        <result column="ACCES_SIX_QUANTITY" property="accesSixQuantity" jdbcType="DOUBLE"/>
+        <result column="ACCES_SIX_SINGLE_USE" property="accesSixSingleUse" jdbcType="DOUBLE"/>
+        <result column="ACCES_SIX_ACTUAL_CSPT" property="accesSixActualCspt" jdbcType="INTEGER"/>
+        <result column="ACCES_SIX_SCRAP_RATE" property="accesSixScrapRate" jdbcType="DOUBLE"/>
+        <result column="ACCES_SIX_ETALON_DESCRIPTION" property="accesSixEtalonDescription" jdbcType="VARCHAR"/>
+        <result column="ACCES_ODER_SYNCH_TIME" property="accesOderSynchTime" jdbcType="VARCHAR"/>
+        <result column="ACCES_READY_DISTRIBUTE_TIME" property="accesReadyDistributeTime" jdbcType="VARCHAR"/>
+        <result column="ACCES_DISPOSE_TIME_CSPT" property="accesDisposeTimeCspt" jdbcType="VARCHAR"/>
+        <result column="ACCES_STATUS" property="accesStatus" jdbcType="VARCHAR"/>
+        <result column="ACCES_REMARKS" property="accesRemarks" jdbcType="VARCHAR"/>
+        <result column="ACCES_MARK_STATUS" property="accesMarkStatus" jdbcType="VARCHAR"/>
+        <result column="FOUNDER" property="founder" jdbcType="VARCHAR"/>
+        <result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR"/>
+        <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR"/>
+        <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR"/>
+        <result column="SUM_SORT" property="sumSort" jdbcType="VARCHAR"/>
+        <result column="READY_SUM_SORT" property="readySumSort" jdbcType="VARCHAR"/>
+        <result column="FOLLOW_TIME" jdbcType="VARCHAR" property="followTime"/>
+        <result column="FOLLOW_STATUS" jdbcType="VARCHAR" property="followStatus"/>
+        <result column="IMG" jdbcType="VARCHAR" property="img"/>
+        <result column="ISSUE_METHOD" jdbcType="VARCHAR" property="issueMethod"/>
+        <result column="ISSUE_NUM" jdbcType="INTEGER" property="issueNum"/>
+        <result column="IS_REPLENISH_STATUS" jdbcType="VARCHAR" property="isReplenishStatus"/>
+        <result column="REPLENISH_TIME" jdbcType="VARCHAR" property="replenishTime"/>
+        <result column="FOLLOW_EXCEPTION" jdbcType="VARCHAR" property="followException"/>
+        <result column="NUM_DIFF" property="numDiff" jdbcType="INTEGER"/>
+        <result column="ACCES_ONE_ADDTION" property="accesOneAddtion" jdbcType="DOUBLE"/>
+        <result column="ACCES_TWO_ADDTION" property="accesTwoAddtion" jdbcType="DOUBLE"/>
+        <result column="ACCES_THREE_ADDTION" property="accesThreeAddtion" jdbcType="DOUBLE"/>
+        <result column="ACCES_FOUR_ADDTION" property="accesFourAddtion" jdbcType="DOUBLE"/>
+        <result column="ACCES_FIVE_ADDTION" property="accesFiveAddtion" jdbcType="DOUBLE"/>
+        <result column="ACCES_SIX_ADDTION" property="accesSixAddtion" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, ADD_TIME, WAVE, ORI_WAVE, ORDER_NUM, ORDER_DETAILS, CROP_DETAILS, CROP_NUM, CROP_DATE,
+        CROP_INFO_UPTT, SPEC_FCTRY, SPEC_FCTRY_ID, SPEC_FCTRY_DATE, SPEC_FCTRY_INFO_UPTT,
+        ACCES_ONE, ACCES_ONE_SERIAL_NUM, ACCES_ONE_QUANTITY, ACCES_ONE_SINGLE_USE, ACCES_ONE_ACTUAL_CSPT,
+        ACCES_ONE_SCRAP_RATE, ACCES_ONE_ETALON_DESCRIPTION, ACCES_TWO, ACCES_TWO_SERIAL_NUM,
+        ACCES_TWO_QUANTITY, ACCES_TWO_SINGLE_USE, ACCES_TWO_ACTUAL_CSPT, ACCES_TWO_SCRAP_RATE,
+        ACCES_TWO_ETALON_DESCRIPTION, ACCES_THREE, ACCES_THREE_SERIAL_NUM, ACCES_THREE_QUANTITY,
+        ACCES_THREE_SINGLE_USE, ACCES_THREE_ACTUAL_CSPT, ACCES_THREE_SCRAP_RATE, ACCES_THREE_ETALON_DESCRIPTION,
+        ACCES_FOUR, ACCES_FOUR_SERIAL_NUM, ACCES_FOUR_QUANTITY, ACCES_FOUR_SINGLE_USE, ACCES_FOUR_ACTUAL_CSPT,
+        ACCES_FOUR_SCRAP_RATE, ACCES_FOUR_ETALON_DESCRIPTION, ACCES_FIVE, ACCES_FIVE_SERIAL_NUM,
+        ACCES_FIVE_QUANTITY, ACCES_FIVE_SINGLE_USE, ACCES_FIVE_ACTUAL_CSPT, ACCES_FIVE_SCRAP_RATE,
+        ACCES_FIVE_ETALON_DESCRIPTION, ACCES_SIX, ACCES_SIX_SERIAL_NUM, ACCES_SIX_QUANTITY,
+        ACCES_SIX_SINGLE_USE, ACCES_SIX_ACTUAL_CSPT, ACCES_SIX_SCRAP_RATE, ACCES_SIX_ETALON_DESCRIPTION,
+        ACCES_ODER_SYNCH_TIME, ACCES_READY_DISTRIBUTE_TIME, ACCES_DISPOSE_TIME_CSPT, ACCES_STATUS,
+        ACCES_REMARKS, ACCES_MARK_STATUS, FOUNDER, CREATED_TIME, MODIFY_TIME, DELETE_TIME,
+        OPERATOR, OPERATOR_IP, SUM_SORT, READY_SUM_SORT, FOLLOW_TIME, FOLLOW_STATUS, IMG,
+        ISSUE_METHOD, ISSUE_NUM, IS_REPLENISH_STATUS, REPLENISH_TIME, NUM_DIFF, ACCES_ONE_ADDTION,
+        ACCES_TWO_ADDTION, ACCES_THREE_ADDTION, ACCES_FOUR_ADDTION, ACCES_FIVE_ADDTION, ACCES_SIX_ADDTION,FOLLOW_EXCEPTION
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from acces_order_follow
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from acces_order_follow
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.warehouse.entity.AccesOrderFollow">
+        insert into acces_order_follow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="addTime != null">
+                ADD_TIME,
+            </if>
+            <if test="wave != null">
+                WAVE,
+            </if>
+            <if test="oriwave != null">
+                ORI_WAVE,
+            </if>
+            <if test="orderNum != null">
+                ORDER_NUM,
+            </if>
+            <if test="orderDetails != null">
+                ORDER_DETAILS,
+            </if>
+            <if test="cropDetails != null">
+                CROP_DETAILS,
+            </if>
+            <if test="cropNum != null">
+                CROP_NUM,
+            </if>
+            <if test="cropDate != null">
+                CROP_DATE,
+            </if>
+            <if test="cropInfoUptt != null">
+                CROP_INFO_UPTT,
+            </if>
+            <if test="specFctry != null">
+                SPEC_FCTRY,
+            </if>
+            <if test="specFctryId != null">
+                SPEC_FCTRY_ID,
+            </if>
+            <if test="specFctryDate != null">
+                SPEC_FCTRY_DATE,
+            </if>
+            <if test="specFctryInfoUptt != null">
+                SPEC_FCTRY_INFO_UPTT,
+            </if>
+            <if test="accesOne != null">
+                ACCES_ONE,
+            </if>
+            <if test="accesOneSerialNum != null">
+                ACCES_ONE_SERIAL_NUM,
+            </if>
+            <if test="accesOneQuantity != null">
+                ACCES_ONE_QUANTITY,
+            </if>
+            <if test="accesOneSingleUse != null">
+                ACCES_ONE_SINGLE_USE,
+            </if>
+            <if test="accesOneActualCspt != null">
+                ACCES_ONE_ACTUAL_CSPT,
+            </if>
+            <if test="accesOneScrapRate != null">
+                ACCES_ONE_SCRAP_RATE,
+            </if>
+            <if test="accesOneEtalonDescription != null">
+                ACCES_ONE_ETALON_DESCRIPTION,
+            </if>
+            <if test="accesTwo != null">
+                ACCES_TWO,
+            </if>
+            <if test="accesTwoSerialNum != null">
+                ACCES_TWO_SERIAL_NUM,
+            </if>
+            <if test="accesTwoQuantity != null">
+                ACCES_TWO_QUANTITY,
+            </if>
+            <if test="accesTwoSingleUse != null">
+                ACCES_TWO_SINGLE_USE,
+            </if>
+            <if test="accesTwoActualCspt != null">
+                ACCES_TWO_ACTUAL_CSPT,
+            </if>
+            <if test="accesTwoScrapRate != null">
+                ACCES_TWO_SCRAP_RATE,
+            </if>
+            <if test="accesTwoEtalonDescription != null">
+                ACCES_TWO_ETALON_DESCRIPTION,
+            </if>
+            <if test="accesThree != null">
+                ACCES_THREE,
+            </if>
+            <if test="accesThreeSerialNum != null">
+                ACCES_THREE_SERIAL_NUM,
+            </if>
+            <if test="accesThreeQuantity != null">
+                ACCES_THREE_QUANTITY,
+            </if>
+            <if test="accesThreeSingleUse != null">
+                ACCES_THREE_SINGLE_USE,
+            </if>
+            <if test="accesThreeActualCspt != null">
+                ACCES_THREE_ACTUAL_CSPT,
+            </if>
+            <if test="accesThreeScrapRate != null">
+                ACCES_THREE_SCRAP_RATE,
+            </if>
+            <if test="accesThreeEtalonDescription != null">
+                ACCES_THREE_ETALON_DESCRIPTION,
+            </if>
+            <if test="accesFour != null">
+                ACCES_FOUR,
+            </if>
+            <if test="accesFourSerialNum != null">
+                ACCES_FOUR_SERIAL_NUM,
+            </if>
+            <if test="accesFourQuantity != null">
+                ACCES_FOUR_QUANTITY,
+            </if>
+            <if test="accesFourSingleUse != null">
+                ACCES_FOUR_SINGLE_USE,
+            </if>
+            <if test="accesFourActualCspt != null">
+                ACCES_FOUR_ACTUAL_CSPT,
+            </if>
+            <if test="accesFourScrapRate != null">
+                ACCES_FOUR_SCRAP_RATE,
+            </if>
+            <if test="accesFourEtalonDescription != null">
+                ACCES_FOUR_ETALON_DESCRIPTION,
+            </if>
+            <if test="accesFive != null">
+                ACCES_FIVE,
+            </if>
+            <if test="accesFiveSerialNum != null">
+                ACCES_FIVE_SERIAL_NUM,
+            </if>
+            <if test="accesFiveQuantity != null">
+                ACCES_FIVE_QUANTITY,
+            </if>
+            <if test="accesFiveSingleUse != null">
+                ACCES_FIVE_SINGLE_USE,
+            </if>
+            <if test="accesFiveActualCspt != null">
+                ACCES_FIVE_ACTUAL_CSPT,
+            </if>
+            <if test="accesFiveScrapRate != null">
+                ACCES_FIVE_SCRAP_RATE,
+            </if>
+            <if test="accesFiveEtalonDescription != null">
+                ACCES_FIVE_ETALON_DESCRIPTION,
+            </if>
+            <if test="accesSix != null">
+                ACCES_SIX,
+            </if>
+            <if test="accesSixSerialNum != null">
+                ACCES_SIX_SERIAL_NUM,
+            </if>
+            <if test="accesSixQuantity != null">
+                ACCES_SIX_QUANTITY,
+            </if>
+            <if test="accesSixSingleUse != null">
+                ACCES_SIX_SINGLE_USE,
+            </if>
+            <if test="accesSixActualCspt != null">
+                ACCES_SIX_ACTUAL_CSPT,
+            </if>
+            <if test="accesSixScrapRate != null">
+                ACCES_SIX_SCRAP_RATE,
+            </if>
+            <if test="accesSixEtalonDescription != null">
+                ACCES_SIX_ETALON_DESCRIPTION,
+            </if>
+            <if test="accesOderSynchTime != null">
+                ACCES_ODER_SYNCH_TIME,
+            </if>
+            <if test="accesReadyDistributeTime != null">
+                ACCES_READY_DISTRIBUTE_TIME,
+            </if>
+            <if test="accesDisposeTimeCspt != null">
+                ACCES_DISPOSE_TIME_CSPT,
+            </if>
+            <if test="accesStatus != null">
+                ACCES_STATUS,
+            </if>
+            <if test="accesRemarks != null">
+                ACCES_REMARKS,
+            </if>
+            <if test="accesMarkStatus != null">
+                ACCES_MARK_STATUS,
+            </if>
+            <if test="founder != null">
+                FOUNDER,
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME,
+            </if>
+            <if test="modifyTime != null">
+                MODIFY_TIME,
+            </if>
+            <if test="deleteTime != null">
+                DELETE_TIME,
+            </if>
+            <if test="operator != null">
+                OPERATOR,
+            </if>
+            <if test="operatorIp != null">
+                OPERATOR_IP,
+            </if>
+            <if test="sumSort != null">
+                SUM_SORT,
+            </if>
+            <if test="readySumSort != null">
+                READY_SUM_SORT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=VARCHAR},
+            </if>
+            <if test="wave != null">
+                #{wave,jdbcType=VARCHAR},
+            </if>
+            <if test="oriwave != null">
+                #{oriwave,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="orderDetails != null">
+                #{orderDetails,jdbcType=VARCHAR},
+            </if>
+            <if test="cropDetails != null">
+                #{cropDetails,jdbcType=VARCHAR},
+            </if>
+            <if test="cropNum != null">
+                #{cropNum,jdbcType=INTEGER},
+            </if>
+            <if test="cropDate != null">
+                #{cropDate,jdbcType=VARCHAR},
+            </if>
+            <if test="cropInfoUptt != null">
+                #{cropInfoUptt,jdbcType=INTEGER},
+            </if>
+            <if test="specFctry != null">
+                #{specFctry,jdbcType=VARCHAR},
+            </if>
+            <if test="specFctryId != null">
+                #{specFctryId,jdbcType=VARCHAR},
+            </if>
+            <if test="specFctryDate != null">
+                #{specFctryDate,jdbcType=VARCHAR},
+            </if>
+            <if test="specFctryInfoUptt != null">
+                #{specFctryInfoUptt,jdbcType=VARCHAR},
+            </if>
+            <if test="accesOne != null">
+                #{accesOne,jdbcType=VARCHAR},
+            </if>
+            <if test="accesOneSerialNum != null">
+                #{accesOneSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesOneQuantity != null">
+                #{accesOneQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesOneSingleUse != null">
+                #{accesOneSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesOneActualCspt != null">
+                #{accesOneActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesOneScrapRate != null">
+                #{accesOneScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesOneEtalonDescription != null">
+                #{accesOneEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesTwo != null">
+                #{accesTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="accesTwoSerialNum != null">
+                #{accesTwoSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesTwoQuantity != null">
+                #{accesTwoQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesTwoSingleUse != null">
+                #{accesTwoSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesTwoActualCspt != null">
+                #{accesTwoActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesTwoScrapRate != null">
+                #{accesTwoScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesTwoEtalonDescription != null">
+                #{accesTwoEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesThree != null">
+                #{accesThree,jdbcType=VARCHAR},
+            </if>
+            <if test="accesThreeSerialNum != null">
+                #{accesThreeSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesThreeQuantity != null">
+                #{accesThreeQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesThreeSingleUse != null">
+                #{accesThreeSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesThreeActualCspt != null">
+                #{accesThreeActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesThreeScrapRate != null">
+                #{accesThreeScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesThreeEtalonDescription != null">
+                #{accesThreeEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFour != null">
+                #{accesFour,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFourSerialNum != null">
+                #{accesFourSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFourQuantity != null">
+                #{accesFourQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFourSingleUse != null">
+                #{accesFourSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFourActualCspt != null">
+                #{accesFourActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesFourScrapRate != null">
+                #{accesFourScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFourEtalonDescription != null">
+                #{accesFourEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFive != null">
+                #{accesFive,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFiveSerialNum != null">
+                #{accesFiveSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFiveQuantity != null">
+                #{accesFiveQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFiveSingleUse != null">
+                #{accesFiveSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFiveActualCspt != null">
+                #{accesFiveActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesFiveScrapRate != null">
+                #{accesFiveScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFiveEtalonDescription != null">
+                #{accesFiveEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesSix != null">
+                #{accesSix,jdbcType=VARCHAR},
+            </if>
+            <if test="accesSixSerialNum != null">
+                #{accesSixSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesSixQuantity != null">
+                #{accesSixQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesSixSingleUse != null">
+                #{accesSixSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesSixActualCspt != null">
+                #{accesSixActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesSixScrapRate != null">
+                #{accesSixScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesSixEtalonDescription != null">
+                #{accesSixEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesOderSynchTime != null">
+                #{accesOderSynchTime,jdbcType=VARCHAR},
+            </if>
+            <if test="accesReadyDistributeTime != null">
+                #{accesReadyDistributeTime,jdbcType=VARCHAR},
+            </if>
+            <if test="accesDisposeTimeCspt != null">
+                #{accesDisposeTimeCspt,jdbcType=VARCHAR},
+            </if>
+            <if test="accesStatus != null">
+                #{accesStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="accesRemarks != null">
+                #{accesRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="accesMarkStatus != null">
+                #{accesMarkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="founder != null">
+                #{founder,jdbcType=VARCHAR},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteTime != null">
+                #{deleteTime,jdbcType=VARCHAR},
+            </if>
+            <if test="operator != null">
+                #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorIp != null">
+                #{operatorIp,jdbcType=VARCHAR},
+            </if>
+            <if test="sumSort != null">
+                #{sumSort,jdbcType=VARCHAR},
+            </if>
+            <if test="readySumSort != null">
+                #{readySumSort,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.AccesOrderFollow">
+        update acces_order_follow
+        <set>
+            <if test="addTime != null">
+                ADD_TIME = #{addTime,jdbcType=VARCHAR},
+            </if>
+            <if test="wave != null">
+                WAVE = #{wave,jdbcType=VARCHAR},
+            </if>
+            <if test="oriwave != null">
+                ORI_WAVE = #{oriwave,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="orderDetails != null">
+                ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+            </if>
+            <if test="cropDetails != null">
+                CROP_DETAILS = #{cropDetails,jdbcType=VARCHAR},
+            </if>
+            <if test="cropNum != null">
+                CROP_NUM = #{cropNum,jdbcType=INTEGER},
+            </if>
+            <if test="cropDate != null">
+                CROP_DATE = #{cropDate,jdbcType=VARCHAR},
+            </if>
+            <if test="cropInfoUptt != null">
+                CROP_INFO_UPTT = #{cropInfoUptt,jdbcType=INTEGER},
+            </if>
+            <if test="specFctry != null">
+                SPEC_FCTRY = #{specFctry,jdbcType=VARCHAR},
+            </if>
+            <if test="specFctryId != null">
+                SPEC_FCTRY_ID = #{specFctryId,jdbcType=VARCHAR},
+            </if>
+            <if test="specFctryDate != null">
+                SPEC_FCTRY_DATE = #{specFctryDate,jdbcType=VARCHAR},
+            </if>
+            <if test="specFctryInfoUptt != null">
+                SPEC_FCTRY_INFO_UPTT = #{specFctryInfoUptt,jdbcType=VARCHAR},
+            </if>
+            <if test="accesOne != null">
+                ACCES_ONE = #{accesOne,jdbcType=VARCHAR},
+            </if>
+            <if test="accesOneSerialNum != null">
+                ACCES_ONE_SERIAL_NUM = #{accesOneSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesOneQuantity != null">
+                ACCES_ONE_QUANTITY = #{accesOneQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesOneSingleUse != null">
+                ACCES_ONE_SINGLE_USE = #{accesOneSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesOneActualCspt != null">
+                ACCES_ONE_ACTUAL_CSPT = #{accesOneActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesOneScrapRate != null">
+                ACCES_ONE_SCRAP_RATE = #{accesOneScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesOneEtalonDescription != null">
+                ACCES_ONE_ETALON_DESCRIPTION = #{accesOneEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesTwo != null">
+                ACCES_TWO = #{accesTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="accesTwoSerialNum != null">
+                ACCES_TWO_SERIAL_NUM = #{accesTwoSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesTwoQuantity != null">
+                ACCES_TWO_QUANTITY = #{accesTwoQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesTwoSingleUse != null">
+                ACCES_TWO_SINGLE_USE = #{accesTwoSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesTwoActualCspt != null">
+                ACCES_TWO_ACTUAL_CSPT = #{accesTwoActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesTwoScrapRate != null">
+                ACCES_TWO_SCRAP_RATE = #{accesTwoScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesTwoEtalonDescription != null">
+                ACCES_TWO_ETALON_DESCRIPTION = #{accesTwoEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesThree != null">
+                ACCES_THREE = #{accesThree,jdbcType=VARCHAR},
+            </if>
+            <if test="accesThreeSerialNum != null">
+                ACCES_THREE_SERIAL_NUM = #{accesThreeSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesThreeQuantity != null">
+                ACCES_THREE_QUANTITY = #{accesThreeQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesThreeSingleUse != null">
+                ACCES_THREE_SINGLE_USE = #{accesThreeSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesThreeActualCspt != null">
+                ACCES_THREE_ACTUAL_CSPT = #{accesThreeActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesThreeScrapRate != null">
+                ACCES_THREE_SCRAP_RATE = #{accesThreeScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesThreeEtalonDescription != null">
+                ACCES_THREE_ETALON_DESCRIPTION = #{accesThreeEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFour != null">
+                ACCES_FOUR = #{accesFour,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFourSerialNum != null">
+                ACCES_FOUR_SERIAL_NUM = #{accesFourSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFourQuantity != null">
+                ACCES_FOUR_QUANTITY = #{accesFourQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFourSingleUse != null">
+                ACCES_FOUR_SINGLE_USE = #{accesFourSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFourActualCspt != null">
+                ACCES_FOUR_ACTUAL_CSPT = #{accesFourActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesFourScrapRate != null">
+                ACCES_FOUR_SCRAP_RATE = #{accesFourScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFourEtalonDescription != null">
+                ACCES_FOUR_ETALON_DESCRIPTION = #{accesFourEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFive != null">
+                ACCES_FIVE = #{accesFive,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFiveSerialNum != null">
+                ACCES_FIVE_SERIAL_NUM = #{accesFiveSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesFiveQuantity != null">
+                ACCES_FIVE_QUANTITY = #{accesFiveQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFiveSingleUse != null">
+                ACCES_FIVE_SINGLE_USE = #{accesFiveSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFiveActualCspt != null">
+                ACCES_FIVE_ACTUAL_CSPT = #{accesFiveActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesFiveScrapRate != null">
+                ACCES_FIVE_SCRAP_RATE = #{accesFiveScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFiveEtalonDescription != null">
+                ACCES_FIVE_ETALON_DESCRIPTION = #{accesFiveEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesSix != null">
+                ACCES_SIX = #{accesSix,jdbcType=VARCHAR},
+            </if>
+            <if test="accesSixSerialNum != null">
+                ACCES_SIX_SERIAL_NUM = #{accesSixSerialNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accesSixQuantity != null">
+                ACCES_SIX_QUANTITY = #{accesSixQuantity,jdbcType=DOUBLE},
+            </if>
+            <if test="accesSixSingleUse != null">
+                ACCES_SIX_SINGLE_USE = #{accesSixSingleUse,jdbcType=DOUBLE},
+            </if>
+            <if test="accesSixActualCspt != null">
+                ACCES_SIX_ACTUAL_CSPT = #{accesSixActualCspt,jdbcType=INTEGER},
+            </if>
+            <if test="accesSixScrapRate != null">
+                ACCES_SIX_SCRAP_RATE = #{accesSixScrapRate,jdbcType=DOUBLE},
+            </if>
+            <if test="accesSixEtalonDescription != null">
+                ACCES_SIX_ETALON_DESCRIPTION = #{accesSixEtalonDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="accesOderSynchTime != null">
+                ACCES_ODER_SYNCH_TIME = #{accesOderSynchTime,jdbcType=VARCHAR},
+            </if>
+            <if test="accesReadyDistributeTime != null">
+                ACCES_READY_DISTRIBUTE_TIME = #{accesReadyDistributeTime,jdbcType=VARCHAR},
+            </if>
+            <if test="accesDisposeTimeCspt != null">
+                ACCES_DISPOSE_TIME_CSPT = #{accesDisposeTimeCspt,jdbcType=VARCHAR},
+            </if>
+            <if test="accesStatus != null">
+                ACCES_STATUS = #{accesStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="accesRemarks != null">
+                ACCES_REMARKS = #{accesRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="accesMarkStatus != null">
+                ACCES_MARK_STATUS = #{accesMarkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="founder != null">
+                FOUNDER = #{founder,jdbcType=VARCHAR},
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteTime != null">
+                DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+            </if>
+            <if test="operator != null">
+                OPERATOR = #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorIp != null">
+                OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+            </if>
+            <if test="sumSort != null">
+                SUM_SORT = #{sumSort,jdbcType=VARCHAR},
+            </if>
+            <if test="readySumSort != null">
+                READY_SUM_SORT = #{readySumSort,jdbcType=VARCHAR},
+            </if>
+            <if test="issueNum != null">
+                ISSUE_NUM = #{issueNum,jdbcType=INTEGER},
+            </if>
+            <if test="isReplenishStatus != null">
+                IS_REPLENISH_STATUS = #{isReplenishStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="replenishTime != null">
+            REPLENISH_TIME = #{replenishTime,jdbcType=VARCHAR},
+            </if>
+            <if test="followStatus != null">
+                FOLLOW_STATUS = #{followStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="followTime != null">
+                FOLLOW_TIME = #{followTime,jdbcType=VARCHAR},
+            </if>
+            <if test="issueMethod != null">
+                ISSUE_METHOD = #{issueMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="accesOneAddtion != null" >
+                ACCES_ONE_ADDTION = #{accesOneAddtion,jdbcType=DOUBLE},
+            </if>
+            <if test="accesTwoAddtion != null" >
+                ACCES_TWO_ADDTION = #{accesTwoAddtion,jdbcType=DOUBLE},
+            </if>
+            <if test="accesThreeAddtion != null" >
+                ACCES_THREE_ADDTION = #{accesThreeAddtion,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFourAddtion != null" >
+                ACCES_FOUR_ADDTION = #{accesFourAddtion,jdbcType=DOUBLE},
+            </if>
+            <if test="accesFiveAddtion != null" >
+                ACCES_FIVE_ADDTION = #{accesFiveAddtion,jdbcType=DOUBLE},
+            </if>
+            <if test="accesSixAddtion != null" >
+                ACCES_SIX_ADDTION = #{accesSixAddtion,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="orderFollowBpcnt" resultType="java.lang.Integer">
+        SELECT COUNT(0) FROM acces_order_follow where ACCES_MARK_STATUS ='1'
+        <if test="addTime != null and addTime != &quot;&quot; and addTime != &quot;N&quot; and addTime != &quot;Y&quot;">
+            AND ADD_TIME LIKE CONCAT('%',#{addTime,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="addTime == &quot;N&quot;">
+            AND (ADD_TIME ='' OR ADD_TIME
+            IS
+            NULL)
+        </if>
+        <if test="addTime ==&quot;Y&quot;">
+            AND ADD_TIME !=''
+        </if>
+
+        <if test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+            AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="wave == &quot;N&quot;">
+            AND (WAVE ='' OR WAVE
+            IS
+            NULL)
+        </if>
+        <if test="wave ==&quot;Y&quot;">
+            AND WAVE !=''
+        </if>
+        <if test="orderNum != null and orderNum != &quot;&quot; and orderNum != &quot;N&quot; and orderNum != &quot;Y&quot;">
+            AND ORDER_NUM LIKE
+            CONCAT('%',#{orderNum,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="orderNum == &quot;N&quot;">
+            AND (ORDER_NUM ='' OR ORDER_NUM
+            IS
+            NULL)
+        </if>
+        <if test="orderNum ==&quot;Y&quot;">
+            AND ORDER_NUM !=''
+        </if>
+        <if test="issueMethod != null and issueMethod != &quot;&quot; and issueMethod != &quot;N&quot; and issueMethod != &quot;Y&quot;">
+            AND ISSUE_METHOD LIKE
+            CONCAT('%',#{issueMethod,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="issueMethod == &quot;N&quot;">
+            AND (ISSUE_METHOD ='' OR ISSUE_METHOD
+            IS
+            NULL)
+        </if>
+        <if test="issueMethod ==&quot;Y&quot;">
+            AND ISSUE_METHOD !=''
+        </if>
+    </select>
+
+    <select id="orderFollowList" parameterType="Map" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM
+        acces_order_follow
+        WHERE
+        ACCES_MARK_STATUS = '1'
+        <if test="addTime != null and addTime != &quot;&quot; and addTime != &quot;N&quot; and addTime != &quot;Y&quot;">
+            AND ADD_TIME LIKE CONCAT('%',#{addTime,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="addTime == &quot;N&quot;">
+            AND (ADD_TIME ='' OR ADD_TIME
+            IS
+            NULL)
+        </if>
+        <if test="addTime ==&quot;Y&quot;">
+            AND ADD_TIME !=''
+        </if>
+        <if test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+            AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="wave == &quot;N&quot;">
+            AND (WAVE ='' OR WAVE
+            IS
+            NULL)
+        </if>
+        <if test="wave ==&quot;Y&quot;">
+            AND WAVE !=''
+        </if>
+        <if test="numberOrder != null and numberOrder != &quot;&quot; and numberOrder != &quot;N&quot; and numberOrder != &quot;Y&quot;">
+            AND NUMBER_ORDER LIKE
+            CONCAT('%',#{numberOrder,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="numberOrder == &quot;N&quot;">
+            AND (NUMBER_ORDER ='' OR NUMBER_ORDER
+            IS
+            NULL)
+        </if>
+        <if test="numberOrder ==&quot;Y&quot;">
+            AND NUMBER_ORDER !=''
+        </if>
+        <if test="issueMethod != null and issueMethod != &quot;&quot; and issueMethod != &quot;N&quot; and issueMethod != &quot;Y&quot;">
+            AND ISSUE_METHOD LIKE
+            CONCAT('%',#{issueMethod,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="issueMethod == &quot;N&quot;">
+            AND (ISSUE_METHOD ='' OR ISSUE_METHOD
+            IS
+            NULL)
+        </if>
+        <if test="issueMethod ==&quot;Y&quot;">
+            AND ISSUE_METHOD !=''
+        </if>
+
+        ORDER BY FIELD(ACCES_STATUS,'理单完成','确认配发','追加补料单') ASC,CROP_DATE DESC,ACCES_ODER_SYNCH_TIME DESC,WAVE
+        ASC LIMIT #{pageNow},#{pageSize}
+    </select>
+</mapper>

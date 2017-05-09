@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<@p.cache/> <@p.css/> <@p.js/>
+<title>产品上新进度</title>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/product/productOnlineProgress.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">工厂片印领料详单</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div>
+					<div class="col-md-12">
+						<!--<button style="float: right;" class="btn btn-primary btn-lg"
+							data-toggle="modal" data-target="#myModal" id="add">添加</button>-->
+						<div style="float: left;">
+							<form id="myselect_from">
+								<font>波次查询</font> <input type="text" name="wave" id="checkByWave"/>
+								<font>服装名查询</font> <input type="text"name="productName" id="checkByproductName" /> 
+								<font>商品编号查询</font><input type="text" name="productCode" id="checkByproductCode" />
+								<button type="reset" id="checkbtn" class="btn btn-default">查 询</button>
+								<!-- form表单中要给button按钮要设置属性否则默认为form表单提交 -->
+							</form>
+						</div>
+					</div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="30" style="text-align: center; font-size: 16px;">产品上新进度表</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">序列号</th>
+								<th style="text-align: center;">波次号</th>
+								<th style="text-align: center;">商品编码</th>
+								<th style="text-align: center;">图片</th>
+								<th style="text-align: center;">入库状态</th>
+								<th style="text-align: center;">入库时间</th>
+								<th style="text-align: center;">样衣发放装态</th>
+								<th style="text-align: center;">样衣发放时间</th>
+								<th style="text-align: center;">拍摄状态</th>
+								<th style="text-align: center;">拍摄完成时间</th>
+								<th style="text-align: center;">美工P图状态</th>
+								<th style="text-align: center;">美工P图完成时间</th>
+								<th style="text-align: center;">上架状态</th>
+								<th style="text-align: center;">上架时间</th>
+								<th style="text-align: center;">订单等级</th>
+								<!-- <th style="text-align: center;">备 注</th>-->
+							</tr>
+						</thead>
+						<tbody id="tbody">
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+</body>
+</html>

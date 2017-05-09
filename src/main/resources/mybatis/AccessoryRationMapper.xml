@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.AccessoryRationMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.AccessoryRation">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="addDate" jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="ORI_ACCESSORY_NAME" property="oriAccessoriesName" jdbcType="VARCHAR" />
+		<result column="NUMBER_ORDER" property="numberOrder" jdbcType="INTEGER" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="CROP_DETAILS" property="cropDetails" jdbcType="VARCHAR" />
+		<result column="CROP_NUMBER" property="cropNumber" jdbcType="INTEGER" />
+		<result column="DESIGN_CHART" property="designChart" jdbcType="VARCHAR" />
+		<result column="CRAFTS_ORDER" property="craftsOrder" jdbcType="VARCHAR" />
+		<result column="SIZE_CHART" property="sizeChart" jdbcType="VARCHAR" />
+		<result column="EDITION_TYPE" property="editionType" jdbcType="VARCHAR" />
+		<result column="CODE52" property="code52" jdbcType="INTEGER" />
+		<result column="CODE59" property="code59" jdbcType="INTEGER" />
+		<result column="CODE66" property="code66" jdbcType="INTEGER" />
+		<result column="CODE73" property="code73" jdbcType="INTEGER" />
+		<result column="CODE80" property="code80" jdbcType="INTEGER" />
+		<result column="CODE90" property="code90" jdbcType="INTEGER" />
+		<result column="ACCESSORIES_NAME" property="accessoriesName"
+			jdbcType="VARCHAR" />
+		<result column="ACCESSORIES" property="accessories"
+				jdbcType="VARCHAR" />
+		<result column="ACCESSORIES_C_QUANTITY" property="accessoriesQuantity"
+			jdbcType="DOUBLE" />
+		<result column="ACCESSORIES_SCRAP_RATE" property="accessoriesScrapRate" jdbcType="DOUBLE" />
+		<result column="ACCESSORIES_SINGLE_USE" property="accessoriesSingleUse"
+			jdbcType="DOUBLE" />
+		<result column="ACCESSORIES_ACTUAL_CONSUMPTION" property="accessoriesActualConsumption"
+			jdbcType="INTEGER" />
+
+		<result column="REMARKS_RICHARD" property="remarksRichard"
+			jdbcType="VARCHAR" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="ISSUED_STATUS" property="issuedStatus"
+			jdbcType="VARCHAR" />
+		<result column="MARK_STATUS" property="markStatus" jdbcType="VARCHAR" />
+		<result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+		<result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR" />
+		<result column="FABRIC_WAREHOUS_DATE" property="fabricWarehousDate"
+			jdbcType="VARCHAR" />
+		<result column="CROP_DATE" property="cropDate" jdbcType="VARCHAR" />
+		<result column="SPECIFIES_FACTORY" property="specifiesFactory"
+			jdbcType="VARCHAR" />
+		<result column="SPECIFIES_FACTORY_DATE" property="specifiesFactoryDate"
+			jdbcType="DATE" />
+	</resultMap>
+	<select id="getAccessoryRationById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		*
+		from accessory_ration
+		where MARK_STATUS ='1' AND ID
+		=
+		#{id,jdbcType=INTEGER}
+	</select>
+	<select id="getAccessoryRationByPageCount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM accessory_ration where MARK_STATUS ='1' AND 1=1
+		<if
+			test='addDate != null and addDate != "" and addDate != "N" and addDate != "Y"'>
+			AND ADD_DATE LIKE CONCAT('%',#{addDate,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='addDate == "N"'>
+			AND (ADD_DATE ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='addDate =="Y"'>
+			AND ADD_DATE !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND (WAVE ='' OR WAVE
+			IS
+			NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='numberOrder != null and numberOrder != "" and numberOrder != "N" and numberOrder != "Y"'>
+			AND NUMBER_ORDER LIKE
+			CONCAT('%',#{numberOrder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='numberOrder == "N"'>
+			AND (NUMBER_ORDER ='' OR NUMBER_ORDER
+			IS
+			NULL)
+		</if>
+		<if test='numberOrder =="Y"'>
+			AND NUMBER_ORDER !=''
+		</if>
+		<if
+			test='orderDetails != null and orderDetails != "" and orderDetails != "N" and orderDetails != "Y"'>
+			AND ORDER_DETAILS LIKE
+			CONCAT('%',#{orderDetails,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='orderDetails == "N"'>
+			AND (ORDER_DETAILS ='' OR ORDER_DETAILS
+			IS
+			NULL)
+		</if>
+		<if test='orderDetails =="Y"'>
+			AND ORDER_DETAILS !=''
+		</if>
+		<if
+			test='designChart != null and designChart != "" and designChart != "N" and designChart != "Y"'>
+			AND DESIGN_CHART LIKE
+			CONCAT('%',#{designChart,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='designChart == "N"'>
+			AND (DESIGN_CHART ='' OR DESIGN_CHART
+			IS
+			NULL)
+		</if>
+		<if test='designChart =="Y"'>
+			AND DESIGN_CHART !=''
+		</if>
+		<if
+			test='craftsOrder != null and craftsOrder != "" and craftsOrder != "N" and craftsOrder != "Y"'>
+			AND CRAFTS_ORDER LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='craftsOrder == "N"'>
+			AND (CRAFTS_ORDER ='' OR CRAFTS_ORDER
+			IS
+			NULL)
+		</if>
+		<if test='craftsOrder =="Y"'>
+			AND CRAFTS_ORDER !=''
+		</if>
+		<if
+			test='sizeChart != null and sizeChart != "" and sizeChart != "N" and sizeChart != "Y"'>
+			AND SIZE_CHART LIKE
+			CONCAT('%',#{sizeChart,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='sizeChart == "N"'>
+			AND (SIZE_CHART ='' OR SIZE_CHART
+			IS
+			NULL)
+		</if>
+		<if test='sizeChart =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='editionType != null and editionType != "" and editionType != "N" and editionType != "Y"'>
+			AND EDITION_TYPE LIKE
+			CONCAT('%',#{editionType,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='editionType == "N"'>
+			AND (EDITION_TYPE ='' OR EDITION_TYPE
+			IS
+			NULL)
+		</if>
+		<if test='editionType =="Y"'>
+			AND EDITION_TYPE !=''
+		</if>
+		<if
+			test='code59 != null and code59 != "" and code59 != "N" and code59 != "Y"'>
+			AND CODE59 LIKE CONCAT('%',#{code59,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code59 == "N"'>
+			AND (CODE59 ='' OR CODE59
+			IS
+			NULL)
+		</if>
+		<if test='code59 =="Y"'>
+			AND CODE59 !=''
+		</if>
+		<if
+			test='code66 != null and code66 != "" and code66 != "N" and code66 != "Y"'>
+			AND CODE66 LIKE CONCAT('%',#{code66,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code66 == "N"'>
+			AND (CODE66 ='' OR CODE66
+			IS
+			NULL)
+		</if>
+		<if test='code66 =="Y"'>
+			AND CODE66 !=''
+		</if>
+		<if
+			test='code73 != null and code73 != "" and code73 != "N" and code73 != "Y"'>
+			AND CODE73 LIKE CONCAT('%',#{code73,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code73 == "N"'>
+			AND (CODE73 ='' OR CODE73
+			IS
+			NULL)
+		</if>
+		<if test='code73 =="Y"'>
+			AND CODE73 !=''
+		</if>
+		<if
+			test='code80 != null and code80 != "" and code80 != "N" and code80 != "Y"'>
+			AND CODE80 LIKE CONCAT('%',#{code80,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code80 == "N"'>
+			AND (CODE80 ='' OR CODE80
+			IS
+			NULL)
+		</if>
+		<if test='code80 =="Y"'>
+			AND CODE80 !=''
+		</if>
+		<if
+			test='code90 != null and code90 != "" and code90 != "N" and code90 != "Y"'>
+			AND CODE90 LIKE CONCAT('%',#{code90,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code90 == "N"'>
+			AND (CODE90 ='' OR CODE90
+			IS
+			NULL)
+		</if>
+		<if test='code90 =="Y"'>
+			AND CODE90 !=''
+		</if>
+		<if
+			test='packingBagQuantity != null and packingBagQuantity != "" and packingBagQuantity != "N" and packingBagQuantity != "Y"'>
+			AND PACKING_BAG_QUANTITY LIKE
+			CONCAT('%',#{packingBagQuantity,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='packingBagQuantity == "N"'>
+			AND ( PACKING_BAG_QUANTITY ='' OR PACKING_BAG_QUANTITY
+			IS
+			NULL)
+		</if>
+		<if test='packingBagQuantity =="Y"'>
+			AND PACKING_BAG_QUANTITY !=''
+		</if>
+		<if
+			test='packingBagSpecification != null and packingBagSpecification != "" and packingBagSpecification != "N" and packingBagSpecification != "Y"'>
+			AND PACKING_BAG_SPECIFICATION LIKE
+			CONCAT('%',#{packingBagSpecification,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='packingBagSpecification == "N"'>
+			AND ( PACKING_BAG_SPECIFICATION ='' OR
+			PACKING_BAG_SPECIFICATION
+			IS
+			NULL)
+		</if>
+		<if test='packingBagSpecification =="Y"'>
+			AND PACKING_BAG_SPECIFICATION !=''
+		</if>
+
+		<if
+			test='ingredient != null and ingredient != "" and ingredient != "N" and ingredient != "Y"'>
+			AND INGREDIENT LIKE
+			CONCAT('%',#{ingredient,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='ingredient == "N"'>
+			AND (INGREDIENT ='' OR INGREDIENT
+			IS
+			NULL)
+		</if>
+		<if test='ingredient =="Y"'>
+			AND INGREDIENT !=''
+		</if>
+
+		<if
+			test='accessoriesName != null and accessoriesName != "" and accessoriesName != "N" and accessoriesName != "Y"'>
+			AND ACCESSORIES_NAME LIKE
+			CONCAT('%',#{accessoriesName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='accessoriesName == "N"'>
+			AND (ACCESSORIES_NAME ='' OR ACCESSORIES_NAME
+			IS
+			NULL)
+		</if>
+		<if test='accessoriesName =="Y"'>
+			AND ACCESSORIES_NAME !=''
+		</if>
+		<if
+			test='accessoriesQuantity != null and accessoriesQuantity != "" and accessoriesQuantity != "N" and accessoriesQuantity != "Y"'>
+			AND ACCESSORIES_QUANTITY LIKE
+			CONCAT('%',#{accessoriesQuantity,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='accessoriesQuantity == "N"'>
+			AND (ACCESSORIES_QUANTITY ='' OR ACCESSORIES_C_QUANTITY
+			IS
+			NULL)
+		</if>
+		<if test='accessoriesQuantity =="Y"'>
+			AND ACCESSORIES_QUANTITY !=''
+		</if>
+		<if
+			test='remarksRichard != null and remarksRichard != "" and remarksRichard != "N" and remarksRichard != "Y"'>
+			AND REMARKS_RICHARD LIKE
+			CONCAT('%',#{remarksRichard,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='remarksRichard == "N"'>
+			AND (REMARKS_RICHARD ='' OR REMARKS_RICHARD
+			IS
+			NULL)
+		</if>
+		<if test='remarksRichard =="Y"'>
+			AND REMARKS_RICHARD !=''
+		</if>
+		<if
+			test='remarks != null and remarks != "" and remarks != "N" and remarks != "Y"'>
+			AND REMARKS LIKE CONCAT('%',#{remarks,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='remarks == "N"'>
+			AND (REMARKS ='' OR REMARKS
+			IS
+			NULL)
+		</if>
+		<if test='remarks =="Y"'>
+			AND REMARKS !=''
+		</if>
+		<if
+			test='issuedStatus != null and issuedStatus != "" and issuedStatus != "N" and issuedStatus != "Y"'>
+			AND ISSUED_STATUS LIKE
+			CONCAT('%',#{issuedStatus,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='issuedStatus == "N"'>
+			AND (ISSUED_STATUS ='' OR ISSUED_STATUS
+			IS
+			NULL)
+		</if>
+		<if test='issuedStatus =="Y"'>
+			AND ISSUED_STATUS !=''
+		</if>
+		<if
+			test='founder != null and founder != "" and founder != "N" and founder != "Y"'>
+			AND FOUNDER LIKE CONCAT('%',#{founder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='founder == "N"'>
+			AND (FOUNDER ='' OR FOUNDER
+			IS
+			NULL)
+		</if>
+		<if test='founder =="Y"'>
+			AND FOUNDER !=''
+		</if>
+	</select>
+	<select id="findConditionAccessoryRationByPage" parameterType="Map"
+		resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		accessory_ration
+		WHERE
+		MARK_STATUS = '1'
+		AND 1 = 1
+		<if
+			test='addDate != null and addDate != "" and addDate != "N" and addDate != "Y"'>
+			AND ADD_DATE LIKE CONCAT('%',#{addDate,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='addDate == "N"'>
+			AND (ADD_DATE ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='addDate =="Y"'>
+			AND ADD_DATE !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND (WAVE ='' OR WAVE
+			IS
+			NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='numberOrder != null and numberOrder != "" and numberOrder != "N" and numberOrder != "Y"'>
+			AND NUMBER_ORDER LIKE
+			CONCAT('%',#{numberOrder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='numberOrder == "N"'>
+			AND (NUMBER_ORDER ='' OR NUMBER_ORDER
+			IS
+			NULL)
+		</if>
+		<if test='numberOrder =="Y"'>
+			AND NUMBER_ORDER !=''
+		</if>
+		<if
+			test='orderDetails != null and orderDetails != "" and orderDetails != "N" and orderDetails != "Y"'>
+			AND ORDER_DETAILS LIKE
+			CONCAT('%',#{orderDetails,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='orderDetails == "N"'>
+			AND (ORDER_DETAILS ='' OR ORDER_DETAILS
+			IS
+			NULL)
+		</if>
+		<if test='orderDetails =="Y"'>
+			AND ORDER_DETAILS !=''
+		</if>
+		<if
+			test='designChart != null and designChart != "" and designChart != "N" and designChart != "Y"'>
+			AND DESIGN_CHART LIKE
+			CONCAT('%',#{designChart,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='designChart == "N"'>
+			AND (DESIGN_CHART ='' OR DESIGN_CHART
+			IS
+			NULL)
+		</if>
+		<if test='designChart =="Y"'>
+			AND DESIGN_CHART !=''
+		</if>
+		<if
+			test='craftsOrder != null and craftsOrder != "" and craftsOrder != "N" and craftsOrder != "Y"'>
+			AND CRAFTS_ORDER LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='craftsOrder == "N"'>
+			AND (CRAFTS_ORDER ='' OR CRAFTS_ORDER
+			IS
+			NULL)
+		</if>
+		<if test='craftsOrder =="Y"'>
+			AND CRAFTS_ORDER !=''
+		</if>
+		<if
+			test='sizeChart != null and sizeChart != "" and sizeChart != "N" and sizeChart != "Y"'>
+			AND SIZE_CHART LIKE
+			CONCAT('%',#{sizeChart,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='sizeChart == "N"'>
+			AND (SIZE_CHART ='' OR SIZE_CHART
+			IS
+			NULL)
+		</if>
+		<if test='sizeChart =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='editionType != null and editionType != "" and editionType != "N" and editionType != "Y"'>
+			AND EDITION_TYPE LIKE
+			CONCAT('%',#{editionType,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='editionType == "N"'>
+			AND (EDITION_TYPE ='' OR EDITION_TYPE
+			IS
+			NULL)
+		</if>
+		<if test='editionType =="Y"'>
+			AND EDITION_TYPE !=''
+		</if>
+		<if
+			test='code59 != null and code59 != "" and code59 != "N" and code59 != "Y"'>
+			AND CODE59 LIKE CONCAT('%',#{code59,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code59 == "N"'>
+			AND (CODE59 ='' OR CODE59
+			IS
+			NULL)
+		</if>
+		<if test='code59 =="Y"'>
+			AND CODE59 !=''
+		</if>
+		<if
+			test='code66 != null and code66 != "" and code66 != "N" and code66 != "Y"'>
+			AND CODE66 LIKE CONCAT('%',#{code66,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code66 == "N"'>
+			AND (CODE66 ='' OR CODE66
+			IS
+			NULL)
+		</if>
+		<if test='code66 =="Y"'>
+			AND CODE66 !=''
+		</if>
+		<if
+			test='code73 != null and code73 != "" and code73 != "N" and code73 != "Y"'>
+			AND CODE73 LIKE CONCAT('%',#{code73,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code73 == "N"'>
+			AND (CODE73 ='' OR CODE73
+			IS
+			NULL)
+		</if>
+		<if test='code73 =="Y"'>
+			AND CODE73 !=''
+		</if>
+		<if
+			test='code80 != null and code80 != "" and code80 != "N" and code80 != "Y"'>
+			AND CODE80 LIKE CONCAT('%',#{code80,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code80 == "N"'>
+			AND (CODE80 ='' OR CODE80
+			IS
+			NULL)
+		</if>
+		<if test='code80 =="Y"'>
+			AND CODE80 !=''
+		</if>
+		<if
+			test='code90 != null and code90 != "" and code90 != "N" and code90 != "Y"'>
+			AND CODE90 LIKE CONCAT('%',#{code90,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='code90 == "N"'>
+			AND (CODE90 ='' OR CODE90
+			IS
+			NULL)
+		</if>
+		<if test='code90 =="Y"'>
+			AND CODE90 !=''
+		</if>
+		<if
+			test='accessoriesName != null and accessoriesName != "" and accessoriesName != "N" and accessoriesName != "Y"'>
+			AND ACCESSORIES_NAME LIKE
+			CONCAT('%',#{accessoriesName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='accessoriesName == "N"'>
+			AND (ACCESSORIES_NAME ='' OR ACCESSORIES_NAME
+			IS
+			NULL)
+		</if>
+		<if test='accessoriesName =="Y"'>
+			AND ACCESSORIES_NAME !=''
+		</if>
+		<if
+			test='accessoriesQuantity != null and accessoriesQuantity != "" and accessoriesQuantity != "N" and accessoriesQuantity != "Y"'>
+			AND ACCESSORIES_QUANTITY LIKE
+			CONCAT('%',#{accessoriesQuantity,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='accessoriesQuantity == "N"'>
+			AND (ACCESSORIES_QUANTITY ='' OR ACCESSORIES_C_QUANTITY
+			IS
+			NULL)
+		</if>
+		<if test='accessoriesQuantity =="Y"'>
+			AND ACCESSORIES_C_QUANTITY !=''
+		</if>
+		<if
+			test='remarksRichard != null and remarksRichard != "" and remarksRichard != "N" and remarksRichard != "Y"'>
+			AND REMARKS_RICHARD LIKE
+			CONCAT('%',#{remarksRichard,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='remarksRichard == "N"'>
+			AND (REMARKS_RICHARD ='' OR REMARKS_RICHARD
+			IS
+			NULL)
+		</if>
+		<if test='remarksRichard =="Y"'>
+			AND REMARKS_RICHARD !=''
+		</if>
+		<if
+			test='remarks != null and remarks != "" and remarks != "N" and remarks != "Y"'>
+			AND REMARKS LIKE CONCAT('%',#{remarks,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='remarks == "N"'>
+			AND (REMARKS ='' OR REMARKS
+			IS
+			NULL)
+		</if>
+		<if test='remarks =="Y"'>
+			AND REMARKS !=''
+		</if>
+		<if
+			test='issuedStatus != null and issuedStatus != "" and issuedStatus != "N" and issuedStatus != "Y"'>
+			AND ISSUED_STATUS LIKE
+			CONCAT('%',#{issuedStatus,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='issuedStatus == "N"'>
+			AND (ISSUED_STATUS ='' OR ISSUED_STATUS
+			IS
+			NULL)
+		</if>
+		<if test='issuedStatus =="Y"'>
+			AND ISSUED_STATUS !=''
+		</if>
+		<if
+			test='founder != null and founder != "" and founder != "N" and founder != "Y"'>
+			AND FOUNDER LIKE CONCAT('%',#{founder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='founder == "N"'>
+			AND (FOUNDER ='' OR FOUNDER
+			IS
+			NULL)
+		</if>
+		<if test='founder =="Y"'>
+			AND FOUNDER !=''
+		</if>
+		ORDER BY FIELD(ISSUED_STATUS,'理单完成','采购中','准备发放','已发放','驳回') ASC,CROP_DATE DESC,CREATED_TIME DESC,WAVE ASC LIMIT #{pageNow},#{pageSize}
+	</select>
+
+	<update id="updateRationIssuedStatus" parameterType="com.warehouse.entity.AccessoryRation">
+		update accessory_ration
+		<set>
+			<if test="issuedStatus != null">
+				ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR},
+			</if>
+
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

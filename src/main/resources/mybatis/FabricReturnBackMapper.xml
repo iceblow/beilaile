@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FabricReturnBackMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.FabricReturnBack">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="RETURN_PEOPLE" property="returnPeople" jdbcType="VARCHAR" />
+		<result column="RETURN_TIME" property="returnTime" jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="FABRIC_MATERIAL" property="fabricMaterial" jdbcType="VARCHAR" />
+		<result column="COLOUR" property="colour" jdbcType="VARCHAR" />
+		<result column="PARAMETER1" property="parameter1" jdbcType="DOUBLE" />
+		<result column="PARAMETER2" property="parameter2" jdbcType="DOUBLE" />
+		<result column="PARAMETER3" property="parameter3" jdbcType="DOUBLE" />
+		<result column="PARAMETER4" property="parameter4" jdbcType="DOUBLE" />
+		<result column="PARAMETER5" property="parameter5" jdbcType="DOUBLE" />
+		<result column="PARAMETER6" property="parameter6" jdbcType="DOUBLE" />
+		<result column="PARAMETER7" property="parameter7" jdbcType="DOUBLE" />
+		<result column="PARAMETER8" property="parameter8" jdbcType="DOUBLE" />
+		<result column="PARAMETER9" property="parameter9" jdbcType="DOUBLE" />
+		<result column="PARAMETER10" property="parameter10" jdbcType="DOUBLE" />
+		<result column="PARAMETER11" property="parameter11" jdbcType="DOUBLE" />
+		<result column="PARAMETER12" property="parameter12" jdbcType="DOUBLE" />
+		<result column="PARAMETER13" property="parameter13" jdbcType="DOUBLE" />
+		<result column="PARAMETER14" property="parameter14" jdbcType="DOUBLE" />
+		<result column="PARAMETER15" property="parameter15" jdbcType="DOUBLE" />
+		<result column="PARAMETER16" property="parameter16" jdbcType="DOUBLE" />
+		<result column="PARAMETER17" property="parameter17" jdbcType="DOUBLE" />
+		<result column="PARAMETER18" property="parameter18" jdbcType="DOUBLE" />
+		<result column="PARAMETER19" property="parameter19" jdbcType="DOUBLE" />
+		<result column="PARAMETER20" property="parameter20" jdbcType="DOUBLE" />
+		<result column="KG_MERET" property="kgMeret" jdbcType="VARCHAR" />
+		<result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="INTEGER" />
+		<!-- <result column="RETURN_AMOUNT" property="returnAmount" jdbcType="VARCHAR" /> -->
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="DATA_STATE" property="dataState" jdbcType="VARCHAR" />
+		<result column="COLOUR_STATE" property="colourState" jdbcType="VARCHAR" />
+		<result column="PRICE" property="price" jdbcType="VARCHAR" />
+		<result column="FABRIC_RETURN_PRICE" property="fabriceReturnPrice" jdbcType="VARCHAR" />
+		<result column="FABRIC_RETURN_WEIGHT" property="fabriceReturnWeight" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, RETURN_PEOPLE, RETURN_TIME, WAVE, DESIGN_IMG, FABRIC_MATERIAL,
+		COLOUR, PARAMETER1,
+		PARAMETER2, PARAMETER3, PARAMETER4, PARAMETER5, PARAMETER6, PARAMETER7,
+		PARAMETER8,
+		PARAMETER9, PARAMETER10, PARAMETER11, PARAMETER12, PARAMETER13, PARAMETER14,
+		PARAMETER15,
+		PARAMETER16, PARAMETER17, PARAMETER18, PARAMETER19, PARAMETER20, KG_MERET,
+		TOTAL_AMOUNT,
+		<!-- RETURN_AMOUNT, -->
+		REMARKS, ADD_TIME, DELETE_TIME, UPDATE_TIME, DATA_STATE
+	</sql>
+
+	<!-- 根据ID查询 -->
+	<select id="getFabricOutflowById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		*
+		from fabric_return_back
+		where DATA_STATE ='1' AND
+		ID=#{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- 模糊查询返回结果 -->
+	<select id="getFabricOutflowByPageCount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM fabric_return_back where 1=1
+		<if
+			test='returnPeople != null and returnPeople != "" and returnPeople != "N" and returnPeople != "Y"'>
+			AND RETURN_PEOPLE LIKE
+			CONCAT(CONCAT('%',#{returnPeople,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='returnPeople =="N" '>
+			AND ( RETURN_PEOPLE='' OR RETURN_PEOPLE IS NULL)
+		</if>
+		<if test='returnPeople =="Y"'>
+			AND RETURN_PEOPLE !=''
+		</if>
+		<if
+			test='returnTime != null and returnTime != "" and returnTime != "N" and returnTime != "Y"'>
+			AND RETURN_TIME LIKE
+			CONCAT(CONCAT('%',#{returnTime,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='returnTime =="N" '>
+			AND (RETURN_TIME='' OR RETURN_TIME IS NULL)
+		</if>
+		<if test='returnTime =="Y"'>
+			AND RETURN_TIME !=''
+		</if>
+		
+		<if test='colour != null and colour != "" and colour != "N" and colour != "Y"'>
+			AND COLOUR LIKE CONCAT(CONCAT('%',#{COLOUR,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='colour =="N" '>
+			AND (COLOUR='' OR COLOUR IS NULL)
+		</if>
+		<if test='colour =="Y"'>
+			AND COLOUR !=''
+		</if>
+		
+		
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT(CONCAT('%',
+			#{wave,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='wave =="N" '>
+			AND (WAVE='' OR WAVE IS NULL )
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='fabricMaterial != null and fabricMaterial != "" and fabricMaterial != "N" and fabricMaterial != "Y"'>
+			AND FABRIC_MATERIAL LIKE CONCAT(CONCAT('%',
+			#{fabricMaterial,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricMaterial =="N" '>
+			AND (FABRIC_MATERIAL='' OR FABRIC_MATERIAL IS NULL)
+		</if>
+		<if test='fabricMaterial =="Y"'>
+			AND FABRIC_MATERIAL !=''
+		</if>
+		<if
+			test='remarks != null and remarks != "" and remarks != "N" and remarks != "Y"'>
+			AND REMARKS LIKE CONCAT(CONCAT('%',
+			#{remarks,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='remarks =="N" '>
+			AND (REMARKS='' OR REMARKS IS NULL)
+		</if>
+		<if test='remarks =="Y"'>
+			AND REMARKS !=''
+		</if>
+	</select>
+
+	<!-- 分页查询返回结果 DATASTATE = '1' --><!-- <include refid="Base_Column_List" /> -->
+	<select id="findConditionFabricOutflowByPage" resultMap="BaseResultMap"
+		parameterType="Map">
+		select
+		*
+		from fabric_return_back where DATA_STATE = '1' AND 1=1
+		<if
+			test='returnPeople != null and returnPeople != "" and returnPeople 
+		!= "N" and returnPeople != "Y"'> AND RETURN_PEOPLE LIKE
+			CONCAT(CONCAT('%',#{returnPeople,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='returnPeople =="N" '>
+			AND ( RETURN_PEOPLE='' OR RETURN_PEOPLE IS NULL)
+		</if>
+		<if test='returnPeople =="Y"'>
+			AND RETURN_PEOPLE !=''
+		</if>
+		<if
+			test='returnTime != null and returnTime != "" and returnTime != "N" and returnTime != "Y"'>
+			AND RETURN_TIME LIKE
+			CONCAT(CONCAT('%',#{returnTime,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='returnTime =="N" '>
+			AND (RETURN_TIME='' OR RETURN_TIME IS NULL)
+		</if>
+		<if test='returnTime =="Y"'>
+			AND RETURN_TIME !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT(CONCAT('%',
+			#{wave,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='wave =="N" '>
+			AND (WAVE='' OR WAVE IS NULL )
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='fabricMaterial != null and fabricMaterial != "" and fabricMaterial != "N" and fabricMaterial != "Y"'>
+			AND FABRIC_MATERIAL LIKE CONCAT(CONCAT('%',
+			#{fabricMaterial,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricMaterial =="N" '>
+			AND (FABRIC_MATERIAL='' OR FABRIC_MATERIAL IS NULL)
+		</if>
+		<if test='fabricMaterial =="Y"'>
+			AND FABRIC_MATERIAL !=''
+		</if>
+		<if
+			test='remarks != null and remarks != "" and remarks != "N" and remarks != "Y"'>
+			AND REMARKS LIKE CONCAT(CONCAT('%',
+			#{remarks,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='remarks =="N" '>
+			AND (REMARKS='' OR REMARKS IS NULL)
+		</if>
+		<if test='remarks =="Y"'>
+			AND REMARKS !=''
+		</if>
+		ORDER BY ADD_TIME DESC LIMIT #{pageNow},#{pageSize}
+	</select>
+
+	<!-- 插入一条数据 -->
+	<insert id="addFabricOutflow" parameterType="com.warehouse.entity.FabricReturnBack">
+		insert into fabric_return_back
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="returnPeople != null">
+				RETURN_PEOPLE,
+			</if>
+			<if test="returnTime != null">
+				RETURN_TIME,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG,
+			</if>
+			<if test="fabricMaterial != null">
+				FABRIC_MATERIAL,
+			</if>
+			<if test="colour != null">
+				COLOUR,
+			</if>
+			<if test="parameter1 != null">
+				PARAMETER1,
+			</if>
+			<if test="parameter2 != null">
+				PARAMETER2,
+			</if>
+			<if test="parameter3 != null">
+				PARAMETER3,
+			</if>
+			<if test="parameter4 != null">
+				PARAMETER4,
+			</if>
+			<if test="parameter5 != null">
+				PARAMETER5,
+			</if>
+			<if test="parameter6 != null">
+				PARAMETER6,
+			</if>
+			<if test="parameter7 != null">
+				PARAMETER7,
+			</if>
+			<if test="parameter8 != null">
+				PARAMETER8,
+			</if>
+			<if test="parameter9 != null">
+				PARAMETER9,
+			</if>
+			<if test="parameter10 != null">
+				PARAMETER10,
+			</if>
+			<if test="parameter11 != null">
+				PARAMETER11,
+			</if>
+			<if test="parameter12 != null">
+				PARAMETER12,
+			</if>
+			<if test="parameter13 != null">
+				PARAMETER13,
+			</if>
+			<if test="parameter14 != null">
+				PARAMETER14,
+			</if>
+			<if test="parameter15 != null">
+				PARAMETER15,
+			</if>
+			<if test="parameter16 != null">
+				PARAMETER16,
+			</if>
+			<if test="parameter17 != null">
+				PARAMETER17,
+			</if>
+			<if test="parameter18 != null">
+				PARAMETER18,
+			</if>
+			<if test="parameter19 != null">
+				PARAMETER19,
+			</if>
+			<if test="parameter20 != null">
+				PARAMETER20,
+			</if>
+			<if test="kgMeret != null">
+				KG_MERET,
+			</if>
+			<if test="totalAmount != null">
+				TOTAL_AMOUNT,
+			</if>
+			<!-- <if test="returnAmount != null">
+				RETURN_AMOUNT,
+			</if> -->
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME,
+			</if>
+			<if test="dataState != null">
+				DATA_STATE,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="returnPeople != null">
+				#{returnPeople,jdbcType=VARCHAR},
+			</if>
+			<if test="returnTime != null">
+				#{returnTime,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricMaterial != null">
+				#{fabricMaterial,jdbcType=VARCHAR},
+			</if>
+			<if test="colour != null">
+				#{colour,jdbcType=VARCHAR},
+			</if>
+			<if test="parameter1 != null">
+				#{parameter1,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter2 != null">
+				#{parameter2,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter3 != null">
+				#{parameter3,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter4 != null">
+				#{parameter4,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter5 != null">
+				#{parameter5,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter6 != null">
+				#{parameter6,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter7 != null">
+				#{parameter7,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter8 != null">
+				#{parameter8,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter9 != null">
+				#{parameter9,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter10 != null">
+				#{parameter10,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter11 != null">
+				#{parameter11,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter12 != null">
+				#{parameter12,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter13 != null">
+				#{parameter13,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter14 != null">
+				#{parameter14,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter15 != null">
+				#{parameter15,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter16 != null">
+				#{parameter16,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter17 != null">
+				#{parameter17,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter18 != null">
+				#{parameter18,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter19 != null">
+				#{parameter19,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter20 != null">
+				#{parameter20,jdbcType=DOUBLE},
+			</if>
+			<if test="kgMeret != null">
+				#{kgMeret,jdbcType=VARCHAR},
+			</if>
+			<if test="totalAmount != null">
+				#{totalAmount,jdbcType=INTEGER},
+			</if>
+			<if test="returnAmount != null">
+				#{returnAmount,jdbcType=INTEGER},
+			</if>
+
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				#{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="dataState != null">
+				#{dataState,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 跟新一条数据 -->
+	<update id="modifyFabricOutflow" parameterType="com.warehouse.entity.FabricReturnBack">
+		update fabric_return_back
+		<set>
+			<if test="returnPeople != null">
+				RETURN_PEOPLE = #{returnPeople,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="returnTime != null">
+				RETURN_TIME = #{returnTime,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricMaterial != null">
+				FABRIC_MATERIAL = #{fabricMaterial,jdbcType=VARCHAR},
+			</if>
+			<if test="colour != null">
+				COLOUR = #{colour,jdbcType=VARCHAR},
+			</if>
+			<if test="parameter1 != null">
+				PARAMETER1 = #{parameter1,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter2 != null">
+				PARAMETER2 = #{parameter2,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter3 != null">
+				PARAMETER3 = #{parameter3,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter4 != null">
+				PARAMETER4 = #{parameter4,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter5 != null">
+				PARAMETER5 = #{parameter5,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter6 != null">
+				PARAMETER6 = #{parameter6,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter7 != null">
+				PARAMETER7 = #{parameter7,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter8 != null">
+				PARAMETER8 = #{parameter8,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter9 != null">
+				PARAMETER9 = #{parameter9,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter10 != null">
+				PARAMETER10 = #{parameter10,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter11 != null">
+				PARAMETER11 = #{parameter11,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter12 != null">
+				PARAMETER12 = #{parameter12,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter13 != null">
+				PARAMETER13 = #{parameter13,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter14 != null">
+				PARAMETER14 = #{parameter14,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter15 != null">
+				PARAMETER15 = #{parameter15,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter16 != null">
+				PARAMETER16 = #{parameter16,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter17 != null">
+				PARAMETER17 = #{parameter17,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter18 != null">
+				PARAMETER18 = #{parameter18,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter19 != null">
+				PARAMETER19 = #{parameter19,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter20 != null">
+				PARAMETER20 = #{parameter20,jdbcType=DOUBLE},
+			</if>
+			<if test="kgMeret != null">
+				KG_MERET = #{kgMeret,jdbcType=VARCHAR},
+			</if>
+			<if test="totalAmount != null">
+				TOTAL_AMOUNT = #{totalAmount,jdbcType=INTEGER},
+			</if>
+			<!-- <if test="returnAmount != null">
+				RETURN_AMOUNT = #{returnAmount,jdbcType=INTEGER},
+			</if> -->
+			<if test="dataState != null">
+				DATA_STATE = #{dataState,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="dataState != null">
+				DATA_STATE =#{dataState,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="delFabricOutflow" parameterType="com.warehouse.entity.FabricReturnBack">
+		update
+		fabric_return_back
+		set
+		DATA_STATE = '0',
+		DELETE_TIME = #{deleteTime,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	
+		<!-- 修改颜色状态 -->
+	<update id="updateColourById" parameterType="com.warehouse.entity.FabricReturnBack">
+		update
+		fabric_return_back
+		set
+		COLOUR_STATE = '1',
+		DELETE_TIME = #{deleteTime,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	
+
+</mapper>

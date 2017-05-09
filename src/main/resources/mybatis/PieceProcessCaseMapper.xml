@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.PieceProcessCaseMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.PieceProcessCase">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="DESIGNER" property="designer" jdbcType="VARCHAR" />
+		<result column="REFERENCE_PRINTING" property="referencePrinting"
+			jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="PATTERN_CRAFTS_ORDER" property="patternCraftsOrder"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDERS" property="orders" jdbcType="INTEGER" />
+		<result column="PRINTING_FACTORY" property="printingFactory"
+			jdbcType="VARCHAR" />
+		<result column="PIECE_OF_PRINTING_OUT" property="pieceOfPrintingOut"
+			jdbcType="VARCHAR" />
+		<result column="PIECE_OF_PRINTING_IN" property="pieceOfPrintingIn"
+			jdbcType="VARCHAR" />
+		<result column="REQUIRE" property="require" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, WAVE, PRODUCT_CODE, DESIGNER, REFERENCE_PRINTING,
+		DESIGN_IMG,
+		SAMPLE_IMG, PATTERN_CRAFTS_ORDER,
+		ORDER_DETAILS, ORDERS,
+		PRINTING_FACTORY, PIECE_OF_PRINTING_OUT,
+		PIECE_OF_PRINTING_IN,
+		REQUIRE
+	</sql>
+	<!-- 根据ID查询信息 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from piece_process_case
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<!-- 查询数据量 -->
+	<select id="getCount" parameterType="com.warehouse.entity.PieceProcessCase"
+		resultType="java.lang.Integer">
+		select count(*) from piece_process_case where 1=1
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if
+			test='printingFactory!="" and printingFactory!=null'>
+			and PRINTING_FACTORY like CONCAT("%",#{printingFactory},"%")	
+		</if>
+	</select>
+	<!-- 得到分页数据 -->
+	<select id="getDataByPage" parameterType="com.warehouse.entity.PieceProcessCase"
+		resultMap="BaseResultMap">
+		select * from piece_process_case where 1=1
+		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%",#{wave},"%")
+		</if>
+		<if
+			test='printingFactory!="" and printingFactory!=null'>
+			and PRINTING_FACTORY like CONCAT("%",#{printingFactory},"%")	
+		</if>
+		order by PIECE_OF_PRINTING_OUT ASC,wave desc limit #{begin},#{end}
+	</select>
+	<!-- 根据传入条件修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.PieceProcessCase">
+		update piece_process_case
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="designer != null">
+				DESIGNER = #{designer,jdbcType=VARCHAR},
+			</if>
+			<if test="referencePrinting != null">
+				REFERENCE_PRINTING =
+				#{referencePrinting,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="sampleImg != null">
+				SAMPLE_IMG = #{sampleImg,jdbcType=VARCHAR},
+			</if>
+			<if test="patternCraftsOrder != null">
+				PATTERN_CRAFTS_ORDER =
+				#{patternCraftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				ORDERS = #{orders,jdbcType=INTEGER},
+			</if>
+			<if test="printingFactory != null">
+				PRINTING_FACTORY = #{printingFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="pieceOfPrintingOut != null">
+				PIECE_OF_PRINTING_OUT =
+				#{pieceOfPrintingOut,jdbcType=VARCHAR},
+			</if>
+			<if test="pieceOfPrintingIn != null">
+				PIECE_OF_PRINTING_IN =
+				#{pieceOfPrintingIn,jdbcType=VARCHAR},
+			</if>
+			<if test="require != null">
+				REQUIRE = #{require,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 修改所有字段 -->
+	<update id="updateByPrimaryKey" parameterType="com.warehouse.entity.PieceProcessCase">
+		update
+		piece_process_case
+		set WAVE = #{wave,jdbcType=VARCHAR},
+		PRODUCT_CODE =
+		#{productCode,jdbcType=VARCHAR},
+		DESIGNER =
+		#{designer,jdbcType=VARCHAR},
+		REFERENCE_PRINTING =
+		#{referencePrinting,jdbcType=VARCHAR},
+		DESIGN_IMG =
+		#{designImg,jdbcType=VARCHAR},
+		SAMPLE_IMG =
+		#{sampleImg,jdbcType=VARCHAR},
+		PATTERN_CRAFTS_ORDER =
+		#{patternCraftsOrder,jdbcType=VARCHAR},
+		ORDER_DETAILS =
+		#{orderDetails,jdbcType=VARCHAR},
+		ORDERS = #{orders,jdbcType=INTEGER},
+		PRINTING_FACTORY = #{printingFactory,jdbcType=VARCHAR},
+		PIECE_OF_PRINTING_OUT = #{pieceOfPrintingOut,jdbcType=VARCHAR},
+		PIECE_OF_PRINTING_IN = #{pieceOfPrintingIn,jdbcType=VARCHAR},
+		REQUIRE =
+		#{require,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 片印领料 -->
+	<update id="pieceOfPrintingOut" parameterType="com.warehouse.entity.PieceProcessCase">
+		update
+		piece_process_case set PIECE_OF_PRINTING_OUT=curdate() where ID=#{id}
+	</update>
+	<!-- 片印回料 -->
+	<update id="pieceOfPrintingIn" parameterType="com.warehouse.entity.PieceProcessCase">
+		update
+		piece_process_case set PIECE_OF_PRINTING_IN=curdate() where ID=#{id}
+	</update>
+</mapper>

@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<@p.cache/> <@p.js/><@p.css/>
+<script src="/res/js/cutting/layer/layer.js"></script>
+<script src="/res/js/laypage/laypage.js"></script>
+<script src="/res/js/ajaxfileupload.js"></script>
+<script src="/res/js/distribution/distributionFinishProductPerfect.js"></script>
+<title>经销单后道</title>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+	line-height: 25px;
+}
+</style>
+</head>
+<body>
+	<@p.top/>
+
+	<div style="width: 100%" class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">经销单后道</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+				<div>
+					<div class="col-md-12">
+						<form id="mySelect_From" action="/distributionFinishProductPerfect/exportCurrentDistributionFinishData.do" >
+							<div class="col-md-2" style="float: left;">
+								<label for="wave">波次号</label> <input type="text"
+									class="form-control date" name="wave">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="productCode">商品编码</label> <input type="text"
+									class="form-control date" name="productCode">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="clothName">服装名</label> <input type="text"
+									class="form-control date" name="clothName">
+							</div>
+
+							<div class="col-md-2" style="float: left;">
+								<label for="releaseTime">下单时间</label> <input type="text"
+									class="form-control date" name="releaseTime">
+							</div>
+							<br /> <br /> <br />
+							<div class="col-md-2" style="float: left;">
+								<label for="startDeliverTime">出货日期</label> <input type="text"
+									class="form-control date" name="startDeliverTime">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="distributtionFactory">工厂</label> <input type="text"
+									class="form-control date" name="distributtionFactory">
+							</div>
+							<div class="col-md-2" style="float: left;">
+								<label for="trackingOfficer">跟单员</label> <input type="text"
+									class="form-control date" name="trackingOfficer">
+							</div>
+							<div class="col-md-1" style="padding: 20px 0 20px 0;">
+								<select name="orderType">
+									<option value="">订单类型</option>
+									<option value="全经销">全经销</option>
+									<option value="半经销">半经销</option>
+								</select>
+							</div>
+						</form>
+						<div class="col-md-2">
+							<br />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="mySelect">查询</button>
+						</div>
+						<div>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" style="background-color: #428bca;"
+								id="exportCurrentDistributionFinishData">导出Excel</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="30" style="text-align: center; font-size: 16px;">经销单后道表</th>
+							</tr>
+							<tr>
+								<th style="text-align: center;">商品编号</th>
+								<th style="text-align: center;">服装名</th>
+								<th style="text-align: center;">原波次</th>
+								<th style="text-align: center;">波次</th>
+								<th style="text-align: center;">设计图</th>
+								<th style="text-align: center;">工艺单</th>
+								<th style="text-align: center;">尺码图</th>
+								<th style="text-align: center;">订单明细</th>
+								<th style="text-align: center;">订单数量</th>
+								<th style="text-align: center;">订单等级</th>
+								<th style="text-align: center;">订单类型</th>
+								<th style="text-align: center;">经销工厂</th>
+								<th style="text-align: center;">计划入库日期</th>
+								<th style="text-align: center;">跟踪员</th>
+								<th style="text-align: center;">备注</th>
+								<th style="text-align: center;">下单号</th>
+								<th style="text-align: center;">下单时间</th>
+								<th style="text-align: center;">环节开始时间</th>
+								<th style="text-align: center;">工厂报告出货日期</th>
+								<th style="text-align: center;">开始出货</th>
+								<th style="text-align: center;">开始出货日期</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<!-- 分页 -->
+					<div id="pageSystem"
+						style="width: 100%; position: relative; top: 10px;"></div>
+				</div>
+			</div>
+
+			<!-- 隐藏的绝对路径，供jquery使用 -->
+			<input type="hidden" value="${pageContext.request.contextPath}"
+				id="path">
+</body>
+<script type="text/javascript" src="/res/js/input-date.js"></script>
+</html>

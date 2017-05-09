@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ProductBackMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.ProductBack">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="girard" property="girard" jdbcType="VARCHAR" />
+		<result column="girard_old" property="girardOld" jdbcType="VARCHAR" />
+		<result column="productCodes" property="productcodes" jdbcType="VARCHAR" />
+		<result column="productName" property="productname" jdbcType="VARCHAR" />
+		<result column="productShortName" property="productshortname"
+			jdbcType="VARCHAR" />
+		<result column="excleFile" property="exclefile" jdbcType="VARCHAR" />
+		<result column="productImg" property="productimg" jdbcType="VARCHAR" />
+		<result column="productOldName" property="productoldname"
+			jdbcType="VARCHAR" />
+		<result column="code52" property="code52" jdbcType="INTEGER" />
+		<result column="code59" property="code59" jdbcType="INTEGER" />
+		<result column="code66" property="code66" jdbcType="INTEGER" />
+		<result column="code73" property="code73" jdbcType="INTEGER" />
+		<result column="code80" property="code80" jdbcType="INTEGER" />
+		<result column="code90" property="code90" jdbcType="INTEGER" />
+		<result column="code100" property="code100" jdbcType="INTEGER" />
+		<result column="code110" property="code110" jdbcType="INTEGER" />
+		<result column="code120" property="code120" jdbcType="INTEGER" />
+		<result column="code130" property="code130" jdbcType="INTEGER" />
+		<result column="code160" property="code160" jdbcType="INTEGER" />
+		<result column="code170" property="code170" jdbcType="INTEGER" />
+		<result column="stock52" property="stock52" jdbcType="INTEGER" />
+		<result column="stock59" property="stock59" jdbcType="INTEGER" />
+		<result column="stock66" property="stock66" jdbcType="INTEGER" />
+		<result column="stock73" property="stock73" jdbcType="INTEGER" />
+		<result column="stock80" property="stock80" jdbcType="INTEGER" />
+		<result column="stock90" property="stock90" jdbcType="INTEGER" />
+		<result column="stock100" property="stock100" jdbcType="INTEGER" />
+		<result column="stock110" property="stock110" jdbcType="INTEGER" />
+		<result column="stock120" property="stock120" jdbcType="INTEGER" />
+		<result column="stock130" property="stock130" jdbcType="INTEGER" />
+		<result column="stock160" property="stock160" jdbcType="INTEGER" />
+		<result column="stock170" property="stock170" jdbcType="INTEGER" />
+		<result column="sale52" property="sale52" jdbcType="INTEGER" />
+		<result column="sale59" property="sale59" jdbcType="INTEGER" />
+		<result column="sale66" property="sale66" jdbcType="INTEGER" />
+		<result column="sale73" property="sale73" jdbcType="INTEGER" />
+		<result column="sale80" property="sale80" jdbcType="INTEGER" />
+		<result column="sale90" property="sale90" jdbcType="INTEGER" />
+		<result column="sale100" property="sale100" jdbcType="INTEGER" />
+		<result column="sale110" property="sale110" jdbcType="INTEGER" />
+		<result column="sale120" property="sale120" jdbcType="INTEGER" />
+		<result column="sale130" property="sale130" jdbcType="INTEGER" />
+		<result column="sale160" property="sale160" jdbcType="INTEGER" />
+		<result column="sale170" property="sale170" jdbcType="INTEGER" />
+		<result column="total" property="total" jdbcType="INTEGER" />
+		<result column="delb" property="delb" jdbcType="INTEGER" />
+		<result column="expect_time" property="expectTime" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+		<result column="OPERATION" property="operation" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 删除 -->
+	<update id="deleteByPrimaryKey" parameterType="com.warehouse.entity.ProductBack">
+		update
+		product_back set delb=1 ,DEL_TIME=#{delTime}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+	<!-- 添加 -->
+	<insert id="insertSelective" parameterType="com.warehouse.entity.ProductBack">
+		insert into product_back
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="girard != null">
+				girard,
+			</if>
+			<if test="girardOld != null">
+				girard_old,
+			</if>
+			<if test="productcodes != null">
+				productCodes,
+			</if>
+			<if test="productname != null">
+				productName,
+			</if>
+			<if test="productshortname != null">
+				productShortName,
+			</if>
+			<if test="exclefile != null">
+				excleFile,
+			</if>
+			<if test="productimg != null">
+				productImg,
+			</if>
+			<if test="productoldname != null">
+				productOldName,
+			</if>
+			<if test="code52 != null">
+				code52,
+			</if>
+			<if test="code59 != null">
+				code59,
+			</if>
+			<if test="code66 != null">
+				code66,
+			</if>
+			<if test="code73 != null">
+				code73,
+			</if>
+			<if test="code80 != null">
+				code80,
+			</if>
+			<if test="code90 != null">
+				code90,
+			</if>
+			<if test="code100 != null">
+				code100,
+			</if>
+			<if test="code110 != null">
+				code110,
+			</if>
+			<if test="code120 != null">
+				code120,
+			</if>
+			<if test="code130 != null">
+				code130,
+			</if>
+			<if test="code160 != null">
+				code160,
+			</if>
+			<if test="code170 != null">
+				code170,
+			</if>
+			<!-- 库存 -->
+			<if test="stock52 != null">
+				stock52,
+			</if>
+			<if test="stock59 != null">
+				stock59,
+			</if>
+			<if test="stock66 != null">
+				stock66,
+			</if>
+			<if test="stock73 != null">
+				stock73,
+			</if>
+			<if test="stock80 != null">
+				stock80,
+			</if>
+			<if test="stock90 != null">
+				stock90,
+			</if>
+			<if test="stock100 != null">
+				stock100,
+			</if>
+			<if test="stock110 != null">
+				stock110,
+			</if>
+			<if test="stock120 != null">
+				stock120,
+			</if>
+			<if test="stock130 != null">
+				stock130,
+			</if>
+			<if test="stock160 != null">
+				stock160,
+			</if>
+			<if test="stock170 != null">
+				stock170,
+			</if>
+			<!-- 销 -->
+			<if test="sale52 != null">
+				sale52,
+			</if>
+			<if test="sale59 != null">
+				sale59,
+			</if>
+			<if test="sale66 != null">
+				sale66,
+			</if>
+			<if test="sale73 != null">
+				sale73,
+			</if>
+			<if test="sale80 != null">
+				sale80,
+			</if>
+			<if test="sale90 != null">
+				sale90,
+			</if>
+			<if test="sale100 != null">
+				sale100,
+			</if>
+			<if test="sale110 != null">
+				sale110,
+			</if>
+			<if test="sale120 != null">
+				sale120,
+			</if>
+			<if test="sale130 != null">
+				sale130,
+			</if>
+			<if test="sale160 != null">
+				sale160,
+			</if>
+			<if test="sale170 != null">
+				sale170,
+			</if>
+			<if test="total != null">
+				total,
+			</if>
+			<if test="expectTime!=null">
+				expect_time,
+			</if>
+			<if test="delb != null">
+				delb,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+			<if test="operation != null">
+				OPERATION,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="girard != null">
+				#{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="girardOld != null">
+				#{girardOld,jdbcType=VARCHAR},
+			</if>
+			<if test="productcodes != null">
+				#{productcodes,jdbcType=VARCHAR},
+			</if>
+			<if test="productname != null">
+				#{productname,jdbcType=VARCHAR},
+			</if>
+			<if test="productshortname != null">
+				#{productshortname,jdbcType=VARCHAR},
+			</if>
+			<if test="exclefile != null">
+				#{exclefile,jdbcType=VARCHAR},
+			</if>
+			<if test="productimg != null">
+				#{productimg,jdbcType=VARCHAR},
+			</if>
+			<if test="productoldname != null">
+				#{productoldname,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				#{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code59 != null">
+				#{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				#{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				#{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				#{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				#{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				#{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				#{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				#{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				#{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				#{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				#{code170,jdbcType=INTEGER},
+			</if>
+			<!-- 库存 -->
+			<if test="stock52 != null">
+				#{stock52,jdbcType=INTEGER},
+			</if>
+			<if test="stock59 != null">
+				#{stock59,jdbcType=INTEGER},
+			</if>
+			<if test="stock66 != null">
+				#{stock66,jdbcType=INTEGER},
+			</if>
+			<if test="stock73 != null">
+				#{stock73,jdbcType=INTEGER},
+			</if>
+			<if test="stock80 != null">
+				#{stock80,jdbcType=INTEGER},
+			</if>
+			<if test="stock90 != null">
+				#{stock90,jdbcType=INTEGER},
+			</if>
+			<if test="stock100 != null">
+				#{stock100,jdbcType=INTEGER},
+			</if>
+			<if test="stock110 != null">
+				#{stock110,jdbcType=INTEGER},
+			</if>
+			<if test="stock120 != null">
+				#{stock120,jdbcType=INTEGER},
+			</if>
+			<if test="stock130 != null">
+				#{stock130,jdbcType=INTEGER},
+			</if>
+			<if test="stock160 != null">
+				#{stock160,jdbcType=INTEGER},
+			</if>
+			<if test="stock170 != null">
+				#{stock170,jdbcType=INTEGER},
+			</if>
+			<!-- 销 -->
+			<if test="sale52 != null">
+				#{sale52,jdbcType=INTEGER},
+			</if>
+			<if test="sale59 != null">
+				#{sale59,jdbcType=INTEGER},
+			</if>
+			<if test="sale66 != null">
+				#{sale66,jdbcType=INTEGER},
+			</if>
+			<if test="sale73 != null">
+				#{sale73,jdbcType=INTEGER},
+			</if>
+			<if test="sale80 != null">
+				#{sale80,jdbcType=INTEGER},
+			</if>
+			<if test="sale90 != null">
+				#{sale90,jdbcType=INTEGER},
+			</if>
+			<if test="sale100 != null">
+				#{sale100,jdbcType=INTEGER},
+			</if>
+			<if test="sale110 != null">
+				#{sale110,jdbcType=INTEGER},
+			</if>
+			<if test="sale120 != null">
+				#{sale120,jdbcType=INTEGER},
+			</if>
+			<if test="sale130 != null">
+				#{sale130,jdbcType=INTEGER},
+			</if>
+			<if test="sale160 != null">
+				#{sale160,jdbcType=INTEGER},
+			</if>
+			<if test="sale170 != null">
+				#{sale170,jdbcType=INTEGER},
+			</if>
+			<if test="total != null">
+				#{total,jdbcType=INTEGER},
+			</if>
+			<if test="expectTime!=null">
+				#{expectTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delb != null">
+				#{delb,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				#{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.ProductBack">
+		update product_back
+		<set>
+			<if test="girard != null and girard!=''">
+				girard = #{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="girardOld != null and girardOld!=''">
+				girard_old = #{girardOld,jdbcType=VARCHAR},
+			</if>
+			<if test="productcodes != null and productcodes!=''">
+				productCodes = #{productcodes,jdbcType=VARCHAR},
+			</if>
+			<if test="productname != null and productname!=''">
+				productName = #{productname,jdbcType=VARCHAR},
+			</if>
+			<if test="productshortname != null and productshortname!=''">
+				productShortName = #{productshortname,jdbcType=VARCHAR},
+			</if>
+			<if test="exclefile != null and exclefile!=''">
+				excleFile = #{exclefile,jdbcType=VARCHAR},
+			</if>
+			<if test="productimg != null and productimg !=''">
+				productImg = #{productimg,jdbcType=VARCHAR},
+			</if>
+			<if test="productoldname != null and productoldname!=''">
+				productOldName = #{productoldname,jdbcType=VARCHAR},
+			</if>
+			<if test='code52 != null'>
+				code52 = #{code52,jdbcType=INTEGER},
+			</if>
+			<if test='code59 != null'>
+				code59 = #{code59,jdbcType=INTEGER},
+			</if>
+			<if test='code66 != null'>
+				code66 = #{code66,jdbcType=INTEGER},
+			</if>
+			<if test='code73 != null'>
+				code73 = #{code73,jdbcType=INTEGER},
+			</if>
+			<if test='code80 != null'>
+				code80 = #{code80,jdbcType=INTEGER},
+			</if>
+			<if test='code90 != null'>
+				code90 = #{code90,jdbcType=INTEGER},
+			</if>
+			<if test='code100 != null'>
+				code100 = #{code100,jdbcType=INTEGER},
+			</if>
+			<if test='code110 != null'>
+				code110 = #{code110,jdbcType=INTEGER},
+			</if>
+			<if test='code120 != null'>
+				code120 = #{code120,jdbcType=INTEGER},
+			</if>
+			<if test='code130 != null'>
+				code130 = #{code130,jdbcType=INTEGER},
+			</if>
+			<if test='code160 != null'>
+				code160 = #{code160,jdbcType=INTEGER},
+			</if>
+			<if test='code170 != null'>
+				code170 = #{code170,jdbcType=INTEGER},
+			</if>
+			<!-- 库存 -->
+			<if test='stock52 != null'>
+				stock52 = #{stock52,jdbcType=INTEGER},
+			</if>
+			<if test='stock59 != null'>
+				stock59 = #{stock59,jdbcType=INTEGER},
+			</if>
+			<if test='stock66 != null'>
+				stock66 = #{stock66,jdbcType=INTEGER},
+			</if>
+			<if test='stock73 != null'>
+				stock73 = #{stock73,jdbcType=INTEGER},
+			</if>
+			<if test='stock80 != null'>
+				stock80 = #{stock80,jdbcType=INTEGER},
+			</if>
+			<if test='stock90 != null'>
+				stock90 = #{stock90,jdbcType=INTEGER},
+			</if>
+			<if test='stock100 != null'>
+				stock100 = #{stock100,jdbcType=INTEGER},
+			</if>
+			<if test='stock110 != null'>
+				stock110 = #{stock110,jdbcType=INTEGER},
+			</if>
+			<if test='stock120 != null'>
+				stock120 = #{stock120,jdbcType=INTEGER},
+			</if>
+			<if test='stock130 != null'>
+				stock130 = #{stock130,jdbcType=INTEGER},
+			</if>
+			<if test='stock160 != null'>
+				stock160 = #{stock160,jdbcType=INTEGER},
+			</if>
+			<if test='stock170 != null'>
+				stock170 = #{stock170,jdbcType=INTEGER},
+			</if>
+			<!-- 销 -->
+			<if test='sale52 != null'>
+				sale52 = #{sale52,jdbcType=INTEGER},
+			</if>
+			<if test='sale59 != null'>
+				sale59 = #{sale59,jdbcType=INTEGER},
+			</if>
+			<if test='sale66 != null'>
+				sale66 = #{sale66,jdbcType=INTEGER},
+			</if>
+			<if test='sale73 != null'>
+				sale73 = #{sale73,jdbcType=INTEGER},
+			</if>
+			<if test='sale80 != null'>
+				sale80 = #{sale80,jdbcType=INTEGER},
+			</if>
+			<if test='sale90 != null'>
+				sale90 = #{sale90,jdbcType=INTEGER},
+			</if>
+			<if test='sale100 != null'>
+				sale100 = #{sale100,jdbcType=INTEGER},
+			</if>
+			<if test='sale110 != null'>
+				sale110 = #{sale110,jdbcType=INTEGER},
+			</if>
+			<if test='sale120 != null'>
+				sale120 = #{sale120,jdbcType=INTEGER},
+			</if>
+			<if test='sale130 != null'>
+				sale130 = #{sale130,jdbcType=INTEGER},
+			</if>
+			<if test='sale160 != null'>
+				sale160 = #{sale160,jdbcType=INTEGER},
+			</if>
+			<if test='sale170 != null'>
+				sale170 = #{sale170,jdbcType=INTEGER},
+			</if>
+			<if test='total != null and total !=""'>
+				total = #{total,jdbcType=INTEGER},
+			</if>
+			<if test="expectTime!=null and expectTime!=''">
+				expect_time=#{expectTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delb != null and delb!=''">
+				delb = #{delb,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null and remark!=''">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 分页查询 -->
+	<!-- 查询数据量 -->
+	<select id="getCountByPage" parameterType="com.warehouse.entity.ProductBack"
+		resultType="java.lang.Integer">
+		select count(0) from product_back where delb !=1 and 1=1
+		<if test='productcodes!="" and productcodes!=null'>
+			and productCodes like concat("%",#{productcodes},"%")
+		</if>
+		<if test='productname!="" and productname!=null'>
+			and productName like concat("%",#{productname},"%")
+		</if>
+		<if test='girardOld!="" and girardOld!=null'>
+			and girard_old like concat("%",#{girardOld},"%")
+		</if>
+		<!-- <if test='productshortname!="" and productshortname!=null'> and productShortName 
+			like concat("%",#{productshortname},"%") </if> <if test='productoldname!="" 
+			and productoldname!=null'> and productOldName like concat("%",#{productoldname},"%") 
+			</if> <if test='exclefile!="" and exclefile!=null'> and excleFile like concat("%",#{exclefile},"%") 
+			</if> -->
+	</select>
+	<!-- 查询分页数据 -->
+	<select id="getDataByPage" parameterType="com.warehouse.entity.ProductBack"
+		resultMap="BaseResultMap">
+		select * from
+		product_back where delb!=1 and 1=1
+		<if test='productcodes!="" and productcodes!=null'>
+			and productCodes like concat("%",#{productcodes},"%")
+		</if>
+		<if test='girardOld!="" and girardOld!=null'>
+			and girard_old like concat("%",#{girardOld},"%")
+		</if>
+		<if test='productname!="" and productname!=null'>
+			and productName like concat("%",#{productname},"%")
+		</if>
+		<!-- <if test='productshortname!="" and productshortname!=null'> and productShortName 
+			like concat("%",#{productshortname},"%") </if> <if test='productoldname!="" 
+			and productoldname!=null'> and productOldName like concat("%",#{productoldname},"%") 
+			</if> <if test='girardOld!="" and girardOld!=null'> and girard_old like concat("%",#{girardOld},"%") 
+			</if> <if test='exclefile!="" and exclefile!=null'> and excleFile like concat("%",#{exclefile},"%") 
+			</if> -->
+		order by total desc LIMIT #{begin},#{end}
+	</select>
+	<!-- 根据编号查询单条信息 -->
+	<select id="getOne" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from product_back where id=#{id}
+	</select>
+
+	<!-- 调用mysql函数 -->
+	<select id="analysis">
+		{ call produck_back_analysis() }
+	</select>
+
+</mapper>

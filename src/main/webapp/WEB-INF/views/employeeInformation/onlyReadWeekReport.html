@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<title>本周出货计划</title><@p.cache/><@p.css/> <@p.js/>
+<script src="/res/js/laypage/laypage.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {ace.settings.check('main-container', 'fixed')} catch (e) {}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content" >
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#"> Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">本周出货计划</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+			</div>
+			
+			<div class="main-content">
+				<table class="table table-bordered" style="width: 100%; height: 100%;">
+					<thead>
+						<tr>
+							<th colspan="30" style="text-align: center; font-size: 25px;">本周出货计划</th>
+						</tr>
+						<tr>
+							<th>工厂</th>
+							<th>本周出货计划</th>
+							<th>本周实际出货</th>
+							<th>星期一</th>
+							<th>星期二</th>
+							<th>星期三</th>
+							<th>星期四</th>
+							<th>星期五</th>
+							<th>星期六 </th>
+							<th>星期日</th>
+						</tr>
+					</thead>
+					<tbody id="tbody"></tbody>
+			</table>			
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+$(function(){
+	selectAllDate();
+});
+
+ function selectAllDate(){
+	 var url = location.search; //获取url中"?"符后的字串
+	 var str = location.search.substr(1);//字符串日期格式   
+	 var mydate= new Date(Date.parse(str.replace(/-/g,  "/")));      //转换成Data();
+	 
+	 var mondayDate = new Date(mydate.getTime() + 1 * 24 * 60 * 60 * 1000); 
+	 if  ((mondayDate.getMonth() + 1) <= 9 && (mondayDate.getDate()) <= 9 ){
+		 mondayDate = mondayDate.getFullYear()  + "-0" + (mondayDate.getMonth() + 1) + "-0" + mondayDate.getDate(); 
+	 }else if ((mondayDate.getMonth() + 1) <= 9 && (mondayDate.getDate()) >= 10 ){
+		 mondayDate = mondayDate.getFullYear()  + "-0" + (mondayDate.getMonth() + 1) + "-" + mondayDate.getDate(); 
+	 }else if ((mondayDate.getMonth() + 1) >= 10 && (mondayDate.getDate()) <= 9){
+		 mondayDate = mondayDate.getFullYear()  + "-" + (mondayDate.getMonth() + 1) + "-0" + mondayDate.getDate(); 
+	 }else{
+		 mondayDate = mondayDate.getFullYear()  + "-" + (mondayDate.getMonth() + 1) + "-" + mondayDate.getDate(); 
+	 }
+	 
+	 var tuesdayDate = new Date(mydate.getTime() + 2 * 24 * 60 * 60 * 1000);
+	 if  ((tuesdayDate.getMonth() + 1) <= 9 && (tuesdayDate.getDate()) <= 9 ){
+		 tuesdayDate = tuesdayDate.getFullYear()  + "-0" + (tuesdayDate.getMonth() + 1) + "-0" + tuesdayDate.getDate(); 
+	 }else if ((tuesdayDate.getMonth() + 1) <= 9 && (tuesdayDate.getDate()) >= 10 ){
+		 tuesdayDate = tuesdayDate.getFullYear()  + "-0" + (tuesdayDate.getMonth() + 1) + "-" + tuesdayDate.getDate(); 
+	 }else if ((tuesdayDate.getMonth() + 1) >=10 && (tuesdayDate.getDate()) <= 9){
+		 tuesdayDate = tuesdayDate.getFullYear()  + "-" + (tuesdayDate.getMonth() + 1) + "-0" + tuesdayDate.getDate(); 
+	 }else{
+		 tuesdayDate = tuesdayDate.getFullYear()  + "-" + (tuesdayDate.getMonth() + 1) + "-" + tuesdayDate.getDate(); 
+	 }
+	 
+	 var wednesdayDate = new Date(mydate.getTime() + 3 * 24 * 60 * 60 * 1000);
+	 if  ((wednesdayDate.getMonth() + 1) <= 9 && (wednesdayDate.getDate()) <= 9 ){
+		 wednesdayDate = wednesdayDate.getFullYear()  + "-0" + (wednesdayDate.getMonth() + 1) + "-0" + wednesdayDate.getDate(); 
+	 }else if ((wednesdayDate.getMonth() + 1) <= 9&& (wednesdayDate.getDate()) >= 10 ){
+		 wednesdayDate = wednesdayDate.getFullYear()  + "-0" + (wednesdayDate.getMonth() + 1) + "-" + wednesdayDate.getDate(); 
+	 }else if ((wednesdayDate.getMonth() + 1) >= 10 && (wednesdayDate.getDate()) <= 9){
+		 wednesdayDate = wednesdayDate.getFullYear()  + "-" + (wednesdayDate.getMonth() + 1) + "-0" + wednesdayDate.getDate(); 
+	 }else{
+		 wednesdayDate = wednesdayDate.getFullYear()  + "-" + (wednesdayDate.getMonth() + 1) + "-" + wednesdayDate.getDate(); 
+	 }
+	
+	 var thursdayDate = new Date(mydate.getTime() + 4 * 24 * 60 * 60 * 1000); 
+	 if  ((thursdayDate.getMonth() + 1) <= 9 && (thursdayDate.getDate()) <= 9 ){
+		 thursdayDate = thursdayDate.getFullYear()  + "-0" + (thursdayDate.getMonth() + 1) + "-0" + thursdayDate.getDate(); 
+	 }else if ((thursdayDate.getMonth() + 1) <= 9 && (thursdayDate.getDate()) >= 10 ){
+		 thursdayDate = thursdayDate.getFullYear()  + "-0" + (thursdayDate.getMonth() + 1) + "-" + thursdayDate.getDate(); 
+	 }else if ((thursdayDate.getMonth() + 1) >= 10 && (thursdayDate.getDate()) <= 9){
+		 thursdayDate = thursdayDate.getFullYear()  + "-" + (thursdayDate.getMonth() + 1) + "-0" + thursdayDate.getDate(); 
+	 }else{
+		 thursdayDate = thursdayDate.getFullYear()  + "-" + (thursdayDate.getMonth() + 1) + "-" + thursdayDate.getDate(); 
+	 }
+	
+	 var firdayDate = new Date(mydate.getTime() + 5 * 24 * 60 * 60 * 1000); 
+	 if  ((firdayDate.getMonth() + 1) <= 9 && (firdayDate.getDate())<= 9){
+		 firdayDate = firdayDate.getFullYear()  + "-0" + (firdayDate.getMonth() + 1) + "-0" + firdayDate.getDate(); 
+	 }else if ((firdayDate.getMonth() + 1) <= 9 && (firdayDate.getDate()) >= 10 ){
+		 firdayDate = firdayDate.getFullYear()  + "-0" + (firdayDate.getMonth() + 1) + "-" + firdayDate.getDate(); 
+	 }else if ((firdayDate.getMonth() + 1) >= 10 && (firdayDate.getDate()) <= 9){
+		 firdayDate = firdayDate.getFullYear()  + "-" + (firdayDate.getMonth() + 1) + "-0" + firdayDate.getDate(); 
+	 }else{
+		 firdayDate = firdayDate.getFullYear()  + "-" + (firdayDate.getMonth() + 1) + "-" + firdayDate.getDate(); 
+	 }
+	 
+	 var saturdayDate = new Date(mydate.getTime() + 6 * 24 * 60 * 60 * 1000); 
+	 if  ((saturdayDate.getMonth() + 1) <= 9 && (saturdayDate.getDate()) <= 9 ){
+		 saturdayDate = saturdayDate.getFullYear()  + "-0" + (saturdayDate.getMonth() + 1) + "-0" + saturdayDate.getDate(); 
+	 }else if ((saturdayDate.getMonth() + 1) <= 9 && (saturdayDate.getDate()) >= 10 ){
+		 saturdayDate = saturdayDate.getFullYear()  + "-0" + (saturdayDate.getMonth() + 1) + "-" + saturdayDate.getDate(); 
+	 }else if ((saturdayDate.getMonth() + 1) >= 10 && (saturdayDate.getDate()) <= 9){
+		 saturdayDate = saturdayDate.getFullYear()  + "-" + (saturdayDate.getMonth() + 1) + "-0" + saturdayDate.getDate(); 
+	 }else{
+		 saturdayDate = saturdayDate.getFullYear()  + "-" + (saturdayDate.getMonth() + 1) + "-" + saturdayDate.getDate(); 
+	 }
+	
+	 $.ajax({
+		 url : 'weekProductionPlan/weekPlanTwo.do',//指定路勁下的指定方法
+		 data : {date:str},
+		 success : function(data){
+			 $("#tbody").empty();
+			 	var factory =   "<td></td>";
+			 	var targer =    "<td></td>";
+			 	var weekTrueSum ="<td></td>";
+				var monday =    "<td>" + mondayDate + "</td>";
+				var tuesday =   "<td>" + tuesdayDate + "</td>";
+				var wednesday = "<td>" + wednesdayDate + "</td>";
+				var thursday =  "<td>" + thursdayDate + "</td>";
+				var firday =    "<td>" + firdayDate + "</td>";
+				var saturday =  "<td>" + saturdayDate + "</td>";
+				var sunday =    "<td>" + str + "</td>";
+				$("#tbody").append(
+						"<tr id='head'>"+ factory+ targer +weekTrueSum+  monday+ tuesday+ wednesday+ thursday+ firday+ saturday +sunday+"</tr>");	
+				var targerSum=0;
+				var sundaySum=0;
+			 	var mondaySum=0;
+			 	var tuesdaySum=0;
+			 	var wednesdaySum=0;
+			 	var thursdaySum=0;
+			 	var firdaySum=0;
+			 	var saturdaySum=0;
+			 	var allWeekTrueSum=0;
+			 	var reg = new RegExp("[^0-9]"); 
+				$.each (data, function(index, x) {
+					var trueSum=0;
+					var factory = "<td >" + x.factory + "</td>";
+					var targer =  x.targer == null ? "<td > </td>" :"<td >" + x.targer+ "</td>";
+					if(x.targer!=null){
+						var r = x.targer.match(reg);  //匹配目标参数
+						if(r==null){
+							targerSum= targerSum*1 + x.targer*1;
+						}
+					}
+					
+					var monday =  x.monday == null ? "<td class='mydblClick' name='monday'></td>" :"<td class='mydblClick' name='monday'>" + x.monday + "</td>";
+					if(x.monday!=null){
+						var r = x.monday.match(reg);  //匹配目标参数
+						if(r==null){
+							trueSum=trueSum*1 + x.monday*1;
+							mondaySum= mondaySum*1 + x.monday*1;
+						}
+					}
+						
+					var tuesday =  x.tuesday == null ? "<td class='mydblClick' name='tuesday'></td>" :"<td class='mydblClick' name='tuesday'>" + x.tuesday + "</td>";
+					if(x.tuesday!=null){	
+						var r = x.tuesday.match(reg);  //匹配目标参数
+						if(r==null){
+							trueSum=trueSum*1 + x.tuesday*1;
+							tuesdaySum= tuesdaySum*1 + x.tuesday*1;
+						}
+					}
+					var wednesday =  x.wednesday == null ? "<td class='mydblClick' name='wednesday'></td>" :"<td class='mydblClick' name='wednesday'>" + x.wednesday + "</td>";
+					if(x.wednesday != null){
+						var r = x.wednesday.match(reg);  //匹配目标参数
+						if(r==null){
+							trueSum=trueSum*1 + x.wednesday*1;
+							wednesdaySum= wednesdaySum*1 + x.wednesday*1;
+						}
+					}	
+					
+					var thursday = x.thursday == null ? "<td class='mydblClick' name='thursday'></td>" : "<td class='mydblClick' name='thursday'>" + x.thursday + "</td>";
+					if(x.thursday != null){
+						var r = x.thursday.match(reg);  //匹配目标参数
+						if(r==null){
+							trueSum=trueSum*1 + x.thursday*1;
+							thursdaySum= thursdaySum*1 + x.thursday*1;
+						}
+					}	
+					
+					var firday =  x.firday == null ? "<td class='mydblClick' name='firday'></td>" :"<td class='mydblClick' name='firday'>" + x.firday + "</td>";
+					if(x.firday != null){
+						var r = x.firday.match(reg);  //匹配目标参数
+						if(r==null){
+							trueSum=trueSum*1 + x.firday*1;
+							firdaySum= firdaySum*1 + x.firday*1;
+						}
+					}	
+					
+					var saturday =  x.saturday == null ? "<td class='mydblClick' name='saturday'></td>" :"<td class='mydblClick' name='saturday'>" + x.saturday + "</td>";
+					if(x.saturday != null){
+						var r = x.saturday.match(reg);  //匹配目标参数
+						if(r==null){
+							trueSum=trueSum*1 + x.saturday*1;
+							saturdaySum= saturdaySum*1 + x.saturday*1;
+						}
+					}	
+					
+					var sunday =  x.sunday == null ? "<td class='mydblClick' name='sunday'></td>" :"<td class='mydblClick' name='sunday'>" + x.sunday + "</td>";
+					var sundayData= x.sunday==null?0:x.sunday;
+					if(!isNaN(sundayData)){
+						trueSum=trueSum*1 + sundayData*1;
+						sundaySum= sundaySum*1 + sundayData*1;
+						allWeekTrueSum=allWeekTrueSum*1 + trueSum*1;
+					}
+					
+					var weekTrueSum =  "<td >" + trueSum + "</td>";
+					$("#tbody").append(
+						"<tr>" + factory+ targer+ weekTrueSum + monday+ tuesday+ wednesday+ thursday+ firday+ saturday +sunday+"</tr>");	
+				});
+				var factory =   "<td>合计</td>";
+			 	var targer =    "<td>"+ targerSum +"</td>";
+			 	var weekTrueSum =   "<td>"+allWeekTrueSum+"</td>";
+			 	var sunday =    "<td>"+ sundaySum +"</td>";
+				var monday =    "<td>"+ mondaySum +"</td>";
+				var tuesday =   "<td>"+ tuesdaySum +"</td>";
+				var wednesday = "<td>"+ wednesdaySum +"</td>";
+				var thursday =  "<td>"+ thursdaySum +"</td>";
+				var firday =    "<td>"+ firdaySum +"</td>";
+				var saturday =  "<td>"+ saturdaySum +"</td>";
+				$("#tbody").append(
+					"<tr>"+ factory+ targer+ weekTrueSum+  monday+ tuesday+ wednesday+ thursday+ firday+ saturday +sunday+"</tr>"); 
+				mydblclick();
+		 }
+		
+	 }); 
+	 
+ }
+ 
+//设置文本框
+ function mydblclick(){
+ 	 $(".mydblClick").on("dblclick",function() {
+ 		var factoryName= $(this).parent().find("td:eq(0)").text().trim();//获取到工厂名
+  		var thisText = $(this).text().trim();
+ 		var thisName = $(this).attr("name");       //获取文本框的属性名
+ 		var thisVal = $(this).attr("value");
+ 		var num = $(this).parent("tr").children("td").index($(this));
+ 		var time  = $("#head").children("td").eq(num).html();
+ 		var time1 = $("#head").children("td").eq(3).html();
+ 		if(thisName == "targer"){
+ 			$(this).html("<form id='dbUpdateForm'><input type='hidden' name='date' value='"+time1+"' /><input type='text' id='my"+thisName +"' name='" + thisName+ "' value='" + thisText+ "'><input type='hidden' name='factory' value='"+factoryName+"' /></form>");
+ 			$(this).attr("class", "sn");
+ 			submitTarger("my"+thisName);
+ 		}else if(thisName == "factory"){
+ 			$(this).html("<form id='dbUpdateForm'><input type='hidden' name='date' value='"+time1+"' /><input type='text' id='my"+thisName +"' name='" + thisName+ "Now' value='" + thisText+ "'><input type='hidden' name='factory' value='"+factoryName+"' /></form>");
+ 			$(this).attr("class", "sn");
+ 			updateFactory("my"+thisName); 
+ 		}else{
+ 			var targer= $(this).parent().find("td:eq(1)").text().trim();
+ 			$(this).html( "<form id='dbUpdateForm'><input type='hidden' name='id' value=''/><input type='hidden' name='targer' value='"+targer+"' /><input type='hidden' name='date' value='"+time+"' /><input type='hidden' name='factory' value='"+factoryName+"' /><input type='text' id='my"+thisName +"' name='" + thisName+ "' value='" + thisText+ "'/></form>"); 
+ 			$(this).attr("class", "sn");
+ 			submitData("my" + thisName,thisText);
+ 		}
+ 		$("#my"+ thisName).focus();	
+ 	}); 
+ } 
+
+ //提交目标值修改
+ function submitTarger(id){
+ 	 $("#" +id).blur(function() {
+ 			var myform = $("#dbUpdateForm").serialize();
+ 			$.ajax({
+ 			 	 url : 'weekProductionPlan/updateTarger.do',
+ 				 type : 'POST',
+ 				 dataType : 'json',
+ 				 data : myform,
+ 			 	 success : function(data){
+ 					if(data>=1){
+ 						selectAllDate();
+ 					}else{
+ 						alert("修改失败");
+ 					}
+ 			 	}  
+ 		 	});  
+ 	});  
+ }
+
+ //提交数据
+ function submitData( id,thisText){
+ 	if(thisText=="" || thisText==null){          //为空，添加数据
+ 		$("#" +id).blur(function() {
+ 			var myform = $("#dbUpdateForm").serialize();
+ 			var newtxt=$("#"+id).val();
+ 			if(newtxt!=""){
+ 				$.ajax({
+ 				 	url : 'weekProductionPlan/insertData.do',
+ 				 	type : 'POST',
+ 				 	dataType : 'json',
+ 				 	data : myform,
+ 				 	success : function(data){
+ 						if(data==1){
+ 							selectAllDate();
+ 						}else{
+ 							alert("添加失败");
+ 						}
+ 				 	}  
+ 				 });  
+ 			}else{
+ 				selectAllDate();
+ 			}
+ 		 });  
+ 	}else{
+ 		$("#" +id).blur(function() {
+ 			var myform = $("#dbUpdateForm").serialize();
+ 			$.ajax({
+ 		 	 	url : 'weekProductionPlan/updateData.do',
+ 				type : 'POST',
+ 			 	dataType : 'json',
+ 			 	data : myform,
+ 		 		success : function(data){
+ 					if(data<1){
+ 						alert("修改失败");
+ 					}
+ 						selectAllDate();
+ 		 		}  
+ 	 		});
+ 		
+ 		});		
+ 	}
+ }
+
+
+</script>
+</html>
+

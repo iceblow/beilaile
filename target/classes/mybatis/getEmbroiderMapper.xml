@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warehouse.dao.GetEmbroiderMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.GetEmbroider">
+		<id column="eid" jdbcType="INTEGER" property="eid" />
+		<id column="order_id" jdbcType="INTEGER" property="orderId" />
+		<result column="company" jdbcType="VARCHAR" property="company" />
+		<result column="edate" jdbcType="VARCHAR" property="edate" />
+		<result column="girard" jdbcType="VARCHAR" property="girard" />
+		<result column="fabric" jdbcType="VARCHAR" property="fabric" />
+		<result column="code52" jdbcType="INTEGER" property="code52" />
+		<result column="code1" jdbcType="INTEGER" property="code1" />
+		<result column="code2" jdbcType="INTEGER" property="code2" />
+		<result column="code3" jdbcType="INTEGER" property="code3" />
+		<result column="code4" jdbcType="INTEGER" property="code4" />
+		<result column="code5" jdbcType="INTEGER" property="code5" />
+		<result column="code6" jdbcType="INTEGER" property="code6" />
+		<result column="code110" property="code110" jdbcType="INTEGER" />
+		<result column="code120" property="code120" jdbcType="INTEGER" />
+		<result column="code130" property="code130" jdbcType="INTEGER" />
+		<result column="code160" property="code160" jdbcType="INTEGER" />
+		<result column="code170" property="code170" jdbcType="INTEGER" />
+		<result column="total" jdbcType="INTEGER" property="total" />
+		<result column="delb" jdbcType="INTEGER" property="delb" />
+		<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+		<result column="PC_IP" jdbcType="VARCHAR" property="pcIp" />
+		<result column="OPERATION" jdbcType="VARCHAR" property="operation" />
+		<result column="OPERATOR" jdbcType="VARCHAR" property="operator" />
+		<result column="ADD_TIME" jdbcType="VARCHAR" property="addTime" />
+		<result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+		<result column="DEL_TIME" jdbcType="VARCHAR" property="delTime" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+	</resultMap>
+	<!-- 删除 -->
+	<update id="delEmbroider" parameterType="com.warehouse.entity.GetEmbroider">
+		update getembroider set
+		delb=1,DEL_TIME=#{delTime}
+		where eid =#{eid}
+	</update>
+	<insert id="addEmbroider" parameterType="com.warehouse.entity.GetEmbroider">
+		insert into getembroider
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="eid != null">
+				eid,
+			</if>
+			<if test="orderId != null">
+				order_id,
+			</if>
+			<if test="company != null">
+				company,
+			</if>
+			<if test="edate != null">
+				edate,
+			</if>
+			<if test="girard != null">
+				girard,
+			</if>
+			<if test="fabric != null">
+				fabric,
+			</if>
+			<if test="code52 != null">
+				code52,
+			</if>
+			<if test="code1 != null">
+				code1,
+			</if>
+			<if test="code2 != null">
+				code2,
+			</if>
+			<if test="code3 != null">
+				code3,
+			</if>
+			<if test="code4 != null">
+				code4,
+			</if>
+			<if test="code5 != null">
+				code5,
+			</if>
+			<if test="code6 != null">
+				code6,
+			</if>
+			<if test="code110 != null">
+				code110,
+			</if>
+			<if test="code120 != null">
+				code120,
+			</if>
+			<if test="code130 != null">
+				code130,
+			</if>
+			<if test="code160 != null">
+				code160,
+			</if>
+			<if test="code170 != null">
+				code170,
+			</if>
+			<if test="total != null">
+				total,
+			</if>
+			<if test="delb != null">
+				delb,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="pcIp != null">
+				PC_IP,
+			</if>
+			<if test="operation != null">
+				OPERATION,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="eid != null">
+				#{eid,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="company != null">
+				#{company,jdbcType=VARCHAR},
+			</if>
+			<if test="edate != null">
+				#{edate,jdbcType=DATE},
+			</if>
+			<if test="girard != null">
+				#{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="fabric != null">
+				#{fabric,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				#{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code1 != null">
+				#{code1,jdbcType=INTEGER},
+			</if>
+			<if test="code2 != null">
+				#{code2,jdbcType=INTEGER},
+			</if>
+			<if test="code3 != null">
+				#{code3,jdbcType=INTEGER},
+			</if>
+			<if test="code4 != null">
+				#{code4,jdbcType=INTEGER},
+			</if>
+			<if test="code5 != null">
+				#{code5,jdbcType=INTEGER},
+			</if>
+			<if test="code6 != null">
+				#{code6,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				#{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				#{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				#{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				#{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				#{code170,jdbcType=INTEGER},
+			</if>
+			<if test="total != null">
+				#{total,jdbcType=INTEGER},
+			</if>
+			<if test="delb != null">
+				#{delb,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="pcIp != null">
+				#{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				#{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="uppEmbroider" parameterType="com.warehouse.entity.GetEmbroider">
+		update getembroider
+		<set>
+			<if test="orderId != null">
+				order_id = #{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="company != null">
+				company = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="edate != null">
+				edate = #{edate,jdbcType=DATE},
+			</if>
+			<if test="girard != null">
+				girard = #{girard,jdbcType=VARCHAR},
+			</if>
+			<if test="fabric != null">
+				fabric = #{fabric,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				code52 = #{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code1 != null">
+				code1 = #{code1,jdbcType=INTEGER},
+			</if>
+			<if test="code2 != null">
+				code2 = #{code2,jdbcType=INTEGER},
+			</if>
+			<if test="code3 != null">
+				code3 = #{code3,jdbcType=INTEGER},
+			</if>
+			<if test="code4 != null">
+				code4 = #{code4,jdbcType=INTEGER},
+			</if>
+			<if test="code5 != null">
+				code5 = #{code5,jdbcType=INTEGER},
+			</if>
+			<if test="code6 != null">
+				code6 = #{code6,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				code110 = #{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				code120 = #{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				code130 = #{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				code160 = #{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				code170 = #{code170,jdbcType=INTEGER},
+			</if>
+			<if test="total != null">
+				total = #{total,jdbcType=INTEGER},
+			</if>
+			<if test="delb != null">
+				delb = #{delb,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="pcIp != null">
+				PC_IP = #{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where eid = #{eid,jdbcType=INTEGER}
+	</update>
+	<!--模糊查询 -->
+	<select id="getCountByLike" parameterType="com.warehouse.entity.GetEmbroider"
+		resultType="java.lang.Integer">
+		select count(1) from
+		getembroider where delb=0
+		<if test="girard!=null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+	</select>
+	<select id="getEmbroiderByLike" parameterType="com.warehouse.entity.GetEmbroider"
+		resultMap="BaseResultMap">
+		select * from
+		getembroider where delb=0
+		<if test="girard!=null and girard!=''">
+			and girard like concat("%",#{girard},"%")
+		</if>
+		order by edate desc limit #{begin},#{end}
+	</select>
+	<!-- 根据订单号查询 -->
+	<select id="selEmbroider" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from getembroider where delb=0 and
+		order_id=#{orderId}
+	</select>
+</mapper>

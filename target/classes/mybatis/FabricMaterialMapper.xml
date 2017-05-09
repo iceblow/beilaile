@@ -1,0 +1,1862 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FabricMaterialMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.FabricMaterial">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="DESIGNERS" property="designers" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="addDate" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="CLOTHES_STYLE" property="clothesStyle"
+			jdbcType="VARCHAR" />
+		<result column="DESIGN_CHART" property="designChart" jdbcType="VARCHAR" />
+		<result column="CRAFTS_ORDER" property="craftsOrder" jdbcType="VARCHAR" />
+		<result column="SIZE_CHART" property="sizeChart" jdbcType="VARCHAR" />
+		<result column="NUMBER_ORDER" property="numberOrder" jdbcType="INTEGER" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="SUPPLIER" property="supplier" jdbcType="VARCHAR" />
+		<result column="FABRIC_A" property="fabricA" jdbcType="VARCHAR" />
+		<result column="FABRIC_A_COLOR" property="fabricAColor"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_A_LENGTH" property="fabricALength"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_A_SINGLE_USE" property="fabricASingleUse"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_A_ACTUAL_CONSUMPTION" property="fabricAActualConsumption"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_B" property="fabricB" jdbcType="VARCHAR" />
+		<result column="FABRIC_B_COLOR" property="fabricBColor"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_B_LENGTH" property="fabricBLength"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_B_SINGLE_USE" property="fabricBSingleUse"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_B_ACTUAL_CONSUMPTION" property="fabricBActualConsumption"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_C" property="fabricC" jdbcType="VARCHAR" />
+		<result column="FABRIC_C_COLOR" property="fabricCColor"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_C_LENGTH" property="fabricCLength"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_C_SINGLE_USE" property="fabricCSingleUse"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_C_ACTUAL_CONSUMPTION" property="fabricCActualConsumption"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_D" property="fabricD" jdbcType="VARCHAR" />
+		<result column="FABRIC_D_COLOR" property="fabricDColor"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_D_LENGTH" property="fabricDLength"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_D_SINGLE_USE" property="fabricDSingleUse"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_D_ACTUAL_CONSUMPTION" property="fabricDActualConsumption"
+			jdbcType="DOUBLE" />
+
+		<result column="FABRIC_E" property="fabricE" jdbcType="VARCHAR" />
+		<result column="FABRIC_E_COLOR" property="fabricEColor"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_E_LENGTH" property="fabricELength"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_E_SINGLE_USE" property="fabricESingleUse"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_E_ACTUAL_CONSUMPTION" property="fabricEActualConsumption"
+			jdbcType="DOUBLE" />
+
+		<result column="FABRIC_F" property="fabricF" jdbcType="VARCHAR" />
+		<result column="FABRIC_F_COLOR" property="fabricFColor"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_F_LENGTH" property="fabricFLength"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_F_SINGLE_USE" property="fabricFSingleUse"
+			jdbcType="DOUBLE" />
+		<result column="FABRIC_F_ACTUAL_CONSUMPTION" property="fabricFActualConsumption"
+			jdbcType="DOUBLE" />
+
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="ISSUED_STATUS" property="issuedStatus"
+			jdbcType="VARCHAR" />
+		<result column="MARK_STATUS" property="markStatus" jdbcType="VARCHAR" />
+		<result column="CREATED_TIME" property="createdTime" jdbcType="VARCHAR" />
+		<result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="OPERATOR_IP" property="operatorIp" jdbcType="VARCHAR" />
+		<result column="commodityCode" property="commodityCode"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_A_CODE" property="fabricACode" jdbcType="VARCHAR" />
+		<result column="FABRIC_B_CODE" property="fabricBCode" jdbcType="VARCHAR" />
+		<result column="FABRIC_C_CODE" property="fabricCCode" jdbcType="VARCHAR" />
+		<result column="FABRIC_D_CODE" property="fabricDCode" jdbcType="VARCHAR" />
+		<result column="FABRIC_E_CODE" property="fabricECode" jdbcType="VARCHAR" />
+		<result column="FABRIC_F_CODE" property="fabricFCode" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DESIGNERS, ADD_DATE, ORINGINAL_WAVE, WAVE,
+		CLOTHES_STYLE,
+		DESIGN_CHART, CRAFTS_ORDER,
+		SIZE_CHART, NUMBER_ORDER,
+		ORDER_DETAILS, SUPPLIER, FABRIC_A, FABRIC_A_COLOR,
+		FABRIC_A_LENGTH,
+		FABRIC_A_SINGLE_USE, FABRIC_A_ACTUAL_CONSUMPTION, FABRIC_B,
+		FABRIC_B_COLOR,
+		FABRIC_B_LENGTH,
+		FABRIC_B_SINGLE_USE,
+		FABRIC_B_ACTUAL_CONSUMPTION, FABRIC_C, FABRIC_C_COLOR,
+		FABRIC_C_LENGTH,
+		FABRIC_C_SINGLE_USE, FABRIC_C_ACTUAL_CONSUMPTION,
+		FABRIC_D, FABRIC_D_COLOR,
+		FABRIC_D_LENGTH,
+		FABRIC_D_SINGLE_USE,
+		FABRIC_D_ACTUAL_CONSUMPTION,
+		FABRIC_E,
+		FABRIC_E_COLOR,
+		FABRIC_E_LENGTH,
+		FABRIC_E_SINGLE_USE,
+		FABRIC_E_ACTUAL_CONSUMPTION,
+		FABRIC_F,
+		FABRIC_F_COLOR,
+		FABRIC_F_LENGTH,
+		FABRIC_F_SINGLE_USE,
+		FABRIC_F_ACTUAL_CONSUMPTION,
+		REMARKS, ISSUED_STATUS, MARK_STATUS,
+		CREATED_TIME, FOUNDER, MODIFY_TIME,
+		DELETE_TIME, OPERATOR,
+		OPERATOR_IP,commodityCode,FABRIC_A_CODE,
+		FABRIC_B_CODE,FABRIC_C_CODE,FABRIC_D_CODE,
+		FABRIC_E_CODE,FABRIC_F_CODE
+	</sql>
+	<select id="getFabricMaterialById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from fabric_material
+		where MARK_STATUS='1' AND ID
+		=
+		#{id}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		fabric_material
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<select id="findFabricMaterialByExcel" resultMap="BaseResultMap">
+		SELECT * FROM
+		fabric_material WHERE MARK_STATUS = '1' AND ISSUED_STATUS ='1'
+	</select>
+	<select id="selectConditionFabricMaterialByPage" parameterType="Map"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM fabric_material where MARK_STATUS='1' AND(ISSUED_STATUS =1 OR
+		ISSUED_STATUS=2
+		) AND 1=1
+		<if
+			test='designers != null and designers != "" and designers != "N" and designers != "Y"'>
+			AND DESIGNERS LIKE CONCAT('%',#{addDate,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='designers == "N"'>
+			AND(DESIGNERS ='' OR DESIGNERS
+			IS
+			NULL)
+		</if>
+		<if test='designers =="Y"'>
+			AND DESIGNERS !=''
+		</if>
+		<if
+			test='addDate != null and addDate != "" and addDate != "N" and addDate != "Y"'>
+			AND ADD_DATE LIKE CONCAT('%',#{addDate,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='addDate == "N"'>
+			AND(ADD_DATE ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='addDate =="Y"'>
+			AND ADD_DATE !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND(WAVE ='' OR WAVE
+			IS
+			NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='clothesStyle != null and clothesStyle != "" and clothesStyle != "N" and clothesStyle != "Y"'>
+			AND CLOTHES_STYLE LIKE
+			CONCAT('%',#{clothesStyle,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='clothesStyle == "N"'>
+			AND(CLOTHES_STYLE ='' OR CLOTHES_STYLE
+			IS
+			NULL)
+		</if>
+		<if test='clothesStyle =="Y"'>
+			AND CLOTHES_STYLE !=''
+		</if>
+		<if
+			test='numberOrder != null and numberOrder != "" and numberOrder != "N" and numberOrder != "Y"'>
+			AND NUMBER_ORDER LIKE
+			CONCAT('%',#{numberOrder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='numberOrder == "N"'>
+			AND(NUMBER_ORDER ='' OR NUMBER_ORDER
+			IS
+			NULL)
+		</if>
+		<if test='numberOrder =="Y"'>
+			AND NUMBER_ORDER !=''
+		</if>
+		<if
+			test='supplier != null and supplier != "" and supplier != "N" and supplier != "Y"'>
+			AND SUPPLIER LIKE CONCAT('%',#{supplier,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='supplier == "N"'>
+			AND(SUPPLIER ='' OR SUPPLIER
+			IS
+			NULL)
+		</if>
+		<if test='supplier =="Y"'>
+			AND SUPPLIER !=''
+		</if>
+		<if
+			test='founder != null and founder != "" and founder != "N" and founder != "Y"'>
+			AND FOUNDER LIKE CONCAT('%',#{founder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='founder == "N"'>
+			AND(FOUNDER ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='founder =="Y"'>
+			AND FOUNDER !=''
+		</if>
+		ORDER BY
+		ISSUED_STATUS ASC
+		LIMIT
+		#{pageNow},#{pageSize}
+	</select>
+
+	<select id="selectFabricMaterialByPageCount" resultType="java.lang.Integer">
+		SELECT
+		COUNT(0) FROM fabric_material where MARK_STATUS='1'
+		AND(ISSUED_STATUS =1 OR
+		ISSUED_STATUS=2
+		) AND 1=1
+		<if
+			test='designers != null and designers != "" and designers != "N" and designers != "Y"'>
+			AND DESIGNERS LIKE CONCAT('%',#{designers,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='designers == "N"'>
+			AND(DESIGNERS ='' OR DESIGNERS
+			IS
+			NULL)
+		</if>
+		<if test='designers =="Y"'>
+			AND DESIGNERS !=''
+		</if>
+		<if
+			test='addDate != null and addDate != "" and addDate != "N" and addDate != "Y"'>
+			AND ADD_DATE LIKE CONCAT('%',#{addDate,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='addDate == "N"'>
+			AND(ADD_DATE ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='addDate =="Y"'>
+			AND ADD_DATE !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND(WAVE ='' OR WAVE
+			IS
+			NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='clothesStyle != null and clothesStyle != "" and clothesStyle != "N" and clothesStyle != "Y"'>
+			AND CLOTHES_STYLE LIKE
+			CONCAT('%',#{clothesStyle,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='clothesStyle == "N"'>
+			AND(CLOTHES_STYLE ='' OR CLOTHES_STYLE
+			IS
+			NULL)
+		</if>
+		<if test='clothesStyle =="Y"'>
+			AND CLOTHES_STYLE !=''
+		</if>
+		<if
+			test='numberOrder != null and numberOrder != "" and numberOrder != "N" and numberOrder != "Y"'>
+			AND NUMBER_ORDER LIKE
+			CONCAT('%',#{numberOrder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='numberOrder == "N"'>
+			AND(NUMBER_ORDER ='' OR NUMBER_ORDER
+			IS
+			NULL)
+		</if>
+		<if test='numberOrder =="Y"'>
+			AND NUMBER_ORDER !=''
+		</if>
+		<if
+			test='supplier != null and supplier != "" and supplier != "N" and supplier != "Y"'>
+			AND SUPPLIER LIKE CONCAT('%',#{supplier,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='supplier == "N"'>
+			AND(SUPPLIER ='' OR SUPPLIER
+			IS
+			NULL)
+		</if>
+		<if test='supplier =="Y"'>
+			AND SUPPLIER !=''
+		</if>
+		<if
+			test='founder != null and founder != "" and founder != "N" and founder != "Y"'>
+			AND FOUNDER LIKE CONCAT('%',#{founder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='founder == "N"'>
+			AND(FOUNDER ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='founder =="Y"'>
+			AND FOUNDER !=''
+		</if>
+	</select>
+	<select id="findConditionFabricMaterialByPage" parameterType="Map"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM fabric_material where MARK_STATUS='1' AND 1=1
+
+		<if
+			test='designers != null and designers != "" and designers != "N" and designers != "Y"'>
+			AND DESIGNERS LIKE CONCAT('%',#{designers,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='designers == "N"'>
+			AND(DESIGNERS ='' OR DESIGNERS
+			IS
+			NULL)
+		</if>
+		<if test='designers =="Y"'>
+			AND DESIGNERS !=''
+		</if>
+		<if
+			test='addDate != null and addDate != "" and addDate != "N" and addDate != "Y"'>
+			AND ADD_DATE LIKE CONCAT('%',#{addDate,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='addDate == "N"'>
+			AND(ADD_DATE ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='addDate =="Y"'>
+			AND ADD_DATE !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND(WAVE ='' OR WAVE
+			IS
+			NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='clothesStyle != null and clothesStyle != "" and clothesStyle != "N" and clothesStyle != "Y"'>
+			AND CLOTHES_STYLE LIKE
+			CONCAT('%',#{clothesStyle,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='clothesStyle == "N"'>
+			AND(CLOTHES_STYLE ='' OR CLOTHES_STYLE
+			IS
+			NULL)
+		</if>
+		<if test='clothesStyle =="Y"'>
+			AND CLOTHES_STYLE !=''
+		</if>
+		<if
+			test='numberOrder != null and numberOrder != "" and numberOrder != "N" and numberOrder != "Y"'>
+			AND NUMBER_ORDER LIKE
+			CONCAT('%',#{numberOrder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='numberOrder == "N"'>
+			AND(NUMBER_ORDER ='' OR NUMBER_ORDER
+			IS
+			NULL)
+		</if>
+		<if test='numberOrder =="Y"'>
+			AND NUMBER_ORDER !=''
+		</if>
+		<if
+			test='supplier != null and supplier != "" and supplier != "N" and supplier != "Y"'>
+			AND SUPPLIER LIKE CONCAT('%',#{supplier,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='supplier == "N"'>
+			AND(SUPPLIER ='' OR SUPPLIER
+			IS
+			NULL)
+		</if>
+		<if test='supplier =="Y"'>
+			AND SUPPLIER !=''
+		</if>
+		<if
+			test='founder != null and founder != "" and founder != "N" and founder != "Y"'>
+			AND FOUNDER LIKE CONCAT('%',#{founder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='founder == "N"'>
+			AND(FOUNDER ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='founder =="Y"'>
+			AND FOUNDER !=''
+		</if>
+
+		<if
+			test='issuedStatus != null and issuedStatus != "" and issuedStatus != "N" and issuedStatus != "Y"'>
+			AND ISSUED_STATUS LIKE
+			CONCAT('%',#{issuedStatus,jdbcType=VARCHAR},'%')
+		</if>
+
+		ORDER BY FIELD(ISSUED_STATUS, 3,0, 1, 2,5),CREATED_TIME DESC
+		LIMIT
+		#{pageNow},#{pageSize}
+	</select>
+
+	<select id="getFabricMaterialByPageCount" resultType="java.lang.Integer">
+		SELECT
+		COUNT(0) FROM fabric_material where MARK_STATUS = '1' AND 1=1
+		<if
+			test='designers != null and designers != "" and designers != "N" and designers != "Y"'>
+			AND DESIGNERS LIKE CONCAT('%',#{designers,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='designers == "N"'>
+			AND(DESIGNERS ='' OR DESIGNERS
+			IS
+			NULL)
+		</if>
+		<if test='designers =="Y"'>
+			AND DESIGNERS !=''
+		</if>
+		<if
+			test='addDate != null and addDate != "" and addDate != "N" and addDate != "Y"'>
+			AND ADD_DATE LIKE CONCAT('%',#{addDate,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='addDate == "N"'>
+			AND(ADD_DATE ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='addDate =="Y"'>
+			AND ADD_DATE !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='wave == "N"'>
+			AND(WAVE ='' OR WAVE
+			IS
+			NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='clothesStyle != null and clothesStyle != "" and clothesStyle != "N" and clothesStyle != "Y"'>
+			AND CLOTHES_STYLE LIKE
+			CONCAT('%',#{clothesStyle,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='clothesStyle == "N"'>
+			AND(CLOTHES_STYLE ='' OR CLOTHES_STYLE
+			IS
+			NULL)
+		</if>
+		<if test='clothesStyle =="Y"'>
+			AND CLOTHES_STYLE !=''
+		</if>
+		<if
+			test='numberOrder != null and numberOrder != "" and numberOrder != "N" and numberOrder != "Y"'>
+			AND NUMBER_ORDER LIKE
+			CONCAT('%',#{numberOrder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='numberOrder == "N"'>
+			AND(NUMBER_ORDER ='' OR NUMBER_ORDER
+			IS
+			NULL)
+		</if>
+		<if test='numberOrder =="Y"'>
+			AND NUMBER_ORDER !=''
+		</if>
+		<if
+			test='supplier != null and supplier != "" and supplier != "N" and supplier != "Y"'>
+			AND SUPPLIER LIKE CONCAT('%',#{supplier,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='supplier == "N"'>
+			AND(SUPPLIER ='' OR SUPPLIER
+			IS
+			NULL)
+		</if>
+		<if test='supplier =="Y"'>
+			AND SUPPLIER !=''
+		</if>
+		<if
+			test='founder != null and founder != "" and founder != "N" and founder != "Y"'>
+			AND FOUNDER LIKE CONCAT('%',#{founder,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='founder == "N"'>
+			AND(FOUNDER ='' OR ADD_DATE
+			IS
+			NULL)
+		</if>
+		<if test='founder =="Y"'>
+			AND FOUNDER !=''
+		</if>
+	</select>
+	<insert id="addFabricMaterial" parameterType="com.warehouse.entity.FabricMaterial">
+		insert into fabric_material
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="designers != null">
+				DESIGNERS,
+			</if>
+			<if test="addDate != null">
+				ADD_DATE,
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="clothesStyle != null">
+				CLOTHES_STYLE,
+			</if>
+			<if test="designChart != null">
+				DESIGN_CHART,
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER,
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART,
+			</if>
+			<if test="numberOrder != null">
+				NUMBER_ORDER,
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS,
+			</if>
+			<if test="supplier != null">
+				SUPPLIER,
+			</if>
+			<if test="fabricA != null">
+				FABRIC_A,
+			</if>
+			<if test="fabricAColor != null">
+				FABRIC_A_COLOR,
+			</if>
+			<if test="fabricALength != null">
+				FABRIC_A_LENGTH,
+			</if>
+			<if test="fabricASingleUse != null">
+				FABRIC_A_SINGLE_USE,
+			</if>
+			<if test="fabricAActualConsumption != null">
+				FABRIC_A_ACTUAL_CONSUMPTION,
+			</if>
+			<if test="fabricB != null">
+				FABRIC_B,
+			</if>
+			<if test="fabricBColor != null">
+				FABRIC_B_COLOR,
+			</if>
+			<if test="fabricBLength != null">
+				FABRIC_B_LENGTH,
+			</if>
+			<if test="fabricBSingleUse != null">
+				FABRIC_B_SINGLE_USE,
+			</if>
+			<if test="fabricBActualConsumption != null">
+				FABRIC_B_ACTUAL_CONSUMPTION,
+			</if>
+			<if test="fabricC != null">
+				FABRIC_C,
+			</if>
+			<if test="fabricCColor != null">
+				FABRIC_C_COLOR,
+			</if>
+			<if test="fabricCLength != null">
+				FABRIC_C_LENGTH,
+			</if>
+			<if test="fabricCSingleUse != null">
+				FABRIC_C_SINGLE_USE,
+			</if>
+			<if test="fabricCActualConsumption != null">
+				FABRIC_C_ACTUAL_CONSUMPTION,
+			</if>
+			<if test="fabricD != null">
+				FABRIC_D,
+			</if>
+			<if test="fabricDColor != null">
+				FABRIC_D_COLOR,
+			</if>
+			<if test="fabricDLength != null">
+				FABRIC_D_LENGTH,
+			</if>
+			<if test="fabricDSingleUse != null">
+				FABRIC_D_SINGLE_USE,
+			</if>
+			<if test="fabricDActualConsumption != null">
+				FABRIC_D_ACTUAL_CONSUMPTION,
+			</if>
+
+			<if test="fabricE != null">
+				FABRIC_E,
+			</if>
+			<if test="fabricEColor != null">
+				FABRIC_E_COLOR,
+			</if>
+			<if test="fabricELength != null">
+				FABRIC_E_LENGTH,
+			</if>
+			<if test="fabricESingleUse != null">
+				FABRIC_E_SINGLE_USE,
+			</if>
+			<if test="fabricEActualConsumption != null">
+				FABRIC_E_ACTUAL_CONSUMPTION,
+			</if>
+
+			<if test="fabricF != null">
+				FABRIC_F,
+			</if>
+			<if test="fabricFColor != null">
+				FABRIC_F_COLOR,
+			</if>
+			<if test="fabricFLength != null">
+				FABRIC_F_LENGTH,
+			</if>
+			<if test="fabricFSingleUse != null">
+				FABRIC_F_SINGLE_USE,
+			</if>
+			<if test="fabricFActualConsumption != null">
+				FABRIC_F_ACTUAL_CONSUMPTION,
+			</if>
+
+
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="issuedStatus != null">
+				ISSUED_STATUS,
+			</if>
+			<if test="markStatus != null">
+				MARK_STATUS,
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME,
+			</if>
+			<if test="founder != null">
+				FOUNDER,
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME,
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP,
+			</if>
+			<if test="commodityCode != null">
+				commodityCode,
+			</if>
+
+			<if test="fabricACode != null">
+				FABRIC_A_CODE,
+			</if>
+			<if test="fabricBCode != null">
+				FABRIC_B_CODE,
+			</if>
+			<if test="fabricCCode != null">
+				FABRIC_C_CODE,
+			</if>
+			<if test="fabricDCode != null">
+				FABRIC_D_CODE,
+			</if>
+			<if test="fabricECode != null">
+				FABRIC_E_CODE,
+			</if>
+			<if test="fabricFCode != null">
+				FABRIC_F_CODE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="designers != null">
+				#{designers,jdbcType=VARCHAR},
+			</if>
+			<if test="addDate != null">
+				#{addDate,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				#{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="clothesStyle != null">
+				#{clothesStyle,jdbcType=VARCHAR},
+			</if>
+			<if test="designChart != null">
+				#{designChart,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				#{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				#{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="numberOrder != null">
+				#{numberOrder,jdbcType=INTEGER},
+			</if>
+			<if test="orderDetails != null">
+				#{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier != null">
+				#{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricA != null">
+				#{fabricA,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricAColor != null">
+				#{fabricAColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricALength != null">
+				#{fabricALength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricASingleUse != null">
+				#{fabricASingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricAActualConsumption != null">
+				#{fabricAActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricB != null">
+				#{fabricB,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBColor != null">
+				#{fabricBColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBLength != null">
+				#{fabricBLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBSingleUse != null">
+				#{fabricBSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBActualConsumption != null">
+				#{fabricBActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricC != null">
+				#{fabricC,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCColor != null">
+				#{fabricCColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCLength != null">
+				#{fabricCLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCSingleUse != null">
+				#{fabricCSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCActualConsumption != null">
+				#{fabricCActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricD != null">
+				#{fabricD,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDColor != null">
+				#{fabricDColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDLength != null">
+				#{fabricDLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDSingleUse != null">
+				#{fabricDSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDActualConsumption != null">
+				#{fabricDActualConsumption,jdbcType=DOUBLE},
+			</if>
+
+			<if test="fabricE != null">
+				#{fabricE,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricEColor != null">
+				#{fabricEColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricELength != null">
+				#{fabricELength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricESingleUse != null">
+				#{fabricESingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricEActualConsumption != null">
+				#{fabricEActualConsumption,jdbcType=DOUBLE},
+			</if>
+
+			<if test="fabricF != null">
+				#{fabricF,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFColor != null">
+				#{fabricFColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFLength != null">
+				#{fabricFLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFSingleUse != null">
+				#{fabricFSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFActualConsumption != null">
+				#{fabricFActualConsumption,jdbcType=DOUBLE},
+			</if>
+
+
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedStatus != null">
+				#{issuedStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="markStatus != null">
+				#{markStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				#{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				#{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				#{operatorIp,jdbcType=VARCHAR},
+			</if>
+			<if test="commodityCode != null">
+				#{commodityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricACode != null">
+				#{fabricACode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBCode != null">
+				#{fabricBCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCCode != null">
+				#{fabricCCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDCode != null">
+				#{fabricDCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricECode != null">
+				#{fabricECode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFCode != null">
+				#{fabricFCode,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="modifyFabricMaterial" parameterType="com.warehouse.entity.FabricMaterial">
+		update fabric_material
+		<set>
+			<if test="designers != null">
+				DESIGNERS = #{designers,jdbcType=VARCHAR},
+			</if>
+			<if test="addDate != null">
+				ADD_DATE = #{addDate,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="clothesStyle != null">
+				CLOTHES_STYLE = #{clothesStyle,jdbcType=VARCHAR},
+			</if>
+			<if test="designChart != null">
+				DESIGN_CHART = #{designChart,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER = #{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="numberOrder != null">
+				NUMBER_ORDER = #{numberOrder,jdbcType=INTEGER},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier != null">
+				SUPPLIER = #{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricA != null">
+				FABRIC_A = #{fabricA,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricAColor != null">
+				FABRIC_A_COLOR = #{fabricAColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricALength != null">
+				FABRIC_A_LENGTH = #{fabricALength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricASingleUse != null">
+				FABRIC_A_SINGLE_USE =
+				#{fabricASingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricAActualConsumption != null">
+				FABRIC_A_ACTUAL_CONSUMPTION =
+				#{fabricAActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricB != null">
+				FABRIC_B = #{fabricB,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBColor != null">
+				FABRIC_B_COLOR = #{fabricBColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBLength != null">
+				FABRIC_B_LENGTH = #{fabricBLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBSingleUse != null">
+				FABRIC_B_SINGLE_USE =
+				#{fabricBSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBActualConsumption != null">
+				FABRIC_B_ACTUAL_CONSUMPTION =
+				#{fabricBActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricC != null">
+				FABRIC_C = #{fabricC,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCColor != null">
+				FABRIC_C_COLOR = #{fabricCColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCLength != null">
+				FABRIC_C_LENGTH = #{fabricCLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCSingleUse != null">
+				FABRIC_C_SINGLE_USE =
+				#{fabricCSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCActualConsumption != null">
+				FABRIC_C_ACTUAL_CONSUMPTION =
+				#{fabricCActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricD != null">
+				FABRIC_D = #{fabricD,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDColor != null">
+				FABRIC_D_COLOR = #{fabricDColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDLength != null">
+				FABRIC_D_LENGTH = #{fabricDLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDSingleUse != null">
+				FABRIC_D_SINGLE_USE =
+				#{fabricDSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDActualConsumption != null">
+				FABRIC_D_ACTUAL_CONSUMPTION =
+				#{fabricDActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricD != null">
+				FABRIC_D = #{fabricD,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDColor != null">
+				FABRIC_D_COLOR = #{fabricDColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDLength != null">
+				FABRIC_D_LENGTH = #{fabricDLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDSingleUse != null">
+				FABRIC_D_SINGLE_USE =
+				#{fabricDSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDActualConsumption != null">
+				FABRIC_D_ACTUAL_CONSUMPTION =
+				#{fabricDActualConsumption,jdbcType=DOUBLE},
+			</if>
+
+			<if test="fabricE != null">
+				FABRIC_E = #{fabricE,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricEColor != null">
+				FABRIC_E_COLOR = #{fabricEColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricELength != null">
+				FABRIC_E_LENGTH = #{fabricELength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricESingleUse != null">
+				FABRIC_E_SINGLE_USE =
+				#{fabricESingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricEActualConsumption != null">
+				FABRIC_E_ACTUAL_CONSUMPTION =
+				#{fabricEActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricF != null">
+				FABRIC_F = #{fabricF,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFColor != null">
+				FABRIC_F_COLOR = #{fabricFColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFLength != null">
+				FABRIC_F_LENGTH = #{fabricFLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFSingleUse != null">
+				FABRIC_F_SINGLE_USE =
+				#{fabricFSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFActualConsumption != null">
+				FABRIC_F_ACTUAL_CONSUMPTION =
+				#{fabricFActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedStatus != null">
+				ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="markStatus != null">
+				MARK_STATUS = #{markStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+			<if test="commodityCode != null">
+				commodityCode = #{commodityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricACode != null">
+				FABRIC_A_CODE = #{fabricACode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBCode != null">
+				FABRIC_B_CODE = #{fabricBCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCCode != null">
+				FABRIC_C_CODE = #{fabricCCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDCode != null">
+				FABRIC_D_CODE = #{fabricDCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricECode != null">
+				FABRIC_E_CODE = #{fabricECode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFCode != null">
+				FABRIC_F_CODE = #{fabricFCode,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateFabricMaterialByStatus" parameterType="com.warehouse.entity.FabricMaterial">
+		update fabric_material
+		<set>
+			<if test="designers != null">
+				DESIGNERS = #{designers,jdbcType=VARCHAR},
+			</if>
+			<if test="addDate != null">
+				ADD_DATE = #{addDate,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="clothesStyle != null">
+				CLOTHES_STYLE = #{clothesStyle,jdbcType=VARCHAR},
+			</if>
+			<if test="designChart != null">
+				DESIGN_CHART = #{designChart,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER = #{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="numberOrder != null">
+				NUMBER_ORDER = #{numberOrder,jdbcType=INTEGER},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier != null">
+				SUPPLIER = #{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricA != null">
+				FABRIC_A = #{fabricA,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricAColor != null">
+				FABRIC_A_COLOR = #{fabricAColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricALength != null">
+				FABRIC_A_LENGTH = #{fabricALength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricASingleUse != null">
+				FABRIC_A_SINGLE_USE =
+				#{fabricASingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricAActualConsumption != null">
+				FABRIC_A_ACTUAL_CONSUMPTION =
+				#{fabricAActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricB != null">
+				FABRIC_B = #{fabricB,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBColor != null">
+				FABRIC_B_COLOR = #{fabricBColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBLength != null">
+				FABRIC_B_LENGTH = #{fabricBLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBSingleUse != null">
+				FABRIC_B_SINGLE_USE =
+				#{fabricBSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBActualConsumption != null">
+				FABRIC_B_ACTUAL_CONSUMPTION =
+				#{fabricBActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricC != null">
+				FABRIC_C = #{fabricC,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCColor != null">
+				FABRIC_C_COLOR = #{fabricCColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCLength != null">
+				FABRIC_C_LENGTH = #{fabricCLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCSingleUse != null">
+				FABRIC_C_SINGLE_USE =
+				#{fabricCSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCActualConsumption != null">
+				FABRIC_C_ACTUAL_CONSUMPTION =
+				#{fabricCActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricD != null">
+				FABRIC_D = #{fabricD,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDColor != null">
+				FABRIC_D_COLOR = #{fabricDColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDLength != null">
+				FABRIC_D_LENGTH = #{fabricDLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDSingleUse != null">
+				FABRIC_D_SINGLE_USE =
+				#{fabricDSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDActualConsumption != null">
+				FABRIC_D_ACTUAL_CONSUMPTION =
+				#{fabricDActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricE != null">
+				FABRIC_E = #{fabricE,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricEColor != null">
+				FABRIC_E_COLOR = #{fabricEColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricELength != null">
+				FABRIC_E_LENGTH = #{fabricELength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricESingleUse != null">
+				FABRIC_E_SINGLE_USE =
+				#{fabricESingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricEActualConsumption != null">
+				FABRIC_E_ACTUAL_CONSUMPTION =
+				#{fabricEActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricF != null">
+				FABRIC_F = #{fabricF,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFColor != null">
+				FABRIC_F_COLOR = #{fabricFColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFLength != null">
+				FABRIC_F_LENGTH = #{fabricFLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFSingleUse != null">
+				FABRIC_F_SINGLE_USE =
+				#{fabricFSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFActualConsumption != null">
+				FABRIC_F_ACTUAL_CONSUMPTION =
+				#{fabricFActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedStatus != null">
+				ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="markStatus != null">
+				MARK_STATUS = '0',
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+			<if test="commodityCode != null">
+				commodityCode = #{commodityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricACode != null">
+				FABRIC_A_CODE = #{fabricACode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBCode != null">
+				FABRIC_B_CODE = #{fabricBCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCCode != null">
+				FABRIC_C_CODE = #{fabricCCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDCode != null">
+				FABRIC_D_CODE = #{fabricDCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricECode != null">
+				FABRIC_E_CODE = #{fabricECode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFCode != null">
+				FABRIC_F_CODE = #{fabricFCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateFabricMaterialByPurchase" parameterType="com.warehouse.entity.FabricMaterial">
+		update fabric_material
+		<set>
+			<if test="designers != null">
+				DESIGNERS = #{designers,jdbcType=VARCHAR},
+			</if>
+			<if test="addDate != null">
+				ADD_DATE = #{addDate,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="clothesStyle != null">
+				CLOTHES_STYLE = #{clothesStyle,jdbcType=VARCHAR},
+			</if>
+			<if test="designChart != null">
+				DESIGN_CHART = #{designChart,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER = #{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="numberOrder != null">
+				NUMBER_ORDER = #{numberOrder,jdbcType=INTEGER},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier != null">
+				SUPPLIER = #{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricA != null">
+				FABRIC_A = #{fabricA,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricAColor != null">
+				FABRIC_A_COLOR = #{fabricAColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricALength != null">
+				FABRIC_A_LENGTH = #{fabricALength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricASingleUse != null">
+				FABRIC_A_SINGLE_USE =
+				#{fabricASingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricAActualConsumption != null">
+				FABRIC_A_ACTUAL_CONSUMPTION =
+				#{fabricAActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricB != null">
+				FABRIC_B = #{fabricB,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBColor != null">
+				FABRIC_B_COLOR = #{fabricBColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBLength != null">
+				FABRIC_B_LENGTH = #{fabricBLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBSingleUse != null">
+				FABRIC_B_SINGLE_USE =
+				#{fabricBSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBActualConsumption != null">
+				FABRIC_B_ACTUAL_CONSUMPTION =
+				#{fabricBActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricC != null">
+				FABRIC_C = #{fabricC,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCColor != null">
+				FABRIC_C_COLOR = #{fabricCColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCLength != null">
+				FABRIC_C_LENGTH = #{fabricCLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCSingleUse != null">
+				FABRIC_C_SINGLE_USE =
+				#{fabricCSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCActualConsumption != null">
+				FABRIC_C_ACTUAL_CONSUMPTION =
+				#{fabricCActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricD != null">
+				FABRIC_D = #{fabricD,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDColor != null">
+				FABRIC_D_COLOR = #{fabricDColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDLength != null">
+				FABRIC_D_LENGTH = #{fabricDLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDSingleUse != null">
+				FABRIC_D_SINGLE_USE =
+				#{fabricDSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDActualConsumption != null">
+				FABRIC_D_ACTUAL_CONSUMPTION =
+				#{fabricDActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricE != null">
+				FABRIC_E = #{fabricE,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricEColor != null">
+				FABRIC_E_COLOR = #{fabricEColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricELength != null">
+				FABRIC_E_LENGTH = #{fabricELength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricESingleUse != null">
+				FABRIC_E_SINGLE_USE =
+				#{fabricESingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricEActualConsumption != null">
+				FABRIC_E_ACTUAL_CONSUMPTION =
+				#{fabricEActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricF != null">
+				FABRIC_F = #{fabricF,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFColor != null">
+				FABRIC_F_COLOR = #{fabricFColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFLength != null">
+				FABRIC_F_LENGTH = #{fabricFLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFSingleUse != null">
+				FABRIC_F_SINGLE_USE =
+				#{fabricFSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFActualConsumption != null">
+				FABRIC_F_ACTUAL_CONSUMPTION =
+				#{fabricFActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedStatus != null">
+				ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="markStatus != null">
+				MARK_STATUS = '0',
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+			<if test="commodityCode != null">
+				commodityCode = #{commodityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricACode != null">
+				FABRIC_A_CODE = #{fabricACode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBCode != null">
+				FABRIC_B_CODE = #{fabricBCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCCode != null">
+				FABRIC_C_CODE = #{fabricCCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDCode != null">
+				FABRIC_D_CODE = #{fabricDCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricECode != null">
+				FABRIC_E_CODE = #{fabricECode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFCode != null">
+				FABRIC_F_CODE = #{fabricFCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateFabricMaterialByOverrule" parameterType="com.warehouse.entity.FabricMaterial">
+		update fabric_material
+		<set>
+			<if test="designers != null">
+				DESIGNERS = #{designers,jdbcType=VARCHAR},
+			</if>
+			<if test="addDate != null">
+				ADD_DATE = #{addDate,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="clothesStyle != null">
+				CLOTHES_STYLE = #{clothesStyle,jdbcType=VARCHAR},
+			</if>
+			<if test="designChart != null">
+				DESIGN_CHART = #{designChart,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER = #{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="numberOrder != null">
+				NUMBER_ORDER = #{numberOrder,jdbcType=INTEGER},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier != null">
+				SUPPLIER = #{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricA != null">
+				FABRIC_A = #{fabricA,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricAColor != null">
+				FABRIC_A_COLOR = #{fabricAColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricALength != null">
+				FABRIC_A_LENGTH = #{fabricALength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricASingleUse != null">
+				FABRIC_A_SINGLE_USE =
+				#{fabricASingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricAActualConsumption != null">
+				FABRIC_A_ACTUAL_CONSUMPTION =
+				#{fabricAActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricB != null">
+				FABRIC_B = #{fabricB,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBColor != null">
+				FABRIC_B_COLOR = #{fabricBColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBLength != null">
+				FABRIC_B_LENGTH = #{fabricBLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBSingleUse != null">
+				FABRIC_B_SINGLE_USE =
+				#{fabricBSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBActualConsumption != null">
+				FABRIC_B_ACTUAL_CONSUMPTION =
+				#{fabricBActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricC != null">
+				FABRIC_C = #{fabricC,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCColor != null">
+				FABRIC_C_COLOR = #{fabricCColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCLength != null">
+				FABRIC_C_LENGTH = #{fabricCLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCSingleUse != null">
+				FABRIC_C_SINGLE_USE =
+				#{fabricCSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCActualConsumption != null">
+				FABRIC_C_ACTUAL_CONSUMPTION =
+				#{fabricCActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricD != null">
+				FABRIC_D = #{fabricD,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDColor != null">
+				FABRIC_D_COLOR = #{fabricDColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDLength != null">
+				FABRIC_D_LENGTH = #{fabricDLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDSingleUse != null">
+				FABRIC_D_SINGLE_USE =
+				#{fabricDSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDActualConsumption != null">
+				FABRIC_D_ACTUAL_CONSUMPTION =
+				#{fabricDActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricE != null">
+				FABRIC_E = #{fabricE,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricEColor != null">
+				FABRIC_E_COLOR = #{fabricEColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricELength != null">
+				FABRIC_E_LENGTH = #{fabricELength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricESingleUse != null">
+				FABRIC_E_SINGLE_USE =
+				#{fabricESingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricEActualConsumption != null">
+				FABRIC_E_ACTUAL_CONSUMPTION =
+				#{fabricEActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricF != null">
+				FABRIC_F = #{fabricF,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFColor != null">
+				FABRIC_F_COLOR = #{fabricFColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFLength != null">
+				FABRIC_F_LENGTH = #{fabricFLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFSingleUse != null">
+				FABRIC_F_SINGLE_USE =
+				#{fabricFSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFActualConsumption != null">
+				FABRIC_F_ACTUAL_CONSUMPTION =
+				#{fabricFActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedStatus != null">
+				ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="markStatus != null">
+				MARK_STATUS = '0',
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+			<if test="commodityCode != null">
+				commodityCode = #{commodityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricACode != null">
+				FABRIC_A_CODE = #{fabricACode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBCode != null">
+				FABRIC_B_CODE = #{fabricBCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCCode != null">
+				FABRIC_C_CODE = #{fabricCCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDCode != null">
+				FABRIC_D_CODE = #{fabricDCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricECode != null">
+				FABRIC_E_CODE = #{fabricECode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFCode != null">
+				FABRIC_F_CODE = #{fabricFCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="delFabricMaterialById" parameterType="com.warehouse.entity.FabricMaterial">
+		update fabric_material
+		<set>
+			<if test="designers != null">
+				DESIGNERS = #{designers,jdbcType=VARCHAR},
+			</if>
+			<if test="addDate != null">
+				ADD_DATE = #{addDate,jdbcType=VARCHAR},
+			</if>
+			<if test="oringinalWave != null">
+				ORINGINAL_WAVE = #{oringinalWave,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="clothesStyle != null">
+				CLOTHES_STYLE = #{clothesStyle,jdbcType=VARCHAR},
+			</if>
+			<if test="designChart != null">
+				DESIGN_CHART = #{designChart,jdbcType=VARCHAR},
+			</if>
+			<if test="craftsOrder != null">
+				CRAFTS_ORDER = #{craftsOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="sizeChart != null">
+				SIZE_CHART = #{sizeChart,jdbcType=VARCHAR},
+			</if>
+			<if test="numberOrder != null">
+				NUMBER_ORDER = #{numberOrder,jdbcType=INTEGER},
+			</if>
+			<if test="orderDetails != null">
+				ORDER_DETAILS = #{orderDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="supplier != null">
+				SUPPLIER = #{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricA != null">
+				FABRIC_A = #{fabricA,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricAColor != null">
+				FABRIC_A_COLOR = #{fabricAColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricALength != null">
+				FABRIC_A_LENGTH = #{fabricALength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricASingleUse != null">
+				FABRIC_A_SINGLE_USE =
+				#{fabricASingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricAActualConsumption != null">
+				FABRIC_A_ACTUAL_CONSUMPTION =
+				#{fabricAActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricB != null">
+				FABRIC_B = #{fabricB,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBColor != null">
+				FABRIC_B_COLOR = #{fabricBColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBLength != null">
+				FABRIC_B_LENGTH = #{fabricBLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBSingleUse != null">
+				FABRIC_B_SINGLE_USE =
+				#{fabricBSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricBActualConsumption != null">
+				FABRIC_B_ACTUAL_CONSUMPTION =
+				#{fabricBActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricC != null">
+				FABRIC_C = #{fabricC,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCColor != null">
+				FABRIC_C_COLOR = #{fabricCColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCLength != null">
+				FABRIC_C_LENGTH = #{fabricCLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCSingleUse != null">
+				FABRIC_C_SINGLE_USE =
+				#{fabricCSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricCActualConsumption != null">
+				FABRIC_C_ACTUAL_CONSUMPTION =
+				#{fabricCActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricD != null">
+				FABRIC_D = #{fabricD,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDColor != null">
+				FABRIC_D_COLOR = #{fabricDColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDLength != null">
+				FABRIC_D_LENGTH = #{fabricDLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDSingleUse != null">
+				FABRIC_D_SINGLE_USE =
+				#{fabricDSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricDActualConsumption != null">
+				FABRIC_D_ACTUAL_CONSUMPTION =
+				#{fabricDActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricE != null">
+				FABRIC_E = #{fabricE,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricEColor != null">
+				FABRIC_E_COLOR = #{fabricEColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricELength != null">
+				FABRIC_E_LENGTH = #{fabricELength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricESingleUse != null">
+				FABRIC_E_SINGLE_USE =
+				#{fabricESingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricEActualConsumption != null">
+				FABRIC_E_ACTUAL_CONSUMPTION =
+				#{fabricEActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricF != null">
+				FABRIC_F = #{fabricF,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFColor != null">
+				FABRIC_F_COLOR = #{fabricFColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFLength != null">
+				FABRIC_F_LENGTH = #{fabricFLength,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFSingleUse != null">
+				FABRIC_F_SINGLE_USE =
+				#{fabricFSingleUse,jdbcType=DOUBLE},
+			</if>
+			<if test="fabricFActualConsumption != null">
+				FABRIC_F_ACTUAL_CONSUMPTION =
+				#{fabricFActualConsumption,jdbcType=DOUBLE},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedStatus != null">
+				ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="markStatus != null">
+				MARK_STATUS = '0',
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorIp != null">
+				OPERATOR_IP = #{operatorIp,jdbcType=VARCHAR},
+			</if>
+			<if test="commodityCode != null">
+				commodityCode = #{commodityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricACode != null">
+				FABRIC_A_CODE = #{fabricACode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBCode != null">
+				FABRIC_B_CODE = #{fabricBCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCCode != null">
+				FABRIC_C_CODE = #{fabricCCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricDCode != null">
+				FABRIC_D_CODE = #{fabricDCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricECode != null">
+				FABRIC_E_CODE = #{fabricECode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricFCode != null">
+				FABRIC_F_CODE = #{fabricFCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

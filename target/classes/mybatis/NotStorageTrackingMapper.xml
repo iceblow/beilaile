@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.NotStorageTrackingMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.NotStorageTracking" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="FACTORY" property="factory" jdbcType="VARCHAR" />
+    <result column="CLOUTH_NAME" property="clouthName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
+    <result column="RELEASE_TIME" property="releaseTime" jdbcType="VARCHAR" />
+    <result column="TIME_DIFFERECE" property="timeDifferece" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="INSERT_TIME" property="insertTime" jdbcType="VARCHAR" />
+    <result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+    <result column="DATA_STATE" property="dataState" jdbcType="VARCHAR" />
+    <result column="DELETE_PEOPLE" property="deletePeople" jdbcType="VARCHAR" />
+    <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+    
+    <result column="STORAGE_TIME" property="storageTime" jdbcType="VARCHAR" />
+   	<result column="ESTIMATED_DELIVERY_TIME" property="estimatedDeliveryTime" jdbcType="VARCHAR" />
+   	<result column="PROBLEM_FEEDBACK" property="problemFeedBack" jdbcType="VARCHAR" />
+   	<result column="REASON_FOR_DELAY" property="reasonForDelay" jdbcType="VARCHAR" />
+   	<result column="PERSON_IN_CHARGE" property="personInCharge" jdbcType="VARCHAR" />
+   	<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+   	<result column="PROBLEM_SOLVING" property="problemSolving" jdbcType="VARCHAR" />
+   	<result column="PROBLEM_SOLVING_TIME" property="problemSolvingTime" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  	<!-- 查询总条数 -->
+  	<select id="selectAllcount" resultType="java.lang.Integer">
+  		SELECT COUNT(0) FROM not_storage_tracking where 1=1
+  		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave}, "%")
+		</if>
+		<if test='factory!=null and factory!=""'>
+			AND FACTORY LIKE CONCAT("%" ,#{factory}, "%")
+		</if>
+		<if test='clouthName!=null and clouthName!=""'>
+			AND CLOUTH_NAME LIKE CONCAT("%" ,#{clouthName}, "%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%" ,#{productCode}, "%")
+		</if>
+		<if test='orderType!=null and orderType!=""'>
+			AND ORDER_TYPE LIKE CONCAT("%" ,#{orderType}, "%")
+		</if>
+		<if test='releaseTime!=null and releaseTime!=""'>
+			AND RELEASE_TIME LIKE CONCAT("%" ,#{releaseTime}, "%")
+		</if>
+  	</select>
+  	
+  		<!-- 分页查询 -->
+  <select id="getnotStorageTrackingPage" parameterType="com.warehouse.dao.NotStorageTrackingMapper" resultMap="BaseResultMap">
+  	select * from not_storage_tracking where 1=1
+  		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='factory!=null and factory!=""'>
+			AND FACTORY LIKE CONCAT("%" ,#{factory,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='clouthName!=null and clouthName!=""'>
+			AND CLOUTH_NAME LIKE CONCAT("%" ,#{clouthName,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='productCode!=null and productCode!=""'>
+			AND PRODUCT_CODE LIKE CONCAT("%" ,#{productCode,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='orderType!=null and orderType!=""'>
+			AND ORDER_TYPE LIKE CONCAT("%" ,#{orderType,jdbcType=VARCHAR}, "%")
+		</if>
+		<if test='releaseTime!=null and releaseTime!=""'>
+			AND RELEASE_TIME LIKE CONCAT("%" ,#{releaseTime,jdbcType=VARCHAR}, "%")
+		</if>
+		and DATA_STATE='0'
+  	limit #{begin},#{end}
+  </select>
+  
+ 		 <!-- 通过双击文本框修改表中数据 -->
+	<update id="updateByText" parameterType="com.warehouse.dao.NotStorageTrackingMapper" >
+		update not_storage_tracking
+		<set>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				FACTORY = #{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="clouthName != null">
+				CLOUTH_NAME = #{clouthName,jdbcType=VARCHAR},
+			</if>
+			<if test="productCode != null">
+				PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orderType != null">
+				ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+			</if>
+			<if test="releaseTime != null">
+				RELEASE_TIME =#{releaseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="timeDifferece != null">
+				TIME_DIFFERECE = #{timeDifferece,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="insertTime != null">
+				INSERT_TIME = #{insertTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="dataState != null">
+				DATA_STATE = #{dataState,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="storageTime != null">
+				STORAGE_TIME =#{storageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="estimatedDeliveryTime != null">
+				ESTIMATED_DELIVERY_TIME = #{estimatedDeliveryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="problemFeedBack != null">
+				PROBLEM_FEEDBACK = #{problemFeedBack,jdbcType=VARCHAR},
+			</if>
+			<if test="reasonForDelay != null">
+				REASON_FOR_DELAY = #{reasonForDelay,jdbcType=VARCHAR},
+			</if>
+			<if test="personInCharge != null">
+				PERSON_IN_CHARGE = #{personInCharge,jdbcType=VARCHAR},
+			</if>
+			<if test="memo != null">
+				MEMO = #{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="problemSolving != null">
+				PROBLEM_SOLVING = #{problemSolving,jdbcType=VARCHAR},
+				PROBLEM_SOLVING_TIME= now()
+			</if>
+			
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+  
+  
+  
+  
+  <update id="deleteById" parameterType="com.warehouse.dao.NotStorageTrackingMapper">
+		update not_storage_tracking
+		<set>
+			DATA_STATE ='1'
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+  
+
+ 
+</mapper>

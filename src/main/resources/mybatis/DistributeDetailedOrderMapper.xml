@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributeDetailedOrderMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.DistributeDetailedOrder">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<id column="P_ID" property="pId" jdbcType="INTEGER" />
+		<id column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+		<result column="PRINTING_FACTORY" property="printingFactory"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="CODE52" property="code52" jdbcType="INTEGER" />
+		<result column="CODE59" property="code59" jdbcType="INTEGER" />
+		<result column="CODE66" property="code66" jdbcType="INTEGER" />
+		<result column="CODE73" property="code73" jdbcType="INTEGER" />
+		<result column="CODE80" property="code80" jdbcType="INTEGER" />
+		<result column="CODE90" property="code90" jdbcType="INTEGER" />
+		<result column="CODE100" property="code100" jdbcType="INTEGER" />
+		<result column="CODE110" property="code110" jdbcType="INTEGER" />
+		<result column="CODE120" property="code120" jdbcType="INTEGER" />
+		<result column="CODE130" property="code130" jdbcType="INTEGER" />
+		<result column="CODE160" property="code160" jdbcType="INTEGER" />
+		<result column="CODE170" property="code170" jdbcType="INTEGER" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 查询 -->
+	<select id="selectByCount" resultType="java.lang.Integer"
+		parameterType="com.warehouse.entity.DistributeDetailedOrder">
+		select count(*) from distribute_detailed_order
+		where STATUS !='0'
+		<if test="orderId!=null">
+			and order_id=#{orderId,jdbcType=INTEGER}
+		</if>
+	</select>
+	<select id="selectByPage" resultMap="BaseResultMap"
+		parameterType="com.warehouse.entity.DistributeDetailedOrder">
+		select * from distribute_detailed_order
+		where STATUS !='0'
+		<if test="orderId!=null">
+			and order_id=#{orderId,jdbcType=INTEGER}
+		</if>
+		order by ADD_TIME desc limit #{begin},#{end}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertSelective" parameterType="com.warehouse.entity.DistributeDetailedOrder">
+		insert into distribute_detailed_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="pid != null">
+				PID,
+			</if>
+			<if test="orderId!=null">
+				orderId,
+			</if>
+			<if test="printingFactory != null">
+				PRINTING_FACTORY,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="code52 != null">
+				CODE52,
+			</if>
+			<if test="code59 != null">
+				CODE59,
+			</if>
+			<if test="code66 != null">
+				CODE66,
+			</if>
+			<if test="code73 != null">
+				CODE73,
+			</if>
+			<if test="code80 != null">
+				CODE80,
+			</if>
+			<if test="code90 != null">
+				CODE90,
+			</if>
+			<if test="code100 != null">
+				CODE100,
+			</if>
+			<if test="code110 != null">
+				CODE110,
+			</if>
+			<if test="code120 != null">
+				CODE120,
+			</if>
+			<if test="code130 != null">
+				CODE130,
+			</if>
+			<if test="code160 != null">
+				CODE160,
+			</if>
+			<if test="code170 != null">
+				CODE170,
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+			<if test="orderId!=null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="printingFactory != null">
+				#{printingFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				#{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code59 != null">
+				#{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				#{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				#{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				#{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				#{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				#{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				#{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				#{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				#{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				#{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				#{code170,jdbcType=INTEGER},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.DistributeDetailedOrder">
+		update distribute_detailed_order
+		<set>
+			<if test="pId != null">
+				PID = #{pId,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null">
+				ORDER_ID = #{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="printingFactory != null">
+				PRINTING_FACTORY = #{printingFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="code52 != null">
+				CODE52 = #{code52,jdbcType=INTEGER},
+			</if>
+			<if test="code59 != null">
+				CODE59 = #{code59,jdbcType=INTEGER},
+			</if>
+			<if test="code66 != null">
+				CODE66 = #{code66,jdbcType=INTEGER},
+			</if>
+			<if test="code73 != null">
+				CODE73 = #{code73,jdbcType=INTEGER},
+			</if>
+			<if test="code80 != null">
+				CODE80 = #{code80,jdbcType=INTEGER},
+			</if>
+			<if test="code90 != null">
+				CODE90 = #{code90,jdbcType=INTEGER},
+			</if>
+			<if test="code100 != null">
+				CODE100 = #{code100,jdbcType=INTEGER},
+			</if>
+			<if test="code110 != null">
+				CODE110 = #{code110,jdbcType=INTEGER},
+			</if>
+			<if test="code120 != null">
+				CODE120 = #{code120,jdbcType=INTEGER},
+			</if>
+			<if test="code130 != null">
+				CODE130 = #{code130,jdbcType=INTEGER},
+			</if>
+			<if test="code160 != null">
+				CODE160 = #{code160,jdbcType=INTEGER},
+			</if>
+			<if test="code170 != null">
+				CODE170 = #{code170,jdbcType=INTEGER},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 删除 -->
+	<update id="delDistributeDetailedOrder" parameterType="com.warehouse.entity.DistributeDetailedOrder">
+		update distribute_detailed_order set STATUS='0' where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- -->
+	<select id="selectByorderId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select * from distribute_detailed_order
+		where order_id=#{orderId,jdbcType=INTEGER}
+	</select>
+
+</mapper>

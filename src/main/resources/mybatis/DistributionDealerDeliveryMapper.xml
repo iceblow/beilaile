@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.DistributionDealerDeliveryMapper">
+	<resultMap id="BaseResultMap"
+		type="com.warehouse.entity.DistributionDealerDelivery">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="SID" property="sid" jdbcType="VARCHAR" />
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+		<result column="ORINGINAL_WAVE" property="oringinalWave"
+			jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="ORDER_DETAILS" property="orderDetails"
+			jdbcType="VARCHAR" />
+		<result column="ORDERS" property="orders" jdbcType="INTEGER" />
+		<result column="CLOTHING_NAME" property="clothingName"
+			jdbcType="VARCHAR" />
+		<result column="ORDERS_TYPE" property="ordersType" jdbcType="VARCHAR" />
+		<result column="DISTRIBUTOR_FACTORY" property="distributorFactory"
+			jdbcType="VARCHAR" />
+		<result column="DISTRIBUTOR_PRICE" property="distributorPrice"
+			jdbcType="REAL" />
+		<result column="REPORT_YARDS_59" property="reportYards59"
+			jdbcType="INTEGER" />
+		<result column="REPORT_YARDS_66" property="reportYards66"
+			jdbcType="INTEGER" />
+		<result column="REPORT_YARDS_73" property="reportYards73"
+			jdbcType="INTEGER" />
+		<result column="REPORT_YARDS_80" property="reportYards80"
+			jdbcType="INTEGER" />
+		<result column="REPORT_YARDS_90" property="reportYards90"
+			jdbcType="INTEGER" />
+		<result column="REPORT_YARDS_110" property="reportYards110"
+			jdbcType="INTEGER" />
+		<result column="REPORT_YARDS_120" property="reportYards120"
+			jdbcType="INTEGER" />
+		<result column="REPORT_YARDS_130" property="reportYards130"
+			jdbcType="INTEGER" />
+		<result column="REPORT_YARDS_160" property="reportYards160"
+			jdbcType="INTEGER" />
+		<result column="REPORT_YARDS_170" property="reportYards170"
+			jdbcType="INTEGER" />
+		<result column="REPORTS_TOTAL_DEAL" property="reportsTotalDeal"
+			jdbcType="INTEGER" />
+		<result column="REAL_YARDS_59" property="realYards59" jdbcType="INTEGER" />
+		<result column="REAL_YARDS_66" property="realYards66" jdbcType="INTEGER" />
+		<result column="REAL_YARDS_73" property="realYards73" jdbcType="INTEGER" />
+		<result column="REAL_YARDS_80" property="realYards80" jdbcType="INTEGER" />
+		<result column="REAL_YARDS_90" property="realYards90" jdbcType="INTEGER" />
+		<result column="REAL_YARDS_110" property="realYards110"
+			jdbcType="INTEGER" />
+		<result column="REAL_YARDS_120" property="realYards120"
+			jdbcType="INTEGER" />
+		<result column="REAL_YARDS_130" property="realYards130"
+			jdbcType="INTEGER" />
+		<result column="REAL_YARDS_160" property="realYards160"
+			jdbcType="INTEGER" />
+		<result column="REAL_YARDS_170" property="realYards170"
+			jdbcType="INTEGER" />
+		<result column="ACTUAL_TOTAL_DEAL" property="actualTotalDeal"
+			jdbcType="INTEGER" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="CONFIRM_DELIVERY_TIME" property="confirmDeliveryTime"
+			jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+		<result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
+		<result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="DELETE_PEOPLE" property="deletePeople"
+			jdbcType="VARCHAR" />
+		<result column="DATA_STATUS" property="dataStatus" jdbcType="VARCHAR" />
+		<result column="DELIVERY_STATUS" property="deliveryStatus"
+			jdbcType="VARCHAR" />
+		<result column="SAMPLE_IMG" property="sampleImg" jdbcType="VARCHAR" />
+		<result column="SIZE_CHART" property="sizeChart" jdbcType="VARCHAR" />
+		<result column="PLAN_STORAGE_DATE" property="planStorageDate"
+			jdbcType="VARCHAR" />
+		<result column="LINK_START_TIME" property="linkStartTime"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_DATE" property="orderDate" jdbcType="VARCHAR" />
+		<result column="ORDER_GRADE" property="orderGrade" jdbcType="VARCHAR" />
+		<result column="TRACKING_PEOPLE" property="trackingPeople"
+			jdbcType="VARCHAR" />
+		<result column="BOARD_SEND_DATE" property="boardSendDate"
+			jdbcType="VARCHAR" />
+		<result column="PROOFING_FACTORY" property="proofingFactory"
+			jdbcType="VARCHAR" />
+		<result column="DELIVERY_ORDER_NUMBER" property="deliveryOrderNumber"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SID, PRODUCT_CODE, ORINGINAL_WAVE, WAVE, DESIGN_IMG, ORDER_DETAILS,
+		ORDERS, CLOTHING_NAME,
+		ORDERS_TYPE, DISTRIBUTOR_FACTORY, DISTRIBUTOR_PRICE, "REPORT_YARDS_59",
+		"REPORT_YARDS_66",
+		"REPORT_YARDS_73", "REPORT_YARDS_80", "REPORT_YARDS_90", "REPORT_YARDS_110",
+		"REPORT_YARDS_120",
+		"REPORT_YARDS_130", "REPORT_YARDS_160", "REPORT_YARDS_170", REPORTS_TOTAL_DEAL,
+		REAL_YARDS_59,
+		REAL_YARDS_66, REAL_YARDS_73, REAL_YARDS_80, REAL_YARDS_90, REAL_YARDS_110,
+		REAL_YARDS_120,
+		REAL_YARDS_130, REAL_YARDS_160, REAL_YARDS_170, ACTUAL_TOTAL_DEAL, REMARKS,
+		CONFIRM_DELIVERY_TIME,
+		CREATE_TIME, FOUNDER, MODIFY_TIME, MODIFIED_BY, DELETE_TIME, DELETE_PEOPLE,
+		DATA_STATUS,
+		DELIVERY_STATUS, SAMPLE_IMG,
+		SIZE_CHART,PLAN_STORAGE_DATE,LINK_START_TIME,ORDER_DATE,ORDER_GRADE,TRACKING_PEOPLE,BOARD_SEND_DATE,
+		PROOFING_FACTORY, DELIVERY_ORDER_NUMBER
+
+	</sql>
+	<select id="selectById" resultMap="BaseResultMap" parameterType="map">
+		select
+		*
+		from distribution_dealer_delivery
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+
+
+
+	<select id="getDistributionInfoBpcnt" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM distribution_dealer_delivery where 1=1
+		AND (DELETE_PEOPLE IS NULL OR DELETE_PEOPLE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if
+			test="clothingName != null and clothingName != &quot;&quot; and clothingName != &quot;N&quot; and clothingName != &quot;Y&quot;">
+			AND CLOTHING_NAME LIKE CONCAT('%',#{clothingName,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="productCode != null and productCode != &quot;&quot; and productCode != &quot;N&quot; and productCode != &quot;Y&quot;">
+			AND PRODUCT_CODE LIKE CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="ordersType != null and ordersType != &quot;&quot; and ordersType != &quot;N&quot; and ordersType != &quot;Y&quot;">
+			AND ORDERS_TYPE LIKE CONCAT('%',#{ordersType,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="distributorFactory != null and distributorFactory != &quot;&quot; and distributorFactory != &quot;N&quot; and distributorFactory != &quot;Y&quot;">
+			AND DISTRIBUTOR_FACTORY LIKE
+			CONCAT('%',#{distributorFactory,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="trackingPeople != null and trackingPeople != &quot;&quot; and trackingPeople != &quot;N&quot; and trackingPeople != &quot;Y&quot;">
+			AND TRACKING_PEOPLE LIKE
+			CONCAT('%',#{trackingPeople,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='boardSendDate != null and boardSendDate != ""'>
+			<if
+				test="boardSendDate == '有'.toString() or boardSendDate == 'Y'.toString() or boardSendDate == 'y'.toString()">
+				AND BOARD_SEND_DATE IS NOT NULL
+			</if>
+			<if
+				test="boardSendDate == '无'.toString() or boardSendDate == 'N'.toString() or boardSendDate == 'n'.toString()">
+				AND BOARD_SEND_DATE IS NULL
+			</if>
+			<if
+				test="boardSendDate != '无'.toString() and boardSendDate != 'N'.toString() and boardSendDate != 'n'.toString()
+			and boardSendDate != '有'.toString() and boardSendDate != 'Y'.toString() and boardSendDate != 'y'.toString() ">
+				AND BOARD_SEND_DATE LIKE
+				CONCAT('%',#{boardSendDate,jdbcType=VARCHAR},'%')
+			</if>
+
+		</if>
+	</select>
+
+	<select id="findDistributionInfoCndbp" parameterType="Map"
+		resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		distribution_dealer_delivery
+		where 1=1
+		AND (DELETE_PEOPLE IS NULL OR DELETE_PEOPLE='')
+		AND (DELETE_TIME IS NULL OR DELETE_TIME='')
+		<if
+			test="clothingName != null and clothingName != &quot;&quot; and clothingName != &quot;N&quot; and clothingName != &quot;Y&quot;">
+			AND CLOTHING_NAME LIKE CONCAT('%',#{clothingName,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="productCode != null and productCode != &quot;&quot; and productCode != &quot;N&quot; and productCode != &quot;Y&quot;">
+			AND PRODUCT_CODE LIKE CONCAT('%',#{productCode,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="ordersType != null and ordersType != &quot;&quot; and ordersType != &quot;N&quot; and ordersType != &quot;Y&quot;">
+			AND ORDERS_TYPE LIKE CONCAT('%',#{ordersType,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="wave != null and wave != &quot;&quot; and wave != &quot;N&quot; and wave != &quot;Y&quot;">
+			AND WAVE LIKE CONCAT('%',#{wave,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="distributorFactory != null and distributorFactory != &quot;&quot; and distributorFactory != &quot;N&quot; and distributorFactory != &quot;Y&quot;">
+			AND DISTRIBUTOR_FACTORY LIKE
+			CONCAT('%',#{distributorFactory,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="trackingPeople != null and trackingPeople != &quot;&quot; and trackingPeople != &quot;N&quot; and trackingPeople != &quot;Y&quot;">
+			AND TRACKING_PEOPLE LIKE
+			CONCAT('%',#{trackingPeople,jdbcType=VARCHAR},'%')
+		</if>
+		<if test='boardSendDate != null and boardSendDate != ""'>
+			<if
+				test="boardSendDate == '有'.toString() or boardSendDate == 'Y'.toString() or boardSendDate == 'y'.toString()">
+				AND BOARD_SEND_DATE IS NOT NULL
+			</if>
+			<if
+				test="boardSendDate == '无'.toString() or boardSendDate == 'N'.toString() or boardSendDate == 'n'.toString()">
+				AND BOARD_SEND_DATE IS NULL
+			</if>
+			<if
+				test="boardSendDate != '无'.toString() and boardSendDate != 'N'.toString() and boardSendDate != 'n'.toString()
+			and boardSendDate != '有'.toString() and boardSendDate != 'Y'.toString() and boardSendDate != 'y'.toString() ">
+				AND BOARD_SEND_DATE LIKE
+				CONCAT('%',#{boardSendDate,jdbcType=VARCHAR},'%')
+			</if>
+
+		</if>
+		ORDER BY DELIVERY_STATUS ASC , CONFIRM_DELIVERY_TIME DESC , ORDER_DATE
+		DESC
+		LIMIT #{pageNow},#{pageSize}
+	</select>
+
+
+	<update id="confirmShipment" parameterType="java.lang.Integer">
+		update distribution_dealer_delivery
+
+		set DELIVERY_STATUS='已出货' , CONFIRM_DELIVERY_TIME=
+		DATE_FORMAT(now(),'%Y-%m-%d %T')
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="modifyDistributionInfo" parameterType="map">
+		update distribution_dealer_delivery
+		<set>
+
+			<if test="reportYards59 != null">
+				REPORT_YARDS_59 = #{reportYards59,jdbcType=INTEGER},
+			</if>
+			<if test="reportYards66 != null">
+				REPORT_YARDS_66 = #{reportYards66,jdbcType=INTEGER},
+			</if>
+			<if test="reportYards73 != null">
+				REPORT_YARDS_73 = #{reportYards73,jdbcType=INTEGER},
+			</if>
+			<if test="reportYards80 != null">
+				REPORT_YARDS_80 = #{reportYards80,jdbcType=INTEGER},
+			</if>
+			<if test="reportYards90 != null">
+				REPORT_YARDS_90 = #{reportYards90,jdbcType=INTEGER},
+			</if>
+			<if test="reportYards110 != null">
+				REPORT_YARDS_110 = #{reportYards110,jdbcType=INTEGER},
+			</if>
+			<if test="reportYards120 != null">
+				REPORT_YARDS_120 = #{reportYards120,jdbcType=INTEGER},
+			</if>
+			<if test="reportYards130 != null">
+				REPORT_YARDS_130 = #{reportYards130,jdbcType=INTEGER},
+			</if>
+			<if test="reportYards160 != null">
+				REPORT_YARDS_160 = #{reportYards160,jdbcType=INTEGER},
+			</if>
+			<if test="reportYards170 != null">
+				REPORT_YARDS_170 = #{reportYards170,jdbcType=INTEGER},
+			</if>
+			<if test="realYards59 != null">
+				REAL_YARDS_59 = #{realYards59,jdbcType=INTEGER},
+			</if>
+			<if test="realYards66 != null">
+				REAL_YARDS_66 = #{realYards66,jdbcType=INTEGER},
+			</if>
+			<if test="realYards73 != null">
+				REAL_YARDS_73 = #{realYards73,jdbcType=INTEGER},
+			</if>
+			<if test="realYards80 != null">
+				REAL_YARDS_80 = #{realYards80,jdbcType=INTEGER},
+			</if>
+			<if test="realYards90 != null">
+				REAL_YARDS_90 = #{realYards90,jdbcType=INTEGER},
+			</if>
+			<if test="realYards110 != null">
+				REAL_YARDS_110 = #{realYards110,jdbcType=INTEGER},
+			</if>
+			<if test="realYards120 != null">
+				REAL_YARDS_120 = #{realYards120,jdbcType=INTEGER},
+			</if>
+			<if test="realYards130 != null">
+				REAL_YARDS_130 = #{realYards130,jdbcType=INTEGER},
+			</if>
+			<if test="realYards160 != null">
+				REAL_YARDS_160 = #{realYards160,jdbcType=INTEGER},
+			</if>
+			<if test="realYards170 != null">
+				REAL_YARDS_170 = #{realYards170,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="trackingPeople != null">
+				TRACKING_PEOPLE = #{trackingPeople,jdbcType=VARCHAR},
+			</if>
+
+
+
+
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateReportAndReal">
+		update distribution_dealer_delivery
+		set ACTUAL_TOTAL_DEAL = #{1},
+		REPORTS_TOTAL_DEAL = #{2}
+		where ID = #{0}
+	</update>
+
+</mapper>	

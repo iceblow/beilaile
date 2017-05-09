@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<@p.cache/><@p.css/> <@p.js/>
+<title>未入库跟踪</title>
+<script src="/res/js/laypage/laypage.js"></script>
+</head>
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="notStorage">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">Home </a></li>
+						<li><a href="#"> Tables </a></li>
+						<li class="active">未入库跟踪</li>
+					</ul>
+					<div class="nav-search" id="nav-search"></div>
+				</div>
+
+			</div>
+			<form id="selectFromData" enctype='mutipart/form-data'>
+					<div class="col-md-2">
+						<label for=wave></label>波次<input id="wave"  type="text"class="form-control" name="wave">
+					</div>
+					<div class="col-md-2">
+						<label for=factory></label>工厂<input id="factory"  type="text"class="form-control" name="factory">
+					</div>
+					<div class="col-md-2">
+						<label for=clouthName></label>商品名称<input id="clouthName"  type="text"class="form-control" name="clouthName">
+					</div>
+					<div class="col-md-2">
+						<label for=productCode></label>商品编码<input id="productCode"  type="text"class="form-control" name="productCode">
+					</div>
+					<div class="col-md-2">
+						<label for=orderType></label>订单类型<input id="orderType"  type="text"class="form-control" name="orderType">
+					</div>
+					<div class="col-md-2">
+						<label for=releaseTime></label>发版时间<input id="releaseTime"  type="text"class="form-control" name="releaseTime">
+					</div>
+			</form>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #428bca;"
+					id="myselect">查询</button>
+			</div> 
+			<div class="main-content">
+				<table class="table table-bordered" style="width: 100%; height: 100%;">
+					<thead>
+						<tr>
+							<th colspan="30" style="text-align: center; font-size: 25px;">未入库跟踪</th>
+						</tr>
+						<tr>
+							<th>序列</th>
+							<th>波次</th>
+							<th>设计图</th>
+							<th>商品编码</th>
+							<th>工厂名称</th>
+							<th>订单类型</th>
+							<th>发版时间</th>
+							<th>间隔天数</th>
+							<th>预计出货日期</th>
+							<th>问题反馈</th>
+							<th>延期原因</th>
+							<th>负责人</th>
+							<th>入库时间</th>
+							<th>备注</th>
+							<th>问题解决</th>
+							<th>问题解决时间</th>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+					</tbody>
+				</table>
+				<!-- 分页 -->
+				<div id="pageSystem" style="width: 100%; position: relative; top: 10px;"></div>				
+			</div>
+		</div>
+	</div>
+</body>
+ <script type="text/javascript">
+$(function() {
+	loadPageDatas(1);
+	selectButton();
+	
+});
+
+//模糊查询
+var mySelectForm;
+function selectButton() {
+	$("#myselect").click(function() {
+		mySelectForm= $("#selectFromData").serialize();
+		firstLoadData("notStorageTracking/getnotStorageTrackingPage.do?"+mySelectForm,1);
+	});
+}
+
+//进入后台进行分页查询
+function loadPageDatas(index) {
+	firstLoadData("notStorageTracking/getnotStorageTrackingPage.do", index);
+}
+
+//查询完成,打印数据
+function loadData(mydata) {
+	$("#tbody").empty();
+	$.each (mydata, function(index, x) {
+		var id = "<td>" + x.id + "</td>";
+		var wave = "<td>" + x.wave + "</td>";  
+		var designImg= "<td><img style='width: 50px; height: 50px' src='" + x.designImg + "'></td>";  //设计图
+		var factory= x.factory == null ? "<td></td>" : "<td>" + x.factory + "</td>";   //工厂名
+		var productCode= x.productCode == null ? "<td></td>" : "<td>" + x.productCode + "</td>"; //商品编码
+		var orderType= x.orderType == null ? "<td></td>" : "<td>" + x.orderType + "</td>";    //订单类型
+		var releaseTime =x.releaseTime == null ? "<td></td>" : "<td>" + x.releaseTime + "</td>";	//发版时间
+		var timeDifferece =x.timeDifferece == null ? "<td></td>" : "<td>" + x.timeDifferece + "</td>";	//发版时间和当前日期的差值
+		var estimatedDeliveryTime = x.estimatedDeliveryTime == null ? "<td class='mydblClick' name='estimatedDeliveryTime'></td>" :"<td class='mydblClick' name='estimatedDeliveryTime'>" + x.estimatedDeliveryTime + "</td>"; //预计入库时间
+		var problemFeedBack = x.problemFeedBack == null ? "<td class='mydblClick' name='problemFeedBack'></td>" :"<td class='mydblClick' name='problemFeedBack'>" + x.problemFeedBack + "</td>"; //问题反馈
+		var reasonForDelay = x.reasonForDelay == null ? "<td class='mydblClick' name='reasonForDelay'></td>" :"<td class='mydblClick' name='reasonForDelay'>" + x.reasonForDelay + "</td>";//延期原因
+		var personInCharge = x.personInCharge == null ? "<td class='mydblClick' name='personInCharge'></td>" :"<td class='mydblClick' name='personInCharge'>" + x.personInCharge + "</td>"; //负责人
+		var storageTime = x.storageTime == null ? "<td ></td>" :"<td >" + x.storageTime + "</td>"; //入库时间
+		var memo = x.memo == null ? "<td class='mydblClick' name='memo'></td>" :"<td class='mydblClick' name='memo'>" + x.memo + "</td>"; //备注
+		var problemSolving = x.problemSolving == null ? "<td class='mydblClick' name='problemSolving'></td>" :"<td class='mydblClick' name='problemSolving'>" + x.problemSolving + "</td>";//问题解决
+		var problemSolvingTime =x.problemSolvingTime == null ? "<td></td>" : "<td>" + x.problemSolvingTime + "</td>";//问题解决时间
+		$("tbody").append(
+				"<tr>"
+					+ id
+					+ wave
+					+ designImg
+					+ productCode
+					+ factory
+					+ orderType
+					+ releaseTime
+					+ timeDifferece
+					+ estimatedDeliveryTime
+					+ problemFeedBack
+					+ reasonForDelay
+					+ personInCharge
+					+ storageTime
+					+ memo
+					+ problemSolving
+					+ problemSolvingTime
+					+ "</tr>");
+	}); 
+	deleteById();
+	mydblclick();
+}
+
+
+//设置文本框
+
+function mydblclick(){
+	 $(".mydblClick").on("dblclick",function() {
+		var myid= $(this).parent().find("td:eq(0)").text().trim();//获取到id值	
+		var thisText = $(this).text().trim();    //文本框中原有的值
+		var thisName = $(this).attr("name");    //获取文本框的属性名
+		var thisVal = $(this).attr("value");   //获取文本框属性值
+		if(thisName == "problemSolving"){
+			$(this).html(
+					"<form id='dbUpdateForm'><input type='hidden' name='id' value="+
+							myid+" /><input type='text' id='my"+thisName +"' name='" + thisName+ "' value='" + thisText+ "'></form>");
+			$(this).attr("class", "sn");
+			twomyblur("my" + thisName);
+		
+		} else if (thisName != "estimatedDeliveryTime") {
+				$(this).html(
+						"<form id='dbUpdateForm'><input type='hidden' name='id' value="+
+								myid+" /><input type='text' id='my"+thisName +"' name='" + thisName+ "' value='" + thisText+ "'></form>");
+				$(this).attr("class", "sn");
+				myblur("my" + thisName);
+		}  else {
+		$(this).html(
+					"<form id='dbUpdateForm'><input type='hidden' name='id' value="+ 
+							myid+" /><input class='form-control input-date' type='text' id='my"+ thisName 
+				+ "' name='"+ thisName + "' value='"+ thisText + "'></form>");
+			$(this).attr("class", "sn");
+		var input_date = $(".input-date").datetimepicker({
+		format : "yyyy-mm-dd",
+		autoclose : true,
+		todayBtn : true,
+		todayHighlight : true,
+		showMeridian : true,
+		pickerPosition : "bottom-left",
+		language : 'zh-CN', // 中文，需要引用zh-CN.js包
+		startView : 2, // 月视图
+		minView : 2
+		// 日期时间选择器所能够提供的最精确的时间选择视图
+		});
+		var input_date_readOnly = $(".input-date").prop("readOnly", "true");
+		timeBlur("my" + thisName);
+		} 
+		$("#my"+ thisName).focus();
+	}); 
+} 
+//修改时间
+function timeBlur(id) {
+	$("#" + id).blur(function() {
+		setTimeout('commitTime()', 200);
+	});
+}
+
+function commitTime() {
+	var myform = $("#dbUpdateForm").serialize();
+	$.ajax({
+		url :'notStorageTracking/updateByText.do',
+		type : 'POST',
+		dataType : 'json',
+		data : myform,
+		async : false,
+		success : function(data) {
+			if (data == 1) {
+				firstLoadData("notStorageTracking/getnotStorageTrackingPage.do?"+mySelectForm,$(".laypage_curr").text());
+			} else {
+				alert("未修改");
+			}
+		}
+	});
+}
+
+//问题解决并添加解决时间
+function twomyblur(id){
+	 $("#" + id).blur(function() {
+			var myform = $("#dbUpdateForm").serialize();
+			var obj=$("#myproblemSolving");
+			if(obj.val()=="" || obj.val()==null){
+				firstLoadData("/notStorageTracking/getnotStorageTrackingPage.do?"+mySelectForm,$(".laypage_curr").text()); // 指定url
+			}else{
+				$.ajax({
+				url : 'notStorageTracking/updateByText.do',      //指定路勁下的指定方法
+				type : 'POST',
+				dataType : 'json',
+				data : myform,
+				success : function(data){
+					if(data==1){
+						firstLoadData("/notStorageTracking/getnotStorageTrackingPage.do?"+mySelectForm,$(".laypage_curr").text()); // 指定url
+					}else{
+						 alert("修改失败");
+					}
+				}
+			}); 
+		}
+				 
+	 });
+}
+
+
+	//提交对文本框中数据
+ function myblur(id){
+	 $("#" + id).blur(function() {
+				 var myform = $("#dbUpdateForm").serialize();
+				 $.ajax({
+					 url : 'notStorageTracking/updateByText.do',//指定路勁下的指定方法
+					 type : 'POST',
+					 dataType : 'json',
+					 data : myform ,
+					 success : function(data){
+						 if(data==1){
+							 firstLoadData("/notStorageTracking/getnotStorageTrackingPage.do?"+mySelectForm,$(".laypage_curr").text()); // 指定url
+						 }else{
+							 alert("修改失败");
+						 }
+					 }
+				 });
+			 });
+ 	}
+
+	//修改数据状态
+	function deleteById(){
+		$(".deleteById").on("click",function(){	
+			var id= $(this).parent().parent().find("td:eq(0)").text().trim();     //获取id
+			if(confirm('确定要删除此条数据吗?')){
+			$.ajax({
+			 	 url : 'notStorageTracking/deleteById.do',
+				 type : 'POST',
+				 dataType : 'json',
+				 data :{id : id},
+			 	 success : function(data){
+					if(data=1){
+						loadPageDatas(1);
+					}else{
+						alert("添加失败");
+					}
+			 	}  
+		 	});
+			}else{
+				return false;
+			}
+		});
+	}
+	
+	
+	
+	
+</script>
+</html>

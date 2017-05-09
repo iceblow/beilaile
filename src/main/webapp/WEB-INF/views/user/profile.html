@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<title>个人档案</title><@p.cache/><@p.css/> <@p.js/>
+<script src="/res/js/user/profile.js"></script>
+</head>
+
+<body>
+	<@p.top/>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<div class="main-container-inner">
+			<@p.left/>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try {
+							ace.settings.check('breadcrumbs', 'fixed')
+						} catch (e) {
+						}
+					</script>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"> </i> <a href="#">
+								Home </a></li>
+						<li><a href="#"> 个人中心 </a></li>
+						<li class="active">个人档案</li>
+					</ul>
+					<!-- .breadcrumb -->
+					<div class="nav-search" id="nav-search"></div>
+					<!-- #nav-search -->
+				</div>
+				<div class="col-md-12">
+					<form class="form-horizontal" id="myUserMsessage">
+						<div class="tabbable">
+							<ul class="nav nav-tabs padding-16">
+								<li class="active"><a data-toggle="tab"
+									href="#edit-settings"> <i
+										class="purple icon-cog bigger-125"></i> 个人信息
+								</a></li>
+								<!-- <li class="active"><a data-toggle="tab" href="#edit-basic">
+										<i class="green icon-edit bigger-125"></i> 基本信息
+								</a></li> -->
+								<li class=""><a data-toggle="tab" href="#edit-password">
+										<i class="blue icon-key bigger-125"></i> 修改登录密码
+								</a></li>
+							</ul>
+							<div class="tab-content profile-edit-tab-content">
+								<!-- <div id="edit-basic" class="tab-pane">
+									<div class="">
+										<div id="user-profile-1" class="user-profile row">
+											<div class="col-xs-12 col-sm-9">
+												<div class="space-12"></div>
+
+												<div class="profile-user-info profile-user-info-striped">
+													<div class="profile-info-row">
+														<div class="profile-info-name">用户名</div>
+
+														<div class="profile-info-value">
+															<span class="editable editable-click" id="username">alexdoe</span>
+														</div>
+													</div>
+
+													<div class="profile-info-row">
+														<div class="profile-info-name">Location</div>
+
+														<div class="profile-info-value">
+															<i class="icon-map-marker light-orange bigger-110"></i> <span
+																class="editable editable-click" id="country">Netherlands</span>
+															<span class="editable editable-click" id="city">Amsterdam</span>
+														</div>
+													</div>
+
+													<div class="profile-info-row">
+														<div class="profile-info-name">年龄</div>
+
+														<div class="profile-info-value">
+															<span class="editable editable-click" id="age">38</span>
+														</div>
+													</div>
+
+													<div class="profile-info-row">
+														<div class="profile-info-name">Joined</div>
+
+														<div class="profile-info-value">
+															<span class="editable editable-click" id="signup">20/06/2010</span>
+														</div>
+													</div>
+
+													<div class="profile-info-row">
+														<div class="profile-info-name">Last Online</div>
+
+														<div class="profile-info-value">
+															<span class="editable editable-click" id="login">3
+																hours ago</span>
+														</div>
+													</div>
+
+													<div class="profile-info-row">
+														<div class="profile-info-name">About Me</div>
+
+														<div class="profile-info-value">
+															<span class="editable editable-click" id="about">Editable
+																as WYSIWYG</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div> -->
+								<!-- ------------------------------------------------------------------------------------------------ -->
+
+
+								<!-- 个人信息 -->
+								<div id="edit-settings" class="tab-pane active">
+									<h4 class="header blue bolder smaller">综合信息</h4>
+
+									<div class="row">
+										<!-- 照片 -->
+										<!-- <div class="col-xs-12 col-sm-4">
+											<div class="ace-file-input ace-file-multiple">
+												<input type="file"><label class="file-label"
+													data-title="Change avatar"><span class="file-name"
+													data-title="No File ..."><i class="icon-picture"></i></span></label><a
+													class="remove" href="#"><i class="icon-remove"></i></a>
+											</div>
+										</div> -->
+
+										<div class="vspace-xs"></div>
+
+										<div class="col-xs-12 col-sm-8">
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right"
+													for="form-field-username">用户名</label>
+
+												<div class="col-sm-8">
+													<input class="col-xs-12 col-sm-4" type="text"
+														name="username" id="username" placeholder="Username"
+														value="${loginUser.username}" readonly="readonly">
+												</div>
+											</div>
+
+											<div class="space-4"></div>
+
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right"
+													for="form-field-first">姓名</label>
+
+												<div class="col-sm-8">
+													<input class="input-small" type="text" name="trueName"
+														id="trueName" placeholder="First Name"
+														value="${loginUser.trueName}">
+													<!-- <input class="input-small"
+														type="text" id="form-field-last" placeholder="Last Name"
+														value="Doe"> -->
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<hr>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-date">生日</label>
+
+										<div class="col-sm-9">
+											<div class="input-medium">
+												<div class="input-group">
+													<input class="input-medium date-picker" id="birthday"
+														type="text" name="birthday" data-date-format="yyyy-MM-dd"
+														placeholder="yyyy-MM-dd" value="${loginUser.birthday}">
+													<span class="input-group-addon"> <i
+														class="icon-calendar"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right">性别</label>
+
+										<div class="col-sm-9">
+											<input type="hidden" id="usex" value="${loginUser.usex}">
+
+											<label class="inline"> <input name="usex"
+												type="radio" value="男"> 男
+											</label> &nbsp; &nbsp; &nbsp; <label class="inline"> <input
+												name="usex" type="radio" value="女">女
+											</label>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-comment">备注</label>
+
+										<div class="col-sm-9">
+											<textarea id="remark" name="remark">${loginUser.remark}</textarea>
+										</div>
+									</div>
+
+									<div class="space"></div>
+									<h4 class="header blue bolder smaller">联系方式</h4>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-email">电子邮件</label>
+
+										<div class="col-sm-9">
+											<span class="input-icon input-icon-right"> <input
+												type="email" name="email" id="email"
+												value="${loginUser.email}"> <i class="icon-envelope"></i>
+											</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-phone">电话</label>
+
+										<div class="col-sm-9">
+											<span class="input-icon input-icon-right"> <input
+												class="input-medium input-mask-phone" type="text"
+												name="phone" id="phone" value="${loginUser.phone}">
+												<i class="icon-phone icon-flip-horizontal"></i>
+											</span>
+										</div>
+									</div>
+
+									<!-- <div class="space"></div>
+									<h4 class="header blue bolder smaller">社交媒体</h4>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-facebook">Facebook</label>
+
+										<div class="col-sm-9">
+											<span class="input-icon"> <input type="text"
+												value="facebook_alexdoe" id="form-field-facebook"> <i
+												class="icon-facebook blue"></i>
+											</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-twitter">Twitter</label>
+
+										<div class="col-sm-9">
+											<span class="input-icon"> <input type="text"
+												value="twitter_alexdoe" id="form-field-twitter"> <i
+												class="icon-twitter light-blue"></i>
+											</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-gplus">Google+</label>
+
+										<div class="col-sm-9">
+											<span class="input-icon"> <input type="text"
+												value="google_alexdoe" id="form-field-gplus"> <i
+												class="icon-google-plus red"></i>
+											</span>
+										</div>
+									</div> -->
+								</div>
+
+								<!-- ----------------------------------------------------------------------------------------------- -->
+
+								<!-- 修改密码 -->
+								<div id="edit-password" class="tab-pane">
+									<div class="space-10"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-pass1">旧密码</label>
+											<input type="hidden" id="myoldPassWord" value="${loginUser.password}">
+										<div class="col-sm-9">
+											<input type="password" name="oldPassWord" id="oldPassWord">
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-pass2">新密码</label>
+
+										<div class="col-sm-9">
+											<input type="password" name="password" id="password">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix form-actions">
+							<div class="col-md-offset-3 col-md-9">
+								<button class="btn btn-info" type="button" id="ok"
+									onclick="update()">
+									<i class="icon-ok bigger-110"></i>确定
+								</button>
+
+								&nbsp; &nbsp;
+								<button class="btn" type="reset">
+									<i class="icon-undo bigger-110"></i>重置
+								</button>
+							</div>
+						</div>
+						<input type="hidden" name="uid" value="${loginUser.uid}">
+						
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- 添加 模态框（Modal）那怎么搞？ -->
+		<!-- .main-container-inner -->
+		<!-- 刪除 -->
+
+		<!-- /.main-container-inner -->
+		<a href="#" id="btn-scroll-up"
+			class="btn-scroll-up btn btn-sm btn-inverse"> <i
+			class="icon-double-angle-up icon-only bigger-110"> </i>
+		</a> <input type="hidden" value="${pageContext.request.contextPath}"
+			id="path">
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			var sex = $("#usex").val();
+			$("input[value=" + sex + "]").attr("checked", true);
+		})
+	</script>
+</body>
+</html>

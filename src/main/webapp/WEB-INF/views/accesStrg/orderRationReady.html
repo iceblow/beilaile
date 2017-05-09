@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>辅料已配齐</title> <@p.cache/> <@p.css/> <@p.js/>
+    <script type="text/babel" src="/res/js/acces/accesCommon.js"></script>
+    <script type="text/babel" src="/res/js/acces/accesOderSort.js"></script>
+</head>
+<body>
+<@p.top/>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <@p.left/>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li><i class="icon-home home-icon"> </i> <a href="#">
+                        Home </a></li>
+                    <li><a href="#"> Tables </a></li>
+                    <li class="active">辅料已配齐</li>
+                </ul>
+                <!-- .breadcrumb -->
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+            <div class="col-md-12">
+                <button id="add_button" class="btn btn-primary btn-lg"
+                        data-toggle="modal" data-target="#myModal">添加
+                </button>
+            </div>
+            <!-- /.col-lg-6 -->
+            <div class="col-md-12">
+                <form enctype="multipart/form-data" role="form" action=""
+                      id="form-anyVal" method="post">
+                    <div id="val-input-empty" class="col-md-12">
+                        <div class="col-md-2">
+                            <label for="queryAddDate">日期</label>
+                            <input type="text" name="addDate" id="queryAddDate"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="queryWave">波次号</label>
+                            <input type="text" name="wave" id="queryWave"/>
+                        </div>
+                        <div class="col-md-2">
+								<span class="input-group-btn">
+									<button id="query" class="btn btn-default" type="button"> 查询</button>
+								</span>
+                        </div>
+                    </div>
+                    <div>
+                        <input hidden="hidden" type="text" id="pageNow" name="pageNow" value="">
+                        <input hidden="hidden" type="text" id="pageSize" name="pageSize" value="">
+                    </div>
+                </form>
+            </div>
+            <div class="page-content">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>日期</th>
+                                <th>波段</th>
+                                <th>订单数</th>
+                                <th>订单详情</th>
+                                <th>裁剪数</th>
+                                <th>裁剪日期</th>
+                                <th>指定工厂</th>
+                                <th>指定工厂日期</th>
+                                <th>图片</th>
+                                <th>完成数</th>
+                                <th>辅料总数</th>
+                                <th>配发状态</th>
+                                <th>辅料流转状态</th>
+                                <th>配发方式</th>
+                                <th>发放数量</th>
+                                <th>是否已追加</th>
+                                <th>备注</th>
+                                <th colspan="1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table_app">
+                            </tbody>
+                        </table>
+                        <ul class="pager pagination-lg tcdPageCode">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    //页面加载就执行
+    $(function () {
+        $(".col-md-2").find(":input").each(
+            function () {
+                $(this).val("");
+            });
+        var anyVal = $("#form-anyVal").serialize();
+        getAccesOrderReadyBpcnt(anyVal);
+    });
+    //查询
+    $("#query").on("click", function () {
+        var anyVal = $("#form-anyVal").serialize();
+        getAccesOrderReadyBpcnt(anyVal);
+    });
+    //提交
+    $("#submit-btn").on("click", function () {
+        var formData = new FormData($("#form-input")[0]);
+        var if_input_Id = $("#obj_hidden_id").val();
+        if (if_input_Id != "" && if_input_Id != null) {
+            //修改
+            modifyAccessoryMaterial(formData);
+        } else {
+            //添加
+            addAccessoryMaterial(formData);
+        }
+    });
+    //查询总条数
+    function getAccesOrderReadyBpcnt(anyVal) {
+        $.post('getAccesOrderReadyBpcnt.do', anyVal,
+            function (data) {
+                $("#pageSize").val(10); //默認查 10條數據这里啊 默认值是10
+                $("#pageNow").val(data.pageNow);
+                var anyVal2 = $("#form-anyVal").serialize();
+                //获取form参数进行查询
+                //調用方法传参
+                findAccesOrderReadyCndbp(anyVal2);
+                // 进入后台进行分页查询
+                $(".tcdPageCode").createPage({ //哦哦
+                    pageCount: data.totalPageCount, //总页数
+                    current: data.pageNow, //当前页
+                    backFn: function (p) {
+                        $("#pageSize").val(10);
+                        $("#pageNow").val(p); //給當前頁賦值
+                        var anyVal1 = $("#form-anyVal").serialize(); //获取form表单
+                        //調用方法
+                        findAccesOrderReadyCndbp(anyVal1);
+                    }
+                });
+            });
+    }
+    //查询
+    function findAccesOrderReadyCndbp(anyVal) {
+        $.post("findAccesOrderReadyCndbp.do", anyVal, //from表单内容
+            function (data) {
+                $(".table_app").empty(); //清空原有的数据
+                for (var i = 0; i < data.length; i++) {
+                    var _HTML_TEBLE_ = "";
+                    _HTML_TEBLE_ = "<tr>" +
+                        + "<input type='hidden' class='id' value='"
+                        + data[i].id
+                        + "'/>"
+                        +"<td>"
+                        + data[i].id
+//                        + "</td><td >"
+//                        + "<input type='checkbox' class='checkbox' name='checkname'>"
+                        + "</td><td >"
+                        + (data[i].addTime == null ? '': data[i].addTime)
+                        + "</td><td >"
+                        + (data[i].wave == null ? '': data[i].wave)
+                        + "</td><td >"
+                        + (data[i].orderNum == null ? '': data[i].orderNum)
+                        + "</td><td >"
+                        + (data[i].orderDetails == null ? '': data[i].orderDetails)
+                        + "</td><td >"
+                        + (data[i].cropNum == null ? '': data[i].cropNum)
+                        + "</td><td >"
+                        + (data[i].cropDate == null ? '': data[i].cropDate)
+                        + "</td><td >"
+                        + (data[i].specFctry == null ? '': data[i].specFctry)
+                        + "</td><td >"
+                        + (data[i].specFctryDate == null ? '': data[i].specFctryDate)
+                        + "</td><td ><img style='width: 120px; height: 120px' src=" + data[i].img + "></td><td>"
+                        + (data[i].readySumSort == null || data[i].readySumSort == "" ? '' : data[i].readySumSort)
+                        + "</td><td>"
+                        + (data[i].sumSort == null || data[i].sumSort == "" ? '' : data[i].sumSort)
+                        + "</td><td >"
+                        + (data[i].followStatus == null || data[i].followStatus == ""? '' : data[i].followStatus)
+                        + "</td><td class='accesStatus" + data[i].id + "'>"
+                        + (data[i].accesStatus == null || data[i].accesStatus == "" ? '' : data[i].accesStatus)
+                        + "</td><td>"
+                        + (data[i].issueMethod == null || data[i].issueMethod == "" ? '' : data[i].issueMethod)
+                        + "</td><td>"
+                        + (data[i].issueNum == null || data[i].issueNum == "" ? '' : data[i].issueNum)
+                        + "</td><td>"
+                        + (data[i].isReplenishStatus == null || data[i].isReplenishStatus == "" ? '' : data[i].isReplenishStatus)
+                        + "</td><td class='fillOrderSort' name='accesRemarks'>"
+                        + (data[i].accesRemarks == null ? '': data[i].accesRemarks)
+                        + "</td><td>"
+                        +"<button type='button' onclick='readySpecFactory("
+                        + data[i].id
+                        + ")' class='btn btn-primary btn-sm icon-confirm'>指定工厂</button>"
+                        +"</td></tr>";
+                    $(".table_app").append(_HTML_TEBLE_);
+                    var accesStatus = data[i].accesStatus;
+                    var issId = data[i].id;
+                    addReadyBGColor(accesStatus,issId);
+
+                }
+            });
+    }
+
+function readySpecFactory( id ) {
+    var sureSpecFactory = confirm("确认 转移货架至指定工厂？");
+    var data = {
+        amId: id
+    };
+    var tdArgs = $(".accesStatus" + id);
+    if (sureSpecFactory) {
+        $.ajax({
+            url: "transferShelf.do",
+            dataType: 'json',
+            type: 'post',
+            data: data,
+            success: function (result) {
+                if (result.readyException!="无异常"){
+                    alert(result.readyException);
+                }else {
+                    var accesStatus = result.accesStatus;
+                    var issueMethod = result.issueMethod;
+                    tdArgs.text(accesStatus);
+                    tdArgs.next().text(issueMethod);
+                    var issId = result.id;
+                    addReadyBGColor(accesStatus, issId);
+                }
+            }
+
+        });
+    }
+}
+    function addReadyBGColor(accesStatus, issId) {
+        if (accesStatus == "完成配发") {
+            $(".accesStatus" + issId).parent().css("background", "#ffdcb9");
+        } else if (accesStatus == "移至工厂货架") {
+            $(".accesStatus" + issId).parent().css("background", "#d9ffff");
+        } else if (accesStatus == "追加补料单") {
+            $(".accesStatus" + issId).parent().css("background", "#ffd9ec");
+//        } else if (accesStatus == "驳回") {
+//            $(".accesStatus" + issId).parent().css("background", "#ffbb77");
+//        } else {
+//            $(".accesStatus" + issId).parent().css("background", "none");
+        }
+    }
+
+
+</script>
+</html>

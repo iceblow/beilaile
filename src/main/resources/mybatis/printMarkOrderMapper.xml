@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.PrintMarkOrderMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.PrintMarkOrder">
+		<id column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+		<result column="PRINTING_FACTORY" property="printingFactory"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_TIME" property="orderTime" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="DELIVERY_TIME" property="deliveryTime"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_REMARK" property="orderRemark" jdbcType="VARCHAR" />
+		<result column="REVOKED_TIME" property="revokedTime" jdbcType="VARCHAR" />
+		<result column="ORDER_STATUS" property="orderStatus" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 查询 -->
+	<select id="selectByCount" resultType="java.lang.Integer"
+		parameterType="com.warehouse.entity.PrintMarkOrder">
+		select COUNT(*) from print_mark_order where ORDER_STATUS!='0'
+		<if test="printingFactory!='' and printingFactory!=null">
+			and PRINTING_FACTORY like
+			concat('%',#{printingFactory},'%')
+		</if>
+	</select>
+	<select id="selectByPage" resultMap="BaseResultMap"
+		parameterType="com.warehouse.entity.PrintMarkOrder">
+		select * from print_mark_order where ORDER_STATUS!='0'
+		<if test="printingFactory!='' and printingFactory!=null">
+			and PRINTING_FACTORY like
+			concat('%',#{printingFactory},'%')
+		</if>
+		order by ORDER_STATUS asc,ADD_TIME desc limit #{begin},#{end}
+	</select>
+	<!-- 添加 -->
+	<insert id="insertSelective" parameterType="com.warehouse.entity.PrintMarkOrder">
+		insert into print_mark_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderId != null">
+				ORDER_ID,
+			</if>
+			<if test="printingFactory != null">
+				PRINTING_FACTORY,
+			</if>
+			<if test="orderTime != null">
+				ORDER_TIME,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="deliveryTime != null">
+				DELIVERY_TIME,
+			</if>
+			<if test="revokedTime != null">
+				REVOKED_TIME,
+			</if>
+			<if test="orderRemark != null">
+				ORDER_REMARK,
+			</if>
+			<if test="orderStatus != null">
+				ORDER_STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderId != null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="printingFactory != null">
+				#{printingFactory,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTime != null">
+				#{orderTime,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deliveryTime != null">
+				#{deliveryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="revokedTime != null">
+				#{revokedTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orderRemark != null">
+				#{orderRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStatus != null">
+				#{orderStatus,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.warehouse.entity.PrintMarkOrder">
+		update print_mark_order
+		<set>
+			<if test="orderTime != null">
+				ORDER_TIME = #{orderTime,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME=#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deliveryTime != null">
+				DELIVERY_TIME = #{deliveryTime,jdbcType=VARCHAR},
+			</if>
+			<if test="revokedTime != null">
+				REVOKED_TIME=#{revokedTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orderRemark != null">
+				ORDER_REMARK = #{orderRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStatus != null">
+				ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ORDER_ID = #{orderId,jdbcType=INTEGER}
+	</update>
+	<!-- 根据ID查询 -->
+	<select id="selPrintByID" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from print_mark_order where ORDER_ID =
+		#{orderId,jdbcType=INTEGER}
+	</select>
+</mapper>

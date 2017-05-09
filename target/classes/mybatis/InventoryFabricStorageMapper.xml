@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.InventoryFabricStorageMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.InventoryFabricStorage">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="SID" property="sid" jdbcType="VARCHAR" />
+		<result column="FABRIC_BARCODE" property="fabricBarcode"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_CODE" property="fabricCode" jdbcType="VARCHAR" />
+		<result column="FABRIC_NAME" property="fabricName" jdbcType="VARCHAR" />
+		<result column="SUPPLIER_NAME" property="supplierName"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_UNIT" property="fabricUnit" jdbcType="VARCHAR" />
+		<result column="FABRIC_COLOR" property="fabricColor" jdbcType="VARCHAR" />
+		<result column="FABRIC_STORAGE_TIME" property="fabricStorageTime"
+			jdbcType="VARCHAR" />
+		<result column="FABRIC_AMOUNT" property="fabricAmount"
+			jdbcType="INTEGER" />
+		<result column="FABRIC_WEIGHT" property="fabricWeight"
+			jdbcType="DOUBLE" />
+		<result column="DATA_STATUS" property="dataStatus" jdbcType="INTEGER" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+		<result column="FOUNDER" property="founder" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
+		<result column="DELETE_TIME" property="deleteTime" jdbcType="VARCHAR" />
+		<result column="DELETE_PEOPLE" property="deletePeople"
+			jdbcType="VARCHAR" />
+		<result column="DEL_STATUS" property="delStatus" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SID, FABRIC_BARCODE, FABRIC_CODE, FABRIC_NAME,
+		SUPPLIER_NAME,
+		FABRIC_UNIT, FABRIC_COLOR,
+		FABRIC_STORAGE_TIME,
+		FABRIC_AMOUNT, FABRIC_WEIGHT, DATA_STATUS, CREATE_TIME, FOUNDER,
+		MODIFY_TIME, MODIFIED_BY, DELETE_TIME, DELETE_PEOPLE,DEL_STATUS
+	</sql>
+	<!-- 根据id查询 -->
+	<select id="findInventoryFabricStorageById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		inventory_fabric_storage
+		WHERE
+		DEL_STATUS = 1
+		AND
+		ID =
+		#{id,jdbcType=INTEGER}
+	</select>
+	<!-- 根据面料编号查询 -->
+	<select id="findInventoryFabricStorageByFabricCode"
+		parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		inventory_fabric_storage
+		WHERE
+		DEL_STATUS = 1
+		AND
+		FABRIC_CODE =
+		#{fabricCode,jdbcType=INTEGER}
+	</select>
+	<select id="getInventoryFabricStorageByPageCount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM inventory_fabric_storage
+		WHERE DEL_STATUS = 1
+		AND
+		1=1
+		<if test='fabricName != null and fabricName != ""'>
+			AND fabric_name LIKE
+			CONCAT(CONCAT('%',#{fabricName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierName != null and supplierName != ""'>
+			AND supplierName LIKE
+			CONCAT(CONCAT('%',#{supplierName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricColor != null and fabricColor != ""'>
+			AND fabric_color LIKE
+			CONCAT(CONCAT('%',#{fabricColor,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricStorageTime != null and fabricStorageTime != ""'>
+			AND fabric_storage_time LIKE
+			CONCAT(CONCAT('%',#{fabricStorageTime,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricInventoryTime != null and fabricInventoryTime != ""'>
+			AND fabric_inventory_time LIKE
+			CONCAT(CONCAT('%',#{fabricInventoryTime,jdbcType=VARCHAR}),'%')
+		</if>
+	</select>
+	<select id="findConditionInventoryFabricStorageByPage"
+		resultMap="BaseResultMap" parameterType="Map">
+		select
+		<include refid="Base_Column_List" />
+		from inventory_fabric_storage
+		WHERE DEL_STATUS = 1 AND 1=1
+		<if test='fabricName != null and fabricName != ""'>
+			AND fabric_name LIKE
+			CONCAT(CONCAT('%',#{fabricName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='supplierName != null and supplierName != ""'>
+			AND supplierName LIKE
+			CONCAT(CONCAT('%',#{supplierName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricColor != null and fabricColor != ""'>
+			AND fabric_color LIKE
+			CONCAT(CONCAT('%',#{fabricColor,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricStorageTime != null and fabricStorageTime != ""'>
+			AND fabric_storage_time LIKE
+			CONCAT(CONCAT('%',#{fabricStorageTime,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test='fabricInventoryTime != null and fabricInventoryTime != ""'>
+			AND fabric_inventory_time LIKE
+			CONCAT(CONCAT('%',#{fabricInventoryTime,jdbcType=VARCHAR}),'%')
+		</if>
+		ORDER BY CREATE_TIME DESC LIMIT #{pageNow},#{pageSize}
+	</select>
+	<insert id="addInventoryFabricStorage" parameterType="com.warehouse.entity.InventoryFabricStorage">
+		insert into inventory_fabric_storage
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="sid != null">
+				SID,
+			</if>
+			<if test="fabricBarcode != null">
+				FABRIC_BARCODE,
+			</if>
+			<if test="fabricCode != null">
+				FABRIC_CODE,
+			</if>
+			<if test="fabricName != null">
+				FABRIC_NAME,
+			</if>
+			<if test="supplierName != null">
+				SUPPLIER_NAME,
+			</if>
+			<if test="fabricUnit != null">
+				FABRIC_UNIT,
+			</if>
+			<if test="fabricColor != null">
+				FABRIC_COLOR,
+			</if>
+			<if test="fabricStorageTime != null">
+				FABRIC_STORAGE_TIME,
+			</if>
+			<if test="fabricAmount != null">
+				FABRIC_AMOUNT,
+			</if>
+			<if test="fabricWeight != null">
+				FABRIC_WEIGHT,
+			</if>
+			<if test="dataStatus != null">
+				DATA_STATUS,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="founder != null">
+				FOUNDER,
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME,
+			</if>
+			<if test="modifiedBy != null">
+				MODIFIED_BY,
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME,
+			</if>
+			<if test="deletePeople != null">
+				DELETE_PEOPLE,
+			</if>
+			<if test="delStatus != null">
+				DEL_STATUS,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBarcode != null">
+				#{fabricBarcode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCode != null">
+				#{fabricCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricName != null">
+				#{fabricName,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierName != null">
+				#{supplierName,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricUnit != null">
+				#{fabricUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricColor != null">
+				#{fabricColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricStorageTime != null">
+				#{fabricStorageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricAmount != null">
+				#{fabricAmount,jdbcType=INTEGER},
+			</if>
+			<if test="fabricWeight != null">
+				#{fabricWeight,jdbcType=DOUBLE},
+			</if>
+			<if test="dataStatus != null">
+				#{dataStatus,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				#{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifiedBy != null">
+				#{modifiedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				#{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deletePeople != null">
+				#{deletePeople,jdbcType=VARCHAR},
+			</if>
+			<if test="delStatus != null">
+				#{delStatus,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="modifyInventoryFabricStorage" parameterType="com.warehouse.entity.InventoryFabricStorage">
+		update inventory_fabric_storage
+		<set>
+			<if test="sid != null">
+				SID = #{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricBarcode != null">
+				FABRIC_BARCODE = #{fabricBarcode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricCode != null">
+				FABRIC_CODE = #{fabricCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricName != null">
+				FABRIC_NAME = #{fabricName,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierName != null">
+				SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricUnit != null">
+				FABRIC_UNIT = #{fabricUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricColor != null">
+				FABRIC_COLOR = #{fabricColor,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricStorageTime != null">
+				FABRIC_STORAGE_TIME =
+				#{fabricStorageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricAmount != null">
+				FABRIC_AMOUNT = #{fabricAmount,jdbcType=INTEGER},
+			</if>
+			<if test="fabricWeight != null">
+				FABRIC_WEIGHT = #{fabricWeight,jdbcType=DOUBLE},
+			</if>
+			<if test="dataStatus != null">
+				DATA_STATUS = #{dataStatus,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="founder != null">
+				FOUNDER = #{founder,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifiedBy != null">
+				MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteTime != null">
+				DELETE_TIME = #{deleteTime,jdbcType=VARCHAR},
+			</if>
+			<if test="deletePeople != null">
+				DELETE_PEOPLE = #{deletePeople,jdbcType=VARCHAR},
+			</if>
+			<if test="delStatus != null">
+				DEL_STATUS = #{delStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="delInventoryFabricStorage" parameterType="com.warehouse.entity.InventoryFabricStorage">
+		update inventory_fabric_storage
+		<set>
+			DEL_STATUS = 0,
+			DELETE_TIME = now(),
+			<if test="deletePeople != null">
+				DELETE_PEOPLE = #{deletePeople,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateInventoryFabricStorageDataStatusById"
+		parameterType="com.warehouse.entity.InventoryFabricStorage">
+		update inventory_fabric_storage
+		<set>
+			FABRIC_STORAGE_TIME =now(),
+			DATA_STATUS = '已入库',
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

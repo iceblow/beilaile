@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.FactoryReceiveFabricMapper">
+	<resultMap id="BaseResultMap" type="com.warehouse.entity.FactoryReceiveFabric">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+		<result column="ISSUE_DATE" property="issueDate" jdbcType="VARCHAR" />
+		<result column="WAVE" property="wave" jdbcType="VARCHAR" />
+		<result column="FABRIC_MATERIAL" property="fabricMaterial"
+			jdbcType="VARCHAR" />
+		<result column="PARAMETER1" property="parameter1" jdbcType="DOUBLE" />
+		<result column="PARAMETER2" property="parameter2" jdbcType="DOUBLE" />
+		<result column="PARAMETER3" property="parameter3" jdbcType="DOUBLE" />
+		<result column="PARAMETER4" property="parameter4" jdbcType="DOUBLE" />
+		<result column="PARAMETER5" property="parameter5" jdbcType="DOUBLE" />
+		<result column="PARAMETER6" property="parameter6" jdbcType="DOUBLE" />
+		<result column="PARAMETER7" property="parameter7" jdbcType="DOUBLE" />
+		<result column="PARAMETER8" property="parameter8" jdbcType="DOUBLE" />
+		<result column="PARAMETER9" property="parameter9" jdbcType="DOUBLE" />
+		<result column="PARAMETER10" property="parameter10" jdbcType="DOUBLE" />
+		<result column="PARAMETER11" property="parameter11" jdbcType="DOUBLE" />
+		<result column="PARAMETER12" property="parameter12" jdbcType="DOUBLE" />
+		<result column="PARAMETER13" property="parameter13" jdbcType="DOUBLE" />
+		<result column="PARAMETER14" property="parameter14" jdbcType="DOUBLE" />
+		<result column="PARAMETER15" property="parameter15" jdbcType="DOUBLE" />
+		<result column="PARAMETER16" property="parameter16" jdbcType="DOUBLE" />
+		<result column="PARAMETER17" property="parameter17" jdbcType="DOUBLE" />
+		<result column="PARAMETER18" property="parameter18" jdbcType="DOUBLE" />
+		<result column="PARAMETER19" property="parameter19" jdbcType="DOUBLE" />
+		<result column="PARAMETER20" property="parameter20" jdbcType="DOUBLE" />
+		<result column="KG_M" property="kgM" jdbcType="VARCHAR" />
+		<result column="TOTAL_COUNT" property="totalCount" jdbcType="INTEGER" />
+		<result column="STATE" property="state" jdbcType="VARCHAR" />
+		<result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+		<result column="PC_IP" property="pcIp" jdbcType="VARCHAR" />
+		<result column="OPERATION" property="operation" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+		<result column="DEL_TIME" property="delTime" jdbcType="VARCHAR" />
+		<result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+		<result column="FULFIL_STATUS" property="fulfilStatus"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, COMPANY_NAME, ISSUE_DATE, WAVE,DESIGN_IMG,
+		FABRIC_MATERIAL,
+		PARAMETER1,
+		PARAMETER2, PARAMETER3,
+		PARAMETER4,
+		PARAMETER5, PARAMETER6,
+		PARAMETER7, PARAMETER8, PARAMETER9,
+		PARAMETER10,
+		PARAMETER11,
+		PARAMETER12, PARAMETER13, PARAMETER14,
+		PARAMETER15, PARAMETER16,
+		PARAMETER17,
+		PARAMETER18, PARAMETER19,
+		PARAMETER20, KG_M,TOTAL_COUNT,
+		STATE,
+		REMARKS, PC_IP, OPERATION,
+		OPERATOR,
+		ADD_TIME, UPDATE_TIME,
+		DEL_TIME,FULFIL_STATUS
+	</sql>
+	<select id="getFactoryReceiveFabricById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		*
+		from factory_receive_fabric
+		where STATE ='1' AND ID
+		=
+		#{id,jdbcType=INTEGER}
+	</select>
+	<select id="getFactoryReceiveFabricByPageCount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM factory_receive_fabric where STATE = '1' AND 1=1
+		<if
+			test='companyName != null and companyName != "" and companyName != "N" and companyName != "Y"'>
+			AND COMPANY_NAME LIKE CONCAT(CONCAT('%',
+			#{companyName,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='companyName =="N" '>
+			AND (COMPANY_NAME='' OR COMPANY_NAME IS NULL)
+		</if>
+		<if test='companyName =="Y"'>
+			AND COMPANY_NAME !=''
+		</if>
+		<if
+			test=' issueDate != null and issueDate != "" and issueDate != "N" and issueDate != "Y"'>
+			AND ISSUE_DATE LIKE CONCAT(CONCAT('%',
+			#{issueDate,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='issueDate =="N" '>
+			AND (ISSUE_DATE='' OR ISSUE_DATE IS NULL)
+		</if>
+		<if test='issueDate =="Y"'>
+			AND ISSUE_DATE !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT(CONCAT('%',
+			#{wave,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='wave =="N" '>
+			AND (WAVE='' OR WAVE IS NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='fabricMaterial != null and fabricMaterial != "" and fabricMaterial != "N" and fabricMaterial != "Y"'>
+			AND FABRIC_MATERIAL LIKE CONCAT(CONCAT('%',
+			#{fabricMaterial,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricMaterial =="N" '>
+			AND (FABRIC_MATERIAL='' OR FABRIC_MATERIAL IS NULL)
+		</if>
+		<if test='fabricMaterial =="Y"'>
+			AND FABRIC_MATERIAL !=''
+		</if>
+		<if
+			test='remarks != null and remarks != "" and remarks != "N" and remarks != "Y"'>
+			AND REMARKS LIKE CONCAT(CONCAT('%',
+			#{remarks,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='remarks =="N" '>
+			AND (REMARKS='' OR REMARKS IS NULL)
+		</if>
+		<if test='remarks =="Y"'>
+			AND REMARKS !=''
+		</if>
+	</select>
+
+	<select id="findConditionFactoryReceiveFabricByPage" resultMap="BaseResultMap"
+		parameterType="Map">
+		select
+		<include refid="Base_Column_List" />
+		from factory_receive_fabric where STATE = '1' AND 1=1
+		<if
+			test='companyName != null and additionTime != "" and additionTime != "N" and additionTime != "Y"'>
+			AND COMPANY_NAME LIKE CONCAT(CONCAT('%',
+			#{companyName,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='companyName =="N" '>
+			AND (COMPANY_NAME='' OR COMPANY_NAME IS NULL)
+		</if>
+		<if test='companyName =="Y"'>
+			AND COMPANY_NAME !=''
+		</if>
+		<if
+			test='issueDate != null and issueDate != "" and issueDate != "N" and issueDate != "Y"'>
+			AND ISSUE_DATE LIKE CONCAT(CONCAT('%',
+			#{issueDate,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='issueDate =="N" '>
+			AND (ISSUE_DATE='' OR ISSUE_DATE IS NULL)
+		</if>
+		<if test='issueDate =="Y"'>
+			AND ISSUE_DATE !=''
+		</if>
+		<if test='wave != null and wave != "" and wave != "N" and wave != "Y"'>
+			AND WAVE LIKE CONCAT(CONCAT('%',
+			#{wave,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='wave =="N" '>
+			AND (WAVE='' OR WAVE IS NULL)
+		</if>
+		<if test='wave =="Y"'>
+			AND WAVE !=''
+		</if>
+		<if
+			test='fabricMaterial != null and fabricMaterial != "" and fabricMaterial != "N" and fabricMaterial != "Y"'>
+			AND FABRIC_MATERIAL LIKE CONCAT(CONCAT('%',
+			#{fabricMaterial,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='fabricMaterial =="N" '>
+			AND (FABRIC_MATERIAL='' OR FABRIC_MATERIAL IS NULL)
+		</if>
+		<if test='fabricMaterial =="Y"'>
+			AND FABRIC_MATERIAL !=''
+		</if>
+		<if
+			test='remarks != null and remarks != "" and remarks != "N" and remarks != "Y"'>
+			AND REMARKS LIKE CONCAT(CONCAT('%',
+			#{remarks,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test='remarks =="N" '>
+			AND (REMARKS='' OR REMARKS IS NULL )
+		</if>
+		<if test='remarks =="Y"'>
+			AND REMARKS !=''
+		</if>
+		ORDER BY ADD_TIME DESC LIMIT #{pageNow},#{pageSize}
+	</select>
+
+	<insert id="addFactoryReceiveFabric" parameterType="com.warehouse.entity.FactoryReceiveFabric">
+		insert into factory_receive_fabric
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="companyName != null">
+				COMPANY_NAME,
+			</if>
+			<if test="issueDate != null">
+				ISSUE_DATE,
+			</if>
+			<if test="wave != null">
+				WAVE,
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG,
+			</if>
+			<if test="fabricMaterial != null">
+				FABRIC_MATERIAL,
+			</if>
+			<if test="parameter1 != null">
+				PARAMETER1,
+			</if>
+			<if test="parameter2 != null">
+				PARAMETER2,
+			</if>
+			<if test="parameter3 != null">
+				PARAMETER3,
+			</if>
+			<if test="parameter4 != null">
+				PARAMETER4,
+			</if>
+			<if test="parameter5 != null">
+				PARAMETER5,
+			</if>
+			<if test="parameter6 != null">
+				PARAMETER6,
+			</if>
+			<if test="parameter7 != null">
+				PARAMETER7,
+			</if>
+			<if test="parameter8 != null">
+				PARAMETER8,
+			</if>
+			<if test="parameter9 != null">
+				PARAMETER9,
+			</if>
+			<if test="parameter10 != null">
+				PARAMETER10,
+			</if>
+			<if test="parameter11 != null">
+				PARAMETER11,
+			</if>
+			<if test="parameter12 != null">
+				PARAMETER12,
+			</if>
+			<if test="parameter13 != null">
+				PARAMETER13,
+			</if>
+			<if test="parameter14 != null">
+				PARAMETER14,
+			</if>
+			<if test="parameter15 != null">
+				PARAMETER15,
+			</if>
+			<if test="parameter16 != null">
+				PARAMETER16,
+			</if>
+			<if test="parameter17 != null">
+				PARAMETER17,
+			</if>
+			<if test="parameter18 != null">
+				PARAMETER18,
+			</if>
+			<if test="parameter19 != null">
+				PARAMETER19,
+			</if>
+			<if test="parameter20 != null">
+				PARAMETER20,
+			</if>
+			<if test="kgM != null">
+				KG_M,
+			</if>
+			<if test="totalCount != null">
+				TOTAL_COUNT,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="pcIp != null">
+				PC_IP,
+			</if>
+			<if test="operation != null">
+				OPERATION,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="delTime != null">
+				DEL_TIME,
+			</if>
+			<if test="fulfilStatus != null">
+				FULFIL_STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="companyName != null">
+				#{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="issueDate != null">
+				#{issueDate,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				#{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				#{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricMaterial != null">
+				#{fabricMaterial,jdbcType=VARCHAR},
+			</if>
+			<if test="parameter1 != null">
+				#{parameter1,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter2 != null">
+				#{parameter2,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter3 != null">
+				#{parameter3,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter4 != null">
+				#{parameter4,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter5 != null">
+				#{parameter5,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter6 != null">
+				#{parameter6,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter7 != null">
+				#{parameter7,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter8 != null">
+				#{parameter8,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter9 != null">
+				#{parameter9,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter10 != null">
+				#{parameter10,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter11 != null">
+				#{parameter11,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter12 != null">
+				#{parameter12,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter13 != null">
+				#{parameter13,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter14 != null">
+				#{parameter14,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter15 != null">
+				#{parameter15,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter16 != null">
+				#{parameter16,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter17 != null">
+				#{parameter17,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter18 != null">
+				#{parameter18,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter19 != null">
+				#{parameter19,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter20 != null">
+				#{parameter20,jdbcType=DOUBLE},
+			</if>
+			<if test="kgM != null">
+				#{kgM,jdbcType=VARCHAR},
+			</if>
+			<if test="totalCount != null">
+				#{totalCount,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="pcIp != null">
+				#{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				#{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				#{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fulfilStatus != null">
+				#{fulfilStatus,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateFactoryReceiveFabricByCompleteStatus"
+		parameterType="com.warehouse.entity.FactoryReceiveFabric">
+		update factory_receive_fabric
+		<set>
+			<if test="companyName != null">
+				COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="issueDate != null">
+				ISSUE_DATE = #{issueDate,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricMaterial != null">
+				FABRIC_MATERIAL = #{fabricMaterial,jdbcType=VARCHAR},
+			</if>
+			<if test="parameter1 != null">
+				PARAMETER1 = #{parameter1,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter2 != null">
+				PARAMETER2 = #{parameter2,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter3 != null">
+				PARAMETER3 = #{parameter3,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter4 != null">
+				PARAMETER4 = #{parameter4,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter5 != null">
+				PARAMETER5 = #{parameter5,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter6 != null">
+				PARAMETER6 = #{parameter6,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter7 != null">
+				PARAMETER7 = #{parameter7,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter8 != null">
+				PARAMETER8 = #{parameter8,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter9 != null">
+				PARAMETER9 = #{parameter9,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter10 != null">
+				PARAMETER10 = #{parameter10,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter11 != null">
+				PARAMETER11 = #{parameter11,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter12 != null">
+				PARAMETER12 = #{parameter12,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter13 != null">
+				PARAMETER13 = #{parameter13,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter14 != null">
+				PARAMETER14 = #{parameter14,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter15 != null">
+				PARAMETER15 = #{parameter15,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter16 != null">
+				PARAMETER16 = #{parameter16,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter17 != null">
+				PARAMETER17 = #{parameter17,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter18 != null">
+				PARAMETER18 = #{parameter18,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter19 != null">
+				PARAMETER19 = #{parameter19,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter20 != null">
+				PARAMETER20 = #{parameter20,jdbcType=DOUBLE},
+			</if>
+			<if test="kgM != null">
+				KG_M = #{kgM,jdbcType=VARCHAR},
+			</if>
+			<if test="totalCount != null">
+				TOTAL_COUNT = #{totalCount,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="pcIp != null">
+				PC_IP = #{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fulfilStatus != null">
+				FULFIL_STATUS = #{fulfilStatus,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="modifyFactoryReceiveFabric" parameterType="com.warehouse.entity.FactoryReceiveFabric">
+		update factory_receive_fabric
+		<set>
+			<if test="companyName != null">
+				COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="issueDate != null">
+				ISSUE_DATE = #{issueDate,jdbcType=VARCHAR},
+			</if>
+			<if test="wave != null">
+				WAVE = #{wave,jdbcType=VARCHAR},
+			</if>
+			<if test="designImg != null">
+				DESIGN_IMG = #{designImg,jdbcType=VARCHAR},
+			</if>
+			<if test="fabricMaterial != null">
+				FABRIC_MATERIAL = #{fabricMaterial,jdbcType=VARCHAR},
+			</if>
+			<if test="parameter1 != null">
+				PARAMETER1 = #{parameter1,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter2 != null">
+				PARAMETER2 = #{parameter2,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter3 != null">
+				PARAMETER3 = #{parameter3,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter4 != null">
+				PARAMETER4 = #{parameter4,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter5 != null">
+				PARAMETER5 = #{parameter5,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter6 != null">
+				PARAMETER6 = #{parameter6,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter7 != null">
+				PARAMETER7 = #{parameter7,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter8 != null">
+				PARAMETER8 = #{parameter8,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter9 != null">
+				PARAMETER9 = #{parameter9,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter10 != null">
+				PARAMETER10 = #{parameter10,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter11 != null">
+				PARAMETER11 = #{parameter11,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter12 != null">
+				PARAMETER12 = #{parameter12,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter13 != null">
+				PARAMETER13 = #{parameter13,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter14 != null">
+				PARAMETER14 = #{parameter14,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter15 != null">
+				PARAMETER15 = #{parameter15,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter16 != null">
+				PARAMETER16 = #{parameter16,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter17 != null">
+				PARAMETER17 = #{parameter17,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter18 != null">
+				PARAMETER18 = #{parameter18,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter19 != null">
+				PARAMETER19 = #{parameter19,jdbcType=DOUBLE},
+			</if>
+			<if test="parameter20 != null">
+				PARAMETER20 = #{parameter20,jdbcType=DOUBLE},
+			</if>
+			<if test="kgM != null">
+				KG_M = #{kgM,jdbcType=VARCHAR},
+			</if>
+			<if test="totalCount != null">
+				TOTAL_COUNT = #{totalCount,jdbcType=INTEGER},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="pcIp != null">
+				PC_IP = #{pcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null">
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="delTime != null">
+				DEL_TIME = #{delTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fulfilStatus != null">
+				FULFIL_STATUS = #{fulfilStatus,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="delFactoryReceiveFabricById" parameterType="com.warehouse.entity.FactoryReceiveFabric">
+		update
+		factory_receive_fabric
+		set
+		STATE = '0',
+		DEL_TIME =
+		#{delTime,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

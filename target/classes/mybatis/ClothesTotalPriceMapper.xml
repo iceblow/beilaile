@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.dao.ClothesTotalPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.entity.ClothesTotalPrice" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="DESIGN_IMG" property="designImg" jdbcType="VARCHAR" />
+    <result column="WAVE" property="wave" jdbcType="VARCHAR" />
+    <result column="FABRIC_OUT_PRICE" property="fabricOutPrice" jdbcType="VARCHAR" />
+    <result column="FABRIC_RETURN_PRICE" property="fabricReturnPrice" jdbcType="VARCHAR" />
+    <result column="USER_FABRIC_PRICE" property="userFabricPrice" jdbcType="VARCHAR" />
+    <result column="A_PRICE" property="aPrice" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DESIGN_IMG, WAVE, FABRIC_OUT_PRICE, FABRIC_RETURN_PRICE, USER_FABRIC_PRICE, A_PRICE,goods_id,goods_name
+  </sql>
+  <!-- 查询总条数  -->
+  <select id="selectClothes1" parameterType="com.warehouse.entity.ClothesTotalPrice" resultType="java.lang.Integer"> 
+  	SELECT COUNT(0) FROM clothes_total_price  where 1=1
+  		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave}, "%")
+		</if>
+  </select>
+  
+  	<!-- 分页查询 -->
+  <select id="getClothesPage" parameterType="com.warehouse.entity.ClothesTotalPrice" resultMap="BaseResultMap">
+  	select * from clothes_total_price where 1=1
+  		<if test='wave!=null and wave!=""'>
+			AND WAVE LIKE CONCAT("%" ,#{wave,jdbcType=VARCHAR}, "%")
+		</if>
+		order by wave asc
+  	limit #{begin},#{end}
+  </select>
+  
+  
+  
+  
+ 
+</mapper>
